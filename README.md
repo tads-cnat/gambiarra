@@ -4,7 +4,8 @@
 
 >Inserir uma logo para o projeto
 
->Inserir pequena descrição do projeto
+>O propósito do Projeto Gambiarra é estabelecer uma conexão entre estudantes especializados em manutenção de computadores e membros, tanto alunos quanto servidores, da comunidade IFRN-CNAT que necessitam desses serviços. Dessa forma, busca-se oferecer uma oportunidade de prática profissional aos estudantes, sob a orientação atenta de um professor.
+
 
 # Equipe e Formas de Contato
 
