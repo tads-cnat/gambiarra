@@ -4,14 +4,30 @@
 
 > Obs.: propõem-se a utilização de alguma ferramenta que possibilite a representação textual do diagrama. como o seguinte exemplo:
 
+### Professor
+
 ```mermaid
 flowchart TD
     A[Index] --- B[Login]
-    A --- C[Cadastro]
-    C --- B
-    B --- D[Página 1]
-    B --- E[Página 2]
-    B --- F[Página 3]
+    A --- C[Doações]
+    A --- D[Sobre nós]
+    B --- E[Chamado]
+    E --- F[Gerenciar chamado]
+    E --- G[Relatório]
+
+```
+
+### Aluno
+
+```mermaid
+flowchart TD
+    A[Index] --- B[Login]
+    A --- C[Doações]
+    A --- D[Sobre nós]
+    B --- E[Chamado]
+    E --- F[Gerenciar chamado]
+    E --- G[Avaliações]
+
 ```
 
 ## A. Tela 1: Index
