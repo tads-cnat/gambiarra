@@ -1,30 +1,32 @@
-# Título do Projeto
+# Gambiarra
 
 <img src="logo.png" width="200" height="200" />
 
->Inserir uma logo para o projeto
+>Logo em desenvolvimento
 
-O propósito do Projeto Gambiarra é estabelecer uma conexão entre estudantes especializados em manutenção de computadores e membros, tanto alunos quanto servidores, da comunidade IFRN-CNAT que necessitam desses serviços. Dessa forma, busca-se oferecer uma oportunidade de prática profissional aos estudantes, sob a orientação atenta de um professor.
+O propósito do Projeto Gambiarra é estabelecer uma conexão entre estudantes em manutenção de computadores e membros, tanto alunos quanto servidores, da comunidade IFRN-CNAT que necessitam desses serviços. Dessa forma, busca-se oferecer uma oportunidade de prática profissional aos estudantes em forma de extensão sob a orientação atenta de um professor.
 
+## Equipe e Formas de Contato
 
-# Equipe e Formas de Contato
+| Integrante| Github| Discord |
+| ------------- | ------------- | ------------- |
+| Leonardo Viana  | [leveau10](https://github.com/leveau10)  | leveau10 |
+| Lívia Vitória | [Naninh4](https://github.com/Naninh4)  | amy_5he |
+| Luiz Gustavo | [1Lgr](https://github.com/1Lgr)   | 1lgr |
+| Mariele Oliveira | [masriele](https://github.com/masriele)  | masriele |
+| Ryan Pinheiro | [ryan-pin](https://github.com/ryan-pin)   | santuaryum |
 
-1. Leonardo Viana leveau10
-2. Lívia Vitória amy_5he
-3. Luiz Gustavo 1lgr
-4. Mariele Oliveira masriele
-5. Ryan Pinheiro santuaryum
+## Horário de Reuniões
+| Dia| Horário| Local |
+| ------------- | ------------- | ------------- |
+|  Segunda-feira | 20:00  | Discord |
+|  Quarta-feira | 9:00 | IFRN |
+|  Domingo | 20:00  | Discord |
 
-> Descrever as formas de contato da equipe - WhatsApp, Discord, etc.
-
-# Horário de Reuniões
-
-> Descrever dias, horários e local das reuniões da equipe
-
-# Documentação
+## Documentação
 
 [Link para os documentos do projeto](doc/documentacao.md)
 
-# Manual da Desenvolvedor
+## Manual da Desenvolvedor
 
 [Orientações para os desenvolvedores do projeto](doc/guia-ds/guia.md)
