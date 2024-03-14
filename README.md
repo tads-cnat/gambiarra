@@ -16,7 +16,7 @@
 ## Gerente: prof. Fellipe Aleixo
 
 Ordem para contato com o gerente da equipe:
-1. Comentários das ISSUES no GitHub, mencionando "@fellipealeixo ";
+1. Comentários das ISSUES no GitHub, mencionando @fellipealeixo;
 1. Chat do Teams - canal da equipe ou contato direto;
 1. Discord: fellipealeixo;
 1. E-mail: fellipe.aleixo@ifrn.edu.br
