@@ -2,17 +2,20 @@
 
 ## Histórico de Revisões
 
-| Data       | Versão | Descrição                | Autor                        |
-|------------|--------|--------------------------|------------------------------|
-| 27/02/2024 | 1.0    | Início da documentação  | Todos os integrantes da equipe |
-| 13/03/2024 | 1.1    | Finalizada primeira versão | Todos os integrantes da equipe |
+| Data       | Versão | Descrição                  | Autor                          |
+|------------|--------|----------------------------|--------------------------------|
+| 27/02/2024 | 1.0.0    | Início da documentação     | Todos os integrantes da equipe |
+| 13/03/2024 | 1.1.0    | Finalizada primeira versão | Todos os integrantes da equipe |
+| 15/03/2024 | 1.1.1   | <ul> <li> Correção do Objetivo do Projeto</li> <li> Atualização do nome de usuário de "Aluno" para "Cliente" </li> <li> Atualização do nome de usuário de "Doadores" para "Visitantes" </li></ul> | Livia Vitória da Silva |
+
 
 
 
 
 ## 1. Objetivo do projeto
 
-Desenvolver um sistema web de gerenciamento de chamados de manutenção técnica. Afim de oferecer suporte para professores de manutenção de computadores promoverem uma boa prática de ensino.
+
+Desenvolver um sistema web para gerenciamento de chamados de manutenção técnica visa oferecer suporte aos professores de manutenção de computadores do IFRN-CNAT, incentivando boas práticas profissionais. O projeto se baseia nos pilares de ensino, pesquisa e extensão, com um foco especial na integração curricular da última etapa. Este sistema não apenas facilita a gestão eficiente dos chamados de manutenção, mas também contribui para a promoção de uma cultura de excelência técnica e profissionalismo, alinhada com os objetivos educacionais e institucionais do IFRN-CNAT.
 
 ## 2. Descrição do problema
 
@@ -27,39 +30,16 @@ Desenvolver um sistema web de gerenciamento de chamados de manutenção técnica
 
 | Nome                |  Descrição          |   Responsabilidade  |
 | -----------------   | -----------------   | -----------------   |
-| Professores de manutenção | Administrador do Sistema. | - Receber solicitações
-- Avaliar viabilidade
-- Elaborar relatório de manutenção
-- Resolver chamados
-- Comunicar-se com alunos
-- Comunicar-se com os clientes(usuários) |
+| Professores de manutenção | Administrador do Sistema. | <ul> <li>Receber solicitações</li><li>Avaliar viabilidade</li><li>Elaborar relatório de manutenção</li><li> Resolver chamados</li><li>Comunicar-se com alunos</li><li> Comunicar-se com os clientes(usuários)</li> |
+
+| Nome                |  Descrição          |   Responsabilidade  |
+| -----------------   | -----------------   | -----------------   |
+| Cliente | Usuários do sistema que possuem vínculo com o SUAP. Esses usuários fornecem máquinas que precisam de manutenção para a prática de ensino por meio de um chamado. | <ul><li> Abrir pedido de manutenção</li><li> Comunicar-se com professores</li><li> Encerrar o chamado </li><li> Acompanhar o chamado</li><li> Avaliar o serviço</li> <li>Elaborar relatórios</li></ul>|
 
 
 | Nome                |  Descrição          |   Responsabilidade  |
 | -----------------   | -----------------   | -----------------   |
-| Professores de manutenção | Administrador do Sistema. | - Receber solicitações
-- Avaliar viabilidade
-- Elaborar relatório de manutenção
-- Resolver chamados
-- Comunicar-se com alunos
-- Comunicar-se com os clientes(usuários) |
-
-
-| Nome                |  Descrição          |   Responsabilidade  |
-| -----------------   | -----------------   | -----------------   |
-| Alunos(SUAP) | Usuários do sistema que possuem vínculo com o SUAP. Esses usuários fornecem máquinas que precisam de manutenção para a prática de ensino por meio de um chamado. | 
-- Abrir pedido de manutenção
-- Comunicar-se com professores
-- Encerrar o chamado
-- Acompanhar o chamado
-- Avaliar o serviço
-- Elaborar relatórios |
-
-| Nome                |  Descrição          |   Responsabilidade  |
-| -----------------   | -----------------   | -----------------   |
-| Visitante | Pessoa que não possui cadastro no sistema. | 
-- Visualizar serviços
-- Possibilidade de doar |
+| Visitante | Pessoa que não possui cadastro no sistema. | <ul> <li>Visualizar serviços oferecidos</li> <li>Possibilidade de doar</li><li>Vizualizar feedbacks</li></ul>|
 
 
 
@@ -71,7 +51,7 @@ Desenvolver um sistema web de gerenciamento de chamados de manutenção técnica
 
 - Os professores necessitam de um local que tenha computador com acesso a internet para acessar os recursos de gerenciamento de chamados e comunicação com clientes. Impressora também é necessária para algumas funcionalidades como impressão de etiquetas, ordem de serviço e relatórios.
 
-- Os alunos necessitam apenas de um dispositivo móvel ou computador com acesso à internet para acessar os recursos disponíveis, não havendo carências ambientais específicas.
+- Os Clientes necessitam apenas de um dispositivo móvel ou computador com acesso à internet para acessar os recursos disponíveis, não havendo carências ambientais específicas.
 As tarefas e atividades no sistema duram poucos minutos e podem ser feitas a qualquer momento da semana, não  importando horário. 
 
 ## 5. Principais necessidades dos usuários
@@ -88,9 +68,9 @@ No projeto, podemos identificar dois tipos de concorrentes, empresas de prestaç
 
 ## 7. Visão geral do produto
 
-Nosso produto é uma plataforma simplificada para gerenciamento de chamados de manutenção técnica, direcionada a professores de disciplinas de manutenção de computadores. Os alunos têm a oportunidade de resolver problemas reais de membros da comunidade escolar, como pais, alunos, professores e servidores, enriquecendo seu aprendizado prático e contribuindo para a resolução de questões tecnológicas na escola.  O sistema deve ser compatível com os navegadores mais usados no mercado.
+Nosso produto é uma plataforma simplificada para gerenciamento de chamados de manutenção técnica, direcionada a professores de disciplinas de manutenção de computadores do IFRN - CNAT. Os alunos têm a oportunidade de resolver problemas reais de membros da comunidade escolar, como pais, outros alunos, professores e servidores, enriquecendo seu aprendizado prático e contribuindo para a resolução de questões tecnológicas na escola.  O sistema deve ser compatível com os navegadores mais usados no mercado.
 
--	Em última análise, é necessário um processo simplificado de login integrado ao SUAP. Isso garante uma entrada fácil e rápida para professores, alunos e demais membros da comunidade escolar. Com essa integração, proporcionamos que posteriormente, outros campus se juntem à plataforma, bem como garante que o público alvo deste produto será atingido.
+-	Em última análise, é necessário um processo simplificado de login integrado ao SUAP. Isso garante uma entrada fácil e rápida para professores, alunos e demais membros da comunidade escolar. Com essa integração, proporcionamos que posteriormente, outros campus se juntem à plataforma. Bem como, garante que o público alvo deste produto será atingido.
 
 -	Por fim, deve-se garantir uma identidade visual única através de uma logo marca que identifica nossa plataforma, permitindo que seus membros a utilizem para divulgação em eventos e outras atividades relacionadas.
 
@@ -100,14 +80,14 @@ Nosso produto é uma plataforma simplificada para gerenciamento de chamados de m
 | Código | Nome                           | Descrição                                                                                  |
 |--------|--------------------------------|--------------------------------------------------------------------------------------------|
 | RF01   | Fazer login                    | Acessar as funções da plataforma.                                                          |
-| RF02   | Abrir chamado - Aluno         | Fazer um pedido no site para entregar um computador que precise de reparo a um professor. |
+| RF02   | Abrir chamado - Cliente         | Fazer um pedido no site para entregar um computador que precise de reparo a um professor. |
 | RF03   | Aceitar chamado - Professor   | O professor visualiza os chamados dos usuários abertos e pode aceitá-los para reparo.       |
-| RF04   | Encerrar chamado              | Fechamento de um chamado já aberto.                                                        |
+| RF04   | Encerrar chamado  - Professor     | Fechamento de um chamado já aberto.                                                        |
 | RF05   | Gerar relatórios - Professor  | Após o cumprimento do serviço, o professor deve abrir um relatório explicando o serviço.    |
-| RF06   | Atualizar chamado - Professor & Aluno | Atualização dos dados de um chamado já aberto.                                       |
+| RF06   | Atualizar chamado - Professor & Cliente | Atualização dos dados de um chamado já aberto.                                       |
 | RF07   | Gerar ordem de serviço - Professor | Criação de uma etiqueta relacionada à abertura do chamado, especificando problemas, datas e número de chamado. |
-| RF08   | Avaliar serviço - Aluno        | Espaço para o aluno avaliar o serviço prestado pelo professor.                              |
-| RF09   | Doar ao projeto - Aluno        | Espaço para fazer doações para ajudar a dar continuidade ao projeto.                         |
+| RF08   | Avaliar serviço - Cliente        | Espaço para o aluno avaliar o serviço prestado pelo professor.                              |
+| RF09   | Efetuar doação - Cliente & Visitante  | Espaço para fazer doações para ajudar a dar continuidade ao projeto.                         |
 | RF10   | Gerenciar doações - Professor  | Espaço para o professor gerenciar as doações feitas para o projeto.                          |
 
 
