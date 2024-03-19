@@ -9,9 +9,11 @@
 flowchart TD
     A[Index] --- B[Login]
     A --- C[Doações]
+    C --- I[acompanhar doações]
     A --- G[Sobre nós]
     B --- H[cadastre-se]
     B --- D[Dashboard]
+    D --- I
     H --- D
     D --- E[Relatórios]
     D --- F[Acompanhar chamado]
@@ -24,6 +26,7 @@ flowchart TD
 flowchart TD
     A[Index] --- B[Login]
     A --- C[Doações]
+    C --- I[Acompanhar doações]
     A --- G[Sobre nós]
     B --- H[cadastre-se]
     B --- D[Chamado]
