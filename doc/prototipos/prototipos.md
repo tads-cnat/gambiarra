@@ -21,7 +21,7 @@ flowchart TD
     
 ```
 
-## Alunos
+## Clientes
 ```mermaid
 flowchart TD
     A[Index] --- B[Login]
