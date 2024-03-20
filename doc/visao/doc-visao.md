@@ -7,9 +7,7 @@
 | 27/02/2024 | 1.0.0    | Início da documentação     | Todos os integrantes da equipe |
 | 13/03/2024 | 1.1.0    | Finalizada primeira versão | Todos os integrantes da equipe |
 | 15/03/2024 | 1.1.1   | <ul> <li> Correção do Objetivo do Projeto</li> <li> Atualização do nome de usuário de "Aluno" para "Cliente" </li> <li> Atualização do nome de usuário de "Doadores" para "Visitantes" </li></ul> | Livia Vitória da Silva |
-
-
-
+| 19/03/2024 | 1.1.2    | Regras de negócio | Livia Vitória da Silva |
 
 
 ## 1. Objetivo do projeto
@@ -100,3 +98,40 @@ Nosso produto é uma plataforma simplificada para gerenciamento de chamados de m
 | NF03   | Disponibilidade             | O sistema precisa ter disponibilidade para usuários acompanharem os chamados a qualquer momento. | Disponibilidade | Desejável  |
 | NF04   | Log de dados                | Registrar Logs ao mudar status e outros aspectos de um chamado.    | Segurança     | Desejável     |
 | NF05   | Autenticação via Suap       | Usar base de dados do SUAP para login para restringir o acesso à comunidade escolar. | Segurança     | Desejável     |
+
+
+## <span style="color: red">#</span> REGRAS DE NEGÓGIO
+
+
+<blockquote style="border-left: 5px solid red; padding-left: 10px;  background-color: rgba(255, 87, 127, 0)">
+<p><b>Abertura de chamados</b></p>
+<li>Somente <code style="background-color: #1E1E1E; color: red;">clientes</code>
+cadastrados na plataforma poderão abrir chamados.</li>
+</blockquote>
+
+
+<blockquote style="border-left: 5px solid red; padding-left: 10px;  background-color: rgba(255, 87, 127, 0)">
+<p><b>Encerrar chamados</b></p>
+<li>Somente <code style="background-color: #1E1E1E; color: red;">Professores</code> poderam modificar o status do chamado para encerrá-lo.</li>
+</blockquote>
+
+<blockquote style="border-left: 5px solid red; padding-left: 10px;  background-color: rgba(255, 87, 127, 0)">
+<p><b>Efetuar doação</b></p>
+<li>A contribuição pode ser efetuada tanto por <code style="background-color: #1E1E1E; color: red;">clientes</code> registrados quanto por visitantes que forneçam seus dados pessoais.</li>
+</blockquote>
+
+<blockquote style="border-left: 5px solid red; padding-left: 10px;  background-color: rgba(255, 87, 127, 0)">
+<p><b>Acompanhar doação</b></p>
+<li>O <code style="background-color: #1E1E1E; color: red;">cliente</code> pode monitorar suas doações em andamento ao acessar sua conta. Já o usuário (<code style="background-color: #1E1E1E; color: red;">Visitante</code>) não cadastrado só poderá acompanhar sua doação preenchendo corretamente o campo "código de doação".</li>
+</blockquote>
+
+<blockquote style="border-left: 5px solid red; padding-left: 10px; background-color: rgba(255, 87, 127, 0) ">
+<p><b>Gerar relatórios</b></p>
+<li>Gerar ordem de serviço: Apenas um <code style="background-color: #1E1E1E; color: red;">professor</code> logado pode gerar uma ordem de serviço</li>
+<li>Imprimir termo de responsabilidade:
+Um <code style="background-color: #1E1E1E; color: red;">professor</code> ou <code style="background-color: #1E1E1E; color: red;">cliente</code> logados podem gerar um termo de responsabilidade</li>
+<li>Imprimir relatórios de chamados <i>(Pendentes, resolvidos, fechados, em andamento)</i>:
+Essa funcionalidade possibilita aos <code style="background-color: #1E1E1E; color: red;">professores</code> criar relatórios com base nos chamados abertos no sistema. Os relatórios apresentam informações sobre o número do chamado e os procedimentos solicitados nele.</li>
+</blockquote>
+
+
