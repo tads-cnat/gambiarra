@@ -23,7 +23,19 @@ O propósito do Projeto Gambiarra é estabelecer uma conexão entre estudantes e
 |  Quarta-feira | 9:00 | IFRN |
 |  Domingo | 20:00  | Discord |
 
-## Documentação
+## Gerente: prof. Fellipe Aleixo
+
+Ordem para contato com o gerente da equipe:
+1. Comentários das ISSUES no GitHub, mencionando @fellipealeixo;
+1. Chat do Teams - canal da equipe ou contato direto;
+1. Discord: fellipealeixo;
+1. E-mail: fellipe.aleixo@ifrn.edu.br
+
+# Horário de Reuniões
+
+> Descrever dias, horários e local das reuniões da equipe
+
+# Documentação
 
 [Link para os documentos do projeto](doc/documentacao.md)
 
