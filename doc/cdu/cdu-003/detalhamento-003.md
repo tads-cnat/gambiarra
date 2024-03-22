@@ -1,24 +1,25 @@
-# CDU - Avaliar chamado
+# CDU - Abrir chamado
 
 - **Ator principal**: Cliente
 - **Atores secundários**: ...	 
-- **Resumo**: Esse caso de uso permite o usuário avaliar um serviço depois de concluído
-- **Pré-condição**: Possuir uma conta no sistema e estar na página de detalhes de um chamado
-- **Pós-Condição**: O sistema substitui a função de avaliar pela avaliação do usuario
+- **Resumo**: Neste caso de uso, o cliente pode abrir um chamado e registrar seu problema a ser resolvido
+- **Pré-condição**: Estar logado no sistema
+- **Pós-Condição**: O sistema apresenta a tela de detalhes do chamado e um chat para comunicação do chamado
 
 ## Fluxo Principal
 | Ações do ator | Ações do sistema |
 | :-----------------: | :-----------------: | 
-| 1 - O usuário clica em avaliar serviço | |  
-| | 2 - O sistema apresenta uma tela de avaliação para o usuário com a escolha de 1 a 5 estrelas e uma aba de comentário | 
-| 3 - O usuário avalia o serviço corretamente e clicar em enviar | | 
-| | 4 - O sistema retorna uma mensagem confirmando a avaliação |  
+| 1 - O usuário clica no botão de abrir chamado | |  
+| | 2 - O sistema carrega um formulário para a criação de um chamado | 
+| 3 - O usuário preenche os campos necessários para criar o chamado e clica em enviar | | 
+| | 4 - O sistema registra as informações fornecidas pelo usuário, confirma a criação do chamado e fornece o número de referência do chamado |  
 
 ## Fluxo Alternativo I - Usuário não cadastrado
 | Ações do ator | Ações do sistema |
 | :-----------------: |:-----------------: | 
 | 1.1 - ... | |  
 | | 2.1 - ...|
+
 
 ## Fluxo Alternativo II - ...
 | Ações do ator | Ações do sistema |
