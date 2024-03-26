@@ -2,11 +2,11 @@
 
 ## 1. Diagrama de Casos de Uso do Cliente
 
-![diagrama de caso de uso do cliente](imgs/cdu_cliente.JPG "DIagrama de caso de uso - cliente")
+![diagrama de caso de uso do cliente](imgs/cdu_cliente.jpg "DIagrama de caso de uso - cliente")
 
 ## 2. Diagrama de Casos de Uso do Professor
 
-![diagrama caso de uso do professor](imgs/cdu_professor.JPG "Diagrama de caso de uso - professor")
+![diagrama caso de uso do professor](imgs/cdu_professor.jpg "Diagrama de caso de uso - professor")
 
 ## 2. Listagem dos detalhamentos dos casos de uso
 
