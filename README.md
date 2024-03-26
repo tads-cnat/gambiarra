@@ -31,10 +31,6 @@ Ordem para contato com o gerente da equipe:
 1. Discord: fellipealeixo;
 1. E-mail: fellipe.aleixo@ifrn.edu.br
 
-# Horário de Reuniões
-
-> Descrever dias, horários e local das reuniões da equipe
-
 # Documentação
 
 [Link para os documentos do projeto](doc/documentacao.md)
