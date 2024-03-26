@@ -2,7 +2,13 @@
 
 ## Diagrama ER
 
-> Texto e imagem do diagrama ER...
+1o esboço com atributos e relacionamentos iniciais
+
+O sistema terá duas entidades que agem como atores principais: Cliente e Professor.
+Ambos estarão relacionados à entidade chamado.
+Cada chamado contém um relacionamento com um chat em que os atores se comunicam.
+Cada chat contém um relacionamento com várias mensagens.
+<img src="esboco-um.png" />
 
 ## Modelo Relacional
 
