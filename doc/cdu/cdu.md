@@ -1,12 +1,8 @@
 # Modelo de Casos de Uso
 
-## 1. Diagrama de Casos de Uso do Cliente
+## 1. Diagrama de Caso de Uso
 
-![diagrama de caso de uso do cliente](imgs/cdu_cliente.jpg "DIagrama de caso de uso - cliente")
-
-## 2. Diagrama de Casos de Uso do Professor
-
-![diagrama caso de uso do professor](imgs/cdu_professor.jpg "Diagrama de caso de uso - professor")
+![diagrama de caso de uso do cliente](imgs/cdu_cliente_professor.jpg "DIagrama de caso de uso - cliente")
 
 ## 2. Listagem dos detalhamentos dos casos de uso
 
