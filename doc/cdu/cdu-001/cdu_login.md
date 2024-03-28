@@ -9,7 +9,7 @@
 ## Fluxo Principal
 | Ações do ator | Ações do sistema |
 | :-----------------: | :-----------------: | 
-| 1 - O usuário preenche os dados corretamente para efetuar o login | |  
+| 1 - O usuário preenche os campos de usuario e senha corretamente para efetuar o login | |  
 | | 2 - O sistema efetua o login do usuário e redireciona para a página de perfil | 
 
 ## Fluxo Alternativo I - Usuário não cadastrado

@@ -11,14 +11,14 @@
 | :-----------------: | :-----------------: | 
 | 1 - O usuário clica no botão de abrir chamado | |  
 | | 2 - O sistema carrega um formulário para a criação de um chamado | 
-| 3 - O usuário preenche os campos necessários para criar o chamado e clica em enviar | | 
+| 3 - O usuário preenche os campos de modelo do equipamento e um resumo do problema necessários para criar o chamado e clica em enviar | | 
 | | 4 - O sistema registra as informações fornecidas pelo usuário, confirma a criação do chamado e fornece o número de referência do chamado |  
 
-## Fluxo Alternativo I - Usuário não cadastrado
+## Fluxo Alternativo I - Campo não preenchido
 | Ações do ator | Ações do sistema |
 | :-----------------: |:-----------------: | 
-| 1.1 - ... | |  
-| | 2.1 - ...|
+| 1.1 - O usuário não preenche todos os campos de dados | |  
+| | 1.2 - O sistema retorna uma mensagem de "preencha os dados" sinalizando os campos não preenchidos com a cor vermelha|
 
 
 ## Fluxo Alternativo II - ...
