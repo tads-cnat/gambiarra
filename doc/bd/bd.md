@@ -2,13 +2,15 @@
 
 ## Diagrama ER
 
-1o esboço com atributos e relacionamentos iniciais
+2o esboço com atributos e relacionamentos iniciais
 
 O sistema terá duas entidades que agem como atores principais: Cliente e Professor.
 Ambos estarão relacionados à entidade chamado.
-Cada chamado contém um relacionamento com um chat em que os atores se comunicam.
-Cada chat contém um relacionamento com várias mensagens.
-<img src="esboco-um.png" />
+Um chamado pode conter uma avaliação registrada pelo cliente que a abriu.
+Um chamado pode possuir várias mensagens enviadas pelos dois atores principais.
+Um chamado pode gerar um relatório elaborado por um professor.
+Um professor pode gerar várias doações.
+<img src="esboco-dois.png" />
 
 ## Modelo Relacional
 
