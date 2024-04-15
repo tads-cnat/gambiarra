@@ -59,7 +59,7 @@ flowchart TD
 
 ## F. Tela 6: Detalhes doações
 
-[![ALT](images/detalhes-doacao.png)](https://www.figma.com/file/aEY53HRlxwqbJGecbzNinL/Gambiarra---Baixa-Fidelidade?type=design&node-id=4-2&mode=design&t=Od4uBLX6HB5yZWbs-0)
+[![ALT](images/detalhes-doacoes.png)](https://www.figma.com/file/aEY53HRlxwqbJGecbzNinL/Gambiarra---Baixa-Fidelidade?type=design&node-id=4-2&mode=design&t=Od4uBLX6HB5yZWbs-0)
 
 ## G. Tela 7: Acessar doações
 
