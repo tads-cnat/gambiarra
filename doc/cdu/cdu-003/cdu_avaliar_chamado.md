@@ -14,11 +14,11 @@
 | 3 - O usuário avalia o serviço corretamente e clicar em enviar | | 
 | | 4 - O sistema retorna uma mensagem confirmando a avaliação |  
 
-## Fluxo Alternativo I - Usuário não cadastrado
+## Fluxo Alternativo I - Dados nao preenchidos
 | Ações do ator | Ações do sistema |
 | :-----------------: |:-----------------: | 
-| 1.1 - ... | |  
-| | 2.1 - ...|
+| 1.1 - O usuário não escolhe quantas estrelas ele vai avaliar o serviço | |  
+| | 1.2 - O sistema apresenta uma mensagem abaixo das estrelas "Preencher esse campo é obrigatorio"|
 
 ## Fluxo Alternativo II - ...
 | Ações do ator | Ações do sistema |
