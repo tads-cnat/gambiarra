@@ -265,7 +265,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Chat chamado #?</h1>
+            <h1 class="m-0">Verificar</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -285,87 +285,111 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <!-- Construct the card with style you want. Here we are using card-danger -->
 <!-- Then add the class direct-chat and choose the direct-chat-* contexual class -->
 <!-- The contextual class should match the card, so we are using direct-chat-danger -->
-<div class="card card-success direct-chat direct-chat-success">
-    <div class="card-header">
-      <h3 class="card-title">Chat chamado#??</h3>
-    </div>
-    <!-- /.card-header -->
-    <div class="card-body">
-      <!-- Conversations are loaded here -->
-      <div class="direct-chat-messages">
-        <!-- Message. Default to the left -->
-        <div class="direct-chat-msg">
-          <div class="direct-chat-infos clearfix">
-            <span class="direct-chat-name float-left">Usuário</span>
-            <span class="direct-chat-timestamp float-right">23 Jan 14:00</span>
-          </div>
-          <!-- /.direct-chat-infos -->
-          <img class="direct-chat-img" src="dist/img/usuário_não_logado.png" alt="message user image">
-          <!-- /.direct-chat-img -->
-          <div class="direct-chat-text">
-            Minha placa de video ta dando defeito.
-          </div>
-          <!-- /.direct-chat-text -->
+<div>
+  <section class="content">
+
+    <!-- Default box -->
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title">Detalhes do chamado</h3>
+
+        <div class="card-tools">
+          <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+            <i class="fas fa-minus"></i>
+          </button>
         </div>
-        <!-- /.direct-chat-msg -->
-        <!-- Message to the right -->
-        <div class="direct-chat-msg right">
-          <div class="direct-chat-infos clearfix">
-            <span class="direct-chat-name float-right">Professor</span>
-            <span class="direct-chat-timestamp float-left">23 Jan 14:05</span>
-          </div>
-          <!-- /.direct-chat-infos -->
-          <img class="direct-chat-img" src="dist/img/usuário_não_logado.png" alt="message user image">
-          <!-- /.direct-chat-img -->
-          <div class="direct-chat-text">
-            Ok, iremos averiguar.
-          </div>
-          <!-- /.direct-chat-text -->
-        </div>
-        <!-- /.direct-chat-msg -->
-        <!-- Message. Default to the left -->
-        <div class="direct-chat-msg">
-          <div class="direct-chat-infos clearfix">
-            <span class="direct-chat-name float-left">Usuário</span>
-            <span class="direct-chat-timestamp float-right">23 Jan 17:37</span>
-          </div>
-          <!-- /.direct-chat-infos -->
-          <img class="direct-chat-img" src="dist/img/usuário_não_logado.png" alt="message user image">
-          <!-- /.direct-chat-img -->
-          <div class="direct-chat-text">
-            Eae, descobriu algo?
-          </div>
-          <!-- /.direct-chat-text -->
-        </div>
-        <!-- /.direct-chat-msg -->
-        <!-- Message to the right -->
-        <div class="direct-chat-msg right">
-          <div class="direct-chat-infos clearfix">
-            <span class="direct-chat-name float-right">Professor</span>
-            <span class="direct-chat-timestamp float-left">23 Jan 18:10</span>
-          </div>
-          <!-- /.direct-chat-infos -->
-          <img class="direct-chat-img" src="dist/img/usuário_não_logado.png" alt="message user image">
-          <!-- /.direct-chat-img -->
-          <div class="direct-chat-text">
-            Sim, e já estamos consertando.
-          </div>
-        </ul>
-        <!-- /.contacts-list -->
       </div>
-      <!-- /.direct-chat-pane -->
+      <div class="card-body">
+        <div class="row">
+          <div class="col-12 col-md-12 col-lg-8 order-2 order-md-1">
+            <div class="row">
+              <div class="col-12 col-sm-4">
+                <div class="info-box bg-light">
+                  <div class="info-box-content">
+                    <span class="info-box-text text-center text-muted">Nome</span>
+                    <span class="info-box-number text-center text-muted mb-0">João</span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-sm-4">
+                <div class="info-box bg-light">
+                  <div class="info-box-content">
+                    <span class="info-box-text text-center text-muted">Peça</span>
+                    <span class="info-box-number text-center text-muted mb-0">Notebook Lenovo</span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-sm-4">
+                <div class="info-box bg-light">
+                  <div class="info-box-content">
+                    <span class="info-box-text text-center text-muted">Problema</span>
+                    <span class="info-box-number text-center text-muted mb-0">Não liga</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12">
+                <h4>Descrição</h4>
+                  <div class="post">
+                    <div class="user-block">
+                      <img class="img-circle img-bordered-sm" src="./dist/img/usuário_não_logado.png" alt="user image">
+                      <span class="username">
+                        <a href="#">João</a>
+                      </span>
+                      <span class="description">Enviado - 7:45 24/04/2024</span>
+                    </div>
+                    <!-- /.user-block -->
+                    <p>
+                      Lorem ipsum represents a long-held tradition for designers,
+                      typographers and the like. Some people hate it and argue for
+                      its demise, but others ignore.
+                    </p>
+
+                    <p>
+                      <a href="#" class="link-black text-sm"><i class="fas fa-link mr-1"></i> Foto notebook</a>
+                    </p>
+                  </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-md-12 col-lg-4 order-1 order-md-2">
+            <h3 class="text-primary"><i class="fas fa-paint-brush"></i> Relatório</h3>
+            <p class="text-muted">Lorem ipsum represents a long-held tradition for designers,
+              typographers and the like. Some people hate it and argue for
+              its demise, but others ignore.</p>
+            <div class="text-muted">
+              <p class="text-sm">ID
+                <b class="d-block">#5</b>
+              </p>
+              <p class="text-sm">Problema
+                <b class="d-block">Notebook Lenovo não liga</b>
+              </p>
+            </div>
+            <h5 class="mt-5 text-muted">Arquivos</h5>
+            <ul class="list-unstyled">
+              <li>
+                <a href="" class="btn-link text-secondary"><i class="far fa-fw fa-image "></i> Video.mp4</a>
+              </li>
+              <li>
+                <a href="" class="btn-link text-secondary"><i class="far fa-fw fa-image "></i> Foto.png</a>
+              </li>
+            </ul>
+            <div class="text-center mt-5 mb-3">
+              <a href="#" class="btn btn-sm btn-success">Aceitar Chamado</a>
+              <a href="#" class="btn btn-sm btn-danger">Recusar chamado</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+
+  </section>
     </div>
     <!-- /.card-body -->
-    <div class="card-footer">
-      <form action="#" method="post">
-        <div class="input-group">
-          <input type="text" name="message" placeholder="Digite sua mensagem ..." class="form-control">
-          <span class="input-group-append">
-            <button type="button" class="btn btn-primary">Enviar</button>
-          </span>
-        </div>
-      </form>
-    </div>
+
     <!-- /.card-footer-->
   </div>
   <!--/.direct-chat -->

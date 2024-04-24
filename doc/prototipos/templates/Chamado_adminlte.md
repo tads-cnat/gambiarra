@@ -36,18 +36,21 @@
 
 ### Telas
 
-<h4> Tela de inicio caso precise adicionar algo </h4>
+<h4> Tela de gerenciamento </h4>
 
-![Tela de inicio](./img-templates/tela-limpa.png)
+![Tela de inicio](./img-templates/gerenciar.png)
 
 <h4> Tela de chamados </h4>
 
 ![Tela de chamados](./img-templates/chamados.png)
 
-<h4> Chat </h4>
-
+<h4> Tela de Chat </h4>
 
 ![Tela de inicio](./img-templates/chat.png)
+
+<h4> Tela de Verificar chamado </h4>
+
+![Tela de inicio](./img-templates/verificar.png)
 
 <hr>
 
