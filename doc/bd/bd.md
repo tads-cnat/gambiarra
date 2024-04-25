@@ -8,9 +8,9 @@ O sistema terá duas entidades que agem como atores principais: Cliente e Profes
 Ambos estarão relacionados à entidade chamado.
 Um chamado pode conter uma avaliação registrada pelo cliente que a abriu.
 Um chamado pode possuir várias mensagens enviadas pelos dois atores principais.
-Um chamado pode gerar um relatório elaborado por um professor.
-Um professor pode gerar várias doações.
-<img src="esboco-dois.png" />
+Um chamado pode conter vários equipamentos.
+Um ou várioas alunos podem ser atribuídos à um chamado.
+<img src="esboco-tres.png" />
 
 ## Modelo Relacional
 
