@@ -1,0 +1,141 @@
+
+body{
+    font-family: 'Nunito sans', sans-serif;
+}
+main > section:nth-child(1),
+header{    display: flex;
+    box-shadow: 0px 0px 30px 1px rgba(0, 0, 0, 0.15);
+    border-radius: 30px !important;
+    justify-content: space-between;
+}
+a{
+    text-decoration: none !important;
+    color: #383838;
+}
+
+li{
+    display: inline;
+}
+header{
+    box-shadow: none;
+    padding: 10px 5px;
+    background: linear-gradient(white, white) padding-box,  linear-gradient(-8deg, rgba(255,255,255,1) 7%, #79E546 7%, #79E546 19%, rgba(255,255,255,1) 19%, rgba(255,255,255,1) 27%, rgba(67,56,202,1) 27%, rgba(67,56,202,1) 39%, rgba(252,252,252,1) 39%, rgba(252,252,252,1) 61%, #79E546 61%, #79E546 81%, rgba(255,255,255,1) 81%) border-box;
+    border: 1px solid transparent ;
+}
+
+*{
+    margin: 0 !important;
+}
+main{
+    margin: auto !important;
+}
+
+/* styles padrões */
+
+.button_def svg {
+    fill: #79E546;
+    width: 0;
+    height: 0;
+    transition: fill 0.5s ease-out; /* Adicionando uma transição suave para mudança de cor */
+    transition: width 0.5s ease-in-out; /* Adicionando uma transição suave para mudança de cor */
+
+}
+
+.chatleft{
+    border-radius: 20px 20px 20px 0px;
+}
+
+
+.button_def:hover svg:nth-child(1) {
+    fill: #ffffff; /* Altera a cor do ícone SVG ao passar o mouse */
+    width: 0.6rem;
+    height: 1rem;
+}
+
+.btn.btn-success{
+    width: 75%;
+    border-radius: 30px;
+    text-align: center;
+    background-color: #78e546 !important;
+    border: #79E546;
+    color: rgb(255, 255, 255);
+} 
+.btn-chat01{
+    background-color: #4338CA !important;
+    box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.25);
+    color: #ffffff;
+    font-size: 16px;
+    border-radius: 15px 15px 0px 15px;
+    padding: 10px;
+    border: 0px !important;
+
+
+}
+
+#bannerh{
+    border-bottom: #79E546 solid 1px;
+}
+/* MAIN */
+
+.titleg{
+    border:1px solid #79E546;
+    border-top: 0;
+    border-right: 0;
+    border-radius: 30px 30px 30px 0px; /* sl, sr, ir, il*/
+    padding: 10px 20px !important;
+}
+#titlegB{
+    border: 1px solid #4338CA;
+    border-top: 0;
+    border-left: 0;
+    border-radius: 30px 30px 0px 30px !important; /* sl, sr, ir, il*/
+
+}
+
+.titleg > img{
+    width: 30px;
+}
+
+main > section:nth-child(1){
+    padding: 50px !important;
+    background: linear-gradient(white, white) padding-box,  linear-gradient(-8deg, rgba(255,255,255,1) 7%, rgba(67,56,202,1) 7%, rgba(58,76,209,1) 19%, rgba(255,255,255,1) 19%, rgba(255,255,255,1) 27%, rgba(67,56,202,1) 27%, rgba(67,56,202,1) 39%, rgba(252,252,252,1) 39%, rgba(252,252,252,1) 61%, rgba(67,56,202,1) 61%, rgba(67,56,202,1) 81%, rgba(255,255,255,1) 81%) border-box;
+    border: 1px solid transparent ;
+}
+
+
+/* background: linear-gradient(white, white) padding-box,  linear-gradient(90deg, rgba(255,255,255,1) 7%, rgba(67,56,202,1) 7%, rgba(58,76,209,1) 19%, rgba(255,255,255,1) 19%, rgba(255,255,255,1) 27%, rgba(67,56,202,1) 27%, rgba(67,56,202,1) 39%, rgba(252,252,252,1) 39%, rgba(252,252,252,1) 61%, rgba(67,56,202,1) 61%, rgba(67,56,202,1) 81%, rgba(255,255,255,1) 81%) border-box; */
+/* 
+ */
+
+
+/* footer */
+
+#btncriadores{
+    background-color: white !important;
+    border: 1px solid #383838;
+    color: #383838 !important;
+}
+
+#btncriadores:hover svg {
+    fill: #383838 !important; /* Altera a cor do ícone SVG ao passar o mouse */
+}
+footer > section > div{
+    font-size: 16px !important;
+    text-decoration: none !important ;
+    display: inline !important;
+}
+footer > section > div > div > button{
+    font-size: 14px !important;
+}
+#pfoot{
+    font-size: 13px !important;
+}
+main > h4 > span{
+    color: #4338CA;
+}
+/* footer{
+    background: linear-gradient(white, white) padding-box,  linear-gradient(-8deg, rgba(255,255,255,1) 7%, #79E546 7%, #79E546 19%, rgba(255,255,255,1) 19%, rgba(255,255,255,1) 27%, rgba(67,56,202,1) 27%, rgba(67,56,202,1) 39%, rgba(252,252,252,1) 39%, rgba(252,252,252,1) 61%, #79E546 61%, #79E546 81%, rgba(255,255,255,1) 81%) border-box;
+    border: 1px solid transparent ;
+    border-radius: 30px;
+} */
+/* estou pensando se coloco essa borda no footer */

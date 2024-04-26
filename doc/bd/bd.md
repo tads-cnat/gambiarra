@@ -2,7 +2,15 @@
 
 ## Diagrama ER
 
-> Texto e imagem do diagrama ER...
+2o esboço com atributos e relacionamentos iniciais
+
+O sistema terá duas entidades que agem como atores principais: Cliente e Professor.
+Ambos estarão relacionados à entidade chamado.
+Um chamado pode conter uma avaliação registrada pelo cliente que a abriu.
+Um chamado pode possuir várias mensagens enviadas pelos dois atores principais.
+Um chamado pode conter vários equipamentos.
+Um ou várioas alunos podem ser atribuídos à um chamado.
+<img src="esboco-tres.png" />
 
 ## Modelo Relacional
 

@@ -1,8 +1,6 @@
 # Gambiarra
 
-<img src="logo.png" width="200" height="200" />
-
->Logo em desenvolvimento
+<img src="logo_light.png"/>
 
 O propósito do Projeto Gambiarra é estabelecer uma conexão entre estudantes em manutenção de computadores e membros, tanto alunos quanto servidores, da comunidade IFRN-CNAT que necessitam desses serviços. Dessa forma, busca-se oferecer uma oportunidade de prática profissional aos estudantes em forma de extensão sob a orientação atenta de um professor.
 
@@ -30,10 +28,6 @@ Ordem para contato com o gerente da equipe:
 1. Chat do Teams - canal da equipe ou contato direto;
 1. Discord: fellipealeixo;
 1. E-mail: fellipe.aleixo@ifrn.edu.br
-
-# Horário de Reuniões
-
-> Descrever dias, horários e local das reuniões da equipe
 
 # Documentação
 
