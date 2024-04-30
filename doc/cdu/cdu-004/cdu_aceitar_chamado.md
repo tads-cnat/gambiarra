@@ -3,20 +3,20 @@
 - **Ator principal**: Professor
 - **Atores secundários**: ...	 
 - **Resumo**: Neste caso de uso, o professor pode aceitar o chamado
-- **Pré-condição**: Estar logado no sistema na aba de chamados
-- **Pós-Condição**: O sistema redireciona o usuário para a tela do chamado em aberto
+- **Pré-condição**: Estar logado no sistema na lista de chamados
+- **Pós-Condição**: O sistema redireciona o professor para a tela de detalhes do chamado
 
 ## Fluxo Principal
 | Ações do ator | Ações do sistema |
 | :-----------------: | :-----------------: | 
-| 1 - O usuário analisa as informações contidas no chamado e seleciona a opção de Aceitar chamado | |  
-| | 2 - O sistema redireciona para a página do chamado constando com status Em aberto| 
+| 1 - O Professor analisa as informações contidas no chamado e seleciona a opção de "Aceitar chamado" | |  
+| | 2 - O sistema redireciona para a página de detalhes do chamado mudando o status para "Em aberto"| 
 
 ## Fluxo Alternativo I - Informações insuficientes
 | Ações do ator | Ações do sistema |
 | :-----------------: |:-----------------: | 
-| 1.1 - O usuário verifica que as informações fornecidas não são suficientes e seleciona o botão Recusar chamado| |  
-| | 1.2 - O sistema redireciona para a tela do chamado costando com status Fechado e uma mensagem automática informando que o mesmo foi recusado|
+| 1.1 - O professor verifica que as informações fornecidas não são suficientes e envia uma mensagem ao cliente pedindo correção das informações| |  
+
 
 ## Fluxo Alternativo II - ...
 | Ações do ator | Ações do sistema |
