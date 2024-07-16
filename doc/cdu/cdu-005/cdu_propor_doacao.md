@@ -1,22 +1,22 @@
-# CDU - Propor doação de ferramenta
+# CDU - Propor doação de ferramentas
 
-- **Ator principal**: Cliente
+- **Ator principal**: Usuário
 - **Atores secundários**: ...	 
-- **Resumo**: Neste caso de uso, o cliente pode abrir uma solicitação para doar algo
+- **Resumo**: Neste caso de uso, o usuário pode abrir uma solicitação para doar equipamentos
 - **Pré-condição**: Acessar o site na aba de doações
-- **Pós-condição**: Uma caixa de texto informando que a solicitação foi aberta e o seu código aparece na tela
+- **Pós-condição**: A tela é redirecionada para um chat de acompanhamento de doação
 
 ## Fluxo Principal
 | Ações do ator | Ações do sistema |
 | :-----------------: | :-----------------: | 
-| 1 - O usuário seleciona instituição receptora, informa qual a ferramenta deseja doar, informa o seu contato e pode adicionar alguma informação que achar relevante, após isso, clica no botão Enviar| |  
-| | 2 - O sistema carrega e uma caixa de texto informando que a solicitação foi aberta e o seu código aparece na tela| 
+| 1 - O usuário informa quais os objetos que deseja doar, informa o seu contato, endereço, detalhes sobre os objetos e informações prévias sobre a entrega, e após isso, clica no botão "Enviar"| |  
+| | 2 - O sistema carrega uma caixa de texto informando que a solicitação foi aberta e um código para acompanhamento da doação é mostrado| 
 
-## Fluxo Alternativo I - Informações obrigatórias em falta
+## Fluxo Alternativo I - Informações obrigatórias faltantes
 | Ações do ator | Ações do sistema |
 | :-----------------: |:-----------------: | 
-| 1.1 - O usuário seleciona instituição receptora, informa qual a ferramenta deseja doar e adiciona alguma informação que achar relevante, após isso, clica no botão Enviar| |  
-| | 1.2 - O sistema automaticamente deixa a caixa de Forma de contato em vermelho solicitando preenchimento|
+| 1.1 - O usuário informa quais os objetos que deseja doar, endereço, detalhes sobre os objetos e informações prévias sobre a entrega, e após isso, clica no botão "Enviar"| |  
+| | 1.2 - O sistema informa que o campo de Contato não foi informado e solicita o preenchimento|
 
 ## Fluxo Alternativo II - ...
 | Ações do ator | Ações do sistema |
