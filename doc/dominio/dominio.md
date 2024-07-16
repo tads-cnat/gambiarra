@@ -1,6 +1,6 @@
 # Modelo de Domínio
 
-Descrição e imagem do diagrama de classes de domínio...
+![diagrama de classe de dominio](imgs/diagrama_de_classe_de_dominio.jpg "Diagrama de caso de uso - cliente")
 
 ## Glossário (sugestão)
 
