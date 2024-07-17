@@ -20,19 +20,5 @@
 | 1.1 - O usuário não escolhe quantas estrelas ele vai avaliar o serviço | |  
 | | 1.2 - O sistema apresenta uma mensagem abaixo das estrelas "Preencher esse campo é obrigatorio"|
 
-## Fluxo Alternativo II - ...
-| Ações do ator | Ações do sistema |
-| :-----------------: | :-----------------: | 
-| 2.1 - ... | |  
-| | 2.2 - ... |  
 
-> Obs. as seções a seguir apenas serão utilizadas na segunda unidade do PDSWeb (segundo orientações do gerente do projeto).
-
-## Diagrama de Interação (Sequência ou Comunicação)
-
-> Substituir pela imagem correspondente...
-
-## Diagrama de Classes de Projeto
-
-> Substituir pela imagem contendo as classes (modelo, visão e templates) que implementam o respectivo CDU...
 
