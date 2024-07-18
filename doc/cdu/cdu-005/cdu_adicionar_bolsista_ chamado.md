@@ -4,7 +4,7 @@
 - **Atores secundários**: ...  
 - **Resumo**: Neste caso de uso, o professor pode adicionar um bolsista para participar da resolução de um chamado
 - **Pré-condição**: Estar logado no sistema, ter pelo menos um bolsista cadastrado e estar na página de detalhes do chamado.
-- **Pós-condição**: A tela mostra que um bolsista foi adicionado ao chamado
+- **Pós-condição**: O sistema exibe mensagem indicando que o bolsista foi adicionado ao chamado
 
 ## Fluxo Principal
 
