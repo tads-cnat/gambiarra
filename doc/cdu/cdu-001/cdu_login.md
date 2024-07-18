@@ -9,14 +9,14 @@
 ## Fluxo Principal
 | Ações do ator | Ações do sistema |
 | :-----------------: | :-----------------: | 
-| 1 - O usuário preenche os campos de usuario e senha corretamente para efetuar o login | |  
-| | 2 - O sistema efetua o login do usuário e redireciona para a página de perfil | 
+| 1 - O usuário preenche os campos de email e senha  | |  
+| | 2 - O sistema valida as informações e redireciona o usuário para o seu perfil | 
 
 ## Fluxo Alternativo I - Usuário não cadastrado
 | Ações do ator | Ações do sistema |
 | :-----------------: |:-----------------: | 
-| 1.1 - O usuário preenche os campos com dados não reconhecidos pelo sistema | |  
-| | 1.2 - O sistema retorna uma mensagem de “Conta ou senha incorreta” com opções de redefinir senha e criar conta|
+| 1.1 - O usuário preenche os campos de email e senha  | |  
+| | 1.2 - O sistema invalida as informações e exibe mensagem de erro|
 
 
 
