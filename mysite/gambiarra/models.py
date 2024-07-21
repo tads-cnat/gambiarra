@@ -9,7 +9,7 @@ CARACTERISTICA_CHOICE = [
 ]
 
 STATUS_CHOICES = [
-    ("Em Análise", " O problema está sendo avaliado. "),
+    ("Em Análise", " O problema está sendo avaliado."),
     ("Aceito", "Um professor aceitou o seu chamado, traga seu equipamento!"),
     ("Em Diagnóstico", "A causa raiz está sendo identificada."),
     ("Equipamento em conserto", "O reparo está em andamento."),
@@ -50,7 +50,8 @@ class Chamado(models.Model):
 class Mensagem(models.Model):
     id = models.AutoField(primary_key=True)
     data_envio = models.DateTimeField('Data de publicação', default=timezone.now)
-    autor = models.ForeignKey(Cliente, on_delete=models.CASCADE)  ##Descobrir como atribuir Cliente ou Professor
+    id_autor = models.IntegerField(default=0)        # estratégia pra descobrir quem enviou(prof ou cliente)
+    eh_professor = models.BooleanField(default=True) #
     texto = models.TextField(max_length=240, default=0)
     chamado = models.ForeignKey(Chamado, on_delete=models.CASCADE)
 
@@ -58,4 +59,18 @@ class Avaliacao(models.Model):
     id = models.AutoField(primary_key=True)
     texto = models.TextField(max_length=240, default=0)
     nota = models.DecimalField(max_digits=2, decimal_places=0, default=0)
-    id_chamado = models.ForeignKey(Chamado, on_delete=models.CASCADE)
+    chamado = models.ForeignKey(Chamado, on_delete=models.CASCADE)
+
+class Alteracao(models.Model):
+    id = models.AutoField(primary_key=True);
+    professor = models.ForeignKey(Professor, on_delete=models.CASCADE) #professor que modificou o status
+    status = models.CharField(max_length=30, choices=STATUS_CHOICES)
+    data_alteracao = models.DateTimeField('Data de modificação', default=timezone.now)
+    chamado = models.ForeignKey(Chamado, on_delete=models.CASCADE)
+
+class Item(models.Model):
+    id = models.AutoField(primary_key=True);
+    modelo = models.CharField(max_length=30, default=0)
+    cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE) 
+    descricao = models.CharField(max_length=30, default=0)
+    chamado = models.ForeignKey(Chamado, on_delete=models.CASCADE)
