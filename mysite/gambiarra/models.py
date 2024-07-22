@@ -42,7 +42,9 @@ class Cliente(models.Model):
 
 class Chamado(models.Model):
     id = models.AutoField(primary_key=True)
-    code = models.UUIDField(default=uuid.uuid4)
+    titulo = models.CharField(max_length=50, default=0) 
+    descricao = models.TextField(max_length=240, default=0)
+    code = models.UUIDField(default=uuid.uuid4) #5 DÍGITOS
     professor = models.ForeignKey(Professor, on_delete=models.CASCADE)
     bolsistas = models.ManyToManyField(Cliente)
     status = models.CharField(max_length=30, choices=STATUS_CHOICES)
