@@ -2,7 +2,7 @@
 
 ## 1. Diagrama de Caso de Uso
 
-![diagrama de caso de uso do cliente](imgs/diagrama_casos_de_uso.png "Diagrama de caso de uso - cliente")
+![diagrama de caso de uso do cliente](imgs/diagramacdu.png "Diagrama de caso de uso - cliente")
 
 ## 2. Listagem dos detalhamentos dos casos de uso
 
