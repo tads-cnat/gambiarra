@@ -1,3 +1,6 @@
+html {
+    scroll-behavior: smooth;
+}
 
 body{
     font-family: 'Nunito sans', sans-serif;
@@ -52,11 +55,12 @@ main{
     height: 1rem;
 }
 
+
 .btn.btn-success{
     width: 75%;
     border-radius: 30px;
     text-align: center;
-    background-color: #78e546 !important;
+    background-color: #78e546;
     border: #79E546;
     color: rgb(255, 255, 255);
 } 
@@ -66,11 +70,12 @@ main{
     color: #ffffff;
     font-size: 16px;
     border-radius: 15px 15px 0px 15px;
-    padding: 10px;
+    padding: 5%;
     border: 0px !important;
 
 
 }
+
 
 #bannerh{
     border-bottom: #79E546 solid 1px;
@@ -78,23 +83,21 @@ main{
 /* MAIN */
 
 .titleg{
-    border:1px solid #79E546;
+    border:1px solid #79E546 ;
     border-top: 0;
     border-right: 0;
     border-radius: 30px 30px 30px 0px; /* sl, sr, ir, il*/
-    padding: 10px 20px !important;
+    padding: 2% 5% !important;
 }
-#titlegB{
+.titleB{
     border: 1px solid #4338CA;
     border-top: 0;
     border-left: 0;
     border-radius: 30px 30px 0px 30px !important; /* sl, sr, ir, il*/
+    padding: 2% 5% !important;
 
 }
 
-.titleg > img{
-    width: 30px;
-}
 
 main > section:nth-child(1){
     padding: 50px !important;
@@ -110,15 +113,29 @@ main > section:nth-child(1){
 
 /* footer */
 
-#btncriadores{
+
+.btncriadores:hover svg:nth-child(1) {
+    fill: #383838 ;
+    width: 0.6rem;
+    height: 1rem;
+}
+
+.btncriadores{
     background-color: white !important;
-    border: 1px solid #383838;
+    border: 1px solid #383838 !important;
     color: #383838 !important;
 }
 
-#btncriadores:hover svg {
-    fill: #383838 !important; /* Altera a cor do ícone SVG ao passar o mouse */
+
+.btncriadores svg {
+    fill: #ffffff;
+    width: 0;
+    height: 0;
+    transition: fill 0.5s ease-out; /* Adicionando uma transição suave para mudança de cor */
+    transition: width 0.5s ease-in-out; /* Adicionando uma transição suave para mudança de cor */
+
 }
+
 footer > section > div{
     font-size: 16px !important;
     text-decoration: none !important ;
@@ -132,6 +149,10 @@ footer > section > div > div > button{
 }
 main > h4 > span{
     color: #4338CA;
+}
+span{
+    color: #4338CA;
+
 }
 /* footer{
     background: linear-gradient(white, white) padding-box,  linear-gradient(-8deg, rgba(255,255,255,1) 7%, #79E546 7%, #79E546 19%, rgba(255,255,255,1) 19%, rgba(255,255,255,1) 27%, rgba(67,56,202,1) 27%, rgba(67,56,202,1) 39%, rgba(252,252,252,1) 39%, rgba(252,252,252,1) 61%, #79E546 61%, #79E546 81%, rgba(255,255,255,1) 81%) border-box;
