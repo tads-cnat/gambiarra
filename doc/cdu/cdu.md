@@ -12,3 +12,4 @@
 4. [CDU-004 - Aceitar chamado](cdu-004/cdu_aceitar_chamado.md)
 5. [CDU-005 - Adicionar bolsista ao chamado](cdu-005/cdu_propor_doacao.md)
 6. [CDU-006 - Encerrar chamado](cdu-006/cdu_encerrar_chamado.md)
+7. [CDU-007 - Listar chamados](cdu-007/cdu_listar_chamado.md)
