@@ -3,20 +3,20 @@ from django.utils import timezone
 import uuid
 
 CARACTERISTICA_CHOICE = [
-    ("AL", "Aluno"),
-    ("EX", "Externo"),
-    ("SE", "Servidor"),
+    ("1", "Aluno"),
+    ("2", "Externo"),
+    ("3", "Servidor"),
 ]
 
 STATUS_CHOICES = [
-    ("Em Análise", " O problema está sendo avaliado."),
-    ("Aceito", "Um professor aceitou o seu chamado, traga seu equipamento!"),
-    ("Em Diagnóstico", "A causa raiz está sendo identificada."),
-    ("Equipamento em conserto", "O reparo está em andamento."),
-    ("Aguardando peça", "Estamos esperando por uma peça de reposição."),
-    ("Fechado sem resolução", "O problema foi encerrado sem solução."),
-    ("Resolvido", "O problema foi corrigido com sucesso."),
-    ("Recusado", "O chamado foi recusado."),
+    ("1","Em Análise"),
+    ("2","Aceito"),
+    ("3","Em Diagnóstico"),
+    ("4","Equipamento em conserto"),
+    ("5","Aguardando peça"),
+    ("6","Fechado sem resolução"),
+    ("7","Resolvido"),
+    ("8","Recusado"),
 ] 
 
 class Professor(models.Model):
@@ -60,7 +60,7 @@ class Mensagem(models.Model):
 class Avaliacao(models.Model):
     id = models.AutoField(primary_key=True)
     texto = models.TextField(max_length=240, default=0)
-    nota = models.DecimalField(max_digits=2, decimal_places=0, default=0)
+    nota = models.IntegerField()
     chamado = models.ForeignKey(Chamado, on_delete=models.CASCADE)
 
 class Alteracao(models.Model):
