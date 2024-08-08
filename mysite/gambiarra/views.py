@@ -7,13 +7,9 @@ def index(request):
     
     return render(request, 'index.html')
 
-def base(request):
-    
-    return render(request, 'base.html')
-
 def login(request):
     
-    return render(request, 'Login/index.html')
+    return render(request, 'login/index.html')
 
 def listar_chamados(request):
     chamados = Chamado.objects.all().prefetch_related('bolsistas')

@@ -1,200 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="index.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Montserrat:wght@100&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap"
-        rel="stylesheet">
-</head>
+{% extends "base.html" %}
 
-<header id="topo" class="container m-auto mt-3">
-        
-    <nav class="navbar navbar-expand-lg navbar-light  w-100 d-flex justify-content-between gap-3">
-        <img src="icons/logo.png" alt="">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-      
-        <div class="collapse navbar-collapse row" id="navbarSupportedContent">
-          <ul class="navbar-nav w-100 d-flex justify-content-end align-items-center align-items-md-start gap-2">
-            <li class="nav-item col-3">
-                <a href="index.html">
-                <button  class="btn btn-success button_def">
+{% load static %}
 
-                    Inicio 
-                    <svg fill="#000000" height="800px" width="800px" version="1.1" id="Layer_1"
-                        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                        viewBox="0 0 330 330" xml:space="preserve">
-                        <path id="XMLID_222_" d="M250.606,154.389l-150-149.996c-5.857-5.858-15.355-5.858-21.213,0.001
-                   c-5.857,5.858-5.857,15.355,0.001,21.213l139.393,139.39L79.393,304.394c-5.857,5.858-5.857,15.355,0.001,21.213
-                   C82.322,328.536,86.161,330,90,330s7.678-1.464,10.607-4.394l149.999-150.004c2.814-2.813,4.394-6.628,4.394-10.606
-                   C255,161.018,253.42,157.202,250.606,154.389z" />
-                    </svg>
-                </button>
-            </a>
-                            </li>
-            <li class="nav-item col-3">
-                <button class="btn btn-success button_def"> doações <svg fill="#000000" height="800px" width="800px"
-                    version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
-                    xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 330 330" xml:space="preserve">
-                    <path id="XMLID_222_" d="M250.606,154.389l-150-149.996c-5.857-5.858-15.355-5.858-21.213,0.001
-               c-5.857,5.858-5.857,15.355,0.001,21.213l139.393,139.39L79.393,304.394c-5.857,5.858-5.857,15.355,0.001,21.213
-               C82.322,328.536,86.161,330,90,330s7.678-1.464,10.607-4.394l149.999-150.004c2.814-2.813,4.394-6.628,4.394-10.606
-               C255,161.018,253.42,157.202,250.606,154.389z" />
-                </svg></button>                </li>
-            <li class="nav-item dropdown col-3">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Acesse o site!
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="login.html">Login</a>
-                <a class="dropdown-item" href="#">Cadastre-se</a>
-                <!-- <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Something else here</a>
-              -->
-              </div> 
-            </li>
-         
-          </ul>
-         
-        </div>
-      </nav>
-
-
-
-</header>
-
-
-
+{% block conteudo %}
 <main class="container mt-4 d-flex flex-column justify-content-center align-items-center">
     <section class="flex-column mt-4">
     <h3>Olá! bom de te ver <b><span style="color: #4338CA;">denovo </span>🤖</b></h3>
 
     <form class="row w-100 d-flex flex-column justify-content-center mt-4 ">
         <div class="col-12 m-auto">
-        <div class="form-group m-auto">
-          <input type="text" class="form-control" id="username" placeholder="email@exemplo.com">
+            <div class="form-group m-auto">
+            <input type="text" class="form-control" id="username" placeholder="email@exemplo.com">
+            </div>
+            <div class="form-group mt-4">
+            <input type="tel" class="form-control" id="password" placeholder="*******">
+            </div>
+            
+            <button class="btn btn-success button_def text-light w-50 mt-4">
+                enviar
+                <svg fill="#000000" height="800px" width="800px" version="1.1" id="Layer_1"
+                    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                    viewBox="0 0 330 330" xml:space="preserve">
+                    <path id="XMLID_222_" d="M250.606,154.389l-150-149.996c-5.857-5.858-15.355-5.858-21.213,0.001
+            c-5.857,5.858-5.857,15.355,0.001,21.213l139.393,139.39L79.393,304.394c-5.857,5.858-5.857,15.355,0.001,21.213
+            C82.322,328.536,86.161,330,90,330s7.678-1.464,10.607-4.394l149.999-150.004c2.814-2.813,4.394-6.628,4.394-10.606
+            C255,161.018,253.42,157.202,250.606,154.389z" />
+                </svg>
+            </button>           
         </div>
-        <div class="form-group mt-4">
-          <input type="tel" class="form-control" id="password" placeholder="*******">
-        </div>
-        
-        <button class="btn btn-success button_def text-light w-50 mt-4">
-            enviar
-            <svg fill="#000000" height="800px" width="800px" version="1.1" id="Layer_1"
-                xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                viewBox="0 0 330 330" xml:space="preserve">
-                <path id="XMLID_222_" d="M250.606,154.389l-150-149.996c-5.857-5.858-15.355-5.858-21.213,0.001
-           c-5.857,5.858-5.857,15.355,0.001,21.213l139.393,139.39L79.393,304.394c-5.857,5.858-5.857,15.355,0.001,21.213
-           C82.322,328.536,86.161,330,90,330s7.678-1.464,10.607-4.394l149.999-150.004c2.814-2.813,4.394-6.628,4.394-10.606
-           C255,161.018,253.42,157.202,250.606,154.389z" />
-            </svg>
-        </button>           
-    </div>
     </form>
-
-    </main>
-    <footer class="container m-auto mt-4 p-4 d-flex flex-column justify-content-center align-items-center ">
-        <section class="row w-100 d-flex">
-            <div class="col-lg-8 col-12 d-flex flex-column justify-content-center align-items-start gap-3">
-                <div class="d-flex align-items-center">
-                    <img src="colorfilter.png" alt="cores">
-                    <h4><b>Gambiarra</b></h4>
-                </div>
-                <div class="col-12 w-100 d-flex justify-content-between">
-                    <div class="row w-100">
-                        <div class="col-lg-6 col-12 mt-3">
-                            <button class=" w-100 btn btn-success button_def text-light">
-                                Conheça o projeto
-                                <svg fill="#000000" height="20px" width="20px" version="1.1" id="Layer_1"
-                                    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                                    viewBox="0 0 330 330" xml:space="preserve">
-                                    <path id="XMLID_222_" d="M250.606,154.389l-150-149.996c-5.857-5.858-15.355-5.858-21.213,0.001
-                                       c-5.857,5.858-5.857,15.355,0.001,21.213l139.393,139.39L79.393,304.394c-5.857,5.858-5.857,15.355,0.001,21.213
-                                       C82.322,328.536,86.161,330,90,330s7.678-1.464,10.607-4.394l149.999-150.004c2.814-2.813,4.394-6.628,4.394-10.606
-                                       C255,161.018,253.42,157.202,250.606,154.389z" />
-                                </svg>
-                            </button>
-                        </div>
-                     <div class="col-lg-6 col-12 mt-3 ">
-                        <button class="w-100 btn btn-success btncriadores text-light">
-                            Conheça os criadores
-                            <svg fill="#000000" height="20px" width="20px" version="1.1" id="Layer_1"
-                                xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                                viewBox="0 0 330 330" xml:space="preserve">
-                                <path id="XMLID_222_" d="M250.606,154.389l-150-149.996c-5.857-5.858-15.355-5.858-21.213,0.001
-                                   c-5.857,5.858-5.857,15.355,0.001,21.213l139.393,139.39L79.393,304.394c-5.857,5.858-5.857,15.355,0.001,21.213
-                                   C82.322,328.536,86.161,330,90,330s7.678-1.464,10.607-4.394l149.999-150.004c2.814-2.813,4.394-6.628,4.394-10.606
-                                   C255,161.018,253.42,157.202,250.606,154.389z" />
-                            </svg>
-                        </button>
-                     </div>
-                      
-                    </div>
-                    
-                </div>
-               
-             </div>
-            <div class="col-lg-4  col-12 mt-3 d-flex  justify-content-center "> 
-                <div class=" w-100 d-flex flex-wrap gap-2 justify-content-lg-end justify-content-center text-decoration-none">
-                       
-                        <li class="col-4"><a href="#">item</a></li>
-                        <li class="col-4"><a href="#">item</a></li>
-                        <li class="col-4"><a href="#">item</a></li>
-                        <li class="col-4"><a href="#">item</a></li>
-                        <li class="col-4"><a href="#">item</a></li>
-
-                </div>
-            </div>
-            <div class="d-flex gap-2 mt-3">
-                <a href="#"><svg width="41" height="40" viewBox="0 0 41 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect x="0.5" width="40" height="40" rx="20" fill="#040505" fill-opacity="0.1"/>
-                    <rect x="1" y="0.5" width="39" height="39" rx="19.5" stroke="#040505" stroke-opacity="0.24"/>
-                    <path d="M20.5 11.25C15.668 11.25 11.75 15.2695 11.75 20.2227C11.75 24.1875 14.2578 27.5469 17.7344 28.7344C17.7831 28.745 17.8329 28.7502 17.8828 28.75C18.207 28.75 18.332 28.5117 18.332 28.3047C18.332 28.0898 18.3242 27.5273 18.3203 26.7773C18.0309 26.8452 17.7348 26.8806 17.4375 26.8828C15.7539 26.8828 15.3711 25.5742 15.3711 25.5742C14.9727 24.5391 14.3984 24.2617 14.3984 24.2617C13.6367 23.7266 14.3945 23.7109 14.4531 23.7109H14.457C15.3359 23.7891 15.7969 24.6406 15.7969 24.6406C16.2344 25.4062 16.8203 25.6211 17.3438 25.6211C17.6899 25.6142 18.0306 25.5343 18.3438 25.3867C18.4219 24.8086 18.6484 24.4141 18.8984 24.1875C16.957 23.9609 14.9141 23.1914 14.9141 19.7539C14.9141 18.7734 15.2539 17.9727 15.8125 17.3477C15.7227 17.1211 15.4219 16.207 15.8984 14.9727C15.9624 14.9574 16.0281 14.9508 16.0938 14.9531C16.4102 14.9531 17.125 15.0742 18.3047 15.8945C19.7381 15.4935 21.2541 15.4935 22.6875 15.8945C23.8672 15.0742 24.582 14.9531 24.8984 14.9531C24.9641 14.9508 25.0298 14.9574 25.0938 14.9727C25.5703 16.207 25.2695 17.1211 25.1797 17.3477C25.7383 17.9766 26.0781 18.7773 26.0781 19.7539C26.0781 23.1992 24.0312 23.957 22.082 24.1797C22.3945 24.457 22.6758 25.0039 22.6758 25.8398C22.6758 27.0391 22.6641 28.0078 22.6641 28.3008C22.6641 28.5117 22.7852 28.75 23.1094 28.75C23.1619 28.7502 23.2142 28.745 23.2656 28.7344C26.7461 27.5469 29.25 24.1836 29.25 20.2227C29.25 15.2695 25.332 11.25 20.5 11.25Z" fill="#040505"/>
-                    </svg>
-                    </a>
-                    <a href="#">
-                        <svg width="41" height="40" viewBox="0 0 41 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect x="0.5" width="40" height="40" rx="20" fill="#040505" fill-opacity="0.1"/>
-                        <rect x="1" y="0.5" width="39" height="39" rx="19.5" stroke="#040505" stroke-opacity="0.24"/>
-                        <path d="M23.9916 11.6667H17.0083C13.975 11.6667 12.1666 13.4751 12.1666 16.5084V23.4834C12.1666 26.5251 13.975 28.3334 17.0083 28.3334H23.9833C27.0166 28.3334 28.825 26.5251 28.825 23.4917V16.5084C28.8333 13.4751 27.025 11.6667 23.9916 11.6667ZM20.5 23.2334C18.7166 23.2334 17.2666 21.7834 17.2666 20.0001C17.2666 18.2167 18.7166 16.7667 20.5 16.7667C22.2833 16.7667 23.7333 18.2167 23.7333 20.0001C23.7333 21.7834 22.2833 23.2334 20.5 23.2334ZM25.4333 15.7334C25.3916 15.8334 25.3333 15.9251 25.2583 16.0084C25.175 16.0834 25.0833 16.1417 24.9833 16.1834C24.8833 16.2251 24.775 16.2501 24.6666 16.2501C24.4416 16.2501 24.2333 16.1667 24.075 16.0084C24 15.9251 23.9416 15.8334 23.9 15.7334C23.8583 15.6334 23.8333 15.5251 23.8333 15.4167C23.8333 15.3084 23.8583 15.2001 23.9 15.1001C23.9416 14.9917 24 14.9084 24.075 14.8251C24.2666 14.6334 24.5583 14.5417 24.825 14.6001C24.8833 14.6084 24.9333 14.6251 24.9833 14.6501C25.0333 14.6667 25.0833 14.6917 25.1333 14.7251C25.175 14.7501 25.2166 14.7917 25.2583 14.8251C25.3333 14.9084 25.3916 14.9917 25.4333 15.1001C25.475 15.2001 25.5 15.3084 25.5 15.4167C25.5 15.5251 25.475 15.6334 25.4333 15.7334Z" fill="#040505"/>
-                        </svg>
-                    </a>
-            </div>
-        </section>
-        <hr class="m-4 w-100">
-        <section  class="row w-100">
-            <div id="pfoot" class="d-flex justify-content-between">
-            <div class="col-3">
-                © 2024 IFRN. All rights reserved.
-            </div>
-            <div  class="col-4 d-flex justify-content-between">
-                <p>Terms of Service</p>
-                <p>Privacy Policy</p>
-                <p><a href="#topo">Voltar ao topo</a></p>
-                
-            </div>
-        </div>
-        </section>
-    </footer>
-
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-
-</body>
-</html>
+</main>
+{% endblock %}
