@@ -3,10 +3,6 @@
 {% load static %}
 
 {% block conteudo %}
-<head>
-    <link rel="stylesheet" href="{% static 'css/index.css'}">
-
-</head>
 <section id="section01" class="row d-flex justify-content-center">
     <div class="col-lg-8 col-12 d-flex flex-column gap-2">
         <div class="d-flex align-items-center justify-content-start">
@@ -61,8 +57,7 @@
 
     <div class="col-md-4 col-12 d-flex flex-column justify-content-center  align-items-end">
           
-            <img src="icons/robo01.png" width="100%" >
-
+            <img src="{% static 'img/icon/robo01.png' %}" width="100%" >
             <button class="btn-chat01 button_def m-1">
                 Abrir chamado
                 <svg fill="#000000" height="800px" width="800px" version="1.1" id="Layer_1"
@@ -96,7 +91,7 @@
         </div>
     </div>
     <div  class="col-lg-6 col-md-12  d-flex flex-column justify-content-center  align-items-lg-end  align-items-center p-3">
-        <img src="qrcode.png" class="img-fluid w-75" alt="Qrcode do pix">
+        <img src="{% static 'img/qrcode.png'%}" class="img-fluid w-75" alt="Qrcode do pix">
             <a href="#" class="p-2">copiar</a>
        
     </div>
