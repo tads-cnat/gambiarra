@@ -7,12 +7,15 @@ def index(request):
     
     return render(request, 'index.html')
 
-def login(request):
-    
-    return render(request, 'login/index.html')
-
-def listar_chamados(request):
+def dashboard(request):
     chamados = Chamado.objects.all().prefetch_related('bolsistas')
     context = {'chamados':chamados}
 
-    return render(request, 'gambiarra/listar-chamados.html', context)
+    return render(request, 'dashboard/index.html', context)
+
+
+def login(request):
+    
+    return render(request, 'Login/index.html')
+
+   
