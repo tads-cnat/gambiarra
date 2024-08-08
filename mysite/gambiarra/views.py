@@ -5,7 +5,7 @@ from .models import *
 # Create your views here.
 def index(request):
     
-    return render(request, 'gambiarra/index.html')
+    return render(request, 'index.html')
 
 def listar_chamados(request):
     chamados = Chamado.objects.all().prefetch_related('bolsistas')
