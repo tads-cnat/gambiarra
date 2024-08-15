@@ -35,3 +35,8 @@
 | | 1.2 - O sistema mostra a dashboard que já lista todos os chamados | 
 | 1.3 - O professor seleciona o filtro de chamados fechados | |  
 | | 1.4 - O sistema mostra apenas os chamados fechados|
+
+
+## Diagrama de classe de projeto - Listar Chamado
+
+![diagrama de classe de projeto](../imgs/cproj/cproj_listarchamado.png "Diagrama de classe de projeto - Listar Chamado")
