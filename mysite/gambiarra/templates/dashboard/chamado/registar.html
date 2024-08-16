@@ -5,11 +5,11 @@
 {% bootstrap_javascript %}
 
 {% block conteudo %}
-    <section class="container">
+    <section class="card">
         <form method="post">
             {% csrf_token %} 
-            {% bootstrap_form form %}
-            <input type="submit"  class="btn btn-info" value="Enviar" >
+            {% bootstrap_form chamado %}
+            <input type="submit"  class="btn btn-primary" value="Enviar" >
         </form>
     
     </section>
