@@ -1,0 +1,17 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+{% load bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{% block conteudo %}
+    <section class="container">
+        <form method="post">
+            {% csrf_token %} 
+            {% bootstrap_form form %}
+            <input type="submit"  class="btn btn-info" value="Enviar" >
+        </form>
+    
+    </section>
+
+{% endblock %}

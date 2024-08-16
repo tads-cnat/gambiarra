@@ -1,0 +1,69 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+{% load bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{% block conteudo %}
+    <link rel="stylesheet" href="aceitar.css">
+
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-header">
+            Detalhes do Chamado
+        </div>
+        <div class="card-body">
+            <div class="row mb-3">
+                <div class="col-sm-4">
+                    <div class="info-box bg-light">
+                        <div class="card-title">Nome</div>
+                        <div>João</div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="info-box bg-light">
+                        <div class="card-title">Equipamento</div>
+                        <div>Notebook Lenovo</div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="info-box bg-light">
+                        <div class="card-title">Problema</div>
+                        <div>Não liga</div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-8">
+                    <div>
+                        <div class="user-info">
+                            <img src="https://via.placeholder.com/30" class="rounded-circle">
+                            João <span>Enviado - 7:45 21/07/2024</span>
+                        </div>
+                        <p>Meu notebook está com defeito, ele não mostra sinal de vida ao pressionar o botão ligar, e não liga faz 3 dias, foi do nada e não me vem nada à cabeça que possa ter causado esse defeito nele.</p>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="status text-right">
+                        Status:
+                        Em análise
+                    </div>
+                    <div class="file-section mt-3">
+                        <div class="card-title">Arquivos</div>
+                        <ul class="file-list">
+                            <li><a href="#">Video.mp4</a></li>
+                            <li><a href="#">Foto.png</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="text-right mt-3">
+                <button class="btn btn-success mr-2">Aceitar Chamado</button>
+                <button class="btn btn-danger">Recusar chamado</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

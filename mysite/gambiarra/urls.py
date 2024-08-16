@@ -6,5 +6,6 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('login', views.login, name='login'),
     path('dashboard', views.dashboard , name='dashboard'),
-    # path('<int:question_id>/vote', views.vote, name='vote'),
+    path('abrir-chamado/', views.ChamadoForms.as_view(), name='abrir_chamado'),
+    path('detalhes/<int:pk>/', views.ChamadoDetailView.as_view(), name='detalhes'),
 ]
