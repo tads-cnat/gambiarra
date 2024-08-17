@@ -5,7 +5,6 @@ class ChamadoItemForm(forms.ModelForm):
     # Campos do modelo Item
     modelo = forms.CharField(max_length=30)
     descricao = forms.CharField(max_length=30)
-    cliente = forms.CharField(max_length=30)
     class Meta:
         model = Chamado
         fields = ['titulo', 'descricao', 'cliente']  

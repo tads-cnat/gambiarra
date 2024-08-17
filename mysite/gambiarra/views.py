@@ -1,11 +1,10 @@
 
-from django.http import  HttpResponseRedirect
-from django.urls import reverse
 from django.views import View
 from django.views.generic.detail import DetailView
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import *
 from .models import *
+from django.contrib.auth.decorators import login_required
 
 
 
@@ -37,17 +36,11 @@ class ChamadoForms(View):
             chamado.save()
 
             return redirect('detalhes', chamado.pk)
-        
-
-def index(request):
-    return render(request, 'index.html')
+            
+@login_required
 def dashboard(request):
     chamados = Chamado.objects.all().prefetch_related('bolsistas')
     context = {'chamados':chamados}
 
     return render(request, 'dashboard/index.html', context)
 
-
-def login(request):
-    
-    return render(request, 'Login/index.html')
