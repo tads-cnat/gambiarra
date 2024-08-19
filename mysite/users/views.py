@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login as auth_login
+from django.contrib.auth import authenticate, login as auth_login, logout
 from django.views import View
 from django.contrib import messages
 
@@ -39,3 +39,10 @@ class Login(View):
         
         # Se o formulário não for válido ou as credenciais forem incorretas, retorna para a página de login
         return render(request, 'login.html', {'form': form})
+    
+
+
+
+def user_logout(request):
+    logout(request)  # Termina a sessão do utilizador
+    return redirect('users:login')

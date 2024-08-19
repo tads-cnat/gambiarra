@@ -4,13 +4,11 @@ from .models import Chamado
 class ChamadoItemForm(forms.ModelForm):
     # Campos do modelo Item
     modelo = forms.CharField(max_length=30)
-    descricao = forms.CharField(max_length=30)
+    problema = forms.CharField(max_length=30)
     class Meta:
         model = Chamado
-        fields = ['titulo', 'descricao', 'cliente']  
-        widgets = {
-            'cliente': forms.HiddenInput()  # Campo item oculto no formulário
-        }
+        fields = ['titulo', 'descricao', 'modelo', 'problema']  
+     
 
     def __init__(self, *args, **kwargs):
         super(ChamadoItemForm, self).__init__(*args, **kwargs)

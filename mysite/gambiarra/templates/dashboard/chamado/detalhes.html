@@ -7,29 +7,30 @@
 {% block conteudo %}
     <link rel="stylesheet" href="aceitar.css">
 
-<div class="container mt-5">
+
     <div class="card">
         <div class="card-header">
             Detalhes do Chamado
         </div>
+
         <div class="card-body">
             <div class="row mb-3">
                 <div class="col-sm-4">
                     <div class="info-box bg-light">
                         <div class="card-title">Nome</div>
-                        <div>João</div>
+                        <div>{{ chamado.cliente }}</div>
                     </div>
                 </div>
                 <div class="col-sm-4">
                     <div class="info-box bg-light">
                         <div class="card-title">Equipamento</div>
-                        <div>Notebook Lenovo</div>
+                        <div>{{ chamado.item.modelo }}</div>
                     </div>
                 </div>
                 <div class="col-sm-4">
                     <div class="info-box bg-light">
                         <div class="card-title">Problema</div>
-                        <div>Não liga</div>
+                        <div>{{chamado.item.problema}}</div>
                     </div>
                 </div>
             </div>
@@ -63,7 +64,6 @@
             </div>
         </div>
     </div>
-</div>
 
 
 {% endblock %}

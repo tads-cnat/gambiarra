@@ -29,7 +29,7 @@ class Bolsista(models.Model):
 
 class Item(models.Model):
     modelo = models.CharField(max_length=30, default=0)
-    descricao = models.CharField(max_length=30, default=0)
+    problema = models.CharField(max_length=30, default=0)
 
 
 class Chamado(models.Model):
@@ -41,9 +41,9 @@ class Chamado(models.Model):
     bolsistas = models.ManyToManyField(Bolsista)
     status = models.CharField(max_length=30, choices=STATUS_CHOICES)
     item = models.OneToOneField('Item', on_delete=models.CASCADE, null=True)
-    cliente = models.ForeignKey(User, on_delete=models.CASCADE, related_name='chamados_cliente', null=True)
+    cliente = models.ForeignKey(User, on_delete=models.CASCADE, related_name='chamados_cliente', null=True, blank=True)
 
-
+ 
 class Mensagem(models.Model):
     id = models.AutoField(primary_key=True)
     data_envio = models.DateTimeField('Data de publicação', default=timezone.now)

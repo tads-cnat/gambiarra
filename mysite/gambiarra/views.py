@@ -11,32 +11,39 @@ from django.contrib.auth.decorators import login_required
     
 class ChamadoDetailView(DetailView):
     model = Chamado
-    template_name = 'dashboard/chamado/detalhes.html'  
-
+    template_name = 'dashboard/chamado/detalhes.html' 
+    titulo = "Detalhes"
 
 class ChamadoForms(View):
-    
+    chamado = ChamadoItemForm()
+
     def get(self, request):
-        chamado = ChamadoItemForm()
-        return render(request, 'dashboard/chamado/registar.html', {'chamado': chamado})
+        return render(request, 'dashboard/chamado/registrar.html', {'chamado': self.chamado, 'titulo': "Abrir chamado"})
 
     def post(self, request):
+
         form = ChamadoItemForm(request.POST)
+
         if form.is_valid():
-            # Criação do objeto Item
-            item = Item()
-            item.modelo = form.cleaned_data['modelo']
-            item.descricao = form.cleaned_data['descricao']
-            item.cliente = request.user.cliente  # Associa ao cliente logado (supondo um relacionamento com o cliente)
-            item.save()
-
-            # Criação do objeto Chamado
             chamado = form.save(commit=False)
-            chamado.item = item  
-            chamado.save()
+            chamado.cliente = request.user  # Associa o cliente ao chamado
 
-            return redirect('detalhes', chamado.pk)
+            modelo = form.cleaned_data['modelo']
+            problema_item = form.cleaned_data['problema']
+
+            item = Item.objects.create(
+                modelo=modelo,
+                problema=problema_item
+            )
+            item.save()
             
+            chamado.item = item  # Assign the Item instance, not the pk
+            chamado.save()
+            print(chamado.pk)
+            return redirect('gambiarra:detalhes', pk=chamado.pk)
+        else:
+            return render(request, 'dashboard/chamado/registar.html', {'chamado': form, 'titulo': "Abrir chamado"})   
+        
 @login_required
 def dashboard(request):
     chamados = Chamado.objects.all().prefetch_related('bolsistas')

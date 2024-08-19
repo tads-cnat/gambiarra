@@ -15,26 +15,24 @@ class User(AbstractUser):
             ('3', 'Servidor'),
             ('4', 'Professor'),
         ],
-        default='1'  # Definido como 'Aluno' por padrão
+        default= None, null=True  
     )
 
     def save(self, *args, **kwargs):
-        # Chama o método save da classe pai (AbstractUser)
         super().save(*args, **kwargs)
 
-        # Verifica se o usuário é um Professor
-        if self.tipo_usuario == '4':  # '4' para Professor
-            self.is_staff = True  # Permite acesso ao Django Admin
+        if self.tipo_usuario == '4' or self.tipo_usuario == None: 
+            self.is_staff = True 
             self.is_superuser = True
             admin_group, created = Group.objects.get_or_create(name='Admin')
-            self.groups.add(admin_group)  # Adiciona ao grupo Admin
+            self.groups.add(admin_group) 
         else:
-            self.is_staff = False  # Outros usuários não podem acessar o Django Admin
+            self.is_staff = False 
             admin_group = Group.objects.filter(name='Admin').first()
             if admin_group:
-                self.groups.remove(admin_group)  # Remove do grupo Admin, se presente
-            self.is_superuser = False  # Garante que não é superusuário
+                self.groups.remove(admin_group) 
+            self.is_superuser = False
         
-        # Atualiza o usuário após definir as permissões
+       
         super().save(update_fields=['is_staff', 'is_superuser'])
 
