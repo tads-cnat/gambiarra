@@ -7,7 +7,11 @@ from .models import *
 from django.contrib.auth.decorators import login_required
 
 
-
+def encerrar_chamado(request, pk,):
+    chamado = get_object_or_404(Chamado, pk=pk)
+    chamado.status = '7'
+    chamado.save()
+    return redirect('')
     
 class ChamadoDetailView(DetailView):
     model = Chamado
