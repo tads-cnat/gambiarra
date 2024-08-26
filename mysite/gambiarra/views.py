@@ -6,12 +6,31 @@ from .forms import *
 from .models import *
 from django.contrib.auth.decorators import login_required
 
+class EncerrarView(View):
+    def get(self, request, *args, **kwargs):
+        chamado_id=kwargs['pk']
+        chamado = get_object_or_404(Chamado, pk=chamado_id)
+        return render(request, 'dashboard/chamado/encerrar.html', {'chamado': chamado, 'titulo': "Encerrar chamado"})
 
-def encerrar_chamado(request, pk,):
-    chamado = get_object_or_404(Chamado, pk=pk)
-    chamado.status = '7'
-    chamado.save()
-    return redirect('')
+    def post(self, request, *args, **kwargs):
+        chamado_id=kwargs['pk']
+        chamado = get_object_or_404(Chamado, pk=chamado_id)
+        chamado.status = '7'
+        chamado.save()
+        context = {'chamado': chamado}
+        return render(request, 'dashboard/chamado/detalhes.html', context)
+    
+class AvaliacaoForm(View):
+    def criar_avaliacao(request):
+        if request.method == 'POST':
+            form = AvaliacaoForm(request.POST)
+            if form.is_valid():
+                form.save()
+                return redirect('dashboard') 
+        else:
+            form = AvaliacaoForm()
+
+        return render(request, 'avaliacao_form.html', {'form': form})
     
 class ChamadoDetailView(DetailView):
     model = Chamado
