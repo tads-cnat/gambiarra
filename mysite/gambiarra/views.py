@@ -32,10 +32,13 @@ class AvaliacaoForm(View):
 
         return render(request, 'avaliacao_form.html', {'form': form})
     
-class ChamadoDetailView(DetailView):
-    model = Chamado
-    template_name = 'dashboard/chamado/detalhes.html' 
-    titulo = "Detalhes"
+class ChamadoDetailView(View):
+    def get(self, request, *args, **kwargs):
+        chamado_id = kwargs['pk']
+        chamado = get_object_or_404(Chamado, pk=chamado_id)
+        context = {'chamado':chamado}
+
+        return render(request, 'dashboard/chamado/detalhes.html', context)
 
 class ChamadoForms(View):
     chamado = ChamadoItemForm()
