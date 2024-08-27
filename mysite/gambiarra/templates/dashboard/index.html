@@ -48,6 +48,7 @@
                     <td>
                         <a class="btn btn-primary" href="{% url 'gambiarra:detalhes' c.pk %}">Acessar</a>
                         <a class="btn btn-danger" href="#">Arquivar</a>
+                        <a class="btn btn-warning" href="{% url 'gambiarra:encerrar' c.pk %}">Encerrar chamado</a>
                     </td>
                 </tr>
             {% endfor %}
