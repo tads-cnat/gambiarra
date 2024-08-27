@@ -64,6 +64,7 @@
                 {% if chamado.cliente == request.user %}
                     <button class="btn btn-success mr-2">Abrir Chat</button>
 
+<<<<<<< HEAD
                     <button class="btn btn-success mr-2">Avaliar Serviço</button>
 
                 {% else %}
@@ -71,6 +72,11 @@
                     <button class="btn btn-danger">Recusar chamado</button>
                     
                     <button class="btn btn-warning">Encerrar chamado</button>
+=======
+                {% else %}
+                    <button class="btn btn-success mr-2">Aceitar Chamado</button>
+                    <button class="btn btn-danger">Recusar chamado</button>
+>>>>>>> 6671910785cee5d22e2e81b6df2d5268e7db2b22
                 {% endif %}
             </div>
         </div>

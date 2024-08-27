@@ -140,4 +140,8 @@ STATICFILES_DIRS = [
 AUTH_USER_MODEL = 'users.User' 
 # settings.py
 
+<<<<<<< HEAD
 LOGIN_URL = '/login/' 
+=======
+LOGIN_URL = '/login/' 
+>>>>>>> 6671910785cee5d22e2e81b6df2d5268e7db2b22
