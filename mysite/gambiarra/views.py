@@ -67,7 +67,6 @@ class ChamadoForms(View):
         else:
             return render(request, 'dashboard/chamado/registar.html', {'chamado': form, 'titulo': "Abrir chamado"})   
         
-@login_required
 class DashboardView(View):
     def get(self, request, *args, **kwargs):
         chamados = Chamado.objects.all().prefetch_related('bolsistas')
