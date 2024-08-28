@@ -54,7 +54,7 @@ class Chamado(models.Model):
 class Mensagem(models.Model):
     data_envio = models.DateTimeField('Data de publicação', default=timezone.now)
     autor = models.ForeignKey(User, on_delete=models.CASCADE, null=True)        
-    texto = models.TextField(max_length=240, default=0)
+    texto = models.TextField(max_length=240, default=None, blank=True)
     chamado = models.ForeignKey(Chamado, on_delete=models.CASCADE)
 
 class Avaliacao(models.Model):

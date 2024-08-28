@@ -91,11 +91,33 @@ class AvaliacaoForm(View):
             form = AvaliacaoForm()
 
         return render(request, 'avaliacao_form.html', {'form': form})
-   
-class ChamadoDetailView(DetailView):
-    model = Chamado
-    template_name = 'dashboard/chamado/detalhes.html' 
-    titulo = "Detalhes"
+    
+class ChamadoDetailView(View):
+    def get(self, request, *args, **kwargs):
+        
+        chamado_id = kwargs['pk']
+        chamado = get_object_or_404(Chamado, pk=chamado_id)
+
+        mensagens = Mensagem.objects.filter(chamado= chamado).order_by('data_envio')
+
+        mensagem_form = MensagemForm()
+        context = {'chamado':chamado, 'mensagens':mensagens, 'mensagem_form': mensagem_form}
+        
+        return render(request, 'dashboard/chamado/detalhes.html', context)
+    
+    def post(self, request, *args, **kwargs):
+        mensagem_form = MensagemForm(request.POST)
+        chamado_id = kwargs['pk']
+        chamado = get_object_or_404(Chamado, pk=chamado_id)
+        print(request.user)
+        autor = request.user
+        if mensagem_form.is_valid():
+            mensagem = mensagem_form.save(commit=False)
+            mensagem.chamado = chamado
+            mensagem.autor = autor
+            mensagem.save()
+            return redirect('gambiarra:detalhes', chamado_id)
+
 
 class ChamadoForms(View):
     chamado = ChamadoItemForm()

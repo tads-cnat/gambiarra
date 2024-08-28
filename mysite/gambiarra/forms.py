@@ -1,5 +1,5 @@
 from django import forms
-from .models import Chamado, Avaliacao, Bolsista
+from .models import Chamado, Avaliacao, Mensagem, Bolsista
 
 class ChamadoItemForm(forms.ModelForm):
     # Campos do modelo Item
@@ -44,3 +44,17 @@ class BolsistaForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(BolsistaForm, self).__init__(*args, **kwargs)
+
+class MensagemForm(forms.ModelForm):
+    class Meta:
+        model = Mensagem
+        fields = ['texto']
+        widgets = {
+            'texto': forms.Textarea(attrs={
+                'placeholder': 'Mensagem...',
+                'style': 'height: 100px;',
+            })
+        }
+    
+    def __init__(self, *args, **kwargs):
+        super(MensagemForm, self).__init__(*args, **kwargs)
