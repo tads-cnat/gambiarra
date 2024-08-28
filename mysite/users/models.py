@@ -35,3 +35,4 @@ class User(AbstractUser):
         
        
         super().save(update_fields=['is_staff', 'is_superuser'])
+
