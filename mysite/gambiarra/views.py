@@ -40,23 +40,53 @@ class EncerrarView(View):
         context = {'chamado': chamado}
         return render(request, 'dashboard/chamado/detalhes.html', context)
 
-#acho q isso é inutil    
-class EncerrarForm(View):
-    def criar_encerrar(request):
-        if request.method == 'POST':
-            form = EncerrarForm(request.POST)
-            if form.is_valid():
-                form.save()
-                return redirect('dashboard') 
-        else:
-            form = EncerrarForm()
+class AdicionarBolsistas(View):
+    def get(self, request, pk):
+        chamado = get_object_or_404(Chamado, pk=pk)
+        form = AdicionarBolsistasForm(instance=chamado)
+        return render(request, 'dashboard/chamado/adicionar_bolsistas.html', {'form': form, 'chamado': chamado, 'titulo': "Adicionar Bolsistas"})
 
-        return render(request, 'encerrar_form.html', {'form': form})
+    def post(self, request, pk):
+        chamado = get_object_or_404(Chamado, pk=pk)
+        form = AdicionarBolsistasForm(request.POST, instance=chamado)
+        if form.is_valid():
+            chamado = form.save(commit=False)
+            chamado.save()  
+
+            # Salva relacionamentos many-to-many 
+            form.save_m2m()
+
+            return redirect('gambiarra:detalhes', pk=chamado.pk)
+        return render(request, 'dashboard/chamado/adicionar_bolsistas.html', {'form': form, 'chamado': chamado, 'titulo': "Adicionar Bolsistas"})
+
+
     
-class ChamadoDetailView(DetailView):
-    model = Chamado
-    template_name = 'dashboard/chamado/detalhes.html' 
-    titulo = "Detalhes"
+class ChamadoDetailView(View):
+    def get(self, request, *args, **kwargs):
+        
+        chamado_id = kwargs['pk']
+        chamado = get_object_or_404(Chamado, pk=chamado_id)
+
+        mensagens = Mensagem.objects.filter(chamado= chamado).order_by('data_envio')
+
+        mensagem_form = MensagemForm()
+        context = {'chamado':chamado, 'mensagens':mensagens, 'mensagem_form': mensagem_form}
+        
+        return render(request, 'dashboard/chamado/detalhes.html', context)
+    
+    def post(self, request, *args, **kwargs):
+        mensagem_form = MensagemForm(request.POST)
+        chamado_id = kwargs['pk']
+        chamado = get_object_or_404(Chamado, pk=chamado_id)
+        print(request.user)
+        autor = request.user
+        if mensagem_form.is_valid():
+            mensagem = mensagem_form.save(commit=False)
+            mensagem.chamado = chamado
+            mensagem.autor = autor
+            mensagem.save()
+            return redirect('gambiarra:detalhes', chamado_id)
+
 
 class ChamadoForms(View):
     chamado = ChamadoItemForm()
@@ -83,6 +113,9 @@ class ChamadoForms(View):
             
             chamado.item = item  # Assign the Item instance, not the pk
             chamado.save()
+
+            form.save_m2m() 
+
             print(chamado.pk)
             return redirect('gambiarra:detalhes', pk=chamado.pk)
         else:

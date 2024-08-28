@@ -1,0 +1,30 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+{% load bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{% block conteudo %}
+    <section class="card p-4">
+        <h2>Adicionar Bolsistas ao Chamado</h2>
+        
+        <form method="post">
+            {% csrf_token %}
+            
+            {% bootstrap_form form %}
+            
+            {% if form.errors %}
+                <div class="alert alert-danger mt-3">
+                    <ul>
+                        {% for field, errors in form.errors.items %}
+                            <li>{{ field }}: {{ errors|join:", " }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+            
+            <button type="submit" class="btn btn-success">Salvar</button>
+            <a href="{% url 'gambiarra:detalhes' pk=chamado.pk %}" class="btn btn-secondary ms-2">Voltar</a>
+        </form>
+    </section>
+{% endblock %}
