@@ -7,12 +7,26 @@ class ChamadoItemForm(forms.ModelForm):
     problema = forms.CharField(max_length=30)
     class Meta:
         model = Chamado
-        fields = ['titulo', 'descricao', 'modelo', 'problema']  
+        fields = ['titulo', 'descricao', 'modelo', 'problema', 'bolsistas']
+        widgets = {
+            'bolsistas': forms.CheckboxSelectMultiple(),  # Exibe como caixas de seleção múltipla
+        }  
      
 
     def __init__(self, *args, **kwargs):
         super(ChamadoItemForm, self).__init__(*args, **kwargs)
         # Aqui você pode personalizar o formulário se necessário
+
+class AdicionarBolsistasForm(forms.ModelForm):
+    bolsistas = forms.ModelMultipleChoiceField(
+        queryset=Bolsista.objects.all(),
+        widget=forms.CheckboxSelectMultiple,
+        required=False
+    )
+
+    class Meta:
+        model = Chamado
+        fields = ['bolsistas']
 
 #avaliar chamado
 class AvaliarForm(forms.ModelForm):

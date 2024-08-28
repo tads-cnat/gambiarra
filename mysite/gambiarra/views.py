@@ -60,7 +60,26 @@ class EncerrarView(View):
         chamado.save()
         context = {'chamado': chamado}
         return render(request, 'dashboard/chamado/detalhes.html', context)
-    
+
+class AdicionarBolsistas(View):
+    def get(self, request, pk):
+        chamado = get_object_or_404(Chamado, pk=pk)
+        form = AdicionarBolsistasForm(instance=chamado)
+        return render(request, 'dashboard/chamado/adicionar_bolsistas.html', {'form': form, 'chamado': chamado, 'titulo': "Adicionar Bolsistas"})
+
+    def post(self, request, pk):
+        chamado = get_object_or_404(Chamado, pk=pk)
+        form = AdicionarBolsistasForm(request.POST, instance=chamado)
+        if form.is_valid():
+            chamado = form.save(commit=False)
+            chamado.save()  
+
+            # Salva relacionamentos many-to-many 
+            form.save_m2m()
+
+            return redirect('gambiarra:detalhes', pk=chamado.pk)
+        return render(request, 'dashboard/chamado/adicionar_bolsistas.html', {'form': form, 'chamado': chamado, 'titulo': "Adicionar Bolsistas"})
+
 class AvaliacaoForm(View):
     def criar_avaliacao(request):
         if request.method == 'POST':
@@ -72,7 +91,7 @@ class AvaliacaoForm(View):
             form = AvaliacaoForm()
 
         return render(request, 'avaliacao_form.html', {'form': form})
-    
+   
 class ChamadoDetailView(DetailView):
     model = Chamado
     template_name = 'dashboard/chamado/detalhes.html' 
@@ -103,6 +122,9 @@ class ChamadoForms(View):
             
             chamado.item = item  # Assign the Item instance, not the pk
             chamado.save()
+
+            form.save_m2m() 
+
             print(chamado.pk)
             return redirect('gambiarra:detalhes', pk=chamado.pk)
         else:
