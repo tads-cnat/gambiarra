@@ -49,6 +49,18 @@
                         Status:
                         {{ chamado.get_status_display }}
                     </div>
+                    <hr>
+                <div class="col-sm-5">
+                      <div>
+                          <strong>Bolsistas:</strong>
+                          <ul>
+                              {% for bolsista in chamado.bolsistas.all %}
+                                  <li>{{ bolsista.nome }}</li>
+                              {% empty %}
+                                  <li>Nenhum bolsista associado.</li>
+                              {% endfor %}
+                          </ul>
+                      </div> 
                     <div class="file-section mt-3">
                         <!-- <div class="card-title">Arquivos</div>
                         <ul class="file-list">
@@ -63,6 +75,9 @@
             <div class="text-right mt-3">
                 {% if chamado.cliente == request.user %}
                     <button class="btn btn-success mr-2">Abrir Chat</button>
+                    <a href="{% url 'gambiarra:adicionar-bolsistas' pk=chamado.pk %}"> 
+                      <button class="btn btn-primary mr-2">Adicionar Bolsista</button>
+                    </a>
 
                 {% else %}
                     <button class="btn btn-success mr-2">Aceitar Chamado</button>
