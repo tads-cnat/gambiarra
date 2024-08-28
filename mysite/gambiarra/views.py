@@ -1,51 +1,30 @@
 
 from django.views import View
 from django.views.generic.detail import DetailView
+from django.urls import reverse
+from django.views.generic import CreateView
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import *
 from .models import *
 from django.contrib.auth.decorators import login_required
 
-class ListarBolsistas(View):
-    def get(self, request, *args, **kwargs):
-        bolsistas = Bolsista.objects.all()
-        return render(request, 'dashboard/bolsista/listar_bolsistas.html', {'bolsistas': bolsistas})
-
-class CriarBolsista(View):
-    def get(self, request, *args, **kwargs):
-        form = BolsistaForm()
-        return render(request, 'dashboard/bolsista/registrar_bolsista.html', {'bolsista': form})
+class AvaliarForms(View):
+    avaliar = AvaliacaoForm()
 
     def post(self, request, *args, **kwargs):
-        form = BolsistaForm(request.POST, request.FILES)
+        chamado_id=kwargs['pk']
+        form = AvaliacaoForm(request.POST)
+        print(chamado_id)
+        chamado = get_object_or_404(Chamado, pk=chamado_id)
+
         if form.is_valid():
-            form.save()
-            return redirect('gambiarra:listar-bolsistas')
-        return render(request, 'dashboard/bolsista/registrar_bolsista.html', {'bolsista': form})
+            avaliacao = form.save(commit=False)  # Não salva ainda
+            avaliacao.chamado = chamado          # Define o campo chamado
+            avaliacao.save()                    # Salva o objeto Avaliacao
+            return redirect('gambiarra:detalhes', pk=chamado_id)     
 
-class EditarBolsista(View):
-    def get(self, request, pk, *args, **kwargs):
-        bolsista = get_object_or_404(Bolsista, pk=pk)
-        form = BolsistaForm(instance=bolsista)
-        return render(request, 'dashboard/bolsista/registrar_bolsista.html', {'bolsista': form})
-
-    def post(self, request, pk, *args, **kwargs):
-        bolsista = get_object_or_404(Bolsista, pk=pk)
-        form = BolsistaForm(request.POST, request.FILES, instance=bolsista)
-        if form.is_valid():
-            form.save()
-            return redirect('gambiarra:listar-bolsistas')
-        return render(request, 'dashboard/bolsista/registrar_bolsista.html', {'bolsista': form})
-
-class DeletarBolsista(View):
-    def get(self, request, pk, *args, **kwargs):
-        bolsista = get_object_or_404(Bolsista, pk=pk)
-        return render(request, 'dashboard/bolsista/deletar_bolsista.html', {'bolsista': bolsista})
-
-    def post(self, request, pk, *args, **kwargs):
-        bolsista = get_object_or_404(Bolsista, pk=pk)
-        bolsista.delete()
-        return redirect('gambiarra:listar-bolsistas')
+        else:
+            return render({'avaliar': form})
 
 class EncerrarView(View):
     def get(self, request, *args, **kwargs):
@@ -80,17 +59,7 @@ class AdicionarBolsistas(View):
             return redirect('gambiarra:detalhes', pk=chamado.pk)
         return render(request, 'dashboard/chamado/adicionar_bolsistas.html', {'form': form, 'chamado': chamado, 'titulo': "Adicionar Bolsistas"})
 
-class AvaliacaoForm(View):
-    def criar_avaliacao(request):
-        if request.method == 'POST':
-            form = AvaliacaoForm(request.POST)
-            if form.is_valid():
-                form.save()
-                return redirect('dashboard') 
-        else:
-            form = AvaliacaoForm()
 
-        return render(request, 'avaliacao_form.html', {'form': form})
     
 class ChamadoDetailView(View):
     def get(self, request, *args, **kwargs):
@@ -155,5 +124,6 @@ class ChamadoForms(View):
 class DashboardView(View):
     def get(self, request, *args, **kwargs):
         chamados = Chamado.objects.all().prefetch_related('bolsistas')
-        context = {'chamados':chamados}
+        avaliar = AvaliacaoForm()
+        context = {'chamados':chamados, "avaliar":avaliar}
         return render(request, 'dashboard/index.html', context)

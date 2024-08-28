@@ -28,15 +28,6 @@ class AdicionarBolsistasForm(forms.ModelForm):
         model = Chamado
         fields = ['bolsistas']
 
-#avaliar chamado
-class AvaliarForm(forms.ModelForm):
-    class Meta:
-        model = Avaliacao
-        fields = ['texto', 'nota', 'chamado']  
-
-    def __init__(self, *args, **kwargs):
-        super(AvaliarForm, self).__init__(*args, **kwargs)
-
 class BolsistaForm(forms.ModelForm):
     class Meta:
         model = Bolsista
@@ -58,3 +49,15 @@ class MensagemForm(forms.ModelForm):
     
     def __init__(self, *args, **kwargs):
         super(MensagemForm, self).__init__(*args, **kwargs)
+
+#avaliar chamado
+class AvaliacaoForm(forms.ModelForm):
+    class Meta:
+        model = Avaliacao
+        fields = ['texto', 'nota']
+        widgets = {
+            'texto': forms.Textarea(attrs={'rows': 4, 'placeholder': 'Escreva sua avaliação aqui'}),
+            'nota': forms.NumberInput(attrs={'min': 1, 'max': 5}),
+        }
+    def __init__(self, *args, **kwargs):
+        super(AvaliacaoForm, self).__init__(*args, **kwargs)
