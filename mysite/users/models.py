@@ -15,7 +15,7 @@ class User(AbstractUser):
             ('3', 'Servidor'),
             ('4', 'Professor'),
         ],
-        default= None, null=True  
+        null=True  
     )
 
     def save(self, *args, **kwargs):
@@ -36,3 +36,5 @@ class User(AbstractUser):
        
         super().save(update_fields=['is_staff', 'is_superuser'])
 
+    def __str__(self):
+        return f'{self.username} - {self.get_tipo_usuario_display()}'

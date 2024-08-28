@@ -7,10 +7,8 @@ class ChamadoItemForm(forms.ModelForm):
     problema = forms.CharField(max_length=30)
     class Meta:
         model = Chamado
-        fields = ['titulo', 'descricao', 'modelo', 'problema', 'bolsistas']
-        widgets = {
-            'bolsistas': forms.CheckboxSelectMultiple(),  # Exibe como caixas de seleção múltipla
-        }  
+        fields = ['titulo', 'descricao', 'modelo', 'problema']
+       
      
 
     def __init__(self, *args, **kwargs):
@@ -41,10 +39,9 @@ class MensagemForm(forms.ModelForm):
         model = Mensagem
         fields = ['texto']
         widgets = {
-            'texto': forms.Textarea(attrs={
-                'placeholder': 'Mensagem...',
-                'style': 'height: 100px;',
-            })
+            'texto': forms.TextInput(attrs={
+            'placeholder': 'Mensagem...',
+        })
         }
     
     def __init__(self, *args, **kwargs):

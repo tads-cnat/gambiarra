@@ -19,9 +19,9 @@ STATUS_CHOICES = [
 
 
 class Bolsista(models.Model):
-    nome = models.CharField(max_length=100, default=0)
-    matricula = models.CharField(max_length=20, default=0)
-    foto_perfil = models.ImageField(upload_to='Bolsista', default=0)
+    nome = models.CharField(max_length=100, default="")
+    matricula = models.CharField(max_length=20, default="")
+    foto_perfil = models.ImageField(upload_to='Bolsista', null=True, blank=True)
 
     def __str__(self):
         return self.nome 
@@ -36,8 +36,8 @@ class Bolsista(models.Model):
 
 
 class Item(models.Model):
-    modelo = models.CharField(max_length=30, default=0)
-    problema = models.CharField(max_length=30, default=0)
+    modelo = models.CharField(max_length=30, default="")
+    problema = models.CharField(max_length=30, default="")
 
 
 class Chamado(models.Model):
@@ -54,11 +54,11 @@ class Chamado(models.Model):
 class Mensagem(models.Model):
     data_envio = models.DateTimeField('Data de publicação', default=timezone.now)
     autor = models.ForeignKey(User, on_delete=models.CASCADE, null=True)        
-    texto = models.TextField(max_length=240, default=None, blank=True)
+    texto = models.TextField(max_length=240, default="", blank=False)
     chamado = models.ForeignKey(Chamado, on_delete=models.CASCADE)
 
 class Avaliacao(models.Model):
-    texto = models.TextField(max_length=240, default=0)
+    texto = models.TextField(max_length=240, default="")
     nota = models.IntegerField()
     chamado = models.ForeignKey(Chamado, on_delete=models.CASCADE)
 
