@@ -1,5 +1,5 @@
 from django import forms
-from .models import Chamado, Avaliacao
+from .models import Chamado, Avaliacao, Bolsista
 
 class ChamadoItemForm(forms.ModelForm):
     # Campos do modelo Item
@@ -22,3 +22,11 @@ class AvaliarForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(AvaliarForm, self).__init__(*args, **kwargs)
+
+class BolsistaForm(forms.ModelForm):
+    class Meta:
+        model = Bolsista
+        fields = ['nome', 'matricula', 'foto_perfil']
+
+    def __init__(self, *args, **kwargs):
+        super(BolsistaForm, self).__init__(*args, **kwargs)

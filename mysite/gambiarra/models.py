@@ -2,6 +2,7 @@ from django.db import models
 from django.utils import timezone
 import uuid
 from users.models import User
+import os
 
 
 
@@ -24,6 +25,13 @@ class Bolsista(models.Model):
 
     def __str__(self):
         return self.nome 
+    
+    def delete(self, *args, **kwargs):
+        # Deleta a foto do bolsista
+        if self.foto_perfil:
+            if os.path.isfile(self.foto_perfil.path):
+                os.remove(self.foto_perfil.path)
+        super().delete(*args, **kwargs)
     
 
 

@@ -6,6 +6,47 @@ from .forms import *
 from .models import *
 from django.contrib.auth.decorators import login_required
 
+class ListarBolsistas(View):
+    def get(self, request, *args, **kwargs):
+        bolsistas = Bolsista.objects.all()
+        return render(request, 'dashboard/bolsista/listar_bolsistas.html', {'bolsistas': bolsistas})
+
+class CriarBolsista(View):
+    def get(self, request, *args, **kwargs):
+        form = BolsistaForm()
+        return render(request, 'dashboard/bolsista/registrar_bolsista.html', {'bolsista': form})
+
+    def post(self, request, *args, **kwargs):
+        form = BolsistaForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('gambiarra:listar-bolsistas')
+        return render(request, 'dashboard/bolsista/registrar_bolsista.html', {'bolsista': form})
+
+class EditarBolsista(View):
+    def get(self, request, pk, *args, **kwargs):
+        bolsista = get_object_or_404(Bolsista, pk=pk)
+        form = BolsistaForm(instance=bolsista)
+        return render(request, 'dashboard/bolsista/registrar_bolsista.html', {'bolsista': form})
+
+    def post(self, request, pk, *args, **kwargs):
+        bolsista = get_object_or_404(Bolsista, pk=pk)
+        form = BolsistaForm(request.POST, request.FILES, instance=bolsista)
+        if form.is_valid():
+            form.save()
+            return redirect('gambiarra:listar-bolsistas')
+        return render(request, 'dashboard/bolsista/registrar_bolsista.html', {'bolsista': form})
+
+class DeletarBolsista(View):
+    def get(self, request, pk, *args, **kwargs):
+        bolsista = get_object_or_404(Bolsista, pk=pk)
+        return render(request, 'dashboard/bolsista/deletar_bolsista.html', {'bolsista': bolsista})
+
+    def post(self, request, pk, *args, **kwargs):
+        bolsista = get_object_or_404(Bolsista, pk=pk)
+        bolsista.delete()
+        return redirect('gambiarra:listar-bolsistas')
+
 class EncerrarView(View):
     def get(self, request, *args, **kwargs):
         chamado_id=kwargs['pk']
