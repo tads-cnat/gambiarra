@@ -1,6 +1,7 @@
 from django.urls import path
 from . import views
 
+
 app_name = 'gambiarra'
 urlpatterns = [
     path('', views.DashboardView.as_view(), name='dashboard'),
@@ -12,4 +13,5 @@ urlpatterns = [
     path('bolsistas/criar/', views.CriarBolsista.as_view(), name='criar-bolsista'),
     path('bolsistas/<int:pk>/editar/', views.EditarBolsista.as_view(), name='editar-bolsista'),
     path('bolsistas/<int:pk>/deletar/', views.DeletarBolsista.as_view(), name='excluir-bolsista'),
+    path('avaliar/<int:pk>/', views.AvaliarForms.as_view(), name='avaliar'),
 ]

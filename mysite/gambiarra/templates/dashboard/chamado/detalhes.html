@@ -75,13 +75,14 @@
             <div class="text-right mt-3">
                 {% if chamado.cliente == request.user %}
                     <button class="btn btn-success mr-2">Abrir Chat</button>
-                    <a href="{% url 'gambiarra:adicionar-bolsistas' pk=chamado.pk %}"> 
-                      <button class="btn btn-primary mr-2">Adicionar Bolsista</button>
-                    </a>
+
 
                 {% else %}
                     <button class="btn btn-success mr-2">Aceitar Chamado</button>
                     <button class="btn btn-danger">Recusar chamado</button>
+					<a href="{% url 'gambiarra:adicionar-bolsistas' pk=chamado.pk %}"> 
+						<button class="btn btn-primary mr-2">Adicionar Bolsista</button>
+					  </a>
                 {% endif %}
             </div>
         </div>
@@ -210,12 +211,25 @@
 						</div>
 
 						<div class="card-footer text-muted d-flex justify-content-start align-items-center p-3">
-							<form method="post">
+							<form method="post" class="d-flex w-100">
 								{% csrf_token %}
-								{%bootstrap_form mensagem_form%}
-								<button class="btn btn-primary" >enviar</button>
+								
+								<div class="flex-grow-1 me-2">
+									<input
+										type="text"
+										name="texto"
+										placeholder="Mensagem..."
+										class="form-control"
+									/>
+								</div>
+								
+								<div class="d-flex align-items-center">
+									<button type="submit" class="btn btn-primary">Enviar</button>
+								</div>
 							</form>
 						</div>
+						
+						
 					</div>
 				</div>
 			</div>

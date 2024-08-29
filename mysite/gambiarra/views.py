@@ -1,10 +1,14 @@
 
 from django.views import View
 from django.views.generic.detail import DetailView
+from django.urls import reverse
+from django.views.generic import CreateView
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import *
 from .models import *
 from django.contrib.auth.decorators import login_required
+
+
 
 class ListarBolsistas(View):
     def get(self, request, *args, **kwargs):
@@ -47,6 +51,24 @@ class DeletarBolsista(View):
         bolsista.delete()
         return redirect('gambiarra:listar-bolsistas')
 
+class AvaliarForms(View):
+    avaliar = AvaliacaoForm()
+
+    def post(self, request, *args, **kwargs):
+        chamado_id=kwargs['pk']
+        form = AvaliacaoForm(request.POST)
+        print(chamado_id)
+        chamado = get_object_or_404(Chamado, pk=chamado_id)
+
+        if form.is_valid():
+            avaliacao = form.save(commit=False)  # Não salva ainda
+            avaliacao.chamado = chamado          # Define o campo chamado
+            avaliacao.save()                    # Salva o objeto Avaliacao
+            return redirect('gambiarra:detalhes', pk=chamado_id)     
+
+        else:
+            return render({'avaliar': form})
+
 class EncerrarView(View):
     def get(self, request, *args, **kwargs):
         chamado_id=kwargs['pk']
@@ -80,17 +102,7 @@ class AdicionarBolsistas(View):
             return redirect('gambiarra:detalhes', pk=chamado.pk)
         return render(request, 'dashboard/chamado/adicionar_bolsistas.html', {'form': form, 'chamado': chamado, 'titulo': "Adicionar Bolsistas"})
 
-class AvaliacaoForm(View):
-    def criar_avaliacao(request):
-        if request.method == 'POST':
-            form = AvaliacaoForm(request.POST)
-            if form.is_valid():
-                form.save()
-                return redirect('dashboard') 
-        else:
-            form = AvaliacaoForm()
 
-        return render(request, 'avaliacao_form.html', {'form': form})
     
 class ChamadoDetailView(View):
     def get(self, request, *args, **kwargs):
@@ -112,6 +124,7 @@ class ChamadoDetailView(View):
         print(request.user)
         autor = request.user
         if mensagem_form.is_valid():
+
             mensagem = mensagem_form.save(commit=False)
             mensagem.chamado = chamado
             mensagem.autor = autor
@@ -145,9 +158,13 @@ class ChamadoForms(View):
             chamado.item = item  # Assign the Item instance, not the pk
             chamado.save()
 
+            alt = Alteracao()
+            alt.chamado = chamado
+            alt.autor = request.user
+            alt.status = '1'
+            alt.save()
             form.save_m2m() 
 
-            print(chamado.pk)
             return redirect('gambiarra:detalhes', pk=chamado.pk)
         else:
             return render(request, 'dashboard/chamado/registar.html', {'chamado': form, 'titulo': "Abrir chamado"})   
@@ -155,5 +172,6 @@ class ChamadoForms(View):
 class DashboardView(View):
     def get(self, request, *args, **kwargs):
         chamados = Chamado.objects.all().prefetch_related('bolsistas')
-        context = {'chamados':chamados}
+        avaliar = AvaliacaoForm()
+        context = {'chamados':chamados, "avaliar":avaliar}
         return render(request, 'dashboard/index.html', context)
