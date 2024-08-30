@@ -130,3 +130,5 @@ Um <code style="background-color: #1E1E1E; color: red;">professor</code> ou <cod
 Essa funcionalidade possibilita aos <code style="background-color: #1E1E1E; color: red;">professores</code> criar relatórios com base nos chamados abertos no sistema. Os relatórios apresentam informações sobre o número do chamado e os procedimentos solicitados nele.</li>
 </blockquote>
 
+
+
