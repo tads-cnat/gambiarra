@@ -1,0 +1,28 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+{% load bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{% block conteudo %}
+    <section class="card">
+        <form method="post">
+            {% csrf_token %} 
+       
+            {% bootstrap_form chamado %}
+
+                 {% if chamado.errors %}
+                    <div class="error">
+                        <ul>
+                            {% for field, errors in chamado.errors.items %}
+                                <li>{{ field }}: {{ errors|join:", " }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+            <input type="submit"  class="btn btn-primary" value="Enviar" >
+        </form>
+        {{ request.user }}
+    </section>
+
+{% endblock %}
