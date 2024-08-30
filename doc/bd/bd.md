@@ -10,7 +10,7 @@ Um chamado pode conter uma avaliação registrada pelo cliente que a abriu.
 Um chamado pode possuir várias mensagens enviadas pelos dois atores principais.
 Um chamado pode conter vários equipamentos.
 Um ou várioas alunos podem ser atribuídos à um chamado.
-<img src="esboco-tres.png" />
+<img src="esboco-quatro.png" />
 
 ## Modelo Relacional
 
