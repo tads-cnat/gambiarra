@@ -7,6 +7,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .forms import *
 from .models import *
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 
 
@@ -79,7 +80,13 @@ class EncerrarView(View):
         chamado_id=kwargs['pk']
         chamado = get_object_or_404(Chamado, pk=chamado_id)
         chamado.status = '7'
+        
         chamado.save()
+        alt = Alteracao()
+        alt.chamado = chamado
+        alt.autor = request.user
+        alt.status = '7'
+        alt.save()
         context = {'chamado': chamado}
         return render(request, 'dashboard/chamado/detalhes.html', context)
 
@@ -106,14 +113,15 @@ class AdicionarBolsistas(View):
     
 class ChamadoDetailView(View):
     def get(self, request, *args, **kwargs):
-        
+
         chamado_id = kwargs['pk']
         chamado = get_object_or_404(Chamado, pk=chamado_id)
+        alteracoes = Alteracao.objects.filter(chamado=chamado.pk)  # Corrigido para usar filter
 
-        mensagens = Mensagem.objects.filter(chamado= chamado).order_by('data_envio')
+        mensagens = Mensagem.objects.filter(chamado=chamado).order_by('data_envio')
 
         mensagem_form = MensagemForm()
-        context = {'chamado':chamado, 'mensagens':mensagens, 'mensagem_form': mensagem_form}
+        context = {'chamado':chamado, 'mensagens':mensagens, 'mensagem_form': mensagem_form, 'alteracoes': alteracoes}
         
         return render(request, 'dashboard/chamado/detalhes.html', context)
     
@@ -121,20 +129,21 @@ class ChamadoDetailView(View):
         mensagem_form = MensagemForm(request.POST)
         chamado_id = kwargs['pk']
         chamado = get_object_or_404(Chamado, pk=chamado_id)
-        print(request.user)
         autor = request.user
-        if mensagem_form.is_valid():
-
-            mensagem = mensagem_form.save(commit=False)
-            mensagem.chamado = chamado
-            mensagem.autor = autor
-            mensagem.save()
-            return redirect('gambiarra:detalhes', chamado_id)
-
+        texto = request.POST.get('texto')
+        print(texto)
+        if texto.strip():
+            if mensagem_form.is_valid():
+                mensagem = mensagem_form.save(commit=False)
+                mensagem.chamado = chamado
+                mensagem.autor = autor
+                if(mensagem.texto == ""): return redirect('gambiarra:detalhes', chamado_id)
+                mensagem.save()
+                return redirect('gambiarra:detalhes', chamado_id)
+        
 
 class ChamadoForms(View):
     chamado = ChamadoItemForm()
-
     def get(self, request):
         return render(request, 'dashboard/chamado/registrar.html', {'chamado': self.chamado, 'titulo': "Abrir chamado"})
 
@@ -175,3 +184,22 @@ class DashboardView(View):
         avaliar = AvaliacaoForm()
         context = {'chamados':chamados, "avaliar":avaliar}
         return render(request, 'dashboard/index.html', context)
+
+
+
+def alterar_status(request, chamado_id):
+    chamado = get_object_or_404(Chamado, id=chamado_id)
+    
+    if request.method == 'POST':
+        novo_status = request.POST.get('status')
+        if novo_status in dict(STATUS_CHOICES):
+            chamado.status = novo_status
+            chamado.save()
+            alt = Alteracao()
+            alt.autor = request.user
+            alt.chamado = chamado
+            alt.status = novo_status
+            alt.save()
+            messages.success(request, 'Sucesso. O status foi alterado.')
+
+    return redirect('gambiarra:detalhes',chamado_id)

@@ -6,11 +6,15 @@ from django.contrib import messages
 from .models import User
 from .forms import AdminForm  # Assumindo que você tem um formulário chamado AdminForm
 
+
 def index(request):
     return render(request, 'index.html')
 
 class Login(View):
     def get(self, request):
+        if request.user.is_authenticated:
+            # Redireciona para outra página, como o dashboard, se já estiver logado
+            return redirect('gambiarra:dashboard')
         form = AdminForm()
         return render(request, 'login.html', {'form': form})
 

@@ -46,57 +46,71 @@
                     {% endfor %}
                 </td>
                 <td>
-                    <a class="btn btn-primary" href="{% url 'gambiarra:detalhes' c.pk %}">Acessar</a>
-                    <a class="btn btn-danger" href="#">Arquivar</a>
-                    {% if c.status != '7' %}
-                        <a class="btn btn-warning" href="{% url 'gambiarra:encerrar' c.pk %}">Encerrar chamado</a>
-                    {% endif %}
-                    {% if c.status >= '7' %}
-                    <!-- Button trigger modal -->
-                    <a href="{% url 'gambiarra:avaliar' c.pk %}" type="button" class="btn btn-success mr-2"
-                        data-toggle="modal" data-target="#exampleModal">
-                        Avaliar
-                    </a>
-                    {% endif %}
+                    {% if request.user == c.client  %}
+                        <a class="btn btn-primary" href="{% url 'gambiarra:detalhes' c.pk %}">Acessar</a>
+                        {% if c.status >= '7' %}
+                            <a type="button" class="btn btn-success mr-2"
+                                data-toggle="modal" data-target="#exampleModal">
+                                Avaliar
+                            </a>    
+                            
+                                              
                     <!-- Modal -->
                     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
-                        aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Avaliar chamado</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <form method="post" action="{% url 'gambiarra:avaliar' c.pk %}">
-                                    <div class="modal-body">
-
-                                        {% csrf_token %}
-
-                                        {% bootstrap_form avaliar %}
-
-                                        {% if avaliar.errors %}
-                                        <div class="error">
-                                            <ul>
-                                                {% for field, errors in avaliar.errors.items %}
-                                                <li>{{ field }}: {{ errors|join:", " }}</li>
-                                                {% endfor %}
-                                            </ul>
-                                        </div>
-                                        {% endif %}
-
-
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary"
-                                            data-dismiss="modal">Fechar</button>
-                                        <button type="submit" class="btn btn-primary">Avaliar</button>
-                                    </div>
-                                </form>
+                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Avaliar chamado</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
                             </div>
+                            <form method="post" action="{% url 'gambiarra:avaliar' c.pk %}">
+                                <div class="modal-body">
+
+                                    {% csrf_token %}
+
+                                    {% bootstrap_form avaliar %}
+
+                                    {% if avaliar.errors %}
+                                    <div class="error">
+                                        <ul>
+                                            {% for field, errors in avaliar.errors.items %}
+                                            <li>{{ field }}: {{ errors|join:", " }}</li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                    {% endif %}
+
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-dismiss="modal">Fechar</button>
+                                    <button type="submit" class="btn btn-primary">Avaliar</button>
+                                </div>
+                            </form>
                         </div>
                     </div>
+                </div>
+                        {% endif %}
+                        
+                    {% else %}
+                        <a class="btn btn-primary" href="{% url 'gambiarra:detalhes' c.pk %}">Acessar</a>
+                        {% if c.status != '7' %}
+                            <a class="btn btn-warning" href="{% url 'gambiarra:encerrar' c.pk %}">Encerrar chamado</a>
+                        {% endif %}
+                        {% if c.status >= '7' %}
+                        <a class="btn btn-danger" href="#">Arquivar</a>
+                        {% endif %}
+
+                    {% endif %}
+
+
+                    <!-- Button trigger modal -->
+                     
+
                 </td>
             </tr>
             {% endfor %}

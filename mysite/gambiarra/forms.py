@@ -35,15 +35,14 @@ class BolsistaForm(forms.ModelForm):
         super(BolsistaForm, self).__init__(*args, **kwargs)
 
 class MensagemForm(forms.ModelForm):
+    texto = forms.CharField(
+        label='',
+        widget=forms.TextInput(attrs={'placeholder': 'Mensagem...'})
+    )
     class Meta:
         model = Mensagem
         fields = ['texto']
-        widgets = {
-            'texto': forms.TextInput(attrs={
-            'placeholder': 'Mensagem...',
-        })
-        }
-    
+       
     def __init__(self, *args, **kwargs):
         super(MensagemForm, self).__init__(*args, **kwargs)
 
