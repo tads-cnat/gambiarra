@@ -15,13 +15,13 @@ class User(AbstractUser):
             ('3', 'Servidor'),
             ('4', 'Professor'),
         ],
-        null=True  
+        default='4'  
     )
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
 
-        if self.tipo_usuario == '4' or self.tipo_usuario == None: 
+        if self.tipo_usuario == '4': 
             self.is_staff = True 
             self.is_superuser = True
             admin_group, created = Group.objects.get_or_create(name='Admin')
