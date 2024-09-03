@@ -2,252 +2,311 @@
 bootstrap_css %} {% bootstrap_javascript %} {% block conteudo %}
 
 <section class="card">
-	<div id="detalhes">
-		<div class="card-header">Detalhes do Chamado</div>
+  <div id="detalhes">
+    <div class="card-header">Detalhes do Chamado</div>
 
-		<div class="card-body">
-			<div class="row mb-3">
-				<div class="col-sm-4">
-					<div class="info-box bg-light">
-						<div class="card-title">Nome</div>
-						<div>{{ chamado.cliente }}</div>
-					</div>
-				</div>
-				<div class="col-sm-4">
-					<div class="info-box bg-light">
-						<div class="card-title">Equipamento</div>
-						<div>{{ chamado.item.modelo }}</div>
-					</div>
-				</div>
-				<div class="col-sm-4">
-					<div class="info-box bg-light">
-						<div class="card-title">Problema</div>
-						<div>{{chamado.item.problema}}</div>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-sm-8">
-					<div>
-						<div class="user-info">
-							<img src="https://via.placeholder.com/30" class="rounded-circle" />
-							{{ chamado.cliente }} <span>Enviado - 7:45 21/07/2024</span>
-						</div>
-						<p>{{ chamado.descricao }}</p>
-					</div>
-				</div>
-				<div class="col-sm-4">
-					<div class="d-flex justify-content-between align-items-center">
-						<div class="status text-right">
-							Status: {{ chamado.get_status_display }}
-						</div>
-						{% if chamado.cliente != request.user %}
-							<a type="button" class="btn btn-success mr-2" data-toggle="modal" data-target="#exampleModal"
-								data-status="{{ chamado.status }}">
-								Alterar Status
-							</a>
-						{% endif %}
+    <div class="card-body">
+      <div class="row mb-3">
+        <div class="col-sm-4">
+          <div class="info-box bg-light">
+            <div class="card-title">Nome</div>
+            <div>{{ chamado.cliente }}</div>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="info-box bg-light">
+            <div class="card-title">Equipamento</div>
+            <div>{{ chamado.item.modelo }}</div>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="info-box bg-light">
+            <div class="card-title">Problema</div>
+            <div>{{chamado.item.problema}}</div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-8">
+          <div>
+            <div class="user-info">
+              <img
+                src="https://via.placeholder.com/30"
+                class="rounded-circle"
+              />
+              {{ chamado.cliente }} <span>Enviado - 7:45 21/07/2024</span>
+            </div>
+            <p>{{ chamado.descricao }}</p>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="d-flex justify-content-between align-items-center">
+            <div class="status text-right">
+              Status: {{ chamado.get_status_display }}
+            </div>
+            {% if chamado.cliente != request.user %}
+            <a
+              type="button"
+              class="btn btn-success mr-2"
+              data-toggle="modal"
+              data-target="#exampleModal"
+              data-status="{{ chamado.status }}"
+            >
+              Alterar Status
+            </a>
+            {% endif %}
 
-						<!-- Modal -->
-						<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
-							aria-labelledby="exampleModalLabel" aria-hidden="true">
-							<div class="modal-dialog" role="document">
-								<div class="modal-content">
-									<div class="modal-header">
-										<h5 class="modal-title" id="exampleModalLabel">
-											Alterar Status
-										</h5>
-										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-											<span aria-hidden="true">&times;</span>
-										</button>
-									</div>
+            <!-- Modal -->
+            <div
+              class="modal fade"
+              id="exampleModal"
+              tabindex="-1"
+              role="dialog"
+              aria-labelledby="exampleModalLabel"
+              aria-hidden="true"
+            >
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">
+                      Alterar Status
+                    </h5>
+                    <button
+                      type="button"
+                      class="close"
+                      data-dismiss="modal"
+                      aria-label="Close"
+                    >
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
 
-									<form method="post" action="{% url 'gambiarra:alterar_status' chamado.pk %}">
-										<div class="modal-body">
-											{% csrf_token %}
+                  <form
+                    method="post"
+                    action="{% url 'gambiarra:alterar_status' chamado.pk %}"
+                  >
+                    <div class="modal-body">
+                      {% csrf_token %}
 
-											<div class="status text-right">
-												Status:
-												<select name="status" class="form-select">
-													<option value="1">Em Análise</option>
-													<option value="2">Aceito</option>
-													<option value="3">Em Diagnóstico</option>
-													<option value="4">Equipamento em conserto</option>
-													<option value="5">Aguardando peça</option>
-													<option value="6">Fechado sem resolução</option>
-													<option value="7">Resolvido</option>
-													<option value="8">Recusado</option>
-												</select>
-											</div>
-										</div>
-										<div class="modal-footer">
-											<button type="button" class="btn btn-terciary" data-dismiss="modal">
-												Fechar
-											</button>
-											<button type="submit" class="btn btn-primary">
-												Enviar
-											</button>
-										</div>
-									</form>
-								</div>
-							</div>
-						</div>
-					</div>
-					<hr />
-					<div class="col-sm-5">
-						<div>
-							<strong>Bolsistas:</strong>
-							<ul>
-								{% for bolsista in chamado.bolsistas.all %}
-								<li>{{ bolsista.nome }}</li>
-								{% empty %}
-								<li>Nenhum bolsista associado.</li>
-								{% endfor %}
-							</ul>
-						</div>
-					</div>
-				</div>
+                      <div class="status text-right">
+                        Status:
+                        <select name="status" class="form-select">
+                          <option value="1">Em Análise</option>
+                          <option value="2">Aceito</option>
+                          <option value="3">Em Diagnóstico</option>
+                          <option value="4">Equipamento em conserto</option>
+                          <option value="5">Aguardando peça</option>
+                          <option value="6">Fechado sem resolução</option>
+                          <option value="7">Resolvido</option>
+                          <option value="8">Recusado</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button
+                        type="button"
+                        class="btn btn-terciary"
+                        data-dismiss="modal"
+                      >
+                        Fechar
+                      </button>
+                      <button type="submit" class="btn btn-primary">
+                        Enviar
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+          <hr />
+          <div class="col-sm-5">
+            <div>
+              <strong>Bolsistas:</strong>
+              <ul>
+                {% for bolsista in chamado.bolsistas.all %}
+                <li>{{ bolsista.nome }}</li>
+                {% empty %}
+                <li>Nenhum bolsista associado.</li>
+                {% endfor %}
+              </ul>
+            </div>
+          </div>
+        </div>
 
-				<div class="text-right mt-3">
-					{% if chamado.cliente != request.user %}
+        <div class="text-right mt-3">
+          {% if chamado.cliente != request.user %} {% if chamado.status == '1' %}
+          <a class="btn btn-success" href="{% url 'gambiarra:aceitar' c.pk %}"
+            >Aceitar</a
+          >
+		  <button class="btn btn-danger">Recusar</button>
+          {% endif %} 
+          <a href="{% url 'gambiarra:adicionar-bolsistas' pk=chamado.pk %}">
+            <button class="btn btn-primary mr-2">Adicionar Bolsista</button>
+          </a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
 
-					<button class="btn btn-success mr-2">Aceitar</button>
-					<button class="btn btn-danger">Recusar</button>
-					<a href="{% url 'gambiarra:adicionar-bolsistas' pk=chamado.pk %}">
-						<button class="btn btn-primary mr-2">Adicionar Bolsista</button>
-					</a>
-					{% endif %}
-				</div>
-			</div>
-		</div>
+    <section id="chat">
+      <div class="container py-5">
+        <div class="row d-flex justify-content-between">
+          <div class="col-12">
+            <div class="card w-100 h-100" id="chat2">
+              <div
+                class="card-header d-flex justify-content-between align-items-center p-3"
+              >
+                <h5 class="mb-0">Chat</h5>
+              </div>
 
-		<section id="chat">
-			<div class="container py-5">
-				<div class="row d-flex justify-content-between">
-					<div class="col-12">
-						<div class="card w-100 h-100" id="chat2">
-							<div class="card-header d-flex justify-content-between align-items-center p-3">
-								<h5 class="mb-0">Chat</h5>
-							</div>
+              <div
+                class="card-body"
+                data-mdb-perfect-scrollbar-init
+                id="message-container"
+              >
+                {% for mensagem in mensagens %} {% if mensagem.autor == user %}
 
-							<div class="card-body" data-mdb-perfect-scrollbar-init id="message-container">
-								{%for mensagem in mensagens%} {%if mensagem.autor == user %}
+                <div class="d-flex flex-row justify-content-end mb-2 pt-1">
+                  <div>
+                    <p
+                      class="small p-2 me-3 mb-1 text-white rounded-3 bg-primary"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#collapseExample{{ forloop.counter }}"
+                      aria-expanded="false"
+                      aria-controls="collapseExample{{ forloop.counter }}"
+                    >
+                      {{ mensagem.texto }}
+                    </p>
+                    <div
+                      class="collapse"
+                      id="collapseExample{{ forloop.counter }}"
+                    >
+                      <p
+                        class="small me-3 mb-3 rounded-3 text-muted d-flex justify-content-end"
+                      >
+                        {{ mensagem.data_envio }}
+                      </p>
+                    </div>
+                  </div>
+                  <img
+                    src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava5-bg.webp"
+                    alt="avatar 1"
+                    style="width: 45px; height: 100%"
+                  />
+                </div>
 
-								<div class="d-flex flex-row justify-content-end mb-2 pt-1">
-									<div>
-										<p class="small p-2 me-3 mb-1 text-white rounded-3 bg-primary" type="button"
-											data-bs-toggle="collapse"
-											data-bs-target="#collapseExample{{ forloop.counter }}" aria-expanded="false"
-											aria-controls="collapseExample{{ forloop.counter }}">
-											{{ mensagem.texto }}
-										</p>
-										<div class="collapse" id="collapseExample{{ forloop.counter }}">
-											<p class="small me-3 mb-3 rounded-3 text-muted d-flex justify-content-end">
-												{{ mensagem.data_envio }}
-											</p>
-										</div>
-									</div>
-									<img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava5-bg.webp"
-										alt="avatar 1" style="width: 45px; height: 100%" />
-								</div>
+                {%else%}
 
-								{%else%}
+                <div class="d-flex flex-row justify-content-start mb-2">
+                  <img
+                    src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3	-bg.webp"
+                    alt="avatar 1"
+                    style="width: 45px; height: 100%"
+                  />
+                  <div>
+                    <p
+                      class="small p-2 ms-3 mb-1 rounded-3 bg-body-tertiary"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#collapseExample{{ forloop.counter }}"
+                      aria-expanded="false"
+                      aria-controls="collapseExample{{ forloop.counter }}"
+                    >
+                      {{ mensagem.texto }}
+                    </p>
+                    <div
+                      class="collapse"
+                      id="collapseExample{{ forloop.counter }}"
+                    >
+                      <p class="small ms-3 mb-3 rounded-3 text-muted">
+                        {{ mensagem.data_envio }}
+                      </p>
+                    </div>
+                  </div>
+                </div>
 
-								<div class="d-flex flex-row justify-content-start mb-2">
-									<img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3	-bg.webp"
-										alt="avatar 1" style="width: 45px; height: 100%" />
-									<div>
-										<p class="small p-2 ms-3 mb-1 rounded-3 bg-body-tertiary" type="button"
-											data-bs-toggle="collapse"
-											data-bs-target="#collapseExample{{ forloop.counter }}" aria-expanded="false"
-											aria-controls="collapseExample{{ forloop.counter }}">
-											{{ mensagem.texto }}
-										</p>
-										<div class="collapse" id="collapseExample{{ forloop.counter }}">
-											<p class="small ms-3 mb-3 rounded-3 text-muted">
-												{{ mensagem.data_envio }}
-											</p>
-										</div>
-									</div>
-								</div>
+                {%endif%} {%endfor%}
+              </div>
 
-								{%endif%} {%endfor%}
-							</div>
+              <div
+                class="card-footer text-muted d-flex justify-content-start align-items-center p-3"
+              >
+                <form
+                  method="post"
+                  class="d-flex w-100 align-items-center justify-content-center m-0"
+                >
+                  {% csrf_token %}
 
-							<div class="card-footer text-muted d-flex justify-content-start align-items-center p-3">
-								<form method="post" class="d-flex w-100 align-items-center justify-content-center m-0">
-									{% csrf_token %}
+                  <div class="flex-grow-1 me-2">
+                    {% bootstrap_form mensagem_form %}
+                  </div>
 
-									<div class="flex-grow-1 me-2">
-										{% bootstrap_form mensagem_form %}
-									</div>
+                  <div class="d-flex align-items-center mb-3">
+                    <button type="submit" class="btn btn-primary">
+                      Enviar
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
 
-									<div class="d-flex align-items-center mb-3">
-										<button type="submit" class="btn btn-primary">
-											Enviar
-										</button>
-									</div>
-								</form>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-	</div>
-
-	{% for alteracao in alteracoes %}
-		<p>{{ alteracao.get_status_display }}</p>
-	{% endfor %}
+  {% for alteracao in alteracoes %}
+  <p>{{ alteracao.get_status_display }}</p>
+  {% endfor %}
 </section>
 
-
 <script>
-	document.addEventListener("DOMContentLoaded", function () {
-		$("#exampleModal").on("show.bs.modal", function (event) {
-			var button = $(event.relatedTarget); // Botão que abriu o modal
-			var status = button.data("status"); // Extrair o valor do status do atributo data-status
+  document.addEventListener("DOMContentLoaded", function () {
+    $("#exampleModal").on("show.bs.modal", function (event) {
+      var button = $(event.relatedTarget); // Botão que abriu o modal
+      var status = button.data("status"); // Extrair o valor do status do atributo data-status
 
-			var modal = $(this);
-			modal.find('select[name="status"]').val(status); // Definir o valor do campo select
-		});
-	});
-	window.onload = function () {
-		var messageContainer = document.getElementById("message-container");
-		messageContainer.scrollTop = messageContainer.scrollHeight;
-	};
+      var modal = $(this);
+      modal.find('select[name="status"]').val(status); // Definir o valor do campo select
+    });
+  });
+  window.onload = function () {
+    var messageContainer = document.getElementById("message-container");
+    messageContainer.scrollTop = messageContainer.scrollHeight;
+  };
 </script>
 <style>
-	/* css do chat */
-	#chat2 .form-control {
-		border-color: transparent;
-	}
+  /* css do chat */
+  #chat2 .form-control {
+    border-color: transparent;
+  }
 
-	#chat2 .form-control:focus {
-		border-color: transparent;
-		box-shadow: inset 0px 0px 0px 1px transparent;
-	}
+  #chat2 .form-control:focus {
+    border-color: transparent;
+    box-shadow: inset 0px 0px 0px 1px transparent;
+  }
 
-	.divider:after,
-	.divider:before {
-		content: "";
-		flex: 1;
-		height: 1px;
-		background: #eee;
-	}
+  .divider:after,
+  .divider:before {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: #eee;
+  }
 
-	/* Adicione o estilo para permitir o scroll */
-	#chat2 .card-body {
-		overflow-y: auto;
-		/* Permite o scroll vertical */
-		overflow-x: hidden;
-		/* Evita scroll horizontal */
-		height: 400px;
-		/* Assegura a altura definida */
-	}
+  /* Adicione o estilo para permitir o scroll */
+  #chat2 .card-body {
+    overflow-y: auto;
+    /* Permite o scroll vertical */
+    overflow-x: hidden;
+    /* Evita scroll horizontal */
+    height: 400px;
+    /* Assegura a altura definida */
+  }
 
-	/* css da linha do tempo */
-
+  /* css da linha do tempo */
 </style>
 
 {% endblock %}

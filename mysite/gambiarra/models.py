@@ -27,7 +27,6 @@ class Bolsista(models.Model):
         return self.nome 
     
     def delete(self, *args, **kwargs):
-        # Deleta a foto do bolsista
         if self.foto_perfil:
             if os.path.isfile(self.foto_perfil.path):
                 os.remove(self.foto_perfil.path)
@@ -44,7 +43,7 @@ class Chamado(models.Model):
     titulo = models.CharField(max_length=50, default="") 
     descricao = models.TextField(max_length=240, default="")
     code = models.UUIDField(default=uuid.uuid4)
-    professor = models.ForeignKey(User, on_delete=models.CASCADE, related_name='chamados_professor', null=True)
+    professor = models.ForeignKey(User, on_delete=models.CASCADE, related_name='chamados_professor', null=True, blank=True)
     bolsistas = models.ManyToManyField(Bolsista, blank = True)
     status = models.CharField(max_length=30, choices=STATUS_CHOICES, default="1")
     item = models.OneToOneField('Item', on_delete=models.CASCADE, null=True)

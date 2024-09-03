@@ -14,6 +14,7 @@ urlpatterns = [
     path('bolsistas/<int:pk>/editar/', views.EditarBolsista.as_view(), name='editar-bolsista'),
     path('bolsistas/<int:pk>/deletar/', views.DeletarBolsista.as_view(), name='excluir-bolsista'),
     path('avaliar/<int:pk>/', views.AvaliarForms.as_view(), name='avaliar'),
-    path('alterar-status/<int:chamado_id>/', views.alterar_status, name='alterar_status'),
+    path('alterar-status/<int:pk>/', views.alterar_status, name='alterar_status'),
+    path('aceitar/<int:pk>/', views.aceitar, name='aceitar'),
 
 ]

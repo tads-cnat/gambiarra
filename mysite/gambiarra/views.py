@@ -139,7 +139,21 @@ class ChamadoDetailView(View):
                 if(mensagem.texto == ""): return redirect('gambiarra:detalhes', chamado_id)
                 mensagem.save()
                 return redirect('gambiarra:detalhes', chamado_id)
+def aceitar(request, *args, **kwargs):
+        chamado_id = kwargs['pk']
+        chamado = get_object_or_404(Chamado, pk=chamado_id)
+        chamado.status = '2'
+        chamado.save()
+        alt = Alteracao()
+        alt.chamado = chamado
+        alt.autor = request.user
+        alt.status = '2'
+        alt.save()
         
+        messages.success(request, 'Sucesso. O chamado foi aceito.')
+
+        return redirect('gambiarra:detalhes', chamado_id)
+
 
 class ChamadoForms(View):
     chamado = ChamadoItemForm()
@@ -147,7 +161,7 @@ class ChamadoForms(View):
         return render(request, 'dashboard/chamado/registrar.html', {'chamado': self.chamado, 'titulo': "Abrir chamado"})
 
     def post(self, request):
-
+        
         form = ChamadoItemForm(request.POST)
 
         if form.is_valid():
@@ -180,14 +194,18 @@ class ChamadoForms(View):
 class DashboardView(View):
     def get(self, request, *args, **kwargs):
         chamados = Chamado.objects.all().prefetch_related('bolsistas')
+
+        if request.user.tipo_usuario != '4':
+            chamados = Chamado.objects.filter(cliente=request.user).prefetch_related('bolsistas')
+
         avaliar = AvaliacaoForm()
         context = {'chamados':chamados, "avaliar":avaliar}
         return render(request, 'dashboard/index.html', context)
 
 
 
-def alterar_status(request, chamado_id):
-    chamado = get_object_or_404(Chamado, id=chamado_id)
+def alterar_status(request, pk):
+    chamado = get_object_or_404(Chamado, pk=pk)
     
     if request.method == 'POST':
         novo_status = request.POST.get('status')
@@ -201,4 +219,4 @@ def alterar_status(request, chamado_id):
             alt.save()
             messages.success(request, 'Sucesso. O status foi alterado.')
 
-    return redirect('gambiarra:detalhes',chamado_id)
+    return redirect('gambiarra:detalhes', pk)
