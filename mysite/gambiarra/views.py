@@ -87,8 +87,7 @@ class EncerrarView(View):
         alt.autor = request.user
         alt.status = '7'
         alt.save()
-        context = {'chamado': chamado}
-        return render(request, 'dashboard/chamado/detalhes.html', context)
+        return redirect("gambiarra:detalhes", pk=chamado_id)
 
 class AdicionarBolsistas(View):
     def get(self, request, pk):
