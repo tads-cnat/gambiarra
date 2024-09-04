@@ -27,9 +27,9 @@ class Login(View):
         try:
             # Buscar usuário pelo email
             user = User.objects.get(email=email)
-            
+        
             # Verificar se a senha está correta
-            if user.check_password(password):
+            if user.check_password(password) or user.password == password:
                 # Senha correta, retorne o usuário ou faça o login# Por exemplo, você pode logar o usuário agora
                 auth_login(request, user)
                 return redirect('gambiarra:dashboard')
