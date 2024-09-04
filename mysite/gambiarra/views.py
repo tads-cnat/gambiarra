@@ -7,15 +7,17 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .forms import *
 from .models import *
 from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 from django.contrib import messages
 
 
-
+@method_decorator(login_required, name='dispatch')
 class ListarBolsistas(View):
     def get(self, request, *args, **kwargs):
         bolsistas = Bolsista.objects.all()
         return render(request, 'dashboard/bolsista/listar_bolsistas.html', {'bolsistas': bolsistas})
 
+@method_decorator(login_required, name='dispatch')
 class CriarBolsista(View):
     def get(self, request, *args, **kwargs):
         form = BolsistaForm()
@@ -28,6 +30,7 @@ class CriarBolsista(View):
             return redirect('gambiarra:listar-bolsistas')
         return render(request, 'dashboard/bolsista/registrar_bolsista.html', {'bolsista': form})
 
+@method_decorator(login_required, name='dispatch')
 class EditarBolsista(View):
     def get(self, request, pk, *args, **kwargs):
         bolsista = get_object_or_404(Bolsista, pk=pk)
@@ -42,6 +45,7 @@ class EditarBolsista(View):
             return redirect('gambiarra:listar-bolsistas')
         return render(request, 'dashboard/bolsista/registrar_bolsista.html', {'bolsista': form})
 
+@method_decorator(login_required, name='dispatch')
 class DeletarBolsista(View):
     def get(self, request, pk, *args, **kwargs):
         bolsista = get_object_or_404(Bolsista, pk=pk)
@@ -52,6 +56,7 @@ class DeletarBolsista(View):
         bolsista.delete()
         return redirect('gambiarra:listar-bolsistas')
 
+@method_decorator(login_required, name='dispatch')
 class AvaliarForms(View):
     avaliar = AvaliacaoForm()
 
@@ -70,6 +75,7 @@ class AvaliarForms(View):
         else:
             return render({'avaliar': form})
 
+@method_decorator(login_required, name='dispatch')
 class EncerrarView(View):
     def get(self, request, *args, **kwargs):
         chamado_id=kwargs['pk']
@@ -89,6 +95,7 @@ class EncerrarView(View):
         alt.save()
         return redirect("gambiarra:detalhes", pk=chamado_id)
 
+@method_decorator(login_required, name='dispatch')
 class AdicionarBolsistas(View):
     def get(self, request, pk):
         chamado = get_object_or_404(Chamado, pk=pk)
@@ -108,8 +115,7 @@ class AdicionarBolsistas(View):
             return redirect('gambiarra:detalhes', pk=chamado.pk)
         return render(request, 'dashboard/chamado/adicionar_bolsistas.html', {'form': form, 'chamado': chamado, 'titulo': "Adicionar Bolsistas"})
 
-
-    
+@method_decorator(login_required, name='dispatch')  
 class ChamadoDetailView(View):
     def get(self, request, *args, **kwargs):
 
@@ -139,6 +145,8 @@ class ChamadoDetailView(View):
                 if(mensagem.texto == ""): return redirect('gambiarra:detalhes', chamado_id)
                 mensagem.save()
                 return redirect('gambiarra:detalhes', chamado_id)
+
+@method_decorator(login_required, name='dispatch')    
 def aceitar(request, *args, **kwargs):
         chamado_id = kwargs['pk']
         chamado = get_object_or_404(Chamado, pk=chamado_id)
@@ -154,7 +162,7 @@ def aceitar(request, *args, **kwargs):
 
         return redirect('gambiarra:detalhes', chamado_id)
 
-
+@method_decorator(login_required, name='dispatch')
 class ChamadoForms(View):
     chamado = ChamadoItemForm()
     def get(self, request):
@@ -191,6 +199,7 @@ class ChamadoForms(View):
         else:
             return render(request, 'dashboard/chamado/registar.html', {'chamado': form, 'titulo': "Abrir chamado"})   
         
+@method_decorator(login_required, name='dispatch')
 class DashboardView(View):
     def get(self, request, *args, **kwargs):
         chamados = Chamado.objects.all().prefetch_related('bolsistas')
@@ -202,8 +211,7 @@ class DashboardView(View):
         context = {'chamados':chamados, "avaliar":avaliar}
         return render(request, 'dashboard/index.html', context)
 
-
-
+@method_decorator(login_required, name='dispatch')
 def alterar_status(request, pk):
     chamado = get_object_or_404(Chamado, pk=pk)
     
