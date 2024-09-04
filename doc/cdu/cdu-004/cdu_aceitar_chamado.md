@@ -19,4 +19,6 @@
 | | 1.2 - O sistema redireciona para a página de detalhes do chamado, atualizando o seu status para indicar que ele foi recusado | 
 
 
+## Diagrama de Sequência - Aceitar Chamado
 
+![diagrama de sequência aceitar chamado](img/aceitar_seq.jpg "Diagrama sequência - Aceitar Chamado")
