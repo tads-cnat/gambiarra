@@ -150,6 +150,7 @@ class ChamadoDetailView(View):
 def aceitar(request, *args, **kwargs):
         chamado_id = kwargs['pk']
         chamado = get_object_or_404(Chamado, pk=chamado_id)
+        chamado.professor = request.user
         chamado.status = '2'
         chamado.save()
         alt = Alteracao()
