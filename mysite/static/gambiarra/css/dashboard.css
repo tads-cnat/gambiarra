@@ -92,7 +92,7 @@ body {
     overflow-y: auto; /* Permite rolar o conteúdo principal */
 
 }
-  #esse {
+#esse {
     padding: 50px;
     background: linear-gradient(white, white) padding-box, 
                 linear-gradient(-8deg, rgba(255,255,255,1) 7%, rgba(67,56,202,1) 7%, rgba(58,76,209,1) 19%, rgba(255,255,255,1) 19%, rgba(255,255,255,1) 27%, rgba(67,56,202,1) 27%, rgba(67,56,202,1) 39%, rgba(252,252,252,1) 39%, rgba(252,252,252,1) 61%, rgba(67,56,202,1) 61%, rgba(67,56,202,1) 81%, rgba(255,255,255,1) 81%) border-box;
@@ -100,3 +100,41 @@ body {
     box-shadow: 5px 5px 10px 5px rgba(54, 54, 54, 0.10) !important;
     border-radius: 30px !important;
 }
+
+th{
+  align-items: center!important;
+}
+
+.tr-dashboard th{
+  vertical-align: middle;
+}
+
+table{
+  color: #DEE2E6!important;
+  border-color: #DEE2E6;
+}
+
+/* botões de acção da index */
+.button-group {
+  display: flex;
+  gap: 10px; /* Espaçamento entre os botões */
+  flex-wrap: wrap; /* Permite que os botões quebrem linha, se necessário */
+}
+
+@media (max-width: 768px) {
+  .button-group {
+      justify-content: center; /* Centraliza os botões em telas menores */
+  }
+}
+
+@media (max-width: 576px) {
+  .button-group {
+      flex-direction: column; /* Torna os botões verticais em telas muito pequenas */
+  }
+}
+
+
+.dropdown-divider{
+  color: #DEE2E6;
+}
+
