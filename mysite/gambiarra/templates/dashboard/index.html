@@ -10,7 +10,11 @@
 
 </style>
 
+
+
+
 <div class="container">
+
     <table class="table table-hover">
         <thead>
           <tr>
@@ -24,35 +28,37 @@
         </thead>
         <tbody>
             {% for c in chamados %}
-            <tr>
-                <td>
+            <tr class="tr-dashboard">
+                <th scope="row">
                     {{c.code}}
-                </td>
-                <td>
+                </th>
+                <th>
                     {{c.titulo}}
-                </td>
-                <td>
+                </th>
+                <th>
                     {{c.get_status_display}}
-                </td>
-                <td>
+                </th>
+                <th>
                     {{ c.foto_perfil }}
                     {{c.professor.nome}}
-                </td>
-                <td>
+                </th>
+                <th>
                     {% for b in c.bolsistas.all %}
                     <p>
                         {{b.nome}}
                     </p>
                     {% endfor %}
-                </td>
-                <td>
-                    {% if request.user == c.cliente %}
-                    <a  href="{% url 'gambiarra:detalhes' c.pk %}"> <button  class="btn btn-primary btn-sm" >Acessar</button></a>
-                    {% if c.status >= '7' %}
-                    <a type="button"  data-toggle="modal" data-target="#exampleModal">
-                        <button  class="btn btn-success mr-2" >Avaliar</button> 
-                    </a>
-
+                </th>
+                <th>
+                    <div class="button-group">
+                        {% if request.user == c.cliente %}
+                        <a href="{% url 'gambiarra:detalhes' c.pk %}">
+                            <button class="btn btn-primary btn-sm">Acessar</button>
+                        </a>
+                        {% if c.status >= '7' %}
+                        <a type="button" data-toggle="modal" data-target="#exampleModal">
+                            <button class="btn btn-success btn-sm">Avaliar</button>
+                        </a>
 
                     <!-- Modal -->
                     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
@@ -60,7 +66,8 @@
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Avaliar chamado</h5>
+                                    <h5 class="modal-title" id="ex
+                                    ampleModalLabel">Avaliar chamado</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
@@ -98,12 +105,11 @@
                     {% else %}
                         {% if c.status  == '1' %}
                             <a href="{% url 'gambiarra:aceitar' c.pk %}"> <button  class="btn btn-success btn-sm" >Aceitar</button></a>
-                            <a href=""></a>
-		                    <button class="btn btn-danger">Recusar</button>
+		                    <button class="btn btn-danger btn-sm">Recusar</button>
                         {% endif %}
                         <a  href="{% url 'gambiarra:detalhes' c.pk %}"> <button  class="btn btn-primary btn-sm" >Acessar</button></a>
                         {% if c.status != '7' %}
-                            <a  href="{% url 'gambiarra:encerrar' c.pk %}"> <button class="btn btn-warning btn-sm" >Encerrar</button></a>
+                            <a  href="{% url 'gambiarra:encerrar' c.pk %}"> <button class="btn btn-warning btn-sm text-white" >Encerrar</button></a>
                         {% endif %}
                         {% if c.status >= '7' %}
                         <a href="#">
@@ -113,16 +119,11 @@
 
                     {% endif %}
 
-
-                    <!-- Button trigger modal -->
-
-
-                </td>
+                </th>
             </tr>
-            {% endfor %}
+            {% endfor %}       
         </tbody>
       </table>
-
 
 </div>
 {% endblock %}
