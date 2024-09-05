@@ -37,4 +37,4 @@ class User(AbstractUser):
         super().save(update_fields=['is_staff', 'is_superuser'])
 
     def __str__(self):
-        return f'{self.username} - {self.get_tipo_usuario_display()}'
+        return f'{self.username}'

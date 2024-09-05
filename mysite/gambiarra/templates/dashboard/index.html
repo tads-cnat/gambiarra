@@ -35,8 +35,8 @@
                     {{c.get_status_display}}
                 </td>
                 <td>
-                    {{ c.foto_perfil }}
-                    {{c.professor.nome}}
+                    <img src="{{ c.professor.foto_perfil.url }}" alt="" style="width: 25px; height: 25px; border-radius: 50%;">
+                    {{c.professor}}
                 </td>
                 <td>
                     {% for b in c.bolsistas.all %}
@@ -98,12 +98,11 @@
                     {% else %}
                         {% if c.status  == '1' %}
                             <a href="{% url 'gambiarra:aceitar' c.pk %}"> <button  class="btn btn-success btn-sm" >Aceitar</button></a>
-                            <a href=""></a>
-		                    <button class="btn btn-danger">Recusar</button>
+		                    <button class="btn btn-danger btn-sm">Recusar</button>
                         {% endif %}
                         <a  href="{% url 'gambiarra:detalhes' c.pk %}"> <button  class="btn btn-primary btn-sm" >Acessar</button></a>
                         {% if c.status != '7' %}
-                            <a  href="{% url 'gambiarra:encerrar' c.pk %}"> <button class="btn btn-warning btn-sm" >Encerrar</button></a>
+                            <a  href="{% url 'gambiarra:encerrar' c.pk %}"> <button class="btn btn-warning btn-sm text-white" >Encerrar</button></a>
                         {% endif %}
                         {% if c.status >= '7' %}
                         <a href="#">

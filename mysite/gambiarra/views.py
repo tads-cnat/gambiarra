@@ -21,7 +21,7 @@ class ListarBolsistas(View):
 class CriarBolsista(View):
     def get(self, request, *args, **kwargs):
         form = BolsistaForm()
-        return render(request, 'dashboard/bolsista/registrar_bolsista.html', {'bolsista': form})
+        return render(request, 'dashboard/bolsista/registrar_bolsista.html', {'bolsista': form} )
 
     def post(self, request, *args, **kwargs):
         form = BolsistaForm(request.POST, request.FILES)
@@ -145,11 +145,9 @@ class ChamadoDetailView(View):
                 if(mensagem.texto == ""): return redirect('gambiarra:detalhes', chamado_id)
                 mensagem.save()
                 return redirect('gambiarra:detalhes', chamado_id)
-
-@method_decorator(login_required, name='dispatch')    
-def aceitar(request, *args, **kwargs):
-        chamado_id = kwargs['pk']
-        chamado = get_object_or_404(Chamado, pk=chamado_id)
+@login_required
+def aceitar(request, pk):
+        chamado = get_object_or_404(Chamado, pk=pk)
         chamado.professor = request.user
         chamado.status = '2'
         chamado.save()
@@ -161,7 +159,7 @@ def aceitar(request, *args, **kwargs):
         
         messages.success(request, 'Sucesso. O chamado foi aceito.')
 
-        return redirect('gambiarra:detalhes', chamado_id)
+        return redirect('gambiarra:detalhes', pk)
 
 @method_decorator(login_required, name='dispatch')
 class ChamadoForms(View):
