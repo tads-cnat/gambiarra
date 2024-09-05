@@ -2,7 +2,7 @@
 
 ## Diagrama ER
 
-2o esboço com atributos e relacionamentos iniciais
+5º esboço com atributos e relacionamentos
 
 O sistema terá duas entidades que agem como atores principais: Cliente e Professor.
 Ambos estarão relacionados à entidade chamado.
