@@ -1,0 +1,28 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+{% load bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{% block conteudo %}
+    <section >
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            {% bootstrap_form bolsista %}
+
+            {% if bolsista.errors %}
+                <div class="error">
+                    <ul>
+                        {% for field, errors in bolsista.errors.items %}
+                            <li>{{ field }}: {{ errors|join:", " }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+            
+            <input type="submit" class="btn btn-success" value="Enviar">
+            <a href="{% url 'gambiarra:listar-bolsistas' %}" class="btn btn-terciary ms-2">Voltar</a>
+        </form>
+    </section>
+{% endblock %}

@@ -6,7 +6,7 @@ class User(AbstractUser):
     cpf = models.CharField(max_length=11, unique=True, null=True)
     matricula = models.CharField(max_length=20, unique=True, null=True) 
     telefone = models.CharField(max_length=15, blank=True, null=True)
-
+    foto_perfil = models.ImageField(upload_to='Usuario', null=True, blank=True)
     tipo_usuario = models.CharField(
         max_length=20,
         choices=[
@@ -15,13 +15,17 @@ class User(AbstractUser):
             ('3', 'Servidor'),
             ('4', 'Professor'),
         ],
-        default= None, null=True  
+        default='4'  
     )
 
     def save(self, *args, **kwargs):
+
+        if self.pk and 'password' in self.__dict__ and not self.password.startswith('pbkdf2_'):
+            self.set_password(self.password)
+            
         super().save(*args, **kwargs)
 
-        if self.tipo_usuario == '4' or self.tipo_usuario == None: 
+        if self.tipo_usuario == '4': 
             self.is_staff = True 
             self.is_superuser = True
             admin_group, created = Group.objects.get_or_create(name='Admin')
@@ -36,3 +40,5 @@ class User(AbstractUser):
        
         super().save(update_fields=['is_staff', 'is_superuser'])
 
+    def __str__(self):
+        return f'{self.username}'

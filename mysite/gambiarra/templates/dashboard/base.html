@@ -15,85 +15,80 @@
     <link rel="stylesheet" href="{% static 'gambiarra/css/dashboard.css'%}">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Montserrat:wght@100&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap"
-        rel="stylesheet">
-    <style>
-        body {
-            display: flex;
-            height: 100vh;
-            margin: 0;
-        }
-        .sidebar {
-            width: 20vw;
-            height: 100vh;
-            overflow-y: auto; /* Permite rolar se o conteúdo for maior que a altura da viewport */
-            background-color: #343a40;
-            color: white;
-        }
-        .main-content {
-            width: 80vw;
-            overflow-y: auto; /* Permite rolar o conteúdo principal */
-        }
-        .container {
-            padding: 20px;
-        }
-    </style>
+      <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400&display=swap" rel="stylesheet">
+      
+  
 </head>
 <body>
-    <nav class="sidebar d-flex flex-column flex-shrink-0 p-3">
+    <nav class="sidebar d-flex flex-column flex-shrink-0 p-4">
         <a href="{% url 'gambiarra:dashboard' %}" class="d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
           <img  class="bi me-2 img-fluid w-75" src="{% static 'gambiarra/img/logo.png' %}" alt="">
           
         </a>
         <hr>
-        <ul class="nav nav-pills flex-column mb-auto">
-          <li class="nav-item">
-            <a href="#" class="nav-link active" aria-current="page">
-              <svg class="bi me-2" width="16" height="16"><use xlink:href="#home"></use></svg>
+        <ul class="nav nav-pills flex-column mb-auto p-2">
+          <li class="nav-item ">
+            <a href="{% url 'gambiarra:dashboard' %}"  class="nav-link "><button style="text-align: start;" class="btn btn-success w-100" aria-current="page">
               Chamados
+            </button>
+          </a>
+            
+          </li>
+          <li class="nav-item">
+            <a href="{% url 'gambiarra:listar-bolsistas' %}" class="nav-link " aria-current="page">
+              Gerenciar Bolsistas
             </a>
           </li>
-          <li>
-            <a href="#" class="nav-link text-white">
-              <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>
+          <li  class="nav-item">
+            <a href="#" class="nav-link">
               Relatórios
             </a>
           </li>
-          <li>
-            <a href="#" class="nav-link text-white">
-              <svg class="bi me-2" width="16" height="16"><use xlink:href="#table"></use></svg>
+          <li  class="nav-item">
+            <a href="#" class="nav-link ">
               Configurações
             </a>
           </li>
           <li>
-            <a href="{% url 'gambiarra:abrir-chamado' %}" class="nav-link text-white">
-              <button class="btn btn-success"> Abrir Chamado</button>
+            <a href="{% url 'gambiarra:abrir-chamado' %}" >
+              <button  class="btn btn-primary"> Abrir Chamado</button>
             </a>
           </li>
         </ul>
         <hr>
         <div class="dropdown">
-          <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-            <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
+          <a href="#" class="d-flex align-items-center  text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+            <img src="{{request.user.foto_perfil.url }}" alt="" width="32" height="32" class="rounded-circle me-2">
             <strong>{{ request.user.username }}</strong>
           </a>
-          <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
+          <ul class="dropdown-menu dropdown-menu-ligth text-small shadow" aria-labelledby="dropdownUser1">
             <li><a class="dropdown-item" href="#">Relatórios</a></li>
             <li><a class="dropdown-item" href="#">Configurações</a></li>
-            <li><a class="dropdown-item" href="#">Perfil</a></li>
+            <li><a class="dropdown-item" href="{% url 'gambiarra:dashboard' %}">Perfil</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item danger" href="{% url 'users:logout' %}">sair</a></li>
+            <li><a class="dropdown-item text-danger" href="{% url 'users:logout' %}">sair</a></li>
           </ul>
         </div>
     </nav>
-    <main class="main-content">
-      <h1>{{ titulo }}</h1>
-      <div class="container mt-5">
+    <main class="main-content p-3">     
+      <div class="container mt-2" style="border-left: 5px solid #79E546; padding-left: 20px ;">
+        
+        <h1>{{ titulo }}</h1>
 
+      </div>
+      <div id="esse" class="container mt-5">
+        {% for message in messages %}
+          <div class="alert alert-{{ message.tags }} alert-dismissible fade show mt-2" role="alert">
+            {{ message }}
+            <a type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></a>
+          </div>
+        {% endfor %}
         {% block conteudo %}
         {% endblock %}
       </div>
+
     </main>
+
 </body>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

@@ -1,0 +1,18 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+{% load bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{% block conteudo %}
+    <div class="container mt-4">
+        <section class="card p-4">
+            <h2 class="mb-4">Tem certeza que deseja excluir o bolsista "{{ bolsista.nome }}"?</h2>
+            <form method="post">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-success">Confirmar</button>
+                <a href="{% url 'gambiarra:listar-bolsistas' %}" class="btn btn-terciary ">Cancelar</a>
+            </form>
+        </section>
+    </div>
+{% endblock %}

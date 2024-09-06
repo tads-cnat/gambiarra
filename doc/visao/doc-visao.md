@@ -8,6 +8,7 @@
 | 13/03/2024 | 1.1.0    | Finalizada primeira versão | Todos os integrantes da equipe |
 | 15/03/2024 | 1.1.1   | <ul> <li> Correção do Objetivo do Projeto</li> <li> Atualização do nome de usuário de "Aluno" para "Cliente" </li> <li> Atualização do nome de usuário de "Doadores" para "Visitantes" </li></ul> | Livia Vitória da Silva |
 | 19/03/2024 | 1.1.2    | Regras de negócio | Livia Vitória da Silva |
+| 30/08/2024 | 1.1.3    | Regras de negócio | Livia Vitória da Silva |
 
 
 ## 1. Objetivo do projeto
@@ -28,16 +29,16 @@ Desenvolver um sistema web para gerenciamento de chamados de manutenção técni
 
 | Nome                |  Descrição          |   Responsabilidade  |
 | -----------------   | -----------------   | -----------------   |
-| Professores de manutenção | Administrador do Sistema. | <ul> <li>Receber solicitações</li><li>Avaliar viabilidade</li><li>Elaborar relatório de manutenção</li><li> Resolver chamados</li><li>Comunicar-se com alunos</li><li> Comunicar-se com os clientes(usuários)</li> |
+| Professores de manutenção | Administrador do Sistema. | <ul> <li>Receber solicitações</li><li>Avaliar viabilidade</li><li>Elaborar relatório de manutenção</li><li> Resolver chamados</li><li>Encerrar chamado</li> <li>Aceitar chamado</li><li> Comunicar-se com os clientes(usuários)</li> |
 
 | Nome                |  Descrição          |   Responsabilidade  |
 | -----------------   | -----------------   | -----------------   |
-| Cliente | Usuários do sistema que possuem vínculo com o SUAP. Esses usuários fornecem máquinas que precisam de manutenção para a prática de ensino por meio de um chamado. | <ul><li> Abrir pedido de manutenção</li><li> Comunicar-se com professores</li><li> Encerrar o chamado </li><li> Acompanhar o chamado</li><li> Avaliar o serviço</li> <li>Elaborar relatórios</li></ul>|
+| Cliente | Usuários do cadastrados no sistema. Esses usuários fornecem máquinas que precisam de manutenção para a prática de ensino por meio de um chamado. | <ul><li> Abrir chamado de manutenção</li><li> Comunicar-se com professores</li><li> Acompanhar o chamado</li><li> Avaliar o serviço</li> </ul>|
 
 
 | Nome                |  Descrição          |   Responsabilidade  |
 | -----------------   | -----------------   | -----------------   |
-| Visitante | Pessoa que não possui cadastro no sistema. | <ul> <li>Visualizar serviços oferecidos</li> <li>Possibilidade de doar</li><li>Vizualizar feedbacks</li></ul>|
+| Visitante | Pessoa que não possui cadastro no sistema. | <ul> <li>Visualizar serviços oferecidos</li> <li>Possibilidade de doar ao projeto</li><li>Vizualizar feedbacks</li></ul>|
 
 
 
@@ -58,7 +59,7 @@ As tarefas e atividades no sistema duram poucos minutos e podem ser feitas a qua
 
 - Nesse cenário visando ajudar tantos os alunos quanto as pessoas que precisam de manutenção confiável e com baixo custo nasce um projeto que visa conectar ambos.
 
-- Um sistema que conecta pessoas que precisam desse serviço com professores de manutenção do IFRN, o sistema possibilita a abertura de um chamado para manutenção de computadores, sendo possível visualizar o perfil do Professor responsável, avaliar o serviço,  visualizar serviços já concluídos e a doação de materiais ou monetária. O professor responsável consegue gerenciar todas as funções do site.
+- Um sistema que conecta pessoas que precisam desse serviço com professores de manutenção do IFRN-CNAT, o sistema possibilita a abertura de um chamado para manutenção de computadores, sendo possível visualizar o perfil do Professor responsável, avaliar o serviço,  visualizar serviços já concluídos e a doação de materiais ou monetária. O professor responsável consegue gerenciar todas as funções do site.
 
 ## 6. Alternativas concorrentes
 
@@ -68,7 +69,7 @@ No projeto, podemos identificar dois tipos de concorrentes, empresas de prestaç
 
 Nosso produto é uma plataforma simplificada para gerenciamento de chamados de manutenção técnica, direcionada a professores de disciplinas de manutenção de computadores do IFRN - CNAT. Os alunos têm a oportunidade de resolver problemas reais de membros da comunidade escolar, como pais, outros alunos, professores e servidores, enriquecendo seu aprendizado prático e contribuindo para a resolução de questões tecnológicas na escola.  O sistema deve ser compatível com os navegadores mais usados no mercado.
 
--	Em última análise, é necessário um processo simplificado de login integrado ao SUAP. Isso garante uma entrada fácil e rápida para professores, alunos e demais membros da comunidade escolar. Com essa integração, proporcionamos que posteriormente, outros campus se juntem à plataforma. Bem como, garante que o público alvo deste produto será atingido.
+-	Em última análise, é desejável um processo simplificado de login integrado ao SUAP. Isso garante uma entrada fácil e rápida para professores, alunos e demais membros da comunidade escolar. Com essa integração, proporcionamos que posteriormente, outros campus se juntem à plataforma. Bem como, garante que o público alvo deste produto será atingido.
 
 -	Por fim, deve-se garantir uma identidade visual única através de uma logo marca que identifica nossa plataforma, permitindo que seus membros a utilizem para divulgação em eventos e outras atividades relacionadas.
 
@@ -86,7 +87,7 @@ Nosso produto é uma plataforma simplificada para gerenciamento de chamados de m
 | RF07   | Gerar ordem de serviço - Professor | Criação de uma etiqueta relacionada à abertura do chamado, especificando problemas, datas e número de chamado. |
 | RF08   | Avaliar serviço - Cliente        | Espaço para o aluno avaliar o serviço prestado pelo professor.                              |
 | RF09   | Efetuar doação - Cliente & Visitante  | Espaço para fazer doações para ajudar a dar continuidade ao projeto.                         |
-| RF10   | Gerenciar doações - Professor  | Espaço para o professor gerenciar as doações feitas para o projeto.                          |
+| RF10   | Gerenciar doações - Professor  | Espaço para o professor disponibilizar seu email para gerenciar as doações feitas para o projeto.                          |
 
 
 
@@ -117,12 +118,7 @@ cadastrados na plataforma poderão abrir chamados.</li>
 
 <blockquote style="border-left: 5px solid red; padding-left: 10px;  background-color: rgba(255, 87, 127, 0)">
 <p><b>Efetuar doação</b></p>
-<li>A contribuição pode ser efetuada tanto por <code style="background-color: #1E1E1E; color: red;">clientes</code> registrados quanto por visitantes que forneçam seus dados pessoais.</li>
-</blockquote>
-
-<blockquote style="border-left: 5px solid red; padding-left: 10px;  background-color: rgba(255, 87, 127, 0)">
-<p><b>Acompanhar doação</b></p>
-<li>O <code style="background-color: #1E1E1E; color: red;">cliente</code> pode monitorar suas doações em andamento ao acessar sua conta. Já o usuário (<code style="background-color: #1E1E1E; color: red;">Visitante</code>) não cadastrado só poderá acompanhar sua doação preenchendo corretamente o campo "código de doação".</li>
+<li>A contribuição pode ser efetuada tanto por <code style="background-color: #1E1E1E; color: red;">clientes</code> registrados quanto por visitantes que proponham a doação através do email disponibilizado pelo professor.</li>
 </blockquote>
 
 <blockquote style="border-left: 5px solid red; padding-left: 10px; background-color: rgba(255, 87, 127, 0) ">
@@ -130,8 +126,9 @@ cadastrados na plataforma poderão abrir chamados.</li>
 <li>Gerar ordem de serviço: Apenas um <code style="background-color: #1E1E1E; color: red;">professor</code> logado pode gerar uma ordem de serviço</li>
 <li>Imprimir termo de responsabilidade:
 Um <code style="background-color: #1E1E1E; color: red;">professor</code> ou <code style="background-color: #1E1E1E; color: red;">cliente</code> logados podem gerar um termo de responsabilidade</li>
-<li>Imprimir relatórios de chamados <i>(Pendentes, resolvidos, fechados, em andamento)</i>:
+<li>Imprimir relatórios de chamados <i>(Em análise, fechados e aceitos)</i>:
 Essa funcionalidade possibilita aos <code style="background-color: #1E1E1E; color: red;">professores</code> criar relatórios com base nos chamados abertos no sistema. Os relatórios apresentam informações sobre o número do chamado e os procedimentos solicitados nele.</li>
 </blockquote>
+
 
 

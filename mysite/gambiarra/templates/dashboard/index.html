@@ -7,52 +7,178 @@
 {% block conteudo %}
 
 <style>
-    
+
 </style>
 
+
+
+
 <div class="container">
-    <table class="table table-striped table-bordered table-hover">
-        <h2>Chamados Abertos</h2>
-        <thead>
-            <tr>
-                <th scope="col">Código</th>
-                <th scope="col">Título</th>
-                <th scope="col">Status</th>
-                <th scope="col">Professor</th>
-                <th scope="col">Bolsista(s)</th>
-                <th scope="col">Ações</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for c in chamados %}
-                <tr>
-                    <td>
+    <section id="perfil">
+        <div class="w-100">
+          <img src="{% static 'gambiarra/img/banner-perfil.png' %}" class="img-fluid w-100 banner" alt="">
+          <img src="{{ request.user.foto_perfil.url }}" class="img-fluid rounded-circle foto_perfil" alt="">
+         
+        </div>
+        <div class="p-3">
+            <h4> 
+                {{ request.user.first_name }} {{ request.user.last_name }} 
+            </h4>
+            <i class="bi bi-envelope-fill me-2" style="font-size: 24px;"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M160-160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800h640q33 0 56.5 23.5T880-720v480q0 33-23.5 56.5T800-160H160Zm320-280L160-640v400h640v-400L480-440Zm0-80 320-200H160l320 200ZM160-640v-80 480-400Z"/></svg></i>
+            <span>{{  request.user.email }}</span>
+        </div>
+       
+    </section>
+
+    <ul class="nav nav-tabs w-100">
+        <li class="nav-item">
+          <a class="nav-link active" href="#">Todos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Pendentes</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Aceitos</a>
+        </li>
+      </ul>
+      <section class="mt-4">
+
+        <table class="table table-hover mt-4">
+            <thead>
+              <tr>
+                <th scope="col"><b>Código</b></th>
+                <th scope="col"><b>Título</b></th>
+                <th scope="col"><b>Status</b></th>
+                <th scope="col"><b>Professor</b></th>
+                <th scope="col"><b>Bolsista(s)</b></th>
+                <th scope="col"><b>Ações</b></th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for c in chamados %}
+                <tr class="tr-dashboard">
+                    <th scope="row">
                         {{c.code}}
-                    </td>
-                    <td>
+                    </th>
+                    <th>
                         {{c.titulo}}
-                    </td>
-                    <td>
-                        {{c.get_status_display}}
-                    </td>
-                    <td>
-                        {{c.professor.nome}}
-                    </td>
-                    <td>
-                    {% for b in c.bolsistas.all %}
-                        <p>
-                            {{b.nome}}
-                        </p>
-                    {% endfor %}
-                    </td>
-                    <td>
-                        <a class="btn btn-primary" href="{% url 'gambiarra:detalhes' c.pk %}">Acessar</a>
-                        <a class="btn btn-danger" href="#">Arquivar</a>
-                        <a class="btn btn-warning" href="{% url 'gambiarra:encerrar' c.pk %}">Encerrar chamado</a>
-                    </td>
+                    </th>
+                    <th>
+                        {% if c.status == '1' %}
+                        <span class="badge badge-secondary">{{ c.get_status_display }}</span>
+                        {% elif c.status == '2' %}
+                            <span class="badge badge-success">{{ c.get_status_display }}</span>
+                        {% elif c.status == '3' or c.status == '4' %}
+                            <span class="badge badge-info">{{ c.get_status_display }}</span>
+                        {% elif c.status == '5' %}
+                            <span class="badge badge-warning">{{ c.get_status_display }}</span>
+                        {% elif c.status == '6' or c.status == '8' %}
+                            <span class="badge badge-danger">{{ c.get_status_display }}</span>
+                        {% elif c.status == '7' %}
+                            <span class="badge badge-success">{{ c.get_status_display }}</span>
+                        {% else %}
+                            <span class="badge badge-secondary">{{ c.get_status_display }}</span>
+                        {% endif %}
+                    
+                    </th>
+                    <th>
+                        {% if c.professor %}
+                        <img src="{{ c.professor.foto_perfil.url }}" alt="" width="25px"  class="rounded-circle ">
+                        {{c.professor}}
+                        {% else %}
+                        -
+                        {% endif%}
+                       
+                    </th>
+                    <th scope="row" >
+                        {% if c.bolsistas.all %}
+                        {% for b in c.bolsistas.all %}
+                          <div class="mb-2 mt-2">
+                            <img src="{{ b.foto_perfil.url }}" alt="Foto de perfil de {{ b.nome }}" width="25px" class="rounded-circle">
+                            {{ b.nome }}
+                          </div>
+                        {% endfor %}
+                      {% else %}
+                        -
+                      {% endif %}
+                      
+                    </th>
+                    <th>
+                        <div class="button-group">
+                            {% if request.user == c.cliente %}
+                            <a href="{% url 'gambiarra:detalhes' c.pk %}">
+                                <button class="btn btn-primary btn-sm">Acessar</button>
+                            </a>
+                            {% if c.status >= '7' %}
+                            <a type="button" data-toggle="modal" data-target="#exampleModal">
+                                <button class="btn btn-success btn-sm">Avaliar</button>
+                            </a>
+    
+                        <!-- Modal -->
+                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="ex
+                                        ampleModalLabel">Avaliar chamado</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <form method="post" action="{% url 'gambiarra:avaliar' c.pk %}">
+                                        <div class="modal-body">
+    
+                                            {% csrf_token %}
+    
+                                            {% bootstrap_form avaliar %}
+    
+                                            {% if avaliar.errors %}
+                                            <div class="error">
+                                                <ul>
+                                                    {% for field, errors in avaliar.errors.items %}
+                                                    <li>{{ field }}: {{ errors|join:", " }}</li>
+                                                    {% endfor %}
+                                                </ul>
+                                            </div>
+                                            {% endif %}
+    
+    
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-terciary btn-sm"
+                                                data-dismiss="modal">Fechar</button>
+                                            <button type="submit" class="btn btn-primary">Avaliar</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                            {% endif %}
+    
+                        {% else %}
+                            {% if c.status  == '1' %}
+                                <a href="{% url 'gambiarra:aceitar' c.pk %}"> <button  class="btn btn-success btn-sm" >Aceitar</button></a>
+                                <button class="btn btn-danger btn-sm">Recusar</button>
+                            {% endif %}
+                            <a  href="{% url 'gambiarra:detalhes' c.pk %}"> <button  class="btn btn-primary btn-sm" >Acessar</button></a>
+                            {% if c.status != '7' %}
+                                <a  href="{% url 'gambiarra:encerrar' c.pk %}"> <button class="btn btn-warning btn-sm text-white" >Encerrar</button></a>
+                            {% endif %}
+                            {% if c.status >= '7' %}
+                            <a href="#">
+                                <button class="btn btn-danger btn-sm">Arquivar</button>
+                            </a>
+                            {% endif %}
+    
+                        {% endif %}
+                        </div>
+                    </th>
                 </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+                {% endfor %}       
+            </tbody>
+          </table>
+        </section>
+
 </div>
 {% endblock %}
