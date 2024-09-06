@@ -24,4 +24,9 @@
 | | 1.4 - O sistema redireciona o professor para a página de detalhes do chamado | 
 
 
+## Diagrama de Sequência - Encerrar Chamado
+
+![diagrama de sequência encerrar chamado](img/encerrar_seq.jpg "Diagrama sequência - Encerrar Chamado")
+
+
 
