@@ -5,7 +5,7 @@
 {% bootstrap_javascript %}
 
 {% block conteudo %}
-    <section class="card">
+    <section >
         <form method="post">
             {% csrf_token %} 
        
@@ -22,7 +22,6 @@
                 {% endif %}
             <input type="submit"  class="btn btn-primary" value="Enviar" >
         </form>
-        {{ request.user }}
     </section>
 
 {% endblock %}

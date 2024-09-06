@@ -19,6 +19,10 @@ class User(AbstractUser):
     )
 
     def save(self, *args, **kwargs):
+
+        if self.pk and 'password' in self.__dict__ and not self.password.startswith('pbkdf2_'):
+            self.set_password(self.password)
+            
         super().save(*args, **kwargs)
 
         if self.tipo_usuario == '4': 
@@ -37,4 +41,4 @@ class User(AbstractUser):
         super().save(update_fields=['is_staff', 'is_superuser'])
 
     def __str__(self):
-        return f'{self.username} - {self.get_tipo_usuario_display()}'
+        return f'{self.username}'

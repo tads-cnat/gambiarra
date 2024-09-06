@@ -48,7 +48,7 @@ class Chamado(models.Model):
     status = models.CharField(max_length=30, choices=STATUS_CHOICES, default="1")
     item = models.OneToOneField('Item', on_delete=models.CASCADE, null=True)
     cliente = models.ForeignKey(User, on_delete=models.CASCADE, related_name='chamados_cliente', null=True, blank=True)
-
+    
  
 class Mensagem(models.Model):
     data_envio = models.DateTimeField('Data de publicação', default=timezone.now)
@@ -59,7 +59,7 @@ class Mensagem(models.Model):
 class Avaliacao(models.Model):
     texto = models.TextField(max_length=240, default="")
     nota = models.IntegerField()
-    chamado = models.ForeignKey(Chamado, on_delete=models.CASCADE)
+    chamado = models.OneToOneField(Chamado, on_delete=models.CASCADE)
 
 class Alteracao(models.Model):
     autor = models.ForeignKey(User, on_delete=models.CASCADE, null=True) 
