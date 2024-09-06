@@ -39,4 +39,4 @@
 
 ## Diagrama de classe de projeto - Listar Chamado
 
-![diagrama de classe de projeto](../imgs/cproj/cproj_listarchamado.png "Diagrama de classe de projeto - Listar Chamado")
+![diagrama de classe de projeto](../imgs/cproj/listarchamado.png "Diagrama de classe de projeto - Listar Chamado")
