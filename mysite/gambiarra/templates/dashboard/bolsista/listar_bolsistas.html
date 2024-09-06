@@ -7,45 +7,75 @@
 {% block conteudo %}
 
 <div class="container">
-    <a href="{% url 'gambiarra:criar-bolsista' %}" class="nav-link text-white">
-        <button class="btn btn-success"> Adicionar Novo Bolsista</button>
-    </a>
+    <!-- Adicionar Bolsista Button -->
+    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#adicionarBolsistaModal">
+      Adicionar Novo Bolsista
+    </button>
+
     <table class="table table-hover">
         <thead>
-          <tr>
-            <th scope="col"><b>Foto</b></th>
-            <th scope="col"><b>Nome</b></th>
-            <th scope="col"><b>Matrícula</b></th>
-            <th scope="col"><b>Ações</b></th>
-
-          </tr>
+            <tr>
+                <th scope="col"><b>Foto</b></th>
+                <th scope="col"><b>Nome</b></th>
+                <th scope="col"><b>Matrícula</b></th>
+                <th scope="col"><b>Ações</b></th>
+            </tr>
         </thead>
         <tbody>
             {% for bolsista in bolsistas %}
-          
-          <tr  class="tr-dashboard">
-            <th scope="row">
-                <img src="{{ bolsista.foto_perfil.url }}" alt="{{ bolsista.nome }}" width="50"  class="rounded-circle ">
-            </th>
-            <th>
-                {{ bolsista.nome }}
-            </th>
-            <th>
-                {{ bolsista.matricula }}
-            </th>
-            <th >
-                <div class="button-group">
-
-                    <a class="btn btn-primary text-white btn-sm" href="{% url 'gambiarra:editar-bolsista' bolsista.id %}">Editar</a>
-                    <a class="btn btn-danger text-white btn-sm" href="{% url 'gambiarra:excluir-bolsista' bolsista.id %}">Excluir</a>
-                </div>
-            </th>
-          </tr>
-          {% endfor %}
-
+            <tr class="tr-dashboard">
+                <th scope="row">
+                    <img src="{{ bolsista.foto_perfil.url }}" alt="{{ bolsista.nome }}" width="50" class="rounded-circle ">
+                </th>
+                <th>
+                    {{ bolsista.nome }}
+                </th>
+                <th>
+                    {{ bolsista.matricula }}
+                </th>
+                <th>
+                    <div class="button-group">
+                        <a class="btn btn-primary text-white btn-sm" href="{% url 'gambiarra:editar-bolsista' bolsista.id %}">Editar</a>
+                        <a class="btn btn-danger text-white btn-sm" href="{% url 'gambiarra:excluir-bolsista' bolsista.id %}">Excluir</a>
+                    </div>
+                </th>
+            </tr>
+            {% endfor %}
         </tbody>
-      </table>
-
+    </table>
 </div>
-{% endblock %}
 
+<!-- Modal HTML -->
+<div class="modal fade" id="adicionarBolsistaModal" tabindex="-1" aria-labelledby="adicionarBolsistaModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="adicionarBolsistaModalLabel">Adicionar Novo Bolsista</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form method="post" enctype="multipart/form-data" action="{% url 'gambiarra:criar-bolsista' %}">
+                {% csrf_token %}
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="id_nome" class="form-label">Nome</label>
+                        <input type="text" class="form-control" id="id_nome" name="nome" value="{{ form.nome.value|default_if_none:'' }}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="id_matricula" class="form-label">Matrícula</label>
+                        <input type="text" class="form-control" id="id_matricula" name="matricula" value="{{ form.matricula.value|default_if_none:'' }}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="id_foto_perfil" class="form-label">Foto de Perfil</label>
+                        <input type="file" class="form-control" id="id_foto_perfil" name="foto_perfil">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                    <button type="submit" class="btn btn-primary">Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
