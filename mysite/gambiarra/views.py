@@ -15,7 +15,8 @@ from django.contrib import messages
 class ListarBolsistas(View):
     def get(self, request, *args, **kwargs):
         bolsistas = Bolsista.objects.all()
-        return render(request, 'dashboard/bolsista/listar_bolsistas.html', {'bolsistas': bolsistas})
+        titulo = "Listar Bolsistas"
+        return render(request, 'dashboard/bolsista/listar_bolsistas.html', {'bolsistas': bolsistas, 'titulo': titulo})
 
 @method_decorator(login_required, name='dispatch')
 class CriarBolsista(View):
@@ -122,11 +123,13 @@ class ChamadoDetailView(View):
         chamado_id = kwargs['pk']
         chamado = get_object_or_404(Chamado, pk=chamado_id)
         alteracoes = Alteracao.objects.filter(chamado=chamado.pk)  # Corrigido para usar filter
+        aceito_presente = alteracoes.filter(status='2').exists()
+        fechado_presente = alteracoes.filter(status__in=['8', '7', '6']).exists()
+
 
         mensagens = Mensagem.objects.filter(chamado=chamado).order_by('data_envio')
-
         mensagem_form = MensagemForm()
-        context = {'chamado':chamado, 'mensagens':mensagens, 'mensagem_form': mensagem_form, 'alteracoes': alteracoes}
+        context = {'chamado':chamado, 'mensagens':mensagens, 'mensagem_form': mensagem_form, 'alteracoes': alteracoes, 'aceito_presente': aceito_presente, 'fechado_presente': fechado_presente}
         
         return render(request, 'dashboard/chamado/detalhes.html', context)
     
@@ -209,8 +212,8 @@ class DashboardView(View):
         avaliar = AvaliacaoForm()
         context = {'chamados':chamados, "avaliar":avaliar}
         return render(request, 'dashboard/index.html', context)
-
-@method_decorator(login_required, name='dispatch')
+    
+@login_required
 def alterar_status(request, pk):
     chamado = get_object_or_404(Chamado, pk=pk)
     

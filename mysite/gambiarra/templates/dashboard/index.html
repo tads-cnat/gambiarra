@@ -14,118 +14,171 @@
 
 
 <div class="container">
+    <section id="perfil">
+        <div class="w-100">
+          <img src="{% static 'gambiarra/img/banner-perfil.png' %}" class="img-fluid w-100 banner" alt="">
+          <img src="{{ request.user.foto_perfil.url }}" class="img-fluid rounded-circle foto_perfil" alt="">
+         
+        </div>
+        <div class="p-3">
+            <h4> 
+                {{ request.user.first_name }} {{ request.user.last_name }} 
+            </h4>
+            <i class="bi bi-envelope-fill me-2" style="font-size: 24px;"></i>
+            <span>{{  request.user.email }}</span>
+        </div>
+       
+    </section>
 
-    <table class="table table-hover">
-        <thead>
-          <tr>
-            <th scope="col"><b>Código</b></th>
-            <th scope="col"><b>Título</b></th>
-            <th scope="col"><b>Status</b></th>
-            <th scope="col"><b>Professor</b></th>
-            <th scope="col"><b>Bolsista(s)</b></th>
-            <th scope="col"><b>Ações</b></th>
-          </tr>
-        </thead>
-        <tbody>
-            {% for c in chamados %}
-            <tr class="tr-dashboard">
-                <th scope="row">
-                    {{c.code}}
-                </th>
-                <th>
-                    {{c.titulo}}
-                </th>
-                <th>
-                    {{c.get_status_display}}
-                </th>
-                <th>
-                    <img src="{{ c.professor.foto_perfil.url }}" alt="" style="width: 25px; height: 25px; border-radius: 50%;">
-                    {{c.professor}}
-                </th>
-                <th>
-                    {% for b in c.bolsistas.all %}
-                    <p>
-                        {{b.nome}}
-                    </p>
-                    {% endfor %}
-                </th>
-                <th>
-                    <div class="button-group">
-                        {% if request.user == c.cliente %}
-                        <a href="{% url 'gambiarra:detalhes' c.pk %}">
-                            <button class="btn btn-primary btn-sm">Acessar</button>
-                        </a>
-                        {% if c.status >= '7' %}
-                        <a type="button" data-toggle="modal" data-target="#exampleModal">
-                            <button class="btn btn-success btn-sm">Avaliar</button>
-                        </a>
+    <ul class="nav nav-tabs w-100">
+        <li class="nav-item">
+          <a class="nav-link active" href="#">Todos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Pendentes</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Aceitos</a>
+        </li>
+      </ul>
+      <section class="mt-4">
 
-                    <!-- Modal -->
-                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
-                        aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="ex
-                                    ampleModalLabel">Avaliar chamado</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <form method="post" action="{% url 'gambiarra:avaliar' c.pk %}">
-                                    <div class="modal-body">
-
-                                        {% csrf_token %}
-
-                                        {% bootstrap_form avaliar %}
-
-                                        {% if avaliar.errors %}
-                                        <div class="error">
-                                            <ul>
-                                                {% for field, errors in avaliar.errors.items %}
-                                                <li>{{ field }}: {{ errors|join:", " }}</li>
-                                                {% endfor %}
-                                            </ul>
+        <table class="table table-hover mt-4">
+            <thead>
+              <tr>
+                <th scope="col"><b>Código</b></th>
+                <th scope="col"><b>Título</b></th>
+                <th scope="col"><b>Status</b></th>
+                <th scope="col"><b>Professor</b></th>
+                <th scope="col"><b>Bolsista(s)</b></th>
+                <th scope="col"><b>Ações</b></th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for c in chamados %}
+                <tr class="tr-dashboard">
+                    <th scope="row">
+                        {{c.code}}
+                    </th>
+                    <th>
+                        {{c.titulo}}
+                    </th>
+                    <th>
+                        {% if c.status == '1' %}
+                        <span class="badge badge-secondary">{{ c.get_status_display }}</span>
+                        {% elif c.status == '2' %}
+                            <span class="badge badge-success">{{ c.get_status_display }}</span>
+                        {% elif c.status == '3' or c.status == '4' %}
+                            <span class="badge badge-info">{{ c.get_status_display }}</span>
+                        {% elif c.status == '5' %}
+                            <span class="badge badge-warning">{{ c.get_status_display }}</span>
+                        {% elif c.status == '6' or c.status == '8' %}
+                            <span class="badge badge-danger">{{ c.get_status_display }}</span>
+                        {% elif c.status == '7' %}
+                            <span class="badge badge-success">{{ c.get_status_display }}</span>
+                        {% else %}
+                            <span class="badge badge-secondary">{{ c.get_status_display }}</span>
+                        {% endif %}
+                    
+                    </th>
+                    <th>
+                        {% if c.professor %}
+                        <img src="{{ c.professor.foto_perfil.url }}" alt="" width="25px"  class="rounded-circle ">
+                        {{c.professor}}
+                        {% else %}
+                        -
+                        {% endif%}
+                       
+                    </th>
+                    <th scope="row" >
+                        {% if c.bolsistas.all %}
+                        {% for b in c.bolsistas.all %}
+                          <div class="mb-2 mt-2">
+                            <img src="{{ b.foto_perfil.url }}" alt="Foto de perfil de {{ b.nome }}" width="25px" class="rounded-circle">
+                            {{ b.nome }}
+                          </div>
+                        {% endfor %}
+                      {% else %}
+                        -
+                      {% endif %}
+                      
+                    </th>
+                    <th>
+                        <div class="button-group">
+                            {% if request.user == c.cliente %}
+                            <a href="{% url 'gambiarra:detalhes' c.pk %}">
+                                <button class="btn btn-primary btn-sm">Acessar</button>
+                            </a>
+                            {% if c.status >= '7' %}
+                            <a type="button" data-toggle="modal" data-target="#exampleModal">
+                                <button class="btn btn-success btn-sm">Avaliar</button>
+                            </a>
+    
+                        <!-- Modal -->
+                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="ex
+                                        ampleModalLabel">Avaliar chamado</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <form method="post" action="{% url 'gambiarra:avaliar' c.pk %}">
+                                        <div class="modal-body">
+    
+                                            {% csrf_token %}
+    
+                                            {% bootstrap_form avaliar %}
+    
+                                            {% if avaliar.errors %}
+                                            <div class="error">
+                                                <ul>
+                                                    {% for field, errors in avaliar.errors.items %}
+                                                    <li>{{ field }}: {{ errors|join:", " }}</li>
+                                                    {% endfor %}
+                                                </ul>
+                                            </div>
+                                            {% endif %}
+    
+    
                                         </div>
-                                        {% endif %}
-
-
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-terciary btn-sm"
-                                            data-dismiss="modal">Fechar</button>
-                                        <button type="submit" class="btn btn-primary">Avaliar</button>
-                                    </div>
-                                </form>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-terciary btn-sm"
+                                                data-dismiss="modal">Fechar</button>
+                                            <button type="submit" class="btn btn-primary">Avaliar</button>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                            {% endif %}
+    
+                        {% else %}
+                            {% if c.status  == '1' %}
+                                <a href="{% url 'gambiarra:aceitar' c.pk %}"> <button  class="btn btn-success btn-sm" >Aceitar</button></a>
+                                <button class="btn btn-danger btn-sm">Recusar</button>
+                            {% endif %}
+                            <a  href="{% url 'gambiarra:detalhes' c.pk %}"> <button  class="btn btn-primary btn-sm" >Acessar</button></a>
+                            {% if c.status != '7' %}
+                                <a  href="{% url 'gambiarra:encerrar' c.pk %}"> <button class="btn btn-warning btn-sm text-white" >Encerrar</button></a>
+                            {% endif %}
+                            {% if c.status >= '7' %}
+                            <a href="#">
+                                <button class="btn btn-danger btn-sm">Arquivar</button>
+                            </a>
+                            {% endif %}
+    
                         {% endif %}
-
-                    {% else %}
-                        {% if c.status  == '1' %}
-                            <a href="{% url 'gambiarra:aceitar' c.pk %}"> <button  class="btn btn-success btn-sm" >Aceitar</button></a>
-		                    <button class="btn btn-danger btn-sm">Recusar</button>
-		                    <button class="btn btn-danger btn-sm">Recusar</button>
-                        {% endif %}
-                        <a  href="{% url 'gambiarra:detalhes' c.pk %}"> <button  class="btn btn-primary btn-sm" >Acessar</button></a>
-                        {% if c.status != '7' %}
-                            <a  href="{% url 'gambiarra:encerrar' c.pk %}"> <button class="btn btn-warning btn-sm text-white" >Encerrar</button></a>
-                            <a  href="{% url 'gambiarra:encerrar' c.pk %}"> <button class="btn btn-warning btn-sm text-white" >Encerrar</button></a>
-                        {% endif %}
-                        {% if c.status >= '7' %}
-                        <a href="#">
-                            <button class="btn btn-danger btn-sm">Arquivar</button>
-                        </a>
-                        {% endif %}
-
-                    {% endif %}
-
-                </th>
-            </tr>
-            {% endfor %}       
-        </tbody>
-      </table>
+                        </div>
+                    </th>
+                </tr>
+                {% endfor %}       
+            </tbody>
+          </table>
+        </section>
 
 </div>
 {% endblock %}

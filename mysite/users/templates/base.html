@@ -1,4 +1,8 @@
 {% load static %}
+{% load static %}
+{% load bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -60,9 +64,7 @@
                   <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="{% url 'users:login'%}">Login</a>
                     <a class="dropdown-item" href="#">Cadastre-se</a>
-                    <!-- <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                  -->
+                    
                   </div> 
                 </li>
              

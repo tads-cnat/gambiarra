@@ -13,13 +13,12 @@ nav, a{
     color: #363636 !important;
 
 }
-.nav-item{
+.nav-pills > .nav-item{
     padding: 12px 24px;
     border-bottom: 1px solid var(--gray-ligth, #DEE2E6);
 }
 .nav-pills{
     gap: 10px;
-
 }
 /* custom.css */
 .btn-primary {
@@ -64,8 +63,6 @@ nav, a{
   }
 
 .nav-link{
-    padding-right: 0 !important;
-    padding-left: 5px !important;
     justify-content: start !important;
 }
 
@@ -138,3 +135,109 @@ table{
   color: #DEE2E6;
 }
 
+
+
+
+/* perfil */
+
+.foto_perfil {
+  margin-left: 20px ;
+  width: 100px;
+}
+
+.banner {
+  margin-bottom: -40px; 
+}
+
+#perfil {
+  position: relative; 
+  overflow: hidden;
+}
+
+
+.nav-tabs > .nav-item{
+    padding: 0;
+    padding-top: 20px;
+}
+.nav-tabs > .nav-item > .nav-link{
+  padding-left: 20px;
+  padding-right:  20px;
+
+}
+.active {
+  color: #12A400 !important; 
+  font-weight: bold; /* Usa font-weight para definir o texto em negrito */
+}
+.badge{
+  font-weight: 200;
+
+}
+.badge-secondary{
+  background-color: rgb(108, 117, 125);
+}
+.badge-success{
+  background-color: #28A745 !important;
+}
+
+.badge-primary {
+  background-color: #7749F8 !important;
+  color: #ffffff;
+}
+
+.badge-info {
+  background-color: #17A2B8 !important;
+  color: #ffffff;
+}
+
+.badge-warning {
+  background-color: #FFC107 !important;
+}
+
+.badge-danger {
+  background-color: #DC3545 !important;
+  color: #ffffff;
+}
+
+
+/* linha do tempo */
+
+.timeline {
+  position: relative;
+  padding: 2rem 0;
+  max-height: 525px; 
+  overflow-y: auto; 
+  font-size: 14px;
+
+}
+
+.timeline-item {
+  position: relative;
+  margin: 0 auto 2rem;
+  padding: 1rem;
+  width: calc(60% - 2rem);
+  background-color: #f8f9fa;
+  border-radius: 0.25rem;
+}
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -8px;
+  width: 16px;
+  height: 16px;
+  background-color: #6c757d;
+  border-radius: 50%;
+}
+
+.timeline-item-left {
+  left: 0;
+  text-align: right;
+}
+.timeline-item-left::before {
+  left: auto;
+  right: -8px;
+}
+.timeline-item-right {
+  right: 0;
+  text-align: left;
+}

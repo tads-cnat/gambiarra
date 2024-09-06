@@ -28,9 +28,11 @@
         <hr>
         <ul class="nav nav-pills flex-column mb-auto p-2">
           <li class="nav-item ">
-            <button style="text-align: start;" class="btn btn-success w-100" aria-current="page">
+            <a href="{% url 'gambiarra:dashboard' %}"  class="nav-link "><button style="text-align: start;" class="btn btn-success w-100" aria-current="page">
               Chamados
             </button>
+          </a>
+            
           </li>
           <li class="nav-item">
             <a href="{% url 'gambiarra:listar-bolsistas' %}" class="nav-link " aria-current="page">
@@ -56,20 +58,21 @@
         <hr>
         <div class="dropdown">
           <a href="#" class="d-flex align-items-center  text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-            <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
+            <img src="{{request.user.foto_perfil.url }}" alt="" width="32" height="32" class="rounded-circle me-2">
             <strong>{{ request.user.username }}</strong>
           </a>
           <ul class="dropdown-menu dropdown-menu-ligth text-small shadow" aria-labelledby="dropdownUser1">
             <li><a class="dropdown-item" href="#">Relatórios</a></li>
             <li><a class="dropdown-item" href="#">Configurações</a></li>
-            <li><a class="dropdown-item" href="#">Perfil</a></li>
+            <li><a class="dropdown-item" href="{% url 'gambiarra:dashboard' %}">Perfil</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item danger" href="{% url 'users:logout' %}">sair</a></li>
+            <li><a class="dropdown-item text-danger" href="{% url 'users:logout' %}">sair</a></li>
           </ul>
         </div>
     </nav>
     <main class="main-content p-3">     
       <div class="container mt-2" style="border-left: 5px solid #79E546; padding-left: 20px ;">
+        
         <h1>{{ titulo }}</h1>
 
       </div>
