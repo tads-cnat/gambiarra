@@ -5,8 +5,8 @@
 flowchart TD
     [Index] --- [Login]
     [Index] --- [Cadastro]
-    [Dashboard] --- [Registro]
-    [Dashboard] --- [Detalhes]
+    [Dashboard] --- [Abrir chamado]
+    [Dashboard] --- [Detalhes do chamado]
 ```
 
 ## Prototipos de baixa fidelidade
@@ -39,7 +39,7 @@ flowchart TD
 
 [![ALT](images/acessar-doacoes.png)](https://www.figma.com/file/aEY53HRlxwqbJGecbzNinL/Gambiarra---Baixa-Fidelidade?type=design&node-id=4-2&mode=design&t=Od4uBLX6HB5yZWbs-0)
 
-## H. Tela 8: Registro
+## H. Tela 8: Cadastro
 
 [![ALT](images/registro.png)](https://www.figma.com/file/aEY53HRlxwqbJGecbzNinL/Gambiarra---Baixa-Fidelidade?type=design&node-id=4-2&mode=design&t=Od4uBLX6HB5yZWbs-0)
 
@@ -47,10 +47,10 @@ flowchart TD
 
 [![ALT](images/abrir-chamado.png)](https://www.figma.com/file/aEY53HRlxwqbJGecbzNinL/Gambiarra---Baixa-Fidelidade?type=design&node-id=4-2&mode=design&t=Od4uBLX6HB5yZWbs-0)
 
-## J. Tela 10: Acompanhar chamado #1
+## J. Tela 10: Acompanhar chamado
 
 [![ALT](images/acompanhar-chamado-1.png)](https://www.figma.com/file/aEY53HRlxwqbJGecbzNinL/Gambiarra---Baixa-Fidelidade?type=design&node-id=4-2&mode=design&t=Od4uBLX6HB5yZWbs-0)
 
-## L. Tela 11: Acompanhar chamado #2
+## L. Tela 11: Detalhes do chamado
 
 [![ALT](images/acompanhar-chamado-2.png)](https://www.figma.com/file/aEY53HRlxwqbJGecbzNinL/Gambiarra---Baixa-Fidelidade?type=design&node-id=4-2&mode=design&t=Od4uBLX6HB5yZWbs-0)
