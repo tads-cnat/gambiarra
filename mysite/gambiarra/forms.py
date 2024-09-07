@@ -15,13 +15,13 @@ class ChamadoItemForm(forms.ModelForm):
         super(ChamadoItemForm, self).__init__(*args, **kwargs)
         # Aqui você pode personalizar o formulário se necessário
 
+
 class AdicionarBolsistasForm(forms.ModelForm):
     bolsistas = forms.ModelMultipleChoiceField(
         queryset=Bolsista.objects.all(),
         widget=forms.CheckboxSelectMultiple,
         required=False
     )
-
     class Meta:
         model = Chamado
         fields = ['bolsistas']

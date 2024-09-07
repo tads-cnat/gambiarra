@@ -98,23 +98,15 @@ class EncerrarView(View):
 
 @method_decorator(login_required, name='dispatch')
 class AdicionarBolsistas(View):
-    def get(self, request, pk):
-        chamado = get_object_or_404(Chamado, pk=pk)
-        form = AdicionarBolsistasForm(instance=chamado)
-        return render(request, 'dashboard/chamado/adicionar_bolsistas.html', {'form': form, 'chamado': chamado, 'titulo': "Adicionar Bolsistas"})
-
     def post(self, request, pk):
         chamado = get_object_or_404(Chamado, pk=pk)
         form = AdicionarBolsistasForm(request.POST, instance=chamado)
         if form.is_valid():
             chamado = form.save(commit=False)
             chamado.save()  
-
-            # Salva relacionamentos many-to-many 
             form.save_m2m()
 
-            return redirect('gambiarra:detalhes', pk=chamado.pk)
-        return render(request, 'dashboard/chamado/adicionar_bolsistas.html', {'form': form, 'chamado': chamado, 'titulo': "Adicionar Bolsistas"})
+        return redirect('gambiarra:detalhes', pk=chamado.pk)
 
 @method_decorator(login_required, name='dispatch')  
 class ChamadoDetailView(View):
@@ -125,11 +117,12 @@ class ChamadoDetailView(View):
         alteracoes = Alteracao.objects.filter(chamado=chamado.pk)  # Corrigido para usar filter
         aceito_presente = alteracoes.filter(status='2').exists()
         fechado_presente = alteracoes.filter(status__in=['8', '7', '6']).exists()
+        bolsistaForm = AdicionarBolsistasForm(instance=chamado)
 
 
         mensagens = Mensagem.objects.filter(chamado=chamado).order_by('data_envio')
         mensagem_form = MensagemForm()
-        context = {'chamado':chamado, 'mensagens':mensagens, 'mensagem_form': mensagem_form, 'alteracoes': alteracoes, 'aceito_presente': aceito_presente, 'fechado_presente': fechado_presente}
+        context = {'chamado':chamado, 'mensagens':mensagens, 'mensagem_form': mensagem_form, 'alteracoes': alteracoes, 'aceito_presente': aceito_presente, 'fechado_presente': fechado_presente, 'bolsistaForm': bolsistaForm}
         
         return render(request, 'dashboard/chamado/detalhes.html', context)
     
