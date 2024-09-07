@@ -1,12 +1,12 @@
 # Protótipos de Interface com o Usuário
 ## Mapa do Site
-> Obs.: propõem-se a utilização de alguma ferramenta que possibilite a representação textual do diagrama. como o seguinte exemplo:
+
 ```mermaid
-flowchart TD
-    [Index] --- [Login]
-    [Index] --- [Cadastro]
-    [Dashboard] --- [Abrir chamado]
-    [Dashboard] --- [Detalhes do chamado]
+flowchart TD;
+    A[Index] --> B [Login]
+    A[Index] --- C[Cadastro]
+    D[Dashboard] --- E[Abrir chamado]
+    D[Dashboard] --- F[Detalhes do chamado]
 ```
 
 ## Prototipos de baixa fidelidade
