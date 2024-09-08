@@ -16,8 +16,7 @@ class ListarBolsistas(View):
     def get(self, request, *args, **kwargs):
         bolsistas = Bolsista.objects.all()
         titulo = "Listar Bolsistas"
-        formBolsista = BolsistaForm();
-        return render(request, 'dashboard/bolsista/listar_bolsistas.html', {'bolsistas': bolsistas, 'titulo': titulo, 'form': formBolsista})
+        return render(request, 'dashboard/bolsista/listar_bolsistas.html', {'bolsistas': bolsistas, 'titulo': titulo})
 
 @method_decorator(login_required, name='dispatch')
 class CriarBolsista(View):
@@ -25,24 +24,31 @@ class CriarBolsista(View):
         form = BolsistaForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return redirect('gambiarra:listar-bolsistas')
-        return render(request, 'dashboard/bolsista/registrar_bolsista.html', {'bolsista': form})
+        return redirect('gambiarra:listar-bolsistas')
+        
 
 @method_decorator(login_required, name='dispatch')
 class EditarBolsista(View):
+    def get(self, request, pk, *args, **kwargs):
+        bolsista = get_object_or_404(Bolsista, pk=pk)
+        form = BolsistaForm(instance=bolsista)
+        return render(request, 'dashboard/bolsista/registrar_bolsista.html', {'bolsista': form})
+
     def post(self, request, pk, *args, **kwargs):
         bolsista = get_object_or_404(Bolsista, pk=pk)
         form = BolsistaForm(request.POST, request.FILES, instance=bolsista)
-        
+
+        #alterado para limpar a foto caso o campo seja acionado no formulario
         if form.is_valid():
-            if 'foto_perfil' in request.FILES and request.FILES['foto_perfil']:
-                form.save()
-            else:
-                bolsista = form.save(commit=False)
-                bolsista.foto_perfil = bolsista.foto_perfil 
-                bolsista.save()
-            
-        return redirect('gambiarra:listar-bolsistas')
+            if 'clear_foto_perfil' in request.POST:
+                if bolsista.foto_perfil:
+                    bolsista.foto_perfil.delete(save=False)
+                    bolsista.foto_perfil = url="../media/padrão/perfil_teste.jpg"  
+
+            form.save()
+            return redirect('gambiarra:listar-bolsistas')
+
+        return render(request, 'dashboard/bolsista/registrar_bolsista.html', {'bolsista': form})
 
 
 @method_decorator(login_required, name='dispatch')
@@ -77,6 +83,11 @@ class AvaliarForms(View):
 
 @method_decorator(login_required, name='dispatch')
 class EncerrarView(View):
+    def get(self, request, *args, **kwargs):
+        chamado_id=kwargs['pk']
+        chamado = get_object_or_404(Chamado, pk=chamado_id)
+        return render(request, 'dashboard/chamado/encerrar.html', {'chamado': chamado, 'titulo': "Encerrar chamado"})
+
     def post(self, request, *args, **kwargs):
         chamado_id=kwargs['pk']
         chamado = get_object_or_404(Chamado, pk=chamado_id)

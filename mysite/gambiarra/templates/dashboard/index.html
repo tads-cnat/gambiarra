@@ -187,12 +187,12 @@
                                             desfeita.
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-terciary"
-                                                data-dismiss="modal">Cancelar</button>
                                             <form method="post" action="{% url 'gambiarra:encerrar' c.id %}">
                                                 {% csrf_token %}
                                                 <button type="submit" class="btn btn-danger">Encerrar</button>
                                             </form>
+                                            <button type="button" class="btn btn-terciary"
+                                                data-dismiss="modal">Cancelar</button>
                                         </div>
                                     </div>
                                 </div>

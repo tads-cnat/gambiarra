@@ -132,13 +132,14 @@ bootstrap_css %} {% bootstrap_javascript %} {% block conteudo %}
 
                 </div>
                 {% endfor %}
+                {% if request.user.tipo_usuario == '4' %}
                 <div class="row d-flex justify-content-end">
                   <button type="button" class="btn btn-primary w-50 btn-sm " id="btn-alterar-status" data-toggle="modal"
                     data-target="#ADModal" {% if fechado_presente %} disabled {% endif %}>
                     Adicionar bolsista
                   </button>
                 </div>
-
+                {% endif %}
 
                 <!-- Modal -->
                 <div class="modal fade" id="ADModal" tabindex="-1" role="dialog" aria-labelledby="ADLabel"

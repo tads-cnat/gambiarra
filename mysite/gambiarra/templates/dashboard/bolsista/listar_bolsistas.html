@@ -9,7 +9,7 @@
 <div class="container">
     <!-- Adicionar Bolsista Button -->
     <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#adicionarBolsistaModal">
-        Adicionar Novo Bolsista
+      Adicionar Novo Bolsista
     </button>
 
     <table class="table table-hover">
@@ -25,99 +25,92 @@
             {% for bolsista in bolsistas %}
             <tr class="tr-dashboard">
                 <th scope="row">
-                    <img src="{{ bolsista.foto_perfil.url }}" alt="{{ bolsista.nome }}" width="50"
-                        class="rounded-circle ">
+                    <img src="{{ bolsista.foto_perfil.url }}" alt="{{ bolsista.nome }}" width="50" class="rounded-circle ">
                 </th>
-                <th>
-                    {{ bolsista.nome }}
-                </th>
-                <th>
-                    {{ bolsista.matricula }}
-                </th>
+                <th>{{ bolsista.nome }}</th>
+                <th>{{ bolsista.matricula }}</th>
                 <th>
                     <div class="button-group">
-                        <button class="btn btn-primary text-white btn-sm" href="#" data-bs-toggle="modal"
-                            data-bs-target="#editarBolsistaModal" data-id="{{ bolsista.id }}"
-                            data-nome="{{ bolsista.nome }}" data-matricula="{{ bolsista.matricula }}"
-                            data-foto="{{ bolsista.foto_perfil.url }}" class="edit-btn">
-                            Editar
-                    </button>
-                        <!-- Modal de Edição -->
-                        <div class="modal fade" id="editarBolsistaModal" tabindex="-1"
-                            aria-labelledby="editarBolsistaModalLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="editarBolsistaModalLabel">Editar Bolsista</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                            aria-label="Close"></button>
-                                    </div>
-                                    <form method="post" enctype="multipart/form-data"
-                                        action="{% url 'gambiarra:editar-bolsista' bolsista.pk %}">
-                                        {% csrf_token %}
-                                        <div class="modal-body">
-                                            {% bootstrap_form form %}
-
-                                            <div class="mb-3">
-                                                <label for="foto_perfil_atual" class="form-label">Foto Atual</label>
-                                                <img id="foto_perfil_atual" src="" alt="Foto do Bolsista" class="img-fluid">
-                                            </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-terciary"
-                                                data-bs-dismiss="modal">Cancelar</button>
-                                            <button type="submit" class="btn btn-primary">Salvar</button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <button class="btn btn-danger text-white btn-sm" data-toggle="modal"
-                            data-target="#confirmCloseModal"> Excluir </button>
-
-                        <!-- modal exclusão -->
-                        <div class="modal fade" id="confirmCloseModal" tabindex="-1" role="dialog"
-                            aria-labelledby="confirmCloseModalLabel" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="confirmCloseModalLabel">Confirmar Exclusão
-                                        </h5>
-                                        <button type="button" class="close btn-close" data-dismiss="modal"
-                                            aria-label="Close">
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        Tem certeza de que deseja excluir este bolsista? Esta ação não pode ser
-                                        desfeita.
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-terciary"
-                                            data-dismiss="modal">Cancelar</button>
-                                        <form method="post" action="{% url 'gambiarra:excluir-bolsista' bolsista.id %}">
-                                            {% csrf_token %}
-                                            <button type="submit" class="btn btn-danger">Excluir</button>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-
-
+                        <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#editarBolsistaModal{{ bolsista.id }}">Editar</button>                        
+                        <button class="btn btn-danger text-white btn-sm" data-bs-toggle="modal" data-bs-target="#excluirBolsistaModal{{ bolsista.id }}">Excluir</button>
                     </div>
                 </th>
             </tr>
+
+            <!-- Modal para Editar Bolsista -->
+            <div class="modal fade" id="editarBolsistaModal{{ bolsista.id }}" tabindex="-1" aria-labelledby="editarBolsistaModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="editarBolsistaModalLabel">Editar Bolsista</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form method="post" enctype="multipart/form-data" action="{% url 'gambiarra:editar-bolsista' bolsista.id %}">
+                            {% csrf_token %}
+                            <div class="modal-body">
+                                <div class="mb-3">
+                                    <label for="id_nome" class="form-label">Nome</label>
+                                    <input type="text" class="form-control" id="id_nome" name="nome" value="{{ bolsista.nome }}">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="id_matricula" class="form-label">Matrícula</label>
+                                    <input type="text" class="form-control" id="id_matricula" name="matricula" value="{{ bolsista.matricula }}">
+                                </div>
+                                {% if bolsista.foto_perfil %}
+                                <div class="mb-3">
+                                    <label class="form-label">Foto Atual</label>
+                                    <div>
+                                        <img src="{{ bolsista.foto_perfil.url }}" alt="{{ bolsista.nome }}" width="100" class="rounded">
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="clear_foto_perfil" name="clear_foto_perfil">
+                                        <label class="form-check-label" for="clear_foto_perfil">Remover foto</label>
+                                    </div>
+                                </div>
+                                {% endif %}
+                                <div class="mb-3">
+                                    <label for="id_foto_perfil" class="form-label">Atualizar Foto de Perfil</label>
+                                    <input type="file" class="form-control" id="id_foto_perfil" name="foto_perfil">
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary">Salvar</button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal para Excluir Bolsista -->
+            <div class="modal fade" id="excluirBolsistaModal{{ bolsista.id }}" tabindex="-1" aria-labelledby="excluirBolsistaModalLabel{{ bolsista.id }}" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="excluirBolsistaModalLabel{{ bolsista.id }}">Excluir Bolsista</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            Tem certeza que deseja excluir o bolsista "{{ bolsista.nome }}"?
+                        </div>
+                        <div class="modal-footer">
+                            <form method="post" action="{% url 'gambiarra:excluir-bolsista' bolsista.id %}">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-danger">Excluir</button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             {% endfor %}
         </tbody>
     </table>
 </div>
 
-<!-- Modal HTML -->
-<div class="modal fade" id="adicionarBolsistaModal" tabindex="-1" aria-labelledby="adicionarBolsistaModalLabel"
-    aria-hidden="true">
+<!-- Modal de Adicionar Bolsista (fora do loop) -->
+<div class="modal fade" id="adicionarBolsistaModal" tabindex="-1" aria-labelledby="adicionarBolsistaModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -127,35 +120,26 @@
             <form method="post" enctype="multipart/form-data" action="{% url 'gambiarra:criar-bolsista' %}">
                 {% csrf_token %}
                 <div class="modal-body">
-                    {% bootstrap_form form %}
-
+                    <div class="mb-3">
+                        <label for="id_nome" class="form-label">Nome</label>
+                        <input type="text" class="form-control" id="id_nome" name="nome" value="{{ form.nome.value|default_if_none:'' }}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="id_matricula" class="form-label">Matrícula</label>
+                        <input type="text" class="form-control" id="id_matricula" name="matricula" value="{{ form.matricula.value|default_if_none:'' }}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="id_foto_perfil" class="form-label">Foto de Perfil</label>
+                        <input type="file" class="form-control" id="id_foto_perfil" name="foto_perfil">
+                    </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-terciary" data-bs-dismiss="modal">Cancelar</button>
                     <button type="submit" class="btn btn-primary">Salvar</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
                 </div>
             </form>
         </div>
     </div>
 </div>
-
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        var editarModal = document.getElementById('editarBolsistaModal');
-        editarModal.addEventListener('show.bs.modal', function (event) {
-            var button = event.relatedTarget; // Botão que abriu o modal
-            var id = button.getAttribute('data-id');
-            var nome = button.getAttribute('data-nome');
-            var matricula = button.getAttribute('data-matricula');
-            var foto = button.getAttribute('data-foto');
-
-            var modal = $(this);
-            modal.find('input[name="id"]').val(id);
-            modal.find('input[name="nome"]').val(nome);
-            modal.find('input[name="matricula"]').val(matricula);
-            modal.find('#foto_perfil_atual').attr('src', foto);
-        });
-    });
-</script>
 
 {% endblock %}
