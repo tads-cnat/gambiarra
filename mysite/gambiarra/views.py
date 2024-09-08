@@ -47,7 +47,7 @@ class EditarBolsista(View):
             if 'clear_foto_perfil' in request.POST:
                 if bolsista.foto_perfil:
                     bolsista.foto_perfil.delete(save=False)
-                bolsista.foto_perfil = url="../media/Bolsista/perfil_teste.jpg"  
+                    bolsista.foto_perfil = url="../media/padrão/perfil_teste.jpg"  
 
             form.save()
             return redirect('gambiarra:listar-bolsistas')

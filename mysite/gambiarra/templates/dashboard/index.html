@@ -163,7 +163,7 @@
                             {% endif %}
                             <a  href="{% url 'gambiarra:detalhes' c.pk %}"> <button  class="btn btn-primary btn-sm" >Acessar</button></a>
                             {% if c.status != '7' %}
-                                <a  href="{% url 'gambiarra:encerrar' c.pk %}"> <button class="btn btn-warning btn-sm text-white" >Encerrar</button></a>
+                                <button class="btn btn-danger text-white btn-sm" data-bs-toggle="modal" data-bs-target="#encerrarChamadoModal{{ c.id }}">Encerrar</button>
                             {% endif %}
                             {% if c.status >= '7' %}
                             <a href="#">
@@ -175,10 +175,33 @@
                         </div>
                     </th>
                 </tr>
+                <!-- Modal de Encerramento do Chamado -->
+                <div class="modal fade" id="encerrarChamadoModal{{ c.id }}" tabindex="-1" aria-labelledby="encerrarChamadoModalLabel{{ c.id }}" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="encerrarChamadoModalLabel{{ c.id }}">Encerrar Chamado</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                Tem certeza que deseja encerrar o chamado "{{ c.titulo }}"?
+                            </div>
+                            <div class="modal-footer">
+                                <form method="post" action="{% url 'gambiarra:encerrar' c.id %}">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-danger">Encerrar</button>
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 {% endfor %}       
             </tbody>
           </table>
         </section>
 
+
 </div>
+
 {% endblock %}
