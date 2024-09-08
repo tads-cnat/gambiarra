@@ -16,14 +16,11 @@ class ListarBolsistas(View):
     def get(self, request, *args, **kwargs):
         bolsistas = Bolsista.objects.all()
         titulo = "Listar Bolsistas"
-        return render(request, 'dashboard/bolsista/listar_bolsistas.html', {'bolsistas': bolsistas, 'titulo': titulo})
+        formBolsista = BolsistaForm();
+        return render(request, 'dashboard/bolsista/listar_bolsistas.html', {'bolsistas': bolsistas, 'titulo': titulo, 'form': formBolsista})
 
 @method_decorator(login_required, name='dispatch')
 class CriarBolsista(View):
-    def get(self, request, *args, **kwargs):
-        form = BolsistaForm()
-        return render(request, 'dashboard/bolsista/registrar_bolsista.html', {'bolsista': form} )
-
     def post(self, request, *args, **kwargs):
         form = BolsistaForm(request.POST, request.FILES)
         if form.is_valid():
@@ -33,18 +30,19 @@ class CriarBolsista(View):
 
 @method_decorator(login_required, name='dispatch')
 class EditarBolsista(View):
-    def get(self, request, pk, *args, **kwargs):
-        bolsista = get_object_or_404(Bolsista, pk=pk)
-        form = BolsistaForm(instance=bolsista)
-        return render(request, 'dashboard/bolsista/registrar_bolsista.html', {'bolsista': form})
-
     def post(self, request, pk, *args, **kwargs):
         bolsista = get_object_or_404(Bolsista, pk=pk)
         form = BolsistaForm(request.POST, request.FILES, instance=bolsista)
+        
         if form.is_valid():
-            form.save()
-            return redirect('gambiarra:listar-bolsistas')
-        return render(request, 'dashboard/bolsista/registrar_bolsista.html', {'bolsista': form})
+            if 'foto_perfil' in request.FILES and request.FILES['foto_perfil']:
+                form.save()
+            else:
+                bolsista = form.save(commit=False)
+                bolsista.foto_perfil = bolsista.foto_perfil 
+                bolsista.save()
+            
+        return redirect('gambiarra:listar-bolsistas')
 
 @method_decorator(login_required, name='dispatch')
 class DeletarBolsista(View):
