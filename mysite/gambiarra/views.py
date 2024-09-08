@@ -41,10 +41,19 @@ class EditarBolsista(View):
     def post(self, request, pk, *args, **kwargs):
         bolsista = get_object_or_404(Bolsista, pk=pk)
         form = BolsistaForm(request.POST, request.FILES, instance=bolsista)
+
+        #alterado para limpar a foto caso o campo seja acionado no formulario
         if form.is_valid():
+            if 'clear_foto_perfil' in request.POST:
+                if bolsista.foto_perfil:
+                    bolsista.foto_perfil.delete(save=False)
+                bolsista.foto_perfil = url="../media/Bolsista/perfil_teste.jpg"  
+
             form.save()
             return redirect('gambiarra:listar-bolsistas')
+
         return render(request, 'dashboard/bolsista/registrar_bolsista.html', {'bolsista': form})
+
 
 @method_decorator(login_required, name='dispatch')
 class DeletarBolsista(View):
