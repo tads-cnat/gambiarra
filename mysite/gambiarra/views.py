@@ -78,11 +78,6 @@ class AvaliarForms(View):
 
 @method_decorator(login_required, name='dispatch')
 class EncerrarView(View):
-    def get(self, request, *args, **kwargs):
-        chamado_id=kwargs['pk']
-        chamado = get_object_or_404(Chamado, pk=chamado_id)
-        return render(request, 'dashboard/chamado/encerrar.html', {'chamado': chamado, 'titulo': "Encerrar chamado"})
-
     def post(self, request, *args, **kwargs):
         chamado_id=kwargs['pk']
         chamado = get_object_or_404(Chamado, pk=chamado_id)
