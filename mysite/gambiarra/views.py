@@ -44,6 +44,7 @@ class EditarBolsista(View):
             
         return redirect('gambiarra:listar-bolsistas')
 
+
 @method_decorator(login_required, name='dispatch')
 class DeletarBolsista(View):
     def get(self, request, pk, *args, **kwargs):

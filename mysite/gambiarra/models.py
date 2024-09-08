@@ -21,7 +21,7 @@ STATUS_CHOICES = [
 class Bolsista(models.Model):
     nome = models.CharField(max_length=100, default="")
     matricula = models.CharField(max_length=20, default="")
-    foto_perfil = models.ImageField(upload_to='Bolsista', null=True, blank=True)
+    foto_perfil = models.ImageField(upload_to='Bolsista', null=True, blank=True, default='../media/Bolsista/perfil_teste.jpg')
 
     def __str__(self):
         return self.nome 
