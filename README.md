@@ -11,8 +11,8 @@ O propósito do Projeto Gambiarra é estabelecer uma conexão entre estudantes e
 | Leonardo Viana  | [leveau10](https://github.com/leveau10)  | leveau10 |
 | Lívia Vitória | [Naninh4](https://github.com/Naninh4)  | amy_5he |
 | Luiz Gustavo | [1Lgr](https://github.com/1Lgr)   | 1lgr |
-| Mariele Oliveira | [masriele](https://github.com/masriele)  | masriele |
 | Ryan Pinheiro | [ryan-pin](https://github.com/ryan-pin)   | santuaryum |
+
 
 ## Horário de Reuniões
 | Dia| Horário| Local |
