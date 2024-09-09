@@ -27,18 +27,20 @@
         </a>
         <hr>
         <ul class="nav nav-pills flex-column mb-auto p-2">
-          <li class="nav-item ">
-            <a href="{% url 'gambiarra:dashboard' %}"  class="nav-link "><button style="text-align: start;" class="btn btn-success w-100" aria-current="page">
+          <li class="nav-item">
+            <a href="{% url 'gambiarra:dashboard' %}"  class="nav-link w-100"><button style="text-align: start;" class="btn btn-success w-100" aria-current="page">
               Chamados
             </button>
           </a>
             
           </li>
+          {% if request.user.tipo_usuario == '4' %}
           <li class="nav-item">
             <a href="{% url 'gambiarra:listar-bolsistas' %}" class="nav-link " aria-current="page">
               Gerenciar Bolsistas
             </a>
           </li>
+          {% endif %}
           <li  class="nav-item">
             <a href="#" class="nav-link">
               Relatórios
@@ -49,11 +51,16 @@
               Configurações
             </a>
           </li>
-          <li>
-            <a href="{% url 'gambiarra:abrir-chamado' %}" >
-              <button  class="btn btn-primary"> Abrir Chamado</button>
-            </a>
+          {% if request.user.tipo_usuario != '4' %}
+
+          <li class="nav-item">
+          
+            <a href="{% url 'gambiarra:abrir-chamado' %}" class="nav-link w-100"><button style="text-align: start;" class="btn btn-primary w-100" aria-current="page">
+              Abrir Chamado
+            </button></a>
           </li>
+          {% endif %}
+
         </ul>
         <hr>
         <div class="dropdown">

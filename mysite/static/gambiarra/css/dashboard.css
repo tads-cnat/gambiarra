@@ -14,7 +14,7 @@ nav, a{
 
 }
 .nav-pills > .nav-item{
-    padding: 12px 24px;
+    display: flex !important;
     border-bottom: 1px solid var(--gray-ligth, #DEE2E6);
 }
 .nav-pills{

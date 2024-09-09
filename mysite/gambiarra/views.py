@@ -20,16 +20,12 @@ class ListarBolsistas(View):
 
 @method_decorator(login_required, name='dispatch')
 class CriarBolsista(View):
-    def get(self, request, *args, **kwargs):
-        form = BolsistaForm()
-        return render(request, 'dashboard/bolsista/registrar_bolsista.html', {'bolsista': form} )
-
     def post(self, request, *args, **kwargs):
         form = BolsistaForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return redirect('gambiarra:listar-bolsistas')
-        return render(request, 'dashboard/bolsista/registrar_bolsista.html', {'bolsista': form})
+        return redirect('gambiarra:listar-bolsistas')
+        
 
 @method_decorator(login_required, name='dispatch')
 class EditarBolsista(View):
@@ -41,10 +37,19 @@ class EditarBolsista(View):
     def post(self, request, pk, *args, **kwargs):
         bolsista = get_object_or_404(Bolsista, pk=pk)
         form = BolsistaForm(request.POST, request.FILES, instance=bolsista)
+
+        #alterado para limpar a foto caso o campo seja acionado no formulario
         if form.is_valid():
+            if 'clear_foto_perfil' in request.POST:
+                if bolsista.foto_perfil:
+                    bolsista.foto_perfil.delete(save=False)
+                    bolsista.foto_perfil = url="../media/padrão/perfil_teste.jpg"  
+
             form.save()
             return redirect('gambiarra:listar-bolsistas')
+
         return render(request, 'dashboard/bolsista/registrar_bolsista.html', {'bolsista': form})
+
 
 @method_decorator(login_required, name='dispatch')
 class DeletarBolsista(View):
@@ -98,23 +103,15 @@ class EncerrarView(View):
 
 @method_decorator(login_required, name='dispatch')
 class AdicionarBolsistas(View):
-    def get(self, request, pk):
-        chamado = get_object_or_404(Chamado, pk=pk)
-        form = AdicionarBolsistasForm(instance=chamado)
-        return render(request, 'dashboard/chamado/adicionar_bolsistas.html', {'form': form, 'chamado': chamado, 'titulo': "Adicionar Bolsistas"})
-
     def post(self, request, pk):
         chamado = get_object_or_404(Chamado, pk=pk)
         form = AdicionarBolsistasForm(request.POST, instance=chamado)
         if form.is_valid():
             chamado = form.save(commit=False)
             chamado.save()  
-
-            # Salva relacionamentos many-to-many 
             form.save_m2m()
 
-            return redirect('gambiarra:detalhes', pk=chamado.pk)
-        return render(request, 'dashboard/chamado/adicionar_bolsistas.html', {'form': form, 'chamado': chamado, 'titulo': "Adicionar Bolsistas"})
+        return redirect('gambiarra:detalhes', pk=chamado.pk)
 
 @method_decorator(login_required, name='dispatch')  
 class ChamadoDetailView(View):
@@ -125,11 +122,12 @@ class ChamadoDetailView(View):
         alteracoes = Alteracao.objects.filter(chamado=chamado.pk)  # Corrigido para usar filter
         aceito_presente = alteracoes.filter(status='2').exists()
         fechado_presente = alteracoes.filter(status__in=['8', '7', '6']).exists()
+        bolsistaForm = AdicionarBolsistasForm(instance=chamado)
 
 
         mensagens = Mensagem.objects.filter(chamado=chamado).order_by('data_envio')
         mensagem_form = MensagemForm()
-        context = {'chamado':chamado, 'mensagens':mensagens, 'mensagem_form': mensagem_form, 'alteracoes': alteracoes, 'aceito_presente': aceito_presente, 'fechado_presente': fechado_presente}
+        context = {'chamado':chamado, 'mensagens':mensagens, 'mensagem_form': mensagem_form, 'alteracoes': alteracoes, 'aceito_presente': aceito_presente, 'fechado_presente': fechado_presente, 'bolsistaForm': bolsistaForm}
         
         return render(request, 'dashboard/chamado/detalhes.html', context)
     
@@ -204,10 +202,10 @@ class ChamadoForms(View):
 @method_decorator(login_required, name='dispatch')
 class DashboardView(View):
     def get(self, request, *args, **kwargs):
-        chamados = Chamado.objects.all().prefetch_related('bolsistas')
+        chamados = Chamado.objects.all().prefetch_related('bolsistas', 'avaliacao')
 
         if request.user.tipo_usuario != '4':
-            chamados = Chamado.objects.filter(cliente=request.user).prefetch_related('bolsistas')
+            chamados = Chamado.objects.filter(cliente=request.user).prefetch_related('bolsistas', 'avaliacao')
 
         avaliar = AvaliacaoForm()
         context = {'chamados':chamados, "avaliar":avaliar}

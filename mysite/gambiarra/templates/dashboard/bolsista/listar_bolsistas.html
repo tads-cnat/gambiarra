@@ -7,45 +7,144 @@
 {% block conteudo %}
 
 <div class="container">
-    <a href="{% url 'gambiarra:criar-bolsista' %}" class="nav-link text-white">
-        <button class="btn btn-success"> Adicionar Novo Bolsista</button>
-    </a>
+    <!-- Adicionar Bolsista Button -->
+    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#adicionarBolsistaModal">
+      Adicionar Novo Bolsista
+    </button>
+
     <table class="table table-hover">
         <thead>
-          <tr>
-            <th scope="col"><b>Foto</b></th>
-            <th scope="col"><b>Nome</b></th>
-            <th scope="col"><b>Matrícula</b></th>
-            <th scope="col"><b>Ações</b></th>
-
-          </tr>
+            <tr>
+                <th scope="col"><b>Foto</b></th>
+                <th scope="col"><b>Nome</b></th>
+                <th scope="col"><b>Matrícula</b></th>
+                <th scope="col"><b>Ações</b></th>
+            </tr>
         </thead>
         <tbody>
             {% for bolsista in bolsistas %}
-          
-          <tr  class="tr-dashboard">
-            <th scope="row">
-                <img src="{{ bolsista.foto_perfil.url }}" alt="{{ bolsista.nome }}" width="50"  class="rounded-circle ">
-            </th>
-            <th>
-                {{ bolsista.nome }}
-            </th>
-            <th>
-                {{ bolsista.matricula }}
-            </th>
-            <th >
-                <div class="button-group">
+            <tr class="tr-dashboard">
+                <th scope="row">
+                    <img src="{{ bolsista.foto_perfil.url }}" alt="{{ bolsista.nome }}" 
+                         width="50" height="50" 
+                         class="rounded-circle img-fluid" 
+                         style="width: 50px; height: 50px; object-fit: cover;">
+                </th>
+                
+                <th>{{ bolsista.nome }}</th>
+                <th>{{ bolsista.matricula }}</th>
+                <th>
+                    <div class="button-group">
+                        <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#editarBolsistaModal{{ bolsista.id }}">Editar</button>                        
+                        <button class="btn btn-danger text-white btn-sm" data-bs-toggle="modal" data-bs-target="#excluirBolsistaModal{{ bolsista.id }}">Excluir</button>
+                    </div>
+                </th>
+            </tr>
 
-                    <a class="btn btn-primary text-white btn-sm" href="{% url 'gambiarra:editar-bolsista' bolsista.id %}">Editar</a>
-                    <a class="btn btn-danger text-white btn-sm" href="{% url 'gambiarra:excluir-bolsista' bolsista.id %}">Excluir</a>
+            <!-- Modal para Editar Bolsista -->
+            <div class="modal fade" id="editarBolsistaModal{{ bolsista.id }}" tabindex="-1" aria-labelledby="editarBolsistaModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="editarBolsistaModalLabel">Editar Bolsista</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form method="post" enctype="multipart/form-data" action="{% url 'gambiarra:editar-bolsista' bolsista.id %}">
+                            {% csrf_token %}
+                            <div class="modal-body">
+                                <div class="mb-3">
+                                    <label for="id_nome" class="form-label">Nome</label>
+                                    <input type="text" class="form-control" id="id_nome" name="nome" value="{{ bolsista.nome }}">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="id_matricula" class="form-label">Matrícula</label>
+                                    <input type="text" class="form-control" id="id_matricula" name="matricula" value="{{ bolsista.matricula }}">
+                                </div>
+                                {% if bolsista.foto_perfil %}
+                                <div class="mb-3">
+                                    <label class="form-label">Foto Atual</label>
+                                    <div>
+                                        <img class="img-fluid" src="{{ bolsista.foto_perfil.url }}" alt="{{ bolsista.nome }}">
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="clear_foto_perfil" name="clear_foto_perfil">
+                                        <label class="form-check-label" for="clear_foto_perfil">Remover foto</label>
+                                    </div>
+                                </div>
+                                {% endif %}
+                                <div class="mb-3">
+                                    <label for="id_foto_perfil" class="form-label">Atualizar Foto de Perfil</label>
+                                    <input type="file" class="form-control" id="id_foto_perfil" name="foto_perfil">
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-terciary " data-bs-dismiss="modal">Fechar</button>
+                                <button type="submit" class="btn btn-primary ">Salvar</button>
+
+                            </div>
+                        </form>
+                    </div>
                 </div>
-            </th>
-          </tr>
-          {% endfor %}
+            </div>
 
+            <!-- Modal para Excluir Bolsista -->
+            <div class="modal fade" id="excluirBolsistaModal{{ bolsista.id }}" tabindex="-1" aria-labelledby="excluirBolsistaModalLabel{{ bolsista.id }}" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="excluirBolsistaModalLabel{{ bolsista.id }}">Excluir Bolsista</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            Tem certeza que deseja excluir o bolsista "{{ bolsista.nome }}"?
+                        </div>
+                        <div class="modal-footer">
+                            <form method="post" action="{% url 'gambiarra:excluir-bolsista' bolsista.id %}">
+                                {% csrf_token %}
+                                <button type="button" class="btn btn-terciary " data-bs-dismiss="modal">Fechar</button>
+                                <button type="submit" class="btn btn-primary ">Excluir</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {% endfor %}
         </tbody>
-      </table>
-
+    </table>
 </div>
-{% endblock %}
 
+<!-- Modal de Adicionar Bolsista (fora do loop) -->
+<div class="modal fade" id="adicionarBolsistaModal" tabindex="-1" aria-labelledby="adicionarBolsistaModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="adicionarBolsistaModalLabel">Adicionar Novo Bolsista</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form method="post" enctype="multipart/form-data" action="{% url 'gambiarra:criar-bolsista' %}">
+                {% csrf_token %}
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="id_nome" class="form-label">Nome</label>
+                        <input type="text" class="form-control" id="id_nome" name="nome" value="{{ form.nome.value|default_if_none:'' }}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="id_matricula" class="form-label">Matrícula</label>
+                        <input type="text" class="form-control" id="id_matricula" name="matricula" value="{{ form.matricula.value|default_if_none:'' }}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="id_foto_perfil" class="form-label">Foto de Perfil</label>
+                        <input type="file" class="form-control" id="id_foto_perfil" name="foto_perfil">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-terciary" data-bs-dismiss="modal">Fechar</button>
+                    <button type="submit" class="btn btn-primary ">Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
