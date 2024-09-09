@@ -273,51 +273,14 @@
                                 </a>
                                 {% if c.status >= '7' %}
                                 {% if not c.avaliacao %}
-                                <a type="button" data-toggle="modal" data-target="#exampleModal">
+                                <a type="button" data-toggle="modal" data-target="#modal-{{ c.pk }}"
+                                    data-id="{{ c.pk }}">
                                     <button class="btn btn-success btn-sm">Avaliar</button>
                                 </a>
+
                                 {% endif %}
                             </div>
-                            <!-- Modal -->
-                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
-                                aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="ex
-                                                            ampleModalLabel">Avaliar chamado</h5>
-                                            <button type="button" class="close btn-close" data-dismiss="modal"
-                                                aria-label="Close">
-                                            </button>
-                                        </div>
-                                        <form method="post" action="{% url 'gambiarra:avaliar' c.pk %}">
-                                            <div class="modal-body">
-
-                                                {% csrf_token %}
-
-                                                {% bootstrap_form avaliar %}
-
-                                                {% if avaliar.errors %}
-                                                <div class="error">
-                                                    <ul>
-                                                        {% for field, errors in avaliar.errors.items %}
-                                                        <li>{{ field }}: {{ errors|join:", " }}</li>
-                                                        {% endfor %}
-                                                    </ul>
-                                                </div>
-                                                {% endif %}
-
-
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-terciary btn-sm"
-                                                    data-dismiss="modal">Fechar</button>
-                                                <button type="submit" class="btn btn-primary">Avaliar</button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
+                            
                             {% endif %}
 
                             {% else %}
@@ -461,51 +424,14 @@
                                 {% if c.status >= '7' %}
 
                                 {% if not c.avaliacao %}
-                                <a type="button" data-toggle="modal" data-target="#exampleModal">
+                                <a type="button" data-toggle="modal" data-target="#modal-{{ c.pk }}"
+                                    data-id="{{ c.pk }}">
                                     <button class="btn btn-success btn-sm">Avaliar</button>
                                 </a>
+
                                 {% endif %}
                             </div>
-                            <!-- Modal -->
-                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
-                                aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="ex
-                                                            ampleModalLabel">Avaliar chamado</h5>
-                                            <button type="button" class="close btn-close" data-dismiss="modal"
-                                                aria-label="Close">
-                                            </button>
-                                        </div>
-                                        <form method="post" action="{% url 'gambiarra:avaliar' c.pk %}">
-                                            <div class="modal-body">
-
-                                                {% csrf_token %}
-
-                                                {% bootstrap_form avaliar %}
-
-                                                {% if avaliar.errors %}
-                                                <div class="error">
-                                                    <ul>
-                                                        {% for field, errors in avaliar.errors.items %}
-                                                        <li>{{ field }}: {{ errors|join:", " }}</li>
-                                                        {% endfor %}
-                                                    </ul>
-                                                </div>
-                                                {% endif %}
-
-
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-terciary btn-sm"
-                                                    data-dismiss="modal">Fechar</button>
-                                                <button type="submit" class="btn btn-primary">Avaliar</button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
+                          
                             {% endif %}
 
                             {% else %}
@@ -649,51 +575,14 @@
                                 {% if c.status >= '7' %}
 
                                 {% if not c.avaliacao %}
-                                <a type="button" data-toggle="modal" data-target="#exampleModal">
+                                <a type="button" data-toggle="modal" data-target="#modal-{{ c.pk }}"
+                                    data-id="{{ c.pk }}">
                                     <button class="btn btn-success btn-sm">Avaliar</button>
                                 </a>
+
                                 {% endif %}
                             </div>
-                            <!-- Modal -->
-                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
-                                aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="ex
-                                                            ampleModalLabel">Avaliar chamado</h5>
-                                            <button type="button" class="close btn-close" data-dismiss="modal"
-                                                aria-label="Close">
-                                            </button>
-                                        </div>
-                                        <form method="post" action="{% url 'gambiarra:avaliar' c.pk %}">
-                                            <div class="modal-body">
-
-                                                {% csrf_token %}
-
-                                                {% bootstrap_form avaliar %}
-
-                                                {% if avaliar.errors %}
-                                                <div class="error">
-                                                    <ul>
-                                                        {% for field, errors in avaliar.errors.items %}
-                                                        <li>{{ field }}: {{ errors|join:", " }}</li>
-                                                        {% endfor %}
-                                                    </ul>
-                                                </div>
-                                                {% endif %}
-
-
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-terciary btn-sm"
-                                                    data-dismiss="modal">Fechar</button>
-                                                <button type="submit" class="btn btn-primary">Avaliar</button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
+                        
                             {% endif %}
 
                             {% else %}
