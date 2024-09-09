@@ -36,6 +36,12 @@ bootstrap_css %} {% bootstrap_javascript %} {% block conteudo %}
             <br>
 
             <p>{{ chamado.descricao }}</p>
+            <br>
+            {% if chamado.avaliacao %}
+              "{{ chamado.avaliacao.texto }}"
+              {{ chamado.avaliacao.nota }}
+              &#11088;
+            {% endif %}
           </div>
         </div>
         <div class="col-sm-4">
@@ -59,7 +65,7 @@ bootstrap_css %} {% bootstrap_javascript %} {% block conteudo %}
               {% endif %}
             </div>
             {% if chamado.cliente != request.user and request.user.tipo_usuario == '4' %}
-            <button type="button" class="btn btn-success mr-2" data-toggle="modal" data-target="#exampleModal"
+            <button type="button" class="btn btn-success btn-sm mr-2" data-toggle="modal" data-target="#exampleModal"
               data-status="{{ chamado.status }}" {% if fechado_presente %} disabled {% endif %}>
               Alterar Status
             </button>
@@ -124,8 +130,9 @@ bootstrap_css %} {% bootstrap_javascript %} {% block conteudo %}
               <div class="row w-100">
                 {% for bolsista in chamado.bolsistas.all %}
                 <div class="mb-2 mt-2">
-                  <img src="{{ bolsista.foto_perfil.url }}" alt="" width="25px" class="rounded-circle ">
-                  {{bolsista.nome}}
+                  <img src="{{ bolsista.foto_perfil.url }}" alt="{{ bolsista.nome }}" 
+                  class="rounded-circle img-fluid" 
+                  style="width: 25px; height: 25px; object-fit: cover;">                  {{bolsista.nome}}
                   {% empty %}
                   <p> Nenhum bolsista atribuído
                   </p>
@@ -200,12 +207,12 @@ bootstrap_css %} {% bootstrap_javascript %} {% block conteudo %}
         </div>
       </div>
     </div>
-    <section class="row">
+    <section class="row d-flex align-items-center">
       <section class="col-4 d-flex justify-content-center align-items-start">
         <div class="container timeline">
           {% for alteracao in alteracoes %}
 
-          <div
+          <div "
             class="timeline-item {% if forloop.counter|divisibleby:2 %}timeline-item-right{% else %}timeline-item-left{% endif %}">
             {% if alteracao.status == '1' %}
             <span class="badge badge-secondary">{{ alteracao.get_status_display }}</span>

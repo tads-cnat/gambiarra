@@ -51,6 +51,7 @@
                         <th scope="col"><b>Código</b></th>
                         <th scope="col"><b>Título</b></th>
                         <th scope="col"><b>Status</b></th>
+                        <th scope="col"><b>Avaliação</b></th>
                         <th scope="col"><b>Professor</b></th>
                         <th scope="col"><b>Bolsista(s)</b></th>
                         <th scope="col"><b>Ações</b></th>
@@ -84,6 +85,13 @@
 
                         </th>
                         <th>
+                            {% if c.avaliacao %}
+                            "{{ c.avaliacao.texto }}"
+                            {{ c.avaliacao.nota }}
+                            &#11088;
+                            {% endif %}
+                        </th>
+                        <th>
                             {% if c.professor %}
                             <img src="{{ c.professor.foto_perfil.url }}" alt="" width="25px" class="rounded-circle ">
                             {{c.professor}}
@@ -96,8 +104,8 @@
                             {% if c.bolsistas.all %}
                             {% for b in c.bolsistas.all %}
                             <div class="mb-2 mt-2">
-                                <img src="{{ b.foto_perfil.url }}" alt="Foto de perfil de {{ b.nome }}" width="25px"
-                                    class="rounded-circle">
+                                <img src="{{ b.foto_perfil.url }}" alt="{{ b.nome }}" class="rounded-circle img-fluid"
+                                    style="width: 25px; height: 25px; object-fit: cover;">
                                 {{ b.nome }}
                             </div>
                             {% endfor %}
@@ -113,9 +121,12 @@
                                     <button class="btn btn-primary btn-sm">Acessar</button>
                                 </a>
                                 {% if c.status >= '7' %}
+                                {% if not c.avaliacao %}
                                 <a type="button" data-toggle="modal" data-target="#exampleModal">
                                     <button class="btn btn-success btn-sm">Avaliar</button>
                                 </a>
+                                {% endif %}
+
                             </div>
                             <!-- Modal -->
                             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
@@ -161,7 +172,8 @@
 
                             {% else %}
                             {% if c.status == '1' %}
-                            <a href="#"> <button class="btn btn-success btn-sm">Aceitar</button></a>
+                            <a href="{% url 'gambiarra:aceitar' c.pk %}"> <button
+                                    class="btn btn-success btn-sm">Aceitar</button></a>
                             <button class="btn btn-danger btn-sm">Recusar</button>
                             {% endif %}
                             <a href="{% url 'gambiarra:detalhes' c.pk %}"> <button
@@ -215,20 +227,23 @@
 
         <!-- Pendentes Tab -->
         <div class="tab-pane fade" id="pendentes" role="tabpanel" aria-labelledby="pendentes-tab">
-            {% for c in chamados %}
-            {% if c.status == '1' %}
+
             <table class="table table-hover mt-4">
+
                 <thead>
                     <tr>
                         <th scope="col"><b>Código</b></th>
                         <th scope="col"><b>Título</b></th>
                         <th scope="col"><b>Status</b></th>
+                        <th scope="col"><b>Avaliação</b></th>
                         <th scope="col"><b>Professor</b></th>
                         <th scope="col"><b>Bolsista(s)</b></th>
                         <th scope="col"><b>Ações</b></th>
                     </tr>
                 </thead>
                 <tbody>
+                    {% for c in chamados %}
+                    {% if c.status == '1' %}
                     <tr class="tr-dashboard">
                         <th scope="row">
                             {{c.code}}
@@ -255,6 +270,13 @@
 
                         </th>
                         <th>
+                            {% if c.avaliacao %}
+                            "{{ c.avaliacao.texto }}"
+                            {{ c.avaliacao.nota }}
+                            &#11088;
+                            {% endif %}
+                        </th>
+                        <th>
                             {% if c.professor %}
                             <img src="{{ c.professor.foto_perfil.url }}" alt="" width="25px" class="rounded-circle ">
                             {{c.professor}}
@@ -267,8 +289,8 @@
                             {% if c.bolsistas.all %}
                             {% for b in c.bolsistas.all %}
                             <div class="mb-2 mt-2">
-                                <img src="{{ b.foto_perfil.url }}" alt="Foto de perfil de {{ b.nome }}" width="25px"
-                                    class="rounded-circle">
+                                <img src="{{ b.foto_perfil.url }}" alt="{{ b.nome }}" class="rounded-circle img-fluid"
+                                    style="width: 25px; height: 25px; object-fit: cover;">
                                 {{ b.nome }}
                             </div>
                             {% endfor %}
@@ -284,9 +306,11 @@
                                     <button class="btn btn-primary btn-sm">Acessar</button>
                                 </a>
                                 {% if c.status >= '7' %}
+                                {% if not c.avaliacao %}
                                 <a type="button" data-toggle="modal" data-target="#exampleModal">
                                     <button class="btn btn-success btn-sm">Avaliar</button>
                                 </a>
+                                {% endif %}
                             </div>
                             <!-- Modal -->
                             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
@@ -296,8 +320,9 @@
                                         <div class="modal-header">
                                             <h5 class="modal-title" id="ex
                                                             ampleModalLabel">Avaliar chamado</h5>
-                                                            <button type="button" class="close btn-close" data-dismiss="modal" aria-label="Close">
-                                                            </button>
+                                            <button type="button" class="close btn-close" data-dismiss="modal"
+                                                aria-label="Close">
+                                            </button>
                                         </div>
                                         <form method="post" action="{% url 'gambiarra:avaliar' c.pk %}">
                                             <div class="modal-body">
@@ -349,7 +374,8 @@
                                         <div class="modal-header">
                                             <h5 class="modal-title" id="confirmCloseModalLabel">Confirmar Encerramento
                                             </h5>
-                                            <button type="button" class="close btn-close" data-dismiss="modal" aria-label="Close">
+                                            <button type="button" class="close btn-close" data-dismiss="modal"
+                                                aria-label="Close">
                                             </button>
                                         </div>
                                         <div class="modal-body">
@@ -378,29 +404,33 @@
 
                         </th>
                     </tr>
+                    {% endif %}
+                    {% endfor %}
+
                 </tbody>
             </table>
-            {% endif %}
-            {% endfor %}
+
         </div>
 
         <!-- Aceitos Tab -->
         <div class="tab-pane fade" id="aceitos" role="tabpanel" aria-labelledby="aceitos-tab">
-            {% for c in chamados %}
-            {% if c.status == '2' or c.status == '3' or c.status == '4' or c.status == '5' %}
-            <table class="table table-hover mt-4">
-                <thead>
 
+            <table class="table table-hover mt-4">
+
+                <thead>
                     <tr>
                         <th scope="col"><b>Código</b></th>
                         <th scope="col"><b>Título</b></th>
                         <th scope="col"><b>Status</b></th>
+                        <th scope="col"><b>Avaliação</b></th>
                         <th scope="col"><b>Professor</b></th>
                         <th scope="col"><b>Bolsista(s)</b></th>
                         <th scope="col"><b>Ações</b></th>
                     </tr>
                 </thead>
                 <tbody>
+                    {% for c in chamados %}
+                    {% if c.status == '2' %}
                     <tr class="tr-dashboard">
                         <th scope="row">
                             {{c.code}}
@@ -427,6 +457,13 @@
 
                         </th>
                         <th>
+                            {% if c.avaliacao %}
+                            "{{ c.avaliacao.texto }}"
+                            {{ c.avaliacao.nota }}
+                            &#11088;
+                            {% endif %}
+                        </th>
+                        <th>
                             {% if c.professor %}
                             <img src="{{ c.professor.foto_perfil.url }}" alt="" width="25px" class="rounded-circle ">
                             {{c.professor}}
@@ -439,8 +476,8 @@
                             {% if c.bolsistas.all %}
                             {% for b in c.bolsistas.all %}
                             <div class="mb-2 mt-2">
-                                <img src="{{ b.foto_perfil.url }}" alt="Foto de perfil de {{ b.nome }}" width="25px"
-                                    class="rounded-circle">
+                                <img src="{{ b.foto_perfil.url }}" alt="{{ b.nome }}" class="rounded-circle img-fluid"
+                                    style="width: 25px; height: 25px; object-fit: cover;">
                                 {{ b.nome }}
                             </div>
                             {% endfor %}
@@ -456,9 +493,12 @@
                                     <button class="btn btn-primary btn-sm">Acessar</button>
                                 </a>
                                 {% if c.status >= '7' %}
+
+                                {% if not c.avaliacao %}
                                 <a type="button" data-toggle="modal" data-target="#exampleModal">
                                     <button class="btn btn-success btn-sm">Avaliar</button>
                                 </a>
+                                {% endif %}
                             </div>
                             <!-- Modal -->
                             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
@@ -468,8 +508,9 @@
                                         <div class="modal-header">
                                             <h5 class="modal-title" id="ex
                                                             ampleModalLabel">Avaliar chamado</h5>
-                                                            <button type="button" class="close btn-close" data-dismiss="modal" aria-label="Close">
-                                                            </button>
+                                            <button type="button" class="close btn-close" data-dismiss="modal"
+                                                aria-label="Close">
+                                            </button>
                                         </div>
                                         <form method="post" action="{% url 'gambiarra:avaliar' c.pk %}">
                                             <div class="modal-body">
@@ -521,7 +562,8 @@
                                         <div class="modal-header">
                                             <h5 class="modal-title" id="confirmCloseModalLabel">Confirmar Encerramento
                                             </h5>
-                                            <button type="button" class="close btn-close" data-dismiss="modal" aria-label="Close">
+                                            <button type="button" class="close btn-close" data-dismiss="modal"
+                                                aria-label="Close">
                                             </button>
                                         </div>
                                         <div class="modal-body">
@@ -550,28 +592,32 @@
 
                         </th>
                     </tr>
+                    {% endif %}
+                    {% endfor %}
+
                 </tbody>
             </table>
-            {% endif %}
-            {% endfor %}
-        </div>
 
+        </div>
+        <!-- fechados -->
         <div class="tab-pane fade" id="fechados" role="tabpanel" aria-labelledby="fechados-tab">
-            {% for c in chamados %}
-            {% if c.status == '6' or c.status == '7' or c.status == '8' %}
-            {% with found=True %}
+
             <table class="table table-hover mt-4">
+
                 <thead>
                     <tr>
                         <th scope="col"><b>Código</b></th>
                         <th scope="col"><b>Título</b></th>
                         <th scope="col"><b>Status</b></th>
+                        <th scope="col"><b>Avaliação/b></th>
                         <th scope="col"><b>Professor</b></th>
                         <th scope="col"><b>Bolsista(s)</b></th>
                         <th scope="col"><b>Ações</b></th>
                     </tr>
                 </thead>
                 <tbody>
+                    {% for c in chamados %}
+                    {% if c.status == '6' or c.status == '7' or c.status == '8' %}
                     <tr class="tr-dashboard">
                         <th scope="row">
                             {{c.code}}
@@ -598,6 +644,14 @@
 
                         </th>
                         <th>
+                            {% if c.avaliacao %}
+                            "{{ c.avaliacao.texto }}"
+                            {{ c.avaliacao.nota }}
+                            &#11088;
+                            {% endif %}
+                        </th>
+
+                        <th>
                             {% if c.professor %}
                             <img src="{{ c.professor.foto_perfil.url }}" alt="" width="25px" class="rounded-circle ">
                             {{c.professor}}
@@ -610,8 +664,8 @@
                             {% if c.bolsistas.all %}
                             {% for b in c.bolsistas.all %}
                             <div class="mb-2 mt-2">
-                                <img src="{{ b.foto_perfil.url }}" alt="Foto de perfil de {{ b.nome }}" width="25px"
-                                    class="rounded-circle">
+                                <img src="{{ b.foto_perfil.url }}" alt="{{ b.nome }}" class="rounded-circle img-fluid"
+                                    style="width: 25px; height: 25px; object-fit: cover;">
                                 {{ b.nome }}
                             </div>
                             {% endfor %}
@@ -627,9 +681,12 @@
                                     <button class="btn btn-primary btn-sm">Acessar</button>
                                 </a>
                                 {% if c.status >= '7' %}
+
+                                {% if not c.avaliacao %}
                                 <a type="button" data-toggle="modal" data-target="#exampleModal">
                                     <button class="btn btn-success btn-sm">Avaliar</button>
                                 </a>
+                                {% endif %}
                             </div>
                             <!-- Modal -->
                             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
@@ -651,13 +708,13 @@
                                                 {% bootstrap_form avaliar %}
 
                                                 {% if avaliar.errors %}
-                                                    <div class="error">
-                                                        <ul>
-                                                            {% for field, errors in avaliar.errors.items %}
-                                                            <li>{{ field }}: {{ errors|join:", " }}</li>
-                                                            {% endfor %}
-                                                        </ul>
-                                                    </div>
+                                                <div class="error">
+                                                    <ul>
+                                                        {% for field, errors in avaliar.errors.items %}
+                                                        <li>{{ field }}: {{ errors|join:", " }}</li>
+                                                        {% endfor %}
+                                                    </ul>
+                                                </div>
                                                 {% endif %}
 
 
@@ -711,7 +768,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>F
+                            </div>
                             {% endif %}
                             {% if c.status >= '7' %}
                             <a href="#">
@@ -723,11 +780,12 @@
 
                         </th>
                     </tr>
+                    {% endif %}
+                    {% endfor %}
+
                 </tbody>
             </table>
-            {% endwith %}
-            {% endif %}
-            {% endfor %}
+
         </div>
     </div>
 

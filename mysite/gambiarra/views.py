@@ -202,10 +202,10 @@ class ChamadoForms(View):
 @method_decorator(login_required, name='dispatch')
 class DashboardView(View):
     def get(self, request, *args, **kwargs):
-        chamados = Chamado.objects.all().prefetch_related('bolsistas')
+        chamados = Chamado.objects.all().prefetch_related('bolsistas', 'avaliacao')
 
         if request.user.tipo_usuario != '4':
-            chamados = Chamado.objects.filter(cliente=request.user).prefetch_related('bolsistas')
+            chamados = Chamado.objects.filter(cliente=request.user).prefetch_related('bolsistas', 'avaliacao')
 
         avaliar = AvaliacaoForm()
         context = {'chamados':chamados, "avaliar":avaliar}
