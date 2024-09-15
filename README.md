@@ -53,7 +53,7 @@ Ordem para contato com o gerente da equipe:
 
 ### 4. Encerrar chamado - Professor
 
-![Aluno abrindo chamado no sistema](doc/imgs/Encerrar.gif)
+![Aluno abrindo chamado no sistema](doc/imgs/encerrar.gif)
 
 ### 5. Avaliar chamado - Aluno
 
