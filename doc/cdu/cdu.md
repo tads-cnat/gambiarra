@@ -2,7 +2,7 @@
 
 ## 1. Diagrama de Caso de Uso
 
-![diagrama de caso de uso do cliente](imgs/diagramacdu1.png "Diagrama de caso de uso - cliente")
+![diagrama de caso de uso](imgs/diagramacdu1.png "Diagrama de caso de uso")
 
 ## 2. Listagem dos detalhamentos dos casos de uso
 
@@ -13,3 +13,9 @@
 5. [CDU-005 - Adicionar bolsista ao chamado](cdu-005/cdu_propor_doacao.md)
 6. [CDU-006 - Encerrar chamado](cdu-006/cdu_encerrar_chamado.md)
 7. [CDU-007 - Listar chamados](cdu-007/cdu_listar_chamado.md)
+
+## 3. Casos de uso implementados
+
+### Os casos de uso em verde foram implementados
+
+![diagrama de caso de uso com casos de uso implementados](imgs/cdu_imp.jpg "Diagrama de caso de uso implementados")
