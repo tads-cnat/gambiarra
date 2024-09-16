@@ -1,9 +1,11 @@
 
+/* Padrões globais da dashboard */
+
+
 * {
     font-family: 'Montserrat', sans-serif;
 }
 
-/* custom.css */
 * {
     font-family: 'Montserrat', sans-serif;
     font-weight: 400; /* Peso regular */
@@ -20,52 +22,57 @@ nav, a{
 .nav-pills{
     gap: 10px;
 }
-/* custom.css */
+
+.nav-link{
+  justify-content: start !important;
+}
+
+
+/* Personalizando classes do bootstrap */
+
 .btn-primary {
     background-color:#7749F8;
     border-color: #7749F8;
-  }
+}
   
-  .bg-primary {
+.bg-primary {
     background-color: #7749F8 !important;
     color: white !important;
-  }
+}
   
-  .text-primary {
+.text-primary {
     color:#7749F8 !important;
-  }
+}
 
-  .btn.btn-primary:hover {
+.btn.btn-primary:hover {
     background-color: #9069fd !important;
     border-color: #9069fd !important;
     color: white !important;
-  }
+}
 
   
-  .btn-success {
+.btn-success {
     background-color:#12a400;
     border-color: #79E546;
-  }
+}
   
-  .bg-success {
+  
+.bg-success {
     background-color: #79E546 !important;
     color: white !important;
-  }
+}
   
-  .text-success {
+.text-success {
     color:#79E546 !important;
-  }
+}
 
-  .btn.btn-success:hover {
+.btn.btn-success:hover {
     background-color: #9eec7a !important;
     border-color: #9eec7a !important;
     color: white !important;
-  }
-
-.nav-link{
-    justify-content: start !important;
 }
 
+/* fim */
 
 /* base css */
 
@@ -74,6 +81,7 @@ body {
     height: 100vh;
     margin: 0;
 }
+
 .sidebar {
     width: 20vw;
     height: 100vh;
@@ -84,12 +92,13 @@ body {
     background-color: #FFFFFF !important;
     box-shadow: 5px 5px 10px 5px rgba(54, 54, 54, 0.10) !important;
 }
+
 .main-content {
     width: 80vw;
     overflow-y: auto; /* Permite rolar o conteúdo principal */
 
 }
-#esse {
+#card-main {
     padding: 50px;
     background: linear-gradient(white, white) padding-box, 
                 linear-gradient(-8deg, rgba(255,255,255,1) 7%, rgba(67,56,202,1) 7%, rgba(58,76,209,1) 19%, rgba(255,255,255,1) 19%, rgba(255,255,255,1) 27%, rgba(67,56,202,1) 27%, rgba(67,56,202,1) 39%, rgba(252,252,252,1) 39%, rgba(252,252,252,1) 61%, rgba(67,56,202,1) 61%, rgba(67,56,202,1) 81%, rgba(255,255,255,1) 81%) border-box;
@@ -114,7 +123,7 @@ table{
 /* botões de acção da index */
 .button-group {
   display: flex;
-  gap: 10px; /* Espaçamento entre os botões */
+  gap: 10px; 
   flex-wrap: wrap; /* Permite que os botões quebrem linha, se necessário */
 }
 
@@ -135,11 +144,13 @@ table{
   color: #DEE2E6;
 }
 
+/* fim */
 
 
+
+/* listar chamdados - dashboard */
 
 /* perfil */
-
 .foto_perfil {
   margin-left: 20px ;
   width: 100px;
@@ -154,7 +165,7 @@ table{
   overflow: hidden;
 }
 
-
+/* css tabs de listagem */
 .nav-tabs > .nav-item{
     padding: 0;
     padding-top: 20px;
@@ -197,6 +208,10 @@ table{
   background-color: #DC3545 !important;
   color: #ffffff;
 }
+
+/* fim do css da tela de listagem */
+
+/* css da tela de detalhamento do chamado */
 
 
 /* linha do tempo */
@@ -241,3 +256,33 @@ table{
   right: 0;
   text-align: left;
 }
+
+/* fim */
+
+
+ /* css do chat */
+ #chat2 .form-control {
+  border-color: transparent;
+}
+
+#chat2 .form-control:focus {
+  border-color: transparent;
+  box-shadow: inset 0px 0px 0px 1px transparent;
+}
+
+.divider:after,
+.divider:before {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #eee;
+}
+
+/* Adicione o estilo para permitir o scroll */
+#chat2 .card-body {
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: 400px;
+}
+
+/* fim */
