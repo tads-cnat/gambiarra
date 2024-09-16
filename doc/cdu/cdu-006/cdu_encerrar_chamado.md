@@ -26,7 +26,7 @@
 
 ## Diagrama de Sequência - Encerrar Chamado
 
-![diagrama de sequência encerrar chamado](img/encerrar_seq.jpg "Diagrama sequência - Encerrar Chamado")
+![diagrama de sequência encerrar chamado](img/encerrar_seq.png "Diagrama sequência - Encerrar Chamado")
 
 
 
