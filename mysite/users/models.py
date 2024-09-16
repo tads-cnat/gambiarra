@@ -6,7 +6,7 @@ class User(AbstractUser):
     cpf = models.CharField(max_length=11, unique=True, null=True)
     matricula = models.CharField(max_length=20, unique=True, null=True) 
     telefone = models.CharField(max_length=15, blank=True, null=True)
-    foto_perfil = models.ImageField(upload_to='Usuario', null=True, blank=True)
+    foto_perfil = models.ImageField(upload_to='Usuario', null=True, blank=True, default='../media/Padrao/perfil_default.png')
     tipo_usuario = models.CharField(
         max_length=20,
         choices=[

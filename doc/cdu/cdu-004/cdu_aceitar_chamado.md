@@ -21,4 +21,4 @@
 
 ## Diagrama de Sequência - Aceitar Chamado
 
-![diagrama de sequência aceitar chamado](img/aceitar_seq.jpg "Diagrama sequência - Aceitar Chamado")
+![diagrama de sequência aceitar chamado](img/aceitar_seq.png "Diagrama sequência - Aceitar Chamado")

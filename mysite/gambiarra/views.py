@@ -29,11 +29,6 @@ class CriarBolsista(View):
 
 @method_decorator(login_required, name='dispatch')
 class EditarBolsista(View):
-    def get(self, request, pk, *args, **kwargs):
-        bolsista = get_object_or_404(Bolsista, pk=pk)
-        form = BolsistaForm(instance=bolsista)
-        return render(request, 'dashboard/bolsista/registrar_bolsista.html', {'bolsista': form})
-
     def post(self, request, pk, *args, **kwargs):
         bolsista = get_object_or_404(Bolsista, pk=pk)
         form = BolsistaForm(request.POST, request.FILES, instance=bolsista)
@@ -43,7 +38,7 @@ class EditarBolsista(View):
             if 'clear_foto_perfil' in request.POST:
                 if bolsista.foto_perfil:
                     bolsista.foto_perfil.delete(save=False)
-                    bolsista.foto_perfil = url="../media/padrão/perfil_teste.jpg"  
+                    bolsista.foto_perfil = url="../media/Padrao/perfil_default.png"  
 
             form.save()
             return redirect('gambiarra:listar-bolsistas')
@@ -53,10 +48,6 @@ class EditarBolsista(View):
 
 @method_decorator(login_required, name='dispatch')
 class DeletarBolsista(View):
-    def get(self, request, pk, *args, **kwargs):
-        bolsista = get_object_or_404(Bolsista, pk=pk)
-        return render(request, 'dashboard/bolsista/deletar_bolsista.html', {'bolsista': bolsista})
-
     def post(self, request, pk, *args, **kwargs):
         bolsista = get_object_or_404(Bolsista, pk=pk)
         bolsista.delete()
@@ -83,11 +74,6 @@ class AvaliarForms(View):
 
 @method_decorator(login_required, name='dispatch')
 class EncerrarView(View):
-    def get(self, request, *args, **kwargs):
-        chamado_id=kwargs['pk']
-        chamado = get_object_or_404(Chamado, pk=chamado_id)
-        return render(request, 'dashboard/chamado/encerrar.html', {'chamado': chamado, 'titulo': "Encerrar chamado"})
-
     def post(self, request, *args, **kwargs):
         chamado_id=kwargs['pk']
         chamado = get_object_or_404(Chamado, pk=chamado_id)
@@ -146,8 +132,11 @@ class ChamadoDetailView(View):
                 if(mensagem.texto == ""): return redirect('gambiarra:detalhes', chamado_id)
                 mensagem.save()
                 return redirect('gambiarra:detalhes', chamado_id)
-@login_required
-def aceitar(request, pk):
+            
+            
+@method_decorator(login_required, name='dispatch')
+class AceitarView(View):
+    def aceitar(request, pk):
         chamado = get_object_or_404(Chamado, pk=pk)
         chamado.professor = request.user
         chamado.status = '2'
