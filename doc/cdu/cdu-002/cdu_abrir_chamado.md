@@ -22,4 +22,4 @@
 
 ## Diagrama de classe de projeto - Abrir Chamado
 
-![diagrama de classe de projeto](../imgs/cproj/abrirchamado.jpg "Diagrama de classe de projeto - Abrir Chamado")
+![diagrama de classe de projeto](../imgs/cproj/abrirchamado.png "Diagrama de classe de projeto - Abrir Chamado")
