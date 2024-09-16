@@ -75,7 +75,7 @@ Ordem para contato com o gerente da equipe:
 
 ![Aluno abrindo chamado no sistema](doc/imgs/detalhar.gif)
 
-### 10. Detalhar Chamado e enviar mensagem
+### 10. Alterar status do chamado - Professor
 
-![Aluno abrindo chamado no sistema](doc/imgs/detalhar.gif)
+![Aluno abrindo chamado no sistema](doc/imgs/alterar-status.gif)
 
