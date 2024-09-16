@@ -49,7 +49,6 @@ class Chamado(models.Model):
     item = models.OneToOneField('Item', on_delete=models.CASCADE, null=True)
     cliente = models.ForeignKey(User, on_delete=models.CASCADE, related_name='chamados_cliente', null=True, blank=True)
     
- 
 class Mensagem(models.Model):
     data_envio = models.DateTimeField('Data de publicação', default=timezone.now)
     autor = models.ForeignKey(User, on_delete=models.CASCADE, null=True)        
