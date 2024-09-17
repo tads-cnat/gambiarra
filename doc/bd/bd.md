@@ -34,14 +34,16 @@ Um ou várioas alunos podem ser atribuídos à um chamado.
 | status      | Situação atual do chamado  | VARCHAR      | 100     | ❌   | ❌  | ❌  | ❌     | ❌       | Em análise   |                          |
 | bolsistas   | Bolsistas vinculados       | INTEGER      |         | ❌   | ❌  | ✅  | ❌     | ❌       |              |                          |
 | professor   | Professor vinculado        | INTEGER      |         | ❌   | ❌  | ✅  | ❌     | ❌       |              |                          |
+| cliente   | Cliente vinculado        | INTEGER      |         | ❌   | ❌  | ✅  | ❌     | ❌       |              |                          |
+| item   | Item Vinculado       | INTEGER      |         | ❌   | ❌  | ✅  | ❌     | ❌       |              |                          |
 
 ---
 
-**Tabela**: Professor
+**Tabela**: User
 
-*Descrição*: Registro dos professores vinculados ao gambiarra.
+*Descrição*: Registro dos usuários(professor e cliente).
 
-*Observações*: A tabela armazena as informações pessoais e de contato dos professores.
+*Observações*: A tabela armazena as informações pessoais e de contato dos professores e clientes.
 
 | Colunas   | Descrição                | Tipo de Dado | Tamanho | Null  | PK   | FK   | Unique | Identity | Default | Check                    |
 | --------- | ------------------------ | ------------ | ------- | ----- | ---- | ---- | ------ | -------- | ------- | ------------------------ |
@@ -52,26 +54,7 @@ Um ou várioas alunos podem ser atribuídos à um chamado.
 | email     | Email do professor        | VARCHAR      | 30      | ❌   | ❌  | ❌  | ❌     | ❌       |         |                          |
 | senha     | Senha de acesso           | VARCHAR      | 30      | ❌   | ❌  | ❌  | ❌     | ❌       |         |                          |
 | telefone  | Telefone de contato       | VARCHAR      | 15      | ❌   | ❌  | ❌  | ❌     | ❌       |         |                          |
-
----
-
-**Tabela**: Cliente
-
-*Descrição*: Registro dos clientes que podem ser alunos ou externos.
-
-*Observações*: A tabela armazena as informações pessoais e de contato dos clientes.
-
-| Colunas        | Descrição                  | Tipo de Dado | Tamanho | Null  | PK   | FK   | Unique | Identity | Default | Check                    |
-| -------------- | -------------------------- | ------------ | ------- | ----- | ---- | ---- | ------ | -------- | ------- | ------------------------ |
-| id             | Identificador do cliente    | INTEGER      |         | ❌   | ✅  | ❌  | ✅     | ✅       |         |                          |
-| cpf            | CPF do cliente              | VARCHAR      | 11      | ❌   | ❌  | ❌  | ✅     | ❌       |         |                          |
-| matricula      | Matrícula do cliente        | VARCHAR      | 20      | ❌   | ❌  | ❌  | ✅     | ❌       |         |                          |
-| nome           | Nome do cliente             | VARCHAR      | 30      | ❌   | ❌  | ❌  | ❌     | ❌       |         |                          |
-| email          | Email do cliente            | VARCHAR      | 30      | ❌   | ❌  | ❌  | ❌     | ❌       |         |                          |
-| senha          | Senha de acesso             | VARCHAR      | 30      | ❌   | ❌  | ❌  | ❌     | ❌       |         |                          |
-| telefone       | Telefone de contato         | VARCHAR      | 15      | ❌   | ❌  | ❌  | ❌     | ❌       |         |                          |
-| caracteristica | Usuário aluno ou externo    | VARCHAR      | 2       | ❌   | ❌  | ❌  | ❌     | ❌       |         |                          |
-
+| tipo_usuario  | Papel que o usuário desempenha      | CHOICE      | 20     | ❌   | ❌  | ❌  | ❌     | ❌       |         |                          |
 ---
 
 **Tabela**: Mensagem
@@ -84,8 +67,7 @@ Um ou várioas alunos podem ser atribuídos à um chamado.
 | ----------- | --------------------------------- | ------------ | ------- | ----- | ---- | ---- | ------ | -------- | ------- | ------------------------ |
 | id          | Identificador da mensagem         | INTEGER      |         | ❌   | ✅  | ❌  | ✅     | ✅       |         |                          |
 | data_envio  | Data de envio da mensagem         | TIMESTAMP    |         | ❌   | ❌  | ❌  | ❌     | ❌       |         |                          |
-| id_autor    | Identificador do autor            | INTEGER      |         | ❌   | ❌  | ✅  | ❌     | ❌       |         |                          |
-| eh_professor| Identifica se o autor é professor | BOOLEAN      |         | ❌   | ❌  | ❌  | ❌     | ❌       |         |                          |
+| autor    | Identificador do autor            | INTEGER      |         | ❌   | ❌  | ✅  | ❌     | ❌       |         |                          |
 | texto       | Corpo da mensagem                 | TEXT         | 240     | ❌   | ❌  | ❌  | ❌     | ❌       |         |                          |
 | chamado     | Identificador do chamado vinculado| INTEGER      |         | ❌   | ❌  | ✅  | ❌     | ❌       |         |                          |
 
@@ -115,11 +97,11 @@ Um ou várioas alunos podem ser atribuídos à um chamado.
 
 | Colunas        | Descrição                  | Tipo de Dado | Tamanho | Null | PK  | FK  | Unique | Identity | Default | Check |
 | ---------------| -------------------------- | ------------ | ------- | ---- | --- | --- | ------ | -------- | ------- | ----- |
-| id             |                            | INTEGER      |         | ❌   | ✅  | ❌  | ✅     | ✅       |         |       |
-| professor      |                            | INTEGER      |         | ❌   | ❌  | ✅  | ❌     | ❌       |         |       |
-| status         |                            | VARCHAR      | 30      | ❌   | ❌  | ❌  | ❌     | ❌       |         |       |
-| data_alteracao | data de mudança de status | TIMESTAMP    |         | ❌   | ❌  | ❌  | ❌     | ❌       |         |       |
-| chamada        |                            | INTEGER      |         | ❌   | ❌  | ✅  | ❌     | ❌       |         |       |
+| id             |      Identificador da Alteração                      | INTEGER      |         | ❌   | ✅  | ❌  | ✅     | ✅       |         |       |
+| autor      |  Autor da alteração                          | INTEGER      |         | ❌   | ❌  | ✅  | ❌     | ❌       |         |       |
+| status         |   Status atualizado                         | VARCHAR      | 30      | ❌   | ❌  | ❌  | ❌     | ❌       |         |       |
+| data_alteracao | Data de mudança de status | TIMESTAMP    |         | ❌   | ❌  | ❌  | ❌     | ❌       |         |       |
+| chamado        |      Identificador do chamado                      | INTEGER      |         | ❌   | ❌  | ✅  | ❌     | ❌       |         |       |
 
 
 ---
@@ -133,11 +115,10 @@ Um ou várioas alunos podem ser atribuídos à um chamado.
 
 | Colunas   | Descrição                   | Tipo de Dado | Tamanho | Null  | PK   | FK   | Unique | Identity | Default | Check |
 | --------- | --------------------------- | ------------ | ------- | ----- | ---- | ---- | ------ | -------- | ------- | ----- |
-| id        |                            | INTEGER      |         | ❌   | ✅  | ❌  | ✅     | ✅       |         |       |
-| modelo    |                            | VARCHAR      | 30      | ❌   | ❌  | ❌  | ❌     | ❌       |         |       |
-| cliente   |                            | INTEGER      |         | ❌   | ❌  | ✅  | ❌     | ❌       |         |       |
-| descricao |                            | TEXT         | 240     | ❌   | ❌  | ❌  | ❌     | ❌       |         |       |
-| chamado   |                            | INTEGER      |         | ❌   | ❌  | ✅  | ❌     | ❌       |         |       |
+| id        |    Identificador do Item                        | INTEGER      |         | ❌   | ✅  | ❌  | ✅     | ✅       |         |       |
+| modelo    |       Nome do equipamento                     | VARCHAR      | 30      | ❌   | ❌  | ❌  | ❌     | ❌       |         |       |
+| problema |    Problema descrito                        | VARCHAR         | 30     | ❌   | ❌  | ❌  | ❌     | ❌       |         |       |
+
 
 ---
 
