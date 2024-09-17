@@ -15,8 +15,8 @@
 ## Fluxo Alternativo I - Usuário não cadastrado
 | Ações do ator | Ações do sistema |
 | :-----------------: |:-----------------: | 
-| 1.1 - O usuário preenche os campos de email e senha  | |  
-| | 1.2 - O sistema invalida as informações e exibe mensagem de erro|
+| 1 - O usuário preenche os campos de email e senha  | |  
+| | 2 - O sistema invalida as informações e exibe mensagem de erro|
 
 
 
