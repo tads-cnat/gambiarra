@@ -3,8 +3,9 @@
 - **Ator principal**: Cliente
 - **Atores secundários**: ...	 
 - **Resumo**: Esse caso de uso permite o cliente avaliar um serviço depois de concluído
-- **Pré-condição**: Estar logado no sistema e estar na página de listagem dos um chamados
-- **Pós-Condição**: O sistema desabilita a função de avaliar e exibe a avaliação do usuario
+- **Pré-condição**: Estar logado no sistema, estar na página principal da dashboard e o chamado estar fechado.
+
+- **Pós-Condição**: O sistema retira opção de avaliar da listagem e exibe a avaliação na página de detalhes do chamado 
 
 ## Fluxo Principal
 | Ações do ator | Ações do sistema |
