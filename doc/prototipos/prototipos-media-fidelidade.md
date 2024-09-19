@@ -1,5 +1,19 @@
 # Protótipos de Interface com o Usuário
+## Mapa do Site
+```mermaid
+flowchart TD
+    A[Index] --- B[Login]
+    B --- C[Dashboard Cliente]
+    B --- D[Dashboard Professor]
+    A --- H[Cadastro]
+    H --- B
+    C[Dashboard Cliente] --- E[Abrir chamado]
+    C[Dashboard Cliente] --- F[Detalhes do Chamado]
+    D --- F[Detalhes do Chamado]
+    C --- U[Gerenciar Doação]
+    D --- U
 
+```
 ## Prototipos de media fidelidade
 
 ## A. Tela 1: Index

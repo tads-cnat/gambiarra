@@ -9,16 +9,9 @@
 ## Fluxo Principal
 | Ações do ator | Ações do sistema |
 | :-----------------: | :-----------------: | 
-| 1 - O Professor analisa as informações contidas no chamado e seleciona a opção de aceitá-lo | |  
-| | 2 -  O sistema redireciona para a página de detalhes do chamado, atualizando o seu status para indicar que ele foi aceito | 
-
-## Fluxo Alternativo I - Recusar chamado
-| Ações do ator | Ações do sistema |
-| :-----------------: |:-----------------: | 
-| 1.1 - O Professor analisa as informações contidas no chamado e seleciona a opção de recusá-lo | |  
-| | 1.2 - O sistema redireciona para a página de detalhes do chamado, atualizando o seu status para indicar que ele foi recusado | 
-
+| 1 - O Professor, na linha do chamado pretendido,  clica no botão de aceitar | |  
+| | 2 -  O sistema redireciona o Professor para a página de detalhes do chamado, exibe mensagem de sucesso e o status atualizado | 
 
 ## Diagrama de Sequência - Aceitar Chamado
 
-![diagrama de sequência aceitar chamado](img/aceitar_seq.jpg "Diagrama sequência - Aceitar Chamado")
+![diagrama de sequência aceitar chamado](img/aceitar_seq.png "Diagrama sequência - Aceitar Chamado")

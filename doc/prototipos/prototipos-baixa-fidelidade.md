@@ -1,6 +1,5 @@
 # Protótipos de Interface com o Usuário
 ## Mapa do Site
-> Obs.: propõem-se a utilização de alguma ferramenta que possibilite a representação textual do diagrama. como o seguinte exemplo:
 ```mermaid
 flowchart TD
     A[Index] --- B[Login]
