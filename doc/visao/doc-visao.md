@@ -61,6 +61,8 @@ As tarefas e atividades no sistema duram poucos minutos e podem ser feitas a qua
 
 - Um sistema que conecta pessoas que precisam desse serviço com professores de manutenção do IFRN-CNAT, o sistema possibilita a abertura de um chamado para manutenção de computadores, sendo possível visualizar o perfil do Professor responsável, avaliar o serviço,  visualizar serviços já concluídos e a doação de materiais ou monetária. O professor responsável consegue gerenciar todas as funções do site.
 
+- Além disso, bolsistas que trabalharem dentro dos chamados terão suas atividades registradas no sistema, permitindo um acompanhamento mais eficaz do aprendizado e da experiência prática adquirida. Cada bolsista poderá visualizar suas tarefas, horas trabalhadas e receber feedback dos professores, contribuindo para seu desenvolvimento profissional. 
+
 ## 6. Alternativas concorrentes
 
 No projeto, podemos identificar dois tipos de concorrentes, empresas de prestação de serviços, como a Triider e NetSupport.
