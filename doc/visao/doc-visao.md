@@ -67,7 +67,7 @@ No projeto, podemos identificar dois tipos de concorrentes, empresas de prestaç
 
 ## 7. Visão geral do produto
 
-Nosso produto é uma plataforma simplificada para gerenciamento de chamados de manutenção técnica, direcionada a professores de disciplinas de manutenção de computadores do IFRN - CNAT. Os alunos têm a oportunidade de resolver problemas reais de membros da comunidade escolar, como pais, outros alunos, professores e servidores, enriquecendo seu aprendizado prático e contribuindo para a resolução de questões tecnológicas na escola.  O sistema deve ser compatível com os navegadores mais usados no mercado.
+Nosso produto é uma plataforma focada em gerenciamento de chamados de manutenção técnica e, gerenciamento de atividades e contribuições dos bolsistas nos chamados solicitados, direcionada a professores de disciplinas de manutenção de computadores do IFRN - CNAT. Os alunos têm a oportunidade de resolver problemas reais de membros da comunidade escolar, como pais, outros alunos, professores e servidores, enriquecendo seu aprendizado prático e contribuindo para a resolução de questões tecnológicas na escola.  O sistema deve ser compatível com os navegadores mais usados no mercado.
 
 -	Em última análise, é desejável um processo simplificado de login integrado ao SUAP. Isso garante uma entrada fácil e rápida para professores, alunos e demais membros da comunidade escolar. Com essa integração, proporcionamos que posteriormente, outros campus se juntem à plataforma. Bem como, garante que o público alvo deste produto será atingido.
 
