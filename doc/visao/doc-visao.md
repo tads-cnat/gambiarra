@@ -97,7 +97,7 @@ Nosso produto é uma plataforma focada em gerenciamento de chamados de manutenç
 | NF01   | Controle de acesso Usuário | Só usuários autenticados podem ter acesso ao sistema.             | Segurança     | Obrigatório   |
 | NF02   | Usabilidade e navegabilidade | O sistema necessita ser intuitivo e de fácil usabilidade.        | Performance   | Obrigatório   |
 | NF03   | Disponibilidade             | O sistema precisa ter disponibilidade para usuários acompanharem os chamados a qualquer momento. | Disponibilidade | Desejável  |
-| NF04   | Log de dados                | Registrar Logs ao mudar status e outros aspectos de um chamado.    | Segurança     | Desejável     |
+| NF04   | Auditoria de Logs                | Registrar Logs ao mudar status e outros aspectos de um chamado.    | Segurança     | Desejável     |
 | NF05   | Autenticação via Suap       | Usar base de dados do SUAP para login para restringir o acesso à comunidade escolar. | Segurança     | Desejável     |
 
 
