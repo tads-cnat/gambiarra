@@ -61,13 +61,15 @@ As tarefas e atividades no sistema duram poucos minutos e podem ser feitas a qua
 
 - Um sistema que conecta pessoas que precisam desse serviço com professores de manutenção do IFRN-CNAT, o sistema possibilita a abertura de um chamado para manutenção de computadores, sendo possível visualizar o perfil do Professor responsável, avaliar o serviço,  visualizar serviços já concluídos e a doação de materiais ou monetária. O professor responsável consegue gerenciar todas as funções do site.
 
+- Além disso, bolsistas que trabalharem dentro dos chamados terão suas atividades registradas no sistema, permitindo um acompanhamento mais eficaz do aprendizado e da experiência prática adquirida. Cada bolsista poderá visualizar suas tarefas, horas trabalhadas e receber feedback dos professores, contribuindo para seu desenvolvimento profissional. 
+
 ## 6. Alternativas concorrentes
 
 No projeto, podemos identificar dois tipos de concorrentes, empresas de prestação de serviços, como a Triider e NetSupport.
 
 ## 7. Visão geral do produto
 
-Nosso produto é uma plataforma simplificada para gerenciamento de chamados de manutenção técnica, direcionada a professores de disciplinas de manutenção de computadores do IFRN - CNAT. Os alunos têm a oportunidade de resolver problemas reais de membros da comunidade escolar, como pais, outros alunos, professores e servidores, enriquecendo seu aprendizado prático e contribuindo para a resolução de questões tecnológicas na escola.  O sistema deve ser compatível com os navegadores mais usados no mercado.
+Nosso produto é uma plataforma focada em gerenciamento de chamados de manutenção técnica e, gerenciamento de atividades e contribuições dos bolsistas nos chamados solicitados, direcionada a professores de disciplinas de manutenção de computadores do IFRN - CNAT. Os alunos têm a oportunidade de resolver problemas reais de membros da comunidade escolar, como pais, outros alunos, professores e servidores, enriquecendo seu aprendizado prático e contribuindo para a resolução de questões tecnológicas na escola.  O sistema deve ser compatível com os navegadores mais usados no mercado.
 
 -	Em última análise, é desejável um processo simplificado de login integrado ao SUAP. Isso garante uma entrada fácil e rápida para professores, alunos e demais membros da comunidade escolar. Com essa integração, proporcionamos que posteriormente, outros campus se juntem à plataforma. Bem como, garante que o público alvo deste produto será atingido.
 
@@ -98,7 +100,7 @@ Nosso produto é uma plataforma simplificada para gerenciamento de chamados de m
 | NF01   | Controle de acesso Usuário | Só usuários autenticados podem ter acesso ao sistema.             | Segurança     | Obrigatório   |
 | NF02   | Usabilidade e navegabilidade | O sistema necessita ser intuitivo e de fácil usabilidade.        | Performance   | Obrigatório   |
 | NF03   | Disponibilidade             | O sistema precisa ter disponibilidade para usuários acompanharem os chamados a qualquer momento. | Disponibilidade | Desejável  |
-| NF04   | Log de dados                | Registrar Logs ao mudar status e outros aspectos de um chamado.    | Segurança     | Desejável     |
+| NF04   | Auditoria de Logs                | Registrar Logs ao mudar status e outros aspectos de um chamado.    | Segurança     | Desejável     |
 | NF05   | Autenticação via Suap       | Usar base de dados do SUAP para login para restringir o acesso à comunidade escolar. | Segurança     | Desejável     |
 
 
