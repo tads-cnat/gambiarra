@@ -76,19 +76,20 @@ Nosso produto é uma plataforma simplificada para gerenciamento de chamados de m
 
 ## 8. Requisitos funcionais
 
-| Código | Nome                           | Descrição                                                                                  |
-|--------|--------------------------------|--------------------------------------------------------------------------------------------|
-| RF01   | Fazer login                    | Acessar as funções da plataforma.                                                          |
-| RF02   | Abrir chamado - Cliente         | Fazer um pedido no site para entregar um computador que precise de reparo a um professor. |
-| RF03   | Aceitar chamado - Professor   | O professor visualiza os chamados dos usuários abertos e pode aceitá-los para reparo.       |
-| RF04   | Encerrar chamado  - Professor     | Fechamento de um chamado já aberto.                                                        |
-| RF05   | Gerar relatórios - Professor  | Após o cumprimento do serviço, o professor deve abrir um relatório explicando o serviço.    |
-| RF06   | Atualizar chamado - Professor & Cliente | Atualização dos dados de um chamado já aberto.                                       |
-| RF07   | Gerar ordem de serviço - Professor | Criação de uma etiqueta relacionada à abertura do chamado, especificando problemas, datas e número de chamado. |
-| RF08   | Avaliar serviço - Cliente        | Espaço para o aluno avaliar o serviço prestado pelo professor.                              |
-| RF09   | Efetuar doação - Cliente & Visitante  | Espaço para fazer doações para ajudar a dar continuidade ao projeto.                         |
-| RF10   | Gerenciar doações - Professor  | Espaço para o professor disponibilizar seu email para gerenciar as doações feitas para o projeto.                          |
-
+| Código | Nome                                      | Descrição                                                                                          | Regras de Negócio |
+|--------|-------------------------------------------|----------------------------------------------------------------------------------------------------|-------------------|
+| RF01   | Abertura de chamados                      | O sistema deve disponibilizar um formulário para registrar um equipamento que precisa de reparo.   |                   |
+| RF02   | Aceitação de chamados                     | O sistema deve possibilitar aceitação um chamado.                                                  |                   |
+| RF03   | Encerramento de chamados                  | O sistema deve possibilitar o fechamento de um chamado já aberto.                                  |                   |
+| RF04   | Detalhamento de chamados                  | O sistema deve possibilitar  o detalhamento do chamado.                                            |                   |
+| RF05   | Gerenciamento de status dos chamados      | O sistema deve possibilitar alterações no status do chamado aberto.                                |                   |
+| RF06   | Avaliação de chamados                     | O sistema deve possibilitar o registro de uma avaliação do chamado.                                |                   |
+| RF07   | Listagem de chamados                      | O sistema deve possuir listas com os chamados                                                      |                   |
+| RF08   | Gerenciamento dos bolsistas               | O sistema deve possibilitar adicionar, remover, editar e excluir bolsistas a plataforma.           |                   |
+| RF09   | Atribuição de bolsistas                   | O sistema deve possibilitar atribuir ou remover os bolsistas a um chamado.                         |                   |
+| RF10   | Envio de mensagens                        | O sistema deve possibilitar o envio de mensagens com os participantes do chamado.                  |                   |
+| RF11   | Geração de ordem de serviço               | O sistema deve possibilitar criação de uma etiqueta com informações de um chamado.                 |                   |
+| RF12   | Logar no sistema                          | O sistema deve disponibilizar autenticação para os seus usuários.                                  |                   |
 
 
 ## 9. Requisitos não-funcionais
