@@ -4,17 +4,15 @@
 
 | Data       | Versão | Descrição                  | Autor                          |
 |------------|--------|----------------------------|--------------------------------|
-| 27/02/2024 | 1.0.0    | Início da documentação     | Todos os integrantes da equipe |
-| 13/03/2024 | 1.1.0    | Finalizada primeira versão | Todos os integrantes da equipe |
-| 15/03/2024 | 1.1.1   | <ul> <li> Correção do Objetivo do Projeto</li> <li> Atualização do nome de usuário de "Aluno" para "Cliente" </li> <li> Atualização do nome de usuário de "Doadores" para "Visitantes" </li></ul> | Livia Vitória da Silva |
-| 19/03/2024 | 1.1.2    | Regras de negócio | Livia Vitória da Silva |
-| 30/08/2024 | 1.1.3    | Regras de negócio | Livia Vitória da Silva |
+| 22/10/2024 | 2.0.0  | Reformulação do projeto    | Todos os integrantes da equipe |
+|------------|--------|----------------------------|--------------------------------|
 
 
 ## 1. Objetivo do projeto
 
+Desenvolver um sistema web para o gerenciamento de chamados de manutenção técnica, destinado a oferecer suporte aos professores responsáveis pela manutenção de computadores no IFRN-CNAT. Este sistema permitirá que alunos das disciplinas de manutenção atuem como bolsistas, resolvendo tarefas atribuídas pelos professores dentro de chamados específicos.
 
-Desenvolver um sistema web para gerenciamento de chamados de manutenção técnica visa oferecer suporte aos professores de manutenção de computadores do IFRN-CNAT, incentivando boas práticas profissionais. O projeto se baseia nos pilares de ensino, pesquisa e extensão, com um foco especial na integração curricular da última etapa. Este sistema não apenas facilita a gestão eficiente dos chamados de manutenção, mas também contribui para a promoção de uma cultura de excelência técnica e profissionalismo, alinhada com os objetivos educacionais e institucionais do IFRN-CNAT.
+O projeto fundamenta-se nos pilares de ensino, pesquisa e extensão, com especial ênfase na integração curricular na etapa final do curso. Além de facilitar a gestão eficiente dos chamados, o sistema promove uma cultura de excelência técnica e profissionalismo, alinhando-se aos objetivos educacionais e institucionais do IFRN-CNAT.
 
 ## 2. Descrição do problema
 
@@ -43,7 +41,6 @@ Desenvolver um sistema web para gerenciamento de chamados de manutenção técni
 
 
 ## 4. Descrição do ambiente dos usuários
-
 
 
 - O ambiente dos tipos de usuários variam de acordo com suas atribuições e necessidades.
@@ -104,29 +101,4 @@ Nosso produto é uma plataforma focada em gerenciamento de chamados de manutenç
 | NF05   | Autenticação via Suap       | Usar base de dados do SUAP para login para restringir o acesso à comunidade escolar. | Segurança     | Desejável     |
 
 
-## <span style="color: red">#</span> REGRAS DE NEGÓGIO
-
-
-<blockquote style="border-left: 5px solid red; padding-left: 10px;  background-color: rgba(255, 87, 127, 0)">
-<p><b>Abertura de chamados</b></p>
-<li>Somente <code style="background-color: #1E1E1E; color: red;">clientes</code>
-cadastrados na plataforma poderão abrir chamados.</li>
-</blockquote>
-
-
-<blockquote style="border-left: 5px solid red; padding-left: 10px;  background-color: rgba(255, 87, 127, 0)">
-<p><b>Encerrar chamados</b></p>
-<li>Somente <code style="background-color: #1E1E1E; color: red;">Professores</code> poderam modificar o status do chamado para encerrá-lo.</li>
-</blockquote>
-
-<blockquote style="border-left: 5px solid red; padding-left: 10px; background-color: rgba(255, 87, 127, 0) ">
-<p><b>Gerar relatórios</b></p>
-<li>Gerar ordem de serviço: Apenas um <code style="background-color: #1E1E1E; color: red;">professor</code> logado pode gerar uma ordem de serviço</li>
-<li>Imprimir termo de responsabilidade:
-Um <code style="background-color: #1E1E1E; color: red;">professor</code> ou <code style="background-color: #1E1E1E; color: red;">cliente</code> logados podem gerar um termo de responsabilidade</li>
-<li>Imprimir relatórios de chamados <i>(Em análise, fechados e aceitos)</i>:
-Essa funcionalidade possibilita aos <code style="background-color: #1E1E1E; color: red;">professores</code> criar relatórios com base nos chamados abertos no sistema. Os relatórios apresentam informações sobre o número do chamado e os procedimentos solicitados nele.</li>
-</blockquote>
-
-
-
+## <span style="color: blue">#</span> [REGRAS DE NEGÓGIO](regras/regras-de-negocio.md)
