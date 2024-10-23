@@ -4,17 +4,15 @@
 
 | Data       | Versão | Descrição                  | Autor                          |
 |------------|--------|----------------------------|--------------------------------|
-| 27/02/2024 | 1.0.0    | Início da documentação     | Todos os integrantes da equipe |
-| 13/03/2024 | 1.1.0    | Finalizada primeira versão | Todos os integrantes da equipe |
-| 15/03/2024 | 1.1.1   | <ul> <li> Correção do Objetivo do Projeto</li> <li> Atualização do nome de usuário de "Aluno" para "Cliente" </li> <li> Atualização do nome de usuário de "Doadores" para "Visitantes" </li></ul> | Livia Vitória da Silva |
-| 19/03/2024 | 1.1.2    | Regras de negócio | Livia Vitória da Silva |
-| 30/08/2024 | 1.1.3    | Regras de negócio | Livia Vitória da Silva |
+| 22/10/2024 | 2.0.0  | Reformulação do projeto    | Todos os integrantes da equipe |
+|------------|--------|----------------------------|--------------------------------|
 
 
 ## 1. Objetivo do projeto
 
+Desenvolver um sistema web para o gerenciamento de chamados de manutenção técnica, destinado a oferecer suporte aos professores responsáveis pela manutenção de computadores no IFRN-CNAT. Este sistema permitirá que alunos das disciplinas de manutenção atuem como bolsistas, resolvendo tarefas atribuídas pelos professores dentro de chamados específicos.
 
-Desenvolver um sistema web para gerenciamento de chamados de manutenção técnica visa oferecer suporte aos professores de manutenção de computadores do IFRN-CNAT, incentivando boas práticas profissionais. O projeto se baseia nos pilares de ensino, pesquisa e extensão, com um foco especial na integração curricular da última etapa. Este sistema não apenas facilita a gestão eficiente dos chamados de manutenção, mas também contribui para a promoção de uma cultura de excelência técnica e profissionalismo, alinhada com os objetivos educacionais e institucionais do IFRN-CNAT.
+O projeto fundamenta-se nos pilares de ensino, pesquisa e extensão, com especial ênfase na integração curricular na etapa final do curso. Além de facilitar a gestão eficiente dos chamados, o sistema promove uma cultura de excelência técnica e profissionalismo, alinhando-se aos objetivos educacionais e institucionais do IFRN-CNAT.
 
 ## 2. Descrição do problema
 
@@ -45,7 +43,6 @@ Desenvolver um sistema web para gerenciamento de chamados de manutenção técni
 ## 4. Descrição do ambiente dos usuários
 
 
-
 - O ambiente dos tipos de usuários variam de acordo com suas atribuições e necessidades.
 
 - Os professores necessitam de um local que tenha computador com acesso a internet para acessar os recursos de gerenciamento de chamados e comunicação com clientes. Impressora também é necessária para algumas funcionalidades como impressão de etiquetas, ordem de serviço e relatórios.
@@ -59,7 +56,9 @@ As tarefas e atividades no sistema duram poucos minutos e podem ser feitas a qua
 
 - Nesse cenário visando ajudar tantos os alunos quanto as pessoas que precisam de manutenção confiável e com baixo custo nasce um projeto que visa conectar ambos.
 
-- Um sistema que conecta pessoas que precisam desse serviço com professores de manutenção do IFRN-CNAT, o sistema possibilita a abertura de um chamado para manutenção de computadores, sendo possível visualizar o perfil do Professor responsável, avaliar o serviço,  visualizar serviços já concluídos e a doação de materiais ou monetária. O professor responsável consegue gerenciar todas as funções do site.
+- Um sistema que conecta pessoas que precisam desse serviço com professores de manutenção do IFRN-CNAT, o sistema possibilita a abertura de um chamado para manutenção de computadores, sendo possível visualizar o perfil do Professor responsável, avaliar o serviço,  visualizar serviços já concluídos. O professor responsável consegue gerenciar todas as funções do site.
+
+- Além disso, bolsistas que trabalharem dentro dos chamados terão suas atividades registradas no sistema, permitindo um acompanhamento mais eficaz do aprendizado e da experiência prática adquirida. Cada bolsista poderá visualizar suas tarefas, horas trabalhadas e receber feedback dos professores, contribuindo para seu desenvolvimento profissional. 
 
 ## 6. Alternativas concorrentes
 
@@ -67,7 +66,7 @@ No projeto, podemos identificar dois tipos de concorrentes, empresas de prestaç
 
 ## 7. Visão geral do produto
 
-Nosso produto é uma plataforma simplificada para gerenciamento de chamados de manutenção técnica, direcionada a professores de disciplinas de manutenção de computadores do IFRN - CNAT. Os alunos têm a oportunidade de resolver problemas reais de membros da comunidade escolar, como pais, outros alunos, professores e servidores, enriquecendo seu aprendizado prático e contribuindo para a resolução de questões tecnológicas na escola.  O sistema deve ser compatível com os navegadores mais usados no mercado.
+Nosso produto é uma plataforma focada em gerenciamento de chamados de manutenção técnica e, gerenciamento de atividades e contribuições dos bolsistas nos chamados solicitados, direcionada a professores de disciplinas de manutenção de computadores do IFRN - CNAT. Os alunos têm a oportunidade de resolver problemas reais de membros da comunidade escolar, como pais, outros alunos, professores e servidores, enriquecendo seu aprendizado prático e contribuindo para a resolução de questões tecnológicas na escola.  O sistema deve ser compatível com os navegadores mais usados no mercado.
 
 -	Em última análise, é desejável um processo simplificado de login integrado ao SUAP. Isso garante uma entrada fácil e rápida para professores, alunos e demais membros da comunidade escolar. Com essa integração, proporcionamos que posteriormente, outros campus se juntem à plataforma. Bem como, garante que o público alvo deste produto será atingido.
 
@@ -76,59 +75,30 @@ Nosso produto é uma plataforma simplificada para gerenciamento de chamados de m
 
 ## 8. Requisitos funcionais
 
-| Código | Nome                           | Descrição                                                                                  |
-|--------|--------------------------------|--------------------------------------------------------------------------------------------|
-| RF01   | Fazer login                    | Acessar as funções da plataforma.                                                          |
-| RF02   | Abrir chamado - Cliente         | Fazer um pedido no site para entregar um computador que precise de reparo a um professor. |
-| RF03   | Aceitar chamado - Professor   | O professor visualiza os chamados dos usuários abertos e pode aceitá-los para reparo.       |
-| RF04   | Encerrar chamado  - Professor     | Fechamento de um chamado já aberto.                                                        |
-| RF05   | Gerar relatórios - Professor  | Após o cumprimento do serviço, o professor deve abrir um relatório explicando o serviço.    |
-| RF06   | Atualizar chamado - Professor & Cliente | Atualização dos dados de um chamado já aberto.                                       |
-| RF07   | Gerar ordem de serviço - Professor | Criação de uma etiqueta relacionada à abertura do chamado, especificando problemas, datas e número de chamado. |
-| RF08   | Avaliar serviço - Cliente        | Espaço para o aluno avaliar o serviço prestado pelo professor.                              |
-| RF09   | Efetuar doação - Cliente & Visitante  | Espaço para fazer doações para ajudar a dar continuidade ao projeto.                         |
-| RF10   | Gerenciar doações - Professor  | Espaço para o professor disponibilizar seu email para gerenciar as doações feitas para o projeto.                          |
-
+| Código | Nome                                      | Descrição                                                                                          | Regras de Negócio |
+|--------|-------------------------------------------|----------------------------------------------------------------------------------------------------|-------------------|
+| RF01   | Abertura de chamados                      | O sistema deve disponibilizar um formulário para registrar um equipamento que precisa de reparo.   |                   |
+| RF02   | Aceitação de chamados                     | O sistema deve possibilitar aceitação um chamado.                                                  |                   |
+| RF03   | Encerramento de chamados                  | O sistema deve possibilitar o fechamento de um chamado já aberto.                                  |                   |
+| RF04   | Detalhamento de chamados                  | O sistema deve possibilitar  o detalhamento do chamado.                                            |                   |
+| RF05   | Gerenciamento de status dos chamados      | O sistema deve possibilitar alterações no status do chamado aberto.                                |                   |
+| RF06   | Avaliação de chamados                     | O sistema deve possibilitar o registro de uma avaliação do chamado.                                |                   |
+| RF07   | Listagem de chamados                      | O sistema deve possuir listas com os chamados                                                      |                   |
+| RF08   | Gerenciamento dos bolsistas               | O sistema deve possibilitar adicionar, remover, editar e excluir bolsistas a plataforma.           |                   |
+| RF09   | Atribuição de bolsistas                   | O sistema deve possibilitar atribuir ou remover os bolsistas a um chamado.                         |                   |
+| RF10   | Envio de mensagens                        | O sistema deve possibilitar o envio de mensagens com os participantes do chamado.                  |                   |
+| RF11   | Geração de ordem de serviço               | O sistema deve possibilitar criação de uma etiqueta com informações de um chamado.                 |                   |
+| RF12   | Logar no sistema                          | O sistema deve disponibilizar autenticação para os seus usuários.                                  |                   |
 
 
 ## 9. Requisitos não-funcionais
 | Código | Nome                        | Descrição                                                          | Categoria     | Classificação |
 |--------|-----------------------------|--------------------------------------------------------------------|---------------|---------------|
-| NF01   | Controle de acesso Usuário | Só usuários autenticados podem ter acesso ao sistema.             | Segurança     | Obrigatório   |
+| NF01   | Controle de acesso Usuário | Apenas usuários autenticados podem ter acesso ao sistema.             | Segurança     | Obrigatório   |
 | NF02   | Usabilidade e navegabilidade | O sistema necessita ser intuitivo e de fácil usabilidade.        | Performance   | Obrigatório   |
-| NF03   | Disponibilidade             | O sistema precisa ter disponibilidade para usuários acompanharem os chamados a qualquer momento. | Disponibilidade | Desejável  |
-| NF04   | Log de dados                | Registrar Logs ao mudar status e outros aspectos de um chamado.    | Segurança     | Desejável     |
+| NF03   | Disponibilidade             | O sistema necessita ter disponibilidade para usuários acompanharem os chamados a qualquer momento. | Disponibilidade | Desejável  |
+| NF04   | Auditoria de Logs                | Registrar Logs ao mudar status e outros aspectos de um chamado.    | Segurança     | Desejável     |
 | NF05   | Autenticação via Suap       | Usar base de dados do SUAP para login para restringir o acesso à comunidade escolar. | Segurança     | Desejável     |
 
 
-## <span style="color: red">#</span> REGRAS DE NEGÓGIO
-
-
-<blockquote style="border-left: 5px solid red; padding-left: 10px;  background-color: rgba(255, 87, 127, 0)">
-<p><b>Abertura de chamados</b></p>
-<li>Somente <code style="background-color: #1E1E1E; color: red;">clientes</code>
-cadastrados na plataforma poderão abrir chamados.</li>
-</blockquote>
-
-
-<blockquote style="border-left: 5px solid red; padding-left: 10px;  background-color: rgba(255, 87, 127, 0)">
-<p><b>Encerrar chamados</b></p>
-<li>Somente <code style="background-color: #1E1E1E; color: red;">Professores</code> poderam modificar o status do chamado para encerrá-lo.</li>
-</blockquote>
-
-<blockquote style="border-left: 5px solid red; padding-left: 10px;  background-color: rgba(255, 87, 127, 0)">
-<p><b>Efetuar doação</b></p>
-<li>A contribuição pode ser efetuada tanto por <code style="background-color: #1E1E1E; color: red;">clientes</code> registrados quanto por visitantes que proponham a doação através do email disponibilizado pelo professor.</li>
-</blockquote>
-
-<blockquote style="border-left: 5px solid red; padding-left: 10px; background-color: rgba(255, 87, 127, 0) ">
-<p><b>Gerar relatórios</b></p>
-<li>Gerar ordem de serviço: Apenas um <code style="background-color: #1E1E1E; color: red;">professor</code> logado pode gerar uma ordem de serviço</li>
-<li>Imprimir termo de responsabilidade:
-Um <code style="background-color: #1E1E1E; color: red;">professor</code> ou <code style="background-color: #1E1E1E; color: red;">cliente</code> logados podem gerar um termo de responsabilidade</li>
-<li>Imprimir relatórios de chamados <i>(Em análise, fechados e aceitos)</i>:
-Essa funcionalidade possibilita aos <code style="background-color: #1E1E1E; color: red;">professores</code> criar relatórios com base nos chamados abertos no sistema. Os relatórios apresentam informações sobre o número do chamado e os procedimentos solicitados nele.</li>
-</blockquote>
-
-
-
+## <span style="color: blue">#</span> [REGRAS DE NEGÓGIO](regras/regras-de-negocio.md)
