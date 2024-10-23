@@ -59,7 +59,7 @@ As tarefas e atividades no sistema duram poucos minutos e podem ser feitas a qua
 
 - Nesse cenário visando ajudar tantos os alunos quanto as pessoas que precisam de manutenção confiável e com baixo custo nasce um projeto que visa conectar ambos.
 
-- Um sistema que conecta pessoas que precisam desse serviço com professores de manutenção do IFRN-CNAT, o sistema possibilita a abertura de um chamado para manutenção de computadores, sendo possível visualizar o perfil do Professor responsável, avaliar o serviço,  visualizar serviços já concluídos e a doação de materiais ou monetária. O professor responsável consegue gerenciar todas as funções do site.
+- Um sistema que conecta pessoas que precisam desse serviço com professores de manutenção do IFRN-CNAT, o sistema possibilita a abertura de um chamado para manutenção de computadores, sendo possível visualizar o perfil do Professor responsável, avaliar o serviço,  visualizar serviços já concluídos. O professor responsável consegue gerenciar todas as funções do site.
 
 - Além disso, bolsistas que trabalharem dentro dos chamados terão suas atividades registradas no sistema, permitindo um acompanhamento mais eficaz do aprendizado e da experiência prática adquirida. Cada bolsista poderá visualizar suas tarefas, horas trabalhadas e receber feedback dos professores, contribuindo para seu desenvolvimento profissional. 
 
@@ -97,9 +97,9 @@ Nosso produto é uma plataforma focada em gerenciamento de chamados de manutenç
 ## 9. Requisitos não-funcionais
 | Código | Nome                        | Descrição                                                          | Categoria     | Classificação |
 |--------|-----------------------------|--------------------------------------------------------------------|---------------|---------------|
-| NF01   | Controle de acesso Usuário | Só usuários autenticados podem ter acesso ao sistema.             | Segurança     | Obrigatório   |
+| NF01   | Controle de acesso Usuário | Apenas usuários autenticados podem ter acesso ao sistema.             | Segurança     | Obrigatório   |
 | NF02   | Usabilidade e navegabilidade | O sistema necessita ser intuitivo e de fácil usabilidade.        | Performance   | Obrigatório   |
-| NF03   | Disponibilidade             | O sistema precisa ter disponibilidade para usuários acompanharem os chamados a qualquer momento. | Disponibilidade | Desejável  |
+| NF03   | Disponibilidade             | O sistema necessita ter disponibilidade para usuários acompanharem os chamados a qualquer momento. | Disponibilidade | Desejável  |
 | NF04   | Auditoria de Logs                | Registrar Logs ao mudar status e outros aspectos de um chamado.    | Segurança     | Desejável     |
 | NF05   | Autenticação via Suap       | Usar base de dados do SUAP para login para restringir o acesso à comunidade escolar. | Segurança     | Desejável     |
 
@@ -117,11 +117,6 @@ cadastrados na plataforma poderão abrir chamados.</li>
 <blockquote style="border-left: 5px solid red; padding-left: 10px;  background-color: rgba(255, 87, 127, 0)">
 <p><b>Encerrar chamados</b></p>
 <li>Somente <code style="background-color: #1E1E1E; color: red;">Professores</code> poderam modificar o status do chamado para encerrá-lo.</li>
-</blockquote>
-
-<blockquote style="border-left: 5px solid red; padding-left: 10px;  background-color: rgba(255, 87, 127, 0)">
-<p><b>Efetuar doação</b></p>
-<li>A contribuição pode ser efetuada tanto por <code style="background-color: #1E1E1E; color: red;">clientes</code> registrados quanto por visitantes que proponham a doação através do email disponibilizado pelo professor.</li>
 </blockquote>
 
 <blockquote style="border-left: 5px solid red; padding-left: 10px; background-color: rgba(255, 87, 127, 0) ">
