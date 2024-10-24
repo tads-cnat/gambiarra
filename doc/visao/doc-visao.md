@@ -75,6 +75,8 @@ Nosso produto é uma plataforma focada em gerenciamento de chamados de manutenç
 
 ## 8. Requisitos funcionais
 
+#### <span style="color: blue; font-size: 20px">#</span> [REGRAS DE NEGÓGIO](../regras/regras-de-negocio.md)
+ 
 | Código | Nome                                      | Descrição                                                                                          | Regras de Negócio |
 |--------|-------------------------------------------|----------------------------------------------------------------------------------------------------|-------------------|
 | RF01   | Abertura de chamados                      | O sistema deve disponibilizar um formulário para registrar um equipamento que precisa de reparo.   |                   |
@@ -101,4 +103,3 @@ Nosso produto é uma plataforma focada em gerenciamento de chamados de manutenç
 | NF05   | Autenticação via Suap       | Usar base de dados do SUAP para login para restringir o acesso à comunidade escolar. | Segurança     | Desejável     |
 
 
-## <span style="color: blue">#</span> [REGRAS DE NEGÓGIO](regras/regras-de-negocio.md)
