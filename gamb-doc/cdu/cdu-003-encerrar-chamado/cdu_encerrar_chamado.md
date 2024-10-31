@@ -28,5 +28,7 @@
 
 ![diagrama de sequência encerrar chamado](img/encerrar_seq.png "Diagrama sequência - Encerrar Chamado")
 
+[Voltar aos Casos de Uso](../cdu.md)
+
 
 
