@@ -31,51 +31,51 @@ Ordem para contato com o gerente da equipe:
 
 # Documentação
 
-[Link para os documentos do projeto](doc/documentacao.md)
+[Link para os documentos do projeto](gamb-doc/documentacao.md)
 
 ## Manual da Desenvolvedor
 
-[Orientações para os desenvolvedores do projeto](doc/guia-ds/guia.md)
+[Orientações para os desenvolvedores do projeto](gamb-doc/guia-ds/guia.md)
 
 ## Telas do site
 
 ### 1. Login
 
-![Login do aluno no sistema](doc/imgs/login.gif)
+![Login do aluno no sistema](gamb-doc/imgs/login.gif)
 
 ### 2. Abrir chamado - Aluno
 
-![Aluno abrindo chamado no sistema](doc/imgs/abrir-chamado.gif)
+![Aluno abrindo chamado no sistema](gamb-doc/imgs/abrir-chamado.gif)
 
 ### 3. Aceitar chamado - Professor
 
-![Aluno abrindo chamado no sistema](doc/imgs/aceitar.gif)
+![Aluno abrindo chamado no sistema](gamb-doc/imgs/aceitar.gif)
 
 ### 4. Encerrar chamado - Professor
 
-![Aluno abrindo chamado no sistema](doc/imgs/encerrar.gif)
+![Aluno abrindo chamado no sistema](gamb-doc/imgs/encerrar.gif)
 
 ### 5. Avaliar chamado - Aluno
 
-![Aluno abrindo chamado no sistema](doc/imgs/avaliar.gif)
+![Aluno abrindo chamado no sistema](gamb-doc/imgs/avaliar.gif)
 
 ### 6. Listar chamados
 
-![Aluno abrindo chamado no sistema](doc/imgs/listagem.gif)
+![Aluno abrindo chamado no sistema](gamb-doc/imgs/listagem.gif)
 
 ### 7. Gerenciar bolsista
 
-![Aluno abrindo chamado no sistema](doc/imgs/gerenciar-bolsista.gif)
+![Aluno abrindo chamado no sistema](gamb-doc/imgs/gerenciar-bolsista.gif)
 
 ### 8. Atribuir bolsista
 
-![Aluno abrindo chamado no sistema](doc/imgs/atribuir-bolsista.gif)
+![Aluno abrindo chamado no sistema](gamb-doc/imgs/atribuir-bolsista.gif)
 
 ### 9. Detalhar Chamado e enviar mensagem
 
-![Aluno abrindo chamado no sistema](doc/imgs/detalhar.gif)
+![Aluno abrindo chamado no sistema](gamb-doc/imgs/detalhar.gif)
 
 ### 10. Alterar status do chamado - Professor
 
-![Aluno abrindo chamado no sistema](doc/imgs/alterar-status.gif)
+![Aluno abrindo chamado no sistema](gamb-doc/imgs/alterar-status.gif)
 
