@@ -24,3 +24,5 @@
 | | 2 - O sistema abre um modal com a lista dos bolsistas cadastrados |
 | 3 - O professor desiste da ação e clica no botão de fechar |
 || 4 - O sistema fecha o modal |
+
+[Voltar aos Casos de Uso](../cdu.md)
