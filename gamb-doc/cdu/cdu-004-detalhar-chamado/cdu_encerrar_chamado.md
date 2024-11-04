@@ -2,7 +2,7 @@
 
 - **Ator principal**: Usuário do sistema
 - **Atores secundários**: N/A
-- **Resumo**: Este caso de uso permite que o usuário visualize e detalhe as informações de um chamado específico.
+- **Resumo**: Neste caso de uso, o usuário pode detalhar as informações de um chamado.
 - **Pré-condição**: O usuário deve estar autenticado no sistema e visualizar a lista de chamados.
 - **Pós-condição**: O sistema exibe uma página com detalhes completos do chamado selecionado.
 
