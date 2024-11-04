@@ -1,18 +1,16 @@
 # CDU - Detalhar Chamado
 
 - **Ator principal**: Usuário do sistema
-- **Atores secundários**: ...	 
-- **Resumo**: Neste caso de uso, o usuário pode detalhar as informações do chamado.
-- **Pré-condição**: Estar logado no sistema e estar na página de listagem dos chamados.
-- **Pós-Condição**: O sistema redireciona o usuário para a tela de detalhes do chamado.
+- **Atores secundários**: N/A
+- **Resumo**: Este caso de uso permite que o usuário visualize e detalhe as informações de um chamado específico.
+- **Pré-condição**: O usuário deve estar autenticado no sistema e visualizar a lista de chamados.
+- **Pós-condição**: O sistema exibe uma página com detalhes completos do chamado selecionado.
 
 ## Fluxo Principal
-| Ações do ator | Ações do sistema |
-| :-----------------: | :-----------------: | 
-| 1 - O usuário, na lista dos chamados, clica no botão de acessar || |  
-| | 2 -  O sistema redireciona para a página com todas as informações detalhadas do chamado |    
+
+| Ações do ator                                                                                       | Ações do sistema                                                                                                                                            |
+| --------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1. O usuário, na página de listagem dos chamados, seleciona um chamado e clica no botão "Detalhar". |                                                                                                                                                             |
+|                                                                                                     | 2. O sistema redireciona para a página de detalhes do chamado, exibindo todas as informações relevantes (ex.: descrição, histórico de ações, status, etc.). |
 
 [Voltar aos Casos de Uso](../cdu.md)
-
-
-
