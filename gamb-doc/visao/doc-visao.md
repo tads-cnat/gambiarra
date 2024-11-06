@@ -83,7 +83,7 @@ Nosso produto é uma plataforma focada em gerenciamento de chamados de manutenç
 | RF02   | Aceitação de chamados                     | O sistema deve possibilitar aceitação um chamado.                                                  |                   |
 | RF03   | Encerramento de chamados                  | O sistema deve possibilitar o fechamento de um chamado já aberto.                                  |                   |
 | RF04   | Detalhamento de chamados                  | O sistema deve possibilitar  o detalhamento do chamado.                                            |                   |
-| RF05   | Gerenciamento de status dos chamados      | O sistema deve possibilitar alterações no status do chamado aberto.                                |                   |
+| RF05   | Alteração de status dos chamados          |  O sistema deve possibilitar alterações no status do chamado aberto.                                |                   |
 | RF06   | Avaliação de chamados                     | O sistema deve possibilitar o registro de uma avaliação do chamado.                                |                   |
 | RF07   | Listagem de chamados                      | O sistema deve possuir listas com os chamados                                                      |                   |
 | RF08   | Gerenciamento dos bolsistas               | O sistema deve possibilitar adicionar, remover, editar e excluir bolsistas a plataforma.           |                   |
