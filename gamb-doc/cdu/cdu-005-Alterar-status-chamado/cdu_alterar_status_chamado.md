@@ -9,7 +9,7 @@
 ## Fluxo Principal
 | Ações do ator | Ações do sistema |
 | :-----------------: | :-----------------: | 
-| 1 - O Professor, na lista dos chamados, clica no botão de alterar status || |  
+| 1 - O Professor, na listagem dos chamados, clica no botão de alterar status || |  
 | | 2 -  O sistema mostra uma lista com os status disponíveis | 
 | 3 - O Professor seleciona o status desejado e clica em enviar|| |     
 | | 4 - O sistema altera o status do chamado e retorna uma mensagem de sucesso |   

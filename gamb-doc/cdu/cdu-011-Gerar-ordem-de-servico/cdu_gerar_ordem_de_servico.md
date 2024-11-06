@@ -1,7 +1,7 @@
 # CDU - Geração de ordem de serviço
 
 - **Ator principal**: Professor
-- **Atores secundários**: ...  
+- **Atores secundários**: Bolsista 
 - **Resumo**: Neste caso de uso, o Professor pode gerar uma etiqueta com as principais informações do chamado.
 - **Pré-condição**: Estar logado no sistema e estar na pagina de detalhes do chamado.
 - **Pós-condição**: O sistema retorna uma mensagem de sucesso.
