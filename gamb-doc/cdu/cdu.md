@@ -6,13 +6,19 @@
 
 ## 2. Listagem dos detalhamentos dos casos de uso
 
-1. [CDU-001 - Abrir Chamado](cdu-001-abrir-chamado/cdu_abrir_chamado.md)
-2. [CDU-002 - Aceitar Chamado](cdu-002-aceitar-chamado/cdu_aceitar_chamado.md)
-3. [CDU-003 - Encerrar Chamado](cdu-003-encerrar-chamado/cdu_encerrar_chamado.md)
-4. [CDU-006 - Avaliar Chamado](cdu-006-avaliar-chamado/cdu_avaliar_chamado.md)
-5. [CDU-007 - Listar Chamados](cdu-007-listar-cahamdos/cdu_listar_chamado.md)
-6. [CDU-009 - Atribuir Bolsista](cdu-009-atribuir-bolsistas/cdu_adicionar_bolsista_chamado.md)
-7. [CDU-0012 - Login no Sistema](cdu-0012-login/cdu_login.md)
+01. [CDU-001 - Abrir chamado](cdu-001-Abrir-chamado/cdu_abrir_chamado.md)
+02. [CDU-002 - Aceitar chamado](cdu-002-Aceitar-chamado/cdu_aceitar_chamado.md)
+03. [CDU-003 - Encerrar chamado](cdu-003-Encerrar-chamado/cdu_encerrar_chamado.md)
+04. [CDU-004 - Detalhar chamado](cdu-004-Detalhar-chamado/cdu_detalhar_chamado.md)
+05. [CDU-005 - Alterar status do chamado](cdu-005-Alterar-status-chamado/cdu_alterar_status_chamado.md)
+06. [CDU-006 - Avaliar chamado](cdu-006-Avaliar-chamado/cdu_avaliar_chamado.md)
+07. [CDU-007 - Listar chamados](cdu-007-Listar-cahamdos/cdu_listar_chamado.md)
+08. [CDU-008 - Gerenciar bolsistas](cdu-008-Gerenciar-bolsistas/cdu_gerenciar_bolsistas.md)
+09. [CDU-009 - Atribuir bolsista](cdu-009-Atribuir-bolsistas/cdu_atribuir_bolsista.md)
+10. [CDU-010 - Envio de mensagens](cdu-010-Envio-de-mensagens/cdu_envio_mensagem.md)
+11. [CDU-011 - Gerar ordem de serviço](cdu-011-Gerar-ordem-de-servico/cdu_gerar_ordem_de_servico.md)
+12. [CDU-012 - Login no Sistema](cdu-012-Login/cdu_login.md)
+
 
 ## 3. Casos de uso implementados
 

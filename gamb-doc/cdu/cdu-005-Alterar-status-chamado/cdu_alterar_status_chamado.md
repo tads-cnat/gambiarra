@@ -1,4 +1,4 @@
-# CDU - Gerenciar status do chamado
+# CDU - Alterar status do chamado
 
 - **Ator principal**: Professor
 - **Atores secundários**: ...	 
