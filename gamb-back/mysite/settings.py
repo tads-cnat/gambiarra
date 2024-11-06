@@ -35,6 +35,9 @@ INSTALLED_APPS = [
     #drf
     'rest_framework',
     
+    #swagger
+    'drf_spectacular',
+
     #bootstrap
     'bootstrap5',
 
@@ -149,3 +152,18 @@ AUTH_USER_MODEL = 'users.User'
 # settings.py
 
 LOGIN_URL = '/login/' 
+
+# rest framework configs
+REST_FRAMEWORK = {
+    # YOUR SETTINGS
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+}
+
+# swagger configs
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Gamb Swagger Documentation',
+    'DESCRIPTION': 'Swagger de documentacao de endpoints',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
+    # OTHER SETTINGS
+}
