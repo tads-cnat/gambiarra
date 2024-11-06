@@ -1,7 +1,7 @@
 # CDU - Detalhar Chamado
 
 - **Ator principal**: Cliente
-- **Atores secundários**: Professor
+- **Atores secundários**: Professor, Bolsista
 - **Resumo**: Neste caso de uso, o cliente pode detalhar as informações de um chamado.
 - **Pré-condição**: O cliente deve estar autenticado no sistema e visualizar a lista de chamados.
 - **Pós-condição**: O sistema exibe uma página com detalhes completos do chamado selecionado.

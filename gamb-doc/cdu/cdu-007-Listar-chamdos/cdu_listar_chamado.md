@@ -1,7 +1,7 @@
 # CDU - Listar Chamados
 
 - **Ator principal**: Professor
-- **Atores secundários**: ...	 
+- **Atores secundários**: Cliente, Bolsista
 - **Resumo**: Neste caso de uso, o professor pode listar chamados
 - **Pré-condição**: Estar logado no sistema e estar na página de listagem dos chamados
 - **Pós-Condição**: O professor visualiza todos chamados

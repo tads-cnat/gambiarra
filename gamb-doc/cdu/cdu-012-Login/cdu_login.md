@@ -1,7 +1,7 @@
 # CDU - Login
 
 - **Ator principal**: Cliente
-- **Atores secundários**:  Professor	 
+- **Atores secundários**:  Professor, Bolsista	 
 - **Resumo**: Esse caso de uso permite o cliente ter acesso a todas as funcionalidades do projeto
 - **Pré-condição**: Possuir uma conta no sistema e estar na página de login
 - **Pós-Condição**: O sistema redireciona o cliente para a página principal da dashboard
