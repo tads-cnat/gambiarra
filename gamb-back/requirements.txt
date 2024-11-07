@@ -9,6 +9,8 @@ inflection==0.5.1
 jsonschema==4.23.0
 jsonschema-specifications==2024.10.1
 pillow==10.4.0
+psycopg==3.2.3
+psycopg-binary==3.2.3
 PyYAML==6.0.2
 referencing==0.35.1
 rpds-py==0.21.0
