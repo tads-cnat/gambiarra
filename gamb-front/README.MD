@@ -1,0 +1,1 @@
+# Módulo frontend do projeto gambiarra
