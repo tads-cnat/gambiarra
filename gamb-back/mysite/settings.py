@@ -32,15 +32,26 @@ ALLOWED_HOSTS = ['pdsweb.pythonanywhere.com', 'localhost', '127.0.0.1']
 # Application definition
 
 INSTALLED_APPS = [
+    #drf
+    'rest_framework',
+    
+    #swagger
+    'drf_spectacular',
+
+    #bootstrap
     'bootstrap5',
+
+    #apps
     'gambiarra',
+    'users',
+
+    #django
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'users'
 
 ]
 
@@ -79,9 +90,17 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 DATABASES = {
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': BASE_DIR / 'db.sqlite3',
+    # }
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'PASSWORD': 'postgres',
+        'HOST': 'localhost',  # Accessing PostgreSQL from local
+        'PORT': '5432',
     }
 }
 
@@ -141,3 +160,18 @@ AUTH_USER_MODEL = 'users.User'
 # settings.py
 
 LOGIN_URL = '/login/' 
+
+# rest framework configs
+REST_FRAMEWORK = {
+    # YOUR SETTINGS
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+}
+
+# swagger configs
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Gamb Swagger Documentation',
+    'DESCRIPTION': 'Swagger de documentacao de endpoints',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
+    # OTHER SETTINGS
+}
