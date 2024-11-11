@@ -5,7 +5,7 @@ from users.models import User
 import os
 
 
-
+#criar uma entidade para guardar esses status
 STATUS_CHOICES = [
     ("1","Em Análise"),
     ("2","Aceito"),

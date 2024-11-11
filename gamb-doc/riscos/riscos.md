@@ -1,8 +1,8 @@
 # Riscos
 
-| Risco de desenvolvimento|
-| ------------ |
-| Desligamento de algum membro do projeto |
-| Arquitetura não suportar os casos de uso |
-| Tempo insuficiente para desenvolvimento |
-| Curva de aprendizado de ferramentas |
+| ID | Título | Descrição | Indicador | Estratégia de Mitigação | Plano de Contigência | 
+| ------------ | ------------ | ------------ | ------------ | ------------ | ------------ |
+| RI01 | Desligamento de algum membro do projeto | Saída repentina de algum membro do projeto | <li> Falta de assiduidade nas reuniões </li><li> Falta de comunicação </li>| Comunicação interpessoal transparente e contínua em conjunto com balanceamento de atividades entre os membros | Reorganização de   responsabilidades individuais e reavaliação de requisitos e casos de uso afim de minimizar tarefas |
+| RI02 | Arquitetura não suportar os casos de uso | A arquitetura implantada afeta a funcionalidade e a performance do caso de uso de forma que o requisito que o gerou não foi totalmente atingido | <li>Site lento</li> <li>Experiência do usuário prejudicada</li> <li>Comunicação ruidosa entre os componentes do sistema</li> | Avaliação constante e adaptação arquitetural para que os requisitos sejam atendidos de forma plena, porém sempre seguindo um padrão para facilitar futuras manutenções | Refatorar a arquitetura e estabelecer outros padrões que melhor atendam nossas demandas |
+| RI03 | Tempo insuficiente para desenvolvimento | Falta de tempo para desenvolver as tarefas propostas | <li>Atraso nas entregas</li> <li> Falta de planejamento da tarefa</li>| Dividir tarefas grandes em partes menores, acordar melhor o prazo das tarefa e organizar reuniões para a comunicação entre a equipe | Comunicação entre a equipe e dividir a tarefa entre membros da equipe |
+| RI04 | Curva de aprendizado de ferramentas | Dificuldade para se adequar à novas tecnologias |<li> Falta de celeridade nas entregas </li> <li> Erros inesperados durante execução do código do projeto  </li>| Adotar programação em pares e estudo de documentação em grupo | Reavaliação de importância ou reatribuição de tarefa em que falta domínio da tecnologia para ser concluída |

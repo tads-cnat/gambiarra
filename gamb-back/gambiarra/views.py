@@ -10,6 +10,47 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.contrib import messages
 
+#rest framework
+from rest_framework.generics import(
+    GenericAPIView,
+    CreateAPIView,
+) 
+from rest_framework.response import Response
+from rest_framework import status
+#serializers
+from gambiarra.serializers import(
+    ChamadoSerializer,
+)
+#swagger
+from drf_spectacular.utils import extend_schema       
+@extend_schema(
+    request=ChamadoSerializer,
+    responses=ChamadoSerializer,
+)
+
+#cria novo chamado com status 1
+class CreateChamadoView(CreateAPIView):
+    queryset = Chamado.objects.all()
+    serializer_class = ChamadoSerializer
+
+    def create(self, request):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+
+        return Response(data={
+            "success": True,
+            "data": None,
+            "message": "Chamado aberto com sucesso!"
+        }, status=status.HTTP_201_CREATED)
+
+
+
+
+# def get(self, request, id): #recupera um chamado pelo id
+#     chamado = get_object_or_404(Chamado, id=id)
+#     serializer = ChamadoSerializer(chamado)
+#     return Response(serializer.data)
 
 @method_decorator(login_required, name='dispatch')
 class ListarBolsistas(View):
