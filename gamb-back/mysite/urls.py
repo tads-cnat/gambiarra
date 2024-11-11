@@ -3,6 +3,7 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, SpectacularSwaggerView
+from gambiarra.urls import gambiarra_urls
 
 api_doc = [
     path("schema/", 
@@ -16,11 +17,12 @@ api_doc = [
 ]
 
 api_path = [
-
+    path("", include(gambiarra_urls))
 ]
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include(api_doc)),
+    path('api/', include(api_path)),
     path('api/doc/', include(api_doc)),
 ]
 

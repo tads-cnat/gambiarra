@@ -165,6 +165,7 @@ LOGIN_URL = '/login/'
 REST_FRAMEWORK = {
     # YOUR SETTINGS
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+    
 }
 
 # swagger configs
@@ -172,6 +173,8 @@ SPECTACULAR_SETTINGS = {
     'TITLE': 'Gamb Swagger Documentation',
     'DESCRIPTION': 'Swagger de documentacao de endpoints',
     'VERSION': '1.0.0',
-    'SERVE_INCLUDE_SCHEMA': False,
+    'SERVE_INCLUDE_SCHEMA': True,
     # OTHER SETTINGS
+    'COMPONENT_SPLIT_REQUEST': True,
+    'COMPONENT_NO_READ_ONLY_REQUIRED': True,
 }
