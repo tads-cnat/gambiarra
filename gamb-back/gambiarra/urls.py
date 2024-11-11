@@ -3,7 +3,7 @@ from . import views
 
 
 app_name = 'gambiarra'
-urlpatterns = [
+gambiarra_urls = [
     path('', views.DashboardView.as_view(), name='dashboard'),
     path('abrir-chamado', views.ChamadoForms.as_view(), name='abrir-chamado'),
     path('detalhes/<int:pk>/', views.ChamadoDetailView.as_view(), name='detalhes'),
@@ -17,4 +17,6 @@ urlpatterns = [
     path('alterar-status/<int:pk>/', views.alterar_status, name='alterar_status'),
     path('aceitar/<int:pk>/', views.AceitarView.aceitar, name='aceitar'),
 
+    #drf
+    path('create-chamado/', views.CreateChamadoView.as_view(), name='create-chamado')
 ]
