@@ -6,28 +6,24 @@ O propósito do Projeto Gambiarra é estabelecer uma conexão entre estudantes e
 
 ## Equipe e Formas de Contato
 
-| Integrante| Github| Discord |
-| ------------- | ------------- | ------------- |
-| Leonardo Viana  | [leveau10](https://github.com/leveau10)  | leveau10 |
-| Lívia Vitória | [Naninh4](https://github.com/Naninh4)  | amy_5he |
-| Luiz Gustavo | [1Lgr](https://github.com/1Lgr)   | 1lgr |
-| Ryan Pinheiro | [ryan-pin](https://github.com/ryan-pin)   | santuaryum |
-
+| Integrante     | Github                                  | Discord    |
+| -------------- | --------------------------------------- | ---------- |
+| Leonardo Viana | [leveau10](https://github.com/leveau10) | leveau10   |
+| Lívia Vitória  | [Naninh4](https://github.com/Naninh4)   | amy_5he    |
+| Luiz Gustavo   | [1Lgr](https://github.com/1Lgr)         | 1lgr       |
+| Ryan Pinheiro  | [ryan-pin](https://github.com/ryan-pin) | santuaryum |
 
 ## Horário de Reuniões
-| Dia| Horário| Local |
-| ------------- | ------------- | ------------- |
-|  Segunda-feira | 20:00  | Discord |
-|  Quarta-feira | 9:00 | IFRN |
-|  Domingo | 20:00  | Discord |
 
-## Gerente: prof. Fellipe Aleixo
+| Dia           | Horário | Local   |
+| ------------- | ------- | ------- |
+| Segunda-feira | 20:00   | Discord |
+| Quarta-feira  | 9:00    | IFRN    |
+| Domingo       | 20:00   | Discord |
 
-Ordem para contato com o gerente da equipe:
-1. Comentários das ISSUES no GitHub, mencionando @fellipealeixo;
-1. Chat do Teams - canal da equipe ou contato direto;
-1. Discord: fellipealeixo;
-1. E-mail: fellipe.aleixo@ifrn.edu.br
+## Gerente: prof. Marilia Aranha Freire
+
+Ordem para contato com o gerente da equipe: 2. Discord: mariliaafreire; 3. E-mail: marilia.freire@ifrn.edu.br
 
 # Documentação
 
@@ -78,4 +74,3 @@ Ordem para contato com o gerente da equipe:
 ### 10. Alterar status do chamado - Professor
 
 ![Aluno abrindo chamado no sistema](gamb-doc/imgs/alterar-status.gif)
-
