@@ -21,5 +21,6 @@ export const defaultTheme = {
 	"gray-700": "#29292E",
 	"gray-800": "#202024",
 	"gray-900": "#121214",
-	"gray-text": "#363636",
+
+	gray_text: "#363636",
 } as const;
