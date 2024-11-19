@@ -8,12 +8,12 @@ export const GlobalStyle = createGlobalStyle`
     }
 
     body {
-        background-color: ${props => props.theme.white};
-        color: ${props => props.theme.black};
+        background-color: ${(props) => props.theme.white};
+        color: ${(props) => props.theme.gray};
 
     }
 
     body, input, button, textarea {
         font-family: 'Poppins', sans-serif;
     }
-`
+`;
