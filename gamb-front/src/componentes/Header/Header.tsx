@@ -4,7 +4,7 @@ export function Header() {
     return(
         <HeaderContainer>
             <HeaderContent>
-                <h1>GAMBI</h1>
+                <img src="\assets\gambi-logo.png" alt="" />
                 <nav>
                     <ul>
                         <li><a href="#">Inicio</a></li>
