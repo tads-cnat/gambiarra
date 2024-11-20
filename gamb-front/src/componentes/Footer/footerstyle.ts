@@ -9,7 +9,7 @@ export const FooterContainer = styled.footer`
     .copyright {
         display: flex;
         justify-content: space-between;
-        border-top: 1px solid ${props => props.theme['gray-300']};
+        border-top: 1px solid ${props => props.theme.gray_300};
         padding-top: 2rem;
     }
     div ul {
@@ -77,16 +77,16 @@ export const FooterButton = styled.button<ButtonProps>`
     transition: 0.5s;
 
     background-color: ${({ variant, theme }) =>
-    variant === "verde" ? theme["green-sucess-primary"] : theme["white"]};
-  color: ${({ variant, theme }) =>
-    variant === "verde" ? theme["white"] : theme["black"]};
-  border: ${({ variant, theme }) =>
-    variant === "verde" ? "none" : `1px solid ${theme["black"]}`};
-
-  &:hover {
-    background-color: ${({ variant, theme }) =>
-      variant === "verde" ? theme["green-sucess-primary"] : theme["gray-100"]};
+    variant === "verde" ? theme.green_sucess_primary : theme.white};
     color: ${({ variant, theme }) =>
-      variant === "verde" ? theme["white"] : theme["black"]};
-  }
+    variant === "verde" ? theme.white : theme.black};
+    border: ${({ variant, theme }) =>
+    variant === "verde" ? "none" : `1px solid ${theme.black}`};
+
+    &:hover {
+        background-color: ${({ variant, theme }) =>
+        variant === "verde" ? theme.green_sucess_primary: theme.gray_100};
+        color: ${({ variant, theme }) =>
+        variant === "verde" ? theme.white : theme.black};
+    }
 `;

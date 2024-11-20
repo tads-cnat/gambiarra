@@ -1,4 +1,5 @@
 import { HeaderContainer, HeaderContent } from "./headerstyle";
+import { House } from "@phosphor-icons/react";
 
 export function Header() {
     return(
@@ -7,6 +8,9 @@ export function Header() {
                 <img src="\assets\gambi-logo.png" alt="" />
                 <nav>
                     <ul>
+                        <i>
+                            <House size={32}/>
+                        </i>
                         <li><a href="#">Inicio</a></li>
                         <li><a href="#">Desenvolvedores</a></li>
                         <li><a href="#">Sobre nos</a></li>
