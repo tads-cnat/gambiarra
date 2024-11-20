@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const HeaderContainer = styled.header`
-    background: ${props => props.theme['light-white']};
+    background: ${props => props.theme.cores.light_white};
     padding: 0.875rem;
     width: 95%;
     margin: 0 auto;
@@ -24,18 +24,22 @@ export const HeaderContent = styled.div`
         list-style: none;
         display: flex;
         gap: 5rem;
+        align-items: center;
+
 
         a{
-            color: ${props => props.theme['black']};
+            color: ${props => props.theme.cores.black};
             text-decoration: none;
             font-weight: 500;
             
             transition: 0.5s;
 
             &:hover{
-                color: ${props => props.theme['purple-info-primary']};
+                color: ${props => props.theme.cores.purple_info_primary};
                 font-size: 1.1rem;
             }
         }
     }
+
+
 `

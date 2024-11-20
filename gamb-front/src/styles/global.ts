@@ -6,19 +6,24 @@ export const GlobalStyle = createGlobalStyle`
         padding: 0;
         box-sizing: border-box;
         font-family: 'Poppins', sans-serif;
-        font-weight: $font-weight-light;
+        font-weight: ${(props) => props.theme.fontWeights.regular};
 
 
     }
 
     body {
         background-color: ${(props) => props.theme.cores.light_white};
-        color: ${(props) => props.theme.gray_text};
+        color: ${(props) => props.theme.cores.gray_text};
     }
+    
+
     .icon-dark{
-        color: ${(props) => props.theme.gray_text}  !important;
+        color: ${(props) => props.theme.cores.gray_text};
+        size: 22px;
     }
-    .icon-ligth {
-        color: ${(props) => props.theme.white}  !important;
+
+    .icon-light {
+        color: ${(props) => props.theme.cores.white};
+
     }
 `;

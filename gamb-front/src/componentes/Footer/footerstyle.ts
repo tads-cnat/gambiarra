@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const FooterContainer = styled.footer`
-	background: ${(props) => props.theme["white"]};
+	background: ${(props) => props.theme.cores.light_white};
     padding: 3rem 4.5rem;
     
 
@@ -9,7 +9,7 @@ export const FooterContainer = styled.footer`
     .copyright {
         display: flex;
         justify-content: space-between;
-        border-top: 1px solid ${props => props.theme.gray_300};
+        border-top: 1px solid ${props => props.theme.cores.gray_300};
         padding-top: 2rem;
     }
     div ul {
@@ -17,7 +17,7 @@ export const FooterContainer = styled.footer`
         display: flex;
         gap: 4rem;
         a{
-            color: ${props => props.theme['black']};
+            color: ${props => props.theme.cores.black};
             text-decoration: none;
         }
     }
@@ -52,12 +52,12 @@ export const FooterContent = styled.div`
         gap: 1rem;
         
         a{
-            color: ${props => props.theme['black']};
+            color: ${props => props.theme.cores.black};
             text-decoration: none;
 
             &:hover{
-                color: ${props => props.theme['purple-info-primary']};
-                border-bottom: 1px solid ${props => props.theme['purple-info-primary']};
+                color: ${props => props.theme.cores.purple_info_primary};
+                border-bottom: 1px solid ${props => props.theme.cores.purple_info_primary};
             }
         }
     }
@@ -77,16 +77,16 @@ export const FooterButton = styled.button<ButtonProps>`
     transition: 0.5s;
 
     background-color: ${({ variant, theme }) =>
-    variant === "verde" ? theme.green_sucess_primary : theme.white};
+    variant === "verde" ? theme.cores.green_sucess_primary : theme.cores.white};
     color: ${({ variant, theme }) =>
-    variant === "verde" ? theme.white : theme.black};
+    variant === "verde" ? theme.cores.white : theme.cores.black};
     border: ${({ variant, theme }) =>
-    variant === "verde" ? "none" : `1px solid ${theme.black}`};
+    variant === "verde" ? "none" : `1px solid ${theme.cores.black}`};
 
     &:hover {
         background-color: ${({ variant, theme }) =>
-        variant === "verde" ? theme.green_sucess_primary: theme.gray_100};
+        variant === "verde" ? theme.cores.green_sucess_secondary: theme.cores.gray_100};
         color: ${({ variant, theme }) =>
-        variant === "verde" ? theme.white : theme.black};
+        variant === "verde" ? theme.cores.white : theme.cores.black};
     }
 `;
