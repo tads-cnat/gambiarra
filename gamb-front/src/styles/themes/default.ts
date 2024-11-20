@@ -10,8 +10,8 @@ export const defaultTheme = {
 	"purple-info-primary": "#4338CA",
 	"purple-info-secondary": "#7563D7",
 
-	danger: "DC3545",
-	warning: "#FFC107",
+	"danger": "#DC3545",
+	"warning": "#FFC107",
 
 	"gray-100": "#E1E1E6",
 	"gray-300": "#C4C4CC",
@@ -22,5 +22,5 @@ export const defaultTheme = {
 	"gray-800": "#202024",
 	"gray-900": "#121214",
 
-	gray_text: "#363636",
+	"gray_text": "#363636",
 } as const;

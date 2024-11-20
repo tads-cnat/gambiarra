@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const FooterContainer = styled.footer`
-	background: ${(props) => props.theme["sucess-green"]};
+	background: ${(props) => props.theme["white"]};
     padding: 3rem 4.5rem;
     
 
@@ -56,8 +56,8 @@ export const FooterContent = styled.div`
             text-decoration: none;
 
             &:hover{
-                color: ${props => props.theme['purple-info']};
-                border-bottom: 1px solid ${props => props.theme['purple-info']};
+                color: ${props => props.theme['purple-info-primary']};
+                border-bottom: 1px solid ${props => props.theme['purple-info-primary']};
             }
         }
     }
@@ -77,7 +77,7 @@ export const FooterButton = styled.button<ButtonProps>`
     transition: 0.5s;
 
     background-color: ${({ variant, theme }) =>
-    variant === "verde" ? theme["green-sucess"] : theme["white"]};
+    variant === "verde" ? theme["green-sucess-primary"] : theme["white"]};
   color: ${({ variant, theme }) =>
     variant === "verde" ? theme["white"] : theme["black"]};
   border: ${({ variant, theme }) =>
@@ -85,7 +85,7 @@ export const FooterButton = styled.button<ButtonProps>`
 
   &:hover {
     background-color: ${({ variant, theme }) =>
-      variant === "verde" ? theme["green-sucess2"] : theme["gray-100"]};
+      variant === "verde" ? theme["green-sucess-primary"] : theme["gray-100"]};
     color: ${({ variant, theme }) =>
       variant === "verde" ? theme["white"] : theme["black"]};
   }

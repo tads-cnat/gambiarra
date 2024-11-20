@@ -33,7 +33,7 @@ export const HeaderContent = styled.div`
             transition: 0.5s;
 
             &:hover{
-                color: ${props => props.theme['purple-info']};
+                color: ${props => props.theme['purple-info-primary']};
                 font-size: 1.1rem;
             }
         }
