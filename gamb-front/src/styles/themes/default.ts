@@ -1,3 +1,5 @@
+import { space } from "postcss/lib/list";
+
 export const defaultTheme = {
 	cores: {
 		white: "#FFFFFF",
@@ -55,6 +57,23 @@ export const defaultTheme = {
 		font_scale_up_05: 2, // rem 32px h3
 		font_scale_up_06: 2.5, // rem 40px h2
 		font_scale_up_07: 3, // rem 48px h1
+
+	},
+	space:{
+		
+		spacing_scale_default: 0, // rem - equivalente a 0px
+		spacing_scale_up_01: 0.3125, // rem - equivalente a 5px
+		spacing_scale_up_02: 0.625, // rem - equivalente a 10px
+		spacing_scale_up_03: 0.75, // rem - equivalente a 12px
+		spacing_scale_up_04: 1, // rem - equivalente a 16px
+		spacing_scale_up_05: 1.25, // rem - equivalente a 20px
+		spacing_scale_up_06: 1.5, // rem - equivalente a 24px
+		spacing_scale_up_07: 2, // rem - equivalente a 32px
+		spacing_scale_up_08: 2.5, // rem - equivalente a 40px
+		spacing_scale_up_09: 3, // rem - equivalente a 48px
+		spacing_scale_up_10: 3.5, // rem - equivalente a 56px
+		spacing_scale_up_11: 4, // rem - equivalente a 64px
+		spacing_scale_up_12: 4.5, // rem - equivalente a 72px
 
 	},
 	teste: "flex flex-col w-1/2 bg-red-500 p-4"
