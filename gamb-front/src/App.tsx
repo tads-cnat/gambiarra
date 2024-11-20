@@ -4,10 +4,16 @@ import { GlobalStyle } from "./styles/global";
 import { Dashboard } from "./dashboard";
 
 export function App() {
+  const style = defaultTheme;
+
   return (
     <ThemeProvider theme={defaultTheme}>
       <GlobalStyle />
       <Dashboard />
+  
+      <div className={style.teste}>
+        <p>Exemplo de como passar classes do tailwind através do styled componentes</p>
+      </div>
     </ThemeProvider>
 
   )

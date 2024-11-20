@@ -56,6 +56,7 @@ export const defaultTheme = {
 		font_scale_up_06: 2.5, // rem 40px h2
 		font_scale_up_07: 3, // rem 48px h1
 
-	}
+	},
+	teste: "flex flex-col w-1/2 bg-red-500 p-4"
 	
 } as const;
