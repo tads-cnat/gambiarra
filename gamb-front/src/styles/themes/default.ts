@@ -12,7 +12,16 @@ export const defaultTheme = {
 		purple_info_secondary: "#7563D7",
 	
 		danger: "#DC3545",
+		danger_second: '#EA868F',
+		danger_hover: '#D95F6B',
+
 		warning: "#FFC107",
+		warning_second: '#FBD870',
+
+		background: '#F8F8F8',
+
+		blue_info_light: '#C9E5FF',
+		blue_info: '#61B3FF',
 	
 		// No mais claro para o mais escuro
 		gray_100: "#E1E1E6",
