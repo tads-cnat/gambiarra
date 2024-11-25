@@ -9,7 +9,7 @@ export function App() {
   return (
     <ThemeProvider theme={defaultTheme}>
       <GlobalStyle />
-      <Dashboard />
+      {/* <Dashboard /> */}
   
       <div className={style.teste}>
         <p>Exemplo de como passar classes do tailwind através do styled componentes</p>
