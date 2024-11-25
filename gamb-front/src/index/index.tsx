@@ -1,5 +1,5 @@
-import { Footer } from "../componentes/Footer/Footer";
-import { Header } from "../componentes/Header/Header";
+import { Footer } from "../componentes/GambFooter/Footer";
+import { Header } from "../componentes/GambHeader/Header";
 
 import GambButton from "../componentes/Button/GambButton";
 
