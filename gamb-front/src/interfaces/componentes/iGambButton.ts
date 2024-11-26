@@ -1,3 +1,5 @@
+import { Icon } from "@phosphor-icons/react";
+
 export interface GambButtonProps {
 	// Define a variante de cor do botão.
 	variant: "verde" | "amarelo" | "vermelho" | "roxo" | "branco";
@@ -25,4 +27,10 @@ export interface GambButtonProps {
 
 	// Define o atributo data-cypress para testes automatizados.
 	dataCypress?: string;
+
+	// Define o tamanho do botão. Opções: "small" | "medium" | "large".
+	size?: "small" | "medium" | "large";
+
+	// Define o ícone a ser exibido no botão.
+	icon?: string;
 }

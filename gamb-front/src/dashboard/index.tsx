@@ -27,6 +27,8 @@ export function Dashboard() {
 			<GambButton
 				label="Botão Roxo"
 				variant="roxo"
+				icon="house"
+				size="medium"
 			/>
 			<div className={style.teste}>
 				<p>
