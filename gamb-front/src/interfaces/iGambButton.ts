@@ -1,0 +1,28 @@
+export interface GambButtonProps {
+	// Define a variante de cor do botão.
+	variant: "verde" | "amarelo" | "vermelho" | "roxo" | "branco";
+
+	// Permite adicionar conteúdo filho dentro do botão (ícones, texto, etc.).
+	children?: React.ReactNode;
+
+	// Função a ser executada quando o botão for clicado.
+	onClick?: () => void;
+
+	// Define o tipo do botão. Opções: "button" | "submit" | "reset".
+	type?: "button" | "submit" | "reset";
+
+	// Indica se o botão está desabilitado (inativo).
+	disabled?: boolean;
+
+	// Permite adicionar classes CSS personalizadas ao botão.
+	className?: string;
+
+	// Define estilos inline para o botão.
+	style?: React.CSSProperties;
+
+	// Texto exibido no botão.
+	label: string;
+
+	// Define o atributo data-cypress para testes automatizados.
+	dataCypress?: string;
+}
