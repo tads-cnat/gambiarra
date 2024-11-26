@@ -37,6 +37,7 @@ class Bolsista(models.Model):
 class Item(models.Model):
     modelo = models.CharField(max_length=30, default="")
     problema = models.CharField(max_length=30, default="")
+    Acessorio = models.ManyToManyField(Acessorio)
 
 
 class Chamado(models.Model):
@@ -66,4 +67,6 @@ class Alteracao(models.Model):
     data_alteracao = models.DateTimeField('Data de modificação', default=timezone.now)
     chamado = models.ForeignKey(Chamado, on_delete=models.CASCADE)
 
-
+class Acessorio(models.Model):
+    nome = models.CharField(max_length = 50, default="")
+    item = models.ForeignKey(Item, on_delete=models.CASCADE)   
