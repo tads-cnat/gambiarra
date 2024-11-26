@@ -9,7 +9,7 @@ class ChamadoSerializer(serializers.ModelSerializer):
 class AcessorioSerializer(serializers.ModelSerializer):
     class Meta:
         model = Acessorio
-        filds = ['nome', 'item']
+        fields = ['nome', 'item']
 
 
 
