@@ -50,7 +50,7 @@ export default function Icon(props: GambIconProps): JSX.Element {
 		<>
 			{IconComponent &&
 				React.cloneElement(IconComponent, {
-					size,
+					size: size || 16,
 					color,
 					className,
 				})}

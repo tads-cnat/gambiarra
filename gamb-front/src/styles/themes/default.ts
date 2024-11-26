@@ -1,5 +1,3 @@
-import { space } from "postcss/lib/list";
-
 export const defaultTheme = {
 	cores: {
 		white: "#FFFFFF",
