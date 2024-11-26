@@ -3,7 +3,7 @@ import { ChamadoSubmit } from "../../interfaces/models/iChamado";
 import axiosInstance from "../base/axiosInstance";
 import BaseService from "../base/baseService";
 
-class AbrirChamadoService extends BaseService {
+class ChamadoService extends BaseService {
 	async listarChamados(id: string, filters: ChamadoFilter): Promise<unknown> {
 		const response = await axiosInstance.get(`chamados/${id}/cursos/`, {
 			params: filters,
@@ -16,4 +16,4 @@ class AbrirChamadoService extends BaseService {
 	}
 }
 
-export default new AbrirChamadoService("chamados/");
+export default new ChamadoService("chamados/");
