@@ -36,8 +36,7 @@ class Bolsista(models.Model):
 
 class Item(models.Model):
     modelo = models.CharField(max_length=30, default="")
-    problema = models.CharField(max_length=30, default="")
-    Acessorio = models.ManyToManyField(Acessorio)
+    diagnostico = models.CharField(max_length=200, default="")
 
 
 class Chamado(models.Model):
