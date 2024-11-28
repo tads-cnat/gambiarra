@@ -5,7 +5,7 @@ interface ButtonProps {
 }
 
 export const ButtonGeneric = styled.button<ButtonProps>`
-	padding: 0.875rem 1.5rem;
+	padding: 0.8rem 1rem;
 	border-radius: 6px;
 	cursor: pointer;
 	border: 0;
@@ -14,8 +14,8 @@ export const ButtonGeneric = styled.button<ButtonProps>`
 
 	transition: 0.5s;
 
-    /* variação de cores */
-    
+	/* variação de cores */
+
 	background-color: ${({ variant, theme }) =>
 		variant === "verde"
 			? theme.cores.green_sucess_primary
@@ -61,4 +61,6 @@ export const ButtonGeneric = styled.button<ButtonProps>`
 				? theme.cores.black
 				: theme.cores.white};
 	}
+	display: flex;
+	gap: 2px;
 `;

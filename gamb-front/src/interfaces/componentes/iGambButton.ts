@@ -25,4 +25,10 @@ export interface GambButtonProps {
 
 	// Define o atributo data-cypress para testes automatizados.
 	dataCypress?: string;
+
+	// Define o tamanho do botão. Opções: "small" | "medium" | "large".
+	size?: "small" | "medium" | "large";
+
+	// Define o ícone a ser exibido no botão.
+	icon?: string;
 }

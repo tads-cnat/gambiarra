@@ -1,8 +1,11 @@
-import GambButton from "../componentes/Button/GambButton";
-import { Footer } from "../componentes/Footer/Footer";
-import { Header } from "../componentes/Header/Header";
+import GambButton from "../componentes/GambButton/Button";
+import { Footer } from "../componentes/GambFooter/Footer";
+import { Header } from "../componentes/GambHeader/Header";
+import { defaultTheme } from "../styles/themes/default";
 
 export function Dashboard() {
+	const style = defaultTheme;
+
 	return (
 		<div>
 			<Header />
@@ -24,10 +27,17 @@ export function Dashboard() {
 			<GambButton
 				label="Botão Roxo"
 				variant="roxo"
+				icon="house"
+				size="medium"
 			/>
+			<div className={style.teste}>
+				<p>
+					Exemplo de como passar classes do tailwind através do styled
+					componentes
+				</p>
+			</div>
 
 			<Footer />
 		</div>
 	);
 }
-
