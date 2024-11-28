@@ -16,7 +16,7 @@ STATUS_CHOICES = [
     ("7","Resolvido"),
     ("8","Recusado"),
 ] 
-
+ 
 
 class Bolsista(models.Model):
     nome = models.CharField(max_length=100, default="")
