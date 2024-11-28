@@ -1,8 +1,12 @@
 export interface ChamadoSubmit {
 	titulo: string;
 	descricao: string;
-	acessorios: string[];
-	item: string;
+	item: {
+		modelo: string;
+		acessorios: {
+			nome: string;
+		}[];
+	};
 }
 
 export interface Chamados {

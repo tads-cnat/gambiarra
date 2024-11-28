@@ -2,7 +2,7 @@ import axiosInstance from "./axiosInstance";
 import { BaseFilter } from "../../filters/BaseFilter";
 
 class BaseService {
-	serviceUrl: string = "https://rickandmortyapi.com/api/character/"; // TROCAR PELA API DO GAMBIARRA
+	serviceUrl: string = "http:localhost//api/v1/"; // TROCAR PELA API DO GAMBIARRA
 
 	constructor(serviceUrl: string) {
 		this.serviceUrl = serviceUrl;
