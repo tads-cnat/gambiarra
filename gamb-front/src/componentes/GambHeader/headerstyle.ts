@@ -32,6 +32,11 @@ export const HeaderContent = styled.div`
             text-decoration: none;
             font-weight: 500;
             
+            /* alinhar icone ao texto */
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+
             transition: 0.5s;
 
             &:hover{
