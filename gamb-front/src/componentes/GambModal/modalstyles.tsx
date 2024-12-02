@@ -58,7 +58,7 @@ export const ModalCard = styled.div`
             }
         }
 
-        button[type="submit"] {
+        /* button[type="submit"] {
             height: 58px;
             border: 0;
             background: ${props => props.theme.cores.green_sucess_primary};
@@ -67,11 +67,11 @@ export const ModalCard = styled.div`
             border-radius: 16px;
             margin-top: 1.5rem;
             cursor: pointer;
-        }
+        } */
     }
 `;
 
-export const ModalButtons = styled.div`
+export const ModalFooter = styled.div`
     display: flex;
     padding: 11px;
     justify-content: flex-end;
