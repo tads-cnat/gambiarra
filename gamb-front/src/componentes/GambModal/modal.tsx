@@ -1,4 +1,4 @@
-import { CloseButton, ModalContent, ModalOverlay } from "./modalstyles";
+import { CloseButton, ModalCard, ModalOverlay } from "./modalstyles";
 
 interface ModalProps {
 	isOpen: boolean;
@@ -12,12 +12,12 @@ export function Modal({ isOpen, onClose, children }: ModalProps) {
 			isOpen={isOpen}
 			onClick={onClose}
 		>
-			<ModalContent onClick={(e) => e.stopPropagation()}>
+			<ModalCard onClick={(e) => e.stopPropagation()}>
 				<CloseButton onClick={onClose}>&times;</CloseButton>
-
+				
                 {children}
 
-			</ModalContent>
+			</ModalCard>
 		</ModalOverlay>
 	);
 }

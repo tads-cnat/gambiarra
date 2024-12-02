@@ -4,6 +4,7 @@ import { GlobalStyle } from "./styles/global";
 
 import { Modal } from "./componentes/GambModal/modal";
 import { useState } from "react";
+import { ModalButtons, ModalHeader } from "./componentes/GambModal/modalstyles";
 
 
 export function App() {
@@ -20,15 +21,30 @@ export function App() {
       {/* <Dashboard /> */}
 
       <div>
-          <Modal isOpen={isModalOpen} onClose={closeModal}>
+          <Modal isOpen={isModalOpen} onClose={closeModal}> 
                 {/* content aqui */}
                 <form>
-                    <h2>Modal</h2>
-
-                    <label >nome</label>
-                    <input type="text" placeholder="placeholder" />
+                  <ModalHeader>
+                    <h2>Abrir Chamado</h2>
+                  </ModalHeader>
                     
-                    <button type="submit">Enviar</button>
+                    <h3>| Dados Gerais *</h3>
+
+                    <label >Nome</label>
+                    <input type="text" placeholder="placeholder" />
+
+                    <label >Descrição</label>
+                    <input type="text" placeholder="placeholder" />
+
+                    <label >Modelo</label>
+                    <input type="text" placeholder="placeholder" />
+
+                    
+                    <ModalButtons>
+                      <button type="submit">Fechar</button>
+                      <button type="submit">Enviar</button> 
+                    </ModalButtons>
+
                 </form>
           </Modal>
 

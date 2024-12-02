@@ -18,10 +18,19 @@ export const CloseButton = styled.button`
   cursor: pointer;
 `;
 
-export const ModalContent = styled.div`
+export const ModalHeader = styled.div`
+    display: flex;
+    padding: 9px 0px;
+    align-items: center;
+    gap: 10px;
+    align-self: stretch;
+    font-size: 2rem;
+`
+
+export const ModalCard = styled.div`
     min-width: 32rem;
     border: 6px;
-    padding: 2.5rem 3rem;
+    padding: 1.25rem;
     background: ${props => props.theme.cores.white};
     border-radius: 30px;
 
@@ -61,3 +70,12 @@ export const ModalContent = styled.div`
         }
     }
 `;
+
+export const ModalButtons = styled.div`
+    display: flex;
+    padding: 11px;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 10px;
+    align-self: stretch;
+`
