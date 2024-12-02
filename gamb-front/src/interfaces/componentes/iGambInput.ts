@@ -1,3 +1,5 @@
+import { FieldError} from "react-hook-form";
+
 export interface InputFieldProps {
     /**
      * Nome do campo no formulário, usado para identificação no React Hook Form.
@@ -44,6 +46,8 @@ export interface InputFieldProps {
     /**
      * Mensagem de erro a ser exibida caso o campo não passe na validação.
      */
-    errorMessage?: string;
-  }
+    errorMessage?: string | undefined;
+
+    textAux?: string;
+}
   

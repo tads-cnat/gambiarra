@@ -1,43 +1,45 @@
+import { useForm } from "react-hook-form";
 import GambButton from "../componentes/GambButton/Button";
-import { Footer } from "../componentes/GambFooter/Footer";
-import { Header } from "../componentes/GambHeader/Header";
+import InputField from "../componentes/GambInput/Input";
 import { defaultTheme } from "../styles/themes/default";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { formSchema } from "./schema";
 
 export function Dashboard() {
-	const style = defaultTheme;
+  const style = defaultTheme;
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(formSchema), // Adiciona o resolver do schema
+  });
 
-	return (
-		<div>
-			<Header />
-			<h1>Dashboard</h1>
+  const onSubmit = (data: any) => {
+    console.log("Form data:", data);
+  };
 
-			{/* teste botões */}
-			<GambButton
-				label="Botão Verde"
-				variant="verde"
-			/>
-			<GambButton
-				label="Botão Amarelo"
-				variant="amarelo"
-			/>
-			<GambButton
-				label="Botão Vermelho"
-				variant="vermelho"
-			/>
-			<GambButton
-				label="Botão Roxo"
-				variant="roxo"
-				icon="house"
-				size="medium"
-			/>
-			<div className={style.teste}>
-				<p>
-					Exemplo de como passar classes do tailwind através do styled
-					componentes
-				</p>
-			</div>
-
-			<Footer />
-		</div>
-	);
+  return (
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+      >
+        <InputField
+          name="email"
+          control={control}
+          label="Email"
+          placeholder="Digite seu email"
+          type="email"
+          errorMessage={errors.email?.message} // Exibe mensagem de erro
+        />
+        <InputField
+          name="password"
+          control={control}
+          label="Senha"
+          placeholder="Digite sua senha"
+          type="password"
+          errorMessage={errors.password?.message} // Exibe mensagem de erro
+        />
+        <GambButton variant="roxo" type="submit" label="Enviar" />
+      </form>
+  );
 }
