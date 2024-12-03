@@ -1,6 +1,7 @@
 import GambButton from "../componentes/GambButton/Button";
 import { Footer } from "../componentes/GambFooter/Footer";
 import { Header } from "../componentes/GambHeader/Header";
+import GambMessage from "../componentes/GambMessage/Message";
 import { defaultTheme } from "../styles/themes/default";
 
 export function Dashboard() {
@@ -11,6 +12,10 @@ export function Dashboard() {
 			<Header />
 			<h1>Dashboard</h1>
 
+			<GambMessage
+				type="success"
+				text="Mensagem de sucesso"
+			/>
 			{/* teste botões */}
 			<GambButton
 				label="Botão Verde"
