@@ -7,17 +7,18 @@ interface ModalProps {
 }
 
 export function Modal({ isOpen, onClose, children }: ModalProps) {
-	return (
-		<ModalOverlay
-			isOpen={isOpen}
-			onClick={onClose}
-		>
-			<ModalCard onClick={(e) => e.stopPropagation()}>
-				<CloseButton onClick={onClose}>&times;</CloseButton>
-				
-                {children}
+	if (isOpen) {
+		return (
+			<ModalOverlay
+				isOpen={isOpen}
+				onClick={onClose}
+			>
+				<ModalCard onClick={(e) => e.stopPropagation()}>
+					<CloseButton onClick={onClose}>&times;</CloseButton>
 
-			</ModalCard>
-		</ModalOverlay>
-	);
+					{children}
+				</ModalCard>
+			</ModalOverlay>
+		);
+	}
 }
