@@ -27,6 +27,7 @@ export default function GambButton(props: GambButtonProps): JSX.Element {
 				data-cypress={dataCypress}
 			>
 				<ButtonGeneric variant={variant}>
+					{label}
 					{icon && (
 						<Icon
 							icon={icon}
@@ -41,7 +42,6 @@ export default function GambButton(props: GambButtonProps): JSX.Element {
 							}
 						/>
 					)}
-					{label}
 				</ButtonGeneric>
 			</button>
 		</>
