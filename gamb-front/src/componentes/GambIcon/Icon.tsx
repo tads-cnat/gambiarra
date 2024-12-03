@@ -21,6 +21,9 @@ import {
 	WarningDiamond,
 	Warning,
 	X,
+	CaretRight,
+	CaretCircleDown,
+	FileText,
 } from "@phosphor-icons/react";
 import { GambIconProps } from "../../interfaces/componentes/iGambIcon";
 import React from "react";
@@ -36,7 +39,7 @@ const iconComponents: { [key: string]: JSX.Element } = {
 	trash: <Trash />,
 	lock: <Lock />,
 	camera: <Camera />,
-	shoppingCart: <ShoppingCart />,
+	shopping_cart: <ShoppingCart />,
 	calendar: <Calendar />,
 	clipboard: <Clipboard />,
 	play: <Play />,
@@ -48,6 +51,9 @@ const iconComponents: { [key: string]: JSX.Element } = {
 	warning: <WarningDiamond/>,
 	danger: <Warning/>,
 	close: <X/>,
+	seta_direita: <CaretRight />,
+	seta_baixo: <CaretCircleDown />,
+	arquivo: <FileText />,
 };
 
 export default function Icon(props: GambIconProps): JSX.Element {
