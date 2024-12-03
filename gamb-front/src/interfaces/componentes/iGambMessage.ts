@@ -1,13 +1,11 @@
 export type MessageType = "success" | "info" | "warning" | "danger";
 
 export interface MessageProps {
-  
-  // Tipo de mensagem
-  type: MessageType; 
-  
-  // Texto a ser exibido
-  text: string;      
+	// Tipo de mensagem
+	type: MessageType;
 
-  // Função opcional para fechar o alerta
-  onClose?: () => void; 
+	// Texto a ser exibido
+	text: string;
+
+	viewClose: boolean;
 }
