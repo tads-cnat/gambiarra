@@ -1,19 +1,14 @@
 import GambButton from "../componentes/GambButton/Button";
-import { Footer } from "../componentes/GambFooter/Footer";
-import { Header } from "../componentes/GambHeader/Header";
 import GambMessage from "../componentes/GambMessage/Message";
-import  GambMessage  from "../componentes/GambMessage/Message";
-import { defaultTheme } from "../styles/themes/default";
 import { Sidebar } from "../componentes/Sidebar/Sidebar";
+import { defaultTheme } from "../styles/themes/default";
 
 export function Dashboard() {
 	const style = defaultTheme;
 
-    return (
-        <div>
+    return ( <>
             <h1>Dashboard</h1>
             <Sidebar />
-        		<div>
           <h1>Dashboard</h1>
 
         <GambMessage 
@@ -42,7 +37,6 @@ export function Dashboard() {
             componentes
           </p>
         </div>
-
-     </div>
+        </>
     );
 }
