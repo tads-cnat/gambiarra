@@ -16,7 +16,6 @@ gambiarra_urls = [
     path('avaliar/<int:pk>/', views.AvaliarForms.as_view(), name='avaliar'),
     path('alterar-status/<int:pk>/', views.alterar_status, name='alterar_status'),
     path('aceitar/<int:pk>/', views.AceitarView.aceitar, name='aceitar'),
-
     #drf
-    path('create-chamado/', views.CreateChamadoView.as_view(), name='create-chamado')
+    path('chamado/', views.CreateChamadoView.as_view(), name='create-chamado')
 ]
