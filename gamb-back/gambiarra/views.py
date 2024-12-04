@@ -19,32 +19,33 @@ from rest_framework.response import Response
 from rest_framework import status
 #serializers
 from gambiarra.serializers import(
-    ChamadoSerializer,
+    CreateChamadoSerializer,
 )
 #swagger
 from drf_spectacular.utils import extend_schema       
 @extend_schema(
-    request=ChamadoSerializer,
-    responses=ChamadoSerializer,
+    request=CreateChamadoSerializer,
+    responses=CreateChamadoSerializer,
 )
 
 #cria novo chamado com status 1
 class CreateChamadoView(CreateAPIView):
     queryset = Chamado.objects.all()
-    serializer_class = ChamadoSerializer
+    serializer_class = CreateChamadoSerializer
 
     def create(self, request):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
+        chamado = serializer.instance
 
         return Response(data={
             "success": True,
-            "data": None,
+            "data": {
+                chamado.id
+            },
             "message": "Chamado aberto com sucesso!"
         }, status=status.HTTP_201_CREATED)
-
-
 
 
 # def get(self, request, id): #recupera um chamado pelo id
