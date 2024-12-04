@@ -27,7 +27,7 @@ export const defaultTheme = {
 		gray_100: "#E1E1E6",
 		gray_300: "#C4C4CC",
 		gray_400: "#8D8D99",
-		gray_500: "#7C7C8A",
+		gray_500: "#5F5F5F",
 		gray_text: "#363636",
 		gray_600: "#323238",
 		gray_700: "#29292E",
@@ -44,7 +44,8 @@ export const defaultTheme = {
 	},
 
 	fontSize: {
-		font_scale_up_01: 0.5, // rem 8px
+		font_scale_up_00: 0.5, // rem 8px
+		font_scale_up_01: 0.625, // rem 10px
 		font_scale_up_02: 0.75, // rem 12px
 		font_scale_up_03: 0.875, // rem 14px
 		font_scale_up_default: 1, // rem 16px
