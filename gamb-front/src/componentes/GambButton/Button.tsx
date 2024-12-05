@@ -26,18 +26,21 @@ export default function GambButton(props: GambButtonProps): JSX.Element {
 				style={style}
 				data-cypress={dataCypress}
 			>
-				<ButtonGeneric variant={variant}>
+				<ButtonGeneric
+					variant={variant}
+					size={size || "medium"}
+				>
 					{label}
 					{icon && (
 						<Icon
 							icon={icon}
 							size={
 								size === "small"
-									? 14
+									? 12
 									: size === "medium"
-									? 16
+									? 14
 									: size === "large"
-									? 24
+									? 16
 									: size
 							}
 						/>
