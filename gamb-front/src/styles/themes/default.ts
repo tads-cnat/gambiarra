@@ -4,6 +4,7 @@ export const defaultTheme = {
 		black: "#000000",
 
 		light_white: "#F8F9FA",
+		gray_light: "#DEE2E6",
 
 		green_sucess_primary: "#28A745",
 		green_sucess_secondary: "#68C17C",

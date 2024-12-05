@@ -16,6 +16,7 @@ import {
 	Pause,
 	Plus,
 	Minus,
+	CaretRight,
 	CheckCircle,
 	Info,
 	WarningDiamond,
@@ -46,6 +47,7 @@ const iconComponents: { [key: string]: JSX.Element } = {
 	pause: <Pause />,
 	plus: <Plus />,
 	minus: <Minus />,
+	seta_direita: <CaretRight /> 
 	checkcircle: <CheckCircle/>,
 	info: <Info weight="fill" />,
 	warning: <WarningDiamond/>,

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 interface ButtonProps {
-	variant: "verde" | "amarelo" | "vermelho" | "roxo" | "branco";
+	variant: "verde" | "amarelo" | "vermelho" | "roxo" | "branco" | "cinza";
 }
 
 export const ButtonGeneric = styled.button<ButtonProps>`
@@ -23,12 +23,14 @@ export const ButtonGeneric = styled.button<ButtonProps>`
 			? theme.cores.warning
 			: variant === "vermelho"
 			? theme.cores.danger
+			: variant === "cinza"
+			? theme.cores.gray_light
 			: variant === "roxo"
 			? theme.cores.purple_info_primary
 			: theme.cores.white};
 
 	color: ${({ variant, theme }) =>
-		variant === "branco" || variant === "amarelo"
+		variant === "branco" || variant === "amarelo" || variant === "cinza"
 			? theme.cores.black
 			: theme.cores.white};
 
@@ -40,6 +42,8 @@ export const ButtonGeneric = styled.button<ButtonProps>`
 				? theme.cores.warning
 				: variant === "vermelho"
 				? theme.cores.danger
+				: variant === "cinza"
+				? theme.cores.gray_light
 				: variant === "roxo"
 				? theme.cores.purple_info_primary
 				: theme.cores.black};
@@ -52,12 +56,14 @@ export const ButtonGeneric = styled.button<ButtonProps>`
 				? theme.cores.warning_second
 				: variant === "vermelho"
 				? theme.cores.danger_hover
+				: variant === "cinza"
+				? theme.cores.gray_300
 				: variant === "roxo"
 				? theme.cores.purple_info_secondary
 				: theme.cores.light_white};
 
 		color: ${({ variant, theme }) =>
-			variant === "branco" || variant === "amarelo"
+			variant === "branco" || variant === "amarelo" || variant === "cinza"
 				? theme.cores.black
 				: theme.cores.white};
 	}

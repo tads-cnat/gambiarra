@@ -9,6 +9,7 @@ import { Sidebar } from "../componentes/Sidebar/Sidebar";
 export function Dashboard() {
 	const style = defaultTheme;
 
+
     return (
         <div>
             <h1>Dashboard</h1>
