@@ -22,7 +22,6 @@ import {
 	WarningDiamond,
 	Warning,
 	X,
-	CaretRight,
 	CaretCircleDown,
 	FileText,
 } from "@phosphor-icons/react";
@@ -47,13 +46,12 @@ const iconComponents: { [key: string]: JSX.Element } = {
 	pause: <Pause />,
 	plus: <Plus />,
 	minus: <Minus />,
-	seta_direita: <CaretRight /> 
+	seta_direita: <CaretRight />, 
 	checkcircle: <CheckCircle/>,
 	info: <Info weight="fill" />,
 	warning: <WarningDiamond/>,
 	danger: <Warning/>,
 	close: <X/>,
-	seta_direita: <CaretRight />,
 	seta_baixo: <CaretCircleDown />,
 	arquivo: <FileText />,
 };

@@ -8,12 +8,11 @@ export const DashboardContainer = styled.aside`
 
 export const DashboardMain = styled.main`
 	overflow-y: auto;
-	heigth: 100vh;
 	padding: 2rem 0.5rem;
 `;
 
 export const DashboardContent = styled.aside`
-	heigth: 100vh;
+	min-height: 100%; 
 	border-radius: 30px;
 	box-shadow: 5px 5px 10px 5px rgba(54, 54, 54, 0.1);
 	padding: 2rem;
