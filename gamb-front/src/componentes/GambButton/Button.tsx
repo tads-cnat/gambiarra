@@ -42,7 +42,6 @@ export default function GambButton(props: GambButtonProps): JSX.Element {
 							}
 						/>
 					)}
-
 				</ButtonGeneric>
 			</button>
 		</>

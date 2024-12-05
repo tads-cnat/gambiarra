@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Chamado,Avaliacao, Mensagem, Alteracao, Item, Bolsista
+from .models import Chamado,Avaliacao, Mensagem, Alteracao, Item, Bolsista,  Acessorio
 # Register your models here.
 admin.site.register(Chamado)
 admin.site.register(Bolsista)
@@ -8,3 +8,4 @@ admin.site.register(Avaliacao)
 admin.site.register(Mensagem)
 admin.site.register(Alteracao)
 admin.site.register(Item)
+admin.site.register(Acessorio)
