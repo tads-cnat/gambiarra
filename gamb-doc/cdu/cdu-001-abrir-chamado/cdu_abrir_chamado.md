@@ -11,7 +11,7 @@
 | :-----------------: | :-----------------: | 
 | 1 - O usuário clica no botão de abrir chamado | |  
 | | 2 - O sistema carrega um formulário para a criação de um chamado | 
-| 3 - O usuário preenche as informações e clica no botão de envio para criar o chamado | | 
+| 3 - O usuário preenche as informações titulo, descrição e o modelo do item, entao clica no botão de envio para criar o chamado | | 
 | | 4 - O sistema registra as informações e redireciona o usuário para página de detalhamento do chamado |  
 
 ## Fluxo Alternativo I - Campo não preenchido
