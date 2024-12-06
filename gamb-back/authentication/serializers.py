@@ -26,7 +26,7 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data): #creates and saves the user
         validated_data.pop('password2')
-        cliente, created = Group.objects.get_or_create(name=GrupoEnum.CLIENTE)
+        cliente, created = Group.objects.get_or_create(name=GrupoEnum.GERENTE)
 
         user = User(
             username=validated_data['username'],
@@ -35,5 +35,5 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
         )
         user.set_password(validated_data['password1']) # used this instead of create_user method to make sure the password is hashed
         user.save()
-        # user.groups.add(cliente)    #VER COM O PESSOAL SE VAMOS QUERER ISSO AQUI MESMO(ACUMULAR GRUPOS)
+        user.groups.add(cliente)    #VER COM O PESSOAL SE VAMOS QUERER ISSO AQUI MESMO(ACUMULAR GRUPOS)
         return user

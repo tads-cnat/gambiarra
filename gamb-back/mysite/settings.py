@@ -188,8 +188,6 @@ SIMPLE_JWT = {
     'ALGORITHM': 'HS256',
 }
 
-LOGIN_URL = '/login/' 
-
 # rest framework configs
 REST_FRAMEWORK = {
     # YOUR SETTINGS
