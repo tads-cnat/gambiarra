@@ -36,7 +36,9 @@
 | 3 - O professor seleciona o filtro de chamados fechados | |  
 | | 4 - O sistema mostra apenas os chamados fechados |
 
+## Diagrama de atividades - Listar Chamados
 
+![diagrama de atividades](../imgs/atividades/ativ_listar_chamados.jpg "Diagrama de atividades - Listar Chamados")
 
 
 ## Diagrama de classe de projeto - Listar Chamado

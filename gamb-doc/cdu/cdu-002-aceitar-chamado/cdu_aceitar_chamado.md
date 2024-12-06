@@ -12,8 +12,12 @@
 | 1 - O Professor, na linha do chamado pretendido,  clica no botão de aceitar | |  
 | | 2 -  O sistema redireciona o Professor para a página de detalhes do chamado, exibe mensagem de sucesso e o status atualizado | 
 
+## Diagrama de atividades - Aceitar Chamado
+
+![diagrama de atividades](../imgs/atividades/ativ_aceitar_chamado.jpg "Diagrama de atividades - Aceitar Chamado")
+
+
 ## Diagrama de Sequência - Aceitar Chamado
 
 ![diagrama de sequência aceitar chamado](img/aceitar_seq.png "Diagrama sequência - Aceitar Chamado")
 
-[Voltar aos Casos de Uso](../cdu.md)
