@@ -12,7 +12,7 @@
 04. [CDU-004 - Detalhar chamado](cdu-004-Detalhar-chamado/cdu_detalhar_chamado.md)
 05. [CDU-005 - Alterar status do chamado](cdu-005-Alterar-status-chamado/cdu_alterar_status_chamado.md)
 06. [CDU-006 - Avaliar chamado](cdu-006-avaliar-chamado/cdu_avaliar_chamado.md)
-07. [CDU-007 - Listar chamados](cdu-007-listar-chamdos/cdu_listar_chamado.md)
+07. [CDU-007 - Listar chamados](cdu-007-Listar-chamdos/cdu_listar_chamado.md)
 08. [CDU-008 - Gerenciar bolsistas](cdu-008-Gerenciar-bolsistas/cdu_gerenciar_bolsistas.md)
 09. [CDU-009 - Atribuir bolsista](cdu-009-Atribuir-bolsistas/cdu_atribuir_bolsista.md)
 10. [CDU-010 - Envio de mensagens](cdu-010-Envio-de-mensagens/cdu_envio_mensagem.md)
