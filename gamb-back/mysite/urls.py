@@ -4,6 +4,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, SpectacularSwaggerView
 from gambiarra.urls import gambiarra_urls
+from authentication.urls import auth_urls
 
 api_doc = [
     path("schema/", 
@@ -17,11 +18,13 @@ api_doc = [
 ]
 
 api_path = [
-    path("", include(gambiarra_urls))
+    path("", include(gambiarra_urls)),
+    path("auth/", include(auth_urls))
 ]
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    
     path('api/v1/', include(api_path)),
     path('api/doc/', include(api_doc)),
 ]

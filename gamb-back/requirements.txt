@@ -3,8 +3,9 @@ attrs==24.2.0
 beautifulsoup4==4.12.3
 Django==4.2.15
 django-bootstrap-v5==1.0.11
-djangorestframework==3.15.2
 django-cors-headers==4.6.0
+djangorestframework==3.15.2
+djangorestframework-simplejwt==5.3.1
 drf-spectacular==0.27.2
 inflection==0.5.1
 jsonschema==4.23.0
@@ -12,6 +13,7 @@ jsonschema-specifications==2024.10.1
 pillow==10.4.0
 psycopg==3.2.3
 psycopg-binary==3.2.3
+PyJWT==2.10.1
 PyYAML==6.0.2
 referencing==0.35.1
 rpds-py==0.21.0
