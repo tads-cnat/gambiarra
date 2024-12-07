@@ -1,43 +1,52 @@
-import React from "react";
-import { Controller } from "react-hook-form";
 import { InputFieldProps } from "../../interfaces/componentes/iGambInput";
+import Icon from "../GambIcon/Icon";
+import UseMessage from "../GambMessage/Message";
+import { InputText } from "./inputsStyle"; // Importando o styled-component
 
-const InputField: React.FC<InputFieldProps> = ({
-  name,
-  control,
-  label,
-  type = "text",
-  placeholder = "",
-  defaultValue = "",
-  rules,
-  className,
-  errorMessage,
-  textAux,
-}) => (
-  <div className={`input-field ${className}`}>
-    {label && <label className="block text-gray-700 mb-2" htmlFor={name}>{label}</label>}
-    <Controller
-      name={name}
-      control={control}
-      defaultValue={defaultValue}
-      rules={rules}
-      render={({ field }) => (
-        <>        <input
-          {...field}
-          id={name}
-          type={type}
-          placeholder={placeholder}
-          className="appearance-none block w-full  border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none "
-          data-cypress={name + "-input"}
-        />
-       
-        <p className="text-400 text-xs">{textAux}</p>
-        </>
+export default function InputField(props: InputFieldProps): JSX.Element {
+  const {
+    name,
+    defaultValue,
+    label,
+    type = "text",
+    placeholder,
+    className,
+    register,
+    textAux,
+    error,
+    icon,
+  } = props;
 
-      )}
-    />
-    {errorMessage && <span className="error-message text-400 text-xs">{errorMessage}</span>}
-  </div>
-);
+  return (
+    <>
+      <div >
+        {label && (
+          <label className="block text-gray-700 mb-2}" htmlFor={name}>
+            {label}
+          </label>
+        )}
 
-export default InputField;
+        {/* Usando o styled component inputText para envolver o input */}
+        <InputText className={className}>
+        <Icon icon={icon || "arquivo"} />
+        <input
+            id={name + "-input"}
+            type={type}
+            placeholder={placeholder}
+            data-cypress={`${name}-input`}
+            {...register}
+            defaultValue={defaultValue}
+          />
+        </InputText>
+
+        {/* Texto auxiliar */}
+        {textAux && <p className=" text-xs">{textAux}</p>}
+
+        {/* Exibição de mensagem de erro */}
+        {error && (
+          <UseMessage type="danger" text={error} />
+        )}
+      </div>
+    </>
+  );
+}
