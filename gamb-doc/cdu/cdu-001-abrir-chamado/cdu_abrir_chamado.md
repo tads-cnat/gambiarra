@@ -20,6 +20,10 @@
 | 1 - O usuário não preenche todos os campos do formulário | |  
 | | 2 - O sistema exibe mensagem de erro sinalizando que os campos não foram preenchidos |
 
+## Diagrama de atividades - Abrir Chamado
+
+![diagrama de atividades](../imgs/atividades/ativ_abrir_chamado.jpg "Diagrama de atividades - Abrir Chamado")
+
 ## Diagrama de classe de projeto - Abrir Chamado
 
 ![diagrama de classe de projeto](../imgs/cproj/abrirchamado.png "Diagrama de classe de projeto - Abrir Chamado")
