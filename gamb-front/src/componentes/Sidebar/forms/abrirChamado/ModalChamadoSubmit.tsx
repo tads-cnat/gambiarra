@@ -7,8 +7,6 @@ import GambButton from "../../../GambButton/Button";
 import { MouseEvent } from "react";
 import { chamadoSchema } from "./schema";
 
-// Schema de validação
-
 export default function ModalChamadoSubmit(props: {
 	isModalOpen: boolean;
 	closeModal: () => void;
@@ -81,11 +79,7 @@ export default function ModalChamadoSubmit(props: {
 					textAux="Informe o modelo do item com defeito"
 					register={register("item.modelo")}
 				/>
-				<h3 className="text-xl font-regular  mt-3 mb-1">
-					| Acessórios (Opcional)
-				</h3>
-
-				{/* Botão para adicionar um acessório */}
+        {/* Botão para adicionar um acessório */}
 				<div className="flex w-full justify-end">
 					<GambButton
 						label="Adicionar Acessório"
@@ -96,6 +90,12 @@ export default function ModalChamadoSubmit(props: {
 						onClick={addAcessorio}
 					/>
 				</div>
+        
+				<h3 className="text-xl font-regular  mt-3 mb-1">
+					| Acessórios (Opcional)
+				</h3>
+
+				
 
 				{/* Mapeando os campos de acessórios */}
 				{fields && fields.length > 0 ? (

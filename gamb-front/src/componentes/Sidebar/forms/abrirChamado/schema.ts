@@ -16,7 +16,5 @@ export const chamadoSchema = Yup.object().shape({
             nome: Yup.string().required("O nome do acessório é obrigatório"),
           })
         )
-        .min(1, "Deve haver pelo menos um acessório")
-        .required("Os acessórios são obrigatórios"),
     }),
   });

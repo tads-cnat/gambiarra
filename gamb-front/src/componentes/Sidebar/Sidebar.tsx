@@ -9,6 +9,7 @@ import GambButton from "../GambButton/Button";
 import { useState } from "react";
 import { ChamadoSubmit } from "../../interfaces/models/iChamado";
 import  ModalChamadoSubmit from "./forms/abrirChamado/ModalChamadoSubmit";
+import ChamadoService from "../../services/models/ChamadoService";
 
 export function Sidebar() {
 
@@ -16,8 +17,15 @@ export function Sidebar() {
 
 	const closeModal = () => setModalOpen(false);
 
-	const onSubmit = (data: ChamadoSubmit) => {
-		console.log("Dados enviados:", data);
+	async function onSubmit(data: ChamadoSubmit): Promise<void> {
+		console.log(data);
+		// ChamadoService.criarChamado(data).then((response) => {
+		// 	console.log(response);
+		// 	alert("Chamado criado com sucesso");
+		// }).catch(() => {
+		// 	alert("Erro ao criar chamado");
+		// });
+
 		setModalOpen(false);
 	};
 

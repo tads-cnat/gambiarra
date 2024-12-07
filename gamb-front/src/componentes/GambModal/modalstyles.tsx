@@ -30,7 +30,9 @@ export const ModalHeader = styled.div`
 `;
 
 export const ModalCard = styled.div`
-       min-width: 32rem;
+    max-width: 32rem;
+    min-width: 32rem;
+
     padding: 1.25rem;
     background: ${props => props.theme.cores.white};
     border-radius: 30px;
