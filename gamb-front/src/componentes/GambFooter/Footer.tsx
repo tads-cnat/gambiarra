@@ -1,18 +1,15 @@
-import { FooterButton, FooterContainer, FooterContent } from "./footerstyle";
+import GambButton from "../GambButton/Button";
+import { FooterContainer, FooterContent } from "./footerstyle";
 
 export function Footer() {
 	return (
 		<FooterContainer>
 			<FooterContent>
 				<div className="info">
-					<h2>gambiarra</h2>
+					<h2><img src="\assets\gambi-footer.png" alt="" /></h2>
                     <div className="buttons">
-                        <FooterButton variant="verde">
-                            Conheça o projeto
-                        </FooterButton>
-                        <FooterButton variant="branco">
-                            Conheça os criadores
-                        </FooterButton>
+						<GambButton variant="verde" label="Conheça o projeto" />
+						<GambButton variant="branco" label="Conheça os criadores" />
                     </div>
                     <div className="social-links">
                         <a href="#">

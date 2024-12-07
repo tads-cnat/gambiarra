@@ -1,6 +1,6 @@
 export interface GambButtonProps {
 	// Define a variante de cor do botão.
-	variant: "verde" | "amarelo" | "vermelho" | "roxo" | "branco";
+	variant: "verde" | "amarelo" | "vermelho" | "roxo" | "branco" | "cinza";
 
 	// Permite adicionar conteúdo filho dentro do botão (ícones, texto, etc.).
 	children?: React.ReactNode;

@@ -45,6 +45,9 @@ INSTALLED_APPS = [
     'gambiarra',
     'users',
 
+    #cors
+    'corsheaders',
+
     #django
     'django.contrib.admin',
     'django.contrib.auth',
@@ -63,6 +66,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+
 ]
 
 ROOT_URLCONF = 'mysite.urls'
@@ -178,3 +183,7 @@ SPECTACULAR_SETTINGS = {
     'COMPONENT_SPLIT_REQUEST': True,
     'COMPONENT_NO_READ_ONLY_REQUIRED': True,
 }
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5173",
+]

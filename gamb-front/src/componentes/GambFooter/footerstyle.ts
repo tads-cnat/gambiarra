@@ -11,6 +11,13 @@ export const FooterContainer = styled.footer`
         justify-content: space-between;
         border-top: 1px solid ${props => props.theme.cores.gray_300};
         padding-top: 2rem;
+
+        a{
+            &:hover{
+                color: ${props => props.theme.cores.purple_info_primary};
+                border-bottom: 1px solid ${props => props.theme.cores.purple_info_primary};
+            }
+        }
     }
     div ul {
         list-style: none;
