@@ -6,6 +6,7 @@ export const ModalOverlay = styled.div<{ isOpen: boolean }>`
     height: 100vh;
     inset: 0;
     background: rgba(0, 0, 0, 0.75);
+    display: ${({ isOpen }) => (isOpen ? 'block' : 'none')}; /* Mostrar quando modal estiver aberto */
 `;
 
 export const CloseButton = styled.button`
@@ -25,49 +26,35 @@ export const ModalHeader = styled.div`
     gap: 10px;
     align-self: stretch;
     font-size: 2rem;
-`
+
+`;
 
 export const ModalCard = styled.div`
-    min-width: 32rem;
-    border: 6px;
+       min-width: 32rem;
     padding: 1.25rem;
     background: ${props => props.theme.cores.white};
     border-radius: 30px;
-
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    max-height: 90vh; /* Para limitar a altura e permitir a rolagem se necessário */
+    overflow-y: scroll; /* Permite rolar o conteúdo */
+    
+    
+    /* Esconde a barra de rolagem */
+    ::-webkit-scrollbar {
+        display: none;
+    }
+    
+    /* Adicional para Firefox */
+    scrollbar-width: none; /* Para esconder a barra de rolagem no Firefox */
 
     form {
         margin-top: 2rem;
-
         display: flex;
         flex-direction: column;
         gap: 1rem;
-
-        input {
-            border-radius: 6px;
-            border: 1px solid ${props => props.theme.cores.black};
-            background:  ${props => props.theme.cores.white};
-            color:  ${props => props.theme.cores.black};
-            padding: 0.875rem;
-
-            &::placeholder {
-                color:  ${props => props.theme.cores.gray_text};
-            }
-        }
-
-        /* button[type="submit"] {
-            height: 58px;
-            border: 0;
-            background: ${props => props.theme.cores.green_sucess_primary};
-            color: ${props => props.theme.cores.white};
-            padding:1rem;
-            border-radius: 16px;
-            margin-top: 1.5rem;
-            cursor: pointer;
-        } */
     }
 `;
 
@@ -78,4 +65,4 @@ export const ModalFooter = styled.div`
     align-items: center;
     gap: 10px;
     align-self: stretch;
-`
+`;

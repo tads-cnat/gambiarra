@@ -1,12 +1,14 @@
+import { MouseEvent } from "react";
+
 export interface GambButtonProps {
 	// Define a variante de cor do botão.
-	variant: "verde" | "amarelo" | "vermelho" | "roxo" | "branco" | "cinza";
+	variant: "verde" | "amarelo" | "vermelho" | "roxo" | "branco" | "cinza" | "inline";
 
 	// Permite adicionar conteúdo filho dentro do botão (ícones, texto, etc.).
 	children?: React.ReactNode;
 
 	// Função a ser executada quando o botão for clicado.
-	onClick?: () => void;
+	onClick?: (e: MouseEvent<HTMLButtonElement>) => void; // Adicionar o tipo de evento aqui
 
 	// Define o tipo do botão. Opções: "button" | "submit" | "reset".
 	type?: "button" | "submit" | "reset";
