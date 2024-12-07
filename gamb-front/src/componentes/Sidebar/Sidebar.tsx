@@ -6,57 +6,77 @@ import {
 	UserSpace,
 } from "./sidebarstyles";
 import GambButton from "../GambButton/Button";
+import { useState } from "react";
+import { ChamadoSubmit } from "../../interfaces/models/iChamado";
+import  ModalChamadoSubmit from "./forms/abrirChamado/ModalChamadoSubmit";
 
 export function Sidebar() {
+
+	const [ModalOpen, setModalOpen] = useState(false);
+
+	const closeModal = () => setModalOpen(false);
+
+	const onSubmit = (data: ChamadoSubmit) => {
+		console.log("Dados enviados:", data);
+		setModalOpen(false);
+	};
+
 	return (
-		<SidebarBody>
-			<SidebarContainer>
-				<SidebarContent>
-					<div>
-						<img
-							src="\assets\gambi.png"
-							alt=""
-						/>
-						<div className="buttons-conj flex items-end">
-							<GambButton
-								variant="verde"
-								label="Chamados"
-								icon="seta_direita"
+		<>
+			<SidebarBody>
+				<SidebarContainer>
+					<SidebarContent>
+						<div>
+							<img
+								src="\assets\gambi.png"
+								alt=""
 							/>
-							<GambButton
-								variant="roxo"
-								label="Abrir Chamado"
-								icon="seta_direita"
-							/>
+							<div className="buttons-conj flex items-end">
+								<GambButton
+									variant="verde"
+									label="Chamados"
+									icon="seta_direita"
+								/>
+								<GambButton
+									variant="roxo"
+									label="Abrir Chamado"
+									icon="seta_direita"
+									onClick={() => setModalOpen(true)}
+								/>
+							</div>
+
+							<ul>
+								<li>
+									<a href="#">
+										<FolderUser /> Gerenciar bolsista
+									</a>
+								</li>
+								<li>
+									<a href="#">
+										<FileText /> Gerar ordem de serviço
+									</a>
+								</li>
+								<li>
+									<a href="#">
+										<AddressBook /> Gerar termo de
+										responsabilidade
+									</a>
+								</li>
+							</ul>
 						</div>
 
-						<ul>
-							<li>
-								<a href="#">
-									<FolderUser /> Gerenciar bolsista
-								</a>
-							</li>
-							<li>
-								<a href="#">
-									<FileText /> Gerar ordem de serviço
-								</a>
-							</li>
-							<li>
-								<a href="#">
-									<AddressBook /> Gerar termo de
-									responsabilidade
-								</a>
-							</li>
-						</ul>
-					</div>
-
-					<UserSpace>
-						<User />
-						<p>livia</p>
-						<button>asd</button>
-					</UserSpace>
-				</SidebarContent>
-			</SidebarContainer>
-		</SidebarBody>
+						<UserSpace>
+							<User />
+							<p>livia</p>
+							<button>asd</button>
+						</UserSpace>
+					</SidebarContent>
+				</SidebarContainer>
+			</SidebarBody>
+			<ModalChamadoSubmit
+				isModalOpen={ModalOpen}
+				closeModal={closeModal}
+				onSubmit={onSubmit}/>
+		</>
 	);
 }

@@ -17,7 +17,7 @@ export const MessageWrapper = styled.div<{ type: MessageType }>`
   border-radius: 8px;
   padding: clamp(0.8rem, 2vw, 1rem) clamp(1rem, 4vw, 2rem);
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-  width: 90%;
+  width: 100%;
   max-width: 520px;
   min-width: 300px; 
 
@@ -71,8 +71,6 @@ export const CloseButton = styled.button<{ type: MessageType }>`
   border: none;
   font-size: 1.2rem;
   cursor: pointer;
-  margin-left: 10px;
-
   color: ${({ type, theme }) =>
 		["success", "info", "danger"].includes(type) 
 			? theme.cores.white

@@ -26,4 +26,5 @@ export const GlobalStyle = createGlobalStyle`
         color: ${(props) => props.theme.cores.white};
 
     }
+  
 `;

@@ -7,5 +7,5 @@ export interface MessageProps {
 	// Texto a ser exibido
 	text: string;
 
-	viewClose: boolean;
+	viewClose?: boolean;
 }
