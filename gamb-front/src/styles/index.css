@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.elevacao-def {
+	box-shadow: 5px 5px 10px 5px rgba(54, 54, 54, 0.1);
+}
+.input-acessorio{
+	border: 1px solid #564CCF !important;
+	color:  #564CCF !important;
+}

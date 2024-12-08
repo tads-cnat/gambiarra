@@ -1,56 +1,57 @@
 import styled from "styled-components";
 
 export const SidebarContainer = styled.aside`
-    background-color:${props => props.theme.cores.light_white};
-    width: 25%;
-    height: 90vh;
-    border-radius: 30px;
-    margin-left: 2rem;
-    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
-    padding-bottom: 1rem;
-`
+	background-color: ${(props) => props.theme.cores.white};
+	width: 100%;
+	border-radius: 30px;
+	box-shadow: 5px 5px 10px 5px rgba(54, 54, 54, 0.1);
+	height: 100%;
+`;
+
+export const SidebarBody = styled.div`
+	height: 100vh;
+	padding: 2rem 0rem 2rem 1rem;
+`;
 
 export const UserSpace = styled.div`
-    display: flex;
-    align-items: center;
-`
+	display: flex;
+	align-items: center;
+	justify-content: center;
+`;
 
 export const SidebarContent = styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    height: 100%;
-    gap: 1.25rem;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	gap: 1.25rem;
+	height: 100%;
+	padding: 0 20px;
+	ul {
+		display: flex;
+		gap: 1rem;
+		flex-direction: column;
 
+		a {
+			display: flex;
+			align-items: center;
+			gap: 0.5rem;
+			&:hover {
+				border-bottom: 1px solid
+					${(props) => props.theme.cores.gray_300};
+			}
+		}
+	}
 
-    ul{
-        display: flex;
-        gap: 1rem;
-        flex-direction: column;
+	img {
+		padding: 2rem;
+		border-bottom: 1px solid ${(props) => props.theme.cores.gray_300};
+	}
 
-        a{
-        display: flex;
-        align-items: center;
-
-        &:hover{
-            border-bottom: 1px solid ${props => props.theme.cores.gray_300};
-            }
-        }
-
-    }
-
-
-    img{
-        padding: 3rem ;
-        border-bottom: 1px solid ${props => props.theme.cores.gray_300};
-    }
-
-    .buttons-conj{
-        margin-top: 1.5rem;
-        display: flex;
-        gap: 1rem;
-        padding-bottom: 2rem;
-    }
-
-`
+	.buttons-conj {
+		margin-top: 1.5rem;
+		display: flex;
+		gap: 1rem;
+		padding-bottom: 2rem;
+	}
+`;
