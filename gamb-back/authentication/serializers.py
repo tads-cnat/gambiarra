@@ -26,7 +26,7 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data): #creates and saves the user
         validated_data.pop('password2')
-        cliente, created = Group.objects.get_or_create(name=GrupoEnum.GERENTE)
+        cliente, created = Group.objects.get_or_create(name=GrupoEnum.CLIENTE)
 
         user = User(
             username=validated_data['username'],

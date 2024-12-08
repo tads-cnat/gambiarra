@@ -63,7 +63,7 @@ class OnlyInterno(permissions.BasePermission):
     def has_permission(self, request: Request, view):
         user = request.user
         if user.is_authenticated:
-            return user.grupo.name == GrupoEnum.INTERNO
+            return user.grupo.name in GrupoEnum.INTERNO
         return False
 
 class OnlyExterno(permissions.BasePermission):
@@ -72,6 +72,6 @@ class OnlyExterno(permissions.BasePermission):
     def has_permission(self, request: Request, view):
         user = request.user
         if user.is_authenticated:
-            return user.grupo.name == GrupoEnum.EXTERNO
+            return user.grupo.name in GrupoEnum.EXTERNO
         return False
 
