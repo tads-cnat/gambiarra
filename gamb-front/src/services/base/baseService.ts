@@ -2,11 +2,7 @@ import axiosInstance from "./axiosInstance";
 import { BaseFilter } from "../../filters/BaseFilter";
 
 class BaseService {
-<<<<<<< HEAD
 	serviceUrl: string = "http://127.0.0.1:8000/api/v1/"; // TROCAR PELA API DO GAMBIARRA
-=======
-	serviceUrl: string = "http://localhost:8000/api/v1/"; // TROCAR PELA API DO GAMBIARRA
->>>>>>> 8811c948d83661290aa1228609915a375de6f786
 
 	constructor(serviceUrl: string) {
 		this.serviceUrl = serviceUrl;
