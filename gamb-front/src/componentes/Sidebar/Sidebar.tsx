@@ -27,6 +27,9 @@ export function Sidebar() {
 			})
 			.catch(() => {
 				alert("Erro ao criar chamado");
+			})
+			.finally(() => {
+				window.location.reload();
 			});
 
 		setModalOpen(false);
@@ -100,116 +103,117 @@ export function Sidebar() {
 								onClick={toggleDropdown}
 							/>
 							{isDropdownOpen && (
-							<div>
-
-								{/* Dropdown Menu */}
-								{isDropdownOpen && (
-									<div
-									id="multi-dropdown"
-									className="z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44"
-								  >
-									<ul
-									  className="py-2 text-sm text-gray-700"
-									  aria-labelledby="multiLevelDropdownButton"
-									>
-									  <li>
-										<a
-										  href="#"
-										  className="block px-4 py-2 hover:bg-gray-100"
-										>
-										  Dashboard
-										</a>
-									  </li>
-									  <li>
-										<button
-										  id="doubleDropdownButton"
-										  onClick={toggleSubDropdown}
-										  type="button"
-										  className="flex items-center justify-between w-full px-4 py-2 hover:bg-gray-100"
-										>
-										  Dropdown
-										  <svg
-											className="w-2.5 h-2.5 ms-3 rtl:rotate-180"
-											aria-hidden="true"
-											xmlns="http://www.w3.org/2000/svg"
-											fill="none"
-											viewBox="0 0 6 10"
-										  >
-											<path
-											  stroke="currentColor"
-											  strokeLinecap="round"
-											  strokeLinejoin="round"
-											  strokeWidth="2"
-											  d="m1 9 4-4-4-4"
-											/>
-										  </svg>
-										</button>
-										{isSubDropdownOpen && (
-										  <div
-											id="doubleDropdown"
+								<div>
+									{/* Dropdown Menu */}
+									{isDropdownOpen && (
+										<div
+											id="multi-dropdown"
 											className="z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44"
-										  >
+										>
 											<ul
-											  className="py-2 text-sm text-gray-700"
-											  aria-labelledby="doubleDropdownButton"
+												className="py-2 text-sm text-gray-700"
+												aria-labelledby="multiLevelDropdownButton"
 											>
-											  <li>
-												<a
-												  href="#"
-												  className="block px-4 py-2 hover:bg-gray-100"
-												>
-												  Overview
-												</a>
-											  </li>
-											  <li>
-												<a
-												  href="#"
-												  className="block px-4 py-2 hover:bg-gray-100"
-												>
-												  My downloads
-												</a>
-											  </li>
-											  <li>
-												<a
-												  href="#"
-												  className="block px-4 py-2 hover:bg-gray-100"
-												>
-												  Billing
-												</a>
-											  </li>
-											  <li>
-												<a
-												  href="#"
-												  className="block px-4 py-2 hover:bg-gray-100"
-												>
-												  Rewards
-												</a>
-											  </li>
+												<li>
+													<a
+														href="#"
+														className="block px-4 py-2 hover:bg-gray-100"
+													>
+														Dashboard
+													</a>
+												</li>
+												<li>
+													<button
+														id="doubleDropdownButton"
+														onClick={
+															toggleSubDropdown
+														}
+														type="button"
+														className="flex items-center justify-between w-full px-4 py-2 hover:bg-gray-100"
+													>
+														Dropdown
+														<svg
+															className="w-2.5 h-2.5 ms-3 rtl:rotate-180"
+															aria-hidden="true"
+															xmlns="http://www.w3.org/2000/svg"
+															fill="none"
+															viewBox="0 0 6 10"
+														>
+															<path
+																stroke="currentColor"
+																strokeLinecap="round"
+																strokeLinejoin="round"
+																strokeWidth="2"
+																d="m1 9 4-4-4-4"
+															/>
+														</svg>
+													</button>
+													{isSubDropdownOpen && (
+														<div
+															id="doubleDropdown"
+															className="z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44"
+														>
+															<ul
+																className="py-2 text-sm text-gray-700"
+																aria-labelledby="doubleDropdownButton"
+															>
+																<li>
+																	<a
+																		href="#"
+																		className="block px-4 py-2 hover:bg-gray-100"
+																	>
+																		Overview
+																	</a>
+																</li>
+																<li>
+																	<a
+																		href="#"
+																		className="block px-4 py-2 hover:bg-gray-100"
+																	>
+																		My
+																		downloads
+																	</a>
+																</li>
+																<li>
+																	<a
+																		href="#"
+																		className="block px-4 py-2 hover:bg-gray-100"
+																	>
+																		Billing
+																	</a>
+																</li>
+																<li>
+																	<a
+																		href="#"
+																		className="block px-4 py-2 hover:bg-gray-100"
+																	>
+																		Rewards
+																	</a>
+																</li>
+															</ul>
+														</div>
+													)}
+												</li>
+												<li>
+													<a
+														href="#"
+														className="block px-4 py-2 hover:bg-gray-100"
+													>
+														Earnings
+													</a>
+												</li>
+												<li>
+													<a
+														href="#"
+														className="block px-4 py-2 hover:bg-gray-100"
+													>
+														Sign out
+													</a>
+												</li>
 											</ul>
-										  </div>
-										)}
-									  </li>
-									  <li>
-										<a
-										  href="#"
-										  className="block px-4 py-2 hover:bg-gray-100"
-										>
-										  Earnings
-										</a>
-									  </li>
-									  <li>
-										<a
-										  href="#"
-										  className="block px-4 py-2 hover:bg-gray-100"
-										>
-										  Sign out
-										</a>
-									  </li>
-									</ul>
-								  </div>
-								  
-								)}
-							</div>
+										</div>
+									)}
+								</div>
 							)}
 						</UserSpace>
 					</SidebarContent>
