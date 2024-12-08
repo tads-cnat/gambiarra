@@ -10,7 +10,7 @@ from rest_framework import status
 
 #serializers
 from gambiarra.serializers import(
-    CreateChamadoSerializer, ChamadoSerializer
+    CreateChamadoSerializer, #ChamadoSerializer
 )
 from authentication.permissions import *
 from rest_framework_simplejwt.authentication import JWTAuthentication
@@ -24,13 +24,13 @@ from drf_spectacular.utils import extend_schema
 
 #cria novo chamado com status 1
 class CreateChamadoView(CreateAPIView):
-    permission_classes = [IsAuthenticated, OnlyExterno]
-    authentication_classes = [JWTAuthentication]
+    # permission_classes = [IsAuthenticated, OnlyExterno]
+    # authentication_classes = [JWTAuthentication]
     queryset = Chamado.objects.all()
     serializer_class = CreateChamadoSerializer
 
     def create(self, request):
-        print("Authenticated user:", request.user.grupo.name)
+        # print("Authenticated user:", request.user.grupo.name)
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
