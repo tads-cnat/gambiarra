@@ -3,12 +3,15 @@ import styled from "styled-components";
 export const DashboardContainer = styled.aside`
 	display: flex;
 	height: 100vh;
+
 	gap: 0.5rem;
 `;
 
 export const DashboardMain = styled.main`
 	overflow-y: auto;
 	padding: 2rem 0.5rem;
+	width: 100%;
+
 `;
 
 export const DashboardContent = styled.aside`

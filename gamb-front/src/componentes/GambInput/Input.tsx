@@ -2,6 +2,7 @@ import { InputFieldProps } from "../../interfaces/componentes/iGambInput";
 import Icon from "../GambIcon/Icon";
 import UseMessage from "../GambMessage/Message";
 import { InputText } from "./inputsStyle"; // Importando o styled-component
+import React from "react";
 
 export default function InputField(props: InputFieldProps): JSX.Element {
   const {

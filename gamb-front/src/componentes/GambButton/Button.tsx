@@ -1,3 +1,4 @@
+import React from "react";
 import { GambButtonProps } from "../../interfaces/componentes/iGambButton";
 import Icon from "../GambIcon/Icon";
 import { ButtonGeneric } from "./buttonstyle";
@@ -14,11 +15,13 @@ export default function GambButton(props: GambButtonProps): JSX.Element {
 		dataCypress,
 		icon,
 		size,
+		id,
 	} = props;
 	// regras de negócio relacionadas ao componente devem ser implementadas aqui
 	return (
 		<>
 			<button
+				id={id}
 				onClick={onClick}
 				type={type}
 				disabled={disabled}
@@ -40,7 +43,7 @@ export default function GambButton(props: GambButtonProps): JSX.Element {
 									: size === "medium"
 									? 14
 									: size === "large"
-									? 16
+									? 24
 									: size
 							}
 						/>

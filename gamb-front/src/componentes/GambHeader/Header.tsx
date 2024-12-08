@@ -1,5 +1,6 @@
 import { GithubLogo, HouseLine, MapTrifold, UsersThree } from "@phosphor-icons/react";
 import { HeaderContainer, HeaderContent } from "./headerstyle";
+import React from "react";
 
 export function Header() {
     return(

@@ -12,11 +12,25 @@ export const SidebarBody = styled.div`
 	height: 100vh;
 	padding: 2rem 0rem 2rem 1rem;
 `;
+export const User= styled.div`
+	display: flex;
+	align-items: center;
+	justify-content: start;
+	gap: 1rem;
+	img{
+		width: 32px;
+		height: 32px;
+		border-radius: 50%;
+	}
+`
+
 
 export const UserSpace = styled.div`
 	display: flex;
 	align-items: center;
-	justify-content: center;
+	justify-content: space-between;
+	width: 100%;
+	padding: 1rem 0;
 `;
 
 export const SidebarContent = styled.div`
@@ -43,7 +57,7 @@ export const SidebarContent = styled.div`
 		}
 	}
 
-	img {
+	div > .gambi-img {
 		padding: 2rem;
 		border-bottom: 1px solid ${(props) => props.theme.cores.gray_300};
 	}

@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { MessageProps } from "../../interfaces/componentes/iGambMessage";
 import Icon from "../GambIcon/Icon";
 import {
@@ -8,6 +7,7 @@ import {
     MessageText,
     MessageWrapper,
 } from "./messagestyle";
+import React, { useState } from "react";
 
 export default function UseMessage(props: MessageProps): JSX.Element {
     const { type, text, viewClose } = props;
@@ -17,7 +17,6 @@ export default function UseMessage(props: MessageProps): JSX.Element {
     function onClose() {
         setShow(false);  // Muda o estado para false, fechando a mensagem
     }
-
     // Renderiza a mensagem apenas se `show` for true
     if (!show) {
         return <></>;  // Se a mensagem não deve ser exibida, retorna vazio

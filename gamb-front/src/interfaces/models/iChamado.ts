@@ -3,7 +3,7 @@ export interface ChamadoSubmit {
 	descricao: string;
 	item: {
 		modelo: string;
-		acessorios: {
+		acessorios?: {
 			nome: string;
 		}[];
 	};

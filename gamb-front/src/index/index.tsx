@@ -1,7 +1,6 @@
+import React from "react";
 import { Footer } from "../componentes/GambFooter/Footer";
 import { Header } from "../componentes/GambHeader/Header";
-
-import GambButton from "../componentes/GambButton/Button";
 // import ChamadoService from "../services/models/ChamadoService";
 // import { ChamadoSubmit } from "../interfaces/models/iChamado";
 
@@ -32,25 +31,13 @@ export default function Home() {
 	// 	});
 	// }
 
-	return (
-		<div>
+	return ( <>
 			<Header />
-			<h1>Tela inicial</h1>
-
-			<GambButton
-				variant="verde"
-				label="Criar chamado"
-			/>
-
-			<div>
-				
-			</div>
-
-			<h1>Chamados</h1>
-
-			{/* {{chamados.map(chamado => <div key={chamado.id}>{chamado.titulo}</div>)}} */}
+			<main className="container m-auto">
+				<p> Bem vindo ao gambiarra!</p>
+			</main>
 
 			<Footer />
-		</div>
+			</>
 	);
 }

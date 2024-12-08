@@ -25,6 +25,7 @@ import {
 	CaretCircleDown,
 	FileText,
 	Lego,
+	List,
 } from "@phosphor-icons/react";
 import { GambIconProps } from "../../interfaces/componentes/iGambIcon";
 import React from "react";
@@ -56,6 +57,7 @@ const iconComponents: { [key: string]: JSX.Element } = {
 	seta_baixo: <CaretCircleDown />,
 	arquivo: <FileText />,
 	lego: <Lego />,
+	list: <List />,
 };
 
 export default function Icon(props: GambIconProps): JSX.Element {
