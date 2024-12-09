@@ -5,10 +5,10 @@ export const IndexContainer = styled.div`
 	display: flex;
 	flex-direction: column;
 	/* background-color: ${(props) => props.theme.cores.white}; */
-
 	h2 {
 		font-size: 2rem;
 		span {
+			font-size: 2rem;
 			color: ${(props) => props.theme.cores.purple_info_primary};
 			font-weight: ${(props) => props.theme.fontWeights.bold};
 		}
@@ -18,9 +18,11 @@ export const IndexContainer = styled.div`
 export const MarcaGrafica = styled.div`
 	margin: 2rem 0;
 `;
+
 export const IndexContent = styled.div`
 	display: flex;
 	padding: 50px;
+	width: 75%;
 	background: ${(props) => props.theme.cores.white};
 	justify-content: space-between;
 	align-items: center;
@@ -43,6 +45,7 @@ export const IndexContent = styled.div`
 	p {
 		width: 500px;
 	}
+
 	span {
 		font-size: 1.5rem;
 		color: ${(props) => props.theme.cores.purple_info_primary};

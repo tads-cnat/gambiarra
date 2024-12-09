@@ -1,7 +1,7 @@
 import React from "react";
 import { Footer } from "../componentes/GambFooter/Footer";
 import { Header } from "../componentes/GambHeader/Header";
-import { IndexContainer, IndexContent, MarcaGrafica } from "./styles";
+import { IndexContainer, IndexContent, MarcaGrafica } from "./indexstyles";
 import GambButton from "../componentes/GambButton/Button";
 // import ChamadoService from "../services/models/ChamadoService";
 // import { ChamadoSubmit } from "../interfaces/models/iChamado";
