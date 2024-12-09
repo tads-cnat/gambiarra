@@ -41,7 +41,7 @@ export const HeaderContent = styled.div`
 
             &:hover{
                 color: ${props => props.theme.cores.purple_info_primary};
-                font-size: 1.1rem;
+                /* border-bottom: 1px solid ${props => props.theme.cores.purple_info_primary}; */
             }
         }
     }
