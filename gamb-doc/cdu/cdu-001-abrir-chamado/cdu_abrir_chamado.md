@@ -15,7 +15,6 @@
 | | 4 - O sistema registra as informações e redireciona o usuário para página de detalhamento do chamado |  
 
 ## Fluxo Alternativo I - Cadastrar um acessório do item
-Segue o ajuste:  
 
 | **Ações do ator** | **Ações do sistema** |  
 |:------------------:|:--------------------:|  
