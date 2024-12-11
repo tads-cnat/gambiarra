@@ -1,12 +1,13 @@
 # CDU - Abrir chamado
 
-- **Ator principal**: Cliente
-- **Atores secundários**: ...	 
-- **Resumo**: Neste caso de uso, o cliente pode abrir um chamado e registrar seu problema a ser resolvido
-- **Pré-condição**: Estar logado no sistema.
-- **Pós-Condição**: O sistema apresenta a tela de detalhes do chamado.
+-   **Ator principal**: Cliente
+-   **Atores secundários**: ...
+-   **Resumo**: Neste caso de uso, o cliente pode abrir um chamado e registrar seu problema a ser resolvido
+-   **Pré-condição**: Estar logado no sistema.
+-   **Pós-Condição**: O sistema apresenta a tela de detalhes do chamado.
 
 ## Fluxo Principal
+
 | Ações do ator | Ações do sistema |
 | :-----------------: | :-----------------: | 
 | 1 - O usuário clica no botão de abrir chamado | |  
