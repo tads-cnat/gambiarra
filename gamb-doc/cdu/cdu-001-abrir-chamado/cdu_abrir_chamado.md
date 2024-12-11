@@ -14,7 +14,16 @@
 | 3 - O usuário preenche as informações titulo, descrição e o modelo do item, entao clica no botão de envio para criar o chamado | | 
 | | 4 - O sistema registra as informações e redireciona o usuário para página de detalhamento do chamado |  
 
-## Fluxo Alternativo I - Campo não preenchido
+## Fluxo Alternativo I - Cadastrar um acessório do item
+
+| **Ações do ator** | **Ações do sistema** |  
+|:------------------:|:--------------------:|  
+| 3.1 - O usuário preenche as informações de título, descrição e modelo do item e clica no botão para adicionar um acessório. | |  
+| | 4 - O sistema exibe um campo para ser preenchido com o nome do acessório. |  
+| 5 - O usuário preenche a informação do acessório, entao clica no botão de envio para criar o chamado | |  
+| | 6 - O sistema registra as informações e redireciona o usuário para a página de detalhamento do chamado. |  
+
+## Fluxo Alternativo II - Campo não preenchido
 | Ações do ator | Ações do sistema |
 | :-----------------: |:-----------------: | 
 | 1 - O usuário não preenche todos os campos do formulário | |  
