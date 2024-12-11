@@ -1,5 +1,5 @@
 # Glossário
-
+[Voltar a documentação](../documentacao.md)
 
 #### Termos gerais
 | Termo       | Descrição |
