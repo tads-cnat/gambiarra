@@ -1,4 +1,5 @@
-import { AddressBook, FileText, FolderUser } from "@phosphor-icons/react";
+import { AddressBook, FileText, FolderUser, HouseSimple } from "@phosphor-icons/react";
+import { Link } from "react-router";
 import {
 	SidebarBody,
 	SidebarContainer,
@@ -66,6 +67,11 @@ export function Sidebar() {
 							</div>
 
 							<ul>
+								<li>
+									<Link to="/">
+										<HouseSimple/> Home
+									</Link>
+								</li>
 								<li>
 									<a href="#">
 										<FolderUser /> Gerenciar bolsista

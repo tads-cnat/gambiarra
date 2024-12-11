@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const HeaderContainer = styled.header`
-    background: ${props => props.theme.cores.light_white};
+    background: ${props => props.theme.cores.white};
     padding: 0.875rem;
     width: 95%;
     margin: 0 auto;
@@ -41,7 +41,7 @@ export const HeaderContent = styled.div`
 
             &:hover{
                 color: ${props => props.theme.cores.purple_info_primary};
-                font-size: 1.1rem;
+                /* border-bottom: 1px solid ${props => props.theme.cores.purple_info_primary}; */
             }
         }
     }
