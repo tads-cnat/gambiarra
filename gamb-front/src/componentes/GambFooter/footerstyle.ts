@@ -1,8 +1,10 @@
 import styled from "styled-components";
 
 export const FooterContainer = styled.footer`
-	background: ${(props) => props.theme.cores.light_white};
+	background: ${(props) => props.theme.cores.white};
     padding: 3rem 4.5rem;
+    margin-top: 1.5rem;
+    bottom: 0;
     
 
 
