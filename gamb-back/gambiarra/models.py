@@ -31,7 +31,7 @@ class Chamado(models.Model):
     descricao = models.TextField(max_length=240, default="")
     code = models.UUIDField(default=uuid.uuid4)
     professor = models.ForeignKey(Usuario, on_delete=models.CASCADE, related_name='chamados_professor', null=True, blank=True)
-    bolsistas = models.ManyToManyField(Usuario, related_name='chamados_bolsista', null=True, blank=True)
+    bolsistas = models.ManyToManyField(Usuario, related_name='chamados_bolsista', blank=True)
     status = models.CharField(max_length=30, choices=STATUS_CHOICES, default="1")
     item = models.OneToOneField('Item', on_delete=models.CASCADE, null=True)
     cliente = models.ForeignKey(Usuario, on_delete=models.CASCADE, related_name='chamados_cliente', null=True, blank=True)

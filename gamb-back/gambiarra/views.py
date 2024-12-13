@@ -15,17 +15,10 @@ from gambiarra.serializers import(
 from authentication.permissions import *
 from rest_framework_simplejwt.authentication import JWTAuthentication
 
-#swagger
-from drf_spectacular.utils import extend_schema       
-@extend_schema(
-    request=CreateChamadoSerializer,
-    responses=CreateChamadoSerializer,
-)
-
 #cria novo chamado com status 1
 class CreateChamadoView(CreateAPIView):
-    # permission_classes = [IsAuthenticated, OnlyExterno]
-    # authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated, OnlyExterno]
+    authentication_classes = [JWTAuthentication]
     queryset = Chamado.objects.all()
     serializer_class = CreateChamadoSerializer
 
