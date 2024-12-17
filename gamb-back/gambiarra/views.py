@@ -28,11 +28,10 @@ class CreateChamadoView(CreateAPIView):
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
         chamado = serializer.instance
-
         return Response(data={
             "success": True,
             "data": {
-                chamado.id
+                "id": chamado.id
             },
             "message": "Chamado aberto com sucesso!"
         }, status=status.HTTP_201_CREATED)
