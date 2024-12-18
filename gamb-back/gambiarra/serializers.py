@@ -26,12 +26,12 @@ class CreateChamadoSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         item_data = validated_data.pop('item')
         acessorios_data = item_data.pop('acessorios')
-
+        cliente = self.context['request'].user
         item = Item.objects.create(**item_data)
 
         for acessorio_data in acessorios_data:
             Acessorio.objects.create(item=item, **acessorio_data)
 
-        chamado = Chamado.objects.create(item=item, **validated_data)
+        chamado = Chamado.objects.create(item=item, cliente = cliente, **validated_data)
 
         return chamado
