@@ -1,0 +1,51 @@
+{
+	"name": "Existing Docker Compose (Extend)",
+	"dockerComposeFile": [
+		"../docker-compose.local.yml"
+	],
+	"service": "web",
+	"workspaceFolder": "/app",
+	"extensions": [
+		"ms-python.python",
+		"ms-python.pylint",
+		"ms-python.black-formatter",
+		"ms-python.isort",
+		"vivaxy.vscode-conventional-commits",
+		"littlefoxteam.vscode-python-test-adapter",
+		"baterson.copy-django-model-fields",
+		"Gruntfuggly.todo-tree",
+		"sleistner.vscode-fileutils",
+		"ms-python.debugpy"
+	],
+	"terminal.integrated.shell.linux": "/bin/bash",
+	"settings": {
+		"python.linting.pylintEnabled": true,
+		"python.linting.enabled": true,
+		"python.formatting.provider": "black",
+		"editor.formatOnPaste": false,
+		"editor.formatOnSave": true,
+		"editor.formatOnType": true,
+		"files.trimTrailingWhitespace": true,
+		"python.testing.pytestArgs": [
+			"."
+		],
+		"python.testing.unittestEnabled": false,
+		"python.testing.pytestEnabled": true,
+		"python.linting.pylintArgs": [
+			"--load-plugins",
+			"pylint_django",
+			"--django-settings-module=core.settings"
+		],
+		"[python]": {
+			"editor.codeActionsOnSave": {
+				"source.organizeImports": true
+			},
+			"editor.defaultFormatter": "ms-python.black-formatter"
+		},
+		"isort.args": [
+			"--profile",
+			"black"
+		]
+	},
+	"remoteUser": "appuser"
+}
