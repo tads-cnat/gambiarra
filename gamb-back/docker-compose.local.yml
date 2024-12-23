@@ -8,6 +8,8 @@ services:
       bash -c "
       python manage.py makemigrations &&
       python manage.py migrate &&
+      python manage.py populate_groups &&
+      python manage.py populate_user &&
       python manage.py runserver 0.0.0.0:8000"
     volumes:
       - .:/app
@@ -21,7 +23,7 @@ services:
       POSTGRES_PASSWORD: postgres
       POSTGRES_HOST: db
       POSTGRES_PORT: 5432
-      DJANGO_SETTINGS_MODULE: mysite.settings  # Replace with your actual settings module
+      DJANGO_SETTINGS_MODULE: mysite.settings 
 
   db:
     image: postgres:13-alpine
