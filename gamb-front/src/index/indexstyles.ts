@@ -15,7 +15,15 @@ export const IndexContainer = styled.div`
 		}
 	}
 
-	RobozinhoContainer {
+	.img-fluid {
+		width: 25rem;
+	}
+
+	.roboebotao {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		align-items: end;
 	}
 `;
 

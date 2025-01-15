@@ -77,12 +77,14 @@ export default function Home() {
 							</div>
 						</div>
 
-						<div>
+						<div className="roboebotao">
 							<img
+								className="img-fluid"
 								src="\assets\gambi-robozinho.png"
 								alt=""
 							/>
 							<GambButton
+								className="botaorobo"
 								label="Abrir Chamado"
 								variant="roxo"
 								size="large"
