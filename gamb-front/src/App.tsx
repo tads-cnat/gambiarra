@@ -4,6 +4,8 @@ import { GlobalStyle } from "./styles/global";
 import { Dashboard } from "./dashboard/Dashboard";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./index";
+import CardIndex from "./componentes/GambCardIndex/GambCardIndex";
+import React from "react";
 
 export function App() {
 	return (
@@ -19,10 +21,11 @@ export function App() {
 						<Route
 							path="/dashboard/"
 							element={<Dashboard />}
-						/>
+							/>
 					</Routes>
 				</BrowserRouter>
 			</ThemeProvider>
+
 		</>
 	);
 }
