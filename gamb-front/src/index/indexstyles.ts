@@ -39,7 +39,7 @@ export const IndexContent = styled.div`
 
 	.bottoes {
 		display: flex;
-		gap	: 20px;
+		gap: 20px;
 	}
 
 	p {
@@ -51,4 +51,13 @@ export const IndexContent = styled.div`
 		color: ${(props) => props.theme.cores.purple_info_primary};
 		font-weight: ${(props) => props.theme.fontWeights.bold};
 	}
+`;
+
+export const CardContainer = styled.div`
+	display: grid;
+	//grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); eu sei lá
+	grid-template-columns: repeat(2, 1fr);
+
+	gap: 20px;
+	padding: 20px;
 `;
