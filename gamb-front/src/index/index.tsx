@@ -78,6 +78,10 @@ export default function Home() {
 						</div>
 
 						<div>
+							<img
+								src="\assets\gambi-robozinho.png"
+								alt=""
+							/>
 							<GambButton
 								label="Abrir Chamado"
 								variant="roxo"
@@ -101,9 +105,9 @@ export default function Home() {
 							nomeCampus="Campus Natal Central - IFRN"
 							contato="contatolab@gmail.com"
 							endereco="Lades - Prédio do NIT, 2° andar"
-							professores={11}
-							bolsistas={20}
-							maquinas={300}
+							professores={235}
+							bolsistas={50}
+							maquinas={0}
 						/>
 						<CardIndex
 							nomeCampus="Campus Natal Central - IFRN"
