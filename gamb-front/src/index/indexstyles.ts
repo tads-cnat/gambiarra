@@ -7,11 +7,23 @@ export const IndexContainer = styled.div`
 	/* background-color: ${(props) => props.theme.cores.white}; */
 	h2 {
 		font-size: 2rem;
+		margin-top: 1.5rem;
 		span {
 			font-size: 2rem;
 			color: ${(props) => props.theme.cores.purple_info_primary};
 			font-weight: ${(props) => props.theme.fontWeights.bold};
 		}
+	}
+
+	.img-fluid {
+		width: 25rem;
+	}
+
+	.roboebotao {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		align-items: end;
 	}
 `;
 
