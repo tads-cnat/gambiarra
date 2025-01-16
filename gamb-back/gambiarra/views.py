@@ -6,6 +6,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework_simplejwt.authentication import JWTAuthentication
 
+from authentication.constants import GrupoEnum
 from authentication.permissions import *
 
 # serializers
@@ -40,13 +41,22 @@ class CreateChamadoView(CreateAPIView):
 
 
 class ListarChamadoView(ListAPIView):
-    permission_classes = [IsAuthenticated, OnlyExterno]
+    permission_classes = [IsAuthenticated]
     authentication_classes = [JWTAuthentication]
     serializer_class = ListarChamadoSerializer
 
     def get_queryset(self):
-        user = self.request.user
-        return Chamado.objects.filter(cliente=user)
+        user: Usuario = self.request.user
+        print(type(user.grupo))
+        print(type(GrupoEnum.PROFESSOR))
+        if user.grupo.name == GrupoEnum.PROFESSOR:
+            print("entrou")
+            queryset = Chamado.objects.filter(professor=user).all()
+        elif user.grupo.name == GrupoEnum.GERENTE:
+            queryset = Chamado.objects.all()
+        else:
+            queryset = Chamado.objects.filter(cliente=user).all()
+        return queryset
 
     def list(self, request):
         queryset = self.filter_queryset(self.get_queryset())

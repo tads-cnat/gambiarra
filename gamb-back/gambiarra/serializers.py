@@ -66,7 +66,7 @@ class ListarChamadoSerializer(serializers.ModelSerializer):
 
     def get_professor(self, obj):
         if obj.professor:
-            return obj.professor.first_name
+            return obj.professor.username
         return None
 
     def get_avaliacao(self, obj):
