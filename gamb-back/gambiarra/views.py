@@ -9,7 +9,7 @@ from rest_framework_simplejwt.authentication import JWTAuthentication
 from authentication.permissions import *
 
 # serializers
-from gambiarra.serializers import CreateChamadoSerializer  # ChamadoSerializer
+from gambiarra.serializers import CreateChamadoSerializer, ListarChamadoSerializer
 
 from .models import *
 
@@ -36,4 +36,28 @@ class CreateChamadoView(CreateAPIView):
                 "message": "Chamado aberto com sucesso!",
             },
             status=status.HTTP_201_CREATED,
+        )
+
+
+class ListarChamadoView(ListAPIView):
+    permission_classes = [IsAuthenticated, OnlyExterno]
+    authentication_classes = [JWTAuthentication]
+    serializer_class = ListarChamadoSerializer
+
+    def get_queryset(self):
+        user = self.request.user
+        return Chamado.objects.filter(cliente=user)
+
+    def list(self, request):
+        queryset = self.filter_queryset(self.get_queryset())
+
+        serializer = self.get_serializer(queryset, many=True)
+
+        return Response(
+            data={
+                "success": True,
+                "data": serializer.data,
+                "message": None,
+            },
+            status=status.HTTP_200_OK,
         )
