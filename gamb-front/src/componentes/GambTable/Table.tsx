@@ -1,127 +1,81 @@
 import React from "react";
-import { GambTableProps } from "../../interfaces/componentes/iGambTable";
-import { BodyTd, BodyTr, HeadTh, HeadTr, } from "./tableStyles";
+// import { GambTableProps } from "../../interfaces/componentes/iGambTable";
+import { BodyTd, BodyTr, HeadTr, } from "./tableStyles";
+import { GHeadTh } from "./GHeadTh";
+import { GBodyTd } from "./GBodyTd";
 
-export function GambTable(props: GambTableProps) {
+export function GambTable() {
+
 	return (
 		<>
 			<table>
 				<thead>
 					<HeadTr>
-						<HeadTh>
-                            Ações
-                        </HeadTh>
+						<GHeadTh title="Ações"/>
 
-                        <HeadTh>
-                            Status
-                        </HeadTh>
+                        <GHeadTh title="Status"/>
 
-                        <HeadTh>
-                            Codigo
-                        </HeadTh>
+						<GHeadTh title="Código"/>
                         
-                        <HeadTh >
-                            Titulo
-                        </HeadTh>
+						<GHeadTh title="Titulo"/>
 
-                        <HeadTh>
-                            Professor
-                        </HeadTh>
+						<GHeadTh title="Professor"/>
 
-                        <HeadTh>
-                            Bolsista
-                        </HeadTh>
+						<GHeadTh title="Bolsista"/>
 
-                        <HeadTh>
-                            Avaliação
-                        </HeadTh>
+						<GHeadTh title="Avaliação"/>
 
 					</HeadTr>
 				</thead>
 				<tbody>
                     <BodyTr>
-                        <BodyTd>
-                            X
-                        </BodyTd>
+                        <GBodyTd content="X X X X" />
 
-                        <BodyTd>
-                            aberto
-                        </BodyTd>
+                        <GBodyTd content="Aberto" />
                         
-                        <BodyTd>
-                            5as254
-                        </BodyTd>
+                        <GBodyTd content="a45sda6s58" />
                     
-                        <BodyTd>
-                            AAAAAA
-                        </BodyTd>
+                        <GBodyTd content="Titulo legal" />
                         
-                        <BodyTd>
-                            Lucena
-                        </BodyTd>
-                        <BodyTd>
-                            Lg spider
-                        </BodyTd>
-                        <BodyTd>
-                            Brabo
-                        </BodyTd>
+                        <GBodyTd content="Lucena" />
+
+                        <GBodyTd content="Lg spider" />
+
+                        <GBodyTd content="Brabo" />
                     </BodyTr>
 
                     <BodyTr>
-                        <BodyTd>
-                            X
-                        </BodyTd>
+                        <GBodyTd content="X X X X" />
 
-                        <BodyTd>
-                            aberto
-                        </BodyTd>
+                        <GBodyTd content="Em analise" />
                         
-                        <BodyTd>
-                            5as254
-                        </BodyTd>
+                        <GBodyTd content="a4a85dASD5" />
                     
-                        <BodyTd>
-                            AAAAAA
-                        </BodyTd>
+                        <GBodyTd content="Titulo nao mt legal" />
                         
-                        <BodyTd>
-                            Lucena
-                        </BodyTd>
-                        <BodyTd>
-                            Lg spider
-                        </BodyTd>
-                        <BodyTd>
-                            Brabo
-                        </BodyTd>
-                    </BodyTr> 
+                        <GBodyTd content="Jorgiano" />
+
+                        <GBodyTd content="Livia" />
+
+                        <GBodyTd content="MUITO Brabo" />
+                    </BodyTr>
 
                     <BodyTr>
-                        <BodyTd>
-                            X
-                        </BodyTd>
+                        <GBodyTd content="X X X X" />
 
-                        <BodyTd>
-                            aberto
-                        </BodyTd>
+                        <GBodyTd content="Concluido" />
                         
-                        <BodyTd>
-                            5as254
-                        </BodyTd>
+                        <GBodyTd content="8A541DS64" />
                     
-                        <BodyTd>
-                            AAAAAA
-                        </BodyTd>
+                        <GBodyTd content="Computador" />
                         
-                        <BodyTd>
-                            Lucena
-                        </BodyTd>
-                        <BodyTd>
-                            Lg spider
-                        </BodyTd>
-                        <BodyTd>
-                            Brabo
-                        </BodyTd>
+                        <GBodyTd content="Lucena" />
+
+                        <GBodyTd content="Leonardo" />
+
+                        <GBodyTd content="Muito muito Brabo" />
                     </BodyTr>
+
                 </tbody>
 			</table>
 		</>
