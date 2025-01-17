@@ -1,7 +1,6 @@
 import React from "react"
 import { PaginationProps } from "../../interfaces/componentes/iGambPaginacao.ts"
 import { PageCol, PageLine } from "./PaginacaoStyles.ts"
-import { CaretLeft, CaretRight } from "@phosphor-icons/react"
 import GambButton from "../GambButton/Button.tsx"
 
 

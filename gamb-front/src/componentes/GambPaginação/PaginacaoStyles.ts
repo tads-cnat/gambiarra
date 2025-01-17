@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const PageLine = styled.div`
-
+    background-color: ${props => props.theme.cores.white};
     display: flex;
     height: 66px;
     align-items: flex-start;
@@ -14,7 +14,7 @@ export const PageLine = styled.div`
     border-left: 1px solid ${props => props.theme.cores.gray_light};
 
     padding: 10px;
-    background: ${props => props.theme.cores.Black};
+
 `
 
 export const PageCol = styled.div`

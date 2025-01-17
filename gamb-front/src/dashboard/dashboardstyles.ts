@@ -21,7 +21,7 @@ export const DashboardContent = styled.aside`
 	padding: 2rem;
 	background: #f8f8f8;
 
-	background: linear-gradient(white, white) padding-box,
+	background: linear-gradient(#f8f8f8, #f8f8f8) padding-box,
 		linear-gradient(
 				-30deg,
 				rgba(255, 255, 255, 1) 7%,

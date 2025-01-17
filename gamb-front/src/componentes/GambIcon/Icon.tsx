@@ -30,7 +30,6 @@ import {
 } from "@phosphor-icons/react";
 import { GambIconProps } from "../../interfaces/componentes/iGambIcon";
 import React from "react";
-import { set } from "react-hook-form";
 
 const iconComponents: { [key: string]: JSX.Element } = {
 	house: <House />,
