@@ -19,7 +19,7 @@ export const DashboardContent = styled.aside`
 	border-radius: 30px;
 	box-shadow: 5px 5px 10px 5px rgba(54, 54, 54, 0.1);
 	padding: 2rem;
-	background: ${(props) => props.theme.cores.white};
+	background: #f8f8f8;
 
 	background: linear-gradient(white, white) padding-box,
 		linear-gradient(

@@ -1,8 +1,9 @@
 import React from "react";
 // import { GambTableProps } from "../../interfaces/componentes/iGambTable";
-import { BodyTd, BodyTr, HeadTr, } from "./tableStyles";
+import { BodyTr, HeadTr, } from "./tableStyles";
 import { GHeadTh } from "./GHeadTh";
 import { GBodyTd } from "./GBodyTd";
+import { Pagination } from "../GambPaginação/Paginacao";
 
 export function GambTable() {
 
@@ -77,6 +78,7 @@ export function GambTable() {
                     </BodyTr>
 
                 </tbody>
+                <Pagination pageIndex={1} perPage={10} totalCount={100} />
 			</table>
 		</>
 	);

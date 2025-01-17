@@ -11,7 +11,7 @@ export const HeadTr = styled.tr`
 export const HeadTh = styled.th`
 	display: flex;
 	height: 66px;
-	min-width: 160px;
+	min-width: 200px;
 	max-width: 350px;
 	max-height: 200px;
 	padding: 20px;
@@ -33,7 +33,7 @@ export const BodyTr = styled.tr`
 
 export const BodyTd = styled.td`
 display: flex;
-min-width: 160px;
+min-width: 200px;
 max-width: 350px;
 padding: 20px;
 align-items: center;

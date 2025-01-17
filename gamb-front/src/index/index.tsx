@@ -1,9 +1,8 @@
 import React from "react";
+import GambButton from "../componentes/GambButton/Button";
 import { Footer } from "../componentes/GambFooter/Footer";
 import { Header } from "../componentes/GambHeader/Header";
 import { IndexContainer, IndexContent, MarcaGrafica } from "./indexstyles";
-import GambButton from "../componentes/GambButton/Button";
-import { GambTable } from "../componentes/GambTable/Table";
 // import ChamadoService from "../services/models/ChamadoService";
 // import { ChamadoSubmit } from "../interfaces/models/iChamado";
 
@@ -41,7 +40,6 @@ export default function Home() {
 							alt="manutenção para todos - ifrn cnat"
 						/>
 					</MarcaGrafica>
-					<GambTable/>
 					<IndexContent>
 						<div className="apresentacao">
 							<h2>

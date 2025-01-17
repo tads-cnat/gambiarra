@@ -5,6 +5,7 @@ import {
 	DashboardContent,
 	DashboardMain,
 } from "./dashboardstyles";
+import { GambTable } from "../componentes/GambTable/Table";
 
 export function Dashboard() {
 	return (
@@ -17,6 +18,8 @@ export function Dashboard() {
 						<h1>Dashboard</h1>
 						<h2>Seja bem-vindo ao Dashboard</h2>
 						<h3>Escolha uma opção no menu ao lado</h3>
+
+						<GambTable/>
 
 					</DashboardContent>
 				</DashboardMain>
