@@ -23,7 +23,7 @@ export interface GambButtonProps {
 	style?: React.CSSProperties;
 
 	// Texto exibido no botão.
-	label: string;
+	label?: string;
 
 	// Define o atributo data-cypress para testes automatizados.
 	dataCypress?: string;

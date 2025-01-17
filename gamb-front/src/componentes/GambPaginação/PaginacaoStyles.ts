@@ -8,7 +8,7 @@ export const PageLine = styled.div`
     justify-content: space-between;
     align-items: center;
 
-    border-radius: 0px 0px 30px 30px;
+    border-radius: 0px 0px 8px 8px;
     border-right: 1px solid ${props => props.theme.cores.gray_light};
     border-bottom: 1px solid ${props => props.theme.cores.gray_light};
     border-left: 1px solid ${props => props.theme.cores.gray_light};

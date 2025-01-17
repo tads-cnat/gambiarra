@@ -17,6 +17,7 @@ import {
 	Plus,
 	Minus,
 	CaretRight,
+	CaretLeft,
 	CheckCircle,
 	Info,
 	WarningDiamond,
@@ -29,6 +30,7 @@ import {
 } from "@phosphor-icons/react";
 import { GambIconProps } from "../../interfaces/componentes/iGambIcon";
 import React from "react";
+import { set } from "react-hook-form";
 
 const iconComponents: { [key: string]: JSX.Element } = {
 	house: <House />,
@@ -49,6 +51,7 @@ const iconComponents: { [key: string]: JSX.Element } = {
 	plus: <Plus />,
 	minus: <Minus />,
 	seta_direita: <CaretRight />, 
+	seta_esquerda: <CaretLeft />,
 	checkcircle: <CheckCircle/>,
 	info: <Info weight="fill" />,
 	warning: <WarningDiamond/>,
