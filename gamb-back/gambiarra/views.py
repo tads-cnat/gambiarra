@@ -1,3 +1,4 @@
+from django.db.models import Q
 from rest_framework import status
 
 # rest framework
@@ -50,8 +51,9 @@ class ListarChamadoView(ListAPIView):
         print(type(user.grupo))
         print(type(GrupoEnum.PROFESSOR))
         if user.grupo.name == GrupoEnum.PROFESSOR:
-            print("entrou")
-            queryset = Chamado.objects.filter(professor=user).all()
+            queryset = Chamado.objects.filter(
+                Q(professor=user) | Q(professor__isnull=True)
+            ).all()
         elif user.grupo.name == GrupoEnum.GERENTE:
             queryset = Chamado.objects.all()
         else:
