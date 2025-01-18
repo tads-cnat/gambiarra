@@ -9,3 +9,25 @@
 	border: 1px solid #564CCF !important;
 	color:  #564CCF !important;
 }
+.border-gambi{
+	background: #ffffff;
+	background: linear-gradient(white, white) padding-box,
+		linear-gradient(
+				-30deg,
+				rgba(255, 255, 255, 1) 7%,
+				#79e546 7%,
+				#79e546 19%,
+				rgba(255, 255, 255, 1) 19%,
+				rgba(255, 255, 255, 1) 27%,
+				rgba(67, 56, 202, 1) 27%,
+				rgba(67, 56, 202, 1) 39%,
+				rgba(252, 252, 252, 1) 39%,
+				rgba(252, 252, 252, 1) 61%,
+				#79e546 61%,
+				#79e546 81%,
+				rgba(255, 255, 255, 1) 81%
+			)
+			border-box;
+			border: 1px solid transparent;
+
+}

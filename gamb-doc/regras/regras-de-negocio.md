@@ -1,6 +1,7 @@
 Aqui estão as regras de negócio que você forneceu, adaptadas ao modelo solicitado:
 
 # Regras de Negócio
+[Voltar a documentação](../documentacao.md)
 
 ## Histórico de Revisões
 
