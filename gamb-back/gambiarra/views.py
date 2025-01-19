@@ -48,8 +48,6 @@ class ListarChamadoView(ListAPIView):
 
     def get_queryset(self):
         user: Usuario = self.request.user
-        print(type(user.grupo))
-        print(type(GrupoEnum.PROFESSOR))
         if user.grupo.name == GrupoEnum.PROFESSOR:
             queryset = Chamado.objects.filter(
                 Q(professor=user) | Q(professor__isnull=True)
