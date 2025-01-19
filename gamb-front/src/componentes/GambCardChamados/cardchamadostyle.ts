@@ -41,7 +41,7 @@ export const CardChamadoWrapper = styled.div<{ type: CardChamadoType }>`
 
 export const CardChamadoIcon = styled.div<{ type: CardChamadoType }>`
     width: 100px;
-    height: 85px;
+    height: 100px;
     flex-shrink: 0;
   color: ${({ type, theme }) =>
 		["atribuidas", "concluidas", "recusadas"].includes(type) 

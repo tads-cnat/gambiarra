@@ -62,10 +62,10 @@ const iconComponents: { [key: string]: JSX.Element } = {
 	arquivo: <FileText />,
 	lego: <Lego />,
 	list: <List />,
-	usercirclegear: <UserCircleGear />,
-	usercircleplus: <UserCirclePlus />,
-	usercirclecheck: <UserCircleCheck />,
-	usercircleminus: <UserCircleMinus />,
+	usercirclegear: <UserCircleGear weight="thin"/>,
+	usercircleplus: <UserCirclePlus weight="thin"/>,
+	usercirclecheck: <UserCircleCheck weight="thin"/>,
+	usercircleminus: <UserCircleMinus weight="thin"/>,
 };
 
 export default function Icon(props: GambIconProps): JSX.Element {

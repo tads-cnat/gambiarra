@@ -51,10 +51,10 @@ export default function CardChamado({
 		<CardChamadoContainer>
             <CardChamadoWrapper type={messageType}>
                 <CardChamadoIcon type={messageType}>
-                    {messageType === "atribuidas" ? <Icon icon="usercircleplus" size={85} className="thin-icon" /> : null}
-                    {messageType === "concluidas" ? <Icon icon="usercirclecheck" size={85} /> : null}
-                    {messageType === "pendentes" ? <Icon icon="usercirclegear" size={85} /> : null}
-                    {messageType === "recusadas" ? <Icon icon="usercircleminus" size={85}  /> : null}
+                    {messageType === "atribuidas" ? <Icon icon="usercircleplus" size={100} className="thin-icon" /> : null}
+                    {messageType === "concluidas" ? <Icon icon="usercirclecheck" size={100} /> : null}
+                    {messageType === "pendentes" ? <Icon icon="usercirclegear" size={100} /> : null}
+                    {messageType === "recusadas" ? <Icon icon="usercircleminus" size={100}  /> : null}
                 </CardChamadoIcon>
                 <TextContainer>
                     <CardChamadoText type={messageType}>
