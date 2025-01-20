@@ -6,6 +6,8 @@ import {
 	DashboardContent,
 	DashboardMain,
 } from "./dashboardstyles";
+import { Route, Routes } from "react-router-dom";
+import DashboardHome from "./Home";
 
 export function Dashboard() {
 	return (
@@ -15,10 +17,15 @@ export function Dashboard() {
 				{/* teste botões */}
 				<DashboardMain>
 					<DashboardContent className="elevacao-def">
-						<h1>Dashboard</h1>
-						<h2>Seja bem-vindo ao Dashboard</h2>
-						<h3>Escolha uma opção no menu ao lado</h3>
+						<Routes>
+							{/* Página inicial da Dashboard */}
+							<Route
+								path="/"
+								element={<DashboardHome />}
+							/>
 
+							{/* Página de Gerenciamento de usuários */}
+						</Routes>
 					</DashboardContent>
 				</DashboardMain>
 			</DashboardContainer>
