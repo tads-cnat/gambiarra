@@ -40,7 +40,7 @@ export default function CardChamado({
         if (messageType === "pendentes" && ["bolsista", "professor", "cliente"].includes(userType)) {
             return "Pendentes";
         }
-        if (messageType === "recusadas" && userType === "cliente") {
+        if (messageType === "recusadas" && ["cliente","professor"].includes(userType)) {
             return "Recusados";
         }
         return "Status desconhecido.";
