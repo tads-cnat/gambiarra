@@ -63,7 +63,7 @@ export const TextContainer = styled.div`
 export const CardChamadoText = styled.div<{ type: CardChamadoType }>`
         font-feature-settings: 'liga' off, 'clig' off;
         font-family: Poppins;
-        font-size: 24px;
+        font-size: 28px;
         font-style: normal;
         font-weight: 300;
         line-height: 1.4; /* 114.286% */
@@ -79,7 +79,7 @@ export const CardChamadoText = styled.div<{ type: CardChamadoType }>`
 export const CardChamadoText2 = styled.div<{ type: CardChamadoType }>`
         font-feature-settings: 'liga' off, 'clig' off;
         font-family: Poppins;
-        font-size: 24px;
+        font-size: 25px;
         font-style: normal;
         font-weight: 700;
         line-height: 32px;
