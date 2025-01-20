@@ -1,13 +1,14 @@
 import React from "react";
 import { Sidebar } from "../componentes/Sidebar/Sidebar";
-import CardChamado from "../componentes/GambCardChamados/CardChamado";
 import {
 	DashboardContainer,
 	DashboardContent,
 	DashboardMain,
 } from "./dashboardstyles";
-import { Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import DashboardHome from "./Home";
+import { ProtectedRoute } from "../auth/Routes";
+import { userRoles } from "../auth/roles";
 
 export function Dashboard() {
 	return (
@@ -17,18 +18,39 @@ export function Dashboard() {
 				{/* teste botões */}
 				<DashboardMain>
 					<DashboardContent className="elevacao-def">
-						<Routes>
-							{/* Página inicial da Dashboard */}
-							<Route
-								path="/"
-								element={<DashboardHome />}
-							/>
+						<BrowserRouter>
+							<Routes>
+								{/* Página inicial da Dashboard (Rota Pública)*/}
+								<Route
+									path="/"
+									element={<DashboardHome />}
+								/>
 
-							{/* Página de Gerenciamento de usuários */}
-						</Routes>
+								{/* Página de Gerenciamento de usuários */}
+								<Route
+									path="/gerenciar/usuarios"
+									element={
+										<ProtectedRoute
+											element={<Dashboard />}
+											requiredRole={[
+												userRoles.INTERNO.FUNCIONARIO
+													.GR,
+											]} // Exemplo: apenas "Gerente" pode acessar
+										/>
+									}
+								/>
+							</Routes>
+						</BrowserRouter>
 					</DashboardContent>
 				</DashboardMain>
 			</DashboardContainer>
 		</div>
 	);
 }
+// 				{/* Rota pública */}
+// 				<Route
+// 					path="/"
+// 					element={<Home />}
+// 				/>
+
+// 				{/* Rota protegida */}

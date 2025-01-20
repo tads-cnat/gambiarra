@@ -1,17 +1,17 @@
-interface iuserRoles {
+export interface iuserRoles {
 	INTERNO: {
 		FUNCIONARIO: {
-			GR: "Gerente";
-			PR: "Professor";
-			BO: "Bolsista";
+			GR: string;
+			PR: string;
+			BO: string;
 		};
 		CLIENTE: {
-			AL: "Aluno";
-			SE: "Servidor";
+			AL: string;
+			SE: string;
 		};
 	};
 	EXTERNO: {
-		CLIENTE: "Cliente";
+		CLIENTE: string;
 	};
 }
 

@@ -1,7 +1,5 @@
-import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
-import { Dashboard } from "../dashboard/Dashboard";
-import Home from "../index/index";
 import React from "react";
+import { Navigate } from "react-router-dom";
 
 // Simulação de autenticação
 const isAuthenticated = (): boolean => {
@@ -9,24 +7,27 @@ const isAuthenticated = (): boolean => {
 };
 
 // Simulação de verificação de permissão
-const hasPermission = (requiredRole: string): boolean => {
+const hasPermission = (requiredRole: string[]): boolean => {
 	const userRole = localStorage.getItem("Role");
-	return userRole === requiredRole;
+	if (!userRole) {
+		return false; // Retorna false caso o "Role" não esteja no localStorage
+	}
+	return requiredRole.includes(userRole);
 };
 
 // Componente para proteger rotas
-function ProtectedRoute({
+export function ProtectedRoute({
 	element,
 	requiredRole,
 }: {
 	element: JSX.Element;
-	requiredRole?: string;
+	requiredRole?: string[];
 }): JSX.Element {
 	if (!isAuthenticated()) {
 		// Redireciona para a página inicial se o usuário não estiver autenticado
 		return (
 			<Navigate
-				to="/"
+				to="/login"
 				replace
 			/>
 		);
@@ -36,13 +37,12 @@ function ProtectedRoute({
 		// Redireciona para a página inicial se o usuário não tiver a permissão necessária
 		return (
 			<Navigate
-				to="/"
+				to="/dashboard"
 				replace
 			/>
 		);
 	}
 
-	// Renderiza o componente protegido
 	return element;
 }
 
