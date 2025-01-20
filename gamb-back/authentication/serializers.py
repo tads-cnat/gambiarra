@@ -3,6 +3,7 @@ from django.contrib.auth.models import Group
 from django.contrib.auth.password_validation import validate_password
 from rest_framework import serializers
 from rest_framework.validators import UniqueValidator
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
 from authentication.constants import GrupoEnum
 
@@ -52,3 +53,15 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
         user.save()
         # user.groups.add(cliente)    #VER COM O PESSOAL SE VAMOS QUERER ISSO AQUI MESMO(ACUMULAR GRUPOS)
         return user
+
+
+class CustomLoginSerializer(TokenObtainPairSerializer):
+    def validate(self, attrs):
+        data = super().validate(attrs)
+        data['user_type'] = self.get_user_type(self.user)
+        return data
+    
+    def get_user_type(self, user):
+        if user.grupo:
+            return user.grupo.name  # Retorna o nome do grupo ao qual o usuário pertence
+        return None
