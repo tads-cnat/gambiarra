@@ -45,7 +45,7 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt.token_blacklist',
     
     #swagger
-    'drf_spectacular',
+    'drf_yasg',
 
     #bootstrap
     'bootstrap5',
@@ -132,7 +132,7 @@ DATABASES = {
         'NAME': 'postgres',
         'USER': 'postgres',
         'PASSWORD': 'postgres',
-        'HOST': 'localhost',  # Accessing PostgreSQL from local
+        'HOST': 'db',  # Accessing PostgreSQL from local
         'PORT': '5432',
     }
 }
@@ -190,26 +190,18 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static/'),
 ]
 
-# rest framework configs
-REST_FRAMEWORK = {
-    # YOUR SETTINGS
-    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
-    
-}
-
-# swagger configs
-SPECTACULAR_SETTINGS = {
-    'TITLE': 'Gamb Swagger Documentation',
-    'DESCRIPTION': 'Swagger de documentacao de endpoints',
-    'VERSION': '1.0.0',
-    'SERVE_INCLUDE_SCHEMA': True,
-    # OTHER SETTINGS
-    'COMPONENT_SPLIT_REQUEST': True,
-    'COMPONENT_NO_READ_ONLY_REQUIRED': True,
-    
-}
-
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
 ]
+
+SWAGGER_SETTINGS = {
+    'SECURITY_DEFINITIONS': {
+        'Bearer': {
+            'type': 'apiKey',
+            'name': 'Authorization',
+            'in': 'header',
+            'description': 'Use assim: "Bearer {token}"',
+        },
+    },
+}
 

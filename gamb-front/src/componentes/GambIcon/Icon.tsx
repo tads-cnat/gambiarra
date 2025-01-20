@@ -6,6 +6,7 @@ import {
 	Bell,
 	Star,
 	MusicNote,
+	Envelope,
 	Trash,
 	Lock,
 	Camera,
@@ -28,6 +29,7 @@ import {
 	List,
 	GreaterThan,
 	HouseLine,
+	MapPin,
 } from "@phosphor-icons/react";
 import { GambIconProps } from "../../interfaces/componentes/iGambIcon";
 import React from "react";
@@ -50,18 +52,20 @@ const iconComponents: { [key: string]: JSX.Element } = {
 	pause: <Pause />,
 	plus: <Plus />,
 	minus: <Minus />,
-	seta_direita: <CaretRight />, 
-	checkcircle: <CheckCircle/>,
+	seta_direita: <CaretRight />,
+	checkcircle: <CheckCircle />,
 	info: <Info weight="fill" />,
-	warning: <WarningDiamond/>,
-	danger: <Warning/>,
-	close: <X/>,
+	warning: <WarningDiamond />,
+	danger: <Warning />,
+	close: <X />,
 	seta_baixo: <CaretCircleDown />,
 	arquivo: <FileText />,
 	lego: <Lego />,
 	list: <List />,
 	greaterthan: <GreaterThan weight="bold"/>,
 	greenhouse: <HouseLine weight="fill"/>,
+	envelope: <Envelope />,
+	pin: <MapPin />,
 };
 
 export default function Icon(props: GambIconProps): JSX.Element {
