@@ -4,6 +4,7 @@ from django.contrib.auth.password_validation import validate_password
 from rest_framework import serializers
 from rest_framework.validators import UniqueValidator
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+from rest_framework_simplejwt.tokens import RefreshToken
 
 from authentication.constants import GrupoEnum
 
@@ -51,6 +52,13 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
             validated_data["password1"]
         )  # used this instead of create_user method to make sure the password is hashed
         user.save()
+
+
+    #loga o usuário registrado e salva o token de acesso
+        refresh = RefreshToken.for_user(user)
+        access_token = str(refresh.access_token)
+        user.access_token = access_token
+
         # user.groups.add(cliente)    #VER COM O PESSOAL SE VAMOS QUERER ISSO AQUI MESMO(ACUMULAR GRUPOS)
         return user
 
