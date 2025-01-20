@@ -18,7 +18,6 @@ export function Dashboard() {
 						<h1>Dashboard</h1>
 						<h2>Seja bem-vindo ao Dashboard</h2>
 						<h3>Escolha uma opção no menu ao lado</h3>
-						<CardChamado userType={"professor"} messageType={"concluidas"} quantity={42}/>
 
 					</DashboardContent>
 				</DashboardMain>
