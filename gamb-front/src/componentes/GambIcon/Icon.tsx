@@ -27,6 +27,8 @@ import {
 	FileText,
 	Lego,
 	List,
+	GreaterThan,
+	HouseLine,
 	MapPin,
 } from "@phosphor-icons/react";
 import { GambIconProps } from "../../interfaces/componentes/iGambIcon";
@@ -60,6 +62,8 @@ const iconComponents: { [key: string]: JSX.Element } = {
 	arquivo: <FileText />,
 	lego: <Lego />,
 	list: <List />,
+	greaterthan: <GreaterThan weight="bold"/>,
+	greenhouse: <HouseLine weight="fill"/>,
 	envelope: <Envelope />,
 	pin: <MapPin />,
 };
