@@ -17,6 +17,7 @@ export const HeadTh = styled.th`
 	padding: 20px;
 	align-items: center;
 	gap: 10px;
+	font-weight: 600;
 `;
 
 

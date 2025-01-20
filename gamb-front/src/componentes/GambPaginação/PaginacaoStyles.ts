@@ -28,6 +28,8 @@ export const PageCol = styled.div`
     align-items: center;
     gap: 10px;
 
+    font-weight: 600;
+
     border-bottom: 1px solid var ${props => props.theme.cores.gray_light};
 
 `
