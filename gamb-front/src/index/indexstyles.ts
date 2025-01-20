@@ -7,11 +7,23 @@ export const IndexContainer = styled.div`
 	/* background-color: ${(props) => props.theme.cores.white}; */
 	h2 {
 		font-size: 2rem;
+		margin-top: 1.5rem;
 		span {
 			font-size: 2rem;
 			color: ${(props) => props.theme.cores.purple_info_primary};
 			font-weight: ${(props) => props.theme.fontWeights.bold};
 		}
+	}
+
+	.img-fluid {
+		width: 25rem;
+	}
+
+	.roboebotao {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		align-items: end;
 	}
 `;
 
@@ -39,7 +51,7 @@ export const IndexContent = styled.div`
 
 	.bottoes {
 		display: flex;
-		gap	: 20px;
+		gap: 20px;
 	}
 
 	p {
@@ -51,4 +63,13 @@ export const IndexContent = styled.div`
 		color: ${(props) => props.theme.cores.purple_info_primary};
 		font-weight: ${(props) => props.theme.fontWeights.bold};
 	}
+`;
+
+export const CardContainer = styled.div`
+	display: grid;
+	//grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); eu sei lá
+	grid-template-columns: repeat(2, 1fr);
+
+	gap: 20px;
+	padding: 20px;
 `;
