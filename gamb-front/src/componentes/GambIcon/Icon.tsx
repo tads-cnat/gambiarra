@@ -26,6 +26,7 @@ import {
 	FileText,
 	Lego,
 	List,
+	Envelope,
 } from "@phosphor-icons/react";
 import { GambIconProps } from "../../interfaces/componentes/iGambIcon";
 import React from "react";
@@ -58,6 +59,7 @@ const iconComponents: { [key: string]: JSX.Element } = {
 	arquivo: <FileText />,
 	lego: <Lego />,
 	list: <List />,
+	mail: <Envelope />,
 };
 
 export default function Icon(props: GambIconProps): JSX.Element {

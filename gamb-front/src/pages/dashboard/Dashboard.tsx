@@ -1,5 +1,5 @@
 import React from "react";
-import { Sidebar } from "../componentes/Sidebar/Sidebar";
+import { Sidebar } from "../../componentes/Sidebar/Sidebar";
 import {
 	DashboardContainer,
 	DashboardContent,
