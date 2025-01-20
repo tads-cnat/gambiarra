@@ -17,22 +17,7 @@ STATUS_CHOICES = [
     ("8","Recusado"),
 ] 
  
-class Bolsista(models.Model):
-    nome = models.CharField(max_length=100, default="")
-    matricula = models.CharField(max_length=20, default="")
-    foto_perfil = models.ImageField(upload_to='Bolsista', null=True, blank=True, default='../media/Padrao/perfil_default.png')
-
-    def __str__(self):
-        return self.nome 
-    
-    def delete(self, *args, **kwargs):
-        if self.foto_perfil:
-            if os.path.isfile(self.foto_perfil.path):
-                os.remove(self.foto_perfil.path)
-        super().delete(*args, **kwargs)
-    
-
-
+ 
 class Item(models.Model):
     modelo = models.CharField(max_length=30, default="")
     diagnostico = models.CharField(max_length=200, default="")
@@ -46,7 +31,7 @@ class Chamado(models.Model):
     descricao = models.TextField(max_length=240, default="")
     code = models.UUIDField(default=uuid.uuid4)
     professor = models.ForeignKey(Usuario, on_delete=models.CASCADE, related_name='chamados_professor', null=True, blank=True)
-    bolsistas = models.ManyToManyField(Bolsista, blank=True)
+    bolsistas = models.ManyToManyField(Usuario, on_delete=models.CASCADE, related_name='chamados_bolsista', null=True, blank=True)
     status = models.CharField(max_length=30, choices=STATUS_CHOICES, default="1")
     item = models.OneToOneField('Item', on_delete=models.CASCADE, null=True)
     cliente = models.ForeignKey(Usuario, on_delete=models.CASCADE, related_name='chamados_cliente', null=True, blank=True)

@@ -6,12 +6,13 @@ O propósito do Projeto Gambiarra é estabelecer uma conexão entre estudantes e
 
 ## Equipe e Formas de Contato
 
-| Integrante     | Github                                  | Discord    |
-| -------------- | --------------------------------------- | ---------- |
-| Leonardo Viana | [leveau10](https://github.com/leveau10) | leveau10   |
-| Lívia Vitória  | [Naninh4](https://github.com/Naninh4)   | amy_5he    |
-| Luiz Gustavo   | [1Lgr](https://github.com/1Lgr)         | 1lgr       |
-| Ryan Pinheiro  | [ryan-pin](https://github.com/ryan-pin) | santuaryum |
+| Integrante     | Github                                                | Discord      |
+| -------------- | ----------------------------------------------------- | ------------ |
+| Igor Gabriel   | [igor1208gabriel](https://github.com/Igor1208gabriel) | igor1208biel |
+| Leonardo Viana | [leveau10](https://github.com/leveau10)               | leveau10     |
+| Lívia Vitória  | [liviaaVS](https://github.com/liviaaVS)               | amy_5he      |
+| Luiz Gustavo   | [1Lgr](https://github.com/1Lgr)                       | 1lgr         |
+| Ryan Pinheiro  | [ryan-pin](https://github.com/ryan-pin)               | santuaryum   |
 
 ## Horário de Reuniões
 

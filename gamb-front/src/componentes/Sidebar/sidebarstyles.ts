@@ -33,6 +33,17 @@ export const UserSpace = styled.div`
 	padding: 1rem 0;
 `;
 
+export const ItemDropdown = styled.ul`
+  background-color: ${(props) => props.theme.cores.light_white};
+  overflow: hidden;
+  width: auto;
+
+  a {
+    font-size: ${(props) => props.theme.fontSize.font_scale_up_02}rem; /* Remover o ponto e vírgula extra */
+	color: ${(props) => props.theme.cores.gray_text};
+  }
+`;
+
 export const SidebarContent = styled.div`
 	display: flex;
 	flex-direction: column;
@@ -68,4 +79,5 @@ export const SidebarContent = styled.div`
 		gap: 1rem;
 		padding-bottom: 2rem;
 	}
+
 `;
