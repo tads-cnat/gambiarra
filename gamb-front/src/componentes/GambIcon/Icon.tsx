@@ -26,6 +26,7 @@ import {
 	FileText,
 	Lego,
 	List,
+	GreaterThan,
 } from "@phosphor-icons/react";
 import { GambIconProps } from "../../interfaces/componentes/iGambIcon";
 import React from "react";
@@ -58,6 +59,8 @@ const iconComponents: { [key: string]: JSX.Element } = {
 	arquivo: <FileText />,
 	lego: <Lego />,
 	list: <List />,
+	greaterthan: <GreaterThan weight="bold"/>,
+	greenhouse: <House color="#12a400" weight="fill"/>,
 };
 
 export default function Icon(props: GambIconProps): JSX.Element {
