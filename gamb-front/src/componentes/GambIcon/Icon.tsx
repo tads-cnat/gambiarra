@@ -31,6 +31,8 @@ import {
 	UserCirclePlus,
 	UserCircleCheck,
 	UserCircleMinus,
+	GreaterThan,
+	HouseLine,
 	MapPin,
 } from "@phosphor-icons/react";
 import { GambIconProps } from "../../interfaces/componentes/iGambIcon";
@@ -68,6 +70,8 @@ const iconComponents: { [key: string]: JSX.Element } = {
 	usercircleplus: <UserCirclePlus weight="thin"/>,
 	usercirclecheck: <UserCircleCheck weight="thin"/>,
 	usercircleminus: <UserCircleMinus weight="thin"/>,
+	greaterthan: <GreaterThan weight="bold"/>,
+	greenhouse: <HouseLine weight="fill"/>,
 	envelope: <Envelope />,
 	pin: <MapPin />,
 };
