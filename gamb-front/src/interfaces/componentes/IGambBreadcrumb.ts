@@ -1,6 +1,7 @@
 export type BreadcrumbItem = {
   label: string; 
-  href?: string; 
+  href?: string;
+  permission?: string; 
 };
 
 export interface BreadcrumbProps {

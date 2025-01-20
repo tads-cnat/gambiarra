@@ -6,8 +6,6 @@ export const BreadcrumbContainer = styled.nav`
     font-family: Poppins, sans-serif;
     font-size: 14px;
     gap: 8px;
-    margin-left: 16px;
-    margin-top: -21px;
 `;
 
 export const BreadcrumbItemWrapper = styled.div`
@@ -17,8 +15,8 @@ export const BreadcrumbItemWrapper = styled.div`
 
 export const BreadcrumbLink = styled.a`
   text-decoration: none;
-  color: ${({ theme }) => theme.cores.blue_primary};
-  font-weight: 500;
+  color: ${({ theme }) => theme.cores.purple_info_secondary};
+  font-weight: 400;
 
   &:hover {
     text-decoration: underline;
@@ -32,8 +30,8 @@ export const BreadcrumbSeparator = styled.span`
 `;
 
 export const BreadcrumbText = styled.span`
-  font-weight: 700;
-  color: ${({ theme }) => theme.cores.purple_info_secondary};
+  font-weight: 400;
+  color: ${({ theme }) => theme.cores.blue_primary};
 `;
 
 export const BreadcrumbIcon = styled.div`

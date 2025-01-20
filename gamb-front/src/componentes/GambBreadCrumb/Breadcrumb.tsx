@@ -31,7 +31,7 @@ export default function Breadcrumb({ crumbs }: BreadcrumbProps) {
                 ) : (
                   <BreadcrumbLink href={item.href}>{item.label}</BreadcrumbLink>
                 )}
-                <BreadcrumbSeparator><Icon icon="greaterthan" /></BreadcrumbSeparator>
+                <BreadcrumbSeparator><Icon icon="seta_direita" /></BreadcrumbSeparator>
               </>
             ) : (
               <BreadcrumbText>{item.label}</BreadcrumbText>
