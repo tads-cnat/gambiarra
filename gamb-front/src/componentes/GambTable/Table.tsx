@@ -12,69 +12,69 @@ export function GambTable() {
 			<table>
 				<thead>
 					<HeadTr>
-						<GHeadTh title="Ações"/>
+						<GHeadTh children="Ações"/>
 
-                        <GHeadTh title="Status"/>
+                        <GHeadTh children="Status"/>
 
-						<GHeadTh title="Código"/>
+						<GHeadTh children="Código"/>
                         
-						<GHeadTh title="Titulo"/>
+						<GHeadTh children="Titulo"/>
 
-						<GHeadTh title="Professor"/>
+						<GHeadTh children="Professor"/>
 
-						<GHeadTh title="Bolsista"/>
+						<GHeadTh children="Bolsista"/>
 
-						<GHeadTh title="Avaliação"/>
+						<GHeadTh children="Avaliação"/>
 
 					</HeadTr>
 				</thead>
 				<tbody>
                     <BodyTr>
-                        <GBodyTd content="X X X X" />
+                        <GBodyTd children="X X X X" />
 
-                        <GBodyTd content="Aberto" />
+                        <GBodyTd children="Aberto" />
                         
-                        <GBodyTd content="a45sda6s58" />
+                        <GBodyTd children="a45sda6s58" />
                     
-                        <GBodyTd content="Titulo legal" />
+                        <GBodyTd children="Titulo legal" />
                         
-                        <GBodyTd content="Lucena" />
+                        <GBodyTd children="Lucena" />
 
-                        <GBodyTd content="Lg spider" />
+                        <GBodyTd children="Lg spider" />
 
-                        <GBodyTd content="Brabo" />
+                        <GBodyTd children="Brabo" />
                     </BodyTr>
 
                     <BodyTr>
-                        <GBodyTd content="X X X X" />
+                        <GBodyTd children="X X X X" />
 
-                        <GBodyTd content="Em analise" />
+                        <GBodyTd children="Em analise" />
                         
-                        <GBodyTd content="a4a85dASD5" />
+                        <GBodyTd children="a4a85dASD5" />
                     
-                        <GBodyTd content="Titulo nao mt legal" />
+                        <GBodyTd children="Titulo nao mt legal" />
                         
-                        <GBodyTd content="Jorgiano" />
+                        <GBodyTd children="Jorgiano" />
 
-                        <GBodyTd content="Livia" />
+                        <GBodyTd children="Livia" />
 
-                        <GBodyTd content="MUITO Brabo" />
+                        <GBodyTd children="MUITO Brabo" />
                     </BodyTr>
 
                     <BodyTr>
-                        <GBodyTd content="X X X X" />
+                        <GBodyTd children="X X X X" />
 
-                        <GBodyTd content="Concluido" />
+                        <GBodyTd children="Concluido" />
                         
-                        <GBodyTd content="8A541DS64" />
+                        <GBodyTd children="8A541DS64" />
                     
-                        <GBodyTd content="Computador" />
+                        <GBodyTd children="Computador" />
                         
-                        <GBodyTd content="Lucena" />
+                        <GBodyTd children="Lucena" />
 
-                        <GBodyTd content="Leonardo" />
+                        <GBodyTd children="Leonardo" />
 
-                        <GBodyTd content="Muito muito Brabo" />
+                        <GBodyTd children="Muito muito Brabo" />
                     </BodyTr>
 
                 </tbody>

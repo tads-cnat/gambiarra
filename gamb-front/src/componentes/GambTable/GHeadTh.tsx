@@ -4,6 +4,6 @@ import { HeadTh } from "./tableStyles";
 
 export function GHeadTh(props : GambHeadThProps) {
     return(
-        <HeadTh>{props.title}</HeadTh>
+        <HeadTh>{props.children}</HeadTh>
     )
 }

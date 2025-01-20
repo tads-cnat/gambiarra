@@ -4,6 +4,6 @@ import { GambBodyTdProps } from "../../interfaces/componentes/iGambBodyTd";
 
 export function GBodyTd(props : GambBodyTdProps) {
     return(
-        <BodyTd>{props.content}</BodyTd>
+        <BodyTd>{props.children}</BodyTd>
     )
 }
