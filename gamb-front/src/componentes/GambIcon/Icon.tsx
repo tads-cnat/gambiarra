@@ -27,6 +27,12 @@ import {
 	FileText,
 	Lego,
 	List,
+	UserCircleGear,
+	UserCirclePlus,
+	UserCircleCheck,
+	UserCircleMinus,
+	GreaterThan,
+	HouseLine,
 	MapPin,
 } from "@phosphor-icons/react";
 import { GambIconProps } from "../../interfaces/componentes/iGambIcon";
@@ -60,6 +66,12 @@ const iconComponents: { [key: string]: JSX.Element } = {
 	arquivo: <FileText />,
 	lego: <Lego />,
 	list: <List />,
+	usercirclegear: <UserCircleGear weight="thin"/>,
+	usercircleplus: <UserCirclePlus weight="thin"/>,
+	usercirclecheck: <UserCircleCheck weight="thin"/>,
+	usercircleminus: <UserCircleMinus weight="thin"/>,
+	greaterthan: <GreaterThan weight="bold"/>,
+	greenhouse: <HouseLine weight="fill"/>,
 	envelope: <Envelope />,
 	pin: <MapPin />,
 };

@@ -1,5 +1,6 @@
 import React from "react";
 import { Sidebar } from "../componentes/Sidebar/Sidebar";
+import CardChamado from "../componentes/GambCardChamados/CardChamado";
 import {
 	DashboardContainer,
 	DashboardContent,
