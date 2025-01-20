@@ -1,14 +1,19 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
 
-// Simulação de autenticação
+// ten que ve isso aqui
 const isAuthenticated = (): boolean => {
-	return localStorage.getItem("userToken") !== null;
+	const userToken = localStorage.getItem("userToken");
+	const role = localStorage.getItem("Role");
+	return userToken !== null && role !== null;
 };
 
 // Simulação de verificação de permissão
 const hasPermission = (requiredRole: string[]): boolean => {
 	const userRole = localStorage.getItem("Role");
+	if (requiredRole.includes("Allowed")) {
+		return true;
+	}
 	if (!userRole) {
 		return false; // Retorna false caso o "Role" não esteja no localStorage
 	}
@@ -16,6 +21,7 @@ const hasPermission = (requiredRole: string[]): boolean => {
 };
 
 // Componente para proteger rotas
+
 export function ProtectedRoute({
 	element,
 	requiredRole,
@@ -32,7 +38,6 @@ export function ProtectedRoute({
 			/>
 		);
 	}
-
 	if (requiredRole && !hasPermission(requiredRole)) {
 		// Redireciona para a página inicial se o usuário não tiver a permissão necessária
 		return (

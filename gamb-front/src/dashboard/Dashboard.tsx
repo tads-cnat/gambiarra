@@ -1,16 +1,29 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Sidebar } from "../componentes/Sidebar/Sidebar";
 import {
 	DashboardContainer,
 	DashboardContent,
 	DashboardMain,
 } from "./dashboardstyles";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import DashboardHome from "./Home";
-import { ProtectedRoute } from "../auth/Routes";
-import { userRoles } from "../auth/roles";
+import { Outlet } from "react-router-dom";
 
 export function Dashboard() {
+	useEffect(() => {
+		// Função para capturar mudanças no localStorage
+		const handleStorageChange = (e) => {
+			if (e.key === "userToken" || e.key === "role") {
+				console.log("Mudança no localStorage detectada");
+			}
+		};
+
+		// Adiciona o ouvinte para o evento de mudança no localStorage
+		window.addEventListener("storage", handleStorageChange);
+
+		// Limpa o ouvinte ao desmontar o componente
+		return () => {
+			window.removeEventListener("storage", handleStorageChange);
+		};
+	}, []);
 	return (
 		<div>
 			<DashboardContainer>
@@ -18,39 +31,10 @@ export function Dashboard() {
 				{/* teste botões */}
 				<DashboardMain>
 					<DashboardContent className="elevacao-def">
-						<BrowserRouter>
-							<Routes>
-								{/* Página inicial da Dashboard (Rota Pública)*/}
-								<Route
-									path="/"
-									element={<DashboardHome />}
-								/>
-
-								{/* Página de Gerenciamento de usuários */}
-								<Route
-									path="/gerenciar/usuarios"
-									element={
-										<ProtectedRoute
-											element={<Dashboard />}
-											requiredRole={[
-												userRoles.INTERNO.FUNCIONARIO
-													.GR,
-											]} // Exemplo: apenas "Gerente" pode acessar
-										/>
-									}
-								/>
-							</Routes>
-						</BrowserRouter>
+						<Outlet />
 					</DashboardContent>
 				</DashboardMain>
 			</DashboardContainer>
 		</div>
 	);
 }
-// 				{/* Rota pública */}
-// 				<Route
-// 					path="/"
-// 					element={<Home />}
-// 				/>
-
-// 				{/* Rota protegida */}
