@@ -1,8 +1,8 @@
 import React from "react";
 import { Footer } from "../componentes/GambFooter/Footer";
 import { Header } from "../componentes/GambHeader/Header";
-import authService from "../services/models/authService";
-import { loginSubmit } from "../services/models/auth";
+import authService from "../auth/service/authService";
+import { loginSubmit } from "../auth/service/auth";
 import {
 	CardContainer,
 	IndexContainer,
@@ -14,29 +14,8 @@ import CardIndex from "../componentes/GambCardIndex/GambCardIndex";
 
 // import ChamadoService from "../services/models/ChamadoService";
 // import { ChamadoSubmit } from "../interfaces/models/iChamado";
-import { useNavigate } from "react-router-dom";
 
 export default function Home() {
-	const navigate = useNavigate(); // Hook do React Router para navegação
-
-	const user: loginSubmit = {
-		username: "livia",
-		password: "123",
-	};
-	async function handleLogin() {
-		authService
-			.loginAuth(user)
-			.then((response) => {
-				console.log(response);
-				alert("Login efetuado com sucesso");
-				navigate("/dashboard");
-			})
-			.catch((error) => {
-				console.log(error);
-				alert("Erro ao efetuar login");
-			});
-	}
-
 	return (
 		<>
 			<Header />
