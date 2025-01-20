@@ -1,4 +1,4 @@
-import { AddressBook, FileText, FolderUser, HouseSimple } from "@phosphor-icons/react";
+import { AddressBook, FileText, FolderUser, HouseSimple, SignOut } from "@phosphor-icons/react";
 import { Link } from "react-router";
 import {
 	ItemDropdown,
