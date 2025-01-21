@@ -2,33 +2,16 @@ import React from "react";
 import GambButton from "../../componentes/GambButton/Button";
 import { Footer } from "../../componentes/GambFooter/Footer";
 import { Header } from "../../componentes/GambHeader/Header";
-import { IndexContainer, IndexContent, MarcaGrafica } from "./indexstyles";
+import {
+	CardContainer,
+	IndexContainer,
+	IndexContent,
+	MarcaGrafica,
+} from "./indexstyles";
 // import ChamadoService from "../services/models/ChamadoService";
 // import { ChamadoSubmit } from "../interfaces/models/iChamado";
 
 export default function Home() {
-	// const chamados = ChamadoService.listarChamados();
-	// const chamado: ChamadoSubmit = {
-	// 	titulo: "Exemplo",
-	// 	descricao: "descricao bem foda meu parceiro",
-	// 	item: {
-	// 		modelo: "modelo da lenovo",
-	// 		acessorios: [
-	// 			{
-	// 				nome: "carregador",
-	// 			},
-	// 		],
-	// 	},
-	// };
-	// function ChamadoSubmit() {
-	// 	ChamadoService.criarChamado(chamado).then((response) => {
-	// 		console.log(response);
-
-	// 		alert("Chamado criado com sucesso");
-	// 		window.location.reload();
-	// 	});
-	// }
-
 	return (
 		<>
 			<Header />
@@ -70,14 +53,57 @@ export default function Home() {
 							</div>
 						</div>
 
-						<div>
+						<div className="roboebotao">
+							<img
+								className="img-fluid"
+								src="\assets\gambi-robozinho.png"
+								alt=""
+							/>
 							<GambButton
+								className="botaorobo"
 								label="Abrir Chamado"
 								variant="roxo"
 								size="large"
 							/>
 						</div>
 					</IndexContent>
+
+					<h2>Quais campus estão envolvidos no projeto?</h2>
+
+					<CardContainer>
+						<CardIndex
+							nomeCampus="Campus Natal Central - IFRN"
+							contato="contatolab@gmail.com"
+							endereco="Lades - Prédio do NIT, 1° andar"
+							professores={11}
+							bolsistas={20}
+							maquinas={300}
+						/>
+						<CardIndex
+							nomeCampus="Campus Natal Central - IFRN"
+							contato="contatolab@gmail.com"
+							endereco="Lades - Prédio do NIT, 2° andar"
+							professores={235}
+							bolsistas={50}
+							maquinas={0}
+						/>
+						<CardIndex
+							nomeCampus="Campus Natal Central - IFRN"
+							contato="contatolab@gmail.com"
+							endereco="Lades - Prédio do NIT, 3° andar"
+							professores={11}
+							bolsistas={20}
+							maquinas={300}
+						/>
+						<CardIndex
+							nomeCampus="Campus Natal Central - IFRN"
+							contato="contatolab@gmail.com"
+							endereco="Lades - Prédio do NIT, 4° andar"
+							professores={11}
+							bolsistas={20}
+							maquinas={300}
+						/>
+					</CardContainer>
 				</IndexContainer>
 			</main>
 

@@ -4,5 +4,6 @@ from . import views
 
 app_name = 'gambiarra'
 gambiarra_urls = [
-    path('chamado/', views.CreateChamadoView.as_view(), name='create-chamado')
+    path('chamado/', views.CreateChamadoView.as_view(), name='create-chamado'),
+    path('listar-chamados/', views.ListarChamadoView.as_view(), name='list-chamado')
 ]
