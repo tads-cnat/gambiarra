@@ -8,8 +8,7 @@ import {
 	IndexContent,
 	MarcaGrafica,
 } from "./indexstyles";
-// import ChamadoService from "../services/models/ChamadoService";
-// import { ChamadoSubmit } from "../interfaces/models/iChamado";
+import CardIndex from "../../componentes/GambCardIndex/GambCardIndex";
 
 export default function Home() {
 	return (
@@ -23,8 +22,8 @@ export default function Home() {
 							alt="manutenção para todos - ifrn cnat"
 						/>
 					</MarcaGrafica>
-					<IndexContent>
-						<div className="apresentacao">
+					<IndexContent className="border-gambi">
+						<div className="apresentacao ">
 							<h2>
 								Olá! somos o <span>Gambiarra</span> 🤖
 							</h2>

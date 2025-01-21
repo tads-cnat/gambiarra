@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import InputField from "../GambInput/Input";
+import InputField from "../../../../componentes/GambInput/Input";
 import { Card, CardButtonArea, CardContent } from "./LoginCardStyles";
-import GambButton from "../GambButton/Button";
+import GambButton from "../../../../componentes/GambButton/Button";
+import axiosInstance from "../../../../services/base/axiosInstance";
 
 export function LoginCard() {
 	const [email, setEmail] = useState("");
@@ -9,7 +10,7 @@ export function LoginCard() {
 
 	const handleLogin = async () => {
 		try {
-			const response = await api.post("/login", {
+			const response = await axiosInstance.post("/login", {
 				email,
 				password,
 			});
@@ -21,37 +22,36 @@ export function LoginCard() {
 	};
 
 	return (
-		<Card>
+		<Card className="border-gambi">
 			<CardContent>
 				<h3>
 					Olá! bom te ver <span>denovo</span> 🤖
 				</h3>
 				<InputField
 					label="Email"
-                    type="email"
-                    icon="mail"
+					type="email"
+					icon="envelope"
 					value={email}
 					onChange={(e) => setEmail(e.target.value)}
 				/>
 				<InputField
 					label="Password"
 					type="password"
-                    icon="lock"
+					icon="lock"
 					value={password}
 					onChange={(e) => setPassword(e.target.value)}
 				/>
 
-                <CardButtonArea>
+				<CardButtonArea>
 					<GambButton
 						variant="verde"
 						label="Entrar"
 						icon="seta_direita"
-                        size="large"
+						size="large"
 						onClick={handleLogin}
 					/>
 				</CardButtonArea>
-			
-            </CardContent>    
+			</CardContent>
 		</Card>
 	);
 }
