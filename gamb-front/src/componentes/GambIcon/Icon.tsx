@@ -34,6 +34,9 @@ import {
 	GreaterThan,
 	HouseLine,
 	MapPin,
+	Eye,
+	EyeSlash,
+	EyeClosed,
 } from "@phosphor-icons/react";
 import { GambIconProps } from "../../interfaces/componentes/iGambIcon";
 import React from "react";
@@ -74,6 +77,8 @@ const iconComponents: { [key: string]: JSX.Element } = {
 	greenhouse: <HouseLine weight="fill" />,
 	envelope: <Envelope />,
 	pin: <MapPin />,
+	eyeclose: <EyeClosed />,
+	eyeopen: <Eye />,
 };
 
 export default function Icon(props: GambIconProps): JSX.Element {

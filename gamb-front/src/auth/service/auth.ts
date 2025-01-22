@@ -1,4 +1,4 @@
-export interface loginSubmit {
-    username: string;
-    password: string;
+export interface LoginSubmit {
+	username: string;
+	password: string;
 }

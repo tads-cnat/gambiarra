@@ -1,13 +1,21 @@
 import styled from "styled-components";
 
 interface ButtonProps {
-	variant: "verde" | "amarelo" | "vermelho" | "roxo" | "branco" | "cinza" | "inline" | "circle";
-	size: "small" | "medium" | "large";
+	variant:
+		| "verde"
+		| "amarelo"
+		| "vermelho"
+		| "roxo"
+		| "branco"
+		| "cinza"
+		| "inline"
+		| "circle";
+	size: "small" | "medium" | "large" | "mediumlg";
 }
 
 export const ButtonGeneric = styled.button<ButtonProps>`
-	padding: 8px 20px;
-	border-radius: 6px;
+	padding: ${({ variant }) => (variant == "circle" ? "8px" : "8px 20px")};
+	border-radius: ${({ variant }) => (variant == "circle" ? "50%" : "6px")};
 	cursor: pointer;
 	border: 0;
 	display: inline-flex;
@@ -18,6 +26,8 @@ export const ButtonGeneric = styled.button<ButtonProps>`
 			case "small":
 				return `${theme.fontSize.font_scale_up_01}rem`;
 			case "medium":
+				return `${theme.fontSize.font_scale_up_02}rem`;
+			case "mediumlg":
 				return `${theme.fontSize.font_scale_up_02}rem`;
 			case "large":
 				return `${theme.fontSize.font_scale_up_default}rem`;
@@ -45,7 +55,11 @@ export const ButtonGeneric = styled.button<ButtonProps>`
 			: theme.cores.white};
 
 	color: ${({ variant, theme }) =>
-		variant === "branco" || variant === "amarelo" || variant === "cinza" ||  variant === "inline" || variant === "circle"
+		variant === "branco" ||
+		variant === "amarelo" ||
+		variant === "cinza" ||
+		variant === "inline" ||
+		variant === "circle"
 			? theme.cores.gray_text
 			: theme.cores.white};
 
@@ -84,7 +98,11 @@ export const ButtonGeneric = styled.button<ButtonProps>`
 				: theme.cores.light_white};
 
 		color: ${({ variant, theme }) =>
-			variant === "branco" || variant === "amarelo" || variant === "cinza" || variant === "inline" || variant === "circle"
+			variant === "branco" ||
+			variant === "amarelo" ||
+			variant === "cinza" ||
+			variant === "inline" ||
+			variant === "circle"
 				? theme.cores.gray_text
 				: theme.cores.white};
 	}
