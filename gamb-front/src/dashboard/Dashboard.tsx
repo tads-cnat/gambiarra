@@ -1,6 +1,7 @@
 import React from "react";
 import { Sidebar } from "../componentes/Sidebar/Sidebar";
 import CardChamado from "../componentes/GambCardChamados/CardChamado";
+import CabecalhoDash from "../componentes/GambCabecalhoDash/CabecalhoDash";
 import {
 	DashboardContainer,
 	DashboardContent,
@@ -15,10 +16,13 @@ export function Dashboard() {
 				{/* teste botões */}
 				<DashboardMain>
 					<DashboardContent className="elevacao-def">
-						<h1>Dashboard</h1>
-						<h2>Seja bem-vindo ao Dashboard</h2>
-						<h3>Escolha uma opção no menu ao lado</h3>
-
+						<CabecalhoDash/>
+						<div className="flex gap-2">
+						<CardChamado userType={"professor"} messageType={"atribuidas"} quantity={0}/>
+						<CardChamado userType={"professor"} messageType={"concluidas"} quantity={0}/>
+						<CardChamado userType={"professor"} messageType={"pendentes"} quantity={0}/>
+						<CardChamado userType={"professor"} messageType={"recusadas"} quantity={0}/>
+						</div>
 					</DashboardContent>
 				</DashboardMain>
 			</DashboardContainer>
