@@ -8,6 +8,16 @@ class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
         try:
+            itens = Item.objects.all()
+            chamados = Chamado.objects.all()
+            mensagens = Mensagem.objects.all()
+            avaliacoes = Avaliacao.objects.all()
+
+            if itens and chamados and mensagens and avaliacoes:
+                self.stderr.write(
+                    self.style.ERROR("Já tem objetos no banco")
+                )
+
             #Criando listas de todos os models para facilitar debug. 
             itens = []
             #acessorios = [] #Retirar após debug
@@ -19,6 +29,7 @@ class Command(BaseCommand):
             professores = Usuario.objects.filter(grupo__name="professor")
             bolsistas = Usuario.objects.filter(grupo__name="bolsista")
             clientes = Usuario.objects.filter(grupo__name="cliente")
+
 
             #print("DEBUG", professor, bolsista, cliente, sep="\n")
 
