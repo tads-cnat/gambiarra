@@ -1,16 +1,20 @@
-from rest_framework import status
+from django.db.models import Q
+from django.shortcuts import get_object_or_404
 
 # rest framework
+from rest_framework import status
 from rest_framework.generics import CreateAPIView, ListAPIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework_simplejwt.authentication import JWTAuthentication
 
+from authentication.constants import GrupoEnum
 from authentication.permissions import *
 
 # serializers
-from gambiarra.serializers import CreateChamadoSerializer  # ChamadoSerializer
+from gambiarra.serializers import *
 
+# models
 from .models import *
 
 
@@ -36,4 +40,70 @@ class CreateChamadoView(CreateAPIView):
                 "message": "Chamado aberto com sucesso!",
             },
             status=status.HTTP_201_CREATED,
+        )
+
+
+class ListarChamadoView(ListAPIView):
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [JWTAuthentication]
+    serializer_class = ListarChamadoSerializer
+
+    def get_queryset(self):
+        user: Usuario = self.request.user
+        if user.grupo.name == GrupoEnum.PROFESSOR:
+            queryset = Chamado.objects.filter(
+                Q(professor=user) | Q(professor__isnull=True)
+            ).all()
+        elif user.grupo.name == GrupoEnum.GERENTE:
+            queryset = Chamado.objects.all()
+        else:
+            queryset = Chamado.objects.filter(cliente=user).all()
+        return queryset
+
+    def list(self, request):
+        queryset = self.filter_queryset(self.get_queryset())
+
+        serializer = self.get_serializer(queryset, many=True)
+
+        return Response(
+            data={
+                "success": True,
+                "data": serializer.data,
+                "message": None,
+            },
+            status=status.HTTP_200_OK,
+        )
+
+
+class AceitarChamadoView(CreateAPIView):
+    permission_classes = [IsAuthenticated, OnlyProfessor]
+    authentication_classes = [JWTAuthentication]
+    serializer_class = AceitarChamadoSerializer
+
+    def post(self, request, id):
+        user: Usuario = self.request.user
+        chamado = get_object_or_404(Chamado, id=id)
+
+        if chamado.status == "1":
+            chamado.status = "2"
+            chamado.professor = request.user
+            chamado.save()
+            serializer = self.get_serializer(chamado)
+        else:
+            return Response(
+                data={
+                    "success": True,
+                    "data": None,
+                    "message": "Chamado já aceito",
+                },
+                status=status.HTTP_200_OK,
+            )
+
+        return Response(
+            data={
+                "success": True,
+                "data": serializer.data,
+                "message": "Chamado aceito por " + user.username,
+            },
+            status=status.HTTP_200_OK,
         )
