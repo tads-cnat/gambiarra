@@ -4,7 +4,6 @@ import { CardChamadoType } from "../../interfaces/componentes/iGambCardChamado";
 export const CardChamadoContainer = styled.div`
   display: flex;
   margin: 1rem 0 1rem;
-
 `;
 
 export const CardChamadoWrapper = styled.div<{ type: CardChamadoType }>`
@@ -85,3 +84,4 @@ export const CardChamadoText2 = styled.div<{ type: CardChamadoType }>`
       ? theme.cores.gray
       : theme.cores.white};
 `;
+

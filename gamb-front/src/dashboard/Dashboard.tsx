@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Sidebar } from "../componentes/Sidebar/Sidebar";
 import CardChamado from "../componentes/GambCardChamados/CardChamado";
 import CabecalhoDash from "../componentes/GambCabecalhoDash/CabecalhoDash";
@@ -7,8 +7,25 @@ import {
 	DashboardContent,
 	DashboardMain,
 } from "./dashboardstyles";
+import { Outlet } from "react-router-dom";
 
 export function Dashboard() {
+	useEffect(() => {
+		// Função para capturar mudanças no localStorage
+		const handleStorageChange = (e) => {
+			if (e.key === "userToken" || e.key === "role") {
+				console.log("Mudança no localStorage detectada");
+			}
+		};
+
+		// Adiciona o ouvinte para o evento de mudança no localStorage
+		window.addEventListener("storage", handleStorageChange);
+
+		// Limpa o ouvinte ao desmontar o componente
+		return () => {
+			window.removeEventListener("storage", handleStorageChange);
+		};
+	}, []);
 	return (
 		<div>
 			<DashboardContainer>
