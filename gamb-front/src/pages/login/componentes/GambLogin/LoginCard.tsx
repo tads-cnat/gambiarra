@@ -39,7 +39,7 @@ export function LoginCard() {
 						name="username"
 						error={errors.username?.message}
 						placeholder="Digite seu nome de usuário"
-						register={register("password")}
+						register={register("username")}
 					/>
 					<InputField
 						label="Senha: "
@@ -56,7 +56,6 @@ export function LoginCard() {
 							variant="verde"
 							label="Entrar"
 							icon="seta_direita"
-							size="large"
 							type="submit"
 						/>
 					</CardButtonArea>

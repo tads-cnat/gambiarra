@@ -79,6 +79,7 @@ const iconComponents: { [key: string]: JSX.Element } = {
 	pin: <MapPin />,
 	eyeclose: <EyeClosed />,
 	eyeopen: <Eye />,
+	eyeslash: <EyeSlash />,
 };
 
 export default function Icon(props: GambIconProps): JSX.Element {
