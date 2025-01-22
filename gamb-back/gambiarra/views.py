@@ -42,6 +42,14 @@ class CreateChamadoView(CreateAPIView):
         )
 
 
+TAB_STATUS_MAPPING = {
+    "todos": [],  # Inclui todos os status
+    "aceitos": ["Aceito", "Em Diagnóstico", "Equipamento em conserto", "Aguardando peça"],
+    "pendentes": ["Em Análise"],
+    "recusados": ["Recusado"],
+    "fechados": ["Fechado sem resolução", "Resolvido", "Recusado"],
+}
+
 class ListarChamadoView(ListAPIView):
     permission_classes = [IsAuthenticated]
     authentication_classes = [JWTAuthentication]
@@ -62,15 +70,32 @@ class ListarChamadoView(ListAPIView):
         user: Usuario = self.request.user
         grupo = user.grupo.name
 
-
+        # Base inicial de queryset com base no grupo do usuário
         if grupo == GrupoEnum.GERENTE:
-            return Chamado.objects.all()
+            queryset = Chamado.objects.all()
         elif grupo == GrupoEnum.PROFESSOR:
-            return Chamado.objects.filter(Q(professor=user) | Q(professor__isnull=True)).all()
+            queryset = Chamado.objects.filter(Q(professor=user) | Q(professor__isnull=True))
         elif grupo == GrupoEnum.BOLSISTA:
-            return Chamado.objects.filter(bolsistas=user).all()
+            queryset = Chamado.objects.filter(bolsistas=user)
         else:
-            return Chamado.objects.filter(cliente=user).all()
+            queryset = Chamado.objects.filter(cliente=user)
+
+
+        status_param = self.request.GET.get('status', None)
+        tab_param = self.request.GET.get('tab', "todos")  # Default para "todos"
+
+
+        # Filtrar pela tab (múltiplos status associados)
+        if tab_param in TAB_STATUS_MAPPING and TAB_STATUS_MAPPING[tab_param]:
+            queryset = queryset.filter(status__in=TAB_STATUS_MAPPING[tab_param])
+
+        # Filtrar pelo status individual se fornecido
+        if status_param:
+            queryset = queryset.filter(status=status_param)
+
+
+        return queryset
+
           
 
 
