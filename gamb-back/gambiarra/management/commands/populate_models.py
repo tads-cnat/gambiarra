@@ -17,6 +17,7 @@ class Command(BaseCommand):
                 self.stderr.write(
                     self.style.ERROR("Já tem objetos no banco")
                 )
+                return 
 
             #Criando listas de todos os models para facilitar debug. 
             itens = []
