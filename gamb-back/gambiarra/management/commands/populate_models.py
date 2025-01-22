@@ -5,15 +5,16 @@ import random
 
 class Command(BaseCommand):
     help = "Popula o banco de dados com os modelos de chamado, itens, acessórios, avaliações, mensagens, e alterações de status"
-
     def handle(self, *args, **kwargs):
+        escolha = 1
+        bypass = True
         try:
             itens = Item.objects.all()
             chamados = Chamado.objects.all()
             mensagens = Mensagem.objects.all()
             avaliacoes = Avaliacao.objects.all()
 
-            if itens and chamados and mensagens and avaliacoes:
+            if (itens or chamados or mensagens or avaliacoes) and (not bypass):
                 self.stderr.write(
                     self.style.ERROR("Já tem objetos no banco")
                 )
@@ -83,12 +84,12 @@ class Command(BaseCommand):
                 chamado = Chamado.objects.create(
                     titulo = f"chamado {i[1]}",
                     descricao = f"{i[1]}",
-                    professor = professores[0],
+                    professor = professores[escolha],
                     cliente = random.choice(clientes),
                     status = i[1],
                     item = item,
                 )
-                chamado.bolsistas.add(bolsistas[0])
+                chamado.bolsistas.add(bolsistas[escolha])
                 chamados.append(chamado)
                 #print("\n\n\n")
             self.stdout.write(self.style.SUCCESS("Chamados criados."))
