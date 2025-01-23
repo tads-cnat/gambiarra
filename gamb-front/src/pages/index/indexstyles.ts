@@ -15,6 +15,15 @@ export const IndexContainer = styled.div`
 		}
 	}
 
+	h3 {
+		font-size: 1.5rem;
+		span {
+			font-size: 1.5rem;
+			color: ${(props) => props.theme.cores.purple_info_primary};
+			font-weight: ${(props) => props.theme.fontWeights.semi_bold};
+		}
+	}
+
 	.img-fluid {
 		width: 25rem;
 	}

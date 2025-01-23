@@ -1,41 +1,16 @@
 import React from "react";
-import { Footer } from "../componentes/GambFooter/Footer";
-import { Header } from "../componentes/GambHeader/Header";
+import GambButton from "../../componentes/GambButton/Button";
+import { Footer } from "../../componentes/GambFooter/Footer";
+import { Header } from "../../componentes/GambHeader/Header";
 import {
 	CardContainer,
 	IndexContainer,
 	IndexContent,
 	MarcaGrafica,
 } from "./indexstyles";
-import GambButton from "../componentes/GambButton/Button";
-import CardIndex from "../componentes/GambCardIndex/GambCardIndex";
-
-// import ChamadoService from "../services/models/ChamadoService";
-// import { ChamadoSubmit } from "../interfaces/models/iChamado";
+import CardIndex from "../../componentes/GambCardIndex/GambCardIndex";
 
 export default function Home() {
-	// const chamados = ChamadoService.listarChamados();
-	// const chamado: ChamadoSubmit = {
-	// 	titulo: "Exemplo",
-	// 	descricao: "descricao bem foda meu parceiro",
-	// 	item: {
-	// 		modelo: "modelo da lenovo",
-	// 		acessorios: [
-	// 			{
-	// 				nome: "carregador",
-	// 			},
-	// 		],
-	// 	},
-	// };
-	// function ChamadoSubmit() {
-	// 	ChamadoService.criarChamado(chamado).then((response) => {
-	// 		console.log(response);
-
-	// 		alert("Chamado criado com sucesso");
-	// 		window.location.reload();
-	// 	});
-	// }
-
 	return (
 		<>
 			<Header />
@@ -47,8 +22,8 @@ export default function Home() {
 							alt="manutenção para todos - ifrn cnat"
 						/>
 					</MarcaGrafica>
-					<IndexContent>
-						<div className="apresentacao">
+					<IndexContent className="border-gambi">
+						<div className="apresentacao ">
 							<h2>
 								Olá! somos o <span>Gambiarra</span> 🤖
 							</h2>
