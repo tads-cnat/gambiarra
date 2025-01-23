@@ -1,38 +1,34 @@
 import axiosInstance from "../../services/base/axiosInstance";
 import BaseService from "../../services/base/baseService";
-import { loginSubmit } from "./auth";
-import { userRoles } from "../roles";
+import { LoginSubmit } from "./auth";
+import { useNavigate } from "react-router-dom";
+interface mensagem {
+	sucesso: boolean;
+	mensagem: string;
+}
+
 class authService extends BaseService {
-	async loginAuth(data: loginSubmit): Promise<unknown> {
-		try {
-			const response = await axiosInstance.post(
-				`${this.serviceUrl}/auth/login/`,
-				data
-			);
-			const papel = response.data.papel; // O papel vindo da API
-
-			if (response.status === 200) {
-				localStorage.setItem("access_token", response.data.access);
-				localStorage.setItem("refresh_token", response.data.refresh);
-
-				if (
-					Object.values(userRoles.INTERNO.FUNCIONARIO).includes(
-						papel
-					) ||
-					Object.values(userRoles.INTERNO.CLIENTE).includes(papel) ||
-					Object.values(userRoles.EXTERNO).includes(papel)
-				) {
-					localStorage.setItem("Role", papel); // Armazena o papel no localStorage
-				} else {
-					throw new Error(
-						"Papel de utilizador recebido da API é inválido ."
+	async loginAuth(data: LoginSubmit): Promise<mensagem> {
+		return axiosInstance
+			.post(`${this.serviceUrl}/auth/login/`, data)
+			.then((response) => {
+				if (response.status === 200) {
+					localStorage.setItem("access_token", response.data.access);
+					localStorage.setItem(
+						"refresh_token",
+						response.data.refresh
 					);
+					return {
+						sucesso: true,
+						mensagem: "Login Realizado com sucesso!",
+					};
+				} else {
+					return { sucesso: false, mensagem: response.data.detail };
 				}
-				return response.data;
-			}
-		} catch (error) {
-			return error.response;
-		}
+			})
+			.catch((error) => {
+				return { sucesso: false, mensagem: error.message };
+			});
 	}
 
 	async refreshToken(): Promise<unknown> {
@@ -47,5 +43,26 @@ class authService extends BaseService {
 
 		return response;
 	}
+	async profile(): Promise<boolean> {
+		return await axiosInstance
+			.get(`${this.serviceUrl}/auth/profile/`, {
+				headers: {
+					Authorization: `Bearer ${localStorage.getItem(
+						"access_token"
+					)}`,
+				},
+			})
+			.then((response) => {
+				localStorage.setItem(
+					"user",
+					JSON.stringify(response.data.data)
+				);
+				return true;
+			})
+			.catch(() => {
+				return false;
+			});
+	}
+	
 }
 export default new authService("");

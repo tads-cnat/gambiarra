@@ -6,10 +6,12 @@ import {
 	UsersThree,
 } from "@phosphor-icons/react";
 import { HeaderContainer, HeaderContent } from "./headerstyle";
-import { Link } from "react-router";
+import { useNavigate } from "react-router";
 import React from "react";
 
 export function Header() {
+	const navigate = useNavigate();
+
 	return (
 		<HeaderContainer>
 			<HeaderContent>
@@ -20,35 +22,37 @@ export function Header() {
 				<nav>
 					<ul>
 						<li>
-							<a href="#">
-								{" "}
+							<button
+								onClick={() => {
+									navigate("/");
+								}}
+							>
 								<HouseLine /> Início
-							</a>
+							</button>
 						</li>
 						<li>
-							<a href="#">
-								{" "}
+							<button>
 								<GithubLogo /> Conheça os criadores
-							</a>
+							</button>
 						</li>
 						<li>
-							<a href="#">
-								{" "}
+							<button>
 								<UsersThree /> Conheça o projeto
-							</a>
+							</button>
 						</li>
 						<li>
-							<a href="#">
-								{" "}
+							<button>
 								<MapTrifold /> Unidades do projeto
-							</a>
+							</button>
 						</li>
 						<li>
-							{" "}
-							<Link to="dashboard">
-								{" "}
+							<button
+								onClick={() => {
+									navigate("/login");
+								}}
+							>
 								<User /> Login
-							</Link>{" "}
+							</button>
 						</li>
 					</ul>
 				</nav>
