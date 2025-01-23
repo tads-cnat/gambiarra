@@ -63,6 +63,8 @@ export interface InputFieldProps {
 	 */
 	register: UseFormRegisterReturn;
 
+	formIsValid: boolean | null;
+
 	value?: string;
 
 	icon?: string;

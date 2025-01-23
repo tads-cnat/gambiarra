@@ -1,4 +1,3 @@
-import React from "react";
 import InputField from "../../../../componentes/GambInput/Input";
 import { Card, CardButtonArea, CardContent } from "./LoginCardStyles";
 import GambButton from "../../../../componentes/GambButton/Button";
@@ -7,6 +6,10 @@ import { LoginSubmit } from "../../../../auth/service/auth";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { loginSchema } from "./schema";
 import authService from "../../../../auth/service/authService";
+import { useEffect, useState } from "react";
+import React from "react";
+import UseMessage from "../../../../componentes/GambMessage/Message";
+import { useNavigate } from "react-router-dom";
 
 export function LoginCard() {
 	const {
@@ -16,17 +19,42 @@ export function LoginCard() {
 	} = useForm<LoginSubmit>({
 		resolver: yupResolver(loginSchema),
 	});
+	const [loginIsValid, setLoginIsValid] = useState<boolean | null>(null); // Valor inicial como `null`
+	const navigate = useNavigate(); // Defina o hook navigate
 
 	async function handleLogin(data: LoginSubmit): Promise<void> {
-		try {
-			const response = await authService.loginAuth(data);
-			console.log(response);
-		} catch (error) {
-			console.error(error);
-		}
+		await authService.loginAuth(data).then((response) => {
+			if (response.sucesso) {
+				setLoginIsValid(true);
+				authService.profile().then(() => {
+					setTimeout(() => {
+						navigate("/dashboard");
+					}, 2000);
+				});
+			} else {
+				setLoginIsValid(false);
+			}
+		});
 	}
+	useEffect(() => {
+		console.log(loginIsValid);
+	}, [loginIsValid]);
+
 	return (
 		<Card className="border-gambi">
+			{/* Renderiza as mensagens com base no estado */}
+			{loginIsValid === true && !errors.password && !errors.username ? (
+				<UseMessage
+					type="success"
+					text="Login realizado com sucesso!"
+				/>
+			) : loginIsValid === false ? (
+				<UseMessage
+					type="danger"
+					text="Usuário ou senha inválidos!"
+				/>
+			) : null}
+
 			<form onSubmit={handleSubmit(handleLogin)}>
 				<CardContent>
 					<h3>
@@ -37,6 +65,7 @@ export function LoginCard() {
 						type="text"
 						icon="user"
 						name="username"
+						formIsValid={loginIsValid}
 						error={errors.username?.message}
 						placeholder="Digite seu nome de usuário"
 						register={register("username")}
@@ -45,6 +74,7 @@ export function LoginCard() {
 						label="Senha: "
 						type="password"
 						icon="lock"
+						formIsValid={loginIsValid}
 						name="password"
 						error={errors.password?.message}
 						placeholder="Digite sua senha"

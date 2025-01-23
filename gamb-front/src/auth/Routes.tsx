@@ -1,12 +1,10 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
+import authService from "./service/authService";
 
-// ten que ve isso aqui
-const isAuthenticated = (): boolean => {
-	const userToken = localStorage.getItem("userToken");
-	const role = localStorage.getItem("Role");
-	return userToken !== null && role !== null;
-};
+export async function isAuthenticated(): Promise<boolean> {
+	return authService.profile();
+}
 
 // Simulação de verificação de permissão
 const hasPermission = (requiredRole: string[]): boolean => {
