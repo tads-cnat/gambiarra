@@ -8,10 +8,9 @@ def auth_exception_handler(exc, context):
     response = exception_handler(exc, context)
 
     # Customize for InvalidToken or TokenError
-    if isinstance(exc, (InvalidToken, TokenError, AuthenticationFailed)):
+    if isinstance(exc, (InvalidToken, TokenError)):
         response.data = {
             "success": False,
-            "data": None,
             "message": "Token inválido, amigo",
         }
 
