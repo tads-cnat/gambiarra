@@ -49,7 +49,6 @@ TAB_STATUS_MAPPING = {
     "recusados": ["Recusado"],
     "fechados": ["Fechado sem resolução", "Resolvido", "Recusado"],
 }
-
 class ListarChamadoView(ListAPIView):
     permission_classes = [IsAuthenticated]
     authentication_classes = [JWTAuthentication]
@@ -80,7 +79,6 @@ class ListarChamadoView(ListAPIView):
         else:
             queryset = Chamado.objects.filter(cliente=user)
 
-
         status_param = self.request.GET.get('status', None)
         tab_param = self.request.GET.get('tab', "todos")  # Default para "todos"
 
@@ -91,15 +89,12 @@ class ListarChamadoView(ListAPIView):
 
         # Filtrar pelo status individual se fornecido
         if status_param:
-            queryset = queryset.filter(status=status_param)
+            queryset = queryset.filter(status__icontains=status_param)
 
 
         return queryset
 
           
-
-
-
     def list(self, request):
         queryset = self.filter_queryset(self.get_queryset())
 

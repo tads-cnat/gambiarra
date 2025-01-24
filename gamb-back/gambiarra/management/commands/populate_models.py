@@ -7,7 +7,7 @@ class Command(BaseCommand):
     help = "Popula o banco de dados com os modelos de chamado, itens, acessórios, avaliações, mensagens, e alterações de status"
     def handle(self, *args, **kwargs):
         escolha = 1
-        bypass = True
+        bypass = False
         try:
             itens = Item.objects.all()
             chamados = Chamado.objects.all()
