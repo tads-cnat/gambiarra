@@ -1,8 +1,10 @@
 from django.db.models import Q
 from rest_framework import status, filters
 from .filters import ChamadoFilter 
+from django.shortcuts import get_object_or_404
 
 # rest framework
+from rest_framework import status
 from rest_framework.generics import CreateAPIView, ListAPIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -13,8 +15,9 @@ from authentication.constants import GrupoEnum
 from authentication.permissions import *
 
 # serializers
-from gambiarra.serializers import CreateChamadoSerializer, ListarChamadoSerializer
+from gambiarra.serializers import *
 
+# models
 from .models import *
 
 # cria novo chamado com status 1
@@ -108,5 +111,37 @@ class ListarChamadoView(ListAPIView):
             },
             status=status.HTTP_200_OK,
         )
-    
 
+
+class AceitarChamadoView(CreateAPIView):
+    permission_classes = [IsAuthenticated, OnlyProfessor]
+    authentication_classes = [JWTAuthentication]
+    serializer_class = AceitarChamadoSerializer
+
+    def post(self, request, id):
+        user: Usuario = self.request.user
+        chamado = get_object_or_404(Chamado, id=id)
+
+        if chamado.status == "1":
+            chamado.status = "2"
+            chamado.professor = request.user
+            chamado.save()
+            serializer = self.get_serializer(chamado)
+        else:
+            return Response(
+                data={
+                    "success": True,
+                    "data": None,
+                    "message": "Chamado já aceito",
+                },
+                status=status.HTTP_200_OK,
+            )
+
+        return Response(
+            data={
+                "success": True,
+                "data": serializer.data,
+                "message": "Chamado aceito por " + user.username,
+            },
+            status=status.HTTP_200_OK,
+        )

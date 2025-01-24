@@ -74,3 +74,14 @@ class ListarChamadoSerializer(serializers.ModelSerializer):
         if avaliacao:
             return {"nota": avaliacao.nota, "texto": avaliacao.texto}
         return None
+
+
+class AceitarChamadoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Chamado
+        fields = [
+            "id",
+            "status",
+            "code",
+            "titulo",
+        ]
