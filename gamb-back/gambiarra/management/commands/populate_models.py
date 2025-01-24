@@ -7,25 +7,28 @@ class Command(BaseCommand):
     help = "Popula o banco de dados com os modelos de chamado, itens, acessórios, avaliações, mensagens, e alterações de status"
     def handle(self, *args, **kwargs):
         escolha = 1
-        bypass = False
+        bypass = False #para popular o banco se já houver objetos
         try:
-            itens = Item.objects.all()
-            chamados = Chamado.objects.all()
-            mensagens = Mensagem.objects.all()
-            avaliacoes = Avaliacao.objects.all()
-
-            if (itens or chamados or mensagens or avaliacoes) and (not bypass):
+            if (Item.objects.all() or 
+                Chamado.objects.all() or 
+                Mensagem.objects.all() or 
+                Avaliacao.objects.all()) and (not bypass):
+                #Se houver objetos no banco, não popular
+                #A não ser que bypass for True
+                
                 self.stderr.write(
                     self.style.ERROR("Já tem objetos no banco")
                 )
                 return 
-
+            
             #Criando listas de todos os models para facilitar debug. 
             itens = []
-            #acessorios = [] #Retirar após debug
+            #acessorios = [] #debug
             chamados = []
             mensagens = []
             avaliacoes = []
+
+
 
 
             professores = Usuario.objects.filter(grupo__name="professor")
@@ -55,7 +58,7 @@ class Command(BaseCommand):
                         nome=f"Acessório-{i}-{j}",
                         item=item,
                     )
-                    #acessorios.append(acessorio) #Retirar após debug
+                    #acessorios.append(acessorio) #debug
                 itens.append(item)
             
             #print("DEBUG", itens, acessorios, sep="\n\n")
@@ -122,7 +125,7 @@ class Command(BaseCommand):
                         chamado=chamado,
                     )
                     avaliacoes.append(avaliacao)
-            #print(avaliacoes) # Retirar após Debug
+            #print(avaliacoes) # Debug
 
 
             self.stdout.write(self.style.SUCCESS("Avaliações criadas."))
