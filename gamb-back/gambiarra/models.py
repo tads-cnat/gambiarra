@@ -21,7 +21,8 @@ STATUS_CHOICES = [
 class Item(models.Model):
     modelo = models.CharField(max_length=30, default="")
     diagnostico = models.CharField(max_length=200, default="")
-
+    class Meta:
+        verbose_name_plural = "Itens"
     def __str__(self):
         return f"{self.modelo} - {self.diagnostico}"
 
@@ -45,6 +46,8 @@ class Mensagem(models.Model):
     autor = models.ForeignKey(Usuario, on_delete=models.CASCADE, null=True)        
     texto = models.CharField(max_length=240, default="", blank=False)
     chamado = models.ForeignKey(Chamado, on_delete=models.CASCADE)
+    class Meta:
+        verbose_name_plural = "Mensagens"
 
     def __str__(self):
         return f"Mensagem de {self.autor} - {self.texto[:30]}..."
@@ -54,6 +57,8 @@ class Avaliacao(models.Model):
     texto = models.TextField(max_length=240, default="")
     nota = models.IntegerField()
     chamado = models.OneToOneField(Chamado, on_delete=models.CASCADE)
+    class Meta:
+        verbose_name_plural = "Avaliações"
 
     def __str__(self):
         return f"Avaliação {self.nota} - {self.texto[:30]}..."
@@ -65,6 +70,9 @@ class Alteracao(models.Model):
     data_alteracao = models.DateTimeField('Data de modificação', default=timezone.now)
     chamado = models.ForeignKey(Chamado, on_delete=models.CASCADE)
 
+    class Meta:
+        verbose_name_plural = "Alterações"
+
     def __str__(self):
         return f"Alteração {self.status} - {self.data_alteracao}"
 
@@ -72,6 +80,8 @@ class Alteracao(models.Model):
 class Acessorio(models.Model):
     nome = models.CharField(max_length=50, default="")
     item = models.ForeignKey(Item, on_delete=models.CASCADE)
+    class Meta:
+        verbose_name_plural = "Acessórios"
 
     def __str__(self):
         return f"Acessório: {self.nome} ({self.item.modelo})"
