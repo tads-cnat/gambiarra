@@ -1,13 +1,12 @@
 import React, { useEffect } from "react";
-import { Sidebar } from "../componentes/Sidebar/Sidebar";
-import CardChamado from "../componentes/GambCardChamados/CardChamado";
-import CabecalhoDash from "../componentes/GambCabecalhoDash/CabecalhoDash";
+import { Sidebar } from "../../componentes/Sidebar/Sidebar";
+import CardChamado from "../../componentes/GambCardChamados/CardChamado";
+import CabecalhoDash from "../../componentes/GambCabecalhoDash/CabecalhoDash";
 import {
 	DashboardContainer,
 	DashboardContent,
 	DashboardMain,
 } from "./dashboardstyles";
-import { Outlet } from "react-router-dom";
 
 export function Dashboard() {
 	useEffect(() => {

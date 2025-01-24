@@ -52,3 +52,22 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
         user.save()
         # user.groups.add(cliente)    #VER COM O PESSOAL SE VAMOS QUERER ISSO AQUI MESMO(ACUMULAR GRUPOS)
         return user
+
+
+class ProfileUserSerializer(serializers.ModelSerializer):
+
+    grupo = serializers.CharField(source="grupo.name", read_only=True)
+
+    class Meta:
+        model = User
+        fields = [
+            "id",
+            "is_superuser",
+            "username", 
+            "first_name",
+            "last_name",
+            "email",
+            "is_staff",
+            "is_active",
+            "grupo",
+        ]
