@@ -26,7 +26,9 @@ const actionColors: Record<string, string> = {
 };
 
 const getActionsByStatus = (status: string): string[] => {
-    switch (status.toLowerCase()) {
+    const normalizedStatus = status?.toLowerCase().trim(); // Evita erros com espaços extras ou `null`
+    
+    switch (normalizedStatus) {
         case "em analise":
             return ["aceitar", "recusar", "detalhar"];
         case "aceito":
@@ -34,9 +36,10 @@ const getActionsByStatus = (status: string): string[] => {
         case "resolvido":
             return ["arquivar"];
         default:
-            return ["xcircle"];
+            return []; 
     }
 };
+
 
 function StarRating({ rating }: { rating: number }) {
     return (
@@ -90,7 +93,6 @@ export function GambTable({ data, action}: { data: Record<string, any>[], action
                                         backgroundColor={actionColors[action]} 
                                         size={30} 
                                         iconColor="#FFFFFF"
-                                        {...(row.badgeNumber ? { badgeNumber: row.badgeNumber } : {})} 
                                     />
                                 ))}
                             </GBodyTd>
