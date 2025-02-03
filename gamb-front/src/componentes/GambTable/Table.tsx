@@ -3,7 +3,7 @@ import Notificacao from "../GambNotificao/Notificacao";
 import { Pagination } from "../GambPaginação/Paginacao";
 import { GBodyTd } from "./GBodyTd";
 import { GHeadTh } from "./GHeadTh";
-import { BodyTr, HeadTr } from "./tableStyles";
+import { BodyTr, HeadTr, Table } from "./tableStyles";
 
 const actionIcons: Record<string, string> = {
 	aceitar: "checks",
@@ -74,7 +74,7 @@ export function GambTable({
 	action,
 	hiddenFields = [],
 }: {
-	data: Record<string, any>[];
+	data: Record<string, unknown>[];
 	action: boolean;
 	hiddenFields?: string[];
 }) {
@@ -97,25 +97,27 @@ export function GambTable({
 
 	return (
 		<>
-			<table>
-				<thead>
-					<HeadTr>
-						{action && <GHeadTh children="Ações" />}
-						{headers.map((header) => (
-							<GHeadTh
-								key={header}
-								children={header}
-							/>
-						))}
-					</HeadTr>
-				</thead>
-				<tbody>
-					{data.map((row, index) => (
-						<BodyTr key={index}>
-							{action && (
-								<GBodyTd>
-									{getActionsByStatus(String(row.status)).map(
-										(action) => (
+			<div style={{ width: "100%", overflowX: "auto" }}>
+				<Table style={{ minWidth: "100%" }}>
+					<thead>
+						<HeadTr>
+							{action && <GHeadTh children="Ações" />}
+							{headers.map((header) => (
+								<GHeadTh
+									key={header}
+									children={header}
+								/>
+							))}
+						</HeadTr>
+					</thead>
+					<tbody>
+						{data.map((row, index) => (
+							<BodyTr key={index}>
+								{action && (
+									<GBodyTd>
+										{getActionsByStatus(
+											String(row.status)
+										).map((action) => (
 											<Notificacao
 												key={action}
 												icon={actionIcons[action]}
@@ -125,43 +127,46 @@ export function GambTable({
 												size={30}
 												iconColor="#FFFFFF"
 											/>
-										)
-									)}
-								</GBodyTd>
-							)}
-							{headers.map((header) => (
-								<GBodyTd key={header}>
-									{isChamados &&
-									header === "avaliacao" &&
-									Array.isArray(row[header]) &&
-									row[header].length === 2 &&
-									typeof row[header][1] === "number" ? (
-										<div className="flex flex-col justify-center ">
-											<span className="font-bold mb-1">
-												{row[header][0]}
-											</span>
-											<StarRating
-												rating={Number(row[header][1])}
+										))}
+									</GBodyTd>
+								)}
+								{headers.map((header) => (
+									<GBodyTd key={header}>
+										{isChamados &&
+										header === "avaliacao" &&
+										Array.isArray(row[header]) &&
+										row[header].length === 2 &&
+										typeof row[header][1] === "number" ? (
+											<div className="flex flex-col justify-center">
+												<span className="font-bold mb-1">
+													{row[header][0]}
+												</span>
+												<StarRating
+													rating={Number(
+														row[header][1]
+													)}
+												/>
+											</div>
+										) : isChamados &&
+										  header === "status" ? (
+											<StatusBadge
+												status={String(row[header])}
 											/>
-										</div>
-									) : isChamados && header === "status" ? (
-										<StatusBadge
-											status={String(row[header])}
-										/>
-									) : (
-										String(row[header])
-									)}
-								</GBodyTd>
-							))}
-						</BodyTr>
-					))}
-				</tbody>
-				<Pagination
-					pageIndex={1}
-					perPage={data.length}
-					totalCount={data.length}
-				/>
-			</table>
+										) : (
+											String(row[header])
+										)}
+									</GBodyTd>
+								))}
+							</BodyTr>
+						))}
+					</tbody>
+				</Table>
+			</div>
+			<Pagination
+				pageIndex={1}
+				perPage={data.length}
+				totalCount={data.length}
+			/>
 		</>
 	);
 }
