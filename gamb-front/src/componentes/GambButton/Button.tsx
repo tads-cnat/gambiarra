@@ -20,9 +20,7 @@ export default function GambButton(props: GambButtonProps): JSX.Element {
 	// regras de negócio relacionadas ao componente devem ser implementadas aqui
 	return (
 		<>
-			<ButtonGeneric
-				variant={variant}
-				size={size || "medium"}
+			<button
 				id={id}
 				onClick={onClick}
 				type={type}
@@ -31,24 +29,27 @@ export default function GambButton(props: GambButtonProps): JSX.Element {
 				style={style}
 				data-cypress={dataCypress}
 			>
-				{label}
-				{icon && (
-					<Icon
-						icon={icon}
-						size={
-							size === "small"
-								? 12
-								: size === "medium"
-								? 14
-								: size === "mediumlg"
-								? 18
-								: size === "large"
-								? 24
-								: size
-						}
-					/>
-				)}
-			</ButtonGeneric>
+				<ButtonGeneric
+					variant={variant}
+					size={size || "medium"}
+				>
+					{label}
+					{icon && (
+						<Icon
+							icon={icon}
+							size={
+								size === "small"
+									? 12
+									: size === "medium"
+									? 14
+									: size === "large"
+									? 24
+									: size
+							}
+						/>
+					)}
+				</ButtonGeneric>
+			</button>
 		</>
 	);
 }
