@@ -1,9 +1,9 @@
 import React from "react";
-import { BodyTr, HeadTr } from "./tableStyles";
-import { GHeadTh } from "./GHeadTh";
-import { GBodyTd } from "./GBodyTd";
-import { Pagination } from "../GambPaginação/Paginacao";
 import Notificacao from "../GambNotificao/Notificacao";
+import { Pagination } from "../GambPaginação/Paginacao";
+import { GBodyTd } from "./GBodyTd";
+import { GHeadTh } from "./GHeadTh";
+import { BodyTr, HeadTr } from "./tableStyles";
 
 const actionIcons: Record<string, string> = {
     aceitar: "checks",
@@ -48,55 +48,66 @@ function StarRating({ rating }: { rating: number }) {
 }
 
 function StatusBadge({ status }: { status: string }) {
+    // Mapeia os status para cores específicas
+    const statusColors: Record<string, string> = {
+        "em analise": "bg-gray-400 text-gray-900",
+        "aceito": "bg-yellow-300 text-yellow-800",
+        "resolvido": "bg-green-300 text-green-800",
+        "recusado": "bg-red-300 text-red-800",
+        "arquivado": "bg-gray-400 text-gray-900"
+    };
+
+    // Define a cor de fundo com base no status ou usa uma padrão
+    const bgColor = statusColors[status.toLowerCase()] || "bg-gray-300 text-gray-700";
+
     return (
-        <span className="bg-gray-300 text-gray-700 px-2 py-1 rounded-md text-sm font-bold">{status}</span>
+        <span className={`px-2 py-1 rounded-md text-sm font-bold ${bgColor}`}>
+            {status}
+        </span>
     );
 }
 
-export function GambTable({ data, action}: { data: Record<string, any>[], action: boolean }) {
+
+export function GambTable({ data, action, hiddenFields = [] }: { 
+    data: Record<string, any>[]; 
+    action: boolean; 
+    hiddenFields?: string[];
+}) {
     if (data.length === 0) {
         return <p>Nenhum dado disponível</p>;
     }
 
     const isChamados = data.every(item => "id" in item && "codigo" in item && "titulo" in item && "status" in item);
-    const headers = Object.keys(data[0]);
+    
+    // Filtra os headers removendo os que estão na lista de `hiddenFields`
+    const headers = Object.keys(data[0]).filter(header => !hiddenFields.includes(header));
 
     return (
         <>
             <table>
                 <thead>
                     <HeadTr>
-                        {action ? (
-                            <>
-                                <GHeadTh children="Ações" />
-                                {headers.map((header) => (
-                                    <GHeadTh key={header} children={header} />
-                                ))}
-                            </>
-                        ) : (
-                            headers.map((header) => (
-                                <GHeadTh key={header} children={header} />
-                            ))
-                        )}
-                        
+                        {action && <GHeadTh children="Ações" />}
+                        {headers.map((header) => (
+                            <GHeadTh key={header} children={header} />
+                        ))}
                     </HeadTr>
                 </thead>
                 <tbody>
                     {data.map((row, index) => (
                         <BodyTr key={index}>
-                            {action ? (
+                            {action && (
                                 <GBodyTd>
-                                {getActionsByStatus(String(row.status)).map(action => (
-                                    <Notificacao 
-                                        key={action} 
-                                        icon={actionIcons[action]} 
-                                        backgroundColor={actionColors[action]} 
-                                        size={30} 
-                                        iconColor="#FFFFFF"
-                                    />
-                                ))}
-                            </GBodyTd>
-                            ) : (<></>
+                                    {getActionsByStatus(String(row.status)).map(action => (
+                                        <Notificacao 
+                                            key={action} 
+                                            icon={actionIcons[action]} 
+                                            backgroundColor={actionColors[action]} 
+                                            size={30} 
+                                            iconColor="#FFFFFF"
+                                        />
+                                    ))}
+                                </GBodyTd>
                             )}
                             {headers.map((header) => (
                                 <GBodyTd key={header}>
@@ -120,3 +131,4 @@ export function GambTable({ data, action}: { data: Record<string, any>[], action
         </>
     );
 }
+

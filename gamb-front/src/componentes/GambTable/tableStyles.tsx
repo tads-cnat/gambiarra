@@ -1,5 +1,6 @@
 import styled from "styled-components";
 
+
 export const HeadTr = styled.tr`
 	display: flex;
 	height: 66.4px;
@@ -8,10 +9,12 @@ export const HeadTr = styled.tr`
 	background: ${(props) => props.theme.cores.white};
 `;
 
+// necessario olhar a largura minima das celulas, se diminuir a tela, ela fica pra fora do container da dashboard
+
 export const HeadTh = styled.th`
 	display: flex;
 	height: 66px;
-	min-width: 200px;
+	min-width: 210px;
 	max-width: 350px;
 	max-height: 200px;
 	padding: 20px;
@@ -34,7 +37,7 @@ export const BodyTr = styled.tr`
 
 export const BodyTd = styled.td`
 display: flex;
-min-width: 200px;
+min-width: 210px;
 max-width: 350px;
 padding: 20px;
 align-items: center;
