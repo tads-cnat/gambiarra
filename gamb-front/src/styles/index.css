@@ -28,31 +28,5 @@
 				rgba(255, 255, 255, 1) 81%
 			)
 			border-box;
-	border: 1px solid transparent;
-}
-
-/* Navegadores baseados em WebKit (Chrome, Safari) */
-::-webkit-scrollbar {
-	width: 12px; /* Largura da barra vertical */
-	height: 12px; /* Altura da barra horizontal */
-}
-
-::-webkit-scrollbar-track {
-	background: #f1f1f1; /* Cor do fundo da trilha */
-	border-radius: 10px; /* Arredondamento da trilha */
-}
-
-::-webkit-scrollbar-thumb {
-	background: #888; /* Cor da barra de scroll */
-	border-radius: 10px; /* Arredondamento da barra */
-}
-
-::-webkit-scrollbar-thumb:hover {
-	background: #555; /* Cor ao passar o mouse por cima */
-}
-
-/* Firefox */
-.scrollable {
-	scrollbar-width: thin; /* Tamanho fino */
-	scrollbar-color: #888 #f1f1f1; /* Cor da barra e da trilha */
+	border: 1px solid transparent !important;
 }

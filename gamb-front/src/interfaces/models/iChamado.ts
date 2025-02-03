@@ -16,7 +16,7 @@ export interface Chamados {
 	cliente_id: number;
 	professor_id?: number;
 	status: string;
-	avaliacao?: [string, number];
+	avaliacao?: string;
 }
 // export interface Chamado {
 // 	// estabelecer o retorno

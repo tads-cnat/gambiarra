@@ -1,5 +1,11 @@
-import { AddressBook, FileText, FolderUser, HouseSimple } from "@phosphor-icons/react";
-import { Link } from "react-router";
+import {
+	AddressBook,
+	FileText,
+	FolderUser,
+	HouseSimple,
+	SignOut,
+} from "@phosphor-icons/react";
+import { Link, useNavigate } from "react-router";
 import {
 	ItemDropdown,
 	SidebarBody,
@@ -19,7 +25,7 @@ export function Sidebar() {
 	const [ModalOpen, setModalOpen] = useState(false);
 
 	const closeModal = () => setModalOpen(false);
-
+	const navigate = useNavigate();
 	async function onSubmit(data: ChamadoSubmit): Promise<void> {
 		console.log(data);
 		ChamadoService.criarChamado(data)
@@ -35,6 +41,12 @@ export function Sidebar() {
 			});
 
 		setModalOpen(false);
+	}
+	function handleLogout(): void {
+		localStorage.removeItem("access_token");
+		localStorage.removeItem("refresh_token");
+		localStorage.removeItem("user");
+		navigate("/login");
 	}
 	const [isDropdownOpen, setDropdownOpen] = useState(false);
 
@@ -68,7 +80,7 @@ export function Sidebar() {
 							<ul>
 								<li>
 									<Link to="/">
-										<HouseSimple/> Home
+										<HouseSimple /> Home
 									</Link>
 								</li>
 								<li>
@@ -100,14 +112,15 @@ export function Sidebar() {
 							</User>
 							<div className="flex flex-col-reverse relative ">
 								{isDropdownOpen && (
-
 									<ItemDropdown className="absolute bottom-full mb-2 left-0 w-full elevacao-def">
-											<li className="p-2 hover:bg-gray_500">
-												<a href="#">
-													<SignOut /> logout
-												</a>
-											</li>
-											
+										<li className="p-2 hover:bg-gray_500">
+											<a
+												href="/login"
+												onClick={handleLogout}
+											>
+												<SignOut /> logout
+											</a>
+										</li>
 									</ItemDropdown>
 								)}
 								<GambButton

@@ -10,7 +10,5 @@ export interface NotificacaoProps {
   
     // Tamanho do círculo principal
     size?: number;
-
-    iconColor?: string;
   }
   
