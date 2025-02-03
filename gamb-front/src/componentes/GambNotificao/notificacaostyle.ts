@@ -14,8 +14,8 @@ export const CircleContainer = styled.div<{ size: number; backgroundColor: strin
   position: relative; 
 `;
 
-export const IconContainer = styled.div`
-  color: ${({ theme }) => theme.cores.gray_text}; 
+export const IconContainer = styled.div<{ iconColor?: string }>`
+  color: ${({ iconColor, theme }) => iconColor || theme.cores.gray_text};  
   display: flex;
   align-items: center;
   justify-content: center;

@@ -11,7 +11,7 @@ class OnlyGerente(permissions.BasePermission):
         if user.is_authenticated:
             return user.grupo.name == GrupoEnum.GERENTE
         return False
-
+            
 class OnlyProfessor(permissions.BasePermission):
     message = "Seu usuário não tem permissão."
 
@@ -20,7 +20,7 @@ class OnlyProfessor(permissions.BasePermission):
         if user.is_authenticated:
             return user.grupo.name == GrupoEnum.PROFESSOR
         return False
-
+    
 class OnlyBolsista(permissions.BasePermission):
     message = "Seu usuário não tem permissão."
 
@@ -29,7 +29,7 @@ class OnlyBolsista(permissions.BasePermission):
         if user.is_authenticated:
             return user.grupo.name == GrupoEnum.BOLSISTA
         return False
-
+    
 class OnlyServidor(permissions.BasePermission):
     message = "Seu usuário não tem permissão."
 
@@ -38,7 +38,7 @@ class OnlyServidor(permissions.BasePermission):
         if user.is_authenticated:
             return user.grupo.name == GrupoEnum.SERVIDOR
         return False
-
+    
 class OnlyCliente(permissions.BasePermission):
     message = "Seu usuário não tem permissão."
 
@@ -47,7 +47,7 @@ class OnlyCliente(permissions.BasePermission):
         if user.is_authenticated:
             return user.grupo.name == GrupoEnum.CLIENTE
         return False
-
+    
 class OnlyAluno(permissions.BasePermission):
     message = "Seu usuário não tem permissão."
 

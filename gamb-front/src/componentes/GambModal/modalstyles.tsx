@@ -1,12 +1,12 @@
 import styled from "styled-components";
 
-export const ModalOverlay = styled.div`
+export const ModalOverlay = styled.div<{ isOpen: boolean }>`
     position: fixed;
     width: 100vw;
     height: 100vh;
     inset: 0;
     background: rgba(0, 0, 0, 0.75);
-    display: 'block' ; /* Mostrar quando modal estiver aberto */
+    display: ${({ isOpen }) => (isOpen ? 'block' : 'none')}; /* Mostrar quando modal estiver aberto */
 `;
 
 export const CloseButton = styled.button`

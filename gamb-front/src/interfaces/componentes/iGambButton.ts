@@ -2,15 +2,7 @@ import { MouseEvent } from "react";
 
 export interface GambButtonProps {
 	// Define a variante de cor do botão.
-	variant:
-		| "verde"
-		| "amarelo"
-		| "vermelho"
-		| "roxo"
-		| "branco"
-		| "cinza"
-		| "inline"
-		| "circle";
+	variant: "verde" | "amarelo" | "vermelho" | "roxo" | "branco" | "cinza" | "inline" | "circle";
 
 	// Permite adicionar conteúdo filho dentro do botão (ícones, texto, etc.).
 	children?: React.ReactNode;
@@ -37,9 +29,9 @@ export interface GambButtonProps {
 	dataCypress?: string;
 
 	// Define o tamanho do botão. Opções: "small" | "medium" | "large".
-	size?: "small" | "medium" | "large" | "mediumlg";
+	size?: "small" | "medium" | "large";
 
 	// Define o ícone a ser exibido no botão.
 	icon?: string;
-	id?: string;
+	id?: string; 
 }

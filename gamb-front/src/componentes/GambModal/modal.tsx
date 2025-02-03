@@ -3,17 +3,18 @@ import GambButton from "../GambButton/Button";
 import React from "react";
 
 interface ModalProps {
-	isModalOpen: boolean;
+	isOpen: boolean;
 	onClose: () => void;
 	children?: React.ReactNode;
 	title: string;
 	onSubmit?: () => void;
 }
 
-export  default function Modal({ isModalOpen, onClose, children, title, onSubmit }: ModalProps) {
-	if (isModalOpen) {
+export  default function Modal({ isOpen, onClose, children, title, onSubmit }: ModalProps) {
+	if (isOpen) {
 		return (
 			<ModalOverlay
+				isOpen={isOpen}
 				onClick={onClose}
 			>
 				

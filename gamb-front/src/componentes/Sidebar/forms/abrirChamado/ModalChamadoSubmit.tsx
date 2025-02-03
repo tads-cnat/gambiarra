@@ -40,7 +40,7 @@ export default function ModalChamadoSubmit(props: {
 	return (
 		<>
 			<Modal
-				isModalOpen={isModalOpen}
+				isOpen={isModalOpen}
 				onClose={closeModal}
 				title="Abrir Chamado"
 				onSubmit={handleSubmit(onSubmit)} // Integração com handleSubmit
