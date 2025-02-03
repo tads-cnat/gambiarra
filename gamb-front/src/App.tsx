@@ -55,7 +55,12 @@ export function App() {
 					/>
 					<Route
 						path="/dashboard"
-						element={<Dashboard />}
+						element={
+							<ProtectedRoute
+								element={<Dashboard />}
+								requiredRole={["Allowed"]}
+							/>
+						}
 					>
 						{/* Página inicial da Dashboard */}
 						<Route

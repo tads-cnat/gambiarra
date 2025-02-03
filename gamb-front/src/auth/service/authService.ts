@@ -1,7 +1,6 @@
 import axiosInstance from "../../services/base/axiosInstance";
 import BaseService from "../../services/base/baseService";
 import { LoginSubmit } from "./auth";
-import { useNavigate } from "react-router-dom";
 interface mensagem {
 	sucesso: boolean;
 	mensagem: string;
@@ -63,6 +62,5 @@ class authService extends BaseService {
 				return false;
 			});
 	}
-	
 }
 export default new authService("");

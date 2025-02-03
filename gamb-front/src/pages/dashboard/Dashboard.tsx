@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
+import { Outlet } from "react-router-dom"; // 🔹 Corrigida a importação
 import { Sidebar } from "../../componentes/Sidebar/Sidebar";
-import CardChamado from "../../componentes/GambCardChamados/CardChamado";
 import CabecalhoDash from "../../componentes/GambCabecalhoDash/CabecalhoDash";
 import {
 	DashboardContainer,
@@ -8,10 +8,10 @@ import {
 	DashboardMain,
 } from "./dashboardstyles";
 
-export function Dashboard() {
+export const Dashboard: React.FC = () => {
 	useEffect(() => {
 		// Função para capturar mudanças no localStorage
-		const handleStorageChange = (e) => {
+		const handleStorageChange = (e: StorageEvent) => {
 			if (e.key === "userToken" || e.key === "role") {
 				console.log("Mudança no localStorage detectada");
 			}
@@ -25,23 +25,16 @@ export function Dashboard() {
 			window.removeEventListener("storage", handleStorageChange);
 		};
 	}, []);
+
 	return (
-		<div>
-			<DashboardContainer>
-				<Sidebar />
-				{/* teste botões */}
-				<DashboardMain>
-					<DashboardContent className="elevacao-def">
-						<CabecalhoDash/>
-						<div className="flex gap-2">
-						<CardChamado userType={"professor"} messageType={"atribuidas"} quantity={0}/>
-						<CardChamado userType={"professor"} messageType={"concluidas"} quantity={0}/>
-						<CardChamado userType={"professor"} messageType={"pendentes"} quantity={0}/>
-						<CardChamado userType={"professor"} messageType={"recusadas"} quantity={0}/>
-						</div>
-					</DashboardContent>
-				</DashboardMain>
-			</DashboardContainer>
-		</div>
+		<DashboardContainer>
+			<Sidebar />
+			<DashboardMain>
+				<DashboardContent>
+					<CabecalhoDash />
+					<Outlet />
+				</DashboardContent>
+			</DashboardMain>
+		</DashboardContainer>
 	);
-}
+};

@@ -1,14 +1,22 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
 import authService from "./service/authService";
 
+// Função para verificar se o usuário está autenticado
 export async function isAuthenticated(): Promise<boolean> {
-	return authService.profile();
+	console.log("Verificando autenticação...");
+	try {
+		const result = await authService.profile();
+		return result; // Espera um booleano da API (true ou false)
+	} catch (error) {
+		console.error("Erro ao verificar autenticação", error);
+		return false;
+	}
 }
 
-// Simulação de verificação de permissão
+// Função para verificar se o usuário tem permissão
 const hasPermission = (requiredRole: string[]): boolean => {
-	const userRole = localStorage.getItem("Role");
+	const userRole = localStorage.getItem("user.grupo");
 	if (requiredRole.includes("Allowed")) {
 		return true;
 	}
@@ -19,7 +27,6 @@ const hasPermission = (requiredRole: string[]): boolean => {
 };
 
 // Componente para proteger rotas
-
 export function ProtectedRoute({
 	element,
 	requiredRole,
@@ -27,8 +34,32 @@ export function ProtectedRoute({
 	element: JSX.Element;
 	requiredRole?: string[];
 }): JSX.Element {
-	if (!isAuthenticated()) {
-		// Redireciona para a página inicial se o usuário não estiver autenticado
+	const [isAuthenticatedState, setIsAuthenticatedState] = useState<
+		boolean | null
+	>(null);
+	const [hasPermissionState, setHasPermissionState] = useState<boolean>(true);
+
+	// Verificação de autenticação ao carregar o componente
+	useEffect(() => {
+		const checkAuthentication = async () => {
+			const authenticated = await isAuthenticated();
+			setIsAuthenticatedState(authenticated);
+
+			if (requiredRole) {
+				setHasPermissionState(hasPermission(requiredRole));
+			}
+		};
+
+		checkAuthentication();
+	}, [requiredRole]);
+
+	if (isAuthenticatedState === null) {
+		// Enquanto não sabemos se o usuário está autenticado, podemos retornar um loading
+		return <div>Loading...</div>;
+	}
+
+	if (!isAuthenticatedState) {
+		// Redireciona para a página de login se o usuário não estiver autenticado
 		return (
 			<Navigate
 				to="/login"
@@ -36,8 +67,9 @@ export function ProtectedRoute({
 			/>
 		);
 	}
-	if (requiredRole && !hasPermission(requiredRole)) {
-		// Redireciona para a página inicial se o usuário não tiver a permissão necessária
+
+	if (requiredRole && !hasPermissionState) {
+		// Redireciona para a página inicial se o usuário não tiver permissão
 		return (
 			<Navigate
 				to="/dashboard"
@@ -46,31 +78,5 @@ export function ProtectedRoute({
 		);
 	}
 
-	return element;
+	return element; // Retorna o elemento caso a autenticação e permissão sejam válidas
 }
-
-// Componente principal de rotas
-// export function Routers(): JSX.Element {
-// 	return (
-// 		<BrowserRouter>
-// 			<Routes>
-// 				{/* Rota pública */}
-// 				<Route
-// 					path="/"
-// 					element={<Home />}
-// 				/>
-
-// 				{/* Rota protegida */}
-// 				<Route
-// 					path="/dashboard"
-// 					element={
-// 						<ProtectedRoute
-// 							element={<Dashboard />}
-// 							requiredRole="Gerente" // Exemplo: apenas "Gerente" pode acessar
-// 						/>
-// 					}
-// 				/>
-// 			</Routes>
-// 		</BrowserRouter>
-// 	);
-// }
