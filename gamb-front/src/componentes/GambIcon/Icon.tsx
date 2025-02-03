@@ -17,6 +17,7 @@ import {
 	Plus,
 	Minus,
 	CaretRight,
+	CaretLeft,
 	CheckCircle,
 	Info,
 	WarningDiamond,
@@ -40,10 +41,12 @@ import {
 	Eye,
 	EyeSlash,
 	EyeClosed,
+	Checks,
+	XCircle,
+	Archive,
 } from "@phosphor-icons/react";
 import { GambIconProps } from "../../interfaces/componentes/iGambIcon";
 import React from "react";
-
 const iconComponents: { [key: string]: JSX.Element } = {
 	house: <House />,
 	heart: <Heart />,
@@ -63,6 +66,7 @@ const iconComponents: { [key: string]: JSX.Element } = {
 	plus: <Plus />,
 	minus: <Minus />,
 	seta_direita: <CaretRight />,
+	seta_esquerda: <CaretLeft />,
 	checkcircle: <CheckCircle />,
 	info: <Info weight="fill" />,
 	warning: <WarningDiamond />,
@@ -86,6 +90,9 @@ const iconComponents: { [key: string]: JSX.Element } = {
 	eyeclose: <EyeClosed />,
 	eyeopen: <Eye />,
 	eyeslash: <EyeSlash />,
+	checks: <Checks />,
+	xcircle: <XCircle />,
+	archive: <Archive />,
 };
 
 export default function Icon(props: GambIconProps): JSX.Element {
