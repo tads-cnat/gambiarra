@@ -11,7 +11,7 @@
 |                                Ações do ator                                |                                            Ações do sistema                                             |
 | :-------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------: | --- |
 | 1 - O Professor, na linha do chamado pretendido, clica no botão de encerrar |                                                                                                         |     |
-|                                                                             |                 2 - O sistema abre uma modal de confirmação do encerramento do chamado                  |
+|                                                                             |                 2 - O sistema solicita ao professor uma justificativa para a ação                 |
 |        3 - O Professor confirma a ação clicando no botão de encerrar        |                                                                                                         |
 |                                                                             | 4 - O sistema redireciona o Professor para a página de detalhes do chamado, e exibe o status atualizado |
 

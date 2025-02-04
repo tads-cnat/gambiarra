@@ -8,7 +8,7 @@
 ## 2. Listagem dos detalhamentos dos casos de uso
 
 01. [CDU-001 - Abrir chamado](cdu-001-abrir-chamado/cdu_abrir_chamado.md)
-02. [CDU-002 - Aceitar chamado](cdu-002-aceitar-chamado/cdu_aceitar_chamado.md)
+02. [CDU-002 - Analisar Chamado](cdu-002-analisar-chamado/cdu_analisar_chamado.md)
 03. [CDU-003 - Encerrar chamado](cdu-003-encerrar-chamado/cdu_encerrar_chamado.md)
 04. [CDU-004 - Detalhar chamado](cdu-004-Detalhar-chamado/cdu_detalhar_chamado.md)
 05. [CDU-005 - Alterar status do chamado](cdu-005-Alterar-status-chamado/cdu_alterar_status_chamado.md)

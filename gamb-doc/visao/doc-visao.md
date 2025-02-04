@@ -83,7 +83,7 @@ Nosso produto é uma plataforma focada em gerenciamento de chamados de manutenç
 | RF02   | Aceitação de chamados                     | O sistema deve possibilitar aceitação um chamado.                                                  |                   |
 | RF03   | Encerramento de chamados                  | O sistema deve possibilitar o fechamento de um chamado já aberto.                                  |                   |
 | RF04   | Detalhamento de chamados                  | O sistema deve possibilitar  o detalhamento do chamado.                                            |                   |
-| RF05   | Alteração de status dos chamados          |  O sistema deve possibilitar alterações no status do chamado aberto.                                |                   |
+| RF05   | Alteração de status dos chamados          |  O sistema deve possibilitar alterações no status do chamado aberto.                               |                   |
 | RF06   | Avaliação de chamados                     | O sistema deve possibilitar o registro de uma avaliação do chamado.                                |                   |
 | RF07   | Listagem de chamados                      | O sistema deve possuir listas com os chamados                                                      |                   |
 | RF08   | Gerenciamento dos bolsistas               | O sistema deve possibilitar adicionar, remover, editar e excluir bolsistas a plataforma.           |                   |
@@ -91,6 +91,8 @@ Nosso produto é uma plataforma focada em gerenciamento de chamados de manutenç
 | RF10   | Envio de mensagens                        | O sistema deve possibilitar o envio de mensagens com os participantes do chamado.                  |                   |
 | RF11   | Geração de ordem de serviço               | O sistema deve possibilitar criação de uma etiqueta com informações de um chamado.                 |                   |
 | RF12   | Logar no sistema                          | O sistema deve disponibilizar autenticação para os seus usuários.                                  |                   |
+| RF13   | Recusa de chamados                        | O sistema deve possibilitar recusa de um chamado.                                                  |                   |
+
 
 
 ## 9. Requisitos não-funcionais
