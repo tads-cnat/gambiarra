@@ -85,3 +85,18 @@ class AceitarChamadoSerializer(serializers.ModelSerializer):
             "code",
             "titulo",
         ]
+
+class AlterarStatusSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Chamado
+        fields = [
+            "id",
+            "status",
+            "code",
+            "titulo",
+        ]
+
+class DetalharChamadoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Chamado
+        fields = "__all__"
