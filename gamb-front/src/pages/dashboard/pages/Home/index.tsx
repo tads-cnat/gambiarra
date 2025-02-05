@@ -1,8 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
+import { useForm } from "react-hook-form";
 import CardChamado from "../../../../componentes/GambCardChamados/CardChamado";
+import { GambFilterTable } from "../../../../componentes/GambFilterTable/FilterTable";
+import { FilterContent, FilterInputs } from "../../../../componentes/GambFilterTable/FilterTableStyles";
+import InputField from "../../../../componentes/GambInput/Input";
 import { GambTable } from "../../../../componentes/GambTable/Table";
+import { FilterTitleContainer } from "../../../../componentes/GambFilterTitle/filterTitleStyles";
+import { GambFilterTitle } from "../../../../componentes/GambFilterTitle/filterTitle";
 
 export default function DashboardHome(): JSX.Element {
+	const { register } = useForm();
+	const [formIsValid, setFormIsValid] = useState(false);
+
 	const chamados = [
 		{
 			id: 1,
@@ -119,6 +128,30 @@ export default function DashboardHome(): JSX.Element {
 					quantity={0}
 				/>
 			</div>
+			<GambFilterTable>
+
+			<FilterContent>
+				<GambFilterTitle label="Filtre por pessoas" />
+                <FilterInputs>
+				<InputField label="Bolsista" placeholder="selecione um bolsista" register={register("campo")}/>
+				<InputField label="Professor" placeholder="selecione um professor" register={register("campo")}/>
+				<InputField label="Cliente" placeholder="selecione um cliente" register={register("campo")}/>
+
+                </FilterInputs>
+            </FilterContent>
+            <FilterContent>
+				<GambFilterTitle label="Filtre pelos dados do chamado" />
+                <FilterInputs>
+				<InputField label="Descrição" placeholder="busque pela descrição" register={register("campo")}/>
+				<InputField label="Titulo" placeholder="busque pelo titulo" register={register("campo")}/>
+				<InputField label="Avaliação" placeholder="busque pela avaliação" register={register("campo")}/>
+				<InputField label="Status" placeholder="busque pelo status" register={register("campo")}/>
+				<InputField label="Busca" placeholder="busque por campos de texto" register={register("campo")}/>
+
+                </FilterInputs>
+            </FilterContent>
+				
+			</GambFilterTable>
 			<GambTable
 				data={chamados}
 				action={true}

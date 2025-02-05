@@ -18,6 +18,44 @@ export interface Chamados {
 	status: string;
 	avaliacao?: string;
 }
+
+export interface ChamadoFilterGerente {
+	codigo?: string;
+	titulo?: string;
+	status?: string;
+	avaliacao?: string;
+	professor_id?: number;
+	cliente_id?: number;
+	bolsista_id?: number;
+}
+
+export interface ChamadoFilterGerente {
+	codigo?: string;
+	titulo?: string;
+	status?: string;
+	avaliacao?: string;
+	professor_id?: number;
+	cliente_id?: number;
+	bolsista_id?: number;
+}
+
+export interface ChamadoFilterBolsista {
+	codigo?: string;
+	titulo?: string;
+	status?: string;
+	avaliacao?: string;
+	professor_id?: number;
+	cliente_id?: number;
+}
+
+export interface ChamadoFilterProfessor {
+	codigo?: string;
+	titulo?: string;
+	status?: string;
+	avaliacao?: string;
+	cliente_id?: number;
+	bolsista_id?: number;
+}
 // export interface Chamado {
 // 	// estabelecer o retorno
 // }

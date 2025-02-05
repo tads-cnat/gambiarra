@@ -1,7 +1,7 @@
 import {
-	UseFormRegisterReturn,
 	Control,
 	RegisterOptions,
+	UseFormRegisterReturn,
 } from "react-hook-form";
 
 export interface InputFieldProps {
@@ -63,7 +63,7 @@ export interface InputFieldProps {
 	 */
 	register: UseFormRegisterReturn;
 
-	formIsValid: boolean | null;
+	formIsValid?: boolean | null;
 
 	value?: string;
 
