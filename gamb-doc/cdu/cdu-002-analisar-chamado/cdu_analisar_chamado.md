@@ -6,7 +6,7 @@
 -   **Pré-condição**: Estar logado no sistema na lista de chamados
 -   **Pós-Condição**: O sistema redireciona o professor para a tela de detalhes do chamado
 
-## Fluxo - Aceitar Chamado
+## Fluxo Principal - Aceitar Chamado
 
 |                               Ações do ator                                |                                                      Ações do sistema                                                       |
 | :------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------: |
@@ -21,7 +21,7 @@
 | 1 - O Professor, na linha do chamado pretendido, clica no botão de recusar |                                                                                                                             | 
 |                                                                            | 2 - O sistema solicita ao professor uma justificativa para a ação                                                         |
 | 3 - O Professor insere a justificativa e clica em recusar                  |                                                                                                                             |
-|                                                                            | 4 - O sistema redireciona o Professor para a página de detalhes do chamado, exibe mensagem de sucesso e o status atualizado para "Recusado" |
+|                                                                            | 4 - O sistema redireciona o Professor para a página de detalhes do chamado, exibe mensagem de sucesso e o status é atualizado para "Recusado" |
 
 
 

@@ -17,25 +17,23 @@
 | 5 - O Professor informa a justificativa, detalhando como o chamado foi resolvido, e confirma a ação clicando no botão de encerrar. |                                                                                                                                                                                               |
 |                                                                                                                                    | 6 - O sistema valida a justificativa, encerra o chamado com status **"Fechado com Resolução"**, e redireciona o Professor para a página de detalhes do chamado, exibindo o status atualizado. |
 
-## Fluxo Principal - Fechado sem Resolução
+## Fluxo Alternativo I  - Fechado sem Resolução
 
 | **Ações do Ator**                                                                                                                                               | **Ações do Sistema**                                                                                                                                                                          |
 | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 1 - O Professor, na linha do chamado pretendido, clica no botão de encerrar.                                                                                    |                                                                                                                                                                                               |
-|                                                                                                                                                                 | 2 - O sistema exibe uma opção para o Professor selecionar o tipo de encerramento: **"Fechado com Resolução"** ou **"Fechado sem Resolução"**.                                                 |
-| 3 - O Professor seleciona **"Fechado sem Resolução"**.                                                                                                          |                                                                                                                                                                                               |
-|                                                                                                                                                                 | 4 - O sistema solicita ao professor uma justificativa para a ação.                                                                                                                            |
-| 5 - O Professor informa a justificativa, explicando o motivo pelo qual o chamado será encerrado sem resolução, e confirma a ação clicando no botão de encerrar. |                                                                                                                                                                                               |
-|                                                                                                                                                                 | 6 - O sistema valida a justificativa, encerra o chamado com status **"Fechado sem Resolução"**, e redireciona o Professor para a página de detalhes do chamado, exibindo o status atualizado. |
+| 3.1 - O Professor seleciona **"Fechado sem Resolução"**.                                                                                                        |                                                                                                                                                                                               |
+|                                                                                                                                                                 | 4.1 - O sistema solicita ao professor uma justificativa para a ação.                                                                                                                            |
+| 5.1 - O Professor informa a justificativa, explicando o motivo pelo qual o chamado será encerrado sem resolução, e confirma a ação clicando no botão de encerrar. |                                                                                                                                                                                               |
+|                                                                                                                                                                 | 6.1 - O sistema valida a justificativa, encerra o chamado com status **"Fechado sem Resolução"**, e redireciona o Professor para a página de detalhes do chamado, exibindo o status atualizado. |
 
-## Fluxo Alternativo I - Cancelar Encerramento
+## Fluxo Alternativo II - Cancelar Encerramento
 
 |                                Ações do ator                                |                            Ações do sistema                            |
 | :-------------------------------------------------------------------------: | :--------------------------------------------------------------------: | 
 | 1 - O Professor, na linha do chamado pretendido, clica no botão de encerrar |                                                                        |   
 |                                                                             | 2 - O sistema abre uma modal de confirmação do encerramento do chamado |
-|        3 - O Professor desiste da ação clicando no botão de cancelar        |                                                                        |
-|                                                                             |       4 - O sistema fecha o modal de confirmação de encerramento       |
+|        3.2 - O Professor desiste da ação clicando no botão de cancelar        |                                                                        |
+|                                                                             |       4.2 - O sistema fecha o modal de confirmação de encerramento       |
 
 ## Diagrama de Sequência - Encerrar Chamado
 
