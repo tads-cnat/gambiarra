@@ -2,6 +2,8 @@ from django.db.models import Q
 from rest_framework import status, filters
 from .filters import ChamadoFilter 
 from django.shortcuts import get_object_or_404
+from rest_framework import viewsets
+from rest_framework.decorators import action
 
 # rest framework
 from rest_framework import status
@@ -13,37 +15,8 @@ from django_filters import rest_framework as filters
 from rest_framework.filters import SearchFilter
 from authentication.constants import GrupoEnum
 from authentication.permissions import *
-
-# serializers
 from gambiarra.serializers import *
-
-# models
 from .models import *
-
-# cria novo chamado com status 1
-class CreateChamadoView(CreateAPIView):
-    permission_classes = [IsAuthenticated, OnlyExterno]
-    authentication_classes = [JWTAuthentication]
-    queryset = Chamado.objects.all()
-    serializer_class = CreateChamadoSerializer
-
-    def create(self, request):
-        # print("Authenticated user:", request.user.grupo.name)
-        serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        self.perform_create(serializer)
-        chamado = serializer.instance
-        return Response(
-            data={
-                "success": True,
-                "data": {
-                    "id": chamado.id,
-                },
-                "message": "Chamado aberto com sucesso!",
-            },
-            status=status.HTTP_201_CREATED,
-        )
-
 
 TAB_STATUS_MAPPING = {
     "todos": [],  # Inclui todos os status
@@ -52,10 +25,12 @@ TAB_STATUS_MAPPING = {
     "recusados": ["Recusado"],
     "fechados": ["Fechado sem resolução", "Resolvido", "Recusado"],
 }
-class ListarChamadoView(ListAPIView):
-    permission_classes = [IsAuthenticated]
+
+        
+class ChamadoViewSet(viewsets.ModelViewSet):
     authentication_classes = [JWTAuthentication]
-    serializer_class = ListarChamadoSerializer
+    permission_classes = [IsAuthenticated]
+    queryset = Chamado.objects.all()
     filter_backends = (SearchFilter, filters.DjangoFilterBackend)
     search_fields = [
         'status__icontains',  # Campo status
@@ -68,6 +43,15 @@ class ListarChamadoView(ListAPIView):
     ]
     filterset_class = ChamadoFilter
 
+    def get_serializer_class(self): #Função pra retornar o serializador apropriado pra cada função
+        if self.action == "create":
+            return CreateChamadoSerializer
+        if self.action == "aceitar_chamado":
+            return AceitarChamadoSerializer
+        if self.action == "alterar_status":
+            return AlterarStatusSerializer
+        return DetalharChamadoSerializer
+    
     def get_queryset(self):
         user: Usuario = self.request.user
         grupo = user.grupo.name
@@ -96,29 +80,27 @@ class ListarChamadoView(ListAPIView):
 
 
         return queryset
-
-          
-    def list(self, request):
-        queryset = self.filter_queryset(self.get_queryset())
-
-        serializer = self.get_serializer(queryset, many=True)
-
+    
+    def create(self, request):
+        # print("Authenticated user:", request.user.grupo.name)
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        chamado = serializer.instance
         return Response(
             data={
                 "success": True,
-                "data": serializer.data,
-                "message": None,
+                "data": {
+                    "id": chamado.id,
+                },
+                "message": "Chamado aberto com sucesso!",
             },
-            status=status.HTTP_200_OK,
+            status=status.HTTP_201_CREATED,
         )
-
-
-class AceitarChamadoView(CreateAPIView):
-    permission_classes = [IsAuthenticated, OnlyProfessor]
-    authentication_classes = [JWTAuthentication]
-    serializer_class = AceitarChamadoSerializer
-
-    def post(self, request, id):
+    
+    #esse decorator indica que é uma fnução própria que só pode POST feito por Professor
+    @action(detail=True, methods=['post'], permission_classes=[OnlyProfessor])
+    def aceitar_chamado(self, request, pk=None):
         user: Usuario = self.request.user
         chamado = get_object_or_404(Chamado, id=id)
 
@@ -145,3 +127,8 @@ class AceitarChamadoView(CreateAPIView):
             },
             status=status.HTTP_200_OK,
         )
+    
+    @action(detail=True, methods=["patch"], permission_classes=[OnlyProfessor])
+    def alterar_status(self,request):
+        pass
+    #TODO
