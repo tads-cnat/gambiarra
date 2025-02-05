@@ -39,4 +39,10 @@
 
 ![diagrama de sequência encerrar chamado](img/encerrar_seq.png "Diagrama sequência - Encerrar Chamado")
 
+
+## Diagrama de estados - Alterar status do chamado
+
+![diagrama de estado](../imgs/estado_status_chamado.jpg "Diagrama de estados - Alterar status")
+
+
 [Voltar aos Casos de Uso](../cdu.md)
