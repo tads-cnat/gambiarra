@@ -81,9 +81,6 @@ class AceitarChamadoSerializer(serializers.ModelSerializer):
         model = Chamado
         fields = [
             "id",
-            "status",
-            "code",
-            "titulo",
         ]
 
 class AlterarStatusSerializer(serializers.ModelSerializer):
@@ -92,8 +89,6 @@ class AlterarStatusSerializer(serializers.ModelSerializer):
         fields = [
             "id",
             "status",
-            "code",
-            "titulo",
         ]
 
 class DetalharChamadoSerializer(serializers.ModelSerializer):

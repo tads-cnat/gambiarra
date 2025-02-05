@@ -4,10 +4,7 @@ from .filters import ChamadoFilter
 from django.shortcuts import get_object_or_404
 from rest_framework import viewsets
 from rest_framework.decorators import action
-
-# rest framework
 from rest_framework import status
-from rest_framework.generics import CreateAPIView, ListAPIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework_simplejwt.authentication import JWTAuthentication
@@ -50,9 +47,11 @@ class ChamadoViewSet(viewsets.ModelViewSet):
             return AceitarChamadoSerializer
         if self.action == "alterar_status":
             return AlterarStatusSerializer
-        return DetalharChamadoSerializer
-    
-    def get_queryset(self):
+        if self.action == "get_queryset":
+            return ListarChamadoSerializer
+        
+
+    def listar(self):
         user: Usuario = self.request.user
         grupo = user.grupo.name
 
@@ -83,6 +82,8 @@ class ChamadoViewSet(viewsets.ModelViewSet):
     
     def create(self, request):
         # print("Authenticated user:", request.user.grupo.name)
+        if not OnlyExterno().has_permission(request, self):
+            return Response({"erro": "Você não tem permissão para criar chamados."}, status=status.HTTP_403_FORBIDDEN)
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
@@ -98,7 +99,6 @@ class ChamadoViewSet(viewsets.ModelViewSet):
             status=status.HTTP_201_CREATED,
         )
     
-    #esse decorator indica que é uma fnução própria que só pode POST feito por Professor
     @action(detail=True, methods=['post'], permission_classes=[OnlyProfessor])
     def aceitar_chamado(self, request, pk=None):
         user: Usuario = self.request.user
@@ -129,6 +129,51 @@ class ChamadoViewSet(viewsets.ModelViewSet):
         )
     
     @action(detail=True, methods=["patch"], permission_classes=[OnlyProfessor])
-    def alterar_status(self,request):
-        pass
-    #TODO
+    def alterar_status(self, request, pk):
+        try:
+            chamado = Chamado.objects.get(pk=pk)
+        except Chamado.DoesNotExist:
+            return Response({"erro": "Chamado não encontrado"}, status=status.HTTP_404_NOT_FOUND)
+
+        status_atual = chamado.status
+        acao = request.data.get("acao")
+
+        # Mapeamento de transições válidas baseado no diagrama
+        transicoes = {
+            "Pendente": {
+                "Aceitar chamado": "Aceito",
+                "Recusar chamado": "Recusado",
+            },
+            "Aceito": {
+                "Diagnosticar equipamento": "Em diagnóstico",
+            },
+            "Em diagnóstico": {
+                "Pedir peça": "Aguardando peça",
+                "Fechar chamado [Sem resolução]": "Fechado sem resolução",
+            },
+            "Aguardando peça": {
+                "Consertar equipamento": "Equipamento em conserto",
+                "Fechar chamado [Sem resolução]": "Fechado sem resolução",
+            },
+            "Equipamento em conserto": {
+                "Equipamento consertado": "Resolvido",
+                "Fechar chamado [Sem resolução]": "Fechado sem resolução",
+            },
+            "Resolvido": {
+                "Fechar chamado": "Fechado",
+            },
+            "Fechado sem resolução": {
+                "Fechar chamado": "Fechado",
+            },
+            "Recusado": {
+                "Fechar chamado": "Fechado",
+            },
+        }
+
+        # Verifica se a ação é válida para o status atual
+        if status_atual in transicoes and acao in transicoes[status_atual]:
+            chamado.status = transicoes[status_atual][acao]
+            chamado.save()
+            return Response({"mensagem": "Status atualizado com sucesso", "novo_status": chamado.status}, status=status.HTTP_200_OK)
+        else:
+            return Response({"erro": "Ação inválida para o status atual"}, status=status.HTTP_400_BAD_REQUEST)
