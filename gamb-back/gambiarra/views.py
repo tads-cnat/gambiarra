@@ -141,29 +141,29 @@ class ChamadoViewSet(viewsets.ModelViewSet):
 
         # Mapeamento de transições válidas baseado no diagrama
         transicoes = {
-            "Pendente": {
+            "Em Análise": {
                 "Aceitar chamado": "Aceito",
                 "Recusar chamado": "Recusado",
             },
             "Aceito": {
                 "Diagnosticar equipamento": "Em diagnóstico",
             },
-            "Em diagnóstico": {
+            "Em Diagnóstico": {
                 "Pedir peça": "Aguardando peça",
                 "Fechar chamado [Sem resolução]": "Fechado sem resolução",
             },
-            "Aguardando peça": {
+            "Aguardando Peça": {
                 "Consertar equipamento": "Equipamento em conserto",
                 "Fechar chamado [Sem resolução]": "Fechado sem resolução",
             },
-            "Equipamento em conserto": {
+            "Equipamento Em Conserto": {
                 "Equipamento consertado": "Resolvido",
                 "Fechar chamado [Sem resolução]": "Fechado sem resolução",
             },
             "Resolvido": {
                 "Fechar chamado": "Fechado",
             },
-            "Fechado sem resolução": {
+            "Fechado Sem Resolução": {
                 "Fechar chamado": "Fechado",
             },
             "Recusado": {

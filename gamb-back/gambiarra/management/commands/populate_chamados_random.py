@@ -8,7 +8,7 @@ class Command(BaseCommand):
     def add_arguments(self, parser):
         parser.add_argument("quantidade", type=int)
 
-    help = "Popula o banco de dados com os modelos de chamado, itens, acessórios, avaliações, mensagens, e alterações de status"
+    help = "Popula o banco de dados com os modelos de chamado"
     def handle(self, *args, **options):
         quantidade = options["quantidade"]
         try:

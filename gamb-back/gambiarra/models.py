@@ -10,9 +10,9 @@ STATUS_CHOICES = [
     ("1","Em Análise"),
     ("2","Aceito"),
     ("3","Em Diagnóstico"),
-    ("4","Equipamento em conserto"),
-    ("5","Aguardando peça"),
-    ("6","Fechado sem resolução"),
+    ("4","Equipamento Em Conserto"),
+    ("5","Aguardando Peça"),
+    ("6","Fechado Sem Resolução"),
     ("7","Resolvido"),
     ("8","Recusado"),
 ] 
