@@ -49,6 +49,7 @@ class ChamadoViewSet(viewsets.ModelViewSet):
             return AlterarStatusSerializer
         if self.action == "get_queryset":
             return ListarChamadoSerializer
+        return ListarChamadoSerializer
         
 
     def listar(self):
