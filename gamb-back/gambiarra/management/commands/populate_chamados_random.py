@@ -48,3 +48,6 @@ class Command(BaseCommand):
         except Exception as e:
             self.stderr.write(self.style.ERROR(f"Erro ao popular banco de dados: {str(e)}"))
             pass
+
+
+        #comentário inútil só pra eu poder fazer uma PR
