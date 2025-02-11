@@ -6,6 +6,38 @@ from rest_framework import status
 from django.urls import reverse
 
 class ChamadoViewSetTestCase(APITestCase):
+    transicoes = {
+        "Pendente": {
+            "Aceitar chamado": "Aceito",
+            "Recusar chamado": "Recusado",
+        },
+        "Aceito": {
+            "Diagnosticar equipamento": "Em diagnóstico",
+        },
+        "Em diagnóstico": {
+            "Pedir peça": "Aguardando peça",
+            "Fechar chamado [Sem resolução]": "Fechado sem resolução",
+        },
+        "Aguardando peça": {
+            "Consertar equipamento": "Equipamento em conserto",
+            "Fechar chamado [Sem resolução]": "Fechado sem resolução",
+        },
+        "Equipamento em conserto": {
+            "Equipamento consertado": "Resolvido",
+            "Fechar chamado [Sem resolução]": "Fechado sem resolução",
+        },
+        "Resolvido": {
+            "Fechar chamado": "Fechado",
+        },
+        "Fechado sem resolução": {
+            "Fechar chamado": "Fechado",
+        },
+        "Recusado": {
+            "Fechar chamado": "Fechado",
+        },
+    }
+
+
     def create_users(self):
         grupo_admin, _ = Group.objects.get_or_create(name="admin")
         grupo_professor, _ = Group.objects.get_or_create(name="professor")
@@ -80,38 +112,57 @@ class ChamadoViewSetTestCase(APITestCase):
     def setUp(self):
         self.usuarios = self.create_users()
         self.chamados = {}
-
-        for status in STATUS_CHOICES:
-            chamado = Chamado.objects.create(
-                titulo = status[1],
-                descricao = status[1],
-                status = status[1],
-                cliente = self.usuarios["cliente"],
-            )
-            self.chamados[status[1]] = chamado
         
-        
-
-    def test_aceitar_sucesso(self):
-        chamado = self.chamados[STATUS_CHOICES[0][1]]   #Em análise
-        self.client.force_authenticate(user=self.usuarios["professor"])
-
+    def requisicao(self, usuario, chamado, acao, status_esperado):
+        self.client.force_authenticate(user=self.usuarios[f"{usuario}"])
         url = reverse("Chamado-alterar-status", kwargs={"pk": chamado.id})
         resposta = self.client.patch(
             url, 
-            {"acao": "Aceitar chamado"},
+            {"acao": f"{acao}"},
             format="json"
             )
 
-        print(self.client)
-        print(STATUS_CHOICES[0][1]) #Em análise
-        print(url)
-        print(resposta)
+        self.assertEqual(
+            resposta.status_code, 
+            status_esperado,
+            msg=f"Erro na transição com ação {acao} para o chamado com status {chamado.status}."
+            )
+        return resposta
+            
 
-        self.assertEqual(resposta.status_code, status.HTTP_200_OK)
-        chamado.refresh_from_db()
-        self.assertEqual(chamado.status, "Aceito")
 
+    def test_sucesso(self):
+        for status_inicial, acoes in self.transicoes.items():
+            for acao, status_esperado in acoes.items():
+                chamado = Chamado.objects.create(
+                    titulo=status_inicial,
+                    descricao=status_inicial,
+                    status=status_inicial,
+                    cliente=self.usuarios["cliente"],
+                )
+                self.requisicao(self.usuarios["professor"], chamado, acao, status.HTTP_200_OK)
+                chamado.refresh_from_db()
+                self.assertEqual(
+                    chamado.status, 
+                    status_esperado,
+                    msg=f"Para status {status_inicial} e ação {acao}, esperado {status_esperado}, mas obteve {chamado.status}."
+                )
+        
 
+    def test_aceitar_falha(self):
+        for status_inicial in self.transicoes.keys():
+            chamado = Chamado.objects.create(
+                titulo=f"status_inicial",
+                descricao=f"status_inicial",
+                status=status_inicial,
+                cliente=self.usuarios["cliente"],
+            )
+            response = self.requisicao("professor", chamado, "Ação inválida", status.HTTP_400_BAD_REQUEST)
+            chamado.refresh_from_db()
+            self.assertEqual(
+                chamado.status,
+                status_inicial,
+                msg=f"Para status '{status_inicial}', a ação inválida alterou o status para '{chamado.status}'."
+            )
 
         
