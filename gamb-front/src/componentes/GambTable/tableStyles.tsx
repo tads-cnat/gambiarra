@@ -20,6 +20,7 @@ export const HeadTh = styled.th`
 	align-items: center;
 	gap: 10px;
 	font-weight: 600;
+	border-bottom: 1px solid ${(props) => props.theme.cores.gray_light};
 `;
 
 export const BodyTr = styled.tr`
