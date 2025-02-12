@@ -1,80 +1,17 @@
 import React from "react";
-import Notificacao from "../GambNotificao/Notificacao";
 import { Pagination } from "../GambPaginação/Paginacao";
 import { GBodyTd } from "./GBodyTd";
 import { GHeadTh } from "./GHeadTh";
-import { BodyTr, HeadTr, Table } from "./tableStyles";
-
-const actionIcons: Record<string, string> = {
-	aceitar: "checks",
-	recusar: "xcircle",
-	arquivar: "archive",
-	detalhar: "eyeopen",
-	avaliar: "star",
-	resolver: "checkcircle",
-	chat: "chat",
-};
-
-const actionColors: Record<string, string> = {
-	aceitar: "#12A400",
-	resolver: "#12A400",
-	recusar: "#DC3545",
-	arquivar: "#DC3545",
-	detalhar: "#7C74DA",
-	avaliar: "#FFD454",
-	chat: "#61B3FF",
-};
-
-const getActionsByStatus = (status: string): string[] => {
-	const normalizedStatus = status?.toLowerCase().trim(); // Evita erros com espaços extras ou `null`
-
-	switch (normalizedStatus) {
-		case "em analise":
-			return ["aceitar", "recusar", "detalhar"];
-		case "aceito":
-			return ["detalhar", "chat", "resolver"];
-		case "resolvido":
-			return ["arquivar"];
-		default:
-			return [];
-	}
-};
-
-function StarRating({ rating }: { rating: number }) {
-	return (
-		<span className="star-rating">
-			{"⭐".repeat(rating) + "☆".repeat(5 - rating)}
-		</span>
-	);
-}
-
-function StatusBadge({ status }: { status: string }) {
-	// Mapeia os status para cores específicas
-	const statusColors: Record<string, string> = {
-		"em analise": "bg-gray-400 text-gray-900 font-normal",
-		aceito: "bg-green-500 text-white font-normal",
-		resolvido: "bg-green-500 text-white font-normal",
-		recusado: "bg-red-500 text-white font-normal",
-		arquivado: "bg-gray-500 text-white font-normal",
-	};
-
-	// Define a cor de fundo com base no status ou usa uma padrão
-	const bgColor =
-		statusColors[status.toLowerCase()] || "bg-gray-300 text-gray-700";
-
-	return (
-		<span className={`px-2 py-1 rounded-md text-sm font-bold ${bgColor}`}>
-			{status}
-		</span>
-	);
-}
+import { BodyTr, HeadTr, StatusBadge, Table } from "./tableStyles";
+import { getActionsByStatus } from "./actions";
 
 export function GambTable({
 	data,
 	action,
 	hiddenFields = [],
 }: {
-	data: Record<string, unknown>[];
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	data: Record<string, any>[];
 	action: boolean;
 	hiddenFields?: string[];
 }) {
@@ -101,12 +38,9 @@ export function GambTable({
 				<Table style={{ minWidth: "100%" }}>
 					<thead>
 						<HeadTr>
-							{action && <GHeadTh children="Ações" />}
+							{action && <GHeadTh>Ações</GHeadTh>}
 							{headers.map((header) => (
-								<GHeadTh
-									key={header}
-									children={header}
-								/>
+								<GHeadTh key={header}>{header}</GHeadTh>
 							))}
 						</HeadTr>
 					</thead>
@@ -115,43 +49,39 @@ export function GambTable({
 							<BodyTr key={index}>
 								{action && (
 									<GBodyTd>
-										{getActionsByStatus(
-											String(row.status)
-										).map((action) => (
-											<Notificacao
-												key={action}
-												icon={actionIcons[action]}
-												backgroundColor={
-													actionColors[action]
-												}
-												size={30}
-												iconColor="#FFFFFF"
-											/>
-										))}
+										{getActionsByStatus(row.status.id,row.id )}
 									</GBodyTd>
 								)}
+
 								{headers.map((header) => (
 									<GBodyTd key={header}>
 										{isChamados &&
 										header === "avaliacao" &&
-										Array.isArray(row[header]) &&
-										row[header].length === 2 &&
-										typeof row[header][1] === "number" ? (
+
+										row.avaliacao ? (
 											<div className="flex flex-col justify-center">
 												<span className="font-bold mb-1">
-													{row[header][0]}
+													{String(row.avaliacao.texto)}
 												</span>
-												<StarRating
-													rating={Number(
-														row[header][1]
-													)}
-												/>
+												<span className="star-rating">
+													{"⭐".repeat(
+														row.avaliacao.nota
+													) +
+														"☆".repeat(
+															5 - row.avaliacao.nota
+														)}
+												</span>
 											</div>
 										) : isChamados &&
 										  header === "status" ? (
-											<StatusBadge
-												status={String(row[header])}
-											/>
+											<StatusBadge status={row.status.id}>
+												{String(row.status.nome)}
+											</StatusBadge>
+											
+										) : header === "bolsistas" ? (
+											String(row.bolsistas.map((bolsista) => bolsista.nome).join(", "))
+										): header === "professor" ? (
+											String(row.professor.nome)
 										) : (
 											String(row[header])
 										)}

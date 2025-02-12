@@ -17,7 +17,7 @@ export default function InputField(props: InputFieldProps): JSX.Element {
 		textAux,
 		error,
 		icon,
-		formIsValid = true,
+		formIsValid,
 	} = props;
 
 	// Estado para alternar o tipo de entrada (exclusivo para campos de senha)

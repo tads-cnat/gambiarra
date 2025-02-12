@@ -10,6 +10,31 @@ export const HeadTr = styled.tr`
 
 // necessario olhar a largura minima das celulas, se diminuir a tela, ela fica pra fora do container da dashboard
 
+
+
+const actionColors: Record<string, string> = {
+  1: "#12A400",
+  2: "#12A400",
+  3: "#DC3545",
+  4: "#DC3545",
+  5: "#7C74DA",
+  6: "#FFD454",
+  7: "#61B3FF",
+};
+
+interface StatusProps {
+  status: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
+}
+
+export const StatusBadge = styled.span<StatusProps>`
+  padding: 5px 10px;
+  border-radius: 5px;
+  color: #fff;
+  background: ${({ status }) => actionColors[status] || "#7C7C7C"};
+`;
+
+
+
 export const HeadTh = styled.th`
 	display: flex;
 	height: 66px;

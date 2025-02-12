@@ -93,6 +93,8 @@ const iconComponents: { [key: string]: JSX.Element } = {
 	checks: <Checks />,
 	xcircle: <XCircle />,
 	archive: <Archive />,
+	x: <X />,
+	check: <Checks />,
 };
 
 export default function Icon(props: GambIconProps): JSX.Element {
