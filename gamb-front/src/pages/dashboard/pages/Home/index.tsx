@@ -4,10 +4,11 @@ import GambButton from "../../../../componentes/GambButton/Button";
 import CardChamado from "../../../../componentes/GambCardChamados/CardChamado";
 import { GambFilterTable } from "../../../../componentes/GambFilterTable/FilterTable";
 import { FilterContent, FilterInputs } from "../../../../componentes/GambFilterTable/FilterTableStyles";
-import { GambFilterTitle } from "../../../../componentes/GambFilterTitle/filterTitle";
 import InputField from "../../../../componentes/GambInput/Input";
 import { GambTable } from "../../../../componentes/GambTable/Table";
-import { yupResolver } from "@hookform/resolvers/yup";
+import { GambTitle } from "../../../../componentes/GambTitle/Title";
+// import { yupResolver } from "@hookform/resolvers/yup";
+import axiosInstance from "../../../../services/base/axiosInstance";
 
 interface Filters {
 	bolsista: string;
@@ -23,109 +24,43 @@ interface Filters {
 
 
 export default function DashboardHome(): JSX.Element {
-	const { register, handleSubmit } = useForm<Filters>({
+	
+	const [chamados, setChamados] = useState([]);
+
+	useEffect(() => {
+		axiosInstance.get("/chamado/listar").then((response) => {
+			setChamados(response.data.data);
+			console.log(response.data.data);
+		})
+	},[]) 
+	
+	const { register, handleSubmit, reset } = useForm<Filters>({
 		// resolver: yupResolver(filterSchema) TO-DO
 	});
 
 	function handleFilter(data: Filters) {
-		
+		const filtrosAplicados = Object.keys(data).reduce((acumulador, chave) => {
+		  const valor = data[chave as keyof Filters];
+		  if (valor && valor.trim() !== "") {
+			return { ...acumulador, [chave]: valor };
+		  }
+		  return acumulador;
+		}, {} as Partial<Filters>);
+
+		axiosInstance
+		.get("/chamado/listar", { params: filtrosAplicados })
+		.then((response) => {
+		  setChamados(response.data.data);
+		//   console.log("Filtros aplicados:", filtrosAplicados);
+		//   console.log("Resultado da busca:", response.data.data);
+		})
+		.catch((error) => {
+		  console.error("Erro ao filtrar chamados", error);
+		});
 	}
 
-	const [formIsValid, setFormIsValid] = useState(false);
-
-
-	const chamados = [
-		{
-			id: 1,
-			status: "Aceito",
-			codigo: "8A541DS64",
-			titulo: "Computador",
-			professor: "Lucena",
-			bolsista: "Leonardo",
-			avaliacao: ["Muito Brabo", 5],
-		},
-		{
-			id: 2,
-			status: "Em analise",
-			codigo: "X9Y72FD32",
-			titulo: "Notebook",
-			professor: "Camila",
-			bolsista: "Mariana",
-			avaliacao: ["Ótimo", 3],
-		},
-		{
-			id: 3,
-			status: "Resolvido",
-			codigo: "A1B2C3D4",
-			titulo: "Monitor",
-			professor: "Roberto",
-			bolsista: "Fernanda",
-			avaliacao: ["Satisfatório", 4],
-		},
-		{
-			id: 4,
-			status: "Recusado",
-			codigo: "Z7X6Y5W4",
-			titulo: "Impressora",
-			professor: "Juliana",
-			bolsista: "Carlos",
-			avaliacao: ["Ruim", 2],
-		},
-		{
-			id: 5,
-			status: "Arquivado",
-			codigo: "QWERTY12",
-			titulo: "Projetor",
-			professor: "Bruno",
-			bolsista: "Ana",
-			avaliacao: ["Bom", 4],
-		},
-		{
-			id: 6,
-			status: "Aceito",
-			codigo: "LKJHGF98",
-			titulo: "Teclado Mecânico",
-			professor: "Daniela",
-			bolsista: "Pedro",
-			avaliacao: ["Excelente", 5],
-		},
-		{
-			id: 7,
-			status: "Em analise",
-			codigo: "ZXCVB654",
-			titulo: "Mouse Gamer",
-			professor: "Henrique",
-			bolsista: "Sophia",
-			avaliacao: ["Razoável", 3],
-		},
-		{
-			id: 8,
-			status: "Resolvido",
-			codigo: "BNMASD78HFDHJFDHGFDHGCDHGDFHGFDDFSHGDFSHJFDSJHFDSHGDFSJHFDSHGJFDSHGFDSJHDFSGJH",
-			titulo: "Cadeira Ergonômica",
-			professor: "Patrícia",
-			bolsista: "Eduardo",
-			avaliacao: ["Muito Confortável", 5],
-		},
-		{
-			id: 9,
-			status: "Recusado",
-			codigo: "YUIOJKL2",
-			titulo: "Mesa Digitalizadora",
-			professor: "Ricardo",
-			bolsista: "Beatriz",
-			avaliacao: ["Pouco útil", 2],
-		},
-		{
-			id: 10,
-			status: "Arquivado",
-			codigo: "OPMNBV56",
-			titulo: "Headset",
-			professor: "Sérgio",
-			bolsista: "Larissa",
-			avaliacao: ["Muito Bom", 4],
-		},
-	];
+	// const [formIsValid, setFormIsValid] = useState(false);
+	
 	return (
 		<div>
 
@@ -133,56 +68,67 @@ export default function DashboardHome(): JSX.Element {
 				<CardChamado
 					userType={"professor"}
 					messageType={"atribuidas"}
-					quantity={0}
+					quantity={10}
 				/>
 				<CardChamado
 					userType={"professor"}
 					messageType={"concluidas"}
-					quantity={0}
+					quantity={5}
 				/>
 				<CardChamado
 					userType={"professor"}
 					messageType={"pendentes"}
-					quantity={0}
+					quantity={4}
 				/>
 				<CardChamado
 					userType={"professor"}
 					messageType={"recusadas"}
-					quantity={0}
+					quantity={1}
 				/>
 			</div>
 
 			<form onSubmit={handleSubmit(handleFilter)}>
-			<GambFilterTable>
+			<GambFilterTable className="elevacao-def mb-6">
 				<FilterContent>
-					<GambFilterTitle label="Filtre por pessoas" />
+					<GambTitle label="Filtre por pessoas" />
 					<FilterInputs>
-					<InputField label="Bolsista" placeholder="selecione um bolsista" register={register("bolsista")}/>
-					<InputField label="Professor" placeholder="selecione um professor" register={register("professor")}/>
-					<InputField label="Cliente" placeholder="selecione um cliente" register={register("cliente")}/>
+					<InputField label="Bolsista" placeholder="selecione um bolsista" register={register("bolsista")} icon="x"/>
+					<InputField label="Professor" placeholder="selecione um professor" register={register("professor")} icon="x"/>
+					<InputField label="Cliente" placeholder="selecione um cliente" register={register("cliente")} icon="x"/>
 
 					</FilterInputs>
 				</FilterContent>
 				<FilterContent>
-					<GambFilterTitle label="Filtre pelos dados do chamado" />
+					<GambTitle label="Filtre pelos dados do chamado" color="roxo" />
 					<FilterInputs>
-					<InputField label="Descrição" placeholder="busque pela descrição" register={register("descricao")}/>
-					<InputField label="Titulo" placeholder="busque pelo titulo" register={register("titulo")}/>
-					<InputField label="Avaliação" placeholder="busque pela avaliação" register={register("avaliacao")}/>
-					<InputField label="Status" placeholder="busque pelo status" register={register("status")}/>
-					<InputField label="Busca" placeholder="busque por campos de texto" register={register("busca")}/>
+
+						<InputField label="Descrição" placeholder="busque pela descrição" register={register("descricao")} icon="texto"/>
+						<InputField label="Titulo" placeholder="busque pelo titulo" register={register("titulo")} icon="texto"/>
+						<InputField label="Avaliação" placeholder="busque pela avaliação" register={register("avaliacao")} icon="star"/>
+						<InputField label="Status" placeholder="busque pelo status" register={register("status")} icon="x"/>
+						<InputField label="Busca por texto" placeholder="busque por campos de texto" register={register("busca")} icon="x"/>
 
 					</FilterInputs>
-					<GambButton variant="roxo" label="Filtrar" size="large" />
+
+					<div className="flex gap-4">
+
+					<GambButton variant="cinza" label="Filtrar" size="large" />
+					<GambButton variant="inline" label=" Limpar fitros" size="large" onClick={()=>{
+						reset();
+					}} />
+					</div>
+
 				</FilterContent>
 			</GambFilterTable>
 			</form>
 
+
+
 			<GambTable
 				data={chamados}
 				action={true}
-				hiddenFields={["id"]}
-			/>
+				hiddenFields={["id", "code"]}
+				/>
 		</div>
 	);
 }

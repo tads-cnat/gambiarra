@@ -54,4 +54,5 @@ export const BodyTd = styled.td`
 
 export const Table = styled.table`
 	overflow-x: auto;
+	
 `;

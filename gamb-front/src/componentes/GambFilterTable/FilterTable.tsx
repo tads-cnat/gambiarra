@@ -4,7 +4,7 @@ import { FilterTableContainer } from "./FilterTableStyles";
 
 export function GambFilterTable(props: GambFilterTableProps) {
     return (
-        <FilterTableContainer>
+        <FilterTableContainer className={props.className}>
            {props.children}
         </FilterTableContainer>
     );

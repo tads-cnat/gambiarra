@@ -8,7 +8,6 @@ export const FilterTableContainer = styled.div`
 	gap: 10px;
 	align-self: stretch;
 	border-radius: 16px;
-	border: 1px solid #000000;
 `;
 
 export const FilterContent = styled.div`

@@ -97,7 +97,7 @@ export function GambTable({
 
 	return (
 		<>
-			<div style={{ width: "100%", overflowX: "auto" }}>
+			<div className="elevacao-def" style={{ width: "100%", overflowX: "auto" }}>
 				<Table style={{ minWidth: "100%" }}>
 					<thead>
 						<HeadTr>
