@@ -1,6 +1,6 @@
 import React from "react";
 import GambButton from "../GambButton/Button";
-import { Container, Section, Title, Description, Actions, PeopleList, Card, CardContent } from "./detailstyle";
+import { Container, Section, Title, Description, Actions, PeopleList, Card, CardContent, CardPeople } from "./detailstyle";
 import { ChamadoDetalhesProps } from "../../interfaces/componentes/iGambDetails";
 
 const ChamadoDetalhes: React.FC<ChamadoDetalhesProps> = ({ chamado }) => {
@@ -20,9 +20,9 @@ const ChamadoDetalhes: React.FC<ChamadoDetalhesProps> = ({ chamado }) => {
             </p>
           </Section>
 
-          <Actions>
-            <div className="Flex"> 
+          <div className="Flex"> 
             <p>Açoes</p>
+          <Actions>
                 <GambButton variant="verde" label="Aceitar" icon="checkcircle"/>
                 <GambButton variant="vermelho" label="Recusar" icon="checkcircle"/>
                 <GambButton variant="vermelho" label="Arquivar" icon="checkcircle"/>
@@ -30,12 +30,10 @@ const ChamadoDetalhes: React.FC<ChamadoDetalhesProps> = ({ chamado }) => {
                 <GambButton variant="amarelo" label="Avaliar" icon="checkcircle"/>
                 <GambButton variant="cinza" label="Atribuir tarefas" icon="checkcircle"/>
                 <GambButton variant="branco" label="Alterar Status" icon="checkcircle"/>
-            </div>
           </Actions>
+          </div>
         </CardContent>
-      </Card>
-
-      <Card>
+        <CardPeople>
         <CardContent>
           <Title>Pessoas</Title>
           <PeopleList>
@@ -49,6 +47,7 @@ const ChamadoDetalhes: React.FC<ChamadoDetalhesProps> = ({ chamado }) => {
             </ul>
           </PeopleList>
         </CardContent>
+      </CardPeople>
       </Card>
     </Container>
   );
