@@ -159,3 +159,4 @@ class ChamadoViewSetTestCase(APITestCase):
             [1,2,3,5,6,7,8], #Recusado
         ]        
         self.fazer_requisicoes(impossiveis, status.HTTP_400_BAD_REQUEST)
+        #Desisti por enquanto, commit pra fechar a branch
