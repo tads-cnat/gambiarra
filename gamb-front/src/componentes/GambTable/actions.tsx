@@ -1,0 +1,116 @@
+import React from "react";
+import Notificacao from "../GambNotificao/Notificacao";
+import { userRoles } from "../../auth/roles";
+import { defaultTheme } from "../../styles/themes/default";
+
+export type Action = {
+  name: string;
+  colorIcon: string | "white";
+  background: string;
+  icon: string;
+};
+
+export const btnsPRGR: Record<number, Action[]> = {
+
+  1: [
+    { name: "aceitar", colorIcon: "white", background: defaultTheme.cores.green_sucess_primary, icon: "checkcircle" },
+    { name: "recusar", colorIcon: "white", background: defaultTheme.cores.danger, icon: "xcircle" },
+    { name: "detalhar", colorIcon: "white", background: defaultTheme.cores.purple_info_primary, icon: "eyeopen" },
+  ],
+  2: [
+    { name: "detalhar", colorIcon: "white", background: defaultTheme.cores.purple_info_primary, icon: "eyeopen" },
+    { name: "chat", colorIcon: "white", background: defaultTheme.cores.blue_info, icon: "message-circle" },
+    { name: "resolver", colorIcon: "white", background: defaultTheme.cores.green_sucess_primary, icon: "checkcircle" },
+  ],
+  3: [
+    { name: "detalhar", colorIcon: "white", background: defaultTheme.cores.purple_info_primary, icon: "eyeopen" },
+    { name: "chat", colorIcon: "white", background: defaultTheme.cores.blue_info, icon: "message-circle" },
+    { name: "resolver", colorIcon: "white", background: defaultTheme.cores.green_sucess_primary, icon: "checkcircle" },
+  ],
+  4: [
+    { name: "detalhar", colorIcon: "white", background: defaultTheme.cores.purple_info_primary, icon: "eyeopen" },
+    { name: "chat", colorIcon: "white", background: defaultTheme.cores.blue_info, icon: "message-circle" },
+    { name: "resolver", colorIcon: "white", background: defaultTheme.cores.green_sucess_primary, icon: "checkcircle" },
+  ],
+  5: [
+    { name: "detalhar", colorIcon: "white", background: defaultTheme.cores.purple_info_primary, icon: "eyeopen" },
+    { name: "chat", colorIcon: "white", background: defaultTheme.cores.blue_info, icon: "message-circle" },
+    { name: "resolver", colorIcon: "white", background: defaultTheme.cores.green_sucess_primary, icon: "checkcircle" },
+  ],
+  6: [
+    { name: "detalhar", colorIcon: "white", background: defaultTheme.cores.purple_info_primary, icon: "eyeopen" },
+    { name: "chat", colorIcon: "white", background: defaultTheme.cores.blue_info, icon: "message-circle" },
+    { name: "arquivar", colorIcon: "white", background: defaultTheme.cores.danger, icon: "archive" },
+  ],
+  7: [
+    { name: "detalhar", colorIcon: "white", background: defaultTheme.cores.purple_info_primary, icon: "eyeopen" },
+    { name: "chat", colorIcon: "white", background: defaultTheme.cores.blue_info, icon: "message-circle" },
+    { name: "arquivar", colorIcon: "white", background: defaultTheme.cores.danger, icon: "archive" },
+  ],
+  8: [
+    { name: "detalhar", colorIcon: "white", background: defaultTheme.cores.purple_info_primary, icon: "eyeopen" },
+    { name: "arquivar", colorIcon: "white", background: defaultTheme.cores.danger, icon: "archive" },
+  ],
+};
+
+export const btnClientes: Record<number, Action[]> = {
+  1: [{ name: "detalhar", colorIcon: "white", background: defaultTheme.cores.purple_info_primary, icon: "eyeopen" }],
+  2: [
+    { name: "detalhar", colorIcon: "white", background: defaultTheme.cores.purple_info_primary, icon: "eyeopen" },
+    { name: "chat", colorIcon: "white", background: defaultTheme.cores.blue_info, icon: "message-circle" },
+  ],
+  3: [
+    { name: "detalhar", colorIcon: "white", background: defaultTheme.cores.purple_info_primary, icon: "eyeopen" },
+    { name: "chat", colorIcon: "white", background: defaultTheme.cores.blue_info, icon: "message-circle" },
+  ],
+  4: [
+    { name: "detalhar", colorIcon: "white", background: defaultTheme.cores.purple_info_primary, icon: "eyeopen" },
+    { name: "chat", colorIcon: "white", background: defaultTheme.cores.blue_info, icon: "message-circle" },
+  ],
+  5: [
+    { name: "detalhar", colorIcon: "white", background: defaultTheme.cores.purple_info_primary, icon: "eyeopen" },
+    { name: "chat", colorIcon: "white", background: defaultTheme.cores.blue_info, icon: "message-circle" },
+  ],
+  6: [
+    { name: "detalhar", colorIcon: "white", background: defaultTheme.cores.purple_info_primary, icon: "eyeopen" },
+    { name: "chat", colorIcon: "white", background: defaultTheme.cores.blue_info, icon: "message-circle" },
+    { name: "avaliar", colorIcon: defaultTheme.cores.gray_text, background: defaultTheme.cores.warning, icon: "star" },
+  ],
+  7: [
+    { name: "detalhar", colorIcon: "white", background: defaultTheme.cores.purple_info_primary, icon: "eyeopen" },
+    { name: "chat", colorIcon: "white", background: defaultTheme.cores.blue_info, icon: "message-circle" },
+    { name: "avaliar", colorIcon: defaultTheme.cores.gray_text, background: defaultTheme.cores.warning, icon: "star" },
+  ],
+  8: [{ name: "detalhar", colorIcon: "white", background: defaultTheme.cores.purple_info_primary, icon: "eyeopen" }],
+};
+
+// Função para checar a permissão (ajuste conforme sua lógica)
+const checkPermission = (roles: string[]) =>
+
+  roles.includes(localStorage.getItem("userActiveRole") ?? "");
+
+
+console.log(localStorage.getItem("userActiveRole"));
+
+// Função que mapeia as ações para componentes <Notificacao />
+export const getActionsByStatus = (status: number, idLinha: number): JSX.Element[] => {
+  // Seleciona a lista de ações com base na permissão do usuário
+  console.log(localStorage.getItem("userActiveRole"));
+  console.log(checkPermission([userRoles.INTERNO.FUNCIONARIO.PR]));
+  console.log(userRoles.INTERNO.FUNCIONARIO.PR);
+  const actions: Action[] = checkPermission([userRoles.INTERNO.FUNCIONARIO.PR, userRoles.INTERNO.FUNCIONARIO.GR])
+    ? btnsPRGR[status] || []
+    : btnClientes[status] || [];
+
+  return actions.map((action, index) => (
+    <Notificacao
+      key={`${action.name}-${index}`}
+      icon={action.icon}
+      backgroundColor={action.background}
+      badgeNumber={-1}
+      size={30}
+      iconColor={action.colorIcon}
+      onClick={() => console.log(`Ação: ${action.name} - ID: ${idLinha}`)}
+    />
+  ));
+};
