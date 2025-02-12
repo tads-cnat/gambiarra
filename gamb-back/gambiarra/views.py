@@ -100,81 +100,80 @@ class ChamadoViewSet(viewsets.ModelViewSet):
             status=status.HTTP_201_CREATED,
         )
     
-    @action(detail=True, methods=['post'], permission_classes=[OnlyProfessor])
-    def aceitar_chamado(self, request, pk=None):
-        user: Usuario = self.request.user
-        chamado = get_object_or_404(Chamado, id=id)
-
-        if chamado.status == "1":
-            chamado.status = "2"
-            chamado.professor = request.user
-            chamado.save()
-            serializer = self.get_serializer(chamado)
-        else:
-            return Response(
-                data={
-                    "success": True,
-                    "data": None,
-                    "message": "Chamado já aceito",
-                },
-                status=status.HTTP_200_OK,
-            )
-
-        return Response(
-            data={
-                "success": True,
-                "data": serializer.data,
-                "message": "Chamado aceito por " + user.username,
-            },
-            status=status.HTTP_200_OK,
-        )
-    
     @action(detail=True, methods=["patch"], permission_classes=[OnlyProfessor])
     def alterar_status(self, request, pk):
         try:
             chamado = Chamado.objects.get(pk=pk)
         except Chamado.DoesNotExist:
-            return Response({"erro": "Chamado não encontrado"}, status=status.HTTP_404_NOT_FOUND)
+            return erro("Chamado não encontrado")
 
-        status_atual = chamado.status
-        acao = request.data.get("acao")
+        status_antigo = chamado.status
+        status_novo = request.data.get("status")
 
-        # Mapeamento de transições válidas baseado no diagrama
+        #Definindo transições válidas com base nas decisões projetuais 
         transicoes = {
-            "Em Análise": {
-                "Aceitar chamado": "Aceito",
-                "Recusar chamado": "Recusado",
-            },
-            "Aceito": {
-                "Diagnosticar equipamento": "Em diagnóstico",
-            },
-            "Em Diagnóstico": {
-                "Pedir peça": "Aguardando peça",
-                "Fechar chamado [Sem resolução]": "Fechado sem resolução",
-            },
-            "Aguardando Peça": {
-                "Consertar equipamento": "Equipamento em conserto",
-                "Fechar chamado [Sem resolução]": "Fechado sem resolução",
-            },
-            "Equipamento Em Conserto": {
-                "Equipamento consertado": "Resolvido",
-                "Fechar chamado [Sem resolução]": "Fechado sem resolução",
-            },
-            "Resolvido": {
-                "Fechar chamado": "Fechado",
-            },
-            "Fechado Sem Resolução": {
-                "Fechar chamado": "Fechado",
-            },
-            "Recusado": {
-                "Fechar chamado": "Fechado",
-            },
+            "Em Análise": ["Aceito", "Recusado"],
+            "Aceito": ["Em Diagnóstico"],
+            "Em Diagnóstico": ["Aguardando Peça", "Fechado Sem Resolução", "Equipamento Em Conserto"],
+            "Aguardando Peça": ["Equipamento Em Conserto", "Fechado Sem Resolução"],
+            "Equipamento Em Conserto": ["Resolvido", "Fechado Sem Resolução"],
+            "Resolvido": ["Fechado"],
+            "Fechado Sem Resolução": ["Fechado"],
+            "Recusado": ["Fechado"],
         }
+        
 
-        # Verifica se a ação é válida para o status atual
-        if status_atual in transicoes and acao in transicoes[status_atual]:
-            chamado.status = transicoes[status_atual][acao]
-            chamado.save()
-            return Response({"mensagem": "Status atualizado com sucesso", "novo_status": chamado.status}, status=status.HTTP_200_OK)
-        else:
-            return Response({"erro": "Ação inválida para o status atual"}, status=status.HTTP_400_BAD_REQUEST)
+        #Resolvendo erros:
+        #Se os status não são iguais
+        #Se status não foi passado
+        #Se status não é inteiro
+        #Se o status atual é inváliso (nunca é pra acontecer)
+
+        if str(status_novo) == str(chamado.status):
+            return erro("O status antigo é igual ao status atual.")
+
+
+        if status_novo is None:
+            return erro("O campo 'status' é obrigatório.")
+
+        try:
+            status_novo = int(status_novo)
+        except:
+            return erro("O campo 'status' deve ser um número inteiro")
+        
+        #Transforma STATUS_CHOICE em um dict de ids:chaves
+        status_dict = {status_id: status_texto for status_id, status_texto in STATUS_CHOICES}
+
+        if str(status_novo) not in status_dict:
+            return erro("Status inválido")
+
+        status_atual_texto = status_dict.get(str(chamado.status))
+        status_novo_texto = status_dict.get(str(status_novo))
+
+        if not status_atual_texto:
+            return erro("Status atual inválido")
+            #Nunca é pra chegar aqui, mas vai que...
+
+
+        #Mais verificação de erros:
+        #Se o status atual tem transições definidas (mais um que não é pra dar erro nunca)
+        #Se a transição desejada é permitida
+        
+        if status_atual_texto not in transicoes:
+            return erro(f"Não há transições definidas para o status {status_atual_texto}")
+        
+        if status_novo_texto not in transicoes[status_atual_texto]:
+            return erro(f"Não é possível ir de '{status_atual_texto}' para '{status_novo_texto}'")
+
+        #Linkando o professor ao chamado, se ele aceitá-lo
+        if status_novo_texto == "Aceito":
+            chamado.professor = request.user
+
+        chamado.status = status_novo
+        chamado.save()
+
+        return Response({"mensagem": "Status atualizado com sucesso", "novo_status": status_novo_texto})
+
+#Função pro código não ficar tão verboso feio
+def erro(e):
+    return Response({"erro": e}, status=status.HTTP_400_BAD_REQUEST)
