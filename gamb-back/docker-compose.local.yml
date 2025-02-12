@@ -10,6 +10,7 @@ services:
       python manage.py migrate &&
       python manage.py populate_groups &&
       python manage.py populate_user &&
+      python manage.py populate_models &&
       python manage.py runserver 0.0.0.0:8000"
     volumes:
       - .:/app
