@@ -1,16 +1,38 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import GambButton from "../../../../componentes/GambButton/Button";
 import CardChamado from "../../../../componentes/GambCardChamados/CardChamado";
 import { GambFilterTable } from "../../../../componentes/GambFilterTable/FilterTable";
 import { FilterContent, FilterInputs } from "../../../../componentes/GambFilterTable/FilterTableStyles";
+import { GambFilterTitle } from "../../../../componentes/GambFilterTitle/filterTitle";
 import InputField from "../../../../componentes/GambInput/Input";
 import { GambTable } from "../../../../componentes/GambTable/Table";
-import { FilterTitleContainer } from "../../../../componentes/GambFilterTitle/filterTitleStyles";
-import { GambFilterTitle } from "../../../../componentes/GambFilterTitle/filterTitle";
+import { yupResolver } from "@hookform/resolvers/yup";
+
+interface Filters {
+	bolsista: string;
+	professor: string;
+	cliente: string;
+	descricao: string;
+	titulo: string;
+	avaliacao: string;
+	status: string;
+	busca: string;
+}
+
+
 
 export default function DashboardHome(): JSX.Element {
-	const { register } = useForm();
+	const { register, handleSubmit } = useForm<Filters>({
+		// resolver: yupResolver(filterSchema) TO-DO
+	});
+
+	function handleFilter(data: Filters) {
+		
+	}
+
 	const [formIsValid, setFormIsValid] = useState(false);
+
 
 	const chamados = [
 		{
@@ -106,6 +128,7 @@ export default function DashboardHome(): JSX.Element {
 	];
 	return (
 		<div>
+
 			<div className="flex gap-2">
 				<CardChamado
 					userType={"professor"}
@@ -128,30 +151,33 @@ export default function DashboardHome(): JSX.Element {
 					quantity={0}
 				/>
 			</div>
+
+			<form onSubmit={handleSubmit(handleFilter)}>
 			<GambFilterTable>
+				<FilterContent>
+					<GambFilterTitle label="Filtre por pessoas" />
+					<FilterInputs>
+					<InputField label="Bolsista" placeholder="selecione um bolsista" register={register("bolsista")}/>
+					<InputField label="Professor" placeholder="selecione um professor" register={register("professor")}/>
+					<InputField label="Cliente" placeholder="selecione um cliente" register={register("cliente")}/>
 
-			<FilterContent>
-				<GambFilterTitle label="Filtre por pessoas" />
-                <FilterInputs>
-				<InputField label="Bolsista" placeholder="selecione um bolsista" register={register("campo")}/>
-				<InputField label="Professor" placeholder="selecione um professor" register={register("campo")}/>
-				<InputField label="Cliente" placeholder="selecione um cliente" register={register("campo")}/>
+					</FilterInputs>
+				</FilterContent>
+				<FilterContent>
+					<GambFilterTitle label="Filtre pelos dados do chamado" />
+					<FilterInputs>
+					<InputField label="Descrição" placeholder="busque pela descrição" register={register("descricao")}/>
+					<InputField label="Titulo" placeholder="busque pelo titulo" register={register("titulo")}/>
+					<InputField label="Avaliação" placeholder="busque pela avaliação" register={register("avaliacao")}/>
+					<InputField label="Status" placeholder="busque pelo status" register={register("status")}/>
+					<InputField label="Busca" placeholder="busque por campos de texto" register={register("busca")}/>
 
-                </FilterInputs>
-            </FilterContent>
-            <FilterContent>
-				<GambFilterTitle label="Filtre pelos dados do chamado" />
-                <FilterInputs>
-				<InputField label="Descrição" placeholder="busque pela descrição" register={register("campo")}/>
-				<InputField label="Titulo" placeholder="busque pelo titulo" register={register("campo")}/>
-				<InputField label="Avaliação" placeholder="busque pela avaliação" register={register("campo")}/>
-				<InputField label="Status" placeholder="busque pelo status" register={register("campo")}/>
-				<InputField label="Busca" placeholder="busque por campos de texto" register={register("campo")}/>
-
-                </FilterInputs>
-            </FilterContent>
-				
+					</FilterInputs>
+					<GambButton variant="roxo" label="Filtrar" size="large" />
+				</FilterContent>
 			</GambFilterTable>
+			</form>
+
 			<GambTable
 				data={chamados}
 				action={true}
