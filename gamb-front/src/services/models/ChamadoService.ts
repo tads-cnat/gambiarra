@@ -4,9 +4,9 @@ import axiosInstance from "../base/axiosInstance";
 import BaseService from "../base/baseService";
 
 class ChamadoService extends BaseService {
-	async listarChamados(filters: ChamadoFilter): Promise<unknown> {
+	async listarChamados(filters?: ChamadoFilter): Promise<unknown> {
 		const response = await axiosInstance.get(`${this.serviceUrl}`,{
-			params: filters,
+			params: filters || {},
 		});
 		
 		return response;
