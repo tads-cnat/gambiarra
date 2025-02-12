@@ -52,7 +52,7 @@ class ChamadoViewSet(viewsets.ModelViewSet):
         return ListarChamadoSerializer
         
 
-    def listar(self):
+    def get(self):
         user: Usuario = self.request.user
         grupo = user.grupo.name
 
