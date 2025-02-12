@@ -30,7 +30,7 @@ class ChamadoViewSet(viewsets.ModelViewSet):
     queryset = Chamado.objects.all()
     filter_backends = (SearchFilter, filters.DjangoFilterBackend)
     search_fields = [
-        'status__icontains',  # Campo status
+        'status',  # Campo status
         'titulo__icontains',  # Campo titulo
         'descricao__icontains',  # Campo descricao
         'code__icontains',  # Campo code
@@ -72,11 +72,11 @@ class ChamadoViewSet(viewsets.ModelViewSet):
 
         # Filtrar pela tab (múltiplos status associados)
         if tab_param in TAB_STATUS_MAPPING and TAB_STATUS_MAPPING[tab_param]:
-            queryset = queryset.filter(status__in=TAB_STATUS_MAPPING[tab_param])
+            queryset = queryset.filter(status=TAB_STATUS_MAPPING[tab_param])
 
         # Filtrar pelo status individual se fornecido
         if status_param:
-            queryset = queryset.filter(status__icontains=status_param)
+            queryset = queryset.filter(status=status_param)
 
 
         return queryset

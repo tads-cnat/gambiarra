@@ -2,7 +2,7 @@ import django_filters
 from .models import Chamado
 
 class ChamadoFilter(django_filters.FilterSet):
-    status = django_filters.CharFilter(lookup_expr='icontains')
+    status = django_filters.NumberFilter(lookup_expr='exact')
     titulo = django_filters.CharFilter(lookup_expr='icontains')
     descricao = django_filters.CharFilter(lookup_expr='icontains')
     code = django_filters.CharFilter(lookup_expr='icontains')
