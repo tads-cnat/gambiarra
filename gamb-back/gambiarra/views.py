@@ -41,7 +41,7 @@ class ChamadoViewSet(viewsets.ModelViewSet):
     filterset_class = ChamadoFilter
 
     def get_serializer_class(self): #Função pra retornar o serializador apropriado pra cada função
-        if self.action == "create": 
+        if self.action == "create":
             return CreateChamadoSerializer
         if self.action == "aceitar_chamado":
             return AceitarChamadoSerializer

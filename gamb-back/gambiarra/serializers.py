@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
 from authentication.models import Usuario
-from gambiarra.models import Acessorio, Chamado, Item
+from gambiarra.models import Acessorio, Chamado, Item, STATUS_CHOICES
 
 from .models import Acessorio, Chamado, Item
 
@@ -44,29 +44,38 @@ class CreateChamadoSerializer(serializers.ModelSerializer):
 class ListarChamadoSerializer(serializers.ModelSerializer):
     bolsistas = serializers.SerializerMethodField()
     professor = serializers.SerializerMethodField()
-    cliente = serializers.CharField(source="cliente.username", read_only=True)
-    status = serializers.CharField(source="get_status_display", read_only=True)
+    cliente = serializers.SerializerMethodField()
+    status = serializers.SerializerMethodField()
     avaliacao = serializers.SerializerMethodField()
 
     class Meta:
         model = Chamado
         fields = [
             "id",
-            "status",
-            "code",
             "titulo",
             "professor",
             "bolsistas",
             "cliente",
+            "status",
+            "code",
             "avaliacao",
         ]
 
+    def get_cliente(self, obj):
+        return {
+            "username": obj.cliente.username,
+            "id": obj.cliente.id,
+        }
+
     def get_bolsistas(self, obj):
-        return list(obj.bolsistas.values_list("username", flat=True))
+        return list(obj.bolsistas.values("id", "username"))
 
     def get_professor(self, obj):
         if obj.professor:
-            return obj.professor.username
+            return {
+                "id": obj.professor.id,
+                "username": obj.professor.username,
+            }
         return None
 
     def get_avaliacao(self, obj):
@@ -74,6 +83,12 @@ class ListarChamadoSerializer(serializers.ModelSerializer):
         if avaliacao:
             return {"nota": avaliacao.nota, "texto": avaliacao.texto}
         return None
+    
+    def get_status(self, obj):
+        return {
+            "id": obj.status,
+            "nome": STATUS_CHOICES[int(obj.status)-1][1]
+        }
 
 
 class AceitarChamadoSerializer(serializers.ModelSerializer):
