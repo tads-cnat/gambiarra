@@ -34,14 +34,14 @@ class ChamadoViewSet(viewsets.ModelViewSet):
         'titulo__icontains',  # Campo titulo
         'descricao__icontains',  # Campo descricao
         'code__icontains',  # Campo code
-        'professor__username__icontains',  # Campo professor username
-        'bolsistas__username__icontains',  # Campo bolsistas username
-        'cliente__username__icontains',  # Campo cliente username
+        'professor',  # Campo professor username
+        'bolsistas',  # Campo bolsistas username
+        'cliente',  # Campo cliente username
     ]
     filterset_class = ChamadoFilter
 
     def get_serializer_class(self): #Função pra retornar o serializador apropriado pra cada função
-        if self.action == "create":
+        if self.action == "create": 
             return CreateChamadoSerializer
         if self.action == "aceitar_chamado":
             return AceitarChamadoSerializer
