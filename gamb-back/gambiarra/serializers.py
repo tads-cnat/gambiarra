@@ -63,18 +63,18 @@ class ListarChamadoSerializer(serializers.ModelSerializer):
 
     def get_cliente(self, obj):
         return {
-            "username": obj.cliente.username,
+            "nome": obj.cliente.username,
             "id": obj.cliente.id,
         }
 
     def get_bolsistas(self, obj):
-        return list(obj.bolsistas.values("id", "username"))
+        return list(obj.bolsistas.values("id", "nome"))
 
     def get_professor(self, obj):
         if obj.professor:
             return {
                 "id": obj.professor.id,
-                "username": obj.professor.username,
+                "nome": obj.professor.username,
             }
         return None
 
