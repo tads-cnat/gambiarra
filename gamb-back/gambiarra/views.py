@@ -42,15 +42,16 @@ class ChamadoViewSet(viewsets.ModelViewSet):
     filterset_class = ChamadoFilter
 
     def get_serializer_class(self): #Função pra retornar o serializador apropriado pra cada função
-        if self.action == "create":
+        acao = self.action
+        if acao == "create":
             return CreateChamadoSerializer
-        if self.action == "aceitar_chamado":
+        if acao == "aceitar_chamado":
             return AceitarChamadoSerializer
-        if self.action == "alterar_status":
+        if acao == "alterar_status":
             return AlterarStatusSerializer
-        if self.action == "atribuir_bolsista":
+        if acao == "atribuir_bolsistas" or acao == "remover_bolsistas":
             return UpdateBolsistaSerializer
-        if self.action == "get_queryset":
+        if acao == "get_queryset":
             return ListarChamadoSerializer
         return ListarChamadoSerializer
         
@@ -178,20 +179,80 @@ class ChamadoViewSet(viewsets.ModelViewSet):
         return Response({"mensagem": "Status atualizado com sucesso", "novo_status": status_novo_texto})
 
     @action (detail=True, methods=["patch"], permission_classes=[OnlyStaff])
-    def atribuir_bolsista(self, request, pk):
-        bolsista_id = request.data.get("bolsista")
-        if not bolsista_id:
-            return erro("O campo Bolsista é obrigatório")
+    def atribuir_bolsistas(self, request, pk):
+        bolsista_ids = request.data.get("bolsistas")
+        if not bolsista_ids:
+            return erro("O campo bolsistas é obrigatório")
         
         chamado = get_object_or_404(Chamado, pk=pk)
-        bolsista = get_object_or_404(Usuario, pk=bolsista_id)
-        if chamado.bolsistas.filter(pk=bolsista.pk).exists():
-            return Response({"erro": "Este bolsista já está atribuído a este chamado."}, status=status.HTTP_400_BAD_REQUEST)
+        
+        if not bolsista_ids or not isinstance(bolsista_ids, list):
+            return erro("'bolsistas' deve ser uma lista de IDs.")
 
-        chamado.bolsistas.add(bolsista)
+        bolsistas_validos = []
+        bolsistas_invalidos = []
+        bolsistas_ja_atribuídos = []
+        bolsistas_inexistentes = []
+
+        for bolsista_id in bolsista_ids:
+            bolsista = Usuario.objects.filter(pk=bolsista_id).first()
+            if not bolsista:
+                bolsistas_inexistentes.append(bolsista_id)
+                continue
+
+            if  bolsista.grupo.name != GrupoEnum.BOLSISTA:
+                bolsistas_invalidos.append(bolsista.username)
+
+            if chamado.bolsistas.filter(pk=bolsista.pk).exists():
+                bolsistas_ja_atribuídos.append(bolsista.username)
+            else:
+                chamado.bolsistas.add(bolsista)
+                bolsistas_validos.append(bolsista.username)
+
         chamado.save()
 
-        return Response({"mensagem": f"Bolsista {bolsista.username} atribuído com sucesso"}, status=status.HTTP_200_OK)
+        resposta = {
+            "mensagem": "Processo concluído.",
+            "adicionados": bolsistas_validos,
+            "ja_atribuidos": bolsistas_ja_atribuídos,
+            "inexistentes": bolsistas_inexistentes,
+            "inválidos": bolsistas_invalidos
+        }
+
+        return Response(resposta, status=status.HTTP_200_OK)
+
+
+    @action (detail=True, methods=["patch"], permission_classes=[OnlyStaff])
+    def remover_bolsistas(self, request, pk):
+        bolsista_ids = request.data.get("bolsistas")
+        if not bolsista_ids:
+            return erro("O campo bolsistas é obrigatório")
+        
+        chamado = get_object_or_404(Chamado, pk=pk)
+        bolsistas_existentes = chamado.bolsistas.all()
+        print(bolsistas_existentes)
+        
+        if not bolsista_ids or not isinstance(bolsista_ids, list):
+            return erro("'bolsistas' deve ser uma lista de IDs.")
+
+        removidos = []
+        nao_removidos = []
+
+        for bolsista_id in bolsista_ids:
+            bolsista = get_object_or_404(Usuario, pk=bolsista_id)
+            if bolsista in bolsistas_existentes:
+                chamado.bolsistas.remove(bolsista)
+                removidos.append(bolsista.username)
+            else:
+                nao_removidos.append(bolsista.username)
+
+        chamado.save()
+
+        resposta = {
+            "removidos": removidos,
+            "nao_removidos": nao_removidos,
+        }
+        return Response(resposta, status=status.HTTP_200_OK)
 
 
 #Função pro código não ficar tão verboso feio
