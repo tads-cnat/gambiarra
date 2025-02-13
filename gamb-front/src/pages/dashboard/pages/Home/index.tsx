@@ -37,17 +37,12 @@ export default function DashboardHome(): JSX.Element {
 
 	const [chamados, setChamados] = React.useState<Chamados[]>([]);  // Definindo o tipo Chamado
 	async function handleChamados(): Promise<void> {
-		// Lógica para buscar chamados
-		const filters: ChamadoFilter = {
-			limit: 10,
-			offset: 0,
-		};
-		
-		await ChamadoService.listarChamados(filters).then((res) => {
-			console.log(res);
-			setChamados(res.data);
 
+		await ChamadoService.listarChamados().then((res) => {
+			const chamados: Chamados[] = (res as { data: Chamados[] }).data;
+			setChamados(chamados);
 		});
+		
 
 	}
 	useEffect(() => {
