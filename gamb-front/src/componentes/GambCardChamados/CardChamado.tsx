@@ -94,6 +94,7 @@ function CardChamado({
 
 export default function RenderCards(){
 
+  // fazer a requisição para preencher informações
     const { userActiveRole } = useUser();
     
     return<>
