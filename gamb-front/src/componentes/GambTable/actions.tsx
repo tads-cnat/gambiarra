@@ -83,17 +83,16 @@ export const btnClientes: Record<number, Action[]> = {
   ],
   8: [{ name: "detalhar", colorIcon: "white", background: defaultTheme.cores.purple_info_primary, icon: "eyeopen" }],
 };
-
 // Função para checar a permissão (ajuste conforme sua lógica)
 const checkPermission = (roles: string[]) =>
-
   roles.includes(localStorage.getItem("userActiveRole") ?? "");
 
-
-
 // Função que mapeia as ações para componentes <Notificacao />
-export const getActionsByStatus = (status: number, idLinha: number): JSX.Element[] => {
-
+export const getActionsByStatus = (
+  status: number,
+  idLinha: number,
+  funct?: Record<string, (id: number) => void> // Parâmetro opcional para funções de ação
+): JSX.Element[] => {
   const actions: Action[] = checkPermission([userRoles.INTERNO.FUNCIONARIO.PR, userRoles.INTERNO.FUNCIONARIO.GR])
     ? btnsPRGR[status] || []
     : btnClientes[status] || [];
@@ -106,7 +105,15 @@ export const getActionsByStatus = (status: number, idLinha: number): JSX.Element
       badgeNumber={-1}
       size={30}
       iconColor={action.colorIcon}
-      onClick={() => console.log(`Ação: ${action.name} - ID: ${idLinha}`)}
+      onClick={() => {
+        if (funct && funct[action.name]) {
+          funct[action.name](idLinha);
+        } else {
+          console.log(`Ação: ${action.name} não definida! Defina a função correspondente.`);
+        }
+      }}
     />
   ));
 };
+
+

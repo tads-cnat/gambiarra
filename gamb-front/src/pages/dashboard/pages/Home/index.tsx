@@ -33,6 +33,13 @@ export default function DashboardHome(): JSX.Element {
 				action={true}
 				hiddenFields={["id"]}
 				isChamados={true}
+				TableActions={
+					{
+						detalhar: (id: number) => console.log("detalhar", id),
+						chat: (id: number) => console.log("chat", id),
+						arquivar: (id: number) => console.log("arquivar", id),
+					}
+				}
 			/>
 		</div>
 	);

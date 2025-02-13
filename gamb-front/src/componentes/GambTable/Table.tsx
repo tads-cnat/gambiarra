@@ -9,11 +9,13 @@ export function GambTable({
 	action,
 	hiddenFields = [],
 	isChamados,
+	TableActions,
 }: {
 	data: Record<string, any>[];
 	action: boolean;
 	hiddenFields?: string[];
 	isChamados?: boolean;
+	TableActions?: Record<string, (id: number) => void>;
 }) {
 	if (data.length === 0) {
 		return <p>Nenhum dado disponível</p>;
@@ -41,7 +43,7 @@ export function GambTable({
 							<BodyTr key={index}>
 								{action && (
 									<GBodyTd>
-										{getActionsByStatus(row.status?.id, row.id)}
+										{getActionsByStatus(row.status?.id, row.id, TableActions)}
 									</GBodyTd>
 								)}
 
