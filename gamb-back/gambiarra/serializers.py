@@ -63,18 +63,18 @@ class ListarChamadoSerializer(serializers.ModelSerializer):
 
     def get_cliente(self, obj):
         return {
-            "nome": obj.cliente.username,
+            "username": obj.cliente.username,
             "id": obj.cliente.id,
         }
 
     def get_bolsistas(self, obj):
-        return list(obj.bolsistas.values("id", "nome"))
+        return list(obj.bolsistas.values("id", "username"))
 
     def get_professor(self, obj):
         if obj.professor:
             return {
                 "id": obj.professor.id,
-                "nome": obj.professor.username,
+                "username": obj.professor.username,
             }
         return None
 
@@ -85,9 +85,11 @@ class ListarChamadoSerializer(serializers.ModelSerializer):
         return None
     
     def get_status(self, obj):
+        ide = next((key for key, value in STATUS_CHOICES if value == obj.status), None)
+        
         return {
-            "id": obj.status,
-            "nome": STATUS_CHOICES[int(obj.status)-1][1]
+            "id": ide,
+            "nome": obj.get_status_display()
         }
 
 
