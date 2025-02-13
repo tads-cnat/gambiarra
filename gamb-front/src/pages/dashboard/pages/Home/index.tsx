@@ -1,82 +1,38 @@
-import React, { useEffect } from "react";
-import CardChamado from "../../../../componentes/GambCardChamados/CardChamado";
+import { useEffect, useState } from "react";
 import { GambTable } from "../../../../componentes/GambTable/Table";
 import ChamadoService from "../../../../services/models/ChamadoService";
-import { ChamadoFilter } from "../../../../filters/ChamadoFilter";
 import { Chamados } from "../../../../interfaces/models/iChamado";
+import { useUser } from "../../../../auth/service/user";
+import RenderCards from "../../../../componentes/GambCardChamados/CardChamado";
 
 export default function DashboardHome(): JSX.Element {
-	// const chamados = [
-	// 	{
-	// 		id: 1,
-	// 		status: {
-	// 			id: 1,
-	// 			nome: "Aceito",
-	// 		},
-	// 		codigo: "8A541DS64",
-	// 		titulo: "Computador",
-	// 		professor: {
-	// 			id: 1,
-	// 			nome: "Fernando",
-	// 		},
-	// 		bolsistas: [{
-	// 			id: 1,
-	// 			nome: "João",
-	// 		}, {
-	// 			id: 2,
-	// 			nome: "Maria",
-	// 		}],
-	// 		avaliacao: {
-	// 			texto: "Bom",
-	// 			nota: 4,
-	// 		},
-	// 	},
-		
-	
-	// ];
+	const [chamados, setChamados] = useState<Chamados[]>([]);
 
-	const [chamados, setChamados] = React.useState<Chamados[]>([]);  // Definindo o tipo Chamado
 	async function handleChamados(): Promise<void> {
-
-		await ChamadoService.listarChamados().then((res) => {
-			const chamados: Chamados[] = (res as { data: Chamados[] }).data;
-			
-			setChamados(chamados);
-		});
-		
-
+		const res = await ChamadoService.listarChamados();
+		setChamados((res as { data: Chamados[] }).data);
 	}
+
+	const { userActiveRole } = useUser();
+
 	useEffect(() => {
 		handleChamados();
 	}, []);
+
+	if (!userActiveRole) {
+		return <p>Carregando...</p>;
+	}
+
 	return (
 		<div>
-			<div className="flex gap-2">
-				<CardChamado
-					userType={"professor"}
-					messageType={"atribuidas"}
-					quantity={0}
-				/>
-				<CardChamado
-					userType={"professor"}
-					messageType={"concluidas"}
-					quantity={0}
-				/>
-				<CardChamado
-					userType={"professor"}
-					messageType={"pendentes"}
-					quantity={0}
-				/>
-				<CardChamado
-					userType={"professor"}
-					messageType={"recusadas"}
-					quantity={0}
-				/>
+			<div className="flex flex-wrap gap-2">
+				<RenderCards />
 			</div>
 			<GambTable
 				data={chamados}
 				action={true}
 				hiddenFields={["id"]}
+				isChamados={true}
 			/>
 		</div>
 	);

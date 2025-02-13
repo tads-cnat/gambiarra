@@ -1,12 +1,12 @@
 import styled from "styled-components";
-import { CardChamadoType } from "../../interfaces/componentes/iGambCardChamado";
+import { CardChamadoCardKey } from "../../interfaces/componentes/iGambCardChamado";
 
 export const CardChamadoContainer = styled.div`
   display: flex;
-  margin: 1rem 0 1rem;
+  margin: 1rem 0;
 `;
 
-export const CardChamadoWrapper = styled.div<{ type: CardChamadoType }>`
+export const CardChamadoWrapper = styled.div<{ $cardKey: CardChamadoCardKey }>`
   display: flex;
   width: 15rem;
   height: 5rem;
@@ -16,32 +16,38 @@ export const CardChamadoWrapper = styled.div<{ type: CardChamadoType }>`
   gap: 0.5rem;
   flex-shrink: 0;
   border-radius: 0.375rem;
-  background-color: ${({ type, theme }) =>
-    type === "concluidas"
+  background-color: ${({ $cardKey, theme }) =>
+    $cardKey === "concluidas"
       ? theme.cores.green_sucess_primary
-      : type === "pendentes"
+      : $cardKey === "pendentes"
       ? theme.cores.warning_second
-      : type === "recusadas"
+      : $cardKey === "recusadas"
       ? theme.cores.danger_hover
-      : type === "atribuidas"
+      : $cardKey === "atribuidas"
       ? theme.cores.purple_info_secondary
+      : $cardKey === "cadastrados"
+      ? theme.cores.purple_info_primary
+      : $cardKey === "resolvidos"
+      ? theme.cores.green_sucess_primary
+      : $cardKey === "fechados"
+      ? theme.cores.danger
       : theme.cores.white};
-  color: ${({ type, theme }) =>
-    ["atribuidas", "concluidas", "recusadas"].includes(type)
+  color: ${({ $cardKey, theme }) =>
+    ["atribuidas", "concluidas", "recusadas"].includes($cardKey)
       ? theme.cores.white
-      : type === "pendentes"
+      : $cardKey === "pendentes"
       ? theme.cores.gray
       : theme.cores.white};
 `;
 
-export const CardChamadoIcon = styled.div<{ type: CardChamadoType }>`
+export const CardChamadoIcon = styled.div<{ $cardKey: CardChamadoCardKey }>`
   width: 5rem;
   height: 4.5rem;
   flex-shrink: 0;
-  color: ${({ type, theme }) =>
-    ["atribuidas", "concluidas", "recusadas"].includes(type)
+  color: ${({ $cardKey, theme }) =>
+    ["atribuidas", "concluidas", "recusadas"].includes($cardKey)
       ? theme.cores.white
-      : type === "pendentes"
+      : $cardKey === "pendentes"
       ? theme.cores.gray
       : theme.cores.white};
 `;
@@ -55,33 +61,32 @@ export const TextContainer = styled.div`
   align-self: stretch;
 `;
 
-export const CardChamadoText = styled.div<{ type: CardChamadoType }>`
+export const CardChamadoText = styled.div<{ $cardKey: CardChamadoCardKey }>`
   font-feature-settings: 'liga' off, 'clig' off;
   font-family: Poppins;
   font-size: 1.1rem;
   font-style: normal;
   font-weight: 400;
   line-height: 1.2;
-  color: ${({ type, theme }) =>
-    ["atribuidas", "concluidas", "recusadas"].includes(type)
+  color: ${({ $cardKey, theme }) =>
+    ["atribuidas", "concluidas", "recusadas"].includes($cardKey)
       ? theme.cores.white
-      : type === "pendentes"
+      : $cardKey === "pendentes"
       ? theme.cores.gray
       : theme.cores.white};
 `;
 
-export const CardChamadoText2 = styled.div<{ type: CardChamadoType }>`
+export const CardChamadoText2 = styled.div<{ $cardKey: CardChamadoCardKey }>`
   font-feature-settings: 'liga' off, 'clig' off;
   font-family: Poppins;
   font-size: 1.2rem;
   font-style: normal;
   font-weight: 700;
   line-height: 1.2;
-  color: ${({ type, theme }) =>
-    ["atribuidas", "concluidas", "recusadas"].includes(type)
+  color: ${({ $cardKey, theme }) =>
+    ["atribuidas", "concluidas", "recusadas"].includes($cardKey)
       ? theme.cores.white
-      : type === "pendentes"
+      : $cardKey === "pendentes"
       ? theme.cores.gray
       : theme.cores.white};
 `;
-

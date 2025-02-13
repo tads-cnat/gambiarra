@@ -46,7 +46,8 @@ import {
 	Archive,
 } from "@phosphor-icons/react";
 import { GambIconProps } from "../../interfaces/componentes/iGambIcon";
-import React from "react";
+import { cloneElement } from "react";
+ 
 const iconComponents: { [key: string]: JSX.Element } = {
 	house: <House />,
 	heart: <Heart />,
@@ -106,7 +107,7 @@ export default function Icon(props: GambIconProps): JSX.Element {
 	return (
 		<>
 			{IconComponent &&
-				React.cloneElement(IconComponent, {
+				cloneElement(IconComponent, {
 					size: size || 16,
 					color,
 					className,

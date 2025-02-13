@@ -1,4 +1,4 @@
-import React from "react";
+ 
 import Notificacao from "../GambNotificao/Notificacao";
 import { userRoles } from "../../auth/roles";
 import { defaultTheme } from "../../styles/themes/default";
@@ -90,14 +90,10 @@ const checkPermission = (roles: string[]) =>
   roles.includes(localStorage.getItem("userActiveRole") ?? "");
 
 
-console.log(localStorage.getItem("userActiveRole"));
 
 // Função que mapeia as ações para componentes <Notificacao />
 export const getActionsByStatus = (status: number, idLinha: number): JSX.Element[] => {
-  // Seleciona a lista de ações com base na permissão do usuário
-  console.log(localStorage.getItem("userActiveRole"));
-  console.log(checkPermission([userRoles.INTERNO.FUNCIONARIO.PR]));
-  console.log(userRoles.INTERNO.FUNCIONARIO.PR);
+
   const actions: Action[] = checkPermission([userRoles.INTERNO.FUNCIONARIO.PR, userRoles.INTERNO.FUNCIONARIO.GR])
     ? btnsPRGR[status] || []
     : btnClientes[status] || [];

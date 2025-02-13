@@ -6,7 +6,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import GambButton from "../../../GambButton/Button";
 import { MouseEvent } from "react";
 import { chamadoSchema } from "./schema";
-import React from "react";
+ 
 
 export default function ModalChamadoSubmit(props: {
 	isModalOpen: boolean;
