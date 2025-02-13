@@ -1,7 +1,8 @@
 import React from "react";
 import GambButton from "../GambButton/Button";
-import { Container, Section, Title, Description, Actions, PeopleList, Card, CardContent, CardPeople } from "./detailstyle";
+import { Container, Section, Title, Description, Actions, PeopleList, Card, CardContent, CardPeople, CardContentPeople } from "./detailstyle";
 import { ChamadoDetalhesProps } from "../../interfaces/componentes/iGambDetails";
+import Icon from "../GambIcon/Icon";
 
 const ChamadoDetalhes: React.FC<ChamadoDetalhesProps> = ({ chamado }) => {
   return (
@@ -9,46 +10,78 @@ const ChamadoDetalhes: React.FC<ChamadoDetalhesProps> = ({ chamado }) => {
       <Card>
         <CardContent>
           <Section>
-            <Title>Dados gerais</Title>
+          <div className="inline-flex flex-row items-center gap-1.5 w-full">
+            <Icon icon={"fillcircle"} color="#453DA6"/>
+            <p>Dados Gerais</p>
+            <div className="flex-grow min-w-[50px] h-[2px] bg-[#C0BCED]"></div>
+          </div>
+          <div className="pt-6 inline-flex flex-col gap-7">
             <p>
               <strong>Título:</strong> {chamado.titulo}
             </p>
-              <strong>Descrição</strong> {chamado.descricao}
-            <p>
-              <strong>Tipo do item:</strong> {chamado.item.modelo}{" "}
-              <strong>Modelo do item:</strong> {chamado.item.modelo}
+            <p className="inline-flex flex-col gap-4">
+              <strong> Descrição</strong> {chamado.descricao}
             </p>
+            <p>
+              <strong> Tipo do item:</strong>  {chamado.item.modelo}{" "}
+              <strong> Modelo do item:</strong>  {chamado.item.modelo}
+            </p>
+          </div>
           </Section>
 
           <div className="Flex"> 
-            <p>Açoes</p>
-          <Actions>
-                <GambButton variant="verde" label="Aceitar" icon="checkcircle"/>
-                <GambButton variant="vermelho" label="Recusar" icon="checkcircle"/>
-                <GambButton variant="vermelho" label="Arquivar" icon="checkcircle"/>
-                <GambButton variant="roxo" label="Fechar Chamado" icon="checkcircle"/>
-                <GambButton variant="amarelo" label="Avaliar" icon="checkcircle"/>
-                <GambButton variant="cinza" label="Atribuir tarefas" icon="checkcircle"/>
-                <GambButton variant="branco" label="Alterar Status" icon="checkcircle"/>
-          </Actions>
+          <div className="inline-flex flex-row items-center gap-1.5 w-full">
+            <Icon icon={"fillcircle"} color="#61B3FF"/>
+            <p>Ações</p>
+            <div className="flex-grow min-w-[50px] h-[2px] bg-[#9CCFFF]"></div>
+          </div>
+
+            <Actions>
+                  <GambButton variant="verde" label="Aceitar" icon="checkcircle"/>
+                  <GambButton variant="vermelho" label="Recusar" icon="checkcircle"/>
+                  <GambButton variant="vermelho" label="Arquivar" icon="checkcircle"/>
+                  <GambButton variant="roxo" label="Fechar Chamado" icon="checkcircle"/>
+                  <GambButton variant="amarelo" label="Avaliar" icon="checkcircle"/>
+                  <GambButton variant="cinza" label="Atribuir tarefas" icon="checkcircle"/>
+                  <GambButton variant="branco" label="Alterar Status" icon="checkcircle"/>
+            </Actions>
           </div>
         </CardContent>
-        <CardPeople>
-        <CardContent>
-          <Title>Pessoas</Title>
-          <PeopleList>
-            <p><strong>Cliente:</strong> {chamado.cliente}</p>
-            {chamado.professor && <p><strong>Professor:</strong> {chamado.professor}</p>}
-            <p><strong>Bolsistas:</strong></p>
-            <ul>
-              {chamado.bolsistas.map((bolsista, index) => (
-                <li key={index}>{bolsista}</li>
-              ))}
-            </ul>
-          </PeopleList>
-        </CardContent>
-      </CardPeople>
-      </Card>
+          <CardContentPeople>
+          <div className="inline-flex flex-col gap-1">
+            <div className="inline-flex flex-row items-center gap-1.5 w-full">
+              <Icon icon={"fillcircle"} color="#68C17C"/>
+              <p>Pessoas</p>
+              <div className="flex-grow min-w-[50px] h-[2px] bg-[#A0D8AD]"></div>
+            </div>
+            <PeopleList>
+              <div className="inline-flex flex-col gap-3 w-full">
+                <div className="flex justify-between items-center w-full">
+                  <p><strong>Cliente:</strong></p>
+                  <Icon icon={"fillcircle"} color="#61B3FF"/>
+                </div>
+                <p>{chamado.cliente}</p>
+                <div className="flex justify-between items-center w-full">
+                  <p><strong>Professor:</strong></p>
+                  <Icon icon={"fillcircle"} color="#61B3FF"/>
+                </div>
+                <p>{chamado.professor}</p>
+                <div>
+                  <div className="flex justify-between items-center w-full">
+                    <p><strong>Bolsista:</strong></p>
+                    <Icon icon={"fillcircle"} color="#61B3FF"/>
+                  </div>
+                  <ul>
+                    {chamado.bolsistas.map((bolsista, index) => (
+                      <li key={index}>{bolsista}</li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </PeopleList>
+          </div>
+          </CardContentPeople>
+        </Card>
     </Container>
   );
 };

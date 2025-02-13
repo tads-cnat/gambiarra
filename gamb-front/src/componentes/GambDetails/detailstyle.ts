@@ -27,11 +27,19 @@ export const CardPeople = styled.div`
   min-width: 300px;
 `;
 
+export const CardContentPeople = styled.div`
+  display: flex;
+  flex-direction: column;
+  border: 2px solid var(--gray-placeholders, #C3C3C3);
+  padding: 15px 10px 10px 10px;
+  border-radius: 8px;
+`;
+
 export const CardContent = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
-  border: 1px solid var(--gray-placeholders, #C3C3C3);
+  border: 2px solid var(--gray-placeholders, #C3C3C3);
   padding: 15px 10px 10px 15px;
   border-radius: 8px;
 `;
