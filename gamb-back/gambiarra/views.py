@@ -23,9 +23,7 @@ TAB_STATUS_MAPPING = {
     "recusados": ["Recusado"],
     "fechados": ["Fechado sem resolução", "Resolvido", "Recusado"],
 }
-
-#class ListarBolsistaView(views.View):
-#    pass
+    
 
         
 class ChamadoViewSet(viewsets.ModelViewSet):

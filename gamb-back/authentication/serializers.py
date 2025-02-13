@@ -71,3 +71,9 @@ class ProfileUserSerializer(serializers.ModelSerializer):
             "is_active",
             "grupo",
         ]
+
+class ListarUsuarioSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ["id", "username", "grupo"]
+ 
