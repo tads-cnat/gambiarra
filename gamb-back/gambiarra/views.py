@@ -14,6 +14,7 @@ from authentication.constants import GrupoEnum
 from authentication.permissions import *
 from gambiarra.serializers import *
 from .models import *
+from authentication.models import *
 
 TAB_STATUS_MAPPING = {
     "todos": [],  # Inclui todos os status
@@ -47,6 +48,8 @@ class ChamadoViewSet(viewsets.ModelViewSet):
             return AceitarChamadoSerializer
         if self.action == "alterar_status":
             return AlterarStatusSerializer
+        if self.action == "atribuir_bolsista":
+            return UpdateBolsistaSerializer
         if self.action == "get_queryset":
             return ListarChamadoSerializer
         return ListarChamadoSerializer
@@ -100,7 +103,7 @@ class ChamadoViewSet(viewsets.ModelViewSet):
             status=status.HTTP_201_CREATED,
         )
     
-    @action(detail=True, methods=["patch"], permission_classes=[OnlyProfessor])
+    @action(detail=True, methods=["patch"], permission_classes=[OnlyStaff])
     def alterar_status(self, request, pk):
         try:
             chamado = Chamado.objects.get(pk=pk)
@@ -173,6 +176,23 @@ class ChamadoViewSet(viewsets.ModelViewSet):
         chamado.save()
 
         return Response({"mensagem": "Status atualizado com sucesso", "novo_status": status_novo_texto})
+
+    @action (detail=True, methods=["patch"], permission_classes=[OnlyStaff])
+    def atribuir_bolsista(self, request, pk):
+        bolsista_id = request.data.get("bolsista")
+        if not bolsista_id:
+            return erro("O campo Bolsista é obrigatório")
+        
+        chamado = get_object_or_404(Chamado, pk=pk)
+        bolsista = get_object_or_404(Usuario, pk=bolsista_id)
+        if chamado.bolsistas.filter(pk=bolsista.pk).exists():
+            return Response({"erro": "Este bolsista já está atribuído a este chamado."}, status=status.HTTP_400_BAD_REQUEST)
+
+        chamado.bolsistas.add(bolsista)
+        chamado.save()
+
+        return Response({"mensagem": f"Bolsista {bolsista.username} atribuído com sucesso"}, status=status.HTTP_200_OK)
+
 
 #Função pro código não ficar tão verboso feio
 def erro(e):

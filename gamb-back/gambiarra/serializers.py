@@ -6,6 +6,11 @@ from gambiarra.models import Acessorio, Chamado, Item, STATUS_CHOICES
 from .models import Acessorio, Chamado, Item
 
 
+class UpdateBolsistaSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Chamado
+        fields = ["bolsistas"]
+
 class CreateAcessorioSerializer(serializers.ModelSerializer):
     class Meta:
         model = Acessorio
