@@ -49,7 +49,10 @@ export function GambTable({
 							<BodyTr key={index}>
 								{action && (
 									<GBodyTd>
-										{getActionsByStatus(row.status.id,row.id )}
+										{getActionsByStatus(
+											row.status.id,
+											row.id
+										)}
 									</GBodyTd>
 								)}
 
@@ -57,18 +60,21 @@ export function GambTable({
 									<GBodyTd key={header}>
 										{isChamados &&
 										header === "avaliacao" &&
-
 										row.avaliacao ? (
 											<div className="flex flex-col justify-center">
 												<span className="font-bold mb-1">
-													{String(row.avaliacao.texto)}
+													{String(
+														row.avaliacao.texto
+													)}
 												</span>
 												<span className="star-rating">
 													{"⭐".repeat(
 														row.avaliacao.nota
 													) +
 														"☆".repeat(
-															5 - row.avaliacao.nota
+															5 -
+																row.avaliacao
+																	.nota
 														)}
 												</span>
 											</div>
@@ -77,14 +83,23 @@ export function GambTable({
 											<StatusBadge status={row.status.id}>
 												{String(row.status.nome)}
 											</StatusBadge>
-											
 										) : header === "bolsistas" ? (
-											String(row.bolsistas.map((bolsista) => bolsista.nome).join(", "))
-										): header === "professor" ? (
-											String(row.professor.nome)
+											String(
+												row.bolsistas
+													.map(
+														(bolsista) =>
+															bolsista.username
+													)
+													.join(", ")
+											)
+										) : header === "professor" ? (
+											String(row.professor.username)
+										) : header === "cliente" ? (
+											String(row.cliente.username)
 										) : (
 											String(row[header])
 										)}
+										
 									</GBodyTd>
 								))}
 							</BodyTr>

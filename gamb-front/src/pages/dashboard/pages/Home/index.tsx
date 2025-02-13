@@ -40,6 +40,7 @@ export default function DashboardHome(): JSX.Element {
 
 		await ChamadoService.listarChamados().then((res) => {
 			const chamados: Chamados[] = (res as { data: Chamados[] }).data;
+			
 			setChamados(chamados);
 		});
 		

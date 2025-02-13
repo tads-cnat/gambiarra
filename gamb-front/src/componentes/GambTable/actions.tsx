@@ -19,32 +19,32 @@ export const btnsPRGR: Record<number, Action[]> = {
   ],
   2: [
     { name: "detalhar", colorIcon: "white", background: defaultTheme.cores.purple_info_primary, icon: "eyeopen" },
-    { name: "chat", colorIcon: "white", background: defaultTheme.cores.blue_info, icon: "message-circle" },
+    { name: "chat", colorIcon: "white", background: defaultTheme.cores.blue_info, icon: "chat" },
     { name: "resolver", colorIcon: "white", background: defaultTheme.cores.green_sucess_primary, icon: "checkcircle" },
   ],
   3: [
     { name: "detalhar", colorIcon: "white", background: defaultTheme.cores.purple_info_primary, icon: "eyeopen" },
-    { name: "chat", colorIcon: "white", background: defaultTheme.cores.blue_info, icon: "message-circle" },
+    { name: "chat", colorIcon: "white", background: defaultTheme.cores.blue_info, icon: "chat" },
     { name: "resolver", colorIcon: "white", background: defaultTheme.cores.green_sucess_primary, icon: "checkcircle" },
   ],
   4: [
     { name: "detalhar", colorIcon: "white", background: defaultTheme.cores.purple_info_primary, icon: "eyeopen" },
-    { name: "chat", colorIcon: "white", background: defaultTheme.cores.blue_info, icon: "message-circle" },
+    { name: "chat", colorIcon: "white", background: defaultTheme.cores.blue_info, icon: "chat" },
     { name: "resolver", colorIcon: "white", background: defaultTheme.cores.green_sucess_primary, icon: "checkcircle" },
   ],
   5: [
     { name: "detalhar", colorIcon: "white", background: defaultTheme.cores.purple_info_primary, icon: "eyeopen" },
-    { name: "chat", colorIcon: "white", background: defaultTheme.cores.blue_info, icon: "message-circle" },
+    { name: "chat", colorIcon: "white", background: defaultTheme.cores.blue_info, icon: "chat" },
     { name: "resolver", colorIcon: "white", background: defaultTheme.cores.green_sucess_primary, icon: "checkcircle" },
   ],
   6: [
     { name: "detalhar", colorIcon: "white", background: defaultTheme.cores.purple_info_primary, icon: "eyeopen" },
-    { name: "chat", colorIcon: "white", background: defaultTheme.cores.blue_info, icon: "message-circle" },
+    { name: "chat", colorIcon: "white", background: defaultTheme.cores.blue_info, icon: "chat" },
     { name: "arquivar", colorIcon: "white", background: defaultTheme.cores.danger, icon: "archive" },
   ],
   7: [
     { name: "detalhar", colorIcon: "white", background: defaultTheme.cores.purple_info_primary, icon: "eyeopen" },
-    { name: "chat", colorIcon: "white", background: defaultTheme.cores.blue_info, icon: "message-circle" },
+    { name: "chat", colorIcon: "white", background: defaultTheme.cores.blue_info, icon: "chat" },
     { name: "arquivar", colorIcon: "white", background: defaultTheme.cores.danger, icon: "archive" },
   ],
   8: [
@@ -57,28 +57,28 @@ export const btnClientes: Record<number, Action[]> = {
   1: [{ name: "detalhar", colorIcon: "white", background: defaultTheme.cores.purple_info_primary, icon: "eyeopen" }],
   2: [
     { name: "detalhar", colorIcon: "white", background: defaultTheme.cores.purple_info_primary, icon: "eyeopen" },
-    { name: "chat", colorIcon: "white", background: defaultTheme.cores.blue_info, icon: "message-circle" },
+    { name: "chat", colorIcon: "white", background: defaultTheme.cores.blue_info, icon: "chat" },
   ],
   3: [
     { name: "detalhar", colorIcon: "white", background: defaultTheme.cores.purple_info_primary, icon: "eyeopen" },
-    { name: "chat", colorIcon: "white", background: defaultTheme.cores.blue_info, icon: "message-circle" },
+    { name: "chat", colorIcon: "white", background: defaultTheme.cores.blue_info, icon: "chat" },
   ],
   4: [
     { name: "detalhar", colorIcon: "white", background: defaultTheme.cores.purple_info_primary, icon: "eyeopen" },
-    { name: "chat", colorIcon: "white", background: defaultTheme.cores.blue_info, icon: "message-circle" },
+    { name: "chat", colorIcon: "white", background: defaultTheme.cores.blue_info, icon: "chat" },
   ],
   5: [
     { name: "detalhar", colorIcon: "white", background: defaultTheme.cores.purple_info_primary, icon: "eyeopen" },
-    { name: "chat", colorIcon: "white", background: defaultTheme.cores.blue_info, icon: "message-circle" },
+    { name: "chat", colorIcon: "white", background: defaultTheme.cores.blue_info, icon: "chat" },
   ],
   6: [
     { name: "detalhar", colorIcon: "white", background: defaultTheme.cores.purple_info_primary, icon: "eyeopen" },
-    { name: "chat", colorIcon: "white", background: defaultTheme.cores.blue_info, icon: "message-circle" },
+    { name: "chat", colorIcon: "white", background: defaultTheme.cores.blue_info, icon: "chat" },
     { name: "avaliar", colorIcon: defaultTheme.cores.gray_text, background: defaultTheme.cores.warning, icon: "star" },
   ],
   7: [
     { name: "detalhar", colorIcon: "white", background: defaultTheme.cores.purple_info_primary, icon: "eyeopen" },
-    { name: "chat", colorIcon: "white", background: defaultTheme.cores.blue_info, icon: "message-circle" },
+    { name: "chat", colorIcon: "white", background: defaultTheme.cores.blue_info, icon: "chat" },
     { name: "avaliar", colorIcon: defaultTheme.cores.gray_text, background: defaultTheme.cores.warning, icon: "star" },
   ],
   8: [{ name: "detalhar", colorIcon: "white", background: defaultTheme.cores.purple_info_primary, icon: "eyeopen" }],
