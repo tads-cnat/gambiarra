@@ -10,7 +10,7 @@ export type Action = {
   icon: string;
 };
 
-export const btnsPRGR: Record<number, Action[]> = {
+export const btnsPR: Record<number, Action[]> = {
 
   1: [
     { name: "aceitar", colorIcon: "white", background: defaultTheme.cores.green_sucess_primary, icon: "checkcircle" },
@@ -50,6 +50,36 @@ export const btnsPRGR: Record<number, Action[]> = {
   8: [
     { name: "detalhar", colorIcon: "white", background: defaultTheme.cores.purple_info_primary, icon: "eyeopen" },
     { name: "arquivar", colorIcon: "white", background: defaultTheme.cores.danger, icon: "archive" },
+  ],
+};
+
+export const btnsGR: Record<number, Action[]> = {
+
+  1: [
+    { name: "detalhar", colorIcon: "white", background: defaultTheme.cores.purple_info_primary, icon: "eyeopen" },
+  ],
+  2: [
+    { name: "detalhar", colorIcon: "white", background: defaultTheme.cores.purple_info_primary, icon: "eyeopen" },
+
+  ],
+  3: [
+    { name: "detalhar", colorIcon: "white", background: defaultTheme.cores.purple_info_primary, icon: "eyeopen" },
+
+  ],
+  4: [
+    { name: "detalhar", colorIcon: "white", background: defaultTheme.cores.purple_info_primary, icon: "eyeopen" },
+  ],
+  5: [
+    { name: "detalhar", colorIcon: "white", background: defaultTheme.cores.purple_info_primary, icon: "eyeopen" },
+  ],
+  6: [
+    { name: "detalhar", colorIcon: "white", background: defaultTheme.cores.purple_info_primary, icon: "eyeopen" },
+  ],
+  7: [
+    { name: "detalhar", colorIcon: "white", background: defaultTheme.cores.purple_info_primary, icon: "eyeopen" },
+  ],
+  8: [
+    { name: "detalhar", colorIcon: "white", background: defaultTheme.cores.purple_info_primary, icon: "eyeopen" },
   ],
 };
 
@@ -93,8 +123,8 @@ export const getActionsByStatus = (
   idLinha: number,
   funct?: Record<string, (id: number) => void> // Parâmetro opcional para funções de ação
 ): JSX.Element[] => {
-  const actions: Action[] = checkPermission([userRoles.INTERNO.FUNCIONARIO.PR, userRoles.INTERNO.FUNCIONARIO.GR])
-    ? btnsPRGR[status] || []
+  const actions: Action[] = checkPermission([ userRoles.INTERNO.FUNCIONARIO.GR])
+    ? btnsGR[status] || [] :  checkPermission([userRoles.INTERNO.FUNCIONARIO.PR]) ? btnsPR[status] || []
     : btnClientes[status] || [];
 
   return actions.map((action, index) => (
