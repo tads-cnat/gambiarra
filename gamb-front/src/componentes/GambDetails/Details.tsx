@@ -16,19 +16,29 @@ const ChamadoDetalhes: React.FC<ChamadoDetalhesProps> = ({ chamado }) => {
             <div className="flex-grow min-w-[50px] h-[2px] bg-[#C0BCED]"></div>
           </div>
           <div className="pt-6 inline-flex flex-col gap-7">
-            <p>
-              <strong>Título:</strong> {chamado.titulo}
-            </p>
-            <p className="inline-flex flex-col gap-4">
-              <strong> Descrição</strong> {chamado.descricao}
-            </p>
-            <p>
-              <strong> Tipo do item:</strong>  {chamado.item.modelo}{" "}
-              <strong> Modelo do item:</strong>  {chamado.item.modelo}
-            </p>
+            <div className="inline-flex flex-row items-center gap-1.5">
+              <Icon icon={"text"}/>
+              <p>
+                <strong>Título:</strong> {chamado.titulo}
+              </p>
+            </div>
+            <div className="inline-flex flex-row items-center gap-1.5">
+              <Icon icon={"article"}/>
+              <p><strong> Descrição</strong> </p>
+            </div>
+            <p>{chamado.descricao}</p>
+            <div className="inline-flex gap-4">
+              <div className="inline-flex flex-row items-center gap-1.5">
+                <Icon icon={"simcard"}/>
+                <p><strong> Tipo do item:</strong>  {chamado.item.modelo}{" "}</p>
+              </div>
+              <div className="inline-flex flex-row items-center gap-1.5 ">
+                <Icon icon={"barcode"}/>
+                <p><strong> Modelo do item:</strong> {chamado.item.modelo}</p>
+              </div>
+            </div>
           </div>
           </Section>
-
           <div className="Flex"> 
           <div className="inline-flex flex-row items-center gap-1.5 w-full">
             <Icon icon={"fillcircle"} color="#61B3FF"/>
@@ -58,18 +68,18 @@ const ChamadoDetalhes: React.FC<ChamadoDetalhesProps> = ({ chamado }) => {
               <div className="inline-flex flex-col gap-3 w-full">
                 <div className="flex justify-between items-center w-full">
                   <p><strong>Cliente:</strong></p>
-                  <Icon icon={"fillcircle"} color="#61B3FF"/>
+                  <Icon icon={"user"}/>
                 </div>
                 <p>{chamado.cliente}</p>
                 <div className="flex justify-between items-center w-full">
                   <p><strong>Professor:</strong></p>
-                  <Icon icon={"fillcircle"} color="#61B3FF"/>
+                  <Icon icon={"user"}/>
                 </div>
                 <p>{chamado.professor}</p>
                 <div>
                   <div className="flex justify-between items-center w-full">
                     <p><strong>Bolsista:</strong></p>
-                    <Icon icon={"fillcircle"} color="#61B3FF"/>
+                    <Icon icon={"usersfour"}/>
                   </div>
                   <ul>
                     {chamado.bolsistas.map((bolsista, index) => (

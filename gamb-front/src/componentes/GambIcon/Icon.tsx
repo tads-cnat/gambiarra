@@ -44,6 +44,11 @@ import {
 	Checks,
 	XCircle,
 	Archive,
+	TextT,
+	SimCard,
+	Article,
+	Barcode,
+	UsersFour,
 } from "@phosphor-icons/react";
 import { GambIconProps } from "../../interfaces/componentes/iGambIcon";
 import React from "react";
@@ -94,6 +99,11 @@ const iconComponents: { [key: string]: JSX.Element } = {
 	xcircle: <XCircle />,
 	archive: <Archive />,
 	fillcircle: <Circle weight="fill"/>,
+	text: <TextT />,
+	simcard: <SimCard />,
+	article: <Article />,
+	barcode: <Barcode />,
+	usersfour: <UsersFour />,
 };
 
 export default function Icon(props: GambIconProps): JSX.Element {
