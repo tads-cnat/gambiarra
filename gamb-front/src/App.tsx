@@ -53,7 +53,7 @@ export function App() {
 							)
 						}
 					/>
-					{/* <Route
+					<Route
 						path="/dashboard"
 						element={
 							<ProtectedRoute
@@ -61,13 +61,13 @@ export function App() {
 								requiredRole={["Allowed"]}
 							/>
 						}
-					> */}
+					/>
 						<Route
 						path="/dashboard"
 						element={<Dashboard />}
 						>
 						{/* Página inicial da Dashboard */}
-						{/* <Route
+						<Route
 							index
 							element={
 								<ProtectedRoute
@@ -75,12 +75,7 @@ export function App() {
 									requiredRole={["Allowed"]}
 								/>
 							}
-						/> */}
-						<Route
-							index
-							element={<DashboardHome />}
-
-						/>
+						/>				
 
 						{/* Página de Gerenciamento de Usuários */}
 						<Route
