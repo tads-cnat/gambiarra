@@ -7,5 +7,7 @@ export interface ChamadoFilter extends BaseFilter {
 	professor_id?: number;
 	bolsista_id?: number;
 	cliente_id?: number;
+	avaliacao?: string;
+	search?: string;
 	
 }
