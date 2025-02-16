@@ -35,7 +35,7 @@ class Command(BaseCommand):
                     descricao = f"descrição {i}",
                     professor = random.choice(professores),
                     cliente = random.choice(clientes),
-                    status = random.choice(STATUS_CHOICES)[1],
+                    status = random.choice(STATUS_CHOICES)[0],  #JEITO CERTO DE GUARDAR O STATUS
                     item = Item.objects.create(
                     modelo=f"Item-{i}",
                     diagnostico="Diagnóstico genérico",

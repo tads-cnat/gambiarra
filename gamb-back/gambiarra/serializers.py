@@ -85,7 +85,7 @@ class ListarChamadoSerializer(serializers.ModelSerializer):
         return None
     
     def get_status(self, obj):
-        ide = next((key for key, value in STATUS_CHOICES if value == obj.status), None)
+        ide = next((str(key) for key, value in STATUS_CHOICES if value == obj.get_status_display()), None)
         
         return {
             "id": ide,
