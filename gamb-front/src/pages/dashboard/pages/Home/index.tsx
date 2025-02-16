@@ -64,7 +64,7 @@ export default function DashboardHome(): JSX.Element {
 
 						<InputField label="Descrição" placeholder="busque pela descrição" register={register("descricao")} icon="texto"/>
 						<InputField label="Titulo" placeholder="busque pelo titulo" register={register("titulo")} icon="texto"/>
-						<InputField label="Status" placeholder="busque pelo status" register={register("status_id")} icon="texto"/>
+						<InputField label="Status" placeholder="busque pelo status" register={register("status")} icon="texto"/>
 						<InputField label="Avaliação" placeholder="busque pela avaliação" register={register("avaliacao")} icon="texto"/>
 						<InputField label="Busca por texto" placeholder="busque por campos de texto" register={register("search")} icon="x"/>
 
