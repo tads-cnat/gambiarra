@@ -7,7 +7,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { loginSchema } from "./schema";
 import authService from "../../../../auth/service/authService";
 import { useEffect, useState } from "react";
-import React from "react";
+ 
 import UseMessage from "../../../../componentes/GambMessage/Message";
 import { useNavigate } from "react-router-dom";
 
@@ -37,7 +37,7 @@ export function LoginCard() {
 		});
 	}
 	useEffect(() => {
-		console.log(loginIsValid);
+		 (loginIsValid);
 	}, [loginIsValid]);
 
 	return (

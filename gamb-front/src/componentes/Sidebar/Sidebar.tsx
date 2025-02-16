@@ -19,7 +19,7 @@ import { useState } from "react";
 import { ChamadoSubmit } from "../../interfaces/models/iChamado";
 import ModalChamadoSubmit from "./forms/abrirChamado/ModalChamadoSubmit";
 import ChamadoService from "../../services/models/ChamadoService";
-import React from "react";
+ 
 
 export function Sidebar() {
 	const [ModalOpen, setModalOpen] = useState(false);
@@ -27,10 +27,10 @@ export function Sidebar() {
 	const closeModal = () => setModalOpen(false);
 	const navigate = useNavigate();
 	async function onSubmit(data: ChamadoSubmit): Promise<void> {
-		console.log(data);
+		 (data);
 		ChamadoService.criarChamado(data)
 			.then((response) => {
-				console.log(response);
+				 (response);
 				alert("Chamado criado com sucesso");
 			})
 			.catch(() => {

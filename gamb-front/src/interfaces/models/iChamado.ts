@@ -13,10 +13,22 @@ export interface Chamados {
 	id: number;
 	codigo: string;
 	titulo: string;
-	cliente_id: number;
-	professor_id?: number;
-	status: string;
-	avaliacao?: string;
+	cliente_id: {
+		id: number;
+		username: string;
+	};
+	professor_id?:{
+		id: number;
+		username: string;
+	};
+	status: {
+		id: number;
+		username: string;
+	};
+	avaliacao?: {
+		texto: string;
+		nota: number;
+	};
 }
 
 export interface ChamadoFilterGerente {

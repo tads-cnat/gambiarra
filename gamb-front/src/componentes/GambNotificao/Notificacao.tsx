@@ -1,4 +1,4 @@
-import React from "react";
+ 
 import {
   CircleContainer,
   IconContainer,
@@ -12,10 +12,11 @@ export default function Notificacao({
   backgroundColor,
   badgeNumber = -1,
   size = 50, // Tamanho padrão do círculo principal
-  iconColor
+  iconColor,
+  onClick,
 }: NotificacaoProps) {
   return (
-    <CircleContainer size={size} backgroundColor={backgroundColor}>
+    <CircleContainer size={size} backgroundColor={backgroundColor} onClick={onClick}>
       <IconContainer iconColor={iconColor}>
         <Icon icon={icon} size={size / 2} />
       </IconContainer>

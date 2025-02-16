@@ -1,11 +1,14 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import { GambTable } from "../../../../componentes/GambTable/Table";
+import ChamadoService from "../../../../services/models/ChamadoService";
+import { Chamados } from "../../../../interfaces/models/iChamado";
+import { useUser } from "../../../../auth/service/user";
+import RenderCards from "../../../../componentes/GambCardChamados/CardChamado";
 import { useForm } from "react-hook-form";
 import GambButton from "../../../../componentes/GambButton/Button";
-import CardChamado from "../../../../componentes/GambCardChamados/CardChamado";
 import { GambFilterTable } from "../../../../componentes/GambFilterTable/FilterTable";
 import { FilterContent, FilterInputs } from "../../../../componentes/GambFilterTable/FilterTableStyles";
 import InputField from "../../../../componentes/GambInput/Input";
-import { GambTable } from "../../../../componentes/GambTable/Table";
 import { GambTitle } from "../../../../componentes/GambTitle/Title";
 // import { yupResolver } from "@hookform/resolvers/yup";
 import axiosInstance from "../../../../services/base/axiosInstance";
@@ -24,6 +27,7 @@ interface Filters {
 
 
 export default function DashboardHome(): JSX.Element {
+
 	
 	const [chamados, setChamados] = useState([]);
 
@@ -59,32 +63,15 @@ export default function DashboardHome(): JSX.Element {
 		});
 	}
 
-	// const [formIsValid, setFormIsValid] = useState(false);
+  if (!userActiveRole) {
+		return <p>Carregando...</p>;
+	}
+
 	
 	return (
 		<div>
-
-			<div className="flex gap-2">
-				<CardChamado
-					userType={"professor"}
-					messageType={"atribuidas"}
-					quantity={10}
-				/>
-				<CardChamado
-					userType={"professor"}
-					messageType={"concluidas"}
-					quantity={5}
-				/>
-				<CardChamado
-					userType={"professor"}
-					messageType={"pendentes"}
-					quantity={4}
-				/>
-				<CardChamado
-					userType={"professor"}
-					messageType={"recusadas"}
-					quantity={1}
-				/>
+			<div className="flex flex-wrap gap-2">
+				<RenderCards />
 			</div>
 
 			<form onSubmit={handleSubmit(handleFilter)}>
@@ -129,6 +116,16 @@ export default function DashboardHome(): JSX.Element {
 				action={true}
 				hiddenFields={["id", "code"]}
 				/>
+				hiddenFields={["id"]}
+				isChamados={true}
+				TableActions={
+					{
+						detalhar: (id: number) => console.log("detalhar", id),
+						chat: (id: number) => console.log("chat", id),
+						arquivar: (id: number) => console.log("arquivar", id),
+					}
+				}
+			/>
 		</div>
 	);
 }

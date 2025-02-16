@@ -7,6 +7,7 @@ import {
 	DashboardContent,
 	DashboardMain,
 } from "./dashboardstyles";
+import { UserProvider } from "../../auth/service/user";
 
 export const Dashboard: React.FC = () => {
 	useEffect(() => {
@@ -27,6 +28,7 @@ export const Dashboard: React.FC = () => {
 	}, []);
 
 	return (
+		<UserProvider>
 		<DashboardContainer>
 			<Sidebar />
 			<DashboardMain>
@@ -36,5 +38,6 @@ export const Dashboard: React.FC = () => {
 				</DashboardContent>
 			</DashboardMain>
 		</DashboardContainer>
+		</UserProvider>
 	);
 };

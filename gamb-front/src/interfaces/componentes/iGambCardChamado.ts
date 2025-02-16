@@ -1,15 +1,20 @@
-export type CardChamadoUser = "bolsista" | "professor" | "cliente";
+import { userRoles } from "../../auth/service/user";
 
-export type CardChamadoType = "atribuidas" | "concluidas" | "pendentes" | "recusadas";
+// Se o tipo de usuário já é definido em userRoles, podemos usá-lo diretamente
+export type CardChamadoCardKey =
+  | "atribuidas"
+  | "concluidas"
+  | "pendentes"
+  | "recusadas"
+  | "cadastrados"
+  | "resolvidos"
+  | "fechados";
 
 export interface CardChamadoProps {
-	// Usuario da mensagem
-	userType: CardChamadoUser;
-
-    // Tipo de mensagem
-	messageType: CardChamadoType;
-
-    // Quantidade de chamados
-    quantity: number;
-
+  // Tipo do usuário (ex.: "bolsista", "professor", "cliente", etc.)
+  userType: userRoles;
+  // Chave do cartão fixo a ser exibido
+  cardKey: CardChamadoCardKey;
+  // Quantidade de chamados ou tarefas
+  quantity: number;
 }

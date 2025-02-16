@@ -1,4 +1,4 @@
-import React from "react";
+ 
 import GambButton from "../../componentes/GambButton/Button";
 import { Footer } from "../../componentes/GambFooter/Footer";
 import { Header } from "../../componentes/GambHeader/Header";

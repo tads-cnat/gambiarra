@@ -1,6 +1,6 @@
 import { CloseButton, ModalCard, ModalFooter, ModalHeader, ModalOverlay } from "./modalstyles";
 import GambButton from "../GambButton/Button";
-import React from "react";
+ 
 
 interface ModalProps {
 	isModalOpen: boolean;

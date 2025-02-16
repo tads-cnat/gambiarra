@@ -1,4 +1,4 @@
-import React from "react";
+ 
 import { HeadTh } from "./tableStyles";
 import { GambHeadThProps } from "../../interfaces/componentes/iGambHeadTh";
 

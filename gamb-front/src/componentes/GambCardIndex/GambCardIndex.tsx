@@ -1,4 +1,4 @@
-import React from "react";
+ 
 import GambButton from "../GambButton/Button";
 import {
 	CardIndexStyle,

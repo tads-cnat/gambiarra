@@ -47,7 +47,8 @@ import {
 	TextAlignCenter,
 } from "@phosphor-icons/react";
 import { GambIconProps } from "../../interfaces/componentes/iGambIcon";
-import React from "react";
+import { cloneElement } from "react";
+ 
 const iconComponents: { [key: string]: JSX.Element } = {
 	house: <House />,
 	heart: <Heart />,
@@ -95,6 +96,8 @@ const iconComponents: { [key: string]: JSX.Element } = {
 	xcircle: <XCircle />,
 	archive: <Archive />,
 	texto: <TextAlignCenter />,
+	x: <X />,
+	check: <Checks />,
 };
 
 export default function Icon(props: GambIconProps): JSX.Element {
@@ -106,7 +109,7 @@ export default function Icon(props: GambIconProps): JSX.Element {
 	return (
 		<>
 			{IconComponent &&
-				React.cloneElement(IconComponent, {
+				cloneElement(IconComponent, {
 					size: size || 16,
 					color,
 					className,

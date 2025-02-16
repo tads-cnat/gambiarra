@@ -7,7 +7,7 @@ import {
 } from "@phosphor-icons/react";
 import { HeaderContainer, HeaderContent } from "./headerstyle";
 import { useNavigate } from "react-router";
-import React from "react";
+ 
 
 export function Header() {
 	const navigate = useNavigate();

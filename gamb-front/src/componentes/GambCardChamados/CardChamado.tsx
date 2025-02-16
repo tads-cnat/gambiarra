@@ -1,70 +1,132 @@
-import React from "react";
+ 
 import {
-    CardChamadoContainer,
-    CardChamadoWrapper,
-    CardChamadoIcon,
-    CardChamadoText,
-    CardChamadoText2,
-    TextContainer,
-
+  CardChamadoContainer,
+  CardChamadoWrapper,
+  CardChamadoIcon,
+  CardChamadoText,
+  CardChamadoText2,
+  TextContainer,
 } from "./cardchamadostyle";
 import Icon from "../GambIcon/Icon";
 import { CardChamadoProps } from "../../interfaces/componentes/iGambCardChamado";
+import { useUser } from "../../auth/service/user";
 
-export default function CardChamado({
-	userType,
-	messageType,
-    quantity,
-    
+function CardChamado({
+  userType,
+  cardKey,
+  quantity,
 }: CardChamadoProps) {
+  const messages = {
+    gerente: {
+      cadastrados: "Chamados Cadastrados",
+      pendentes: "Chamados Pendentes",
+      resolvidos: "Chamados Resolvidos",
+      fechados: "Sem solução",
+    },
+    bolsista: {
+      atribuidas: "Atribuídas",
+      concluidas: "Concluídas",
+      pendentes: "Pendentes",
+    },
+    professor: {
+      atribuidas: "Recebidos",
+      concluidas: "Concluídos",
+      pendentes: "Pendentes",
+      recusadas: "Recusados",
+    },
+    cliente: {
+      atribuidas: "Cadastrados",
+      concluidas: "Resolvidos",
+      pendentes: "Pendentes",
+      recusadas: "Recusados",
+    },
+  };
 
-    const getText = ({ messageType, userType }) => {
-        if (messageType === "atribuidas" && userType === "bolsista") {
-            return "Atribuídas";
-        }
-        if (messageType === "atribuidas" && userType === "professor") {
-            return "Recebidos";
-        }
-        if (messageType === "atribuidas" && userType === "cliente") {
-            return "Cadastrados";
-        }
-        if (messageType === "concluidas" && userType === "bolsista") {
-            return "Concluídas";
-        }
-        if (messageType === "concluidas" && userType === "professor") {
-            return "Concluídos";
-        }
-        if (messageType === "concluidas" && userType === "cliente") {
-            return "Resolvidos";
-        }
-        if (messageType === "pendentes" && ["bolsista", "professor", "cliente"].includes(userType)) {
-            return "Pendentes";
-        }
-        if (messageType === "recusadas" && ["cliente","professor"].includes(userType)) {
-            return "Recusados";
-        }
-        return "Status desconhecido.";
-    };
+  const icons = {
+    gerente: {
+      cadastrados: "usercircleplus",
+      pendentes: "usercirclegear",
+      resolvidos: "usercirclecheck",
+      fechados: "usercircleminus",
+
+    },
+    bolsista: {
+      atribuidas: "usercircleplus",
+      concluidas: "usercirclecheck",
+      pendentes: "usercirclegear",
+    },
+    professor: {
+      atribuidas: "usercircleplus",
+      concluidas: "usercirclecheck",
+      pendentes: "usercirclegear",
+      recusadas: "usercircleminus",
+    },
+    cliente: {
+      atribuidas: "usercircleplus",
+      concluidas: "usercirclecheck",
+      pendentes: "usercirclegear",
+      recusadas: "usercircleminus",
+    },
+  };
+
+  // Corrigindo o erro usando type assertion para que o TS saiba que as chaves são do tipo string
+  const message =
+    (messages[userType] as Record<string, string>)[cardKey] || "Status desconhecido.";
+  const iconName =
+    (icons[userType] as Record<string, string>)[cardKey] || "usercirclegear";
+
+  return (
+    <CardChamadoContainer>
+      <CardChamadoWrapper $cardKey={cardKey}>
+        <CardChamadoIcon $cardKey={cardKey}>
+          <Icon icon={iconName} size={75} />
+        </CardChamadoIcon>
+        <TextContainer>
+          <CardChamadoText $cardKey={cardKey}>
+            {quantity} {userType === "bolsista" ? "tarefas" : "chamados"}
+          </CardChamadoText>
+          <CardChamadoText2 $cardKey={cardKey}>{message}</CardChamadoText2>
+        </TextContainer>
+      </CardChamadoWrapper>
+    </CardChamadoContainer>
+  );
+}
+
+export default function RenderCards(){
+
+  // fazer a requisição para preencher informações
+    const { userActiveRole } = useUser();
     
+    return<>
+    {userActiveRole === "gerente" ? (
+        <>
+          <CardChamado userType={userActiveRole} cardKey="cadastrados" quantity={0} />
+          <CardChamado userType={userActiveRole} cardKey="pendentes" quantity={0} />
+          <CardChamado userType={userActiveRole} cardKey="resolvidos" quantity={0} />
+          <CardChamado userType={userActiveRole} cardKey="fechados" quantity={0} />
+        </>
+      ) : userActiveRole === "cliente" ? (
+          <>
+                <CardChamado userType={userActiveRole} cardKey="atribuidas" quantity={0} />
+            <CardChamado userType={userActiveRole} cardKey="concluidas" quantity={0} />
+            <CardChamado userType={userActiveRole} cardKey="pendentes" quantity={0} />
+            <CardChamado userType={userActiveRole} cardKey="recusadas" quantity={0} />						
+          </>
 
-	return (
-		<CardChamadoContainer>
-            <CardChamadoWrapper type={messageType}>
-                <CardChamadoIcon type={messageType}>
-                    {messageType === "atribuidas" ? <Icon icon="usercircleplus" size={75} className="thin-icon" /> : null}
-                    {messageType === "concluidas" ? <Icon icon="usercirclecheck" size={75} /> : null}
-                    {messageType === "pendentes" ? <Icon icon="usercirclegear" size={75} /> : null}
-                    {messageType === "recusadas" ? <Icon icon="usercircleminus" size={75}  /> : null}
-                </CardChamadoIcon>
-                <TextContainer>
-                    <CardChamadoText type={messageType}>
-                        {quantity} {userType === "bolsista" ? "tarefas" : "chamados"}
-                    </CardChamadoText>
-                    <CardChamadoText2  type={messageType}>
-                        {getText({ messageType, userType })}
-                    </CardChamadoText2>
-                </TextContainer>
-            </CardChamadoWrapper>
-        </CardChamadoContainer>
-	);
+      ): userActiveRole === "professor" ? (
+          <>
+              <CardChamado userType={userActiveRole} cardKey="atribuidas" quantity={0} />
+              <CardChamado userType={userActiveRole} cardKey="concluidas" quantity={0} />
+              <CardChamado userType={userActiveRole} cardKey="pendentes" quantity={0} />
+              <CardChamado userType={userActiveRole} cardKey="recusadas" quantity={0} />
+          </>
+      ) : (
+        <>
+          <CardChamado userType={userActiveRole} cardKey="atribuidas" quantity={0} />
+          <CardChamado userType={userActiveRole} cardKey="concluidas" quantity={0} />
+          <CardChamado userType={userActiveRole} cardKey="pendentes" quantity={0} />
+        </>
+      )}
+          </>
+
 }

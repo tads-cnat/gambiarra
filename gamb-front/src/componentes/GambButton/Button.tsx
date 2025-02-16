@@ -1,4 +1,4 @@
-import React from "react";
+ 
 import { GambButtonProps } from "../../interfaces/componentes/iGambButton";
 import Icon from "../GambIcon/Icon";
 import { ButtonGeneric } from "./buttonstyle";
