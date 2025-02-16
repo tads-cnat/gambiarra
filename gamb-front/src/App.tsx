@@ -1,17 +1,17 @@
-import React, { useEffect, useState } from "react";
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
-import { ThemeProvider } from "styled-components";
+import { useEffect, useState } from "react";
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
+import Home from "./pages/index";
 import { ProtectedRoute } from "./auth/Routes";
 import { userRoles } from "./auth/roles";
-import authService from "./auth/service/authService";
-import { Dashboard } from "./pages/dashboard/Dashboard";
-import GerenciarUsuarios from "./pages/dashboard/pages/Gerenciar/usuarios";
-import DashboardHome from "./pages/dashboard/pages/Home";
-import Home from "./pages/index";
-import { Login } from "./pages/login/Login";
+import { ThemeProvider } from "styled-components";
 import { GlobalStyle } from "./styles/global";
-import "./styles/index.css";
+import { Dashboard } from "./pages/dashboard/Dashboard";
+import DashboardHome from "./pages/dashboard/pages/Home";
+import GerenciarUsuarios from "./pages/dashboard/pages/Gerenciar/usuarios";
 import { defaultTheme } from "./styles/themes/default";
+import { Login } from "./pages/login/Login";
+import "./styles/index.css";
+import authService from "./auth/service/authService";
 
 export function App() {
 	const [isAuthenticatedState, setIsAuthenticatedState] = useState<
@@ -61,11 +61,7 @@ export function App() {
 								requiredRole={["Allowed"]}
 							/>
 						}
-					/>
-						<Route
-						path="/dashboard"
-						element={<Dashboard />}
-						>
+					>
 						{/* Página inicial da Dashboard */}
 						<Route
 							index
@@ -75,7 +71,7 @@ export function App() {
 									requiredRole={["Allowed"]}
 								/>
 							}
-						/>				
+						/>
 
 						{/* Página de Gerenciamento de Usuários */}
 						<Route

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const PageLine = styled.div`
-    background-color: ${props => props.theme.cores.background};
+    background-color: ${props => props.theme.cores.white};
     display: flex;
     height: 66px;
     align-items: flex-start;
@@ -9,8 +9,8 @@ export const PageLine = styled.div`
     align-items: center;
 
     border-radius: 0px 0px 8px 8px;
-    border-bottom: 1px solid ${props => props.theme.cores.gray_light};
     border-right: 1px solid ${props => props.theme.cores.gray_light};
+    border-bottom: 1px solid ${props => props.theme.cores.gray_light};
     border-left: 1px solid ${props => props.theme.cores.gray_light};
 
     padding: 10px;
