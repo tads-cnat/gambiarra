@@ -1,7 +1,7 @@
 import {
-	UseFormRegisterReturn,
 	Control,
 	RegisterOptions,
+	UseFormRegisterReturn,
 } from "react-hook-form";
 
 export interface InputFieldProps {
