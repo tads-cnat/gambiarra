@@ -44,6 +44,7 @@ import {
 	Checks,
 	XCircle,
 	Archive,
+	TextAlignCenter,
 } from "@phosphor-icons/react";
 import { GambIconProps } from "../../interfaces/componentes/iGambIcon";
 import { cloneElement } from "react";
@@ -94,6 +95,7 @@ const iconComponents: { [key: string]: JSX.Element } = {
 	checks: <Checks />,
 	xcircle: <XCircle />,
 	archive: <Archive />,
+	texto: <TextAlignCenter />,
 	x: <X />,
 	check: <Checks />,
 };
