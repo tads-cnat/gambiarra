@@ -1,16 +1,17 @@
 import { useEffect, useState } from "react";
-import { GambTable } from "../../../../componentes/GambTable/Table";
-import ChamadoService from "../../../../services/models/ChamadoService";
-import { Chamados } from "../../../../interfaces/models/iChamado";
+import { useForm } from "react-hook-form";
 import { useUser } from "../../../../auth/service/user";
+import GambButton from "../../../../componentes/GambButton/Button";
 import RenderCards from "../../../../componentes/GambCardChamados/CardChamado";
-import InputField from "../../../../componentes/GambInput/Input";
 import { GambFilterTable } from "../../../../componentes/GambFilterTable/FilterTable";
 import { FilterContent, FilterInputs } from "../../../../componentes/GambFilterTable/FilterTableStyles";
+import InputField from "../../../../componentes/GambInput/Input";
+import { SelectField, statusChamado } from "../../../../componentes/GambSelect/Select";
+import { GambTable } from "../../../../componentes/GambTable/Table";
 import { GambTitle } from "../../../../componentes/GambTitle/Title";
-import GambButton from "../../../../componentes/GambButton/Button";
-import { useForm } from "react-hook-form";
 import { ChamadoFilter } from "../../../../filters/ChamadoFilter";
+import { Chamados } from "../../../../interfaces/models/iChamado";
+import ChamadoService from "../../../../services/models/ChamadoService";
 
 
 
@@ -52,10 +53,9 @@ export default function DashboardHome(): JSX.Element {
 				<FilterContent>
 					<GambTitle label="Filtre por pessoas" />
 					<FilterInputs>
-					<InputField label="Bolsista" placeholder="selecione um bolsista" register={register("bolsista_id")} icon="x"/>
-					<InputField label="Professor" placeholder="selecione um professor" register={register("professor_id")} icon="x"/>
-					<InputField label="Cliente" placeholder="selecione um cliente" register={register("cliente_id")} icon="x"/>
-
+						<SelectField label="Professor" placeholder="selecione um professor" register={register("professor_id")} options={[{label: "Professor 1", value: 1}, {label: "Professor 2", value: 2}]} defaultValue={""} />
+						<SelectField label="Bolsista" placeholder="selecione um bolsista" register={register("bolsista_id")} options={[{label: "Bolsista 1", value: 1}, {label: "Bolsista 2", value: 2}]} defaultValue={""} />
+						<SelectField label="Cliente" placeholder="selecione um cliente" register={register("cliente_id")} options={[{label: "Cliente 1", value: 1}, {label: "Cliente 2", value: 2}] } defaultValue={""} />
 					</FilterInputs>
 				</FilterContent>
 				<FilterContent>
@@ -64,7 +64,7 @@ export default function DashboardHome(): JSX.Element {
 
 						<InputField label="Descrição" placeholder="busque pela descrição" register={register("descricao")} icon="texto"/>
 						<InputField label="Titulo" placeholder="busque pelo titulo" register={register("titulo")} icon="texto"/>
-						<InputField label="Status" placeholder="busque pelo status" register={register("status")} icon="texto"/>
+						<SelectField label="Status" placeholder="selecione um status" register={register("status")} options={statusChamado} defaultValue={""}/>
 						<InputField label="Avaliação" placeholder="busque pela avaliação" register={register("avaliacao")} icon="texto"/>
 						<InputField label="Busca por texto" placeholder="busque por campos de texto" register={register("search")} icon="x"/>
 
