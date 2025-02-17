@@ -5,6 +5,11 @@ from authentication.models import Usuario
 from .models import *
 
 
+class UpdateBolsistaSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Chamado
+        fields = ["bolsistas"]
+
 class CreateAcessorioSerializer(serializers.ModelSerializer):
     class Meta:
         model = Acessorio
