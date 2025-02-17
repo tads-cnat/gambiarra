@@ -9,19 +9,19 @@ const ChamadoDetalhes: React.FC<ChamadoDetalhesProps> = ({ chamado }) => {
     <Container>
       <Card>
         <CardContent>
-          <Section>
+          <Section className="relative">
           <div className="inline-flex flex-row items-center gap-1.5 w-full">
             <Icon icon={"fillcircle"} color="#453DA6"/>
             <p>Dados Gerais</p>
             <div className="flex-grow min-w-[50px] h-[2px] bg-[#C0BCED]"></div>
           </div>
           <div className="pt-6 inline-flex flex-col gap-7">
-            <div className="relative inline-flex flex-row items-center gap-1.5">
+            <div className="inline-flex flex-row items-center gap-1.5">
               <Icon icon={"text"}/>
               <p>
                 <strong>Título:</strong> {chamado.titulo}
               </p>
-              <div className="absolute left-[75rem] bg-gray-200 p-2 rounded-md"><Icon icon={"note_pencil"} color="black" size={20}/></div>
+              <div className="absolute bg-gray-200 p-2 rounded-md"><Icon icon={"note_pencil"} color="black" size={20}/></div>
             </div>
             <div className="inline-flex flex-row items-center gap-1.5">
               <Icon icon={"article"}/>
