@@ -212,13 +212,16 @@ class ChamadoViewSet(viewsets.ModelViewSet):
             return Response(serializer.data, status=status.HTTP_200_OK)
         
         elif request.method == "POST":
-            data = request.data.copy()
-            data["chamado"] = chamado.pk 
+            texto = request.data.get("texto")
+            
+            if len(texto) > 240:
+                erro("Texto longo demais") #Ajeitar isso no front
+            
+            mensagem = Mensagem(autor=request.user, texto=texto, chamado=chamado)
 
-            serializer = MensagemSerializer(data=data)
-            serializer.is_valid(raise_exception=True)
+            serializer = MensagemSerializer(mensagem)
 
-            serializer.save(autor=request.user)
+            mensagem.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
