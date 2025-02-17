@@ -1,10 +1,14 @@
 from rest_framework import serializers
 
 from authentication.models import Usuario
-from gambiarra.models import Acessorio, Chamado, Item, STATUS_CHOICES
 
-from .models import Acessorio, Chamado, Item
+from .models import *
 
+
+class UpdateBolsistaSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Chamado
+        fields = ["bolsistas"]
 
 class CreateAcessorioSerializer(serializers.ModelSerializer):
     class Meta:
@@ -112,3 +116,18 @@ class DetalharChamadoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Chamado
         fields = "__all__"
+
+class MensagemSerializer(serializers.ModelSerializer):
+    autor = serializers.PrimaryKeyRelatedField(read_only=True)
+
+    class Meta:
+        model = Mensagem
+        fields = ['id', 'data_envio', 'autor', 'texto', 'chamado']
+        read_only_fields = ['id', 'data_envio', 'autor', 'chamado']
+
+class AlteracaoSerializer(serializers.ModelSerializer):
+    autor = serializers.PrimaryKeyRelatedField(read_only=True)
+
+    class Meta:
+        model = Alteracao
+        fields = ['id', 'autor']

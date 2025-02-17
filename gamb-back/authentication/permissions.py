@@ -75,3 +75,12 @@ class OnlyExterno(permissions.BasePermission):
             return user.grupo.name in GrupoEnum.EXTERNO
         return False
 
+class OnlyStaff(permissions.BasePermission):
+    message = "Seu usuário não tem permissão."
+
+    def has_permission(self, request: Request, view):
+        user = request.user
+        if user.is_authenticated:
+            return user.grupo.name in GrupoEnum.STAFF
+        return False
+
