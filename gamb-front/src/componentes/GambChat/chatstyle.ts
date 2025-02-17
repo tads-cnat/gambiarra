@@ -69,13 +69,9 @@ export const ChatMessage = styled.div<ChatMessageProps>`
 
   .bubble {
     background-color: ${({ side }) =>
-      side === "right" ? "#f1f1f1" : "#FFF"};
+      side === "right" ? "#f1f1f1" : "#e0e0ff"};
     color: #333;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px;
-    border-bottom: 2px solid var(--Roxo-default, #564CCF);
-    border-left: 2px solid var(--Roxo-default, #564CCF);
+    border-radius: 16px;
     padding: 8px 12px;
     max-width: 60%;
     position: relative;
