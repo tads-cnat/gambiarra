@@ -237,6 +237,9 @@ class ChamadoViewSet(viewsets.ModelViewSet):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
+
+
+
 #Função pro código não ficar tão verboso feio
 def erro(e):
     return Response({"erro": e}, status=status.HTTP_400_BAD_REQUEST)

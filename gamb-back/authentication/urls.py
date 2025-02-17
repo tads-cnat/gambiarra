@@ -12,4 +12,8 @@ auth_urls = [
     path("token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
     path("register/", RegisterUserView.as_view(), name="register"),  # register
     path("profile/", ProfileUserView.as_view(), name="profile"),
+]
+
+usuario_url = [
+    
 ] + router.urls

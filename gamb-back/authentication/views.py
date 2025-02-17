@@ -1,4 +1,4 @@
-from rest_framework import status
+from rest_framework import status, filters
 from rest_framework.generics import CreateAPIView, RetrieveAPIView
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.decorators import action
@@ -9,6 +9,11 @@ from .permissions import *
 from .constants import *
 from drf_yasg.utils import swagger_auto_schema
 from drf_yasg import openapi
+from django.contrib.auth.models import Group
+from django.shortcuts import get_object_or_404
+from django_filters import rest_framework as filters
+from .models import Usuario
+from .filters import UsuarioFilter
 
 
 class RegisterUserView(CreateAPIView):
@@ -42,32 +47,18 @@ class ProfileUserView(RetrieveAPIView):
             status=status.HTTP_200_OK,
         )
 
-from django.contrib.auth.models import Group
-from rest_framework.decorators import action
-from rest_framework.response import Response
-from rest_framework import status
-from django.shortcuts import get_object_or_404
+
 
 class UsuarioViewSet(viewsets.ModelViewSet):
     serializer_class = ListarUsuarioSerializer
     permission_classes = [IsAuthenticated]
     queryset = Usuario.objects.all()
+    filter_backends = (filters.DjangoFilterBackend,)
+    filterset_class = UsuarioFilter
 
 
-    @swagger_auto_schema(       #por algum motivo, tive que inserir o parâmetro manualmente
-        manual_parameters=[
-            openapi.Parameter(
-                name="grupo_id",
-                in_=openapi.IN_QUERY,
-                description="ID do grupo para listar os usuários",
-                type=openapi.TYPE_INTEGER,
-                required=True,
-            )
-        ]
-    )
-    @action(detail=False, methods=["get"], permission_classes=[OnlyStaff])
-    def listar_por_grupo(self, request):
-        grupo_id = request.GET.get("grupo_id")
+    def get(self, request):
+        grupo_id = request.GET.get('grupo_id', None)
 
         if not grupo_id:
             return Response({"erro": "O campo 'grupo_id' é obrigatório."}, status=status.HTTP_400_BAD_REQUEST)
