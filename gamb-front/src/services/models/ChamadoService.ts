@@ -26,15 +26,15 @@ class ChamadoService extends BaseService {
 
 	async aceitarChamado(id: number): Promise<unknown> {
 		const response = await axiosInstance.patch(
-			`${this.serviceUrl}${id}/alterar_status/`, {status: 2} )
+			`${this.serviceUrl}/${id}/alterar_status/`, {status: 2} )
 		return response;
 	}
 	
 	async encerrarChamado(id: number): Promise<unknown> {
 		const response = await axiosInstance.patch(
-			`${this.serviceUrl}${id}/alterar_status/`, {status: 8} )
+		`${this.serviceUrl}/${id}/alterar_status/`, {status: 8} )
 		return response;
 	}
 }
 
-export default new ChamadoService("chamado/");
+export default new ChamadoService("chamado");
