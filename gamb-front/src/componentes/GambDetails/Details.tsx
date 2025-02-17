@@ -21,7 +21,7 @@ const ChamadoDetalhes: React.FC<ChamadoDetalhesProps> = ({ chamado }) => {
               <p>
                 <strong>Título:</strong> {chamado.titulo}
               </p>
-              <div className="absolute left-[53rem] bg-gray-200 p-2 rounded-md"><Icon icon={"note_pencil"} color="black" size={20}/></div>
+              <div className="absolute left-[75rem] bg-gray-200 p-2 rounded-md"><Icon icon={"note_pencil"} color="black" size={20}/></div>
             </div>
             <div className="inline-flex flex-row items-center gap-1.5">
               <Icon icon={"article"}/>

@@ -2,17 +2,19 @@ import styled from "styled-components";
 
 export const TimelineContainer = styled.div`
   display: flex;
+  align-items: center;
+  padding: 30px;
   gap: 20px;
-  flex-wrap: wrap;
 `;
 
-export const TimelineContent = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  width: 100%;
-  padding: 30px;
-  border-radius: 8px;
+export const TimelineOUT = styled.div`
+  position: absolute;
+  top: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font-size: 0.8rem;
+  color: #666;
 `;
 
 export const StepWrapper = styled.div`
@@ -30,7 +32,7 @@ export const StepDot = styled.div<{ color: string }>`
 
 export const StepLine = styled.div<{ 
   color: string;
-  $isRejected?: boolean; // Novo prop
+  $isRejected?: boolean;
 }>`
   width: 200px;
   height: 1px;
@@ -38,7 +40,9 @@ export const StepLine = styled.div<{
   margin: 0 8px;
   position: relative;
 
-  ${({ $isRejected }) => $isRejected && `
+  ${({ $isRejected }) =>
+    $isRejected &&
+    `
     &::after {
       content: '';
       position: absolute;
@@ -53,10 +57,24 @@ export const StepLine = styled.div<{
 
 export const StepLabel = styled.span`
   position: absolute;
-  top: 32px;
+  top: 1.75rem; /* Fica abaixo da bolinha */
   left: 0;
   width: 80px;
   text-align: center;
   font-size: 0.8rem;
   transform: translateX(-28%);
+`;
+
+// Container para status fixos (primeiro e último)
+export const FirstOrLastStatusContainer = styled.div`
+  flex-shrink: 0;
+`;
+
+// Container para os status centrais roláveis
+export const MiddleStatusContainer = styled.div`
+  display: flex;
+  gap: 8px;
+  height: 7rem;
+  overflow-x: auto;
+  flex: 1;
 `;

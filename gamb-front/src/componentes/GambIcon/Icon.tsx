@@ -108,6 +108,7 @@ const iconComponents: { [key: string]: JSX.Element } = {
 	usersfour: <UsersFour />,
 	note_pencil: <NotePencil />,
 	check: <Check />,
+	chatfill: <ChatCircle weight="fill"/>,
 };
 
 export default function Icon(props: GambIconProps): JSX.Element {

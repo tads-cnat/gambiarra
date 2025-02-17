@@ -11,6 +11,7 @@ import {
 import ChamadoDetalhes from "../../componentes/GambDetails/Details";
 import Chat from "../../componentes/GambChat/Chat";
 import Timeline from "../../componentes/GambTimeLine/TimeLine";
+import Icon from "../../componentes/GambIcon/Icon";
 
 const chamado={
 	id: 1,
@@ -23,10 +24,14 @@ const chamado={
 }
 
 const statuses = [
-    { label: "Em Análise", color: "#6c757d", completed: true },
+    { label: "Em análise", color: "#6c757d", completed: true },
     { label: "Aceito", color: "#28a745", completed: true },
+    { label: "Esperando peça", color: "#FFC222", completed: true },
+    { label: "Testando", color: "#6c757d", completed: true },
+    { label: "Aceito", color: "#28a745", completed: true },
+    { label: "Esperando peça", color: "#FFC222", completed: true },
+    { label: "Testando", color: "#6c757d", completed: true },
     { label: "Resolvido", color: "#dc3545", completed: true },
-
   ];
 
   const messages = [
@@ -57,6 +62,10 @@ export const Detail: React.FC = () => {
                     <div className="flex flex-col gap-4">
                         <ChamadoDetalhes chamado={chamado}/>
                         <ChatCard>
+                          <div className="inline-flex flex-row items-center">
+                            <Icon icon={"chatfill"} size={40} color="#28a745"/>
+                            <h1 className="bg-gray-200 rounded-md px-2 py-1">Chat do Chamado</h1>
+                          </div>
                           <div className="flex flex-col gap-8">
                             <Timeline statuses={statuses}/>
                             <Chat messages={messages}/>  

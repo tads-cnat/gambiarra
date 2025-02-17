@@ -16,11 +16,6 @@ const Chat: React.FC<ChatProps> = ({ messages }) => {
     <ChatContainer>
       <ChatHeader>
         <div className="header-left">
-          <img
-            src=""
-            alt="Avatar"
-            className="avatar"
-          />
           <span className="username">Nome Usuario</span>
         </div>
       </ChatHeader>
