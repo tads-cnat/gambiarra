@@ -34,9 +34,9 @@ class ChamadoViewSet(viewsets.ModelViewSet):
         'titulo__icontains',  # Campo titulo
         'descricao__icontains',  # Campo descricao
         'code__icontains',  # Campo code
-        'professor',  # Campo professor username
-        'bolsistas',  # Campo bolsistas username
-        'cliente',  # Campo cliente username
+        'professor__username',  # Campo professor username
+        'bolsistas__username',  # Campo bolsistas username
+        'cliente__username',  # Campo cliente username
     ]
     filterset_class = ChamadoFilter
 
