@@ -9,17 +9,7 @@ import {
 	MarcaGrafica,
 } from "./indexstyles";
 import CardIndex from "../../componentes/GambCardIndex/GambCardIndex";
-import ChamadoDetalhes from "../../componentes/GambDetails/Details";
 
-const chamado={
-	id: 1,
-    titulo: "Problema com a tela do notebook",
-    descricao: "A tela do meu notebook está piscando e não consigo trabalhar direito",
-    item: {modelo: "Notebook Dell Inspiron 15 3000", acessorios: [{nome: "Carregador"}]},
-    cliente: "João da Silva",
-    professor: "Prof. João da Silva",
-    bolsistas: ["Maria da Silva", "José da Silva"]
-}
 
 export default function Home() {
 	return (
@@ -114,7 +104,6 @@ export default function Home() {
 							maquinas={300}
 						/>
 					</CardContainer>
-					<ChamadoDetalhes chamado={chamado}/>
 				</IndexContainer>
 			</main>
 

@@ -25,14 +25,30 @@ export const StepDot = styled.div<{ color: string }>`
   width: 24px;
   height: 24px;
   border-radius: 50%;
-  background-color: ${(props) => props.color}; 
+  background-color: ${(props) => props.color};
 `;
 
-export const StepLine = styled.div<{ color: string }>`
-  width: 60px;
-  height: 4px;
-  background-color: ${(props) => props.color}; 
+export const StepLine = styled.div<{ 
+  color: string;
+  $isRejected?: boolean; // Novo prop
+}>`
+  width: 200px;
+  height: 1px;
+  background-color: ${(props) => props.color};
   margin: 0 8px;
+  position: relative;
+
+  ${({ $isRejected }) => $isRejected && `
+    &::after {
+      content: '';
+      position: absolute;
+      right: -1px;
+      top: -13px;
+      width: 1px;
+      height: 30px;
+      background-color: inherit;
+    }
+  `}
 `;
 
 export const StepLabel = styled.span`

@@ -9,8 +9,8 @@ import {
 	DashboardMain,
 } from "./detailstyles";
 import ChamadoDetalhes from "../../componentes/GambDetails/Details";
-import ChatTimeline from "../../componentes/GambChat/Chat";
-import LinhadoTempo from "../../componentes/GambLinhadoTempo/LinhadoTempo";
+import Chat from "../../componentes/GambChat/Chat";
+import Timeline from "../../componentes/GambTimeLine/TimeLine";
 
 const chamado={
 	id: 1,
@@ -25,8 +25,7 @@ const chamado={
 const statuses = [
     { label: "Em Análise", color: "#6c757d", completed: true },
     { label: "Aceito", color: "#28a745", completed: true },
-    { label: "Recusado", color: "#dc3545", completed: true },
-    { label: "Arquivado", color: "#dc3545", completed: true },
+    { label: "Resolvido", color: "#dc3545", completed: true },
 
   ];
 
@@ -58,8 +57,10 @@ export const Detail: React.FC = () => {
                     <div className="flex flex-col gap-4">
                         <ChamadoDetalhes chamado={chamado}/>
                         <ChatCard>
-                            <LinhadoTempo statuses={statuses}/>
-                            <ChatTimeline messages={messages}/>        
+                          <div className="flex flex-col gap-8">
+                            <Timeline statuses={statuses}/>
+                            <Chat messages={messages}/>  
+                          </div>                                  
                         </ChatCard>
                     </div>  
 				</DashboardContent>
