@@ -13,12 +13,16 @@ import { ChamadoFilter } from "../../../../filters/ChamadoFilter";
 import { Chamados } from "../../../../interfaces/models/iChamado";
 import ChamadoService from "../../../../services/models/ChamadoService";
 
-
-
+import AceitarChamadoModal from "../../../../componentes/GambTable/forms/AceitarChamadoModal";
+import EncerrarChamadoModal from "../../../../componentes/GambTable/forms/EncerrarChamadoModal";
 
 export default function DashboardHome(): JSX.Element {
 	const [chamados, setChamados] = useState<Chamados[]>([]);
-
+	const [AceitarModalOpen, setAceitarModalOpen] = useState(false);
+	const [EncerrarModalOpen, setEncerrarModalOpen] = useState(false);
+	const [chamadoId, setChamadoId] = useState(null);
+	const closeAceitarModal = () => setAceitarModalOpen(false);
+	const closeEncerrarModal = () => setEncerrarModalOpen(false);
 
 	const { register, handleSubmit, reset } = useForm<ChamadoFilter>({
 		// resolver: yupResolver(filterSchema) TO-DO
@@ -93,8 +97,28 @@ export default function DashboardHome(): JSX.Element {
 						detalhar: (id: number) => console.log("detalhar", id),
 						chat: (id: number) => console.log("chat", id),
 						arquivar: (id: number) => console.log("arquivar", id),
+						resolver: (id:number) => console.log(id),
+						aceitar: (id:number) =>{ 
+												setChamadoId(id)
+												setAceitarModalOpen(true)
+												},
+						recusar: (id:number) =>{
+												setChamadoId(id)
+												setEncerrarModalOpen(true)
+												},
 					}
+					
 				}
+			/>
+			<AceitarChamadoModal
+				isModalOpen={AceitarModalOpen}
+				closeModal={closeAceitarModal}
+				chamadoId={chamadoId}
+			/>
+			<EncerrarChamadoModal
+				isModalOpen={EncerrarModalOpen}
+				closeModal={closeEncerrarModal}
+				chamadoId={chamadoId}
 			/>
 		</div>
 	);
