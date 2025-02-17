@@ -61,8 +61,7 @@ const ChamadoDetalhes: React.FC<ChamadoDetalhesProps> = ({ chamado }) => {
             </div>
           </Section>
 
-          {/* Seção de Ações */}
-          <div className="flex">
+          <div className="inline-flex flex-col">
             <div className="inline-flex flex-row items-center gap-1.5 w-full">
               <Icon icon={"fillcircle"} color="#61B3FF" />
               <p>Ações</p>
@@ -81,7 +80,6 @@ const ChamadoDetalhes: React.FC<ChamadoDetalhesProps> = ({ chamado }) => {
           </div>
         </CardContent>
 
-        {/* Seção de Pessoas */}
         <CardContentPeople>
           <div className="inline-flex flex-col gap-1">
             <div className="inline-flex flex-row items-center gap-1.5 w-full">
