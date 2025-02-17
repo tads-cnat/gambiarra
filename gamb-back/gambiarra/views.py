@@ -14,6 +14,7 @@ from authentication.constants import GrupoEnum
 from authentication.permissions import *
 from gambiarra.serializers import *
 from .models import *
+from authentication.models import *
 
 TAB_STATUS_MAPPING = {
     "todos": [],  # Inclui todos os status
@@ -22,6 +23,7 @@ TAB_STATUS_MAPPING = {
     "recusados": ["Recusado"],
     "fechados": ["Fechado sem resolução", "Resolvido", "Recusado"],
 }
+    
 
         
 class ChamadoViewSet(viewsets.ModelViewSet):
@@ -41,13 +43,16 @@ class ChamadoViewSet(viewsets.ModelViewSet):
     filterset_class = ChamadoFilter
 
     def get_serializer_class(self): #Função pra retornar o serializador apropriado pra cada função
-        if self.action == "create":
+        acao = self.action
+        if acao == "create":
             return CreateChamadoSerializer
-        if self.action == "aceitar_chamado":
+        if acao == "aceitar_chamado":
             return AceitarChamadoSerializer
-        if self.action == "alterar_status":
+        if acao == "alterar_status":
             return AlterarStatusSerializer
-        if self.action == "get_queryset":
+        if acao == "update_bolsistas":
+            return UpdateBolsistaSerializer
+        if acao == "get_queryset":
             return ListarChamadoSerializer
         return ListarChamadoSerializer
         
@@ -100,13 +105,9 @@ class ChamadoViewSet(viewsets.ModelViewSet):
             status=status.HTTP_201_CREATED,
         )
     
-    @action(detail=True, methods=["patch"], permission_classes=[OnlyProfessor])
+    @action(detail=True, methods=["patch"], permission_classes=[OnlyStaff])
     def alterar_status(self, request, pk):
-        try:
-            chamado = Chamado.objects.get(pk=pk)
-        except Chamado.DoesNotExist:
-            return erro("Chamado não encontrado")
-
+        chamado = self.get_object()
         status_antigo = chamado.status
         status_novo = request.data.get("status")
 
@@ -173,6 +174,54 @@ class ChamadoViewSet(viewsets.ModelViewSet):
         chamado.save()
 
         return Response({"mensagem": "Status atualizado com sucesso", "novo_status": status_novo_texto})
+
+    @action (detail=True, methods=["patch"], permission_classes=[OnlyStaff])
+    def update_bolsistas(self, request, pk):
+        bolsista_ids = request.data.get("bolsistas")
+        if not bolsista_ids:
+            return erro("O campo bolsistas é obrigatório")
+        
+        chamado = get_object_or_404(Chamado, pk=pk)
+        
+        if not bolsista_ids or not isinstance(bolsista_ids, list):
+            return erro("'bolsistas' deve ser uma lista de IDs.")
+
+        bolsistas_validos = []
+
+        for bolsista_id in bolsista_ids:
+            bolsista = Usuario.objects.filter(pk=bolsista_id).first()
+            if bolsista and bolsista.grupo.name == GrupoEnum.BOLSISTA:
+                bolsistas_validos.append(bolsista_id)
+
+        chamado.bolsistas.set(bolsistas_validos)
+        chamado.save()
+
+        resposta = {
+            "bolsistas": bolsistas_validos
+        }
+
+        return Response(resposta, status=status.HTTP_200_OK)
+    
+    @action (detail=True, methods=["get", "post"], permission_classes=[IsAuthenticated])
+    def mensagens(self, request, pk=None):
+        chamado = self.get_object()
+
+        if request.method == "GET":
+            mensagens = Mensagem.objects.filter(chamado=chamado).order_by("data_envio")
+            serializer = MensagemSerializer(mensagens, many=True)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        
+        elif request.method == "POST":
+            data = request.data.copy()
+            data["chamado"] = chamado.pk 
+
+            serializer = MensagemSerializer(data=data)
+            serializer.is_valid(raise_exception=True)
+
+            serializer.save(autor=request.user)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+
 
 #Função pro código não ficar tão verboso feio
 def erro(e):
