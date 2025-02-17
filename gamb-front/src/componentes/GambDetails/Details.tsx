@@ -1,6 +1,6 @@
 import React from "react";
 import GambButton from "../GambButton/Button";
-import { Container, Section, Title, Description, Actions, PeopleList, Card, CardContent, CardPeople, CardContentPeople } from "./detailstyle";
+import { Container, Section, Actions, PeopleList, Card, CardContent, CardContentPeople } from "./detailstyle";
 import { ChamadoDetalhesProps } from "../../interfaces/componentes/iGambDetails";
 import Icon from "../GambIcon/Icon";
 
@@ -16,11 +16,12 @@ const ChamadoDetalhes: React.FC<ChamadoDetalhesProps> = ({ chamado }) => {
             <div className="flex-grow min-w-[50px] h-[2px] bg-[#C0BCED]"></div>
           </div>
           <div className="pt-6 inline-flex flex-col gap-7">
-            <div className="inline-flex flex-row items-center gap-1.5">
+            <div className="relative inline-flex flex-row items-center gap-1.5">
               <Icon icon={"text"}/>
               <p>
                 <strong>Título:</strong> {chamado.titulo}
               </p>
+              <div className="absolute left-[140%] bg-gray-200 p-2 rounded-md"><Icon icon={"note_pencil"} color="black" size={20}/></div>
             </div>
             <div className="inline-flex flex-row items-center gap-1.5">
               <Icon icon={"article"}/>
@@ -66,21 +67,21 @@ const ChamadoDetalhes: React.FC<ChamadoDetalhesProps> = ({ chamado }) => {
             </div>
             <PeopleList>
               <div className="inline-flex flex-col gap-3 w-full">
-                <div className="flex justify-between items-center w-full">
+                <div className="flex justify-between items-center border-b-[0.5px] border-gray-700 w-full">
                   <p><strong>Cliente:</strong></p>
                   <Icon icon={"user"}/>
                 </div>
                 <p>{chamado.cliente}</p>
-                <div className="flex justify-between items-center w-full">
+                <div className="flex justify-between items-center border-b-[0.5px] border-gray-700 w-full">
                   <p><strong>Professor:</strong></p>
                   <Icon icon={"user"}/>
                 </div>
-                <p>{chamado.professor}</p>
+                <div className="break-normal"><p>{chamado.professor}</p></div>
                 <div>
-                  <div className="flex justify-between items-center w-full">
+                  <div className="flex justify-between items-center border-b-[0.5px] border-gray-700 w-full">
                     <p><strong>Bolsista:</strong></p>
                     <Icon icon={"usersfour"}/>
-                  </div>
+                  </div>          
                   <ul>
                     {chamado.bolsistas.map((bolsista, index) => (
                       <li key={index}>{bolsista}</li>

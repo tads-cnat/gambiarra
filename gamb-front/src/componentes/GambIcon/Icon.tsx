@@ -49,6 +49,8 @@ import {
 	Article,
 	Barcode,
 	UsersFour,
+	NotePencil,
+	Check,
 } from "@phosphor-icons/react";
 import { GambIconProps } from "../../interfaces/componentes/iGambIcon";
 import React from "react";
@@ -104,6 +106,8 @@ const iconComponents: { [key: string]: JSX.Element } = {
 	article: <Article />,
 	barcode: <Barcode />,
 	usersfour: <UsersFour />,
+	note_pencil: <NotePencil />,
+	check: <Check />,
 };
 
 export default function Icon(props: GambIconProps): JSX.Element {

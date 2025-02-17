@@ -10,6 +10,7 @@ import DashboardHome from "./pages/dashboard/pages/Home";
 import GerenciarUsuarios from "./pages/dashboard/pages/Gerenciar/usuarios";
 import { defaultTheme } from "./styles/themes/default";
 import { Login } from "./pages/login/Login";
+import { Detail } from "./pages/detail/Detail";
 import "./styles/index.css";
 import authService from "./auth/service/authService";
 
@@ -43,6 +44,12 @@ export function App() {
 						path="/"
 						element={<Home />}
 					/>
+
+					<Route
+						path="/detail"
+						element={<Detail />}
+					/>
+
 					<Route
 						path="/login"
 						element={
