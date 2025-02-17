@@ -94,6 +94,8 @@ class ChamadoViewSet(viewsets.ModelViewSet):
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
         chamado = serializer.instance
+        alteracao = Alteracao(autor = self.request.user, status=chamado.status, chamado=chamado)
+        alteracao.save()
         return Response(
             data={
                 "success": True,
@@ -173,6 +175,9 @@ class ChamadoViewSet(viewsets.ModelViewSet):
         chamado.status = status_novo
         chamado.save()
 
+        alteracao = Alteracao(autor = self.request.user, status=status_novo, chamado=chamado)
+        alteracao.save()
+
         return Response({"mensagem": "Status atualizado com sucesso", "novo_status": status_novo_texto})
 
     @action (detail=True, methods=["patch"], permission_classes=[OnlyStaff])
@@ -224,6 +229,12 @@ class ChamadoViewSet(viewsets.ModelViewSet):
             mensagem.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
+    @action (detail=True, methods=["get"], permission_classes=[IsAuthenticated])
+    def alteracoes(self,request,pk=None):
+        chamado = self.get_object()
+        alteracoes = Alteracao.objects.filter(chamado=chamado).order_by("data_alteracao")
+        serializer = AlteracaoSerializer(alteracoes, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 #Função pro código não ficar tão verboso feio

@@ -124,3 +124,10 @@ class MensagemSerializer(serializers.ModelSerializer):
         model = Mensagem
         fields = ['id', 'data_envio', 'autor', 'texto', 'chamado']
         read_only_fields = ['id', 'data_envio', 'autor', 'chamado']
+
+class AlteracaoSerializer(serializers.ModelSerializer):
+    autor = serializers.PrimaryKeyRelatedField(read_only=True)
+
+    class Meta:
+        model = Alteracao
+        fields = ['id', 'autor']
