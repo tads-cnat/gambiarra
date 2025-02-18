@@ -58,8 +58,14 @@ class ChamadoViewSet(viewsets.ModelViewSet):
             return MensagemSerializer
         if acao == "alteracoes":
             return AlteracaoSerializer
-        if acao == "get":
+        if acao == "retrieve":
             return DetalharChamadoSerializer
+        if acao =="partial_update":
+            return UpdateChamadoSerializer
+        
+        return ListarChamadoSerializer
+        
+        print("\n\n", acao, "\n\n")
         raise Exception("Serializador não encontrado")
 
 

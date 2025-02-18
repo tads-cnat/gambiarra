@@ -131,3 +131,21 @@ class AlteracaoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Alteracao
         fields = ['status','data_alteracao','autor']
+        
+class UpdateChamadoSerializer(serializers.ModelSerializer):
+    avaliacao = serializers.SerializerMethodField()
+
+
+    class Meta:
+        model = Chamado
+        fields = [
+            "titulo",
+            "descricao",
+            "avaliacao",
+        ]
+
+    def get_avaliacao(self, obj):
+        avaliacao = getattr(obj, "avaliacao", None)
+        if avaliacao:
+            return {"nota": avaliacao.nota, "texto": avaliacao.texto}
+        return None
