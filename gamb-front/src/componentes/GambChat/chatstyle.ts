@@ -1,10 +1,10 @@
 import styled from "styled-components";
 
 export const ChatContainer = styled.div`
-  border: 4px solid #564CCF;
-  border-radius: 8px;
+  border: 1px solid #564CCF;
+  border-radius: 2px;
   width: 100%;
-  height: 350px; /* Altura fixa */
+  height: 350px; 
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -12,7 +12,7 @@ export const ChatContainer = styled.div`
 `;
 
 export const ChatHeader = styled.div`
-  background-color: #564CCF; /* Barra superior roxa */
+  background-color: #564CCF;
   color: #fff;
   padding: 12px 16px;
   display: flex;

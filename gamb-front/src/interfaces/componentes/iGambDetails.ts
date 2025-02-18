@@ -1,13 +1,13 @@
 export interface Chamado {
+  id: number;
   titulo: string;
   descricao: string;
-  cliente: string;
-  professor: string;
-  bolsistas: string[];
-  item: {
-    tipo: string;
-    modelo: string;
-  };
+  code: string;
+  status: string; 
+  professor: number;
+  item: number;
+  cliente: number;
+  bolsistas: number[];
 }
 
 export interface ChamadoDetalhesProps {

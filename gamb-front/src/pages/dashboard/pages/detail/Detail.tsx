@@ -45,8 +45,8 @@ export default function Detail(): JSX.Element {
       if (id) {
         try {
           const response = await ChamadoService.getChamadoID(Number(id));
-          console.log("Chamado recebido:", response);
-          setChamado(response);
+          console.log("Chamado recebido:", response); 
+          setChamado(response.data); 
         } catch (error) {
           console.error("Erro ao buscar chamado:", error);
         }
