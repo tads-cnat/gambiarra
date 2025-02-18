@@ -1,28 +1,12 @@
-import React from "react";
-import { Outlet, useParams } from "react-router-dom"; // 🔹 Corrigida a importação
-import { Sidebar } from "../../../../componentes/Sidebar/Sidebar";
-import CabecalhoDash from "../../../../componentes/GambCabecalhoDash/CabecalhoDash";
-import {
-  ChatCard,
-  DashboardContainer,
-  DashboardContent,
-  DashboardMain,
-} from "./detailstyles";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { ChatCard } from "./detailstyles";
 import ChamadoDetalhes from "../../../../componentes/GambDetails/Details";
 import Chat from "../../../../componentes/GambChat/Chat";
 import Timeline from "../../../../componentes/GambTimeLine/TimeLine";
 import Icon from "../../../../componentes/GambIcon/Icon";
 import ChamadoService from "../../../../services/models/ChamadoService";
-
-const chamado = {
-  id: 1,
-  titulo: "Problema com a tela do notebook",
-  descricao: "A tela do meu notebook está piscando e não consigo trabalhar direito",
-  item: { modelo: "Notebook Dell Inspiron 15 3000", acessorios: [{ nome: "Carregador" }] },
-  cliente: "João da Silva",
-  professor: "Prof. João da Silva",
-  bolsistas: ["Maria da Silva", "José da Silva"]
-}
+import { Chamado } from "../../../../interfaces/componentes/iGambDetails";
 
 const statuses = [
   { label: "Em análise", color: "#6c757d", completed: true },
@@ -41,30 +25,47 @@ const messages = [
     user: "Você",
     text: "Oi, tudo bem?",
     time: "13h58m 08/01/2025",
-    side: "right" as const
+    side: "right" as const,
   },
   {
     id: 2,
     user: "Lívio S.",
     text: "Estou bem e você?",
     time: "13h59m 08/01/2025",
-    side: "left" as const
+    side: "left" as const,
   },
 ];
 
-export default function Detail() : JSX.Element {
-  const {id} = useParams(); 
+export default function Detail(): JSX.Element {
+  const { id } = useParams();
+  const [chamado, setChamado] = useState<Chamado | null>(null);
 
+  useEffect(() => {
+    async function fetchChamado() {
+      if (id) {
+        try {
+          const response = await ChamadoService.getChamadoID(Number(id));
+          console.log("Chamado recebido:", response);
+          setChamado(response);
+        } catch (error) {
+          console.error("Erro ao buscar chamado:", error);
+        }
+      }
+    }
 
-  async function GetChamadoID() : Promise <void>{
-    await ChamadoService.getChamadoID(id ? 0);
-  }
+    fetchChamado();
+  }, [id]);
+
   return (
     <div className="flex flex-col gap-4">
-      <ChamadoDetalhes chamado={chamado} />
+      {chamado && chamado.item ? (
+        <ChamadoDetalhes chamado={chamado} />
+      ) : (
+        <p>Carregando chamado...</p>
+      )}
       <ChatCard>
         <div className="inline-flex flex-row items-center">
-          <Icon icon={"chatfill"} size={40} color="#28a745" />
+          <Icon icon="chatfill" size={40} color="#28a745" />
           <h1 className="bg-gray-200 rounded-md px-2 py-1">Chat do Chamado</h1>
         </div>
         <div className="flex flex-col gap-8">
@@ -74,4 +75,4 @@ export default function Detail() : JSX.Element {
       </ChatCard>
     </div>
   );
-};
+}

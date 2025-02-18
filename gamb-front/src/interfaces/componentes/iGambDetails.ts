@@ -1,23 +1,15 @@
-export interface Acessorio {
-    nome: string;
-  }
-  
-  export interface Item {
+export interface Chamado {
+  titulo: string;
+  descricao: string;
+  cliente: string;
+  professor: string;
+  bolsistas: string[];
+  item: {
+    tipo: string;
     modelo: string;
-    acessorios?: Acessorio[];
-  }
-  
-  export interface Chamado {
-    id: number;
-    titulo: string;
-    descricao: string;
-    item: Item;
-    cliente: string;
-    professor?: string;
-    bolsistas: string[];
-  }
-  
-  export interface ChamadoDetalhesProps {
-    chamado: Chamado;
-  }
-  
+  };
+}
+
+export interface ChamadoDetalhesProps {
+  chamado: Chamado;
+}
