@@ -67,7 +67,17 @@ class ChamadoViewSet(viewsets.ModelViewSet):
         
         print("\n\n", acao, "\n\n")
         raise Exception("Serializador não encontrado")
+    
+    
+    
+    def get(self, pk):
+        try:
+            chamado = Chamado.objects.get(pk=pk)
+        except Chamado.DoesNotExist:
+            return Response({"erro": "Chamado não encontrado."}, status=status.HTTP_404_NOT_FOUND)
 
+        serializer = DetalharChamadoSerializer(chamado)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
     def get(self):
         user: Usuario = self.request.user
@@ -97,7 +107,8 @@ class ChamadoViewSet(viewsets.ModelViewSet):
 
 
         return queryset
-
+   
+    
     def create(self, request):
         # print("Authenticated user:", request.user.grupo.name)
         if not OnlyExterno().has_permission(request, self):
