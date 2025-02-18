@@ -46,11 +46,6 @@ export function App() {
 					/>
 
 					<Route
-						path="/detail"
-						element={<Detail />}
-					/>
-
-					<Route
 						path="/login"
 						element={
 							isAuthenticatedState ? (
@@ -75,6 +70,17 @@ export function App() {
 							element={
 								<ProtectedRoute
 									element={<DashboardHome />}
+									requiredRole={["Allowed"]}
+								/>
+							}
+						/>
+
+						<Route
+							path="detail"
+							element={
+								<ProtectedRoute
+
+									element={<Detail />}
 									requiredRole={["Allowed"]}
 								/>
 							}

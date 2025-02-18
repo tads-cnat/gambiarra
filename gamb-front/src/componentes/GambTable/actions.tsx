@@ -136,6 +136,7 @@ export const getActionsByStatus = (
       size={30}
       iconColor={action.colorIcon}
       onClick={() => {
+
         if (funct && funct[action.name]) {
           funct[action.name](idLinha);
         } else {

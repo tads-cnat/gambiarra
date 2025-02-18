@@ -2,13 +2,13 @@ import ChamadoService from "../../../services/models/ChamadoService";
 import GambButton from "../../GambButton/Button";
 import { ModalCard, ModalFooter, ModalHeader, ModalOverlay } from "../../GambModal/modalstyles";
 export default function EncerrarChamadoModal(props: {
-    chamadoId: number;
+    chamadoId: number | null;
 	isModalOpen: boolean;
 	closeModal: () => void;
 }) {
     const { isModalOpen, closeModal, chamadoId } = props;
     async function handleAction(): Promise<void>{
-        ChamadoService.encerrarChamado(chamadoId)
+        ChamadoService.encerrarChamado(chamadoId ?? 0)
             .then((response) => {
                 (response);
                 

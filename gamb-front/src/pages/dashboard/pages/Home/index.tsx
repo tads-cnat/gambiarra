@@ -15,12 +15,14 @@ import ChamadoService from "../../../../services/models/ChamadoService";
 
 import AceitarChamadoModal from "../../../../componentes/GambTable/forms/AceitarChamadoModal";
 import EncerrarChamadoModal from "../../../../componentes/GambTable/forms/EncerrarChamadoModal";
+import { useNavigate } from "react-router-dom";
 
 export default function DashboardHome(): JSX.Element {
+	const navigate = useNavigate();
 	const [chamados, setChamados] = useState<Chamados[]>([]);
 	const [AceitarModalOpen, setAceitarModalOpen] = useState(false);
 	const [EncerrarModalOpen, setEncerrarModalOpen] = useState(false);
-	const [chamadoId, setChamadoId] = useState(null);
+	const [chamadoId, setChamadoId] = useState(0);
 	const closeAceitarModal = () => setAceitarModalOpen(false);
 	const closeEncerrarModal = () => setEncerrarModalOpen(false);
 
@@ -94,7 +96,9 @@ export default function DashboardHome(): JSX.Element {
 				isChamados={true}
 				TableActions={
 					{
-						detalhar: (id: number) => console.log("detalhar", id),
+						detalhar: (id: number) => {
+							navigate("/detail");
+						},
 						chat: (id: number) => console.log("chat", id),
 						arquivar: (id: number) => console.log("arquivar", id),
 						resolver: (id:number) => console.log(id),
