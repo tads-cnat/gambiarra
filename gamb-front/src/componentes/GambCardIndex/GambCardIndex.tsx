@@ -1,4 +1,4 @@
-import React from "react";
+ 
 import GambButton from "../GambButton/Button";
 import {
 	CardIndexStyle,
@@ -19,7 +19,7 @@ export default function CardIndex({
 	maquinas,
 }: CardIndexProps) {
 	return (
-		<CardIndexStyle>
+		<CardIndexStyle className="col-md-6 col-12">
 			<Header>
 				<img
 					src="/assets/logoCNAT.png"

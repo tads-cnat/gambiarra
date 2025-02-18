@@ -5,7 +5,6 @@ export const CardIndexStyle = styled.div`
 	border-radius: 30px;
 	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 	padding: 20px;
-	width: 593px;
 	display: flex;
 	flex-direction: column;
 	gap: 10px;

@@ -18,16 +18,16 @@ export interface iuserRoles {
 export const userRoles: iuserRoles = {
 	INTERNO: {
 		FUNCIONARIO: {
-			GR: "Gerente",
-			PR: "Professor",
-			BO: "Bolsista",
+			GR: "gerente",
+			PR: "professor",
+			BO: "bolsista",
 		},
 		CLIENTE: {
-			AL: "Aluno",
-			SE: "Servidor",
+			AL: "aluno",
+			SE: "servidor",
 		},
 	},
 	EXTERNO: {
-		CLIENTE: "Cliente",
+		CLIENTE: "cliente",
 	},
 };

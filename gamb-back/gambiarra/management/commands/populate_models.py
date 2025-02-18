@@ -88,9 +88,9 @@ class Command(BaseCommand):
                     titulo = f"chamado {i[1]}",
                     descricao = f"{i[1]}",
                     professor = professores[escolha],
-                    cliente = random.choice(clientes),
-                    status = i[1],
-                    item = item,
+                    cliente = random.choice(clientes),  
+                    status = i[0],      #JEITO CERTO DE GUARDAR O STATUS
+                    item = item,    
                 )
                 chamado.bolsistas.add(bolsistas[escolha])
                 chamados.append(chamado)

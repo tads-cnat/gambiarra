@@ -6,8 +6,8 @@ import {
 	UsersThree,
 } from "@phosphor-icons/react";
 import { HeaderContainer, HeaderContent } from "./headerstyle";
-import { useNavigate } from "react-router";
-import React from "react";
+import { useNavigate } from "react-router-dom";
+ 
 
 export function Header() {
 	const navigate = useNavigate();
@@ -16,7 +16,7 @@ export function Header() {
 		<HeaderContainer>
 			<HeaderContent>
 				<img
-					src="\assets\gambi-logo.png"
+					src="\assets\marca-sm.png"
 					alt=""
 				/>
 				<nav>

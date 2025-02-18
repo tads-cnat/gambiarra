@@ -53,7 +53,8 @@ import {
 	Check,
 } from "@phosphor-icons/react";
 import { GambIconProps } from "../../interfaces/componentes/iGambIcon";
-import React from "react";
+import { cloneElement } from "react";
+ 
 const iconComponents: { [key: string]: JSX.Element } = {
 	house: <House />,
 	heart: <Heart />,
@@ -100,6 +101,8 @@ const iconComponents: { [key: string]: JSX.Element } = {
 	checks: <Checks />,
 	xcircle: <XCircle />,
 	archive: <Archive />,
+	x: <X />,
+	check: <Checks />,
 	fillcircle: <Circle weight="fill"/>,
 	text: <TextT />,
 	simcard: <SimCard />,
@@ -107,7 +110,7 @@ const iconComponents: { [key: string]: JSX.Element } = {
 	barcode: <Barcode />,
 	usersfour: <UsersFour />,
 	note_pencil: <NotePencil />,
-	check: <Check />,
+	onecheck: <Check />,
 	chatfill: <ChatCircle weight="fill"/>,
 };
 
@@ -120,7 +123,7 @@ export default function Icon(props: GambIconProps): JSX.Element {
 	return (
 		<>
 			{IconComponent &&
-				React.cloneElement(IconComponent, {
+				cloneElement(IconComponent, {
 					size: size || 16,
 					color,
 					className,

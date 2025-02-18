@@ -54,7 +54,11 @@ class authService extends BaseService {
 			.then((response) => {
 				localStorage.setItem(
 					"user",
-					JSON.stringify(response.data.data)
+					response.data.data
+				);
+				localStorage.setItem(
+					"userActiveRole",
+					response.data.data.grupo
 				);
 				return true;
 			})

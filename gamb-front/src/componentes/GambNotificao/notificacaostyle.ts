@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 
-export const CircleContainer = styled.div<{ size: number; backgroundColor: string }>`
+export const CircleContainer = styled.button<{ size: number; backgroundColor: string }>`
   width: ${({ size }) => size}px;
   height: ${({ size }) => size}px;
   background-color: ${({ backgroundColor }) => backgroundColor};

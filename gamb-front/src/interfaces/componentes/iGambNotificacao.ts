@@ -13,4 +13,7 @@ export interface NotificacaoProps {
 
 	// Cor do ícone
 	iconColor?: string;
+
+	// Função que será executada ao clicar no círculo
+	onClick?: () => void;
 }

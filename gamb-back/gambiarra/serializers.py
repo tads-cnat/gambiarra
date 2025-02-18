@@ -1,10 +1,14 @@
 from rest_framework import serializers
 
 from authentication.models import Usuario
-from gambiarra.models import Acessorio, Chamado, Item
 
-from .models import Acessorio, Chamado, Item
+from .models import *
 
+
+class UpdateBolsistaSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Chamado
+        fields = ["bolsistas"]
 
 class CreateAcessorioSerializer(serializers.ModelSerializer):
     class Meta:
@@ -44,29 +48,38 @@ class CreateChamadoSerializer(serializers.ModelSerializer):
 class ListarChamadoSerializer(serializers.ModelSerializer):
     bolsistas = serializers.SerializerMethodField()
     professor = serializers.SerializerMethodField()
-    cliente = serializers.CharField(source="cliente.username", read_only=True)
-    status = serializers.CharField(source="get_status_display", read_only=True)
+    cliente = serializers.SerializerMethodField()
+    status = serializers.SerializerMethodField()
     avaliacao = serializers.SerializerMethodField()
 
     class Meta:
         model = Chamado
         fields = [
             "id",
-            "status",
-            "code",
             "titulo",
             "professor",
             "bolsistas",
             "cliente",
+            "status",
+            "code",
             "avaliacao",
         ]
 
+    def get_cliente(self, obj):
+        return {
+            "username": obj.cliente.username,
+            "id": obj.cliente.id,
+        }
+
     def get_bolsistas(self, obj):
-        return list(obj.bolsistas.values_list("username", flat=True))
+        return list(obj.bolsistas.values("id", "username"))
 
     def get_professor(self, obj):
         if obj.professor:
-            return obj.professor.username
+            return {
+                "id": obj.professor.id,
+                "username": obj.professor.username,
+            }
         return None
 
     def get_avaliacao(self, obj):
@@ -75,13 +88,46 @@ class ListarChamadoSerializer(serializers.ModelSerializer):
             return {"nota": avaliacao.nota, "texto": avaliacao.texto}
         return None
 
+    def get_status(self, obj):
+        ide = next((str(key) for key, value in STATUS_CHOICES if value == obj.get_status_display()), None)
+
+        return {
+            "id": ide,
+            "nome": obj.get_status_display()
+        }
+
 
 class AceitarChamadoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Chamado
         fields = [
             "id",
-            "status",
-            "code",
-            "titulo",
         ]
+
+class AlterarStatusSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Chamado
+        fields = [
+            "id",
+            "status",
+        ]
+
+class DetalharChamadoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Chamado
+        fields = "__all__"
+
+class MensagemSerializer(serializers.ModelSerializer):
+    autor = serializers.PrimaryKeyRelatedField(read_only=True)
+
+    class Meta:
+        model = Mensagem
+        fields = ['id', 'data_envio', 'autor', 'texto', 'chamado']
+        read_only_fields = ['id', 'data_envio', 'autor', 'chamado']
+
+class AlteracaoSerializer(serializers.ModelSerializer):
+    autor = serializers.PrimaryKeyRelatedField(read_only=True)
+
+    class Meta:
+        model = Alteracao
+        fields = ['status','data_alteracao','autor']

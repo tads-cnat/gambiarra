@@ -1,7 +1,14 @@
-import React from "react";
 import GambButton from "../../componentes/GambButton/Button";
 import { Footer } from "../../componentes/GambFooter/Footer";
 import { Header } from "../../componentes/GambHeader/Header";
+// import { MapContainer } from 'react-leaflet/MapContainer'
+// import { TileLayer } from 'react-leaflet/TileLayer'
+// // import { useMap } from 'react-leaflet/hooks'
+// import { Marker } from 'react-leaflet/Marker'
+// import { Popup } from 'react-leaflet/Popup'
+import { MapContainer, TileLayer, Marker, Popup, } from 'react-leaflet'
+
+
 import {
 	CardContainer,
 	IndexContainer,
@@ -12,6 +19,7 @@ import CardIndex from "../../componentes/GambCardIndex/GambCardIndex";
 
 
 export default function Home() {
+	
 	return (
 		<>
 			<Header />
@@ -19,7 +27,7 @@ export default function Home() {
 				<IndexContainer>
 					<MarcaGrafica>
 						<img
-							src="\assets\marca-grafica.png"
+							src="\assets\slogan.png"
 							alt="manutenção para todos - ifrn cnat"
 						/>
 					</MarcaGrafica>
@@ -70,7 +78,7 @@ export default function Home() {
 
 					<h2>Quais campus estão envolvidos no projeto?</h2>
 
-					<CardContainer>
+					<CardContainer className="row">
 						<CardIndex
 							nomeCampus="Campus Natal Central - IFRN"
 							contato="contatolab@gmail.com"
@@ -104,8 +112,35 @@ export default function Home() {
 							maquinas={300}
 						/>
 					</CardContainer>
+					<h2>Mapa do Projeto 🌍</h2>
+					<MapContainer
+						center={[-5.8117861169586735, -35.20454375958056]}
+						zoom={10}
+						scrollWheelZoom={false}
+						style={{ height: "400px", width: "100%", marginTop: "2rem", padding: "2rem" , maxWidth: "1100px"}}
+					>
+						<TileLayer
+							attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+							url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+						/>
+						<Marker position={[-5.8117861169586735, -35.20454375958056]}>
+							<Popup  >
+							IFRN-CNAT - Campus Natal Central
+							</Popup>
+						</Marker>
+						<Marker position={[-5.749014480391099, -35.26035668704938]}>
+							<Popup  >
+							IFRN-ZN - Campus Zona Norte
+							</Popup>
+						</Marker>
+					</MapContainer>
+
+
 				</IndexContainer>
+
 			</main>
+		
+					
 
 			<Footer />
 		</>
