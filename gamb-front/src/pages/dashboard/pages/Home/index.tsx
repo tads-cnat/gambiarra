@@ -15,6 +15,7 @@ import ChamadoService from "../../../../services/models/ChamadoService";
 
 import AceitarChamadoModal from "../../../../componentes/GambTable/forms/AceitarChamadoModal";
 import EncerrarChamadoModal from "../../../../componentes/GambTable/forms/EncerrarChamadoModal";
+import MultSelect from "../../../../componentes/GambMultSelect/MultSelect";
 
 export default function DashboardHome(): JSX.Element {
 	const [chamados, setChamados] = useState<Chamados[]>([]);
@@ -48,6 +49,7 @@ export default function DashboardHome(): JSX.Element {
 
 	return (
 		<div>
+			<h1># Chamados </h1>
 			<div className="flex flex-wrap gap-2">
 				<RenderCards />
 			</div>
@@ -55,23 +57,22 @@ export default function DashboardHome(): JSX.Element {
 			<form onSubmit={handleSubmit(handleChamados)}>
 			<GambFilterTable className="elevacao-def mb-6">
 				<FilterContent>
-					<GambTitle label="Filtre por pessoas" />
+					<GambTitle label="Filtre por pessoas" color="azul" />
 					<FilterInputs>
 						<SelectField label="Professor" placeholder="selecione um professor" register={register("professor_id")} options={[{label: "Professor 1", value: 1}, {label: "Professor 2", value: 2}]} defaultValue={""} />
 						<SelectField label="Bolsista" placeholder="selecione um bolsista" register={register("bolsista_id")} options={[{label: "Bolsista 1", value: 1}, {label: "Bolsista 2", value: 2}]} defaultValue={""} />
 						<SelectField label="Cliente" placeholder="selecione um cliente" register={register("cliente_id")} options={[{label: "Cliente 1", value: 1}, {label: "Cliente 2", value: 2}] } defaultValue={""} />
 					</FilterInputs>
 				</FilterContent>
-				<FilterContent>
+				<FilterContent className="mt-4">
 					<GambTitle label="Filtre pelos dados do chamado" color="roxo" />
-					<FilterInputs>
+					<FilterInputs >
 
-						<InputField label="Descrição" placeholder="busque pela descrição" register={register("descricao")} icon="texto"/>
-						<InputField label="Titulo" placeholder="busque pelo titulo" register={register("titulo")} icon="texto"/>
+						<InputField label="Descrição" placeholder="busque pela descrição" register={register("descricao")} />
+						<InputField label="Titulo" placeholder="busque pelo titulo" register={register("titulo")} />
 						<SelectField label="Status" placeholder="selecione um status" register={register("status")} options={statusChamado} defaultValue={""}/>
-						<InputField label="Avaliação" placeholder="busque pela avaliação" register={register("avaliacao")} icon="texto"/>
-						<InputField label="Busca por texto" placeholder="busque por campos de texto" register={register("search")} icon="x"/>
-
+						<InputField label="Avaliação" placeholder="busque pela avaliação" register={register("avaliacao")} />
+						<InputField label="Busca por texto" placeholder="busque por campos de texto" register={register("search")} icon="search" classNameFather="w-full"/>
 					</FilterInputs>
 
 					<div className="flex gap-4">
