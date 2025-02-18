@@ -35,6 +35,12 @@ class ChamadoService extends BaseService {
 		`${this.serviceUrl}/${id}/alterar_status/`, {status: 8} )
 		return response;
 	}
+
+	async getChamadoID(id: number): Promise<unknown>{
+		const response = await axiosInstance.get(
+			`${this.serviceUrl}/${id}/`)
+			return response;
+	}
 }
 
 export default new ChamadoService("chamado");

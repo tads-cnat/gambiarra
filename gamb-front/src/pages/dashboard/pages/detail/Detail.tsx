@@ -1,17 +1,18 @@
 import React from "react";
-import { Outlet } from "react-router-dom"; // 🔹 Corrigida a importação
-import { Sidebar } from "../../componentes/Sidebar/Sidebar";
-import CabecalhoDash from "../../componentes/GambCabecalhoDash/CabecalhoDash";
+import { Outlet, useParams } from "react-router-dom"; // 🔹 Corrigida a importação
+import { Sidebar } from "../../../../componentes/Sidebar/Sidebar";
+import CabecalhoDash from "../../../../componentes/GambCabecalhoDash/CabecalhoDash";
 import {
   ChatCard,
   DashboardContainer,
   DashboardContent,
   DashboardMain,
 } from "./detailstyles";
-import ChamadoDetalhes from "../../componentes/GambDetails/Details";
-import Chat from "../../componentes/GambChat/Chat";
-import Timeline from "../../componentes/GambTimeLine/TimeLine";
-import Icon from "../../componentes/GambIcon/Icon";
+import ChamadoDetalhes from "../../../../componentes/GambDetails/Details";
+import Chat from "../../../../componentes/GambChat/Chat";
+import Timeline from "../../../../componentes/GambTimeLine/TimeLine";
+import Icon from "../../../../componentes/GambIcon/Icon";
+import ChamadoService from "../../../../services/models/ChamadoService";
 
 const chamado = {
   id: 1,
@@ -51,7 +52,13 @@ const messages = [
   },
 ];
 
-export const Detail: React.FC = () => {
+export default function Detail() : JSX.Element {
+  const {id} = useParams(); 
+
+
+  async function GetChamadoID() : Promise <void>{
+    await ChamadoService.getChamadoID(id ? 0);
+  }
   return (
     <div className="flex flex-col gap-4">
       <ChamadoDetalhes chamado={chamado} />

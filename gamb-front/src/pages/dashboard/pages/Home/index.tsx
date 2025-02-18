@@ -97,7 +97,7 @@ export default function DashboardHome(): JSX.Element {
 				TableActions={
 					{
 						detalhar: (id: number) => {
-							navigate("/detail");
+							navigate(`/dashboard/detail/${id}`);
 						},
 						chat: (id: number) => console.log("chat", id),
 						arquivar: (id: number) => console.log("arquivar", id),
