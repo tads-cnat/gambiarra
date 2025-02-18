@@ -11,7 +11,7 @@ import {
 import { ChatTimelineProps } from "../../interfaces/componentes/iGambTimeLine";
 
 export default function Timeline({ statuses }: ChatTimelineProps) {
-  if (statuses.length < 3) {
+  if (statuses.length < 5) {
     return (
       <TimelineContainer>
         {statuses.map((status, index) => {
@@ -32,25 +32,11 @@ export default function Timeline({ statuses }: ChatTimelineProps) {
     );
   }
 
-  const firstStatus = statuses[0];
   const lastStatus = statuses[statuses.length - 1];
-  const middleStatuses = statuses.slice(1, -1);
+  const middleStatuses = statuses.slice(0, -1); 
 
   return (
     <TimelineContainer>
-      <FirstOrLastStatusContainer>
-        <StepWrapper>
-          <StepDot color={firstStatus.completed ? firstStatus.color : "#ccc"} />
-          <StepLine
-            color={firstStatus.completed ? firstStatus.color : "#ccc"}
-            $isRejected={
-              firstStatus.label === "Recusado" || firstStatus.label === "Resolvido"
-            }
-          />
-          <StepLabel>{firstStatus.label}</StepLabel>
-        </StepWrapper>
-      </FirstOrLastStatusContainer>
-
       <MiddleStatusContainer>
         {middleStatuses.map((status, index) => {
           const isRejected =

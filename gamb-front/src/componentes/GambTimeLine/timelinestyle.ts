@@ -72,8 +72,10 @@ export const FirstOrLastStatusContainer = styled.div`
 export const MiddleStatusContainer = styled.div`
   display: flex;
   gap: 8px;
+  padding-left: 1.2rem;
   height: 7rem;
   overflow-x: auto;
   overflow-y: hidden;
   flex: 1;
+
 `;
