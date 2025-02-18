@@ -52,13 +52,15 @@ class ChamadoViewSet(viewsets.ModelViewSet):
             return AlterarStatusSerializer
         if acao == "update_bolsistas":
             return UpdateBolsistaSerializer
-        if acao == "get_queryset":
+        if acao == "list":
             return ListarChamadoSerializer
         if acao == "mensagens":
             return MensagemSerializer
         if acao == "alteracoes":
             return AlteracaoSerializer
-        return "3RR0R"
+        if acao == "get":
+            return DetalharChamadoSerializer
+        raise Exception("Serializador não encontrado")
 
 
     def get(self):
