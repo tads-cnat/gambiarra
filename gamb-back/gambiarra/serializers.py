@@ -87,10 +87,10 @@ class ListarChamadoSerializer(serializers.ModelSerializer):
         if avaliacao:
             return {"nota": avaliacao.nota, "texto": avaliacao.texto}
         return None
-    
+
     def get_status(self, obj):
         ide = next((str(key) for key, value in STATUS_CHOICES if value == obj.get_status_display()), None)
-        
+
         return {
             "id": ide,
             "nome": obj.get_status_display()
@@ -130,4 +130,4 @@ class AlteracaoSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Alteracao
-        fields = ['id', 'autor']
+        fields = ['status','data_alteracao','autor']

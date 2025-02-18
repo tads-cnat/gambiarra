@@ -1,6 +1,6 @@
 from django.db.models import Q
 from rest_framework import status, filters
-from .filters import ChamadoFilter 
+from .filters import ChamadoFilter
 from django.shortcuts import get_object_or_404
 from rest_framework import viewsets
 from rest_framework.decorators import action
@@ -23,9 +23,9 @@ TAB_STATUS_MAPPING = {
     "recusados": ["Recusado"],
     "fechados": ["Fechado sem resolução", "Resolvido", "Recusado"],
 }
-    
 
-        
+
+
 class ChamadoViewSet(viewsets.ModelViewSet):
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated]
@@ -54,8 +54,12 @@ class ChamadoViewSet(viewsets.ModelViewSet):
             return UpdateBolsistaSerializer
         if acao == "get_queryset":
             return ListarChamadoSerializer
-        return ListarChamadoSerializer
-        
+        if acao == "mensagens":
+            return MensagemSerializer
+        if acao == "alteracoes":
+            return AlteracaoSerializer
+        return "3RR0R"
+
 
     def get(self):
         user: Usuario = self.request.user
@@ -85,7 +89,7 @@ class ChamadoViewSet(viewsets.ModelViewSet):
 
 
         return queryset
-    
+
     def create(self, request):
         # print("Authenticated user:", request.user.grupo.name)
         if not OnlyExterno().has_permission(request, self):
@@ -106,14 +110,14 @@ class ChamadoViewSet(viewsets.ModelViewSet):
             },
             status=status.HTTP_201_CREATED,
         )
-    
+
     @action(detail=True, methods=["patch"], permission_classes=[OnlyStaff])
     def alterar_status(self, request, pk):
         chamado = self.get_object()
         status_antigo = chamado.status
         status_novo = request.data.get("status")
 
-        #Definindo transições válidas com base nas decisões projetuais 
+        #Definindo transições válidas com base nas decisões projetuais
         transicoes = {
             "Em Análise": ["Aceito", "Recusado"],
             "Aceito": ["Em Diagnóstico"],
@@ -124,7 +128,7 @@ class ChamadoViewSet(viewsets.ModelViewSet):
             "Fechado Sem Resolução": ["Fechado"],
             "Recusado": ["Fechado"],
         }
-        
+
 
         #Resolvendo erros:
         #Se os status não são iguais
@@ -143,7 +147,7 @@ class ChamadoViewSet(viewsets.ModelViewSet):
             status_novo = int(status_novo)
         except:
             return erro("O campo 'status' deve ser um número inteiro")
-        
+
         #Transforma STATUS_CHOICE em um dict de ids:chaves
         status_dict = {status_id: status_texto for status_id, status_texto in STATUS_CHOICES}
 
@@ -161,10 +165,10 @@ class ChamadoViewSet(viewsets.ModelViewSet):
         #Mais verificação de erros:
         #Se o status atual tem transições definidas (mais um que não é pra dar erro nunca)
         #Se a transição desejada é permitida
-        
+
         if status_atual_texto not in transicoes:
             return erro(f"Não há transições definidas para o status {status_atual_texto}")
-        
+
         if status_novo_texto not in transicoes[status_atual_texto]:
             return erro(f"Não é possível ir de '{status_atual_texto}' para '{status_novo_texto}'")
 
@@ -185,9 +189,9 @@ class ChamadoViewSet(viewsets.ModelViewSet):
         bolsista_ids = request.data.get("bolsistas")
         if not bolsista_ids:
             return erro("O campo bolsistas é obrigatório")
-        
+
         chamado = get_object_or_404(Chamado, pk=pk)
-        
+
         if not bolsista_ids or not isinstance(bolsista_ids, list):
             return erro("'bolsistas' deve ser uma lista de IDs.")
 
@@ -206,7 +210,7 @@ class ChamadoViewSet(viewsets.ModelViewSet):
         }
 
         return Response(resposta, status=status.HTTP_200_OK)
-    
+
     @action (detail=True, methods=["get", "post"], permission_classes=[IsAuthenticated])
     def mensagens(self, request, pk=None):
         chamado = self.get_object()
@@ -215,13 +219,13 @@ class ChamadoViewSet(viewsets.ModelViewSet):
             mensagens = Mensagem.objects.filter(chamado=chamado).order_by("data_envio")
             serializer = MensagemSerializer(mensagens, many=True)
             return Response(serializer.data, status=status.HTTP_200_OK)
-        
+
         elif request.method == "POST":
             texto = request.data.get("texto")
-            
+
             if len(texto) > 240:
                 erro("Texto longo demais") #Ajeitar isso no front
-            
+
             mensagem = Mensagem(autor=request.user, texto=texto, chamado=chamado)
 
             serializer = MensagemSerializer(mensagem)
