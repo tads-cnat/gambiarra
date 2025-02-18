@@ -10,7 +10,7 @@ import {
 } from "./timelinestyle";
 import { ChatTimelineProps } from "../../interfaces/componentes/iGambTimeLine";
 
-const Timeline: React.FC<ChatTimelineProps> = ({ statuses }) => {
+export default function Timeline({ statuses }: ChatTimelineProps) {
   if (statuses.length < 3) {
     return (
       <TimelineContainer>
@@ -35,15 +35,17 @@ const Timeline: React.FC<ChatTimelineProps> = ({ statuses }) => {
   const firstStatus = statuses[0];
   const lastStatus = statuses[statuses.length - 1];
   const middleStatuses = statuses.slice(1, -1);
-  
+
   return (
     <TimelineContainer>
       <FirstOrLastStatusContainer>
         <StepWrapper>
           <StepDot color={firstStatus.completed ? firstStatus.color : "#ccc"} />
-          <StepLine 
-            color={firstStatus.completed ? firstStatus.color : "#ccc"} 
-            $isRejected={firstStatus.label === "Recusado" || firstStatus.label === "Resolvido"}
+          <StepLine
+            color={firstStatus.completed ? firstStatus.color : "#ccc"}
+            $isRejected={
+              firstStatus.label === "Recusado" || firstStatus.label === "Resolvido"
+            }
           />
           <StepLabel>{firstStatus.label}</StepLabel>
         </StepWrapper>
@@ -58,11 +60,10 @@ const Timeline: React.FC<ChatTimelineProps> = ({ statuses }) => {
           return (
             <StepWrapper key={index}>
               <div className="inline-flex items-center justify-center ml-1">
-              <StepDot color={dotColor} />
-              <StepLine color={lineColor} $isRejected={isRejected} />
-              <StepLabel className="ml-1 mt-9">{status.label}</StepLabel>
+                <StepDot color={dotColor} />
+                <StepLine color={lineColor} $isRejected={isRejected} />
+                <StepLabel className="ml-1 mt-9">{status.label}</StepLabel>
               </div>
-              
             </StepWrapper>
           );
         })}
@@ -71,15 +72,15 @@ const Timeline: React.FC<ChatTimelineProps> = ({ statuses }) => {
       <FirstOrLastStatusContainer>
         <StepWrapper>
           <StepDot color={lastStatus.completed ? lastStatus.color : "#ccc"} />
-          <StepLine 
-            color={lastStatus.completed ? lastStatus.color : "#ccc"} 
-            $isRejected={lastStatus.label === "Recusado" || lastStatus.label === "Resolvido"}
+          <StepLine
+            color={lastStatus.completed ? lastStatus.color : "#ccc"}
+            $isRejected={
+              lastStatus.label === "Recusado" || lastStatus.label === "Resolvido"
+            }
           />
           <StepLabel>{lastStatus.label}</StepLabel>
         </StepWrapper>
       </FirstOrLastStatusContainer>
     </TimelineContainer>
   );
-};
-
-export default Timeline;
+}

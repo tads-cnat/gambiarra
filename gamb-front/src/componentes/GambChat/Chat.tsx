@@ -6,12 +6,12 @@ import {
   ChatMessage,
   ChatFooter,
   InputField,
-  SendButton
+  SendButton,
 } from "./chatstyle";
 import Icon from "../GambIcon/Icon";
-import { ChatProps } from "../../interfaces/componentes/iGambChat"; 
+import { ChatProps } from "../../interfaces/componentes/iGambChat";
 
-const Chat: React.FC<ChatProps> = ({ messages }) => {
+export default function Chat({ messages }: ChatProps) {
   return (
     <ChatContainer>
       <ChatHeader>
@@ -41,6 +41,4 @@ const Chat: React.FC<ChatProps> = ({ messages }) => {
       </ChatFooter>
     </ChatContainer>
   );
-};
-
-export default Chat;
+}

@@ -12,7 +12,7 @@ import {
 import { ChamadoDetalhesProps } from "../../interfaces/componentes/iGambDetails";
 import Icon from "../GambIcon/Icon";
 
-const ChamadoDetalhes: React.FC<ChamadoDetalhesProps> = ({ chamado }) => {
+export default function ChamadoDetalhes({ chamado }: ChamadoDetalhesProps) {
   return (
     <Container>
       <Card>
@@ -125,6 +125,4 @@ const ChamadoDetalhes: React.FC<ChamadoDetalhesProps> = ({ chamado }) => {
       </Card>
     </Container>
   );
-};
-
-export default ChamadoDetalhes;
+}

@@ -57,7 +57,7 @@ export const StepLine = styled.div<{
 
 export const StepLabel = styled.span`
   position: absolute;
-  top: 1.75rem; /* Fica abaixo da bolinha */
+  top: 1.75rem;
   left: 0;
   width: 80px;
   text-align: center;
@@ -65,16 +65,15 @@ export const StepLabel = styled.span`
   transform: translateX(-28%);
 `;
 
-// Container para status fixos (primeiro e último)
 export const FirstOrLastStatusContainer = styled.div`
   flex-shrink: 0;
 `;
 
-// Container para os status centrais roláveis
 export const MiddleStatusContainer = styled.div`
   display: flex;
   gap: 8px;
   height: 7rem;
   overflow-x: auto;
+  overflow-y: hidden;
   flex: 1;
 `;
