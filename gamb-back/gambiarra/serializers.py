@@ -111,6 +111,19 @@ class AlterarStatusSerializer(serializers.ModelSerializer):
             "id",
             "status",
         ]
+
+class AcessorioSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Acessorio
+        fields = ['id', 'nome']
+
+class ItemSerializer(serializers.ModelSerializer):
+    acessorios = AcessorioSerializer(many=True, read_only=True)
+    
+    class Meta:
+        model = Item
+        fields = ['id', 'modelo', 'diagnostico', 'acessorios']
+
 class DetalharChamadoSerializer(serializers.ModelSerializer):
     
     bolsistas = serializers.SerializerMethodField()
@@ -118,6 +131,7 @@ class DetalharChamadoSerializer(serializers.ModelSerializer):
     cliente = serializers.SerializerMethodField()
     status = serializers.SerializerMethodField()
     avaliacao = serializers.SerializerMethodField()
+    item = ItemSerializer()
 
     class Meta:
         model = Chamado
@@ -166,6 +180,15 @@ class DetalharChamadoSerializer(serializers.ModelSerializer):
             "id": ide,
             "nome": obj.get_status_display()
         }
+    
+     # Mantenha os métodos existentes e modifique apenas o get_item:
+    def get_item(self, obj):
+        # Verifica se existe um item relacionado
+        if not obj.item:
+            return None
+            
+        # Usa o serializer de Item para formatar a resposta
+        return ItemSerializer(obj.item).data
 
 class MensagemSerializer(serializers.ModelSerializer):
     autor = serializers.PrimaryKeyRelatedField(read_only=True)

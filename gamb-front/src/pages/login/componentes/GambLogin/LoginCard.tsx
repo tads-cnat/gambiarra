@@ -29,7 +29,7 @@ export function LoginCard() {
 				authService.profile().then(() => {
 					setTimeout(() => {
 						navigate("/dashboard");
-					}, 2000);
+					}, 1000);
 				});
 			} else {
 				setLoginIsValid(false);

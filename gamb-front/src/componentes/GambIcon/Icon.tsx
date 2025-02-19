@@ -48,6 +48,15 @@ import {
 	ListMagnifyingGlass,
 	SkipBackCircle,
 	Flower,
+	TextT,
+	SimCard,
+	Article,
+	Barcode,
+	UsersFour,
+	NotePencil,
+	Check,
+	ClockClockwise,
+	ChatsCircle,
 } from "@phosphor-icons/react";
 import { GambIconProps } from "../../interfaces/componentes/iGambIcon";
 import { cloneElement } from "react";
@@ -105,6 +114,16 @@ const iconComponents: { [key: string]: JSX.Element } = {
 	back: <SkipBackCircle />,
 	flower: <Flower />,
 
+	fillcircle: <Circle weight="fill"/>,
+	text: <TextT />,
+	simcard: <SimCard />,
+	article: <Article />,
+	barcode: <Barcode />,
+	usersfour: <UsersFour />,
+	note_pencil: <NotePencil />,
+	onecheck: <Check />,
+	chatfill: <ChatsCircle/>,
+	clock: <ClockClockwise />, 
 };
 
 export default function Icon(props: GambIconProps): JSX.Element {

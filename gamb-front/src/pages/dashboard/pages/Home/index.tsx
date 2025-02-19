@@ -22,12 +22,14 @@ import ChamadoService from "../../../../services/models/ChamadoService";
 import AceitarChamadoModal from "../../../../componentes/GambTable/forms/AceitarChamadoModal";
 import EncerrarChamadoModal from "../../../../componentes/GambTable/forms/EncerrarChamadoModal";
 import axiosInstance from "../../../../services/base/axiosInstance";
+import { useNavigate } from "react-router-dom";
 
 export default function DashboardHome(): JSX.Element {
+	const navigate = useNavigate();
 	const [chamados, setChamados] = useState<Chamados[]>([]);
 	const [AceitarModalOpen, setAceitarModalOpen] = useState(false);
 	const [EncerrarModalOpen, setEncerrarModalOpen] = useState(false);
-	const [chamadoId, setChamadoId] = useState(null);
+	const [chamadoId, setChamadoId] = useState(0);
 	const closeAceitarModal = () => setAceitarModalOpen(false);
 	const closeEncerrarModal = () => setEncerrarModalOpen(false);
 	const [optionsProfessor, setOptionsProfessor] = useState([]);
@@ -51,7 +53,6 @@ export default function DashboardHome(): JSX.Element {
 			label: user.username,
 			value: user.id,
 		  }));
-		  console.log(option);
 		  setState(option);
 		} catch (error) {
 		  console.error("Erro ao buscar usuários:", error);
@@ -187,20 +188,25 @@ export default function DashboardHome(): JSX.Element {
 				action={true}
 				hiddenFields={["id"]}
 				isChamados={true}
-				TableActions={{
-					detalhar: (id: number) => console.log("detalhar", id),
-					chat: (id: number) => console.log("chat", id),
-					arquivar: (id: number) => console.log("arquivar", id),
-					resolver: (id: number) => console.log(id),
-					aceitar: (id: number) => {
-						setChamadoId(id);
-						setAceitarModalOpen(true);
-					},
-					recusar: (id: number) => {
-						setChamadoId(id);
-						setEncerrarModalOpen(true);
-					},
-				}}
+				TableActions={
+					{
+						detalhar: (id: number) => {
+							navigate(`/dashboard/detail/${id}`);
+						},
+						chat: (id: number) => console.log("chat", id),
+						arquivar: (id: number) => console.log("arquivar", id),
+						resolver: (id:number) => console.log(id),
+						aceitar: (id:number) =>{ 
+												setChamadoId(id)
+												setAceitarModalOpen(true)
+												},
+						recusar: (id:number) =>{
+												setChamadoId(id)
+												setEncerrarModalOpen(true)
+												},
+					}
+					
+				}
 			/>
 			<AceitarChamadoModal
 				isModalOpen={AceitarModalOpen}

@@ -11,7 +11,6 @@ class ChamadoService extends BaseService {
 			)
 			: {};
 	
-		console.log(filterList);
 		const response = await axiosInstance.get(`${this.serviceUrl}`, {
 			params: filterList,
 		});
@@ -34,6 +33,30 @@ class ChamadoService extends BaseService {
 		const response = await axiosInstance.patch(
 		`${this.serviceUrl}/${id}/alterar_status/`, {status: 8} )
 		return response;
+	}
+
+	async getChamadoID(id: number): Promise<unknown>{
+		const response = await axiosInstance.get(
+			`${this.serviceUrl}/${id}/`)
+			return response;
+	}
+
+	async getAcessorio(id: number): Promise<unknown>{
+		const response = await axiosInstance.get(
+			`${this.serviceUrl}/${id}/get_acessorios_item/`)
+			return response;
+	}
+
+	async alterarStatus(id: number, status: string): Promise<unknown>{
+		const response = await axiosInstance.patch(
+			`${this.serviceUrl}/${id}/alterar_status/`, {status} )
+			return response;
+	}
+	
+	async atribuirBolsista(id: number, bolsistas: number[]): Promise<unknown>{
+		const response = await axiosInstance.patch(
+			`${this.serviceUrl}/${id}/update_bolsistas/`, {bolsistas} )
+			return response;
 	}
 }
 

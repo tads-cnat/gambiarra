@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import Select from "react-select";
 import { Container, customStyles } from "./multSelectStyles";
 
@@ -8,7 +7,7 @@ interface Option {
   value: number;
 }
 
-const status: Option[] = [
+const options: Option[] = [
   { label: "Em Análise", value: 1 },
   { label: "Aceito", value: 2 },
   { label: "Em Diagnóstico", value: 3 },
@@ -25,19 +24,21 @@ interface MultiSelectProps {
   label?: string;
   register: any;  // Defina um tipo mais específico para `register` (por exemplo, `UseFormRegister` do React Hook Form)
   error?: any;     // Defina um tipo mais específico para `error`
-  formIsValid: boolean;
+  formIsValid?: boolean;
   options?: Option[];
+  styles?: React.CSSProperties;
 }
 
 export default function MultSelect(props: MultiSelectProps): JSX.Element {
-  const { placeholder, defaultValue, label, register, error, options } = props;
+  const { placeholder, defaultValue, label, register, error } = props;
 
   // Handle de seleção refinado
   const handleChange = (selectedOptions: Option[] | null) => {
     if (selectedOptions) {
-      console.log(selectedOptions.map((option) => option.value));
-    }
-  };
+      const selectedValues = selectedOptions.map((option) => option.value);
+      register.onChange(selectedValues);
+  }
+};
 
   return (
     <Container>
@@ -48,7 +49,7 @@ export default function MultSelect(props: MultiSelectProps): JSX.Element {
       )}
       <Select
         isMulti
-        options={options === undefined ? status : options}
+        options={ props.options ? props.options : options }
         onChange={handleChange}
         classNamePrefix="select"
         styles={customStyles}

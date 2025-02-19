@@ -10,6 +10,7 @@ import DashboardHome from "./pages/dashboard/pages/Home";
 import GerenciarUsuarios from "./pages/dashboard/pages/Gerenciar/usuarios";
 import { defaultTheme } from "./styles/themes/default";
 import { Login } from "./pages/login/Login";
+import Detail from "./pages/dashboard/pages/detail/Detail";
 import "./styles/index.css";
 import authService from "./auth/service/authService";
 
@@ -43,6 +44,7 @@ export function App() {
 						path="/"
 						element={<Home />}
 					/>
+
 					<Route
 						path="/login"
 						element={
@@ -68,6 +70,17 @@ export function App() {
 							element={
 								<ProtectedRoute
 									element={<DashboardHome />}
+									requiredRole={["Allowed"]}
+								/>
+							}
+						/>
+
+						<Route
+							path="detail/:id"
+							element={
+								<ProtectedRoute
+
+									element={<Detail />}
 									requiredRole={["Allowed"]}
 								/>
 							}

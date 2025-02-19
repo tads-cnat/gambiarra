@@ -1,7 +1,7 @@
 export interface CardIndexProps {
-	nomeCampus?: String;
-	contato?: String;
-	endereco?: String;
+	nomeCampus?: string;
+	contato?: string;
+	endereco?: string;
 	professores?: number;
 	bolsistas?: number;
 	maquinas?: number;

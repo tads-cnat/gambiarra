@@ -17,6 +17,7 @@ import {
 } from "./indexstyles";
 import CardIndex from "../../componentes/GambCardIndex/GambCardIndex";
 
+
 export default function Home() {
 	
 	return (
