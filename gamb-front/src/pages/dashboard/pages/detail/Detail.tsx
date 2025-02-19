@@ -15,18 +15,18 @@ const initialMessages: Array<{
   time: string;
   side: "left" | "right";
 }> = [
-  {
-    id: 1,
-    text: "Olá, como posso ajudar?",
-    time: "10:00",
-    side: "left"
-  },
-  {
-    id: 2,
-    text: "Estou com um problema no meu equipamento",
-    time: "10:01",
-    side: "right"
-  }
+  // {
+  //   id: 1,
+  //   text: "Olá, como posso ajudar?",
+  //   time: "10:00",
+  //   side: "left"
+  // },
+  // {
+  //   id: 2,
+  //   text: "Estou com um problema no meu equipamento",
+  //   time: "10:01",
+  //   side: "right"
+  // }
 ];
 
 export default function Detail(): JSX.Element {
@@ -70,7 +70,7 @@ export default function Detail(): JSX.Element {
           <h3 className="bg-gray-200 rounded-md px-2 py-1">Linha do Tempo</h3>
         </div>
         <div className="flex flex-col gap-8">
-          {/* <RequestTimeLine id={Number(id)} /> */}
+           <RequestTimeLine id={Number(id)} /> 
           
             <div className="inline-flex flex-row items-center gap-4">
             <Icon icon="chatfill" size={40} color="#28a745" />

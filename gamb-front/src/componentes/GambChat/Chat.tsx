@@ -42,7 +42,7 @@ export default function Chat({ initialMessages }: ChatProps) {
     setTimeout(() => {
       const botMessage = {
         id: messages.length + 2,
-        text: "Recebemos sua mensagem. Retornaremos em breve!",
+        text: "Ola, tudo bem com você?",
         time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
         side: "left" as const
       };
