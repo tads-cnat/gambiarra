@@ -64,7 +64,7 @@ export default function AtribuirBolsistaModal(props: {
             </ModalHeader>
 
             <form style={{ marginTop: "8px", maxHeight: "200px", overflowY: "auto" }} onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4 p-2 mt-0 justify-center items-start">
-              Exibe os checkboxes para cada bolsista
+              | Selecione um ou mais bolsistas para atribuir ao chamado:
               <div className="flex flex-col gap-2">
                 {options.map((option) => (
                   <div key={option.value} className="flex items-center gap-2">
