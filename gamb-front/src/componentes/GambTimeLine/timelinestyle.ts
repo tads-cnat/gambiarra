@@ -39,20 +39,6 @@ export const StepLine = styled.div<{
   background-color: ${(props) => props.color};
   margin: 0 8px;
   position: relative;
-
-  ${({ $isRejected }) =>
-    $isRejected &&
-    `
-    &::after {
-      content: '';
-      position: absolute;
-      right: -1px;
-      top: -13px;
-      width: 1px;
-      height: 30px;
-      background-color: inherit;
-    }
-  `}
 `;
 
 export const StepLineEnd = styled.div<{ 

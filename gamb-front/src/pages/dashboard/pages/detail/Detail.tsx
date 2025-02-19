@@ -9,21 +9,24 @@ import ChamadoService from "../../../../services/models/ChamadoService";
 import { Chamado } from "../../../../interfaces/componentes/iGambDetails";
 import { RequestTimeLine } from "../../../../componentes/GambTimeLine/TimeLineReceive";
 
-const messages = [
+const initialMessages: Array<{
+  id: number;
+  text: string;
+  time: string;
+  side: "left" | "right";
+}> = [
   {
     id: 1,
-    user: "Você",
-    text: "Oi, tudo bem?",
-    time: "13h58m 08/01/2025",
-    side: "right" as const,
+    text: "Olá, como posso ajudar?",
+    time: "10:00",
+    side: "left"
   },
   {
     id: 2,
-    user: "Lívio S.",
-    text: "Estou bem e você?",
-    time: "13h59m 08/01/2025",
-    side: "left" as const,
-  },
+    text: "Estou com um problema no meu equipamento",
+    time: "10:01",
+    side: "right"
+  }
 ];
 
 export default function Detail(): JSX.Element {
@@ -67,14 +70,14 @@ export default function Detail(): JSX.Element {
           <h1 className="bg-gray-200 rounded-md px-2 py-1">Linha do Tempo</h1>
         </div>
         <div className="flex flex-col gap-8">
-          <RequestTimeLine id={Number(id)} />
+          {/* <RequestTimeLine id={Number(id)} /> */}
           
             <div className="inline-flex flex-row items-center gap-4">
             <Icon icon="chatfill" size={40} color="#28a745" />
             <h1 className="bg-gray-200 rounded-md px-2 py-1">Chat do Chamado</h1>
         </div>
 
-          <Chat messages={messages} />
+          <Chat initialMessages={initialMessages} />
         </div>
       </ChatCard>
     </div>
