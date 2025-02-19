@@ -1,10 +1,14 @@
 from rest_framework import serializers
 
 from authentication.models import Usuario
-from gambiarra.models import Acessorio, Chamado, Item, STATUS_CHOICES
 
-from .models import Acessorio, Chamado, Item
+from .models import *
 
+
+class UpdateBolsistaSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Chamado
+        fields = ["bolsistas"]
 
 class CreateAcessorioSerializer(serializers.ModelSerializer):
     class Meta:
@@ -83,10 +87,10 @@ class ListarChamadoSerializer(serializers.ModelSerializer):
         if avaliacao:
             return {"nota": avaliacao.nota, "texto": avaliacao.texto}
         return None
-    
+
     def get_status(self, obj):
         ide = next((str(key) for key, value in STATUS_CHOICES if value == obj.get_status_display()), None)
-        
+
         return {
             "id": ide,
             "nome": obj.get_status_display()
@@ -107,8 +111,91 @@ class AlterarStatusSerializer(serializers.ModelSerializer):
             "id",
             "status",
         ]
-
 class DetalharChamadoSerializer(serializers.ModelSerializer):
+    
+    bolsistas = serializers.SerializerMethodField()
+    professor = serializers.SerializerMethodField()
+    cliente = serializers.SerializerMethodField()
+    status = serializers.SerializerMethodField()
+    avaliacao = serializers.SerializerMethodField()
+
     class Meta:
         model = Chamado
-        fields = "__all__"
+        fields = [
+                  "id",
+            "titulo",
+            "professor",
+            "bolsistas",
+            "cliente",
+            "status",
+            "code",
+            "avaliacao",
+            "descricao",
+            "item",
+        ]
+    
+    def get_cliente(self, obj):
+        return {
+            "username": obj.cliente.username,
+            "id": obj.cliente.id,
+        }
+
+    def get_bolsistas(self, obj):
+        if obj.bolsistas.exists():
+            return list(obj.bolsistas.values("id", "username"))
+        return [] 
+
+
+    def get_professor(self, obj):
+        if obj.professor:
+            return {
+                "id": obj.professor.id,
+                "username": obj.professor.username,
+            }
+        return None
+
+    def get_avaliacao(self, obj):
+        avaliacao = getattr(obj, "avaliacao", None)
+        if avaliacao:
+            return {"nota": avaliacao.nota, "texto": avaliacao.texto}
+        return None
+
+    def get_status(self, obj):
+        ide = next((str(key) for key, value in STATUS_CHOICES if value == obj.get_status_display()), None)
+        return {
+            "id": ide,
+            "nome": obj.get_status_display()
+        }
+
+class MensagemSerializer(serializers.ModelSerializer):
+    autor = serializers.PrimaryKeyRelatedField(read_only=True)
+
+    class Meta:
+        model = Mensagem
+        fields = ['id', 'data_envio', 'autor', 'texto', 'chamado']
+        read_only_fields = ['id', 'data_envio', 'autor', 'chamado']
+
+class AlteracaoSerializer(serializers.ModelSerializer):
+    autor = serializers.PrimaryKeyRelatedField(read_only=True)
+
+    class Meta:
+        model = Alteracao
+        fields = ['status','data_alteracao','autor']
+        
+class UpdateChamadoSerializer(serializers.ModelSerializer):
+    avaliacao = serializers.SerializerMethodField()
+
+
+    class Meta:
+        model = Chamado
+        fields = [
+            "titulo",
+            "descricao",
+            "avaliacao",
+        ]
+
+    def get_avaliacao(self, obj):
+        avaliacao = getattr(obj, "avaliacao", None)
+        if avaliacao:
+            return {"nota": avaliacao.nota, "texto": avaliacao.texto}
+        return None

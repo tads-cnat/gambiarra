@@ -13,3 +13,4 @@ class ChamadoFilter(django_filters.FilterSet):
     class Meta:
         model = Chamado 
         fields = ['status', 'titulo', 'descricao', 'code', 'professor_id', 'bolsistas_id', 'cliente_id']
+        

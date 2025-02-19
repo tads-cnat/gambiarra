@@ -9,6 +9,7 @@ export const DashboardContainer = styled.aside`
 
 export const DashboardMain = styled.main`
 	overflow-y: auto;
+	overflow-x: hidden;
 	padding: 2rem 0.5rem;
 	width: 100%;
 

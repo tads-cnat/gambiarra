@@ -3,7 +3,7 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from gambiarra.urls import gambiarra_urls
-from authentication.urls import auth_urls
+from authentication.urls import auth_urls, usuario_url
 from drf_yasg import openapi
 from drf_yasg.views import get_schema_view as swagger_get_schema_view
 from rest_framework import permissions
@@ -26,7 +26,8 @@ api_doc = [
 #adicionar apps aqui
 api_path = [
     path("", include(gambiarra_urls)),
-    path("auth/", include(auth_urls))
+    path("auth/", include(auth_urls)),
+    path("", include(usuario_url))
 ]
 
 urlpatterns = [

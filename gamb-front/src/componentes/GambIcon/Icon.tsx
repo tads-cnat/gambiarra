@@ -45,6 +45,7 @@ import {
 	XCircle,
 	Archive,
 	PlusCircle,
+	ListMagnifyingGlass,
 } from "@phosphor-icons/react";
 import { GambIconProps } from "../../interfaces/componentes/iGambIcon";
 import { cloneElement } from "react";
@@ -98,6 +99,9 @@ const iconComponents: { [key: string]: JSX.Element } = {
 	archive: <Archive />,
 	x: <X />,
 	check: <Checks />,
+	search: <ListMagnifyingGlass />
+
+
 };
 
 export default function Icon(props: GambIconProps): JSX.Element {

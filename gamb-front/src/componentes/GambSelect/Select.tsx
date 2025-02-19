@@ -7,8 +7,7 @@ interface Option {
 }
 
 interface SelectFieldProps {
-  name?: string;
-  defaultValue?: string | number | (string | number)[]; // para um valor padrao nulo, passe "" string vazia
+  defaultValue?: string | number | (string | number)[];
   label?: string;
   placeholder?: string;
   register: UseFormRegisterReturn;
@@ -16,58 +15,51 @@ interface SelectFieldProps {
   error?: string;
   formIsValid?: boolean;
   options: Option[];
-  /**
-   * Se true, o select permitirá selecionar múltiplas opções.
-   * Caso contrário, será um select simples.
-   */
   multiple?: boolean;
 }
 
 export const statusChamado = [
-    { label: "Em Análise", value: 1 },
-    { label: "Aceito", value: 2 },
-    { label: "Em Diagnóstico", value: 3 },
-    { label: "Equipamento Em Conserto", value: 4 },
-    { label: "Aguardando Peça", value: 5 },
-    { label: "Fechado Sem Resolução", value: 6 },
-    { label: "Resolvido", value: 7 },
-    { label: "Recusado", value: 8 },
-  ];
+  { label: "Em Análise", value: 1 },
+  { label: "Aceito", value: 2 },
+  { label: "Em Diagnóstico", value: 3 },
+  { label: "Equipamento Em Conserto", value: 4 },
+  { label: "Aguardando Peça", value: 5 },
+  { label: "Fechado Sem Resolução", value: 6 },
+  { label: "Resolvido", value: 7 },
+  { label: "Recusado", value: 8 },
+];
 
-export function SelectField(props: SelectFieldProps): JSX.Element {
-  const {
-    name,
-    defaultValue,
-    label,
-    placeholder,
-    className,
-    register,
-    error,
-    formIsValid,
-    options,
-    multiple = false,
-  } = props;
+export function SelectField({
+  defaultValue,
+  label,
+  placeholder,
+  className,
+  register,
+  error,
+  formIsValid,
+  options,
+  multiple = false,
+}: SelectFieldProps): JSX.Element {
+  
+  
 
   return (
-    <div>
-      {/* Label do campo */}
+    <div style={{ width: "255px" }}>
       {label && (
-        <label className="block text-gray-700 mb-2" htmlFor={name}>
+        <label className="block text-gray-700 mb-2" >
           {label}
         </label>
       )}
 
-      {/* Campo de seleção */}
       <SelectText
         id={`${name}-select`}
         className={className}
         data-cypress={`${name}-select`}
-        {...register}
         defaultValue={defaultValue as string | number | readonly string[] | undefined}
+        {...register}
         multiple={multiple}
       >
-        {/* Se for select simples e houver placeholder, renderiza uma opção desabilitada */}
-        {!multiple && placeholder && (
+        {placeholder && !multiple && (
           <option value="" disabled>
             {placeholder}
           </option>
@@ -79,10 +71,7 @@ export function SelectField(props: SelectFieldProps): JSX.Element {
         ))}
       </SelectText>
 
-      {/* Exibe mensagem de erro, se houver */}
-      {error && !formIsValid && (
-        <p className="text-red-500 text-xs italic mt-1">{error}</p>
-      )}
+      {error && !formIsValid && <p className="text-red-500 text-xs italic mt-1">{error}</p>}
     </div>
   );
 }

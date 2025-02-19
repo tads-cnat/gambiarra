@@ -18,6 +18,7 @@ export default function InputField(props: InputFieldProps): JSX.Element {
 		error,
 		icon,
 		formIsValid,
+		classNameFather
 	} = props;
 
 	// Estado para alternar o tipo de entrada (exclusivo para campos de senha)
@@ -30,7 +31,7 @@ export default function InputField(props: InputFieldProps): JSX.Element {
 	const iconPassword = isPasswordVisible ? "eyeopen" : "eyeclose";
 
 	return (
-		<div>
+		<div className={classNameFather}>
 			{/* Label do campo */}
 			{label && (
 				<label
