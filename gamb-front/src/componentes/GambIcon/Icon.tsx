@@ -44,7 +44,10 @@ import {
 	Checks,
 	XCircle,
 	Archive,
+	PlusCircle,
 	ListMagnifyingGlass,
+	SkipBackCircle,
+	Flower,
 } from "@phosphor-icons/react";
 import { GambIconProps } from "../../interfaces/componentes/iGambIcon";
 import { cloneElement } from "react";
@@ -65,6 +68,7 @@ const iconComponents: { [key: string]: JSX.Element } = {
 	clipboard: <Clipboard />,
 	play: <Play />,
 	pause: <Pause />,
+	plus_circle: <PlusCircle />,
 	plus: <Plus />,
 	minus: <Minus />,
 	seta_direita: <CaretRight />,
@@ -97,8 +101,9 @@ const iconComponents: { [key: string]: JSX.Element } = {
 	archive: <Archive />,
 	x: <X />,
 	check: <Checks />,
-	search: <ListMagnifyingGlass />
-
+	search: <ListMagnifyingGlass />,
+	back: <SkipBackCircle />,
+	flower: <Flower />,
 
 };
 
