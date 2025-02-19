@@ -7,7 +7,6 @@ interface Option {
 }
 
 interface SelectFieldProps {
-  name?: string;
   defaultValue?: string | number | (string | number)[];
   label?: string;
   placeholder?: string;
@@ -30,29 +29,24 @@ export const statusChamado = [
   { label: "Recusado", value: 8 },
 ];
 
-export function SelectField(props: SelectFieldProps): JSX.Element {
-  const {
-    name,
-    defaultValue,
-    label,
-    placeholder,
-    className,
-    register,
-    error,
-    formIsValid,
-    options,
-    multiple = false,
-  } = props;
-
-  const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const selectedValues = Array.from(event.target.selectedOptions, (option) => Number(option.value));
-    register.onChange({ target: { name, value: multiple ? selectedValues : selectedValues[0] } });
-  };
+export function SelectField({
+  defaultValue,
+  label,
+  placeholder,
+  className,
+  register,
+  error,
+  formIsValid,
+  options,
+  multiple = false,
+}: SelectFieldProps): JSX.Element {
+  
+  
 
   return (
     <div style={{ width: "255px" }}>
       {label && (
-        <label className="block text-gray-700 mb-2" htmlFor={name}>
+        <label className="block text-gray-700 mb-2" >
           {label}
         </label>
       )}
@@ -62,16 +56,13 @@ export function SelectField(props: SelectFieldProps): JSX.Element {
         className={className}
         data-cypress={`${name}-select`}
         defaultValue={defaultValue as string | number | readonly string[] | undefined}
+        {...register}
         multiple={multiple}
-        onChange={handleChange}
       >
-        {!multiple && placeholder && (
-          options.length > 0 && 
-          options.map((option) => (
-            <option key={option.value} value={option.value}>
-            {option.label}
+        {placeholder && !multiple && (
+          <option value="" disabled>
+            {placeholder}
           </option>
-        ))
         )}
         {options.map((option) => (
           <option key={option.value} value={option.value}>

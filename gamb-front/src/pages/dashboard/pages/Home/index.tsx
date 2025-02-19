@@ -1,12 +1,18 @@
-import { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
+import { useCallback, useEffect, useState } from "react";
+import { get, useForm } from "react-hook-form";
 import { useUser } from "../../../../auth/service/user";
 import GambButton from "../../../../componentes/GambButton/Button";
 import RenderCards from "../../../../componentes/GambCardChamados/CardChamado";
 import { GambFilterTable } from "../../../../componentes/GambFilterTable/FilterTable";
-import { FilterContent, FilterInputs } from "../../../../componentes/GambFilterTable/FilterTableStyles";
+import {
+	FilterContent,
+	FilterInputs,
+} from "../../../../componentes/GambFilterTable/FilterTableStyles";
 import InputField from "../../../../componentes/GambInput/Input";
-import { SelectField, statusChamado } from "../../../../componentes/GambSelect/Select";
+import {
+	SelectField,
+	statusChamado,
+} from "../../../../componentes/GambSelect/Select";
 import { GambTable } from "../../../../componentes/GambTable/Table";
 import { GambTitle } from "../../../../componentes/GambTitle/Title";
 import { ChamadoFilter } from "../../../../filters/ChamadoFilter";
@@ -15,7 +21,7 @@ import ChamadoService from "../../../../services/models/ChamadoService";
 
 import AceitarChamadoModal from "../../../../componentes/GambTable/forms/AceitarChamadoModal";
 import EncerrarChamadoModal from "../../../../componentes/GambTable/forms/EncerrarChamadoModal";
-import MultSelect from "../../../../componentes/GambMultSelect/MultSelect";
+import axiosInstance from "../../../../services/base/axiosInstance";
 
 export default function DashboardHome(): JSX.Element {
 	const [chamados, setChamados] = useState<Chamados[]>([]);
@@ -24,6 +30,10 @@ export default function DashboardHome(): JSX.Element {
 	const [chamadoId, setChamadoId] = useState(null);
 	const closeAceitarModal = () => setAceitarModalOpen(false);
 	const closeEncerrarModal = () => setEncerrarModalOpen(false);
+	const [optionsProfessor, setOptionsProfessor] = useState([]);
+	const [optionsCliente, setOptionsCliente] = useState([]);
+	const [optionsBolsista, setOptionsBolsista] = useState([]);
+
 
 	const { register, handleSubmit, reset } = useForm<ChamadoFilter>({
 		// resolver: yupResolver(filterSchema) TO-DO
@@ -32,16 +42,40 @@ export default function DashboardHome(): JSX.Element {
 	async function handleChamados(data?: ChamadoFilter): Promise<void> {
 		await ChamadoService.listarChamados(data).then((res) => {
 			setChamados(res as Chamados[]);
-		}
-		);
+		});
 	}
+	async function fetchUsers(grupo_id: number, setState: (data: any) => void) {
+		try {
+		  const response = await axiosInstance.get("usuario/", { params: { grupo_id } });
+		  const option = response.data.map((user: any) => ({
+			label: user.username,
+			value: user.id,
+		  }));
+		  console.log(option);
+		  setState(option);
+		} catch (error) {
+		  console.error("Erro ao buscar usuários:", error);
+		}
+	  }
 
+	const getUsersBolsista = useCallback(() => fetchUsers(3, setOptionsBolsista), []);
+	const getUsersCliente = useCallback(() => fetchUsers(5, setOptionsCliente), []);
+	const getUsersProfessor = useCallback(() => fetchUsers(2, setOptionsProfessor), []);
 
+	  
 	const { userActiveRole } = useUser();
 
 	useEffect(() => {
 		handleChamados();
 	}, []);
+
+	useEffect(() => {
+		getUsersBolsista();
+		getUsersCliente();
+		getUsersProfessor();
+	  }, [getUsersBolsista, getUsersCliente, getUsersProfessor]); 
+	  
+
 
 	if (!userActiveRole) {
 		return <p>Carregando...</p>;
@@ -55,61 +89,118 @@ export default function DashboardHome(): JSX.Element {
 			</div>
 
 			<form onSubmit={handleSubmit(handleChamados)}>
-			<GambFilterTable className="elevacao-def mb-6">
-				<FilterContent>
-					<GambTitle label="Filtre por pessoas" color="azul" />
-					<FilterInputs>
-						<SelectField label="Professor" placeholder="selecione um professor" register={register("professor_id")} options={[{label: "Professor 1", value: 1}, {label: "Professor 2", value: 2}]} defaultValue={""} />
-						<SelectField label="Bolsista" placeholder="selecione um bolsista" register={register("bolsista_id")} options={[{label: "Bolsista 1", value: 1}, {label: "Bolsista 2", value: 2}]} defaultValue={""} />
-						<SelectField label="Cliente" placeholder="selecione um cliente" register={register("cliente_id")} options={[{label: "Cliente 1", value: 1}, {label: "Cliente 2", value: 2}] } defaultValue={""} />
-					</FilterInputs>
-				</FilterContent>
-				<FilterContent className="mt-4">
-					<GambTitle label="Filtre pelos dados do chamado" color="roxo" />
-					<FilterInputs >
+				<GambFilterTable className="elevacao-def mb-6">
+					<FilterContent>
+						<GambTitle
+							label="Filtre por pessoas"
+							color="azul"
+						/>
+						<FilterInputs>
+							<SelectField
+								label="Bolsista"
+								placeholder="selecione um bolsista"
+								register={register("bolsista_id")}
+								options={optionsBolsista}
+								defaultValue={""}
+								
+							/>
+							{userActiveRole === "gerente" ||
+							userActiveRole === "professor" ? (
+								<SelectField
+									label="Cliente"
+									placeholder="selecione um cliente"
+									register={register("cliente_id")}
+									options={optionsCliente}
+									defaultValue={""}
+								/>
+							) : null}
+							{userActiveRole === "gerente" ||
+							userActiveRole === "cliente" ? (
+								<SelectField
+									label="Professor"
+									placeholder="selecione um professor"
+									register={register("professor_id")}
+									options={optionsProfessor}
+									defaultValue={""}
+								/>
+							) : null}
+						</FilterInputs>
+					</FilterContent>
+					<FilterContent className="mt-4">
+						<GambTitle
+							label="Filtre pelos dados do chamado"
+							color="roxo"
+						/>
+						<FilterInputs>
+							<InputField
+								label="Descrição"
+								placeholder="busque pela descrição"
+								register={register("descricao")}
+							/>
+							<InputField
+								label="Titulo"
+								placeholder="busque pelo titulo"
+								register={register("titulo")}
+							/>
+							<SelectField
+								label="Status"
+								placeholder="selecione um status"
+								register={register("status")}
+								options={statusChamado}
+								defaultValue={""}
+							/>
+							<InputField
+								label="Avaliação"
+								placeholder="busque pela avaliação"
+								register={register("avaliacao")}
+							/>
+							<InputField
+								label="Busca por texto"
+								placeholder="busque por campos de texto"
+								register={register("search")}
+								icon="search"
+								classNameFather="w-full"
+							/>
+						</FilterInputs>
 
-						<InputField label="Descrição" placeholder="busque pela descrição" register={register("descricao")} />
-						<InputField label="Titulo" placeholder="busque pelo titulo" register={register("titulo")} />
-						<SelectField label="Status" placeholder="selecione um status" register={register("status")} options={statusChamado} defaultValue={""}/>
-						<InputField label="Avaliação" placeholder="busque pela avaliação" register={register("avaliacao")} />
-						<InputField label="Busca por texto" placeholder="busque por campos de texto" register={register("search")} icon="search" classNameFather="w-full"/>
-					</FilterInputs>
-
-					<div className="flex gap-4">
-
-					<GambButton variant="cinza" label="Filtrar" size="large" />
-					<GambButton variant="inline" label=" Limpar fitros" size="large" onClick={()=>{
-						reset();
-					}} />
-					</div>
-
-				</FilterContent>
-			</GambFilterTable>
+						<div className="flex gap-4">
+							<GambButton
+								variant="cinza"
+								label="Filtrar"
+								size="large"
+							/>
+							<GambButton
+								variant="inline"
+								label=" Limpar fitros"
+								size="large"
+								onClick={() => {
+									reset();
+								}}
+							/>
+						</div>
+					</FilterContent>
+				</GambFilterTable>
 			</form>
-
 
 			<GambTable
 				data={chamados}
 				action={true}
 				hiddenFields={["id"]}
 				isChamados={true}
-				TableActions={
-					{
-						detalhar: (id: number) => console.log("detalhar", id),
-						chat: (id: number) => console.log("chat", id),
-						arquivar: (id: number) => console.log("arquivar", id),
-						resolver: (id:number) => console.log(id),
-						aceitar: (id:number) =>{ 
-												setChamadoId(id)
-												setAceitarModalOpen(true)
-												},
-						recusar: (id:number) =>{
-												setChamadoId(id)
-												setEncerrarModalOpen(true)
-												},
-					}
-					
-				}
+				TableActions={{
+					detalhar: (id: number) => console.log("detalhar", id),
+					chat: (id: number) => console.log("chat", id),
+					arquivar: (id: number) => console.log("arquivar", id),
+					resolver: (id: number) => console.log(id),
+					aceitar: (id: number) => {
+						setChamadoId(id);
+						setAceitarModalOpen(true);
+					},
+					recusar: (id: number) => {
+						setChamadoId(id);
+						setEncerrarModalOpen(true);
+					},
+				}}
 			/>
 			<AceitarChamadoModal
 				isModalOpen={AceitarModalOpen}
