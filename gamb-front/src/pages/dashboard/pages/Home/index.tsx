@@ -100,7 +100,7 @@ export default function DashboardHome(): JSX.Element {
 							<SelectField
 								label="Bolsista"
 								placeholder="selecione um bolsista"
-								register={register("bolsista_id")}
+								register={register("bolsistas_id")}
 								options={optionsBolsista}
 								defaultValue={""}
 								

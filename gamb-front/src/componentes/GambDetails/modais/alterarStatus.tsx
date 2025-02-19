@@ -20,7 +20,6 @@ export default function AlterarStatusModal(props: {
   async function onSubmit(values: FormValues): Promise<void> {
     if (!chamadoId) return;  // Verifica se chamadoId é válido
 
-    console.log(String(values.status));
     ChamadoService.alterarStatus(chamadoId, String(values.status))  // Altera o status
       .then(() => {
         alert("Status alterado com sucesso");

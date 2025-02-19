@@ -53,7 +53,6 @@ class authService extends BaseService {
 				},
 			})
 			.then((response) => {
-				console.log(response.data.data);
 				const user: UserActive = response.data.data;
 				localStorage.setItem(
 					"user",
