@@ -119,7 +119,8 @@ export default function ChamadoDetalhes({ chamado }: ChamadoDetalhesProps) {
               <GambButton variant="amarelo" label="Avaliar" icon="checkcircle" />
               <GambButton variant="cinza" label="Atribuir tarefas" icon="checkcircle" />
               <GambButton variant="branco" label="Alterar Status" icon="checkcircle" /> */}
-              {getActionsByStatus(Number(chamado.status.id),  chamado.id, Actions)}
+              {getActionsByStatus(Number(chamado.status.id), chamado.id, Actions).length > 0 ? getActionsByStatus(Number(chamado.status.id), chamado.id, Actions) : <p>Nenhuma ação disponivel</p>}
+
             </div>
           
           </div>
