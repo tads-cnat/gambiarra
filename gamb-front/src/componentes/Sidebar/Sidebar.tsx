@@ -237,7 +237,7 @@ export function Sidebar() {
 									src="\assets\perfil.png"
 									alt="Imagem de perfil"
 								/>
-								{userActive?.username || "User"}
+								{userActive?.username || "User"} - {userActiveRole}
 							</User>
 							<div className="flex flex-col-reverse relative">
 								{isDropdownOpen && (
