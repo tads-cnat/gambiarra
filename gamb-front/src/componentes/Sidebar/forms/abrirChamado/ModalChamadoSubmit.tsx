@@ -6,7 +6,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import GambButton from "../../../GambButton/Button";
 import { MouseEvent } from "react";
 import { chamadoSchema } from "./schema";
-import React from "react";
+ 
 
 export default function ModalChamadoSubmit(props: {
 	isModalOpen: boolean;
@@ -40,7 +40,7 @@ export default function ModalChamadoSubmit(props: {
 	return (
 		<>
 			<Modal
-				isOpen={isModalOpen}
+				isModalOpen={isModalOpen}
 				onClose={closeModal}
 				title="Abrir Chamado"
 				onSubmit={handleSubmit(onSubmit)} // Integração com handleSubmit
@@ -66,10 +66,9 @@ export default function ModalChamadoSubmit(props: {
 					error={errors.descricao?.message}
 					register={register("descricao")}
 				/>
-        <h3 className="text-xl font-normal mt-3 mb-1">
+				<h3 className="text-xl font-normal mt-3 mb-1">
 					| Item <span className="text-red-500">*</span>
 				</h3>
-
 
 				<InputField
 					label="Modelo"
@@ -80,7 +79,7 @@ export default function ModalChamadoSubmit(props: {
 					textAux="Informe o modelo do item com defeito"
 					register={register("item.modelo")}
 				/>
-        {/* Botão para adicionar um acessório */}
+				{/* Botão para adicionar um acessório */}
 				<div className="flex w-full justify-end">
 					<GambButton
 						label="Adicionar Acessório"
@@ -91,12 +90,10 @@ export default function ModalChamadoSubmit(props: {
 						onClick={addAcessorio}
 					/>
 				</div>
-        
+
 				<h3 className="text-xl font-regular  mt-3 mb-1">
 					| Acessórios (Opcional)
 				</h3>
-
-				
 
 				{/* Mapeando os campos de acessórios */}
 				{fields && fields.length > 0 ? (

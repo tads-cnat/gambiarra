@@ -1,8 +1,10 @@
 from django.urls import path
+from rest_framework.routers import DefaultRouter
 from . import views
 
-
-app_name = 'gambiarra'
+router = DefaultRouter()
+router.register(r'chamado', views.ChamadoViewSet, basename="Chamado")
+app_name = "gambiarra"
 gambiarra_urls = [
-    path('chamado/', views.CreateChamadoView.as_view(), name='create-chamado')
-]
+
+] + router.urls
