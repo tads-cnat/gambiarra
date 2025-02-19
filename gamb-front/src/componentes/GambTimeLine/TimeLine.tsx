@@ -1,4 +1,3 @@
-import React from "react";
 import {
   TimelineContainer,
   StepWrapper,
@@ -11,46 +10,22 @@ import {
 } from "./timelinestyle";
 import { ChatTimelineProps } from "../../interfaces/componentes/iGambTimeLine";
 
-export default function Timeline({ statuses }: ChatTimelineProps) {
-  if (statuses.length < 5) {
-    return (
-      <TimelineContainer>
-        {statuses.map((status, index) => {
-          const isFinal = index === statuses.length - 1;
-          const dotColor = status.completed ? status.color : "#ccc";
-          const lineColor = status.completed ? status.color : "#ccc";
+export default function Timeline(props: ChatTimelineProps) {
+  const { status } = props;
 
-          return (
-            <StepWrapper key={index}>
-              <StepDot color={dotColor} />
-              {isFinal ? (
-                <StepLineEnd color={lineColor} />
-              ) : (
-                <StepLine color={lineColor} />
-              )}
-              <StepLabel>{status.label}</StepLabel>
-            </StepWrapper>
-          );
-        })}
-      </TimelineContainer>
-    );
-  }
-
-  const lastStatus = statuses[statuses.length - 1];
-  const middleStatuses = statuses.slice(0, -1); 
+  const lastStatus = status[status.length - 1];
+  const middleStatuses = status.slice(0, -1); 
 
   return (
     <TimelineContainer>
       <MiddleStatusContainer>
-        {middleStatuses.map((status, index) => {
-          const dotColor = status.completed ? status.color : "#ccc";
-          const lineColor = status.completed ? status.color : "#ccc";
+        {middleStatuses.map((alt, index) => {
           return (
             <StepWrapper key={index}>
               <div className="inline-flex items-center justify-center ml-1">
-                <StepDot color={dotColor} />
-                <StepLine color={lineColor} />
-                <StepLabel className="ml-1 mt-9">{status.label}</StepLabel>
+                <StepDot color={alt.color} />
+                <StepLine color={alt.color} />
+                <StepLabel className="ml-1 mt-9">{alt.label}</StepLabel>
               </div>
             </StepWrapper>
           );
@@ -59,10 +34,9 @@ export default function Timeline({ statuses }: ChatTimelineProps) {
 
       <FirstOrLastStatusContainer>
         <StepWrapper>
-          <StepDot color={lastStatus.completed ? lastStatus.color : "#ccc"} />
+          <StepDot color={lastStatus.color} />
           <StepLineEnd
-            color={lastStatus.completed ? lastStatus.color : "#ccc"}
-          />
+            color={lastStatus.color}          />
           <StepLabel>{lastStatus.label}</StepLabel>
         </StepWrapper>
       </FirstOrLastStatusContainer>

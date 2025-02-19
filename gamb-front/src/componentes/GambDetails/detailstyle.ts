@@ -40,12 +40,7 @@ export const Section = styled.div`
   margin-bottom: 15px;
 `;
 
-export const Actions = styled.div`
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  margin-top: 15px;
-`;
+
 
 export const PeopleList = styled.div`
   margin-top: 10px;

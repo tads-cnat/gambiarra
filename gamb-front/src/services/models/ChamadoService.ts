@@ -41,6 +41,13 @@ class ChamadoService extends BaseService {
 			`${this.serviceUrl}/${id}/`)
 			return response;
 	}
+
+	async getAcessorio(id: number): Promise<unknown>{
+		const response = await axiosInstance.get(
+			`${this.serviceUrl}/${id}/get_acessorios_item/`)
+			return response;
+	}
+	
 }
 
 export default new ChamadoService("chamado");

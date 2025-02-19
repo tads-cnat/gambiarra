@@ -258,7 +258,13 @@ class ChamadoViewSet(viewsets.ModelViewSet):
         alteracoes = Alteracao.objects.filter(chamado=chamado).order_by("data_alteracao")
         serializer = AlteracaoSerializer(alteracoes, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
-
+    
+    @action(detail=True, methods=["get"], permission_classes=[IsAuthenticated])
+    def get_acessorios_item(self, request, pk):
+        item = get_object_or_404(Item, pk=pk)
+        acessorios = Acessorio.objects.filter(item=item)
+        serializer = AcessorioSerializer(acessorios, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 

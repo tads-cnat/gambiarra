@@ -87,6 +87,7 @@ export const StepLabel = styled.span`
 
 export const FirstOrLastStatusContainer = styled.div`
   flex-shrink: 0;
+  margin-bottom: 0.8rem;
 `;
 
 export const MiddleStatusContainer = styled.div`

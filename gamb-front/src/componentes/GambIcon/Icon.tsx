@@ -51,6 +51,8 @@ import {
 	UsersFour,
 	NotePencil,
 	Check,
+	ClockClockwise,
+	ChatsCircle,
 } from "@phosphor-icons/react";
 import { GambIconProps } from "../../interfaces/componentes/iGambIcon";
 import { cloneElement } from "react";
@@ -111,7 +113,8 @@ const iconComponents: { [key: string]: JSX.Element } = {
 	usersfour: <UsersFour />,
 	note_pencil: <NotePencil />,
 	onecheck: <Check />,
-	chatfill: <ChatCircle weight="fill"/>,
+	chatfill: <ChatsCircle/>,
+	clock: <ClockClockwise />, 
 };
 
 export default function Icon(props: GambIconProps): JSX.Element {

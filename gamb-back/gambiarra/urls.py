@@ -4,7 +4,6 @@ from . import views
 
 router = DefaultRouter()
 router.register(r'chamado', views.ChamadoViewSet, basename="Chamado")
-
 app_name = "gambiarra"
 gambiarra_urls = [
 
