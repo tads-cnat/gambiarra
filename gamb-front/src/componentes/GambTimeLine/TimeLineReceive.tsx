@@ -14,32 +14,33 @@ export function RequestTimeLine(props: {id: number}): JSX.Element {
   
 
     async function handleTimeLine(id: number) {
-        await axiosInstance.get(`/chamados/${id}/alteracoes/`).then((response) => {
+        await axiosInstance.get(`/chamado/${id}/alteracoes/`).then((response) => {
             const result = response.data.map((alt: any) => {
                 let color = "";
                 let label = "";
-                if(alt.status.id === 1){
+                console.log("ALT", alt);
+                if(alt.status === "1"){
                     color = "#6c757d";
                     label = "Em análise";
-                }else if(alt.status.id === 2){
+                }else if(alt.status === "2"){
                     color = "#28a745";
                     label = "Aceito";
-                }else if(alt.status.id === 3){
+                }else if(alt.status === "3"){
                     color= "#FFC222";
                     label = "Em Diagnóstico";
-                }else if(alt.status.id === 4){
+                }else if(alt.status === "4"){
                     color= "#28a745";
                     label = "Equipamento Em Conserto";
-                }else if(alt.status.id === 5){
+                }else if(alt.status === "5"){
                     color= "#FFC222";
                     label = "Aguardando Peça";
-                }else if(alt.status.id === 6){
+                }else if(alt.status === "6"){
                     color= "#28a745";
                     label = "Fechado Sem Resolução";
-                }else if(alt.status.id === 7){
+                }else if(alt.status === "7"){
                     color= "#FFC222";
                     label = "Resolvido";
-                }else if(alt.status.id === 8){
+                }else if(alt.status === "8"){
                     color= "#FFC222";
                     label= "Recusado";
                     
@@ -66,7 +67,8 @@ export function RequestTimeLine(props: {id: number}): JSX.Element {
 
   return (
     <>
-        <Timeline status={timeLine} />
+        {timeLine.length > 0 &&         <Timeline status={timeLine} />
+    }
    
     </>
   );

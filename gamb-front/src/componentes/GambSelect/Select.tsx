@@ -14,8 +14,9 @@ interface SelectFieldProps {
   className?: string;
   error?: string;
   formIsValid?: boolean;
-  options: Option[];
+  options?: Option[];
   multiple?: boolean;
+  styels?: React.CSSProperties;
 }
 
 export const statusChamado = [
@@ -37,14 +38,15 @@ export function SelectField({
   register,
   error,
   formIsValid,
-  options,
+  options = statusChamado,
   multiple = false,
+  styels, 
 }: SelectFieldProps): JSX.Element {
   
   
 
   return (
-    <div style={{ width: "255px" }}>
+    <div style={ styels ? styels : { width: "255px"}}>
       {label && (
         <label className="block text-gray-700 mb-2" >
           {label}

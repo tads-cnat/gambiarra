@@ -53,7 +53,6 @@ export default function DashboardHome(): JSX.Element {
 			label: user.username,
 			value: user.id,
 		  }));
-		  console.log(option);
 		  setState(option);
 		} catch (error) {
 		  console.error("Erro ao buscar usuários:", error);
