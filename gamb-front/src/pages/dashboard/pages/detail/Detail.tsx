@@ -64,14 +64,14 @@ export default function Detail(): JSX.Element {
       <ChatCard>
         <div className="inline-flex flex-row items-center gap-4">
           <Icon icon="clock" size={40} color="#564CCF" />
-          <h1 className="bg-gray-200 rounded-md px-2 py-1">Linha do Tempo</h1>
+          <h3 className="bg-gray-200 rounded-md px-2 py-1">Linha do Tempo</h3>
         </div>
         <div className="flex flex-col gap-8">
           <RequestTimeLine id={Number(id)} />
           
             <div className="inline-flex flex-row items-center gap-4">
             <Icon icon="chatfill" size={40} color="#28a745" />
-            <h1 className="bg-gray-200 rounded-md px-2 py-1">Chat do Chamado</h1>
+            <h3 className="bg-gray-200 rounded-md px-2 py-1">Chat do Chamado</h3>
         </div>
 
           <Chat messages={messages} />

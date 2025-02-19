@@ -117,6 +117,7 @@ class ChamadoViewSet(viewsets.ModelViewSet):
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
         chamado = serializer.instance
+        chamado.save()
         alteracao = Alteracao(autor = self.request.user, status=chamado.status, chamado=chamado)
         alteracao.save()
         return Response(

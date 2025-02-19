@@ -60,7 +60,6 @@ export function Sidebar() {
 		navigate("/login");
 	}
 
-	console.log(window.location.pathname);
 	// Abre/fecha o dropdown do usuário
 	const toggleDropdown = () => setDropdownOpen(!isDropdownOpen);
 

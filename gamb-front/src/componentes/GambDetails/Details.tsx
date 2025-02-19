@@ -12,6 +12,10 @@ import Icon from "../GambIcon/Icon";
 import { getActionsByStatus } from "./actions";
 import AceitarChamadoModal from "../../componentes/GambTable/forms/AceitarChamadoModal";
 import EncerrarChamadoModal from "../../componentes/GambTable/forms/EncerrarChamadoModal";
+import { set } from "react-hook-form";
+import Modal from "../GambModal/modal";
+import AlterarStatusModal from "./modais/alterarStatus";
+import AtribuirBolsistaModal from "./modais/atribuirBolsista";
 
 export default function ChamadoDetalhes({ chamado }: ChamadoDetalhesProps) {
 	const [AceitarModalOpen, setAceitarModalOpen] = useState(false);
@@ -19,6 +23,11 @@ export default function ChamadoDetalhes({ chamado }: ChamadoDetalhesProps) {
 	const [chamadoId, setChamadoId] = useState(0);
 	const closeAceitarModal = () => setAceitarModalOpen(false);
 	const closeEncerrarModal = () => setEncerrarModalOpen(false);
+
+  const [openModalAtribuirBolsista, setOpenModalAtribuirBolsista] = useState(false);
+  const [ openModalAlterarStatus, setOpenModalAlterarStatus ] = useState(false);
+
+
 
   console.log("ChamadoDetalhes recebendo:", chamado);
   const Actions = {
@@ -36,7 +45,14 @@ export default function ChamadoDetalhes({ chamado }: ChamadoDetalhesProps) {
 			setChamadoId(id)
 			setEncerrarModalOpen(true)
 		},
-    
+    AtribuirBolsista: (id: number) => {
+      setChamadoId(id);
+      setOpenModalAtribuirBolsista(true);
+    },
+    AlterarStatus: (id: number) => {
+      setChamadoId(id);
+      setOpenModalAlterarStatus(true);
+    }
   }
 
   return (
@@ -163,7 +179,24 @@ export default function ChamadoDetalhes({ chamado }: ChamadoDetalhesProps) {
                 closeModal={closeEncerrarModal}
                 chamadoId={chamadoId}
               />
+
+
+      
+
+    <AlterarStatusModal 
+      isModalOpen={openModalAlterarStatus}
+      closeModal={() => setOpenModalAlterarStatus(false)}
+      chamadoId={chamadoId}
+    />
+
+<AtribuirBolsistaModal
+      isModalOpen={openModalAtribuirBolsista}
+      closeModal={() => setOpenModalAtribuirBolsista(false)}
+      chamadoId={chamadoId}
+    />
     </Container>
+
+
 
     
   );
