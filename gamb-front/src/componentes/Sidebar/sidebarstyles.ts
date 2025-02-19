@@ -62,21 +62,26 @@ export const SidebarContent = styled.div`
 			align-items: center;
 			gap: 0.5rem;
 			&:hover {
-				border-bottom: 1px solid
-					${(props) => props.theme.cores.gray_300};
+				border-left: 1px solid
+					${(props) => props.theme.cores.purple_info_primary};
+				color: ${(props) => props.theme.cores.purple_info_primary};
 			}
+			padding: 0.5rem;
+
 		}
 	}
 
 	div > .gambi-img {
-		padding: 2rem;
+		padding: 1rem;
 		border-bottom: 1px solid ${(props) => props.theme.cores.gray_300};
+		width: 100%;
 	}
 
 	.buttons-conj {
 		margin-top: 1.5rem;
 		display: flex;
-		gap: 1rem;
+		flex-direction: column;
+		gap: 0.5rem;
 		padding-bottom: 2rem;
 	}
 

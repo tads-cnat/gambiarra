@@ -26,5 +26,9 @@ export const GlobalStyle = createGlobalStyle`
         color: ${(props) => props.theme.cores.white};
 
     }
+    h1 {
+        font-size: ${(props) => props.theme.fontSize.font_scale_up_07}rem;
+        color: ${(props) => props.theme.cores.gray_500};
+    }
   
 `;

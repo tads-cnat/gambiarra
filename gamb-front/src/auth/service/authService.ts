@@ -1,6 +1,7 @@
 import axiosInstance from "../../services/base/axiosInstance";
 import BaseService from "../../services/base/baseService";
 import { LoginSubmit } from "./auth";
+import { UserActive } from "./user";
 interface mensagem {
 	sucesso: boolean;
 	mensagem: string;
@@ -52,9 +53,11 @@ class authService extends BaseService {
 				},
 			})
 			.then((response) => {
+				console.log(response.data.data);
+				const user: UserActive = response.data.data;
 				localStorage.setItem(
 					"user",
-					response.data.data
+					user ? JSON.stringify(user) : ""
 				);
 				localStorage.setItem(
 					"userActiveRole",

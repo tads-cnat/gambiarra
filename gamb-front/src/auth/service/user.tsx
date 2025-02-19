@@ -31,9 +31,10 @@ const UserContext = createContext<UserContextProps | undefined>(undefined);
 export function UserProvider({ children }: { children: React.ReactNode }) {
   // Estado para o usuário ativo
   const [userActive, setUserActive] = useState<UserActive | null>(() => {
-    const storedUser = localStorage.getItem("userActive");
+    const storedUser = localStorage.getItem("user");
     return storedUser ? JSON.parse(storedUser) : null;
   });
+
 
   // Estado para o papel do usuário
   const [userActiveRole, setUserActiveRole] = useState<userRoles>(() => {

@@ -68,4 +68,6 @@ export interface InputFieldProps {
 	value?: string;
 
 	icon?: string;
+
+	classNameFather?: string;
 }

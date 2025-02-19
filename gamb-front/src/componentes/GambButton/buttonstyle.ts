@@ -109,6 +109,7 @@ export const ButtonGeneric = styled.button<ButtonProps>`
 
 	display: inline-flex; /* Alinha o conteúdo horizontalmente */
 	gap: 2px;
+	justify-content: space-between;
 	width: auto; /* Remove a largura fixa e ajusta ao tamanho do conteúdo */
 	white-space: nowrap; /* Impede que o texto seja quebrado em múltiplas linhas */
 `;

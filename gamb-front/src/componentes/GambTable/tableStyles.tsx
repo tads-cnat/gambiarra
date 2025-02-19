@@ -11,7 +11,7 @@ export const HeadTr = styled.tr`
 // Necessário olhar a largura mínima das células; se a tela diminuir, elas podem sair do container da dashboard.
 
 const actionColors: Record<number, string> = {
-  1: "#12A400",
+  1: "#9E9E9E",
   2: "#12A400",
   3: "#DC3545",
   4: "#DC3545",

@@ -12,3 +12,5 @@ Clique em cada um dos links abaixo para acessar o artefato específico.
 8. [Diagrama de Contexto](Contexto/Contexto.MD)
 9. [Lista de Riscos](riscos/riscos.md)
 10. [Diagrama de Conteiner](Container/Conteiner.MD)
+11. [Diagrama de Componentes](Componentes/componentes.md)
+

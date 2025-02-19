@@ -20,7 +20,7 @@ export const SelectText = styled.select<{
 			? props.theme.cores.green_sucess_primary // Aqui está o verde para válido
 			: props.theme.cores.black}; // Preta como padrão
 	padding: 0.92rem;
-
+	
 	option{
     	color: ${(props) => props.theme.cores.gray_text};
   	}
@@ -29,11 +29,6 @@ export const SelectText = styled.select<{
 	align-items: center;
 	gap: 0.5rem;
 
-	select {
-		width: 100%;
-		border: none;
-		background: transparent;
-		color: ${(props) => props.theme.cores.gray_text};
-		outline: none;
-	}
+	width: 100%;
+
 `;
