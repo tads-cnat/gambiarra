@@ -18,7 +18,7 @@ export function GambTable({
 	TableActions?: Record<string, (id: number) => void>;
 }) {
 	if (data.length === 0) {
-		return <p>Nenhum dado disponível</p>;
+		return <p className="mt-4 p-2">Nenhum dado disponível</p>;
 	}
 
 	// Filtra os headers removendo os que estão na lista de `hiddenFields`
