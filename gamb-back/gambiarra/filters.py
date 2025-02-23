@@ -1,5 +1,5 @@
 import django_filters
-from .models import Chamado
+from .models import Chamado, Mensagem
 
 class ChamadoFilter(django_filters.FilterSet):
     status = django_filters.NumberFilter(lookup_expr='exact')
@@ -14,3 +14,9 @@ class ChamadoFilter(django_filters.FilterSet):
         model = Chamado 
         fields = ['status', 'titulo', 'descricao', 'code', 'professor_id', 'bolsistas_id', 'cliente_id']
         
+class MensagemFilter(django_filters.FilterSet):
+    chamado_id = django_filters.NumberFilter(field_name='chamado_id', lookup_expr='exact')
+
+    class Meta:
+        model = Mensagem 
+        fields = ['chamado_id']

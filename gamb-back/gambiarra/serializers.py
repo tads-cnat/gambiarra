@@ -222,3 +222,12 @@ class UpdateChamadoSerializer(serializers.ModelSerializer):
         if avaliacao:
             return {"nota": avaliacao.nota, "texto": avaliacao.texto}
         return None
+
+
+class MensagemSerializer(serializers.ModelSerializer):
+    autor = serializers.PrimaryKeyRelatedField(read_only=True)
+    chamado = serializers.PrimaryKeyRelatedField(read_only=True)
+    class Meta:
+        model = Mensagem
+        fields = ['id', 'data_envio', 'autor', 'texto', 'chamado']
+        # read_only_fields = ['id', 'data_envio', 'autor', 'chamado']

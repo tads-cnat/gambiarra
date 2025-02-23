@@ -6,8 +6,7 @@ import { Header } from "../../componentes/GambHeader/Header";
 // // import { useMap } from 'react-leaflet/hooks'
 // import { Marker } from 'react-leaflet/Marker'
 // import { Popup } from 'react-leaflet/Popup'
-import { MapContainer, TileLayer, Marker, Popup, } from 'react-leaflet'
-
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 
 import {
 	CardContainer,
@@ -23,6 +22,8 @@ export default function Home() {
 	return (
 		<>
 			<Header />
+
+		
 			<main className="container m-auto">
 				<IndexContainer>
 					<MarcaGrafica>
@@ -117,30 +118,31 @@ export default function Home() {
 						center={[-5.8117861169586735, -35.20454375958056]}
 						zoom={10}
 						scrollWheelZoom={false}
-						style={{ height: "400px", width: "100%", marginTop: "2rem", padding: "2rem" , maxWidth: "1100px"}}
+						style={{
+							height: "400px",
+							width: "100%",
+							marginTop: "2rem",
+							padding: "2rem",
+							maxWidth: "1100px",
+						}}
 					>
 						<TileLayer
 							attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 							url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
 						/>
-						<Marker position={[-5.8117861169586735, -35.20454375958056]}>
-							<Popup  >
-							IFRN-CNAT - Campus Natal Central
-							</Popup>
+						<Marker
+							position={[-5.8117861169586735, -35.20454375958056]}
+						>
+							<Popup>IFRN-CNAT - Campus Natal Central</Popup>
 						</Marker>
-						<Marker position={[-5.749014480391099, -35.26035668704938]}>
-							<Popup  >
-							IFRN-ZN - Campus Zona Norte
-							</Popup>
+						<Marker
+							position={[-5.749014480391099, -35.26035668704938]}
+						>
+							<Popup>IFRN-ZN - Campus Zona Norte</Popup>
 						</Marker>
 					</MapContainer>
-
-
 				</IndexContainer>
-
 			</main>
-		
-					
 
 			<Footer />
 		</>

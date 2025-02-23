@@ -46,7 +46,6 @@ export default function DashboardHome(): JSX.Element {
 	const { register, handleSubmit, reset } = useForm<ChamadoFilter>({
 		// resolver: yupResolver(filterSchema) TO-DO
 	});
-
   async function handleChamados(data?: ChamadoFilter): Promise<void> {
     const { status, ...rest } = data || {};
     const filtros = { ...rest, tab: activeTab };
