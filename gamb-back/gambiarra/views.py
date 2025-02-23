@@ -17,11 +17,11 @@ from .models import *
 from authentication.models import *
 
 TAB_STATUS_MAPPING = {
-    "todos": [],  # Inclui todos os status
-    "aceitos": ["Aceito", "Em Diagnóstico", "Equipamento em conserto", "Aguardando peça"],
-    "pendentes": ["Em Análise"],
-    "recusados": ["Recusado"],
-    "fechados": ["Fechado sem resolução", "Resolvido", "Recusado"],
+    "todos": [],
+    "aceitos": ["2", "3", "4", "5"],
+    "pendentes": ["1"],
+    "recusados": ["8"],
+    "fechados": ["6", "7", "8"],
 }
 
 
@@ -79,11 +79,10 @@ class ChamadoViewSet(viewsets.ModelViewSet):
         serializer = DetalharChamadoSerializer(chamado)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
-    def get(self):
+    def get_queryset(self):
         user: Usuario = self.request.user
         grupo = user.grupo.name
 
-        # Base inicial de queryset com base no grupo do usuário
         if grupo == GrupoEnum.GERENTE:
             queryset = Chamado.objects.all()
         elif grupo == GrupoEnum.PROFESSOR:
@@ -94,19 +93,21 @@ class ChamadoViewSet(viewsets.ModelViewSet):
             queryset = Chamado.objects.filter(cliente=user)
 
         status_param = self.request.GET.get('status', None)
-        tab_param = self.request.GET.get('tab', "todos")  # Default para "todos"
+        tab_param = self.request.GET.get('tab', "todos")  # default
 
+        if tab_param not in TAB_STATUS_MAPPING:
+            raise ValueError(f"Valor inválido para o parâmetro 'tab': {tab_param}")
 
-        # Filtrar pela tab (múltiplos status associados)
-        if tab_param in TAB_STATUS_MAPPING and TAB_STATUS_MAPPING[tab_param]:
-            queryset = queryset.filter(status=TAB_STATUS_MAPPING[tab_param])
+        mapeamento = TAB_STATUS_MAPPING[tab_param]
+        if tab_param in TAB_STATUS_MAPPING and mapeamento:
+            queryset = queryset.filter(status__in=mapeamento)
+        
 
-        # Filtrar pelo status individual se fornecido
         if status_param:
             queryset = queryset.filter(status=status_param)
 
-
         return queryset
+
    
     
     def create(self, request):
