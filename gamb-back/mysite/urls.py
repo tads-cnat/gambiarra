@@ -4,7 +4,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from gambiarra.urls import gambiarra_urls
 from authentication.urls import auth_urls, usuario_url
-# from chat.urls import chat_urls
+from chat.urls import chat_urls
 from drf_yasg import openapi
 from drf_yasg.views import get_schema_view as swagger_get_schema_view
 from rest_framework import permissions
@@ -29,7 +29,7 @@ api_path = [
     path("", include(gambiarra_urls)),
     path("auth/", include(auth_urls)),
     path("", include(usuario_url)),
-    # path("chat/", include(chat_urls)),
+    path("chat/", include(chat_urls)),
 ]
 
 urlpatterns = [

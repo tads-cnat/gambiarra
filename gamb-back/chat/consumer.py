@@ -4,41 +4,93 @@ from channels.generic.websocket import AsyncWebsocketConsumer
 from asgiref.sync import sync_to_async
 from gambiarra.models import Mensagem
 from django.core.exceptions import ObjectDoesNotExist
+from authentication.models import Usuario
+from django.core.serializers.json import DjangoJSONEncoder
 
 class ChatConsumer(AsyncWebsocketConsumer):
+    
     async def connect(self):
-        # Quando o WebSocket for aceito, enviaremos a lista de mensagens.
         await self.accept()
-        await self.send(text_data=json.dumps({"texto": "Conectado ao WebSocket!"}))
 
     async def disconnect(self, close_code):
-        pass  # Lógica de desconexão, se necessário
+        pass
 
     async def receive(self, text_data):
-        data = json.loads(text_data)
-        autor = data.get("autor", "Anônimo")
-        chamado = data.get("chamado", "")
-        texto = data.get("texto", "")
-
-        # Salvar mensagem no banco de forma assíncrona
-        await self.save_message(autor, texto, chamado)
-
-        # Agora, vamos enviar todas as mensagens desse chamado específico
-        messages = await self.get_messages_by_chamado(chamado)
-        await self.send(text_data=json.dumps({"mensagens": messages}))
-
-    @sync_to_async
-    def save_message(self, autor, texto, chamado):
         try:
-            Mensagem.objects.create(autor=autor, texto=texto, chamado=chamado)
+            print("Dados recebidos:", text_data)
+            data = json.loads(text_data)
+            history = data.get("history", False)
+            chamado_id = data.get("chamado")
+
+            # Extrair dados com validação
+            if(history):
+                messages = await self.get_messages_by_chamado(chamado_id)
+                await self.send(text_data=json.dumps({
+                    "mensagens": messages
+                }, cls=DjangoJSONEncoder))
+                return
+            
+            autor_id = data.get("autor")
+            chamado_id = data.get("chamado")
+            texto = data.get("texto", "")
+            
+       
+            if not all([autor_id, chamado_id, texto]):
+                await self.send(json.dumps({"error": "Dados incompletos"}))
+                return
+
+            # Salvar mensagem corretamente
+            await self.save_message(autor_id, texto, chamado_id)
+            
+            # Buscar mensagens atualizadas
+            messages = await self.get_messages_by_chamado(chamado_id)
+            
+            # Enviar resposta formatada
+            await self.send(text_data=json.dumps({
+                "mensagens": messages
+            }, cls=DjangoJSONEncoder))
+
+        except json.JSONDecodeError:
+            await self.send(json.dumps({"error": "Formato JSON inválido"}))
         except Exception as e:
-            print(f"Erro ao salvar mensagem: {e}")
+            print(f"Erro geral: {str(e)}")
+            await self.send(json.dumps({"error": "Erro interno do servidor"}))
 
     @sync_to_async
-    def get_messages_by_chamado(self, chamado):
+    def get_user(self, user_id):
         try:
-            # Filtra as mensagens pelo chamado
-            messages = Mensagem.objects.filter(chamado=chamado).order_by("-data_envio")
-            return [{"autor": msg.autor, "texto": msg.texto, "chamado": msg.chamado, "data_envio": msg.data_envio.isoformat()} for msg in messages]
+            return Usuario.objects.get(id=user_id)
+        except Usuario.DoesNotExist:
+            return None
+
+    @sync_to_async
+    def save_message(self, autor_id, texto, chamado_id):
+        try:
+            autor = Usuario.objects.get(id=autor_id)
+            Mensagem.objects.create(
+                autor=autor,
+                texto=texto,
+                chamado_id=chamado_id
+            )
+        except Exception as e:
+            print(f"Erro ao salvar mensagem: {str(e)}")
+            raise
+
+    @sync_to_async
+    def get_messages_by_chamado(self, chamado_id):
+        try:
+            messages = Mensagem.objects.filter(chamado_id=chamado_id).order_by("data_envio")
+            return [{
+                "id": msg.pk,
+                "autor": {
+                    "id": msg.autor.pk,
+                    "username": msg.autor.username
+                },
+                "texto": msg.texto,
+                "chamado": msg.chamado_id,
+                "data_envio": msg.data_envio.astimezone(timezone.utc).isoformat()
+            } for msg in messages]
         except ObjectDoesNotExist:
             return []
+
+    

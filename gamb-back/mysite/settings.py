@@ -214,12 +214,18 @@ CACHES = {
 }
 
 
-# Configuração do canal (pode usar Redis para suporte a múltiplos consumidores)
+# settings.py
+
+# Remova a configuração do Redis para cache (ou mantenha se quiser cache em memória)
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',  # Cache em memória
+    }
+}
+
+# Configure os canais para usar camada in-memory
 CHANNEL_LAYERS = {
     "default": {
-        # "BACKEND": "channels.layers.InMemoryChannelLayer",  # Para desenvolvimento, usa memória
-        # # Para produção, use Redis:
-        "BACKEND": "channels_redis.core.RedisChannelLayer",
-        "CONFIG": {"hosts": [("127.0.0.1", 6379)]},
+        "BACKEND": "channels.layers.InMemoryChannelLayer",  # Camada em memória
     },
 }

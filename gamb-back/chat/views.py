@@ -12,8 +12,8 @@ from rest_framework.response import Response
 class ChatMessageListView(generics.ListAPIView):
     queryset = Mensagem.objects.all().order_by("-data_envio")
     serializer_class = MensagemSerializer
-    # authentication_classes = [JWTAuthentication]
-    # permission_classes = [IsAuthenticated]
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated]
     filter_backends = (filters.DjangoFilterBackend,)
     filterset_class = MensagemFilter    
     
