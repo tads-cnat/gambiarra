@@ -18,10 +18,11 @@ const actionColors: Record<number, string> = {
   5: "#61B3FF",
   6: "#3b3b3b",
   7: "#117005",
+
 };
 
 interface StatusProps {
-  $status: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
+  $status: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
 }
 
 export const StatusBadge = styled.span<StatusProps>`
