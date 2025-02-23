@@ -22,17 +22,14 @@ export default function DashboardHome(): JSX.Element {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // Lê o parâmetro 'tab' da URL; se não existir, usa "todos"
   const params = new URLSearchParams(location.search);
   const activeTab = params.get("tab") || "todos";
 
-  // Atualiza a URL quando a aba for alterada
   const handleTabChange = (tabId: string) => {
     params.set("tab", tabId);
     navigate(`?${params.toString()}`);
   };
 
-  // Estados para os chamados e modais
   const [chamados, setChamados] = useState<Chamados[]>([]);
   const [AceitarModalOpen, setAceitarModalOpen] = useState(false);
   const [EncerrarModalOpen, setEncerrarModalOpen] = useState(false);
@@ -41,7 +38,6 @@ export default function DashboardHome(): JSX.Element {
   const closeAceitarModal = () => setAceitarModalOpen(false);
   const closeEncerrarModal = () => setEncerrarModalOpen(false);
 
-  // Estados para as opções dos selects
   const [optionsProfessor, setOptionsProfessor] = useState([]);
   const [optionsCliente, setOptionsCliente] = useState([]);
   const [optionsBolsista, setOptionsBolsista] = useState([]);
@@ -58,6 +54,7 @@ export default function DashboardHome(): JSX.Element {
       setChamados(res as Chamados[]);
     });
   }
+
   async function fetchUsers(grupo_id: number, setState: (data: any) => void) {
     try {
       const response = await axiosInstance.get("usuario/", { params: { grupo_id } });
@@ -200,10 +197,8 @@ export default function DashboardHome(): JSX.Element {
         </GambFilterTable>
       </form>
 
-      {/* Renderiza as tabs para o filtro */}
       <GambTabs tabs={tabs} activeTab={activeTab} onTabChange={handleTabChange} />
 
-      {/* Renderiza a tabela com os chamados filtrados */}
       <GambTable
         data={chamados}
         action={true}
