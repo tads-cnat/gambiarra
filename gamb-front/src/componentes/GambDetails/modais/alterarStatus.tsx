@@ -2,33 +2,36 @@ import { useForm } from "react-hook-form";
 import ChamadoService from "../../../services/models/ChamadoService";
 import GambButton from "../../GambButton/Button";
 import { ModalCard, ModalFooter, ModalHeader, ModalOverlay } from "../../GambModal/modalstyles";
-import { SelectField } from "../../GambSelect/Select";
+import { SelectField } from "../../GambSelect/Select"; // Importe o statusChamado
 
 interface FormValues {
-  status: number;  // Tipagem para o campo de select
+  status: number;
 }
 
 export default function AlterarStatusModal(props: {
   chamadoId: number | null;
   isModalOpen: boolean;
   closeModal: () => void;
+  stats?: string; // Status atual como string
 }) {
 
   const { register, formState: { errors }, handleSubmit } = useForm<FormValues>();
-  const { isModalOpen, closeModal, chamadoId } = props;
+  const { isModalOpen, closeModal, chamadoId, stats } = props;
 
   async function onSubmit(values: FormValues): Promise<void> {
-    if (!chamadoId) return;  // Verifica se chamadoId é válido
+    if (!chamadoId) return;
 
-    ChamadoService.alterarStatus(chamadoId, String(values.status))  // Altera o status
+    ChamadoService.alterarStatus(chamadoId, String(values.status))
       .then(() => {
         alert("Status alterado com sucesso");
+        closeModal();
       })
       .catch(() => {
         console.error("Erro ao alterar status do chamado");
-      })
- 
+      });
   }
+
+  console.log(stats)
 
   if (isModalOpen) {
     return (
@@ -43,15 +46,16 @@ export default function AlterarStatusModal(props: {
               <SelectField
                 label="Status"
                 placeholder="Selecione um status"
-                register={register("status", { required: true })}  // Adicionando a validação necessária
+                register={register("status", { required: true })}
                 defaultValue=""
-                styels={{ width: "100%" }}
+                styles={{ width: "100%" }}
+                status={stats} // Passando a string do status atual
               />
-              {errors.status && <p style={{ color: 'red' }}>Este campo é obrigatório</p>}  {/* Exibe erro se não for preenchido */}
+              {errors.status && <p style={{ color: 'red' }}>Este campo é obrigatório</p>}
 
               <ModalFooter>
                 <GambButton
-                label="Alterar"
+                  label="Alterar"
                   type="submit"
                   variant="verde"
                   size="large"
@@ -71,5 +75,5 @@ export default function AlterarStatusModal(props: {
     );
   }
 
-  return null;  // Retorna null quando o modal não está aberto
+  return null;
 }
