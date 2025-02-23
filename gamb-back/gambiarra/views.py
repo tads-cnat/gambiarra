@@ -83,10 +83,13 @@ class ChamadoViewSet(viewsets.ModelViewSet):
         user: Usuario = self.request.user
         grupo = user.grupo.name
 
+
+        print(grupo)
+
         if grupo == GrupoEnum.GERENTE:
             queryset = Chamado.objects.all()
         elif grupo == GrupoEnum.PROFESSOR:
-            queryset = Chamado.objects.filter(Q(professor=user) | Q(professor__isnull=True))
+            queryset = Chamado.objects.filter(Q(professor=user) | Q(status="1"))
         elif grupo == GrupoEnum.BOLSISTA:
             queryset = Chamado.objects.filter(bolsistas=user)
         else:
