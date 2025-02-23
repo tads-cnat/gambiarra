@@ -62,8 +62,8 @@ export const MessageIcon = styled.div<{ type: MessageType }>`
 
 export const MessageText = styled.div`
   flex-grow: 1;  
-  font-size: 1.05rem;
-  display: flex;  
+  font-size: 1rem;
+  display: inline-block;
 `;
 
 export const CloseButton = styled.button<{ type: MessageType }>`

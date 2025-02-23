@@ -106,17 +106,3 @@ export const InputField = styled.input`
   font-size: 0.9rem;
 `;
 
-export const SendButton = styled.button`
-  margin-left: 8px;
-  background-color: #564CCF;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  padding: 0 16px;
-  font-size: 0.9rem;
-  cursor: pointer;
-
-  &:hover {
-    background-color: #564CCF;
-  }
-`;

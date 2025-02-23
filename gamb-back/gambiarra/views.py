@@ -22,6 +22,7 @@ TAB_STATUS_MAPPING = {
     "pendentes": ["1"],
     "recusados": ["8"],
     "fechados": ["6", "7", "8"],
+    "arquivados": ["9"],
 }
 
 
@@ -148,9 +149,10 @@ class ChamadoViewSet(viewsets.ModelViewSet):
             "Em Diagnóstico": ["Aguardando Peça", "Fechado Sem Resolução", "Equipamento Em Conserto"],
             "Aguardando Peça": ["Equipamento Em Conserto", "Fechado Sem Resolução"],
             "Equipamento Em Conserto": ["Resolvido", "Fechado Sem Resolução"],
-            "Resolvido": ["Fechado"],
-            "Fechado Sem Resolução": ["Fechado"],
-            "Recusado": ["Fechado"],
+            "Resolvido": ["Fechado", "Arquivado"],
+            "Fechado Sem Resolução": ["Fechado", "Arquivado"],
+            "Recusado": ["Fechado", "Arquivado"],
+            
         }
 
 

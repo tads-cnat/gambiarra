@@ -33,6 +33,10 @@ ALLOWED_HOSTS = ["pdsweb.pythonanywhere.com", "localhost", "127.0.0.1", "0.0.0.0
 # Application definition
 
 INSTALLED_APPS = [
+    "daphne", 
+    "channels",
+    # chat
+    "chat",
     # apps
     "gambiarra",
     # 'users',
@@ -63,6 +67,9 @@ REST_FRAMEWORK = {
     ),
     "EXCEPTION_HANDLER": "authentication.utils.auth_exception_handler",
 }
+
+
+ASGI_APPLICATION = "mysite.asgi.application"
 
 
 AUTH_USER_MODEL = "authentication.Usuario"
@@ -195,5 +202,30 @@ SWAGGER_SETTINGS = {
             "in": "header",
             "description": 'Use assim: "Bearer {token}"',
         },
+    },
+}
+
+# Cache com Redis
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.redis.RedisCache",
+        "LOCATION": os.getenv("REDIS_URL", "redis://127.0.0.1:6379/1"),
+    }
+}
+
+
+# settings.py
+
+# Remova a configuração do Redis para cache (ou mantenha se quiser cache em memória)
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',  # Cache em memória
+    }
+}
+
+# Configure os canais para usar camada in-memory
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels.layers.InMemoryChannelLayer",  # Camada em memória
     },
 }
