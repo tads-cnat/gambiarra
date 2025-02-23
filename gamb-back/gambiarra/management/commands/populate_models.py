@@ -93,8 +93,14 @@ class Command(BaseCommand):
                     status = i[0],      #JEITO CERTO DE GUARDAR O STATUS
                     item = item,    
                 )
+                if chamado.status != '1':
+                    chamado.professor = professores[0]
+                    chamado.save()
+                    
                 chamado.bolsistas.add(bolsistas[escolha])
                 chamados.append(chamado)
+
+
                 #print("\n\n\n")
             self.stdout.write(self.style.SUCCESS("Chamados criados."))
 

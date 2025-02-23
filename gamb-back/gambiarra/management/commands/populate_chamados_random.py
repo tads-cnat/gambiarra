@@ -127,7 +127,7 @@ class Command(BaseCommand):
                     cliente = random.choice(clientes),
                     item=item
                 )
-                print(sequencia_status[-1])
+                #print(sequencia_status[-1])
                 if sequencia_status[-1] != 1:
                     chamado.professor = professor
                     chamado.save()
