@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // Detail.tsx
 import  { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
@@ -36,6 +37,8 @@ export default function Detail(): JSX.Element {
   useEffect(() => {
     fetchChamado();
   }, [id]);
+
+ 
 
   return (
     <div className="flex flex-col gap-4">

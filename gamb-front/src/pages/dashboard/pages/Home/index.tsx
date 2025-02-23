@@ -42,8 +42,11 @@ export default function DashboardHome(): JSX.Element {
 	});
 
 	async function handleChamados(data?: ChamadoFilter): Promise<void> {
+
 		await ChamadoService.listarChamados(data).then((res) => {
 			setChamados(res as Chamados[]);
+		}).catch((error) => {
+			console.error("Erro ao buscar chamados:", error);
 		});
 	}
 	async function fetchUsers(grupo_id: number, setState: (data: any) => void) {
@@ -67,7 +70,7 @@ export default function DashboardHome(): JSX.Element {
 	const { userActiveRole } = useUser();
 
 	useEffect(() => {
-		handleChamados();
+		void handleChamados();
 	}, []);
 
 	useEffect(() => {
