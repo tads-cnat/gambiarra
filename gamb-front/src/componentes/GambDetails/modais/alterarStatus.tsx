@@ -28,6 +28,9 @@ export default function AlterarStatusModal(props: {
       })
       .catch(() => {
         console.error("Erro ao alterar status do chamado");
+      })
+      .finally(() => {
+        window.location.reload();
       });
   }
 

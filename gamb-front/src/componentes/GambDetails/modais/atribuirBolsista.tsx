@@ -5,6 +5,7 @@ import GambButton from "../../GambButton/Button";
 import { ModalCard, ModalFooter, ModalHeader, ModalOverlay } from "../../GambModal/modalstyles";
 import axiosInstance from "../../../services/base/axiosInstance";
 import { useEffect, useState } from "react";
+import { SelectField } from "../../GambSelect/Select";
 // import MultSelect from "../../GambMultSelect/MultSelect";
 
 interface FormValues {
@@ -39,7 +40,7 @@ export default function AtribuirBolsistaModal(props: {
     if (!chamadoId) return;  // Verifica se chamadoId é válido
     ChamadoService.atribuirBolsista(chamadoId, values.bolsistas)  // Altera os bolsistas
       .then(() => {
-        alert("Status alterado com sucesso");
+        alert("Bolsista alterado com sucesso");
       })
       .catch(() => {
         console.error("Erro ao alterar bolsistas do chamado");
@@ -63,8 +64,8 @@ export default function AtribuirBolsistaModal(props: {
               <h3>Atribuir Bolsista ao Chamado</h3>
             </ModalHeader>
 
-            <form style={{ marginTop: "8px", maxHeight: "200px", overflowY: "auto" }} onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4 p-2 mt-0 justify-center items-start">
-              | Selecione um ou mais bolsistas para atribuir ao chamado:
+            <form style={{ marginTop: "8px", maxHeight: "400px", overflowY: "auto" }} onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4 p-2 mt-0 justify-center items-start">
+              Selecione um ou mais bolsistas para atribuir ao chamado:
               <div className="flex flex-col gap-2">
                 {options.map((option) => (
                   <div key={option.value} className="flex items-center gap-2">
@@ -73,12 +74,13 @@ export default function AtribuirBolsistaModal(props: {
                       id={`bolsista-${option.value}`}
                       value={option.value}
                       {...register("bolsistas" ,{ required: true })}
+                        className="w-5 h-5 text-blue-600 bg-gray-200 border-gray-300 rounded focus:ring-green-500"
                     />
                     <label htmlFor={`bolsista-${option.value}`} className="text-gray-700">{option.label}</label>
                   </div>
                 ))}
               </div>
-              {/* <MultSelect
+              {/* <SelectField
                 label="Bolsistas"
                 placeholder="Selecione um ou mais bolsistas"
                 options={options}
