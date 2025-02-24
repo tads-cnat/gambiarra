@@ -95,9 +95,8 @@ class Command(BaseCommand):
                 )
                 if chamado.status != '1':
                     chamado.professor = professores[0]
+                    chamado.bolsistas.add(bolsistas[escolha])
                     chamado.save()
-                    
-                chamado.bolsistas.add(bolsistas[escolha])
                 chamados.append(chamado)
 
 

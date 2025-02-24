@@ -127,7 +127,7 @@ class Command(BaseCommand):
                     cliente = random.choice(clientes),
                     item=item
                 )
-                #print(sequencia_status[-1])
+
                 if sequencia_status[-1] != 1:
                     chamado.professor = professor
                     chamado.save()
@@ -145,7 +145,9 @@ class Command(BaseCommand):
                         nota=random.randint(1, 5),
                         chamado=chamado,
                     )
-                chamado.bolsistas.add(bolsista)
+
+                if chamado.status != '1':      
+                    chamado.bolsistas.add(bolsista)
 
             self.stderr.write(self.style.SUCCESS(f"Adicionados {quantidade} chamados aleatórios"))
             
