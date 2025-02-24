@@ -1,5 +1,5 @@
 export interface BaseFilter {
 	search?: string;
-	limit: number;
-	offset: number;
+	limit?: number;
+	offset?: number;
 }

@@ -15,7 +15,7 @@ import ChamadoService from "../../../../services/models/ChamadoService";
 import AceitarChamadoModal from "../../../../componentes/GambTable/forms/AceitarChamadoModal";
 import EncerrarChamadoModal from "../../../../componentes/GambTable/forms/EncerrarChamadoModal";
 import axiosInstance from "../../../../services/base/axiosInstance";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, data } from "react-router-dom";
 import GambTabs, { Tab } from "../../../../componentes/GambTabs/GambTabs";
 
 export default function DashboardHome(): JSX.Element {
@@ -25,10 +25,7 @@ export default function DashboardHome(): JSX.Element {
   const params = new URLSearchParams(location.search);
   const activeTab = params.get("tab") || "todos";
 
-  const handleTabChange = (tabId: string) => {
-    params.set("tab", tabId);
-    navigate(`?${params.toString()}`);
-  };
+
 
   const [chamados, setChamados] = useState<Chamados[]>([]);
   const [AceitarModalOpen, setAceitarModalOpen] = useState(false);
@@ -43,16 +40,26 @@ export default function DashboardHome(): JSX.Element {
   const [optionsBolsista, setOptionsBolsista] = useState([]);
 
 
-	const { register, handleSubmit, reset } = useForm<ChamadoFilter>({
+	const { register, handleSubmit, reset, getValues } = useForm<ChamadoFilter>({
 		// resolver: yupResolver(filterSchema) TO-DO
 	});
+  const handleTabChange = (tabId: string) => {
+    params.set("tab", tabId);
+    navigate(`?${params.toString()}`);
+    let data = getValues();
+    data = { ...data, tab: tabId as ChamadoFilter["tab"] };
+    handleChamados(data);
+  };
+  
   async function handleChamados(data?: ChamadoFilter): Promise<void> {
-    const { status, ...rest } = data || {};
-    const filtros = { ...rest, tab: activeTab };
-    await ChamadoService.listarChamados(filtros).then((res) => {
-      setChamados(res as Chamados[]);
-    });
+    data = { ...data, tab: activeTab as ChamadoFilter["tab"] };
+    // Removendo valores vazios para evitar parâmetros indesejados
+    const filtros = Object.fromEntries(Object.entries(data).filter(([_, v]) => v));
+  
+    const res = await ChamadoService.listarChamados(filtros);
+    setChamados(res as Chamados[]);
   }
+  
 
   async function fetchUsers(grupo_id: number, setState: (data: any) => void) {
     try {

@@ -9,4 +9,12 @@ export interface ChamadoFilter extends BaseFilter {
 	cliente_id?: number;
 	avaliacao?: string;
 	search?: string;	
+	tab?:   "todos" |
+	"aceitos" |
+	"aceitos" |
+	"pendentes" |
+	"recusados" |
+	"fechados" |
+	"arquivados";
+ 
 }
