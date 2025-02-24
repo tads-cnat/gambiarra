@@ -188,6 +188,7 @@ export default function ChamadoDetalhes({ chamado }: ChamadoDetalhesProps) {
       isModalOpen={openModalAlterarStatus}
       closeModal={() => setOpenModalAlterarStatus(false)}
       chamadoId={chamadoId}
+      stats={chamado.status.id}
     />
 
 <AtribuirBolsistaModal
