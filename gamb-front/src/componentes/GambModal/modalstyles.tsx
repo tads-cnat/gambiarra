@@ -26,7 +26,7 @@ export const ModalHeader = styled.div`
 	align-items: center;
 	gap: 10px;
 	align-self: stretch;
-	font-size: 2rem;
+	font-size: 1.5rem;
 `;
 
 export const ModalCard = styled.div`

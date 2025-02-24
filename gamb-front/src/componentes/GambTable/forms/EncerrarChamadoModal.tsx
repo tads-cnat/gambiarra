@@ -9,9 +9,7 @@ export default function EncerrarChamadoModal(props: {
     const { isModalOpen, closeModal, chamadoId } = props;
     async function handleAction(): Promise<void>{
         ChamadoService.encerrarChamado(chamadoId ?? 0)
-            .then((response) => {
-                (response);
-                
+            .then(() => {                
                alert("Chamado recusado com sucesso");
            })
             .catch(() => {
@@ -31,8 +29,10 @@ export default function EncerrarChamadoModal(props: {
 			    >
                     <ModalCard onClick={(e) => e.stopPropagation()} className="elevacao-def">
                         <ModalHeader>
-                                <h2>{"Deseja recusar o chamado?"}</h2>
+                        <h3>Confirmar Ação - Recusar Chamado</h3>
                         </ModalHeader>
+                        <p>Você está <strong>recusando</strong> um chamado aberto, essa ação não pode ser desfeita.</p>
+
                         <ModalFooter>	
                             <GambButton
                                 label="Recusar"

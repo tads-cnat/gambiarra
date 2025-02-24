@@ -9,9 +9,7 @@ export default function AceitarChamadoModal(props: {
     const { isModalOpen, closeModal, chamadoId } = props;
     async function handleAction(): Promise<void>{
         ChamadoService.aceitarChamado(chamadoId ?? 0)
-            .then((response) => {
-                (response);
-                
+            .then(() => {
                alert("Chamado aceito com sucesso");
            })
             .catch(() => {
@@ -31,8 +29,10 @@ export default function AceitarChamadoModal(props: {
 			    >
                     <ModalCard onClick={(e) => e.stopPropagation()} className="elevacao-def">
                         <ModalHeader>
-                                <h2>{"Deseja aceitar o chamado?"}</h2>
+                                <h4>Confirmar Ação - Aceitar Chamado</h4>
                         </ModalHeader>
+                        <p>Você está <strong>aceitando</strong> um chamado aberto, essa ação não pode ser desfeita.</p>
+
                         <ModalFooter>	
                             <GambButton
                                 label="Aceitar"
