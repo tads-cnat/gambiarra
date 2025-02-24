@@ -57,13 +57,14 @@ class ListarChamadoSerializer(serializers.ModelSerializer):
         fields = [
             "id",
             "titulo",
+            "status",
+            "cliente",
             "professor",
             "bolsistas",
-            "cliente",
-            "status",
-            "code",
             "avaliacao",
+            "code",
         ]
+
 
     def get_cliente(self, obj):
         return {
@@ -136,14 +137,16 @@ class DetalharChamadoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Chamado
         fields = [
-                  "id",
+                  
+            "id",
             "titulo",
+            "status",
+            "cliente",
             "professor",
             "bolsistas",
-            "cliente",
-            "status",
-            "code",
             "avaliacao",
+
+            "code",
             "descricao",
             "item",
         ]
