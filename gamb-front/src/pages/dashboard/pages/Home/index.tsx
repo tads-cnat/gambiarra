@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useCallback, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useUser } from "../../../../auth/service/user";
@@ -15,7 +16,7 @@ import ChamadoService from "../../../../services/models/ChamadoService";
 import AceitarChamadoModal from "../../../../componentes/GambTable/forms/AceitarChamadoModal";
 import EncerrarChamadoModal from "../../../../componentes/GambTable/forms/EncerrarChamadoModal";
 import axiosInstance from "../../../../services/base/axiosInstance";
-import { useNavigate, useLocation, data } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import GambTabs, { Tab } from "../../../../componentes/GambTabs/GambTabs";
 
 export default function DashboardHome(): JSX.Element {
@@ -53,7 +54,7 @@ export default function DashboardHome(): JSX.Element {
   
   async function handleChamados(data?: ChamadoFilter): Promise<void> {
     data = { ...data, tab: activeTab as ChamadoFilter["tab"] };
-    // Removendo valores vazios para evitar parâmetros indesejados
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const filtros = Object.fromEntries(Object.entries(data).filter(([_, v]) => v));
   
     const res = await ChamadoService.listarChamados(filtros);
