@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const TabsContainer = styled.div`
   display: flex;
   border-bottom: 1px solid #e5e7eb;
+  justify-content: space-between;
 `;
 
 export const TabButton = styled.button<{ isActive: boolean }>`

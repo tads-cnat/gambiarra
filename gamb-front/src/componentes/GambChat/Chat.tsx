@@ -5,7 +5,6 @@ import {
 	ChatBody,
 	ChatMessage,
 	ChatFooter,
-	InputField,
 } from "./chatstyle";
 import Icon from "../GambIcon/Icon";
 import { ChatProps } from "../../interfaces/componentes/iGambChat";
@@ -13,6 +12,7 @@ import useWebSocket from "./webSocket";
 import { useForm } from "react-hook-form";
 import { useUser } from "../../auth/service/user";
 import GambButton from "../GambButton/Button";
+import InputField from "../GambInput/Input";
 
 export default function Chat({ chamado_id }: ChatProps) {
 	const chatBodyRef = useRef<HTMLDivElement>(null);
@@ -22,6 +22,14 @@ export default function Chat({ chamado_id }: ChatProps) {
 		"ws://localhost:8000/ws/chat/"
 	);
 
+	const css = `
+    .input-chat > div > div {
+      border: 1px solid #d1d1d1 !important;
+	  color: #d1d1d1 !important;
+
+    }
+	
+  `;
 	useEffect(() => {}, [messages]);
 
 	useEffect(() => {
@@ -44,7 +52,10 @@ export default function Chat({ chamado_id }: ChatProps) {
     }
 };
 	return (
+		
 		<ChatContainer>
+			      <style dangerouslySetInnerHTML={{ __html: css }} />
+
 			<ChatHeader>
 				<div className="header-left">
 					<span className="username">Suporte Técnico</span>
@@ -100,18 +111,25 @@ export default function Chat({ chamado_id }: ChatProps) {
 			</ChatBody>
 
 			<ChatFooter>
+				<div className="input-chat w-full" >
 				<InputField
 					placeholder="Digite sua mensagem..."
-					{...register("texto")}
+					register={register("texto")}
+					icon="chat"
+					type="text"
+					classNameFather="w-full"
+					
 				/>
+				</div>
 				<GambButton
 					label="Enviar"
 					variant="roxo"
-					icon="send"
-					size="small"
+					style={{ fontSize: "0.8rem" }}
 					onClick={handleSubmit(onSubmit)}
 				/>
 			</ChatFooter>
+			
+
 		</ChatContainer>
 	);
 }

@@ -194,8 +194,9 @@ export default function DashboardHome(): JSX.Element {
             </div>
           </FilterContent>
         </GambFilterTable>
+        
       </form>
-
+                
       <GambTabs tabs={tabs} activeTab={activeTab} onTabChange={handleTabChange} />
 
       <GambTable
