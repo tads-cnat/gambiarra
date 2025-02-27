@@ -76,4 +76,9 @@ class ListarUsuarioSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ["id", "username", "grupo"]
+
+class AlterarCargoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ["id"]
  
