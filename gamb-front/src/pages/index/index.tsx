@@ -6,8 +6,7 @@ import { Header } from "../../componentes/GambHeader/Header";
 // // import { useMap } from 'react-leaflet/hooks'
 // import { Marker } from 'react-leaflet/Marker'
 // import { Popup } from 'react-leaflet/Popup'
-import { MapContainer, TileLayer, Marker, Popup, } from 'react-leaflet'
-
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 
 import {
 	CardContainer,
@@ -23,6 +22,8 @@ export default function Home() {
 	return (
 		<>
 			<Header />
+
+		
 			<main className="container m-auto">
 				<IndexContainer>
 					<MarcaGrafica>
@@ -88,7 +89,7 @@ export default function Home() {
 							maquinas={300}
 						/>
 						<CardIndex
-							nomeCampus="Campus Natal Central - IFRN"
+							nomeCampus="Campus Zona Norte - IFRN"
 							contato="contatolab@gmail.com"
 							endereco="Lades - Prédio do NIT, 2° andar"
 							professores={235}
@@ -96,7 +97,7 @@ export default function Home() {
 							maquinas={0}
 						/>
 						<CardIndex
-							nomeCampus="Campus Natal Central - IFRN"
+							nomeCampus="Campus Zona Leste - IFRN"
 							contato="contatolab@gmail.com"
 							endereco="Lades - Prédio do NIT, 3° andar"
 							professores={11}
@@ -104,7 +105,7 @@ export default function Home() {
 							maquinas={300}
 						/>
 						<CardIndex
-							nomeCampus="Campus Natal Central - IFRN"
+							nomeCampus="Campus Pau dos Ferros - IFRN"
 							contato="contatolab@gmail.com"
 							endereco="Lades - Prédio do NIT, 4° andar"
 							professores={11}
@@ -114,33 +115,44 @@ export default function Home() {
 					</CardContainer>
 					<h2>Mapa do Projeto 🌍</h2>
 					<MapContainer
-						center={[-5.8117861169586735, -35.20454375958056]}
-						zoom={10}
+						center={[-5.861046793331842, -36.73219920508594]}
+						zoom={8}
 						scrollWheelZoom={false}
-						style={{ height: "400px", width: "100%", marginTop: "2rem", padding: "2rem" , maxWidth: "1100px"}}
+						style={{
+							height: "400px",
+							width: "100%",
+							marginTop: "2rem",
+							padding: "2rem",
+							maxWidth: "1100px",
+						}}
 					>
 						<TileLayer
 							attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 							url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
 						/>
-						<Marker position={[-5.8117861169586735, -35.20454375958056]}>
-							<Popup  >
-							IFRN-CNAT - Campus Natal Central
-							</Popup>
+						<Marker
+							position={[-5.8117861169586735, -35.20454375958056]}
+						>
+							<Popup>IFRN-CNAT - Campus Natal Central</Popup>
 						</Marker>
-						<Marker position={[-5.749014480391099, -35.26035668704938]}>
-							<Popup  >
-							IFRN-ZN - Campus Zona Norte
-							</Popup>
+						<Marker
+							position={[-5.749014480391099, -35.26035668704938]}
+						>
+							<Popup>IFRN-ZN - Campus Zona Norte</Popup>
+						</Marker>
+						<Marker
+							position={[-5.191132502603954, -37.343701119073756]}
+						>
+							<Popup>IFRN-ZN - Campus Zona Leste</Popup>
+						</Marker>
+						<Marker
+							position={[-6.11054172908148, -38.20527767605662]}
+						>
+							<Popup>IFRN-ZN - Campus Pau dos Ferros</Popup>
 						</Marker>
 					</MapContainer>
-
-
 				</IndexContainer>
-
 			</main>
-		
-					
 
 			<Footer />
 		</>

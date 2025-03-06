@@ -3,11 +3,23 @@ from authentication.models import Usuario
 from gambiarra.models import *
 import random
 
+            #Criação de alterações
+ALTERACOES_POSSIVEIS = [
+    [1, ], #Em análise
+    [1, 2], #Aceito
+    [1, 2, 3], #Em Diagnóstico
+    [1, 2, 3, 5, 4], #Equipamento Em Conserto
+    [1, 2, 3, 5], #Aguardando Peça
+    [1, 2, 3, 5, 4, 6], #Fechado Sem Resolução
+    [1, 2, 3, 5, 4, 7], #Resolvido
+    [1, 8], #Recusado
+]
+
 class Command(BaseCommand):
     help = "Popula o banco de dados com os modelos de chamado, itens, acessórios, avaliações, mensagens, e alterações de status"
     def handle(self, *args, **kwargs):
         escolha = 1
-        bypass = False #para popular o banco se já houver objetos
+        bypass = True #para popular o banco se já houver objetos
         try:
             if (Item.objects.all() or 
                 Chamado.objects.all() or 
@@ -72,17 +84,6 @@ class Command(BaseCommand):
             for i in STATUS_CHOICES:
                 item = random.choice(itens)
                 itens.remove(item)
-
-
-                # print(f'''
-                #     titulo = f"{i[1]}",
-                #     descricao = f"{i[1]}",
-                #     professor = {professores[0]},
-                #     cliente = {random.choice(clientes)},
-                #     status = {i[1]},
-                #     item = {item},
-                #     '''
-                # ) DEBUG
                 
                 chamado = Chamado.objects.create(
                     titulo = f"chamado {i[1]}",
@@ -92,10 +93,28 @@ class Command(BaseCommand):
                     status = i[0],      #JEITO CERTO DE GUARDAR O STATUS
                     item = item,    
                 )
-                chamado.bolsistas.add(bolsistas[escolha])
+                if chamado.status != '1':
+                    chamado.professor = professores[0]
+                    chamado.bolsistas.add(bolsistas[escolha])
+                    chamado.save()
                 chamados.append(chamado)
+
+
                 #print("\n\n\n")
             self.stdout.write(self.style.SUCCESS("Chamados criados."))
+
+
+
+
+            for i in range(len(ALTERACOES_POSSIVEIS)):
+                chamado = chamados[i]
+                for j in ALTERACOES_POSSIVEIS[i]:
+                    Alteracao.objects.create(
+                        autor=professores[0],
+                        status=j,
+                        chamado=chamado
+                    )
+            self.stdout.write(self.style.SUCCESS("Alterações criadas."))
             
 #===============================================================================#
 

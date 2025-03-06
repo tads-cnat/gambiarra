@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // Detail.tsx
 import  { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
@@ -8,26 +9,6 @@ import Icon from "../../../../componentes/GambIcon/Icon";
 import ChamadoService from "../../../../services/models/ChamadoService";
 import { Chamado } from "../../../../interfaces/componentes/iGambDetails";
 import { RequestTimeLine } from "../../../../componentes/GambTimeLine/TimeLineReceive";
-
-const initialMessages: Array<{
-  id: number;
-  text: string;
-  time: string;
-  side: "left" | "right";
-}> = [
-  // {
-  //   id: 1,
-  //   text: "Olá, como posso ajudar?",
-  //   time: "10:00",
-  //   side: "left"
-  // },
-  // {
-  //   id: 2,
-  //   text: "Estou com um problema no meu equipamento",
-  //   time: "10:01",
-  //   side: "right"
-  // }
-];
 
 export default function Detail(): JSX.Element {
   const { id } = useParams();
@@ -57,6 +38,8 @@ export default function Detail(): JSX.Element {
     fetchChamado();
   }, [id]);
 
+ 
+
   return (
     <div className="flex flex-col gap-4">
       {chamado ? (
@@ -77,7 +60,7 @@ export default function Detail(): JSX.Element {
             <h3 className="bg-gray-200 rounded-md px-2 py-1">Chat do Chamado</h3>
         </div>
 
-          <Chat initialMessages={initialMessages} />
+          <Chat chamado_id={Number(id) ? Number(id) : 4}/>
         </div>
       </ChatCard>
     </div>

@@ -15,6 +15,7 @@ STATUS_CHOICES = [
     ("6","Fechado Sem Resolução"),
     ("7","Resolvido"),
     ("8","Recusado"),
+    ("9","Arquivado"),
 ] 
  
  

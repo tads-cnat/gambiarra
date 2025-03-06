@@ -124,6 +124,7 @@ const iconComponents: { [key: string]: JSX.Element } = {
 	onecheck: <Check />,
 	chatfill: <ChatsCircle/>,
 	clock: <ClockClockwise />, 
+	send: <ChatCircle />,
 };
 
 export default function Icon(props: GambIconProps): JSX.Element {

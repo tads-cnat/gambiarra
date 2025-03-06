@@ -96,27 +96,7 @@ export const ChatFooter = styled.div`
   border-top: 1px solid #ccc;
   padding: 12px 16px;
   background-color: #fafafa;
+  gap: 8px;
 `;
 
-export const InputField = styled.input`
-  flex: 1;
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 0.9rem;
-`;
 
-export const SendButton = styled.button`
-  margin-left: 8px;
-  background-color: #564CCF;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  padding: 0 16px;
-  font-size: 0.9rem;
-  cursor: pointer;
-
-  &:hover {
-    background-color: #564CCF;
-  }
-`;

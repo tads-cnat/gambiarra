@@ -51,6 +51,8 @@ export const btnsPR: Record<number, Action[]> = {
     { name: "detalhar", colorIcon: "white", background: defaultTheme.cores.purple_info_primary, icon: "eyeopen" },
     { name: "arquivar", colorIcon: "white", background: defaultTheme.cores.danger, icon: "archive" },
   ],
+  9: [{ name: "detalhar", colorIcon: "white", background: defaultTheme.cores.purple_info_primary, icon: "eyeopen" }],
+
 };
 
 export const btnsGR: Record<number, Action[]> = {
@@ -81,6 +83,8 @@ export const btnsGR: Record<number, Action[]> = {
   8: [
     { name: "detalhar", colorIcon: "white", background: defaultTheme.cores.purple_info_primary, icon: "eyeopen" },
   ],
+  9: [{ name: "detalhar", colorIcon: "white", background: defaultTheme.cores.purple_info_primary, icon: "eyeopen" }],
+
 };
 
 export const btnClientes: Record<number, Action[]> = {
@@ -112,6 +116,8 @@ export const btnClientes: Record<number, Action[]> = {
     { name: "avaliar", colorIcon: defaultTheme.cores.gray_text, background: defaultTheme.cores.warning, icon: "star" },
   ],
   8: [{ name: "detalhar", colorIcon: "white", background: defaultTheme.cores.purple_info_primary, icon: "eyeopen" }],
+
+  9: [{ name: "detalhar", colorIcon: "white", background: defaultTheme.cores.purple_info_primary, icon: "eyeopen" }],
 };
 // Função para checar a permissão (ajuste conforme sua lógica)
 const checkPermission = (roles: string[]) =>

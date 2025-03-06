@@ -6,5 +6,5 @@ export interface Message {
 }
 
 export interface ChatProps {
-  initialMessages: Message[];
+  chamado_id: number;
 }

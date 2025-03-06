@@ -11,8 +11,12 @@ export interface ChamadoSubmit {
 
 export interface Chamados {
 	id: number;
-	codigo: string;
 	titulo: string;
+	status: {
+		id: number;
+		username: string;
+	};
+	codigo: string;
 	cliente_id: {
 		id: number;
 		username: string;
@@ -21,7 +25,7 @@ export interface Chamados {
 		id: number;
 		username: string;
 	};
-	status: {
+	bolsista_id?:{
 		id: number;
 		username: string;
 	};
@@ -30,6 +34,4 @@ export interface Chamados {
 		nota: number;
 	};
 }
-// export interface Chamado {
-// 	// estabelecer o retorno
-// }
+

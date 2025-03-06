@@ -16,9 +16,11 @@ interface SelectFieldProps {
   formIsValid?: boolean;
   options?: Option[];
   multiple?: boolean;
-  styels?: React.CSSProperties;
+  styles?: React.CSSProperties;
+  status?: string; // Status atual do chamado
 }
 
+// Opções completas
 export const statusChamado = [
   { label: "Em Análise", value: 1 },
   { label: "Aceito", value: 2 },
@@ -30,6 +32,55 @@ export const statusChamado = [
   { label: "Recusado", value: 8 },
 ];
 
+const getFilteredOptions = (status?: string): Option[] => {
+  if (!status) return statusChamado;
+  
+  switch(status) {
+    case "1": // Em Análise
+      return [
+        { label: "Aceito", value: 2 },
+        { label: "Recusado", value: 8 }
+      ];
+      
+    case "2": // Aceito
+      return [
+        { label: "Em Diagnóstico", value: 3 },
+      ];
+
+    case "3": // Em Diagnostico
+      return [
+        { label: "Equipamento Em Conserto", value: 4 },
+        { label: "Aguardando Peça", value: 5 },
+        { label: "Fechado Sem Resolução", value: 6 },
+      ];
+
+    case "4": // Equipamento em conserto
+      return [
+        { label: "Aguardando Peça", value: 5 },
+        { label: "Fechado Sem Resolução", value: 6 },
+        { label: "Resolvido", value: 7 },
+      ];
+
+    case "5": // Aguardando peça
+      return [
+        { label: "Equipamento Em Conserto", value: 4 },
+        { label: "Fechado Sem Resolução", value: 6 },
+      ];
+
+    case "6": // Fechado sem resolução
+      return [];
+      
+    case "7": // Resolvido
+      return [];
+      
+    case "8": // Recusado
+      return [];
+      
+    default:
+      return statusChamado;
+  }
+};
+
 export function SelectField({
   defaultValue,
   label,
@@ -38,26 +89,26 @@ export function SelectField({
   register,
   error,
   formIsValid,
-  options = statusChamado,
+  options,
   multiple = false,
-  styels, 
+  styles,
+  status,
 }: SelectFieldProps): JSX.Element {
-  
-  
+
+  // Determinar quais opções mostrar
+  const filteredOptions = options || getFilteredOptions(status);
 
   return (
-    <div style={ styels ? styels : { width: "255px"}}>
+    <div style={styles || { width: "255px" }}>
       {label && (
-        <label className="block text-gray-700 mb-2" >
+        <label className="block text-gray-700 mb-2">
           {label}
         </label>
       )}
 
       <SelectText
-        id={`${name}-select`}
         className={className}
-        data-cypress={`${name}-select`}
-        defaultValue={defaultValue as string | number | readonly string[] | undefined}
+        defaultValue={Array.isArray(defaultValue) ? defaultValue.map(String) : defaultValue?.toString()}
         {...register}
         multiple={multiple}
       >
@@ -66,14 +117,16 @@ export function SelectField({
             {placeholder}
           </option>
         )}
-        {options.map((option) => (
+        {filteredOptions.map((option) => (
           <option key={option.value} value={option.value}>
             {option.label}
           </option>
         ))}
       </SelectText>
 
-      {error && !formIsValid && <p className="text-red-500 text-xs italic mt-1">{error}</p>}
+      {error && !formIsValid && (
+        <p className="text-red-500 text-xs italic mt-1">{error}</p>
+      )}
     </div>
   );
 }

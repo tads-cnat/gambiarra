@@ -13,15 +13,16 @@ export const HeadTr = styled.tr`
 const actionColors: Record<number, string> = {
   1: "#9E9E9E",
   2: "#12A400",
-  3: "#DC3545",
-  4: "#DC3545",
-  5: "#7C74DA",
-  6: "#FFD454",
-  7: "#61B3FF",
+  3: "#ce962f",
+  4: "#7C74DA",
+  5: "#61B3FF",
+  6: "#3b3b3b",
+  7: "#117005",
+
 };
 
 interface StatusProps {
-  $status: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
+  $status: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
 }
 
 export const StatusBadge = styled.span<StatusProps>`
@@ -29,7 +30,7 @@ export const StatusBadge = styled.span<StatusProps>`
   border-radius: 5px;
   color: #fff;
   font-size: 12px;
-  background: ${({ $status }) => actionColors[$status] || "#7C7C7C"};
+  background: ${({ $status }) => actionColors[$status] || "#DC3545"};
 `;
 
 export const HeadTh = styled.th`
