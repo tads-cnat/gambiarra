@@ -84,9 +84,6 @@ class ChamadoViewSet(viewsets.ModelViewSet):
         user: Usuario = self.request.user
         grupo = user.grupo.name
 
-
-        print(grupo)
-
         if grupo == GrupoEnum.GERENTE:
             queryset = Chamado.objects.all()
         elif grupo == GrupoEnum.PROFESSOR:
