@@ -11,23 +11,19 @@ class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
         try:
-            # Obtendo os grupos
             grupo_admin = Group.objects.get(pk=1)
             grupo_professor = Group.objects.get(pk=2)
 
-            # Caminho da pasta de imagens (ajuste o caminho conforme necessário)
-            img_folder_path = os.path.join(settings.BASE_DIR, 'authentication', 'management', 'commands', 'img')
+            pasta = os.path.join(settings.BASE_DIR, 'authentication', 'management', 'commands', 'img')
 
-            # Função para adicionar a imagem de perfil
-            def add_profile_picture(usuario, nome):
-                image_filename = f"{nome}.png".lower()  # Nome do arquivo da imagem
-                image_path = os.path.join(img_folder_path, image_filename)
+            def add_foto(usuario, nome):
+                imagem_nome = f"{nome}.png".lower()
+                imagem_caminho = os.path.join(pasta, imagem_nome)
 
-                if os.path.exists(image_path):
-                    with open(image_path, 'rb') as img_file:
-                        usuario.imagem.save(image_filename, File(img_file), save=True)
+                if os.path.exists(imagem_caminho):
+                    with open(imagem_caminho, 'rb') as img_file:
+                        usuario.imagem.save(imagem_nome, File(img_file), save=True)
 
-            # Gerentes
             gerentes = [
                 {"username": "igor", "email": "igor@admin.com", "grupo": grupo_admin},
                 {"username": "ryan", "email": "ryan@admin.com", "grupo": grupo_admin},
@@ -49,7 +45,7 @@ class Command(BaseCommand):
                 )
                 if created:
                     gerente_obj.set_password("ZAP123!!")
-                    add_profile_picture(gerente_obj, gerente["username"])  # Adiciona a imagem
+                    add_foto(gerente_obj, gerente["username"])
                     gerente_obj.save()
 
             # Professores
@@ -75,7 +71,7 @@ class Command(BaseCommand):
                 )
                 if created:
                     professor_obj.set_password("ZAP123!!")
-                    add_profile_picture(professor_obj, professor["username"])  # Adiciona a imagem
+                    add_foto(professor_obj, professor["username"])
                     professor_obj.save()
 
         except Group.DoesNotExist:
