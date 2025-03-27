@@ -11,6 +11,7 @@ export interface UserActive {
   is_staff: boolean;
   is_active: boolean;
   grupo: string;
+  imagem: string;
 }
 
 // Definindo o tipo para o papel do usuário

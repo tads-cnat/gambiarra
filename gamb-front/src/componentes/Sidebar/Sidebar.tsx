@@ -231,13 +231,17 @@ export function Sidebar() {
 
 						{/* INFORMAÇÕES DO USUÁRIO E DROPDOWN */}
 						<UserSpace>
-							<User>
-								<img
-									src="\assets\perfil.png"
-									alt="Imagem de perfil"
-								/>
-								{userActive?.username || "User"} - {userActiveRole}
-							</User>
+						<User>
+							<img
+								src={userActive?.imagem}
+								//alt="Imagem de perfil"
+								style={{ width: "50px", height: "50px", borderRadius: "50%" }} // Ajustes opcionais
+							/>
+							{userActive?.username || "User"} - {userActiveRole}
+						</User>
+
+
+
 							<div className="flex flex-col-reverse relative">
 								{isDropdownOpen && (
 									<ItemDropdown className="absolute bottom-full mb-2 left-0 w-full elevacao-def">
