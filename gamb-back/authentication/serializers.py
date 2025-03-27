@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Group
 from django.contrib.auth.password_validation import validate_password
@@ -55,7 +56,7 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
 
 
 class ProfileUserSerializer(serializers.ModelSerializer):
-
+    imagem = serializers.SerializerMethodField()
     grupo = serializers.CharField(source="grupo.name", read_only=True)
 
     class Meta:
@@ -70,10 +71,24 @@ class ProfileUserSerializer(serializers.ModelSerializer):
             "is_staff",
             "is_active",
             "grupo",
+            "imagem"
         ]
+        
+    def get_imagem(self, obj):
+        request = self.context.get('request')
+        if obj.imagem:
+            return request.build_absolute_uri(obj.imagem.url) if request else settings.MEDIA_URL + str(obj.imagem)
+        return request.build_absolute_uri(settings.MEDIA_URL + "Padrao/perfil_padrao.png") if request else settings.MEDIA_URL + "perfil_padrao.png"
+
+
 
 class ListarUsuarioSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ["id", "username", "grupo"]
+
+class AlterarCargoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ["id"]
  
