@@ -77,7 +77,7 @@ export default function Home() {
 						</div>
 					</IndexContent>
 
-					<h2>Quais campus estão envolvidos no projeto?</h2>
+					<h2 id="instituicoes">Quais campus estão envolvidos no projeto?</h2>
 
 					<CardContainer className="row">
 						<CardIndex
@@ -113,7 +113,7 @@ export default function Home() {
 							maquinas={300}
 						/>
 					</CardContainer>
-					<h2>Mapa do Projeto 🌍</h2>
+					<h2 id="mapa">Mapa do Projeto 🌍</h2>
 					<MapContainer
 						center={[-5.861046793331842, -36.73219920508594]}
 						zoom={8}
