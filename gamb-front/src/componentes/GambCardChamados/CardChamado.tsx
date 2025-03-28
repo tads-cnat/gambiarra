@@ -20,9 +20,9 @@ function CardChamado({
 }: CardChamadoProps) {
   const messages = {
     gerente: {
-      cadastrados: "Chamados Cadastrados",
-      pendentes: "Chamados Pendentes",
-      resolvidos: "Chamados Resolvidos",
+      cadastrados: "Cadastrados",
+      pendentes: "Pendentes",
+      resolvidos: "Resolvidos",
       fechados: "Sem solução",
     },
     bolsista: {

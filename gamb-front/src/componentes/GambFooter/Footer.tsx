@@ -9,7 +9,7 @@ export function Footer() {
     const isHome = location.pathname === "/";
 
     // Função para navegar e rolar até a seção correta
-    const handleNavigation = (sectionId) => {
+    const handleNavigation = (sectionId: string) => {
         if (isHome) {
             document.getElementById(sectionId)?.scrollIntoView({ behavior: "smooth" });
         } else {
