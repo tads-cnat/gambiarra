@@ -74,9 +74,9 @@ DIAGNOSTICOS_POSSIVEIS = [
 ITEMS_POSSIVEIS = [
     "Notebook Dell Inspiron",
     "Computador HP Pavilion",
-    "MacBook Pro 13'",
+    "MacBook",
     "Monitor LG Ultrawide",
-    "Teclado Mecânico HyperX",
+    "Teclado Mecânico",
     "Mouse Logitech MX Master",
     "Impressora Epson EcoTank",
     "HD Externo Seagate 1TB",
@@ -85,21 +85,21 @@ ITEMS_POSSIVEIS = [
     "Roteador TP-Link AX1500",
     "Microfone Blue Yeti",
     "Headset Gamer Razer",
-    "Tablet Samsung Galaxy Tab",
+    "Tablet Samsung Galaxy",
     "Notebook Lenovo ThinkPad",
     "Computador Apple iMac",
     "Monitor Acer Predator",
     "Teclado Logitech G Pro",
     "Mouse Razer DeathAdder",
-    "Impressora HP LaserJet Pro",
+    "Impressora HP LaserJet",
     "Câmera Canon EOS 80D",
-    "Fones de ouvido Sony WH-1000XM4",
+    "Fones de ouvido Sony",
     "SSD Kingston 1TB",
     "Placa-mãe ASUS ROG Strix",
     "Fonte Corsair 750W",
     "Cadeira Gamer DXRacer",
     "Webcam Logitech C920",
-    "Microfone condensador Audio-Technica AT2020",
+    "Microfone condensador",
 ]
 
 
@@ -151,7 +151,8 @@ ACESSORIOS_POSSIVEIS = [
     "Teclado externo",
     "Adaptador USB-C",
     "Headset com microfone",
-]ACESSORIOS_POSSIVEIS = [
+]
+ACESSORIOS_POSSIVEIS = [
     "Carregador original",
     "Mouse sem fio",
     "Cabo HDMI",
@@ -202,9 +203,10 @@ class Command(BaseCommand):
         deletar = options["deletar"]
 
         if deletar:
-            for i in Chamado.objects.all():
-                i.delete()
-            self.stderr.write(self.style.SUCCESS(f"Deletados todos os chamados."))
+            chamados = Chamado.objects.all()
+            qtd = len(chamados)
+            chamados.delete()
+            self.stderr.write(self.style.SUCCESS(f"Deletados todos os {qtd} chamados."))
 
         try:
             professores = Usuario.objects.filter(grupo__name="professor")
@@ -235,12 +237,10 @@ class Command(BaseCommand):
                     acessorios_nomes = random.sample(ACESSORIOS_POSSIVEIS, k=random.randint(1, 2))
                     for acessorio_nome in acessorios_nomes:
                         Acessorio.objects.create(nome=acessorio_nome, item=item)
-                
-                descricao_acessorios = (f"\nO cliente também enviou os seguintes acessórios para análise: {', '.join(acessorios_nomes)}."if acessorios_nomes else "")
 
                 chamado = Chamado.objects.create(
                     titulo=problema,
-                    descricao = descricao+descricao_acessorios,
+                    descricao = descricao,
                     status=sequencia_status[-1],
                     cliente=cliente,
                     item=item

@@ -7,11 +7,7 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         chamados = Chamado.objects.all()
         qtd = len(chamados)
-        if qtd:
-            for i in chamados:
-                i.delete()
-            self.stderr.write(self.style.SUCCESS(f"Deletados todos ({qtd}) chamados."))
-        else:
-            self.stderr.write(self.style.ERROR(f"Nenhum chamado para deletar."))
+        chamados.delete()
+        self.stdout.write(self.style.SUCCESS(f"Deletados {qtd} chamados"))
 
 
