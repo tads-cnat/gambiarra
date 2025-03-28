@@ -43,13 +43,13 @@ export default function Home() {
 								executado por estudantes do Instituto Federal do
 								Rio Grande do Norte (<b>IFRN-CNAT</b>). Nosso
 								objetivo é <b>fornecer soluções</b> eficientes
-								para os
+								para os{" "}
 								<b>problemas técnicos</b> dos seus dispositivos,
 								com a expertise e a paixão que só os estudantes
 								podem oferecer. Conte conosco para resolver suas
 								questões de forma <b>rápida e confiável!</b>
 							</p>
-							<span>gostou da idéia?</span>
+							<span>gostou da ideia?</span>
 							<div className="bottoes">
 								<GambButton
 									label="Saiba Mais"

@@ -58,7 +58,7 @@ export function LoginCard() {
 			<form onSubmit={handleSubmit(handleLogin)}>
 				<CardContent>
 					<h3>
-						Olá! bom te ver <span>denovo</span> 🤖
+						Olá! bom te ver <span>de novo</span> 🤖
 					</h3>
 					<InputField
 						label="Nome de usuário:"
