@@ -51,7 +51,7 @@ class Command(BaseCommand):
             # Professores
             professores = [
                 {"username": "jorgiano", "email": "jorgiano@admin.com", "grupo": grupo_professor},
-                {"username": "jucena", "email": "lucena@admin.com", "grupo": grupo_professor},
+                {"username": "lucena", "email": "lucena@admin.com", "grupo": grupo_professor},
                 {"username": "braulio", "email": "braulio@admin.com", "grupo": grupo_professor},
                 {"username": "marilia", "email": "marilia@admin.com", "grupo": grupo_professor},
                 {"username": "felipao", "email": "felipao@admin.com", "grupo": grupo_professor},
