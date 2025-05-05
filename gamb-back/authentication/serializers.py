@@ -75,10 +75,16 @@ class ProfileUserSerializer(serializers.ModelSerializer):
         ]
         
     def get_imagem(self, obj):
-        request = self.context.get('request')
+        def build_image_url(path):
+            request = self.context.get('request')
+            if request:
+                return request.build_absolute_uri(path)
+            from urllib.parse import urljoin
+            return urljoin(settings.MEDIA_URL, path)
+
         if obj.imagem:
-            return request.build_absolute_uri(obj.imagem.url) if request else settings.MEDIA_URL + str(obj.imagem)
-        return request.build_absolute_uri(settings.MEDIA_URL + "Padrao/perfil_padrao.png") if request else settings.MEDIA_URL + "perfil_padrao.png"
+            return build_image_url(obj.imagem.url)
+        return build_image_url("Padrao/perfil_padrao.png")
 
 
 
