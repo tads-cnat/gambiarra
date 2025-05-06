@@ -19,18 +19,18 @@ O propósito do Projeto Gambiarra é estabelecer uma conexão entre estudantes e
 | Dia           | Horário | Local   |
 | ------------- | ------- | ------- |
 | Segunda-feira | 20:00   | Discord |
-| Quarta-feira  | 9:00    | IFRN    |
+| Quinta-feira  | 9:00    | IFRN    |
 | Domingo       | 20:00   | Discord |
 
-## Gerente: prof. Marilia Aranha Freire
+## Gerente: prof. Gracon Huttennberg Eliatan Leite de Lima
 
-Ordem para contato com o gerente da equipe: 2. Discord: mariliaafreire; 3. E-mail: marilia.freire@ifrn.edu.br
+Contato do gerente da equipe: E-mail: gracon.lima@ifrn.edu.br;
 
 # Documentação
 
 [Link para os documentos do projeto](gamb-doc/documentacao.md)
 
-## Manual da Desenvolvedor
+## Manual do Desenvolvedor
 
 [Orientações para os desenvolvedores do projeto](gamb-doc/guia-ds/guia.md)
 
