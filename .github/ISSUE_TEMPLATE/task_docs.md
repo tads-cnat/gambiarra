@@ -1,9 +1,10 @@
 ---
-name: Task Backend
-about: "Feature or fix in to project backend."
+name: Task Documentation
+about: "Feature or fix in to project docs."
 title: "[Hierarquia de dependencia] -  Verbo + o que essa issue vai fazer?"
-labels: "backend"
+labels: "documentação"
 assignees: ""
+branch: "main"
 ---
 
 

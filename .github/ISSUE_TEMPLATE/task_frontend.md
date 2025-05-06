@@ -1,6 +1,6 @@
 ---
 name: Task Frontend
-about: "Task frontend"
+about: "Feature or fix in to project frontend."
 title: "[Hierarquia de dependencia] -  Verbo + o que essa issue vai fazer?"
 labels: "frontend"
 assignees: ""
