@@ -1,14 +1,11 @@
 ---
-name: Issue Modelo
-about: "Modelo de Issue"
-title: ""
-labels: ""
+name: Task Frontend
+about: "Task frontend"
+title: "[Hierarquia de dependencia] -  Verbo + o que essa issue vai fazer?"
+labels: "frontend"
 assignees: ""
 ---
 
-**Tempo previsto (em horas):**
-
-**Tempo gasto (em horas):**
 
 **Esforço da tarefa (1 a 5):**
 
