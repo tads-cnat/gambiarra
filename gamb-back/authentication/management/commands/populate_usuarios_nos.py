@@ -53,6 +53,8 @@ class Command(BaseCommand):
                 #Servidores
 
                 #Clientes
+                {"username": "lipe", "grupo": grupo_cliente},
+
 
                 #Alunos
             
@@ -62,10 +64,12 @@ class Command(BaseCommand):
             for usuario in usuarios:
                 is_staff, is_superuser = False, False
 
+                if usuario["grupo"] in [grupo_admin]:
+                    is_superuser = True
+                    
                 #Permissões baseadas em populate_user.py, mas to achando estranho
                 if usuario["grupo"] in [grupo_admin, grupo_professor, grupo_bolsista]:
                     is_staff = True
-                    is_superuser = True
 
 
                 usuario_obj, created = Usuario.objects.update_or_create(
@@ -83,6 +87,9 @@ class Command(BaseCommand):
                     usuario_obj.set_password("ZAP123!!")
                     add_foto(usuario_obj, usuario["username"])
                     usuario_obj.save()
+            
+            self.stderr.write(self.style.SUCCESS("Os usuários foram criados!"))
+
 
 
         except Group.DoesNotExist:
