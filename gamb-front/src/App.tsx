@@ -39,7 +39,7 @@ export function App() {
 	}, []);
 
 	// Enquanto estamos verificando a autenticação, mostramos um carregando
-	if (isAuthenticatedStore() === undefined) {
+	if (!isAuthenticatedStore()) {
 		return <div>Loading...</div>;
 	}
 

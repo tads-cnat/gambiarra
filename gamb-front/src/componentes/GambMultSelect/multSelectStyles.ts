@@ -34,7 +34,7 @@ export const customStyles = {
 		...provided,
 		color: "#e74c3c", // Cor do ícone de remover
 		"&:hover": {
-			$backgroundColor: "#fff", // Cor de fundo ao passar o mouse
+			backgroundColor: "#fff", // Cor de fundo ao passar o mouse
 			color: "#c0392b", // Cor do ícone ao passar o mouse
 		},
 	}),
