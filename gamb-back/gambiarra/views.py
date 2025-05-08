@@ -15,6 +15,7 @@ from authentication.permissions import *
 from gambiarra.serializers import *
 from .models import *
 from authentication.models import *
+from django.db.models import Count
 
 TAB_STATUS_MAPPING = {
     "todos": [],
@@ -84,9 +85,6 @@ class ChamadoViewSet(viewsets.ModelViewSet):
         user: Usuario = self.request.user
         grupo = user.grupo.name
 
-
-        print(grupo)
-
         if grupo == GrupoEnum.GERENTE:
             queryset = Chamado.objects.all()
         elif grupo == GrupoEnum.PROFESSOR:
@@ -112,6 +110,36 @@ class ChamadoViewSet(viewsets.ModelViewSet):
 
         return queryset
 
+    @action(detail=False, methods=["get"], permission_classes=[IsAuthenticated])
+    def contagem_chamados(self, request):
+        user: Usuario = self.request.user
+        grupo = user.grupo.name
+
+        if grupo == GrupoEnum.GERENTE:
+            chamados = Chamado.objects.all()
+            contagem = {
+                "cadastrados": chamados.count(),
+                "pendentes": chamados.filter(status="1").count(),
+                "resolvidos": chamados.filter(status="5").count(),
+                "fechados": chamados.filter(status__in=["6", "7", "8"]).count(),
+            }
+
+        else:
+            if grupo == GrupoEnum.PROFESSOR:
+                chamados = Chamado.objects.filter(Q(professor=user) | Q(status="1"))
+            elif grupo == GrupoEnum.BOLSISTA:
+                chamados = Chamado.objects.filter(bolsistas=user)
+            else:  # Cliente
+                chamados = Chamado.objects.filter(cliente=user)
+
+            contagem = {
+                "atribuidas": chamados.count(),
+                "concluidas": chamados.filter(status__in=["5", "6", "7", "8"]).count(),
+                "pendentes": chamados.filter(status="1").count(),
+                "recusadas": chamados.filter(status="8").count() if grupo != GrupoEnum.BOLSISTA else 0,
+            }
+
+        return Response({"quantidades": contagem}, status=status.HTTP_200_OK)
    
     
     def create(self, request):
