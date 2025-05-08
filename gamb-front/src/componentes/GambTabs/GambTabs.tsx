@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { TabsContainer, TabButton } from "./StyleGambTabs";
 import GambButton from "../GambButton/Button";
-import { useUser } from "../../auth/service/user";
 import ModalChamadoSubmit from "../Sidebar/forms/abrirChamado/ModalChamadoSubmit";
 import { ChamadoSubmit } from "../../interfaces/models/iChamado";
 import ChamadoService from "../../services/models/ChamadoService";
+import { getUserActiveRole } from "../../auth/service/AuthStore";
 
 export interface Tab {
 	id: string;
@@ -33,7 +33,6 @@ export default function GambTabs({
 		params.set("tab", tabId);
 		navigate(`?${params.toString()}`);
 	};
-	const { userActiveRole } = useUser();
 
 	// Fecha o modal de abrir chamado
 	const closeModal = () => setModalOpen(false);
@@ -53,39 +52,38 @@ export default function GambTabs({
 				setModalOpen(false);
 			});
 	}
-	return (<>
-		<TabsContainer>
-			<div className="w-full p-0 align-end flex gap-4">
-				{tabs.map((tab) => (
-					<TabButton
-						key={tab.id}
-						isActive={activeTab === tab.id}
-						onClick={() => handleTabChange(tab.id)}
-					>
-						{tab.label}
-					</TabButton>
-				))}
-			</div>
-			{(userActiveRole === "bolsista" ||
-				userActiveRole === "cliente") && (
-				<GambButton
-					variant="inline"
-					label="Abrir Chamado"
-					icon="plus_circle"
-					onClick={() => setModalOpen(true)}
-					size="small"
-          className="mb-2"
-				/>
-			)}
-
-			
-		</TabsContainer>
-    {/* MODAL PARA ABRIR CHAMADO */}
+	return (
+		<>
+			<TabsContainer>
+				<div className="w-full p-0 align-end flex gap-4">
+					{tabs.map((tab) => (
+						<TabButton
+							key={tab.id}
+							$isActive={activeTab === tab.id}
+							onClick={() => handleTabChange(tab.id)}
+						>
+							{tab.label}
+						</TabButton>
+					))}
+				</div>
+				{(getUserActiveRole() === "bolsista" ||
+					getUserActiveRole() === "cliente") && (
+					<GambButton
+						variant="inline"
+						label="Abrir Chamado"
+						icon="plus_circle"
+						onClick={() => setModalOpen(true)}
+						size="small"
+						className="mb-2"
+					/>
+				)}
+			</TabsContainer>
+			{/* MODAL PARA ABRIR CHAMADO */}
 			<ModalChamadoSubmit
-      isModalOpen={ModalOpen}
-      closeModal={closeModal}
-      onSubmit={onSubmit}
-    />
-    </>
+				isModalOpen={ModalOpen}
+				closeModal={closeModal}
+				onSubmit={onSubmit}
+			/>
+		</>
 	);
 }

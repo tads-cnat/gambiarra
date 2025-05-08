@@ -19,7 +19,7 @@ import { useState } from "react";
 import { ChamadoSubmit } from "../../interfaces/models/iChamado";
 import ModalChamadoSubmit from "./forms/abrirChamado/ModalChamadoSubmit";
 import ChamadoService from "../../services/models/ChamadoService";
-import { useUser } from "../../auth/service/user";
+import { getUserActive, getUserActiveRole, logout } from "../../auth/service/AuthStore";
 
 // 1) Importe o hook para acessar dados do usuário
 
@@ -29,7 +29,6 @@ export function Sidebar() {
 	const [isDropdownOpen, setDropdownOpen] = useState(false);
 
 	// 2) Obtenha dados do usuário e seu papel
-	const { userActive, userActiveRole } = useUser();
 
 	const navigate = useNavigate();
 
@@ -54,9 +53,7 @@ export function Sidebar() {
 
 	// Lógica de logout
 	function handleLogout(): void {
-		localStorage.removeItem("access_token");
-		localStorage.removeItem("refresh_token");
-		localStorage.removeItem("user");
+		logout();
 		navigate("/login");
 	}
 
@@ -65,7 +62,7 @@ export function Sidebar() {
 
 	// 3) Defina os itens de menu de acordo com o papel do usuário
 	function getSidebarItems() {
-		switch (userActiveRole) {
+		switch (getUserActiveRole()) {
 			case "gerente":
 				return [
 					{ to: "/dashboard", label: "Home", icon: <HouseSimple /> },
@@ -176,9 +173,9 @@ export function Sidebar() {
 								{/* 
 					Exibir "Abrir Chamado" apenas para bolsista OU cliente 
 				  */}
-				  
-								{(userActiveRole === "bolsista" ||
-									userActiveRole === "cliente") && (
+
+								{(getUserActiveRole() === "bolsista" ||
+									getUserActiveRole() === "cliente") && (
 									<GambButton
 										variant="roxo"
 										label="Abrir Chamado"
@@ -188,43 +185,40 @@ export function Sidebar() {
 										style={{ width: "100%" }}
 									/>
 								)}
-									<GambButton
-										variant="inline"
-										label={"Voltar"}
-										icon={"back"}
-										size="large"
-										onClick={() => navigate(-1)}
-										style={{ width: "100%" }}
-									/>
-									<GambButton
-										variant="inline"
-										label={"Tela de Início"}
-										icon={"flower"}
-										size="large"
-										onClick={() => navigate("/")}
-										style={{ width: "100%" }}
-									/>
+								<GambButton
+									variant="inline"
+									label={"Voltar"}
+									icon={"back"}
+									size="large"
+									onClick={() => navigate(-1)}
+									style={{ width: "100%" }}
+								/>
+								<GambButton
+									variant="inline"
+									label={"Tela de Início"}
+									icon={"flower"}
+									size="large"
+									onClick={() => navigate("/")}
+									style={{ width: "100%" }}
+								/>
 							</div>
 
 							{/* MENU LATERAL */}
 							<ul>
-								
-								{sidebarItems.map((item) => (
-									<>
-										<li key={item.to}>
-											<Link
-												to={item.to}
-												className={` ${
-													item.to ===
-													window.location.pathname
-														? "text-green-600 font-regular border-l-2 border-green-600"
-														: ""
-												}`}
-											>
-												{item.icon} {item.label}
-											</Link>
-										</li>
-									</>
+								{sidebarItems.map((item, index) => (
+									<li key={`${item.to}-${index}`}>
+										<Link
+											to={item.to}
+											className={`${
+												item.to ===
+												window.location.pathname
+													? "text-green-600 font-regular border-l-2 border-green-600"
+													: ""
+											}`}
+										>
+											{item.icon} {item.label}
+										</Link>
+									</li>
 								))}
 							</ul>
 						</div>
@@ -236,7 +230,8 @@ export function Sidebar() {
 									src="\assets\perfil.png"
 									alt="Imagem de perfil"
 								/>
-								{userActive?.username || "User"} - {userActiveRole}
+								{getUserActive()?.username || "User"} -{" "}
+								{getUserActiveRole()}
 							</User>
 							<div className="flex flex-col-reverse relative">
 								{isDropdownOpen && (

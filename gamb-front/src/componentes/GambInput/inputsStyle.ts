@@ -1,24 +1,24 @@
 import styled from "styled-components";
 
 export const InputText = styled.div<{
-	isInvalid?: boolean;
-	isValid?: boolean | null;
+	$isInvalid?: boolean;
+	$isValid?: boolean | null;
 }>`
 	border-radius: 6px;
 	border: 1px solid
 		${(props) =>
-			props.isInvalid
+			props.$isInvalid
 				? props.theme.cores.danger
-				: props.isValid
-				? props.theme.cores.green_sucess_primary // Aqui está o verde para válido
-				: props.theme.cores.black}; // Preta como padrão
+				: props.$isValid
+				? props.theme.cores.green_sucess_primary
+				: props.theme.cores.black};
 	background: ${(props) => props.theme.cores.white};
 	color: ${(props) =>
-		props.isInvalid
+		props.$isInvalid
 			? props.theme.cores.danger
-			: props.isValid
-			? props.theme.cores.green_sucess_primary // Aqui está o verde para válido
-			: props.theme.cores.black}; // Preta como padrão
+			: props.$isValid
+			? props.theme.cores.green_sucess_primary
+			: props.theme.cores.black};
 	padding: 0.875rem;
 
 	&::placeholder {
@@ -31,9 +31,5 @@ export const InputText = styled.div<{
 
 	input {
 		width: 100%;
-		border: none;
-		background: transparent;
-		color: ${(props) => props.theme.cores.gray_text};
-		outline: none;
 	}
 `;

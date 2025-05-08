@@ -13,16 +13,24 @@ import { Login } from "./pages/login/Login";
 import Detail from "./pages/dashboard/pages/detail/Detail";
 import "./styles/index.css";
 import authService from "./auth/service/authService";
+import {
+	isAuthenticatedStore,
+	setIsAuthenticatedStore,
+} from "./auth/service/AuthStore";
 
 export function App() {
-	const [isAuthenticatedState, setIsAuthenticatedState] = useState<
-		boolean | null
-	>(null);
-
 	// Função assíncrona para verificar autenticação
 	const checkAuth = async () => {
-		const isAuthenticatedResult = await authService.profile();
-		setIsAuthenticatedState(isAuthenticatedResult);
+		const user = await authService.profile();
+		if (user) {
+			if (!isAuthenticatedStore()) {
+				setIsAuthenticatedStore();
+			}
+		} else {
+			if (isAuthenticatedStore()) {
+				setIsAuthenticatedStore();
+			}
+		}
 	};
 
 	// Verifica a autenticação assim que o componente é montado
@@ -31,7 +39,7 @@ export function App() {
 	}, []);
 
 	// Enquanto estamos verificando a autenticação, mostramos um carregando
-	if (isAuthenticatedState === null) {
+	if (isAuthenticatedStore() === undefined) {
 		return <div>Loading...</div>;
 	}
 
@@ -48,7 +56,7 @@ export function App() {
 					<Route
 						path="/login"
 						element={
-							isAuthenticatedState ? (
+							isAuthenticatedStore() ? (
 								<Navigate to="/dashboard" />
 							) : (
 								<Login />
@@ -79,7 +87,6 @@ export function App() {
 							path="detail/:id"
 							element={
 								<ProtectedRoute
-
 									element={<Detail />}
 									requiredRole={["Allowed"]}
 								/>
