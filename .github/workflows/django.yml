@@ -41,7 +41,7 @@ jobs:
           DJANGO_SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
           DATABASE_URL: postgres://postgres:postgres@postgres:5432/github_actions
         run: |
-          cd backend
+          cd gamb-back
           python manage.py migrate
 
       - name: Run tests
@@ -49,5 +49,5 @@ jobs:
           DJANGO_SETTINGS_MODULE: mysite.settings
           DJANGO_SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
         run: |
-          cd backend
+          cd gamb-back
           python manage.py test
