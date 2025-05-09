@@ -9,14 +9,14 @@ import {
 import Icon from "../GambIcon/Icon";
 import { ChatProps } from "../../interfaces/componentes/iGambChat";
 import useWebSocket from "./webSocket";
-import { useForm } from "react-hook-form";
-import { useUser } from "../../auth/service/user";
+import { get, useForm } from "react-hook-form";
+import { getUserActive } from "../../auth/service/AuthStore";
 import GambButton from "../GambButton/Button";
 import InputField from "../GambInput/Input";
 
 export default function Chat({ chamado_id }: ChatProps) {
 	const chatBodyRef = useRef<HTMLDivElement>(null);
-	const { userActive } = useUser();
+
 	const { register, handleSubmit, reset } = useForm<{ texto: string }>();
 	const { messages, sendMessage, connected } = useWebSocket(
 		`ws://localhost:8000/ws/chat/${chamado_id}/`
@@ -49,7 +49,7 @@ export default function Chat({ chamado_id }: ChatProps) {
 			await sendMessage({
 				texto: data.texto,
 				chamado: chamado_id,
-				autor: userActive?.id || 0,
+				autor: getUserActive()?.id || 0,
 			});
 		} catch (error) {
 			console.error("Erro ao enviar mensagem:", error);
@@ -68,7 +68,10 @@ export default function Chat({ chamado_id }: ChatProps) {
 
 			<ChatBody ref={chatBodyRef}>
 				<div className="inline-flex items-center justify-center gap-1.5 mb-4">
-					<Icon icon={"check"} color="green" />
+					<Icon
+						icon={"check"}
+						color="green"
+					/>
 					<span className="status-text">
 						Chamado aberto em {new Date().toLocaleDateString()}
 					</span>
@@ -79,7 +82,7 @@ export default function Chat({ chamado_id }: ChatProps) {
 						messages.map((message) => (
 							<ChatMessage
 								side={
-									message.autor.id === userActive?.id
+									message.autor.id === getUserActive()?.id
 										? "right"
 										: "left"
 								}
@@ -87,7 +90,9 @@ export default function Chat({ chamado_id }: ChatProps) {
 								<div className="bubble">
 									<p>{message.texto}</p>
 									<span className="time">
-										{new Date(message.data_envio).toLocaleString("pt-BR")}
+										{new Date(
+											message.data_envio
+										).toLocaleString("pt-BR")}
 									</span>
 								</div>
 							</ChatMessage>
@@ -105,23 +110,22 @@ export default function Chat({ chamado_id }: ChatProps) {
 			</ChatBody>
 
 			<ChatFooter>
-			<form className="w-full flex items-center gap-2">
-
-				<div className="input-chat w-full">
-					<InputField
-						placeholder="Digite sua mensagem..."
-						register={register("texto")}
-						icon="chat"
-						type="text"
-						classNameFather="w-full"
+				<form className="w-full flex items-center gap-2">
+					<div className="input-chat w-full">
+						<InputField
+							placeholder="Digite sua mensagem..."
+							register={register("texto")}
+							icon="chat"
+							type="text"
+							classNameFather="w-full"
+						/>
+					</div>
+					<GambButton
+						label="Enviar"
+						variant="roxo"
+						style={{ fontSize: "0.8rem" }}
+						onClick={handleSubmit(onSubmit)} // Chama o handleSubmit ao enviar
 					/>
-				</div>
-				<GambButton
-					label="Enviar"
-					variant="roxo"
-					style={{ fontSize: "0.8rem" }}
-					onClick={handleSubmit(onSubmit)} // Chama o handleSubmit ao enviar
-				/>
 				</form>
 			</ChatFooter>
 		</ChatContainer>

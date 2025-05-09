@@ -18,7 +18,7 @@ export default function InputField(props: InputFieldProps): JSX.Element {
 		error,
 		icon,
 		formIsValid,
-		classNameFather
+		classNameFather,
 	} = props;
 
 	// Estado para alternar o tipo de entrada (exclusivo para campos de senha)
@@ -47,8 +47,8 @@ export default function InputField(props: InputFieldProps): JSX.Element {
 				<InputText
 					style={{ padding: 8 }}
 					className={className} // Passando o className corretamente
-					isInvalid={!!error || formIsValid === false} // Validando se há erro ou se o formulário não é válido
-					isValid={formIsValid} // Passando a validade do formulário
+					$isInvalid={!!error || formIsValid === false} // Validando se há erro ou se o formulário não é válido
+					$isValid={formIsValid} // Passando a validade do formulário
 				>
 					<div className="flex items-center justify-center gap-2 w-full">
 						{/* Ícone opcional ao lado do campo */}
@@ -82,8 +82,8 @@ export default function InputField(props: InputFieldProps): JSX.Element {
 				// Campo de entrada para outros tipos
 				<InputText
 					className={className} // Passando o className corretamente
-					isInvalid={!!error || formIsValid === false} // Verifica se tem erro ou se o formulário não é válido
-					isValid={formIsValid} // Passando a validade do formulário
+					$isInvalid={!!error || formIsValid === false} // Verifica se tem erro ou se o formulário não é válido
+					$isValid={formIsValid} // Passando a validade do formulário
 				>
 					<Icon icon={icon || "arquivo"} />
 					<input

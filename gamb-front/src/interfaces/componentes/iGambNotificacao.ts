@@ -3,7 +3,7 @@ export interface NotificacaoProps {
 	icon: string;
 
 	// Cor de fundo do círculo principal
-	backgroundColor: string;
+	$backgroundColor: string;
 
 	// Número exibido no badge superior esquerdo
 	badgeNumber?: number;
@@ -12,7 +12,7 @@ export interface NotificacaoProps {
 	size?: number;
 
 	// Cor do ícone
-	iconColor?: string;
+	$iconColor?: string;
 
 	// Função que será executada ao clicar no círculo
 	onClick?: () => void;
