@@ -5,11 +5,8 @@ on:
     branches: ["*"]
   pull_request:
     branches: ["*"]
-jobs:
-  test:
-    runs-on: ubuntu-latest
 
-    env: 
+  env: 
       SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
       DEBUG: ${{ vars.DEBUG }}
       DJANGO_LOGLEVEL: ${{ vars.DJANGO_LOGLEVEL }}
@@ -20,6 +17,12 @@ jobs:
       DATABASE_PASSWORD: ${{ vars.DATABASE_PASSWORD }}
       DATABASE_HOST: ${{ vars.DATABASE_HOST }}
       DATABASE_PORT: ${{ vars.DATABASE_PORT }}
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+  
 
     steps:
       - uses: actions/checkout@v4
@@ -32,7 +35,7 @@ jobs:
       - name: Test env
         run: | 
           echo "SECRET_KEY is set: ${SECRET_KEY:+yes}"
-          echo "DEBUG= ${{ vars.DEBUG }}"
+          echo "DEBUG= ${DEBUG}"
        
 
       - name: Install dependencies
