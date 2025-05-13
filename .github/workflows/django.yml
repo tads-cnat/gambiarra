@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env: 
-      DJANGO_SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
+      SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
       DEBUG: ${{ vars.DEBUG }}
       DJANGO_LOGLEVEL: ${{ vars.DJANGO_LOGLEVEL }}
       DJANGO_ALLOWED_HOSTS: ${{ vars.DJANGO_ALLOWED_HOSTS }}
@@ -51,7 +51,7 @@ jobs:
       - name: Run migrations
         env:
           DJANGO_SETTINGS_MODULE: mysite.settings
-          DJANGO_SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
+          SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
           DATABASE_URL: postgres://postgres:postgres@postgres:5432/github_actions
         run: |
           cd gamb-back
@@ -60,7 +60,7 @@ jobs:
       - name: Run tests
         env:
           DJANGO_SETTINGS_MODULE: mysite.settings
-          DJANGO_SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
+          SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
         run: |
           cd gamb-back
           python manage.py test
