@@ -32,7 +32,7 @@ jobs:
       - name: Run up
         run: |
           cd gamb-back
-          docker-compose up --build -d
+          docker-compose up  -d
         # O parâmetro -d roda os containers em segundo plano
 
       # Esperar o banco de dados ficar pronto antes de tentar conectar
