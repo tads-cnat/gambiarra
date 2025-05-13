@@ -8,19 +8,20 @@ on:
 
 jobs:
   test:
+    
+    runs-on: ubuntu-latest
+
     env: 
       DJANGO_SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
-      DEBUG: ${{ env.DEBUG }}
-      DJANGO_LOGLEVEL: ${{ env.DJANGO_LOGLEVEL }}
-      DJANGO_ALLOWED_HOSTS: ${{ env.DJANGO_ALLOWED_HOSTS }}
-      DATABASE_ENGINE: ${{ env.DATABASE_ENGINE }}
-      DATABASE_NAME: ${{ env.DATABASE_NAME }}
-      DATABASE_USERNAME: ${{ env.DATABASE_USERNAME }}
-      DATABASE_PASSWORD: ${{ env.DATABASE_PASSWORD }}
-      DATABASE_HOST: ${{ env.DATABASE_HOST }}
-      DATABASE_PORT: ${{ env.DATABASE_PORT }}
-
-    runs-on: ubuntu-latest
+      DEBUG: ${{ vars.DEBUG }}
+      DJANGO_LOGLEVEL: ${{ vars.DJANGO_LOGLEVEL }}
+      DJANGO_ALLOWED_HOSTS: ${{ vars.DJANGO_ALLOWED_HOSTS }}
+      DATABASE_ENGINE: ${{ vars.DATABASE_ENGINE }}
+      DATABASE_NAME: ${{ vars.DATABASE_NAME }}
+      DATABASE_USERNAME: ${{ vars.DATABASE_USERNAME }}
+      DATABASE_PASSWORD: ${{ vars.DATABASE_PASSWORD }}
+      DATABASE_HOST: ${{ vars.DATABASE_HOST }}
+      DATABASE_PORT: ${{ vars.DATABASE_PORT }}
 
     services:
       postgres:
