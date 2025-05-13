@@ -32,10 +32,8 @@ jobs:
       - name: Test env
         run: | 
           echo "SECRET_KEY is set: ${SECRET_KEY:+yes}"
-          echo "DEBUG=${DEBUG}"
-          echo "DJANGO_LOGLEVEL=${DJANGO_LOGLEVEL}"
-          echo "DATABASE_HOST=${DATABASE_HOST}"
-          echo "DATABASE_PORT=${DATABASE_PORT}"
+          echo "DEBUG= ${{ vars.DEBUG }}"
+       
 
       - name: Install dependencies
         run: |
