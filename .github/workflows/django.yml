@@ -33,7 +33,7 @@ jobs:
           python-version: "3.11"
 
       - name: Test env
-          run: |
+        run: |
           echo "SECRET_KEY: $SECRET_KEY"
           echo "DEBUG: $DEBUG"
           echo "DJANGO_LOGLEVEL: $DJANGO_LOGLEVEL"
