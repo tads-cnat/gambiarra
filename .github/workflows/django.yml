@@ -8,6 +8,18 @@ on:
 
 jobs:
   test:
+    env: 
+      DJANGO_SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
+      DEBUG: ${{ env.DEBUG }}
+      DJANGO_LOGLEVEL: ${{ env.DJANGO_LOGLEVEL }}
+      DJANGO_ALLOWED_HOSTS: ${{ env.DJANGO_ALLOWED_HOSTS }}
+      DATABASE_ENGINE: ${{ env.DATABASE_ENGINE }}
+      DATABASE_NAME: ${{ env.DATABASE_NAME }}
+      DATABASE_USERNAME: ${{ env.DATABASE_USERNAME }}
+      DATABASE_PASSWORD: ${{ env.DATABASE_PASSWORD }}
+      DATABASE_HOST: ${{ env.DATABASE_HOST }}
+      DATABASE_PORT: ${{ env.DATABASE_PORT }}
+
     runs-on: ubuntu-latest
 
     services:
