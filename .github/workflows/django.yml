@@ -6,63 +6,53 @@ on:
   pull_request:
     branches: ["*"]
 
-
 jobs:
   test:
     runs-on: ubuntu-latest
-    env: 
-          SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
-          DEBUG: ${{ vars.DEBUG }}
-          DJANGO_LOGLEVEL: ${{ vars.DJANGO_LOGLEVEL }}
-          DJANGO_ALLOWED_HOSTS: ${{ vars.DJANGO_ALLOWED_HOSTS }}
-          DATABASE_ENGINE: ${{ vars.DATABASE_ENGINE }}
-          DATABASE_NAME: ${{ vars.DATABASE_NAME }}
-          DATABASE_USERNAME: ${{ vars.DATABASE_USERNAME }}
-          DATABASE_PASSWORD: ${{ vars.DATABASE_PASSWORD }}
-          DATABASE_HOST: ${{ vars.DATABASE_HOST }}
-          DATABASE_PORT: ${{ vars.DATABASE_PORT }}
+    env:
+      SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
+      DEBUG: ${{ secrets.DEBUG }}
+      DJANGO_LOGLEVEL: ${{ secrets.DJANGO_LOGLEVEL }}
+      DJANGO_ALLOWED_HOSTS: ${{ secrets.DJANGO_ALLOWED_HOSTS }}
+      DATABASE_ENGINE: ${{ secrets.DATABASE_ENGINE }}
+      DATABASE_NAME: ${{ secrets.DATABASE_NAME }}
+      DATABASE_USERNAME: ${{ secrets.DATABASE_USERNAME }}
+      DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
+      DATABASE_HOST: ${{ secrets.DATABASE_HOST }}
+      DATABASE_PORT: ${{ secrets.DATABASE_PORT }}
 
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
+      # Configura o Docker Buildx
+      - name: Set up Docker
+        uses: docker/setup-buildx-action@v2
 
-      - name: Test env
+      # Rodar os containers Docker (web + db + redis)
+      - name: Run docker-compose up
         run: |
-          echo "SECRET_KEY: $SECRET_KEY"
-          echo "DEBUG: $DEBUG"
-          echo "DJANGO_LOGLEVEL: $DJANGO_LOGLEVEL"
-          echo "DJANGO_ALLOWED_HOSTS: $DJANGO_ALLOWED_HOSTS"
-          echo "DATABASE_ENGINE: $DATABASE_ENGINE"
-          echo "DATABASE_NAME: $DATABASE_NAME"
-          echo "DATABASE_USERNAME: $DATABASE_USERNAME"
-          echo "DATABASE_PASSWORD: $DATABASE_PASSWORD"
-          echo "DATABASE_HOST: $DATABASE_HOST"
-          echo "DATABASE_PORT: $DATABASE_PORT"
-       
+          docker-compose -f docker-compose.local.yml up --build -d
+        # O parâmetro -d roda os containers em segundo plano
 
-      - name: Install dependencies
+      # Esperar o banco de dados ficar pronto antes de tentar conectar
+      - name: Wait for DB to be ready
         run: |
-          cd gamb-back
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
+          docker exec -t gambdevdb pg_isready -U postgres
+        # Gambdevdb é o nome do seu contêiner PostgreSQL, conforme o docker-compose.yml
 
-      - name: Run migrations
-        env:
-          DJANGO_SETTINGS_MODULE: mysite.settings
-          DJANGO_SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
-          DATABASE_URL: postgres://postgres:postgres@postgres:5432/github_actions
+      # Rodar migrações dentro do contêiner do Django
+      - name: Run migrations inside Docker container
         run: |
-          cd gamb-back
-          python manage.py migrate
+          docker exec -t gambdrf python manage.py migrate
+        # Gambdrf é o nome do seu contêiner Django, conforme o docker-compose.yml
 
-      - name: Run tests
-        env:
-          DJANGO_SETTINGS_MODULE: mysite.settings
-          DJANGO_SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
+      # Rodar testes dentro do contêiner do Django
+      - name: Run tests inside Docker container
         run: |
-          cd gamb-back
-          python manage.py test
+          docker exec -t gambdrf python manage.py test
+        # Gambdrf é o nome do seu contêiner Django, conforme o docker-compose.yml
+
+      # Desligar os containers após a execução dos testes
+      - name: Shut down Docker containers
+        run: |
+          docker-compose -f docker-compose.local.yml down
