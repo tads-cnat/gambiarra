@@ -13,22 +13,22 @@ jobs:
 
     env: 
       SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
-      DEBUG: ${{ django.DEBUG }}
-      DJANGO_LOGLEVEL: ${{ django.DJANGO_LOGLEVEL }}
-      DJANGO_ALLOWED_HOSTS: ${{ django.DJANGO_ALLOWED_HOSTS }}
-      DATABASE_ENGINE: ${{ django.DATABASE_ENGINE }}
-      DATABASE_NAME: ${{ django.DATABASE_NAME }}
-      DATABASE_USERNAME: ${{ django.DATABASE_USERNAME }}
-      DATABASE_PASSWORD: ${{ django.DATABASE_PASSWORD }}
-      DATABASE_HOST: ${{ django.DATABASE_HOST }}
-      DATABASE_PORT: ${{ django.DATABASE_PORT }}
+      DEBUG: ${{ vars.DEBUG }}
+      DJANGO_LOGLEVEL: ${{ vars.DJANGO_LOGLEVEL }}
+      DJANGO_ALLOWED_HOSTS: ${{ vars.DJANGO_ALLOWED_HOSTS }}
+      DATABASE_ENGINE: ${{ vars.DATABASE_ENGINE }}
+      DATABASE_NAME: ${{ vars.DATABASE_NAME }}
+      DATABASE_USERNAME: ${{ vars.DATABASE_USERNAME }}
+      DATABASE_PASSWORD: ${{ vars.DATABASE_PASSWORD }}
+      DATABASE_HOST: ${{ vars.DATABASE_HOST }}
+      DATABASE_PORT: ${{ vars.DATABASE_PORT }}
 
     run: | 
       echo "SECRET_KEY is set: ${SECRET_KEY:+yes}"
       echo "DEBUG=$DEBUG"
       echo "DJANGO_LOGLEVEL=$DJANGO_LOGLEVEL"
       echo "DATABASE_HOST=$DATABASE_HOST"
-      
+
     services:
       postgres:
         image: postgres:17-alpine
