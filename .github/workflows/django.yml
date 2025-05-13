@@ -33,6 +33,7 @@ jobs:
       - name: Test env
         run: |
           echo "SECRET_KEY: $SECRET_KEY"
+          echo "DEBUG: $DEBUG"
           echo "DJANGO_LOGLEVEL: $DJANGO_LOGLEVEL"
           echo "DJANGO_ALLOWED_HOSTS: $DJANGO_ALLOWED_HOSTS"
           echo "DATABASE_ENGINE: $DATABASE_ENGINE"
