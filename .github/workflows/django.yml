@@ -10,6 +10,21 @@ jobs:
   test:
     
     runs-on: ubuntu-latest
+
+    env: 
+      SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
+      DEBUG: ${{ django.DEBUG }}
+      DJANGO_LOGLEVEL: ${{ django.DJANGO_LOGLEVEL }}
+      DJANGO_ALLOWED_HOSTS: ${{ django.DJANGO_ALLOWED_HOSTS }}
+      DATABASE_ENGINE: ${{ django.DATABASE_ENGINE }}
+      DATABASE_NAME: ${{ django.DATABASE_NAME }}
+      DATABASE_USERNAME: ${{ django.DATABASE_USERNAME }}
+      DATABASE_PASSWORD: ${{ django.DATABASE_PASSWORD }}
+      DATABASE_HOST: ${{ django.DATABASE_HOST }}
+      DATABASE_PORT: ${{ django.DATABASE_PORT }}
+
+    run:
+      | cat SECRET_KEY
     services:
       postgres:
         image: postgres:17-alpine
@@ -17,7 +32,6 @@ jobs:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
           POSTGRES_DB: github_actions
-          
         ports: ["5432:5432"]
          # needed because the postgres container does not provide a healthcheck
         options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
@@ -29,7 +43,7 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-   
+
       - name: Install dependencies
         run: |
           cd gamb-back
