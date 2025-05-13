@@ -6,7 +6,7 @@ on:
   pull_request:
     branches: ["*"]
 
-  env: 
+env: 
       SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
       DEBUG: ${{ vars.DEBUG }}
       DJANGO_LOGLEVEL: ${{ vars.DJANGO_LOGLEVEL }}
