@@ -5,10 +5,8 @@ on:
     branches: ["*"]
   pull_request:
     branches: ["*"]
-
 jobs:
   test:
-    
     runs-on: ubuntu-latest
 
     env: 
@@ -23,19 +21,6 @@ jobs:
       DATABASE_HOST: ${{ vars.DATABASE_HOST }}
       DATABASE_PORT: ${{ vars.DATABASE_PORT }}
 
-   
-
-    services:
-      postgres:
-        image: postgres:17-alpine
-        env:
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
-          POSTGRES_DB: github_actions
-        ports: ["5432:5432"]
-         # needed because the postgres container does not provide a healthcheck
-        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
-
     steps:
       - uses: actions/checkout@v4
 
@@ -44,13 +29,14 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: test env
+      - name: Test env
         run: | 
-            echo "SECRET_KEY is set: ${SECRET_KEY:+yes}"
-            echo "DEBUG=$DEBUG"
-            echo "DJANGO_LOGLEVEL=$DJANGO_LOGLEVEL"
-            echo "DATABASE_HOST=$DATABASE_HOST"
-            
+          echo "SECRET_KEY is set: ${SECRET_KEY:+yes}"
+          echo "DEBUG=${DEBUG}"
+          echo "DJANGO_LOGLEVEL=${DJANGO_LOGLEVEL}"
+          echo "DATABASE_HOST=${DATABASE_HOST}"
+          echo "DATABASE_PORT=${DATABASE_PORT}"
+
       - name: Install dependencies
         run: |
           cd gamb-back
