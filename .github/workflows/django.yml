@@ -23,11 +23,7 @@ jobs:
       DATABASE_HOST: ${{ vars.DATABASE_HOST }}
       DATABASE_PORT: ${{ vars.DATABASE_PORT }}
 
-    run: | 
-      echo "SECRET_KEY is set: ${SECRET_KEY:+yes}"
-      echo "DEBUG=$DEBUG"
-      echo "DJANGO_LOGLEVEL=$DJANGO_LOGLEVEL"
-      echo "DATABASE_HOST=$DATABASE_HOST"
+   
 
     services:
       postgres:
@@ -48,6 +44,13 @@ jobs:
         with:
           python-version: "3.11"
 
+      - name: test env
+        run: | 
+            echo "SECRET_KEY is set: ${SECRET_KEY:+yes}"
+            echo "DEBUG=$DEBUG"
+            echo "DJANGO_LOGLEVEL=$DJANGO_LOGLEVEL"
+            echo "DATABASE_HOST=$DATABASE_HOST"
+            
       - name: Install dependencies
         run: |
           cd gamb-back
