@@ -35,20 +35,6 @@ jobs:
           docker-compose up  -d
         # O parâmetro -d roda os containers em segundo plano
 
-      # Esperar o banco de dados ficar pronto antes de tentar conectar
-      - name: Wait for DB to be ready
-        run: |
-          cd gamb-back
-          docker exec -t gambdevdb pg_isready -U postgres
-        # Gambdevdb é o nome do seu contêiner PostgreSQL, conforme o docker-compose.yml
-
-      # Rodar migrações dentro do contêiner do Django
-      - name: Run migrations inside Docker container
-        run: |
-          cd gamb-back
-          docker exec -t gambdrf python manage.py migrate
-        # Gambdrf é o nome do seu contêiner Django, conforme o docker-compose.yml
-
       # Rodar testes dentro do contêiner do Django
       - name: Run tests inside Docker container
         run: |
