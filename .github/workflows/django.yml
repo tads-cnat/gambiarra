@@ -23,8 +23,12 @@ jobs:
       DATABASE_HOST: ${{ django.DATABASE_HOST }}
       DATABASE_PORT: ${{ django.DATABASE_PORT }}
 
-    run:
-      | cat SECRET_KEY
+    run: | 
+      echo "SECRET_KEY is set: ${SECRET_KEY:+yes}"
+      echo "DEBUG=$DEBUG"
+      echo "DJANGO_LOGLEVEL=$DJANGO_LOGLEVEL"
+      echo "DATABASE_HOST=$DATABASE_HOST"
+      
     services:
       postgres:
         image: postgres:17-alpine
