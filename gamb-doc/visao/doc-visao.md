@@ -93,7 +93,7 @@ Nosso produto é uma plataforma focada em gerenciamento de chamados de manutenç
 | RF12   | Login no sistema                     | O sistema deve disponibilizar autenticação para os seus usuários.                                                                                                  |                        |
 | RF13   | Geração de estatísticas dos chamados | O sistema deve permitir a geração de relatórios em PDF com dados agrupados dos chamados, como quantidade por status, por período e por responsável.               | <a href="/doc/regras/regras-de-negocio.md#rn005">RN005</a> |
 | RF14   | Gerenciamento de atividades          | O sistema deve permitir que bolsistas visualizem e gerenciem as atividades atribuídas a eles, marcando andamento e conclusão. Professores acompanham o progresso. | <a href="/doc/regras/regras-de-negocio.md#rn008">RN008</a>, <a href="/doc/regras/regras-de-negocio.md#rn010">RN010</a> |
-
+| RF15   | Cadastramento de usuários          | O sistema deve permitir que os visitantes se cadastrem na plataforma para acessar as funções do sistema. | <a href="/doc/regras/regras-de-negocio.md#rn008">RN015</a> |
 
 ## 9. Requisitos não-funcionais
 | Código | Nome                        | Descrição                                                          | Categoria     | Classificação |
