@@ -1,7 +1,7 @@
 # Casos de Teste - Abrir Chamado
 
 **Projeto:** Gambiarra  
-**Versão:** 1.1  
+**Versão:** 1.2  
 **Data da Última Atualização:** 14/05  
 
 ## Histórico de Alterações
@@ -104,9 +104,31 @@ Usuário deve estar logado como cliente. Chamado deve estar em status "Fechado",
 
 ---
 
-## 2. Testes Funcionais
+### 1.3 - Caso de Teste: Encerrar Chamado
 
-### 2.1 - Fluxo Principal: Abrir Chamado
+**Pré-requisitos:**  
+O usuário deve estar logado como professor, pois apenas professores têm permissão para fechar chamados. O chamado precisa estar em um dos status: “Em diagnóstico”, “Aguardando Peça” ou “Equipamento em conserto”.
+
+**Passos para execução:**
+
+1. Acesse a tela de listagem de chamados, logado como professor.  
+2. Clique no botão **"Encerrar Chamado"**.  
+3. Um modal será exibido com o seguinte campo:
+   - **(entrada 1)** Justificativa do encerramento do chamado (obrigatório)
+
+**Informações dos Campos:**
+
+- O campo de justificativa é obrigatório.  
+- O campo de justificativa aceita caracteres alfanuméricos com limite de até 255 caracteres.
+
+**Critérios de Aceitação:**
+
+- Após o encerramento do chamado, o status é alterado para “Resolvido” ou “Fechado sem resolução”, a depender do status anterior.  
+- O professor é redirecionado para a tela de detalhes do chamado.
+
+---
+
+## 2. Testes Funcionais
 
 ### 2.1 - Fluxo Principal: Abrir Chamado
 
@@ -123,8 +145,6 @@ Usuário deve estar logado como cliente. Chamado deve estar em status "Fechado",
 | [>50 caracteres]   | notebook não está ligando | notebook dell | carregador         | Erro ao criar chamado     |
 | Computador quebrado | notebook não está ligando | [>255 caracteres] | carregador     | Erro ao criar chamado     |
 | [>50 caracteres]   | [>255 caracteres]         | [>255 caracteres] | [>255 caracteres] | Erro ao criar chamado     |
-
-*(Outros testes incluem entradas com mais de 255 caracteres, campos vazios, etc.)*
 
 ---
 
@@ -153,5 +173,13 @@ Usuário deve estar logado como cliente. Chamado deve estar em status "Fechado",
 
 ---
 
+### 2.4 - Fluxo Principal: Encerrar Chamado
+
+| Justificativa              | Resultado Esperado                     | Resultado Obtido | Situação |
+|----------------------------|----------------------------------------|------------------|----------|
+| Entre 1 e 255 caracteres   | Mensagem de “Encerrado com sucesso”    |                  |          |
+| Mais de 255 caracteres     | Erro - Justificativa                   |                  |          |
+
+---
 
 
