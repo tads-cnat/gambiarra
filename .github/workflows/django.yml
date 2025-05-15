@@ -2,9 +2,9 @@ name: Django CI
 
 on:
   push:
-    branches: ["287-0---implementar-pipelines-para-cicd"]
+    branches: ["*"]
   pull_request:
-    branches: ["287-0---implementar-pipelines-para-cicd"]
+    branches: ["*"]
 
 jobs:
   
