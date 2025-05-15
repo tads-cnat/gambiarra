@@ -107,17 +107,21 @@ Usuário deve estar logado como cliente. Chamado deve estar em status "Fechado",
 ### 1.3 - Caso de Teste: Encerrar Chamado
 
 **Pré-requisitos:**  
-O usuário deve estar logado como professor, pois apenas professores têm permissão para fechar chamados. O chamado precisa estar em um dos status: “Em diagnóstico”, “Aguardando Peça” ou “Equipamento em conserto”.
+O usuário deve estar logado com o usuário "professor1" de senha "ZAP123!!", pois apenas **professores** têm permissão para fechar chamados. 
 
 **Passos para execução:**
 
 1. Acesse a tela de listagem de chamados, logado como professor.  
 2. Clique no botão **"Encerrar Chamado"**.  
 3. Um modal será exibido com o seguinte campo:
-   - **(entrada 1)** Justificativa do encerramento do chamado (obrigatório)
+   - **(entrada 1)** Status de encerramento do chamado (obrigatório)
+   - **(entrada 2)** Justificativa do encerramento do chamado (obrigatório)
+
 
 **Informações dos Campos:**
 
+- O chamado precisa estar em um dos status: "Em Análise", “Em diagnóstico”, “Aguardando Peça” ou “Equipamento em conserto”.
+- Os status de encerramento são: "Fechado com Resolução", "Fechado sem Resolução" ou "Recusado".
 - O campo de justificativa é obrigatório.  
 - O campo de justificativa aceita caracteres alfanuméricos com limite de até 255 caracteres.
 
