@@ -1,4 +1,4 @@
-import { userRoles } from "../../auth/service/AuthStore";
+import { UserRoles } from "../../auth/service/AuthStore";
 
 // Se o tipo de usuário já é definido em userRoles, podemos usá-lo diretamente
 export type CardChamadoCardKey =
@@ -12,7 +12,7 @@ export type CardChamadoCardKey =
 
 export interface CardChamadoProps {
 	// Tipo do usuário (ex.: "bolsista", "professor", "cliente", etc.)
-	userType: userRoles;
+	userType: UserRoles;
 	// Chave do cartão fixo a ser exibido
 	cardKey: CardChamadoCardKey;
 	// Quantidade de chamados ou tarefas

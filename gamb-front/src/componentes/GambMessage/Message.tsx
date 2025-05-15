@@ -7,7 +7,7 @@ import {
     MessageText,
     MessageWrapper,
 } from "./messagestyle";
-import React, { useState } from "react";
+import { useState } from "react";
 
 export default function UseMessage(props: MessageProps): JSX.Element {
     const { type, text, viewClose } = props;

@@ -57,7 +57,7 @@ jobs:
     - name: Set up Node.js
       uses: actions/setup-node@v1
       with:
-        node-version: 18
+        node-version: 22.15.0
     - name: Install dependencies
       run: |
         cd gamb-front
@@ -65,7 +65,7 @@ jobs:
     - name: Build
       run: |
         cd gamb-front
-        npm run dev
+        npm run build
     - name: Test
       run: | 
         cd gamb-front

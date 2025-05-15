@@ -3,7 +3,7 @@ import GambButton from "../GambButton/Button";
 import Icon from "../GambIcon/Icon";
 import UseMessage from "../GambMessage/Message";
 import { InputText } from "./inputsStyle"; // Importando o styled-component
-import React, { useState } from "react";
+import { useState } from "react";
 
 export default function InputField(props: InputFieldProps): JSX.Element {
 	const {
