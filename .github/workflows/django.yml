@@ -46,4 +46,4 @@ jobs:
       - name: Shut down Docker containers
         run: |
           cd gamb-back
-          docker-compose -f docker-compose.local.yml down
+          docker-compose  down
