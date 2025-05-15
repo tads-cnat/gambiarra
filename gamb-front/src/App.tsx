@@ -36,12 +36,10 @@ export function App() {
 	// Verifica a autenticação assim que o componente é montado
 	useEffect(() => {
 		checkAuth();
+		console.log(isAuthenticatedStore());
+		
 	}, []);
 
-	// Enquanto estamos verificando a autenticação, mostramos um carregando
-	if (!isAuthenticatedStore()) {
-		return <div>Loading...</div>;
-	}
 
 	return (
 		<ThemeProvider theme={defaultTheme}>
