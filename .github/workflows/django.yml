@@ -2,9 +2,9 @@ name: Django CI
 
 on:
   push:
-    branches: ["*"]
+    branches: ["287-0---implementar-pipelines-para-cicd"]
   pull_request:
-    branches: ["*"]
+    branches: ["287-0---implementar-pipelines-para-cicd"]
 
 jobs:
   
@@ -52,22 +52,15 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [22.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-
     steps:
     - uses: actions/checkout@v4.2.2
-
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v4.1.0
+    - name: Set up Node.js
+      uses: actions/setup-node@v1
       with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-
-    - run: npm install
-
-    - run: npm run build --if-present
-
-    - run: npm run test
+        node-version: 16
+    - name: Install dependencies
+      run: npm install
+    - name: Build
+      run: npm run build
+    - name: Test
+      run: npm test
