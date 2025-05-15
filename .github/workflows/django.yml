@@ -59,8 +59,14 @@ jobs:
       with:
         node-version: 16
     - name: Install dependencies
-      run: npm install
+      run: |
+        cd gamb-front
+        npm install
     - name: Build
-      run: npm run build
+      run: |
+        cd gamb-front
+        npm run build
     - name: Test
-      run: npm test
+      run: | 
+        cd gamb-front
+        npm test
