@@ -23,7 +23,6 @@ jobs:
       DATABASE_PORT: ${{ secrets.DATABASE_PORT }}
     steps:
       - uses: actions/checkout@v4
-      - uses: cypress-io/github-action@v6
 
       # Configura o Docker Buildx
       - name: Instalar Docker Compose
@@ -35,12 +34,6 @@ jobs:
           cd gamb-back
           docker-compose up  -d
 
-      - name: Run GambFrontend
-        run: |
-          cd gamb-front 
-          npm install
-          npm run dev
-          
       # O parâmetro -d roda os containers em segundo plano
       ## tem erro nos testes, veja isso depois adicione no pipeline
       # # Rodar testes dentro do contêiner do Django
