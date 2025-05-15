@@ -180,12 +180,16 @@ O usuário deve estar logado como professor, pois apenas professores têm permis
 
 ### 2.4 - Fluxo Principal: Encerrar Chamado
 
-|   Status   |   Status de Encerramento  | Justificativa              | Resultado Esperado                     | Resultado Obtido | Situação |
+|   Status Inicial  |   Status Final  | Justificativa              | Resultado Esperado                     | Resultado Obtido | Situação |
 |------------|---------------------------|----------------------------|----------------------------------------|------------------|----------|
-|       Em diagnóstico     | Resolvido                 | Entre 1 e 255 caracteres   | Mensagem de “Encerrado com sucesso”    |                  |          |
-|        Equipamento em conserto    |        Resolvido                   | Mais de 255 caracteres     | Erro - Justificativa                   |                  |          |
-|        Aguardando peça    |        Resolvido                   | Mais de 255 caracteres     | Erro - Justificativa                   |                  |          |
-
-
+|       Equipamento em conserto | Resolvido                 | Entre 1 e 255 caracteres   | Mensagem de “Encerrado com sucesso”    |                  |          |
+|        Equipamento em conserto    |        Equipamento em conserto       | Mais de 255 caracteres     | Erro - Justificativa         |                  |          |
+|     Equipamento em conserto    |     Equipamento em conserto  | Menos de 1 caracter     | Erro - Justificativa      |                  |          |
+|        Aceito                   |   Aceito   | Mais de 255 caracteres    | Erro - Status  não permitido     |                  |          |
+|        Fechado sem resolução    |     Fechado sem resolução    | Entre 1 e 255 caracteres     | Erro - Status não permitido                 |                  |          |
+|        Resolvido          |        Resolvido             | Mais de 255 caracteres     | Erro - Status não permitido                   |                  |          |
+|        Recusado          |        Recusado              | Mais de 255 caracteres     | Erro - Status não permitido                   |                |          |
+|        Em diagnóstico      |     Fechado sem resolução  | Mais de 255 caracteres     | Mensagem de “Encerrado com sucesso”            |                  |          |
+|        Equipamento em conserto     |        Equipamento em conserto |     | Erro - Justificativa obrigatória                  |                  |          |
 ---
 
