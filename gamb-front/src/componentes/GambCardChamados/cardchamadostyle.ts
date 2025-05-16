@@ -1,11 +1,12 @@
 import styled from "styled-components";
 import { CardChamadoCardKey } from "../../interfaces/componentes/iGambCardChamado";
-import { DefaultTheme } from "styled-components/dist/types";
+import { defaultTheme } from "../../styles/themes/default";
 
 export const CardChamadoContainer = styled.div`
 	display: flex;
 	margin: 1rem 0;
 `;
+const theme = defaultTheme
 
 export const CardChamadoWrapper = styled.div<{ $cardKey: CardChamadoCardKey }>`
 	display: flex;
@@ -17,7 +18,7 @@ export const CardChamadoWrapper = styled.div<{ $cardKey: CardChamadoCardKey }>`
 	gap: 0.5rem;
 	flex-shrink: 0;
 	border-radius: 0.375rem;
-	background-color: ${({ $cardKey, theme }) =>
+	background-color: ${({ $cardKey }) =>
 		$cardKey === "concluidas"
 			? theme.cores.green_sucess_primary
 			: $cardKey === "pendentes"
@@ -33,11 +34,11 @@ export const CardChamadoWrapper = styled.div<{ $cardKey: CardChamadoCardKey }>`
 			: $cardKey === "fechados"
 			? theme.cores.danger
 			: theme.cores.white};
-	color: ${({ $cardKey, theme }) =>
+	color: ${({ $cardKey }) =>
 		["atribuidas", "concluidas", "recusadas"].includes($cardKey)
 			? theme.cores.white
 			: $cardKey === "pendentes"
-			? theme.cores.gray
+			? theme.cores.gray_text
 			: theme.cores.white};
 `;
 
@@ -45,11 +46,11 @@ export const CardChamadoIcon = styled.div<{ $cardKey: CardChamadoCardKey }>`
 	width: 5rem;
 	height: 4.5rem;
 	flex-shrink: 0;
-	color: ${({ $cardKey, theme }) =>
+	color: ${({ $cardKey}) =>
 		["atribuidas", "concluidas", "recusadas"].includes($cardKey)
 			? theme.cores.white
 			: $cardKey === "pendentes"
-			? theme.cores.gray
+			? theme.cores.gray_text
 			: theme.cores.white};
 `;
 
@@ -69,11 +70,11 @@ export const CardChamadoText = styled.div<{ $cardKey: CardChamadoCardKey }>`
 	font-style: normal;
 	font-weight: 400;
 	line-height: 1.2;
-	color: ${({ $cardKey, theme }) =>
+	color: ${({ $cardKey }) =>
 		["atribuidas", "concluidas", "recusadas"].includes($cardKey)
 			? theme.cores.white
 			: $cardKey === "pendentes"
-			? theme.cores.gray
+			? theme.cores.gray_text
 			: theme.cores.white};
 `;
 
@@ -84,10 +85,10 @@ export const CardChamadoText2 = styled.div<{ $cardKey: CardChamadoCardKey }>`
 	font-style: normal;
 	font-weight: 700;
 	line-height: 1.2;
-	color: ${({ $cardKey, theme }) =>
+	color: ${({ $cardKey }) =>
 		["atribuidas", "concluidas", "recusadas"].includes($cardKey)
 			? theme.cores.white
 			: $cardKey === "pendentes"
-			? theme.cores.gray
+			? theme.cores.gray_text
 			: theme.cores.white};
 `;

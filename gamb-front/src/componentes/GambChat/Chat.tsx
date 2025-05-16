@@ -9,7 +9,7 @@ import {
 import Icon from "../GambIcon/Icon";
 import { ChatProps } from "../../interfaces/componentes/iGambChat";
 import useWebSocket from "./webSocket";
-import { get, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { getUserActive } from "../../auth/service/AuthStore";
 import GambButton from "../GambButton/Button";
 import InputField from "../GambInput/Input";

@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { defaultTheme } from "../../styles/themes/default";
+const theme = defaultTheme
 
 interface ButtonProps {
 	$variant:
@@ -21,7 +23,7 @@ export const ButtonGeneric = styled.button<ButtonProps>`
 	display: inline-flex;
 	align-items: center;
 	flex-shrink: 0;
-	font-size: ${({ $size, theme }) => {
+	font-size: ${({ $size }) => {
 		switch ($size) {
 			case "small":
 				return `${theme.fontSize.font_scale_up_01}rem`;
@@ -39,7 +41,7 @@ export const ButtonGeneric = styled.button<ButtonProps>`
 	transition: 0.5s;
 
 	/* variação de cores */
-	background-color: ${({ $variant, theme }) =>
+	background-color: ${({ $variant }) =>
 		$variant === "verde"
 			? theme.cores.green_sucess_primary
 			: $variant === "amarelo"
@@ -51,10 +53,10 @@ export const ButtonGeneric = styled.button<ButtonProps>`
 			: $variant === "roxo"
 			? theme.cores.purple_info_primary
 			: $variant === "inline" || $variant === "circle"
-			? theme.cores.transparent
+			? "rgb(151,71,255,0)"
 			: theme.cores.white};
 
-	color: ${({ $variant, theme }) =>
+	color: ${({ $variant }) =>
 		$variant === "branco" ||
 		$variant === "amarelo" ||
 		$variant === "cinza" ||
@@ -64,7 +66,7 @@ export const ButtonGeneric = styled.button<ButtonProps>`
 			: theme.cores.white};
 
 	border: 1px solid
-		${({ $variant, theme }) =>
+		${({ $variant }) =>
 			$variant === "verde"
 				? theme.cores.green_sucess_primary
 				: $variant === "amarelo"
@@ -82,7 +84,7 @@ export const ButtonGeneric = styled.button<ButtonProps>`
 				: theme.cores.black};
 
 	&:hover {
-		background-color: ${({ $variant, theme }) =>
+		background-color: ${({ $variant }) =>
 			$variant === "verde"
 				? theme.cores.green_sucess_secondary
 				: $variant === "amarelo"
@@ -97,7 +99,7 @@ export const ButtonGeneric = styled.button<ButtonProps>`
 				? theme.cores.gray_300
 				: theme.cores.light_white};
 
-		color: ${({ $variant, theme }) =>
+		color: ${({ $variant }) =>
 			$variant === "branco" ||
 			$variant === "amarelo" ||
 			$variant === "cinza" ||

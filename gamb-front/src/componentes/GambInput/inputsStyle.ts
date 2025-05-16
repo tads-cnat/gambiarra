@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { defaultTheme } from "../../styles/themes/default";
+const theme = defaultTheme
 
 export const InputText = styled.div<{
 	$isInvalid?: boolean;
@@ -8,21 +10,21 @@ export const InputText = styled.div<{
 	border: 1px solid
 		${(props) =>
 			props.$isInvalid
-				? props.theme.cores.danger
+				? theme.cores.danger
 				: props.$isValid
-				? props.theme.cores.green_sucess_primary
-				: props.theme.cores.black};
-	background: ${(props) => props.theme.cores.white};
+				? theme.cores.green_sucess_primary
+				: theme.cores.black};
+	background: ${theme.cores.white};
 	color: ${(props) =>
 		props.$isInvalid
-			? props.theme.cores.danger
+			? theme.cores.danger
 			: props.$isValid
-			? props.theme.cores.green_sucess_primary
-			: props.theme.cores.black};
+			? theme.cores.green_sucess_primary
+			: theme.cores.black};
 	padding: 0.875rem;
 
 	&::placeholder {
-		color: ${(props) => props.theme.cores.gray_text};
+		color: ${theme.cores.gray_text};
 	}
 
 	display: flex;

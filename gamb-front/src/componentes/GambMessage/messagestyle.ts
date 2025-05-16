@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import { MessageType } from "../../interfaces/componentes/iGambMessage";
+import { defaultTheme } from "../../styles/themes/default";
+const theme = defaultTheme
 
 
 export const MessageContainer = styled.div`
@@ -21,7 +23,7 @@ export const MessageWrapper = styled.div<{ type: MessageType }>`
   max-width: 520px;
   min-width: 300px; 
 
-  background-color: ${({ type, theme }) =>
+  background-color: ${({ type }) =>
 		type === "success"
 			? theme.cores.green_sucess_secondary
 			: type === "warning"
@@ -31,7 +33,7 @@ export const MessageWrapper = styled.div<{ type: MessageType }>`
 			: type === "info"
 			? theme.cores.purple_info_secondary
 			: theme.cores.white};
-    border:2px solid ${({ type, theme }) =>
+    border:2px solid ${({ type  }) =>
 		type === "success"
 			? theme.cores.green_sucess_primary
 			: type === "warning"
@@ -41,22 +43,22 @@ export const MessageWrapper = styled.div<{ type: MessageType }>`
 			: type === "info"
 			? theme.cores.blue_info
 			: theme.cores.white};
-    color: ${({ type, theme }) =>
+    color: ${({ type  }) =>
 		["success", "info", "danger"].includes(type) 
 			? theme.cores.white
 			: type === "warning"
-			? theme.cores.gray
+			? theme.cores.gray_text
 			: theme.cores.white};
 `;
 
 export const MessageIcon = styled.div<{ type: MessageType }>`
   margin-right: 15px;
   font-size: 1.4rem;
-  color: ${({ type, theme }) =>
+  color: ${({ type  }) =>
 		["success", "info", "danger"].includes(type) 
 			? theme.cores.white
 			: type === "warning"
-			? theme.cores.gray
+			? theme.cores.gray_text
 			: theme.cores.white};
 `;
 
@@ -71,11 +73,11 @@ export const CloseButton = styled.button<{ type: MessageType }>`
   border: none;
   font-size: 1.2rem;
   cursor: pointer;
-  color: ${({ type, theme }) =>
+  color: ${({ type }) =>
 		["success", "info", "danger"].includes(type) 
 			? theme.cores.white
 			: type === "warning"
-			? theme.cores.gray
+			? theme.cores.gray_text
 			: theme.cores.white};
 
   &:hover {

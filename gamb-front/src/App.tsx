@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import Home from "./pages/index";
 import { ProtectedRoute } from "./auth/Routes";
@@ -36,12 +36,10 @@ export function App() {
 	// Verifica a autenticação assim que o componente é montado
 	useEffect(() => {
 		checkAuth();
+		console.log(isAuthenticatedStore());
+		
 	}, []);
 
-	// Enquanto estamos verificando a autenticação, mostramos um carregando
-	if (!isAuthenticatedStore()) {
-		return <div>Loading...</div>;
-	}
 
 	return (
 		<ThemeProvider theme={defaultTheme}>

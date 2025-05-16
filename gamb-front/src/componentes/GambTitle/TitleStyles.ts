@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { defaultTheme } from "../../styles/themes/default";
+const theme = defaultTheme
 
 // Interface para definir as cores permitidas
 interface ColorProps {
@@ -22,7 +24,7 @@ export const FilterTitleContainer = styled.div`
 export const Bolinha = styled.div<ColorProps>`
   width: 14px;
   height: 14px;
-  background-color: ${({ color, theme }) =>
+  background-color: ${({ color }) =>
     color === "roxo"
       ? theme.cores.purple_info_primary
       : color === "azul"
@@ -36,7 +38,7 @@ export const Bolinha = styled.div<ColorProps>`
 export const Linha = styled.hr<ColorProps>`
   flex-grow: 1; /* Faz a linha ocupar todo o espaço disponível */;
   height: 2px; /* Define a espessura */
-  background-color: ${({ color, theme }) =>
+  background-color: ${({ color }) =>
     color === "roxo"
       ? theme.cores.purple_info_primary
       : color === "azul"
