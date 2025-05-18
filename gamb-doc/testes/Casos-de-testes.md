@@ -1,5 +1,7 @@
 # Casos de Teste - Abrir Chamado
 
+[Voltar a documentação](../documentacao.md)
+
 **Projeto:** Gambiarra  
 **Versão:** 1.2  
 **Data da Última Atualização:** 14/05  
