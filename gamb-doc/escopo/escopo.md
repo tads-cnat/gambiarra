@@ -19,22 +19,34 @@
 
 ### Escopo do Projeto
 
-- Desenvolvimento de um sistema web responsivo para gerenciamento de chamados de manutenção técnica.
+- Desenvolvimento de um sistema web distribuido para gerenciamento de chamados de manutenção técnica.
 - Cadastro e autenticação de usuários (professores, clientes, bolsistas).
 - Integração com SUAP para autenticação de usuários.
 - Abertura, acompanhamento e encerramento de chamados de manutenção por professores e clientes.
+- Implantação e hospedagem do sistema em ambiente acessível ao público.
+- Criação e disponibilização da documentação técnica e de uso do sistema.
 
 
 ### Fora do Escopo
 
-- Atendimento a chamados fora do ambiente do IFRN-CNAT.
 - Suporte técnico presencial aos usuários finais do sistema.
 - Desenvolvimento de aplicativo mobile nativo.
-- Atendimento a chamados fora da área de tecnologia.
+- Cobrança de qualquer tipo de custo nos chamados
 - Integração com sistemas de pagamento ou cobrança.
 
 
-## 3. Estrutura Analítica do Projeto (EAP)
+## 3. Premissas
+- Os alunos envolvidos terão tempo suficiente para se dedicar ao projeto durante o semestre.
+- Os alunos terão capacidade implantar o projeto em um sistema de nuvem
+- A autenticação pelo SUAP estará disponível e funcional durante o desenvolvimento e uso do sistema.
+- Acesso a serviços de hospedagem em nuvem de forma gratuita
+
+## 4. Restrições 
+- O projeto deve ser concluído até 13 de agosto de 2025.
+- A equipe de desenvolvimento é composta por alunos com disponibilidade parcial.
+- Custo elevado para serviços de hospedagem em nuvem
+
+## 5. Estrutura Analítica do Projeto (EAP)
 
 ```mermaid
 graph TD
@@ -73,7 +85,7 @@ graph TD
 
 
 
-## 4. Dicionário da EAP
+## 6. Dicionário da EAP
 
 | Código | Termo Técnico | Descrição |
 |--------|------|-----------|
