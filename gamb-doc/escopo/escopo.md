@@ -48,53 +48,28 @@
 
 ## 5. Estrutura Analítica do Projeto (EAP)
 
-```mermaid
-graph TD
-  A[Gambiarra
-  Ver. Distribuido]
-  
-  A1[Gestão do Projeto]
-  A2[Levantamento e Requisitos]
-  A3[Desenvolvimento do Sistema]
-  A4[Testes e Validação]
-  A5[Implantação]
+![Gambiarra Ver  Corporativo](https://github.com/user-attachments/assets/3d72cd24-049f-4211-9949-cc5f319920f4)
 
-  A --> A1
-  A --> A2
-  A --> A3
-  A --> A4
-  A --> A5
 
-  A1 --> A1a[Planejamento]
-  A1 --> A1b[Reuniões]
-  A1 --> A1c[Documentação]
-
-  A2 --> A2a[Requisitos dos Usuários]
-  A2 --> A2b[Modelagem de Dados]
-  A2 --> A2c[Protótipo das Telas]
-
-  A3 --> A3a[Backend]
-  A3 --> A3b[Frontend   ]
-  A3 --> A3c[Integração com SUAP]
-
-  A4 --> A4a[Testes Unitários]
-  A4 --> A4b[Testes de Aceitação]
-
-  A5 --> A5a[Hospedagem]
-```
 
 
 
 ## 6. Dicionário da EAP
 
 | Código | Termo Técnico | Descrição |
-|--------|------|-----------|
-| 2.1 | Requisitos do Usuário | Funcionalidades e necessidades mapeadas junto ao usuário. |
-| 2.2 | Modelagem de Dados | Representação estrutural dos dados, suas entidades e relacionamentos. |
-| 2.3 | Protótipo das Telas | Representações visuais fiéis da interface do sistema. |
-| 3.1 | Backend | Parte do sistema responsável pela lógica de negócios e acesso a dados. |
-| 3.2 | Frontend | Camada de interface gráfica com a qual o usuário interage. |
-| 3.3 | Integração com SUAP | Comunicação com o sistema do SUAP para autenticação dos usuários. |
-| 4.1 | Testes Unitários | Verificações automatizadas de pequenas partes do código. |
-| 4.2 | Testes de Aceitação | Testes realizados com base nos critérios definidos pelo usuário final. |
-| 5.1 | Hospedagem | Publicação do sistema em ambiente acessível via internet. |
+|--------|--------------------|-----------------------------------------------------------------------------|
+| 2.1 | Requisitos do Usuário | Funcionalidades e necessidades mapeadas junto ao usuário.                   |
+| 2.2 | Modelagem de Dados | Representação estrutural dos dados, suas entidades e relacionamentos.          |
+| 2.3 | Protótipo das Telas | Representações visuais fiéis da interface do sistema.                         |
+| 3.1 | Backend | Parte do sistema responsável pela lógica de negócios e acesso a dados.                    |
+| 3.2 | Frontend | Camada de interface gráfica com a qual o usuário interage.                               |
+| 3.3 | Integração com SUAP | Comunicação com o sistema do SUAP para autenticação dos usuários.             |
+| 4.1 | Testes Unitários | Verificações automatizadas de pequenas partes do código.                         |
+| 4.2 | Testes de Aceitação | Testes realizados com base nos critérios definidos pelo usuário final.        |
+| 4.3 | Avaliação Heurística    | Análise da interface com base em princípios de usabilidade reconhecidos.  |
+| 5.1 | Hospedagem | Publicação do sistema em ambiente acessível via internet.                              |
+| 5.2 | Construção de Pipelines | Implementação de fluxos automatizados para integração e entrega contínua. |
+
+
+
+
