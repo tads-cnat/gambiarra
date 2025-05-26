@@ -1,17 +1,19 @@
 import styled from "styled-components";
+import { defaultTheme } from "../../styles/themes/default";
+const theme = defaultTheme
 
 export const IndexContainer = styled.div`
 	align-items: center;
 	display: flex;
 	flex-direction: column;
-	/* background-color: ${(props) => props.theme.cores.white}; */
+	/* background-color: ${theme.cores.white}; */
 	h2 {
 		font-size: 2rem;
 		margin-top: 1.5rem;
 		span {
 			font-size: 2rem;
-			color: ${(props) => props.theme.cores.purple_info_primary};
-			font-weight: ${(props) => props.theme.fontWeights.bold};
+			color: ${theme.cores.purple_info_primary};
+			font-weight: ${theme.fontWeights.bold};
 		}
 	}
 
@@ -19,8 +21,8 @@ export const IndexContainer = styled.div`
 		font-size: 1.5rem;
 		span {
 			font-size: 1.5rem;
-			color: ${(props) => props.theme.cores.purple_info_primary};
-			font-weight: ${(props) => props.theme.fontWeights.semi_bold};
+			color: ${theme.cores.purple_info_primary};
+			font-weight: ${theme.fontWeights.semi_bold};
 		}
 	}
 
@@ -44,7 +46,7 @@ export const IndexContent = styled.div`
 	display: flex;
 	padding: 50px;
 	width: 75%;
-	background: ${(props) => props.theme.cores.white};
+	background: ${theme.cores.white};
 	justify-content: space-between;
 	align-items: center;
 
@@ -69,8 +71,8 @@ export const IndexContent = styled.div`
 
 	span {
 		font-size: 1.5rem;
-		color: ${(props) => props.theme.cores.purple_info_primary};
-		font-weight: ${(props) => props.theme.fontWeights.bold};
+		color: ${theme.cores.purple_info_primary};
+		font-weight: ${theme.fontWeights.bold};
 	}
 `;
 

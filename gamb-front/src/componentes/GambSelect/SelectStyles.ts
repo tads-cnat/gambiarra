@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { defaultTheme } from "../../styles/themes/default";
+const theme = defaultTheme
 
 export const SelectText = styled.select<{
 	isInvalid?: boolean;
@@ -8,21 +10,21 @@ export const SelectText = styled.select<{
 	border: 1px solid
 		${(props) =>
 			props.isInvalid
-				? props.theme.cores.danger
+				? theme.cores.danger
 				: props.isValid
-				? props.theme.cores.green_sucess_primary // Aqui está o verde para válido
-				: props.theme.cores.black}; // Preta como padrão
-	background: ${(props) => props.theme.cores.white};
+				? theme.cores.green_sucess_primary // Aqui está o verde para válido
+				: theme.cores.black}; // Preta como padrão
+	background: ${theme.cores.white};
 	color: ${(props) =>
 		props.isInvalid
-			? props.theme.cores.danger
+			? theme.cores.danger
 			: props.isValid
-			? props.theme.cores.green_sucess_primary // Aqui está o verde para válido
-			: props.theme.cores.black}; // Preta como padrão
+			? theme.cores.green_sucess_primary // Aqui está o verde para válido
+			: theme.cores.black}; // Preta como padrão
 	padding: 0.92rem;
 	
 	option{
-    	color: ${(props) => props.theme.cores.gray_text};
+    	color: ${theme.cores.gray_text};
   	}
 
 	display: flex;

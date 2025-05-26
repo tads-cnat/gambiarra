@@ -1,4 +1,3 @@
- 
 import { GambButtonProps } from "../../interfaces/componentes/iGambButton";
 import Icon from "../GambIcon/Icon";
 import { ButtonGeneric } from "./buttonstyle";
@@ -21,8 +20,8 @@ export default function GambButton(props: GambButtonProps): JSX.Element {
 	return (
 		<>
 			<ButtonGeneric
-				variant={variant}
-				size={size || "medium"}
+				$variant={variant}
+				$size={size || "medium"}
 				id={id}
 				onClick={onClick}
 				type={type}

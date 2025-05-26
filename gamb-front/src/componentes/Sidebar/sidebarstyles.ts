@@ -1,7 +1,9 @@
 import styled from "styled-components";
+import { defaultTheme } from "../../styles/themes/default";
+const theme = defaultTheme
 
 export const SidebarContainer = styled.aside`
-	background-color: ${(props) => props.theme.cores.white};
+	background-color: ${theme.cores.white};
 	width: 100%;
 	border-radius: 30px;
 	box-shadow: 5px 5px 10px 5px rgba(54, 54, 54, 0.1);
@@ -34,13 +36,13 @@ export const UserSpace = styled.div`
 `;
 
 export const ItemDropdown = styled.ul`
-  background-color: ${(props) => props.theme.cores.light_white};
+  background-color: ${theme.cores.light_white};
   overflow: hidden;
   width: auto;
 
   a {
-    font-size: ${(props) => props.theme.fontSize.font_scale_up_02}rem; /* Remover o ponto e vírgula extra */
-	color: ${(props) => props.theme.cores.gray_text};
+    font-size: ${theme.fontSize.font_scale_up_02}rem; /* Remover o ponto e vírgula extra */
+	color: ${theme.cores.gray_text};
   }
 `;
 
@@ -63,8 +65,8 @@ export const SidebarContent = styled.div`
 			gap: 0.5rem;
 			&:hover {
 				border-left: 1px solid
-					${(props) => props.theme.cores.purple_info_primary};
-				color: ${(props) => props.theme.cores.purple_info_primary};
+					${theme.cores.purple_info_primary};
+				color: ${theme.cores.purple_info_primary};
 			}
 			padding: 0.5rem;
 
@@ -73,7 +75,7 @@ export const SidebarContent = styled.div`
 
 	div > .gambi-img {
 		padding: 1rem;
-		border-bottom: 1px solid ${(props) => props.theme.cores.gray_300};
+		border-bottom: 1px solid ${theme.cores.gray_300};
 		width: 100%;
 	}
 

@@ -12,8 +12,6 @@ import Icon from "../GambIcon/Icon";
 import { getActionsByStatus } from "./actions";
 import AceitarChamadoModal from "../../componentes/GambTable/forms/AceitarChamadoModal";
 import EncerrarChamadoModal from "../../componentes/GambTable/forms/EncerrarChamadoModal";
-import { set } from "react-hook-form";
-import Modal from "../GambModal/modal";
 import AlterarStatusModal from "./modais/alterarStatus";
 import AtribuirBolsistaModal from "./modais/atribuirBolsista";
 

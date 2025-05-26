@@ -1,14 +1,12 @@
 ---
-name: Issue Modelo
-about: "Modelo de Issue"
-title: ""
-labels: ""
+name: Task Documentation
+about: "Feature or fix in to project docs."
+title: "[Hierarquia de dependencia] -  Verbo + o que essa issue vai fazer?"
+labels: "documentação"
 assignees: ""
+branch: "main"
 ---
 
-**Tempo previsto (em horas):**
-
-**Tempo gasto (em horas):**
 
 **Esforço da tarefa (1 a 5):**
 

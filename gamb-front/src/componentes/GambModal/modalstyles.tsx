@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { defaultTheme } from "../../styles/themes/default";
+const theme = defaultTheme
 
 export const ModalOverlay = styled.div`
 	position: fixed;
@@ -35,7 +37,7 @@ export const ModalCard = styled.div`
 	min-width: 32rem;
 
 	padding: 1.25rem;
-	background: ${(props) => props.theme.cores.white};
+	background: ${theme.cores.white};
 	border-radius: 30px;
 	position: fixed;
 	top: 50%;
