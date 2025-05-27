@@ -27,6 +27,7 @@ services:
     depends_on:
       - db
       - redis
+    
     environment:
       DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY}
       DEBUG: ${DEBUG}
