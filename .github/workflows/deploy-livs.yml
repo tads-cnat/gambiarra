@@ -28,7 +28,7 @@ jobs:
         run: |
           touch gamb-key-back.pem
           echo "${{ secrets.gamb-keys-back }}" > gamb-key-back.pem
-          chmod 400 gamb-key.back.pem
+          chmod 400 gamb-key-back.pem
 
       - name: Conectar ao servidor remoto
         run: ssh -i 'gamb-key-back.pem' ubuntu@52.22.187.150 "echo 'Conectado com sucesso!'"
