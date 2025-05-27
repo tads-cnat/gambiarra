@@ -20,4 +20,11 @@
 | 1 - O usuário preenche os campos de email e senha |                                                                |
 |                                                   | 2 - O sistema invalida as informações e exibe mensagem de erro |
 
+## Fluxo Alternativo II - Login com Suap
+
+|                   Ações do ator                   |                                         Ações do sistema                                             |
+| :-----------------------------------------------: | :--------------------------------------------------------------------------------------------------: |
+| 1 - O cliente clica no botão "Logar com Suap"     |                                                                                                      |
+|                                                   | 2 - O sistema redireciona o cliente para fazer login com sua conta do suap, validando e credenciando |
+
 [Voltar aos Casos de Uso](../cdu.md)
