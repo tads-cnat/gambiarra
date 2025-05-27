@@ -8,22 +8,28 @@
 
 ## Fluxo Principal
 
-| Ações do Ator                                                 | Ações do Sistema                                             |
-| ------------------------------------------------------------- | ------------------------------------------------------------ |
-| 1. Preenche os campos: nome, utilizador, e-mail, CPF e senha. | 2. Valida os dados e redireciona para a dashboard principal. |
+|                                Ações do ator                                |                                     Ações do sistema                                     |
+| :-------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------: |
+| 1 - O visitante preenche os campos de nome, utilizador, e-mail, CPF e senha |                                                                                          |
+|                                                                             | 2 - O sistema valida as informações e redireciona o visitante para a dashboard principal |
+
 
 ## Fluxo Alternativo I - Dados Inválidos
 
-| Ações do Ator                                                 | Ações do Sistema                                                 |
-| ------------------------------------------------------------- | ---------------------------------------------------------------- |
-| 1. Preenche os campos: nome, utilizador, e-mail, CPF e senha. | 2. Informa erro nos dados inválidos e impede a criação da conta. |
+|                                Ações do ator                                |                                      Ações do sistema                                      |
+| :-------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------: |
+| 1 - O visitante preenche os campos de nome, utilizador, e-mail, CPF e senha |                                                                                            |
+|                                                                             | 2 - O sistema identifica erros nos dados e exibe uma mensagem de erro, impedindo o registo |
+
 
 ## Fluxo Alternativo II - Login com SUAP
 
-| Ações do Ator                    | Ações do Sistema                                                                                               |
-| -------------------------------- | -------------------------------------------------------------------------------------------------------------- |
-| 1. Clica em "Entrar com SUAP".   | 2. Redireciona para o login SUAP, valida o acesso e redireciona para a dashboard. Solicita nome de utilizador. |
-| 3. Informa o nome de utilizador. | 4. Libera o acesso completo à plataforma.                                                                      |
+|                   Ações do ator                  |                               Ações do sistema                              |
+| :----------------------------------------------: | :-------------------------------------------------------------------------: |
+| 1 - O visitante clica no botão "Entrar com SUAP" |                                                                             |
+|                                                  |   2 - O sistema redireciona para o login SUAP, valida e credencia o acesso  |
+|   3 - O visitante informa um nome de utilizador  |                                                                             |
+|                                                  | 4 - O sistema conclui o registo e redireciona o utilizador para a dashboard |
 
 
 [Voltar aos Casos de Uso](../cdu.md)
