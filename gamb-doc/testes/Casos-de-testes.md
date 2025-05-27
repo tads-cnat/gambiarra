@@ -1,7 +1,9 @@
 # Casos de Teste - Abrir Chamado
 
+[Voltar a documentação](../documentacao.md)
+
 **Projeto:** Gambiarra  
-**Versão:** 1.1  
+**Versão:** 1.2  
 **Data da Última Atualização:** 14/05  
 
 ## Histórico de Alterações
@@ -39,9 +41,9 @@ Além desta seção introdutória, o documento está organizado em:
 
 ---
 
-## Testes Funcionais
+## 1.0 Testes Funcionais
 
-### 1.0 - Caso de Teste: Abrir Chamado
+### 1.1 - Caso de Teste: Abrir Chamado
 
 **Pré-requisitos:**  
 Usuário deve estar logado como cliente.
@@ -67,10 +69,11 @@ Usuário deve estar logado como cliente.
 
 ---
 
-### 1.1 - Caso de Teste: Login
+### 1.2 - Caso de Teste: Login
 
 **Pré-requisitos:**  
 Usuário não autenticado.
+Existir um usuário com as credencias usuário: "professor1" e senha: "ZAP123!!"
 
 **Passos para execução:**
 
@@ -81,11 +84,12 @@ Usuário não autenticado.
 
 **Critérios de Aceitação:**
 
+- O sistema exibe a mensagem "Login realizado com sucesso!".
 - Usuário é redirecionado para a dashboard após login bem-sucedido.
 
 ---
 
-### 1.2 - Caso de Teste: Avaliar Chamado
+### 1.3 - Caso de Teste: Avaliar Chamado
 
 **Pré-requisitos:**  
 Usuário deve estar logado como cliente. Chamado deve estar em status "Fechado", "Fechado sem Resolução" ou "Arquivado".
@@ -104,31 +108,68 @@ Usuário deve estar logado como cliente. Chamado deve estar em status "Fechado",
 
 ---
 
+### 1.4 - Caso de Teste: Encerrar Chamado
+
+**Pré-requisitos:**  
+O usuário deve estar logado como professor, pois apenas professores têm permissão para fechar chamados.
+
+**Passos para execução:**
+
+1. Acesse a tela de listagem de chamados, logado como professor.  
+2. Clique no botão **"Encerrar Chamado"**.  
+3. Um modal será exibido com o seguinte campo:
+   - **(entrada 1)** Status de encerramento do chamado (obrigatório)
+   - **(entrada 2)** Justificativa do encerramento do chamado (obrigatório)
+
+**Informações dos Campos:**
+
+- O chamado precisa estar em um dos status: “Em diagnóstico”, “Aguardando Peça” ou “Equipamento em conserto”.
+- Os status de encerramento são: "Resolvido" ou "Fechado sem Resolução".
+- O campo de justificativa é obrigatório.  
+- O campo de justificativa aceita caracteres alfanuméricos com limite de até 255 caracteres.
+
+**Critérios de Aceitação:**
+
+- Após o encerramento do chamado, o status é alterado para “Resolvido” ou “Fechado sem resolução”, a depender do status anterior.  
+- O professor é redirecionado para a tela de detalhes do chamado.
+
+---
+
 ## 2. Testes Funcionais
 
 ### 2.1 - Fluxo Principal: Abrir Chamado
 
-### 2.1 - Fluxo Principal: Abrir Chamado
-
-| Título              | Descrição                 | Modelo        | Acessório         | Resultado Esperado        |
-|---------------------|---------------------------|---------------|--------------------|----------------------------|
-| Computador quebrado | notebook não está ligando | notebook dell | carregador         | Chamado criado com sucesso|
-| Computador quebrado | notebook não está ligando | notebook dell |                    | Chamado criado com sucesso|
-|                     | notebook não está ligando | notebook dell | carregador         | Erro ao criar chamado     |
-| Computador quebrado |                           | notebook dell | carregador         | Erro ao criar chamado     |
-| Computador quebrado | notebook não está ligando |               | carregador         | Erro ao criar chamado     |
-|                     |                           |               |                    | Erro ao criar chamado     |
-| Computador quebrado | notebook não está ligando | notebook dell | [>255 caracteres]  | Erro ao criar chamado     |
-| Computador quebrado | [>255 caracteres]         | notebook dell | carregador         | Erro ao criar chamado     |
-| [>50 caracteres]   | notebook não está ligando | notebook dell | carregador         | Erro ao criar chamado     |
-| Computador quebrado | notebook não está ligando | [>255 caracteres] | carregador     | Erro ao criar chamado     |
-| [>50 caracteres]   | [>255 caracteres]         | [>255 caracteres] | [>255 caracteres] | Erro ao criar chamado     |
-
-*(Outros testes incluem entradas com mais de 255 caracteres, campos vazios, etc.)*
+| Título              | Descrição                 | Modelo        | Acessório          | Resultado Esperado                    |
+|---------------------|---------------------------|---------------|--------------------|---------------------------------------|
+| Computador quebrado | notebook não está ligando | notebook dell | carregador         | Chamado criado com sucesso            |
+| Computador quebrado | notebook não está ligando | notebook dell |                    | Chamado criado com sucesso            |
+|                     | notebook não está ligando | notebook dell | carregador         | Erro: "O título é obrigatório"        |
+| Computador quebrado |                           | notebook dell | carregador         | Erro: "A descrição é obrigatória"     |
+| Computador quebrado | notebook não está ligando |               | carregador         | Erro: "O modelo é obrigatório"     |
+|                     |                           |               |                    | Erro: Mensagens informando que os campos são obrigatórios     |
+| Computador quebrado | notebook não está ligando | notebook dell | [>255 caracteres]  | Erro: "O acessório pode conter no máximo 255 caracteres"     |
+| Computador quebrado | [>255 caracteres]         | notebook dell | carregador         | Erro: "A descrição pode conter no máximo 255 caracteres"     |
+| [>50 caracteres]   | notebook não está ligando | notebook dell | carregador         | Erro: "O título pode conter no máximo 50 caracteres"     |
+| Computador quebrado | notebook não está ligando | [>255 caracteres] | carregador     | Erro: "O modelo pode conter no máximo 255 caracteres"     |
+| [>50 caracteres]   | [>255 caracteres]         | [>255 caracteres] | [>255 caracteres] | Erro: Mensagens informando que os campos execdem o limite e caracteres   |
 
 ---
 
-### 2.2 - Fluxo Principal: Avaliar Chamado
+### 2.2 - Fluxo Principal: Fazer Login
+
+| Usuário         | Senha          | Resultado Esperado                      |
+|-----------------|----------------|-----------------------------------------|
+| professor1         | ZAP123!!         | Login realizado com sucesso             |
+|                 | ZAP123!!           | Erro: "Usuário é obrigatório"           |
+| professor1         |                | Erro: "Senha é obrigatória"             |
+|                 |                | Erro: "Usuário é obrigatório", "Senha é obrigatória" |
+| professor_errado       | senha_errada       | Erro: "Credenciais Inválidas"          |
+| professor1         | senha_errada       | Erro: "Credenciais Inválidas"          |
+| professor_errado       | ZAP123!!         | Erro: "Credenciais Inválidas"          |
+
+---
+
+### 2.3 - Fluxo Principal: Avaliar Chamado
 
 | Nota | Comentário                        | Resultado Esperado              |
 |------|----------------------------------|---------------------------------|
@@ -139,19 +180,18 @@ Usuário deve estar logado como cliente. Chamado deve estar em status "Fechado",
 
 ---
 
-### 2.3 - Fluxo Principal: Fazer Login
+### 2.4 - Fluxo Principal: Encerrar Chamado
 
-| Usuário         | Senha          | Resultado Esperado                      |
-|-----------------|----------------|-----------------------------------------|
-| correto         | correta         | Login realizado com sucesso             |
-|                 | senha           | Erro: "Usuário é obrigatório"           |
-| usuário         |                | Erro: "Senha é obrigatória"             |
-|                 |                | Erro: "Usuário é obrigatório", "Senha é obrigatória" |
-| incorreto       | incorreta       | Erro: "Credenciais Inválidas"          |
-| correto         | incorreta       | Erro: "Credenciais Inválidas"          |
-| incorreto       | correta         | Erro: "Credenciais Inválidas"          |
-
+|   Status Inicial  |   Status Final  | Justificativa              | Resultado Esperado                     | Resultado Obtido | Situação |
+|------------|---------------------------|----------------------------|----------------------------------------|------------------|----------|
+|       Equipamento em conserto | Resolvido                 | Entre 1 e 255 caracteres   | Mensagem de “Encerrado com sucesso”    |                  |          |
+|        Equipamento em conserto    |        Equipamento em conserto       | Mais de 255 caracteres     | Erro - Justificativa         |                  |          |
+|     Equipamento em conserto    |     Equipamento em conserto  | Menos de 1 caracter     | Erro - Justificativa      |                  |          |
+|        Aceito                   |   Aceito   | Mais de 255 caracteres    | Erro - Status  não permitido     |                  |          |
+|        Fechado sem resolução    |     Fechado sem resolução    | Entre 1 e 255 caracteres     | Erro - Status não permitido                 |                  |          |
+|        Resolvido          |        Resolvido             | Mais de 255 caracteres     | Erro - Status não permitido                   |                  |          |
+|        Recusado          |        Recusado              | Mais de 255 caracteres     | Erro - Status não permitido                   |                |          |
+|        Em diagnóstico      |     Fechado sem resolução  | Mais de 255 caracteres     | Mensagem de “Encerrado com sucesso”            |                  |          |
+|        Equipamento em conserto     |        Equipamento em conserto |     | Erro - Justificativa obrigatória                  |                  |          |
 ---
-
-
 

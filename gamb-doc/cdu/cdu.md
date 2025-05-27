@@ -19,6 +19,7 @@
 10. [CDU-010 - Envio de mensagens](cdu-010-Envio-de-mensagens/cdu_envio_mensagem.md)
 11. [CDU-011 - Gerar ordem de serviço](cdu-011-Gerar-ordem-de-servico/cdu_gerar_ordem_de_servico.md)
 12. [CDU-012 - Login no Sistema](cdu-012-Login/cdu_login.md)
+13. [CDU-013 - Criar Conta](cdu-013-criar-conta/cdu_criar_conta.md)
 
 
 ## 3. Casos de uso implementados
