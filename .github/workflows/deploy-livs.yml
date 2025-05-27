@@ -26,25 +26,25 @@ jobs:
 
             - name: Adicionar chave SSH
               run: |
-                  touch gamb-key-back.pem
                   echo "${{ secrets.AWS_KEY_BACK }}" > gamb-key-back.pem
                   chmod 400 gamb-key-back.pem
+
+            - name: Adicionar servidor aos conhecidos
+              run: ssh-keyscan 52.22.187.150 >> ~/.ssh/known_hosts
 
             - name: Conectar ao servidor remoto
               run: ssh -i 'gamb-key-back.pem' ubuntu@52.22.187.150 "echo 'Conectado com sucesso!'"
 
             - name: Criando arquivo .env
               run: |
-                  cd gambiarra/
-                  cd gamb-back/
-                  pwd
-                  echo "DJANGO_SECRET_KEY=${{ secrets.DJANGO_SECRET_KEY }}" > .env
-                  echo "DEBUG=${{ secrets.DEBUG }}" >> .env
-                  echo "DJANGO_LOGLEVEL=${{ secrets.DJANGO_LOGLEVEL }}" >> .env
-                  echo "DJANGO_ALLOWED_HOSTS=${{ secrets.DJANGO_ALLOWED_HOSTS }}" >> .env
-                  echo "DATABASE_ENGINE=${{ secrets.DATABASE_ENGINE }}" >> .env
-                  echo "DATABASE_NAME=${{ secrets.DATABASE_NAME }}" >> .env
-                  echo "DATABASE_USERNAME=${{ secrets.DATABASE_USERNAME }}" >> .env
-                  echo "DATABASE_PASSWORD=${{ secrets.DATABASE_PASSWORD }}" >> .env
-                  echo "DATABASE_HOST=${{ secrets.DATABASE_HOST }}" >> .env
-                  echo "DATABASE_PORT=${{ secrets.DATABASE_PORT }}" >> .env
+                  cd gambiarra/gamb-back/
+                  echo "DJANGO_SECRET_KEY=$DJANGO_SECRET_KEY" > .env
+                  echo "DEBUG=$DEBUG" >> .env
+                  echo "DJANGO_LOGLEVEL=$DJANGO_LOGLEVEL" >> .env
+                  echo "DJANGO_ALLOWED_HOSTS=$DJANGO_ALLOWED_HOSTS" >> .env
+                  echo "DATABASE_ENGINE=$DATABASE_ENGINE" >> .env
+                  echo "DATABASE_NAME=$DATABASE_NAME" >> .env
+                  echo "DATABASE_USERNAME=$DATABASE_USERNAME" >> .env
+                  echo "DATABASE_PASSWORD=$DATABASE_PASSWORD" >> .env
+                  echo "DATABASE_HOST=$DATABASE_HOST" >> .env
+                  echo "DATABASE_PORT=$DATABASE_PORT" >> .env
