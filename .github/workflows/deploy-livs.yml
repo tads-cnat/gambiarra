@@ -39,6 +39,7 @@ jobs:
 
             - name: Criando arquivo .env
               run: |
+                  pwd
                   cd gambiarra/gamb-back/
                   echo "DJANGO_SECRET_KEY=$DJANGO_SECRET_KEY" > .env
                   echo "DEBUG=$DEBUG" >> .env
