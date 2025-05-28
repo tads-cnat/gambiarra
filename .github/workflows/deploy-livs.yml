@@ -30,7 +30,9 @@ jobs:
                   chmod 400 gamb-key-back.pem
 
             - name: Adicionar servidor aos conhecidos
-              run: ssh-keyscan 52.22.187.150 >> ~/.ssh/known_hosts
+              run: |
+                mkdir -p ~/.ssh
+                ssh-keyscan 52.22.187.150 >> ~/.ssh/known_hosts
 
             - name: Conectar ao servidor remoto
               run: ssh -i 'gamb-key-back.pem' ubuntu@52.22.187.150 "echo 'Conectado com sucesso!'"
