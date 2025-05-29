@@ -1,4 +1,4 @@
-name: Django CD
+name: CD Pipeline
 
 on:
     push:
@@ -9,43 +9,42 @@ on:
 jobs:
     deploy:
         runs-on: ubuntu-latest
-        env:
-            DJANGO_SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
-            DEBUG: ${{ secrets.DEBUG }}
-            DJANGO_LOGLEVEL: ${{ secrets.DJANGO_LOGLEVEL }}
-            DJANGO_ALLOWED_HOSTS: ${{ secrets.DJANGO_ALLOWED_HOSTS }}
-            DATABASE_ENGINE: ${{ secrets.DATABASE_ENGINE }}
-            DATABASE_NAME: ${{ secrets.DATABASE_NAME }}
-            DATABASE_USERNAME: ${{ secrets.DATABASE_USERNAME }}
-            DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
-            DATABASE_HOST: ${{ secrets.DATABASE_HOST }}
-            DATABASE_PORT: ${{ secrets.DATABASE_PORT }}
 
         steps:
-            - uses: actions/checkout@v4
+            - name: Checkout Code
+              uses: actions/checkout@v3
 
-            - name: Adicionar chave SSH
+            - name: Set Up SSH Key
+              shell: bash
               run: |
-                  echo "${{ env.AWS_KEY_BACK }}" > gamb-keys.pem
-                  chmod 400 gamb-keys.pem
-            
-            - name: Adicionar servidor aos conhecidos
-              run: |
-                  mkdir -p ~/.ssh
-                  ssh-keyscan 52.22.187.150 >> ~/.ssh/known_hosts
+                  echo "${{ secrets.EC2_KEY }}" > ~/DjangoCDKey.pem
+                  chmod 400 ~/DjangoCDKey.pem
 
-            - name: Conectar ao servidor remoto
+            - name: Deploy Code
+              shell: bash
               run: |
-                ssh -i 'gamb-keys.pem' ubuntu@52.22.187.150 
-                  ls
-                   cd gambiarra/gamb-back/
-                   echo "DJANGO_SECRET_KEY=$DJANGO_SECRET_KEY" > .env
-                   echo "DEBUG=$DEBUG" >> .env
-                   echo "DJANGO_LOGLEVEL=$DJANGO_LOGLEVEL" >> .env
-                   echo "DJANGO_ALLOWED_HOSTS=$DJANGO_ALLOWED_HOSTS" >> .env
-                   echo "DATABASE_ENGINE=$DATABASE_ENGINE" >> .env
-                   echo "DATABASE_NAME=$DATABASE_NAME" >> .env
-                   echo "DATABASE_USERNAME=$DATABASE_USERNAME" >> .env
-                   echo "DATABASE_PASSWORD=$DATABASE_PASSWORD" >> .env
-                   echo "DATABASE_HOST=$DATABASE_HOST" >> .env
-                   echo "DATABASE_PORT=$DATABASE_PORT" >> .env
+                  # Copy all project files to the EC2 instance
+                  scp -o StrictHostKeyChecking=no -i ~/DjangoCDKey.pem -r ./myapp/* ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }}:/home/${{ secrets.EC2_USER }}/Django_Project/
+
+                  # SSH into the EC2 instance and deploy
+                  ssh -o StrictHostKeyChecking=no -i ~/DjangoCDKey.pem ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} "
+                    cd /home/${{ secrets.EC2_USER }}/Django_Project &&
+                    docker-compose up --build -d
+                  "
+
+#  - name: Conectar ao servidor remoto
+#               run: |
+#                 ssh -tt -i 'gamb-keys.pem' ubuntu@52.22.187.150 <<EOF
+#                   ls
+#                    cd gambiarra/gamb-back/
+#                    echo "DJANGO_SECRET_KEY=$DJANGO_SECRET_KEY" > .env
+#                    echo "DEBUG=$DEBUG" >> .env
+#                    echo "DJANGO_LOGLEVEL=$DJANGO_LOGLEVEL" >> .env
+#                    echo "DJANGO_ALLOWED_HOSTS=$DJANGO_ALLOWED_HOSTS" >> .env
+#                    echo "DATABASE_ENGINE=$DATABASE_ENGINE" >> .env
+#                    echo "DATABASE_NAME=$DATABASE_NAME" >> .env
+#                    echo "DATABASE_USERNAME=$DATABASE_USERNAME" >> .env
+#                    echo "DATABASE_PASSWORD=$DATABASE_PASSWORD" >> .env
+#                    echo "DATABASE_HOST=$DATABASE_HOST" >> .env
+#                    echo "DATABASE_PORT=$DATABASE_PORT" >> .env
+#                 EOF
