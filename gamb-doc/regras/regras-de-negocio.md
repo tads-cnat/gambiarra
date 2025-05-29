@@ -8,6 +8,7 @@
 |------------|--------|-------------------|------------------------|
 | 20/10/2024 | 1.0.0  | Regras de negócio | Livia Vitória da Silva |
 | 23/04/2025 | 1.0.1  | Regras de negócio | Livia Vitória da Silva |
+| 15/05/2025 | 1.0.2  | Regras de negócio | Livia Vitória da Silva |
 
 ---
 
@@ -39,3 +40,4 @@
 | <a id="rn012"></a>RN012 | Um **cliente externo** não pode ser atribuído como professor ou bolsista.                                       | Usuário é cliente externo                                       | Impedir atribuição e exibir erro.                       | Verificar tipo de cliente antes da ação.         |
 | <a id="rn013"></a>RN013 | Somente um **cliente interno do tipo aluno** pode ser um bolsista.                                              | Usuário não é um aluno interno                                  | Impedir atribuição como bolsista.                       | Verificar tipo de cliente antes da ação.         |
 | <a id="rn014"></a>RN014 | Somente um **cliente interno do tipo servidor** pode ser um professor.                                          | Usuário não é servidor interno                                  | Impedir atribuição como professor.                      | Verificar tipo de cliente antes da ação.         |
+| <a id="rn015"></a>RN015 | Visitantes podem se cadastrar como usuários internos (vinculo com o suap) ou externos (sem vínculo com o suap).                                          | Visitante não está cadastrado na plataforma                                  | Permitir que visitantes se cadastrem.                    |         |
