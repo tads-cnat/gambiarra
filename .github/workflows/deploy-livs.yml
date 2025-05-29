@@ -26,8 +26,9 @@ jobs:
 
             - name: Adicionar chave SSH
               run: |
-                  echo "${{ secrets.AWS_KEY_BACK }}" > gamb-key-back.pem
-                  chmod 400 gamb-key-back.pem
+                  echo "${{ secrets.AWS_KEY_BACK }}" > gamb-keys.pem
+                  chmod 400 gamb-keys.pem
+                  cat gamb-keys.pem
 
             - name: Adicionar servidor aos conhecidos
               run: |
@@ -36,16 +37,5 @@ jobs:
 
             - name: Conectar ao servidor remoto
               run: |
-                  ssh -i 'gamb-key-back.pem' ubuntu@52.22.187.150 
-                   pwd
-                   ls
-                   echo "DJANGO_SECRET_KEY=$DJANGO_SECRET_KEY" > .env
-                   echo "DEBUG=$DEBUG" >> .env
-                   echo "DJANGO_LOGLEVEL=$DJANGO_LOGLEVEL" >> .env
-                   echo "DJANGO_ALLOWED_HOSTS=$DJANGO_ALLOWED_HOSTS" >> .env
-                   echo "DATABASE_ENGINE=$DATABASE_ENGINE" >> .env
-                   echo "DATABASE_NAME=$DATABASE_NAME" >> .env
-                   echo "DATABASE_USERNAME=$DATABASE_USERNAME" >> .env
-                   echo "DATABASE_PASSWORD=$DATABASE_PASSWORD" >> .env
-                   echo "DATABASE_HOST=$DATABASE_HOST" >> .env
-                   echo "DATABASE_PORT=$DATABASE_PORT" >> .env
+                cat gamb-keys.pem
+                
