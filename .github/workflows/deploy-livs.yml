@@ -1,10 +1,9 @@
-name: Django CD
+name: CD Pipeline
 
 on:
     push:
-        branches: ["298-0---implementar-cd-de-deploy-do-projeto"]
-    pull_request:
-        branches: ["298-0---implementar-cd-de-deploy-do-projeto"]
+        branches:
+            - main
 
 jobs:
     deploy:
@@ -17,34 +16,16 @@ jobs:
             - name: Set Up SSH Key
               shell: bash
               run: |
-                  echo "${{ secrets.EC2_KEY }}" | base64 -d > ~/DjangoCDKey.pem
+                  echo "${{ secrets.EC2_KEY }}" > ~/DjangoCDKey.pem
                   chmod 400 ~/DjangoCDKey.pem
 
             - name: Deploy Code
               shell: bash
               run: |
-                  # Sincronizar o projeto com o servidor EC2
-                  rsync -avz -e "ssh -o StrictHostKeyChecking=no -i ~/DjangoCDKey.pem" ./ ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }}:/home/${{ secrets.EC2_USER }}/Django_Project/
+                  # Copy all project files to the EC2 instance
+                  scp -o StrictHostKeyChecking=no -i ~/DjangoCDKey.pem ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }}:/home/${{ secrets.EC2_USER }}/Django_Project/
 
-                  # Aceder ao servidor remoto e lançar o docker-compose
-                  ssh -o StrictHostKeyChecking=no -i ~/DjangoCDKey.pem ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} <<EOF
-                    cd /home/${{ secrets.EC2_USER }}/Django_Project
-                    docker-compose up --build -d
-                  EOF
-
-#  - name: Conectar ao servidor remoto
-#               run: |
-#                 ssh -tt -i 'gamb-keys.pem' ubuntu@52.22.187.150 <<EOF
-#                   ls
-#                    cd gambiarra/gamb-back/
-#                    echo "DJANGO_SECRET_KEY=$DJANGO_SECRET_KEY" > .env
-#                    echo "DEBUG=$DEBUG" >> .env
-#                    echo "DJANGO_LOGLEVEL=$DJANGO_LOGLEVEL" >> .env
-#                    echo "DJANGO_ALLOWED_HOSTS=$DJANGO_ALLOWED_HOSTS" >> .env
-#                    echo "DATABASE_ENGINE=$DATABASE_ENGINE" >> .env
-#                    echo "DATABASE_NAME=$DATABASE_NAME" >> .env
-#                    echo "DATABASE_USERNAME=$DATABASE_USERNAME" >> .env
-#                    echo "DATABASE_PASSWORD=$DATABASE_PASSWORD" >> .env
-#                    echo "DATABASE_HOST=$DATABASE_HOST" >> .env
-#                    echo "DATABASE_PORT=$DATABASE_PORT" >> .env
-#                 EOF
+                  # SSH into the EC2 instance and deploy
+                  ssh -o StrictHostKeyChecking=no -i ~/DjangoCDKey.pem ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} "
+                      ls
+                  "
