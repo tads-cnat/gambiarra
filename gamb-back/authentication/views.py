@@ -1,8 +1,10 @@
+import requests
 from rest_framework import status, filters
 from rest_framework.generics import CreateAPIView, RetrieveAPIView
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.decorators import action
 from rest_framework.response import Response
+from rest_framework.views import APIView
 from rest_framework import viewsets
 from .serializers import *
 from .permissions import *
@@ -14,7 +16,6 @@ from django.shortcuts import get_object_or_404
 from django_filters import rest_framework as filters
 from .models import Usuario
 from .filters import UsuarioFilter
-
 
 class RegisterUserView(CreateAPIView):
     serializer_class = UserRegistrationSerializer
@@ -104,3 +105,18 @@ class UsuarioViewSet(viewsets.ModelViewSet):
         serializer = ListarUsuarioSerializer(usuario)
         return Response({"mensagem": mensagem, "usuario": serializer.data}, status=retorno)
 
+class SuapLoginView(APIView):
+    def post(self, request):
+        username = request.data.get("username")
+        password = request.data.get("password")
+        suap_login_url = "https://suap.ifrn.edu.br/api/token/"
+        login_response = requests.post(suap_login_url + "pair", data={
+            "username": username,
+            "password": password
+        })
+
+        if login_response.status_code != 200:
+            return Response({"error": "Credenciais inválidas no SUAP"}, status=status.HTTP_401_UNAUTHORIZED)
+
+        print(login_response, login_response.text)
+        
