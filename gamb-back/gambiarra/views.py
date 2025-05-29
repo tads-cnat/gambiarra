@@ -66,12 +66,11 @@ class ChamadoViewSet(viewsets.ModelViewSet):
             return UpdateChamadoSerializer
         
         return ListarChamadoSerializer
-        
-        print("\n\n", acao, "\n\n")
-        raise Exception("Serializador não encontrado")
+       
+
     
     
-    
+
     def get(self, pk):
         try:
             chamado = Chamado.objects.get(pk=pk)

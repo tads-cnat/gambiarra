@@ -7,66 +7,64 @@ on:
     branches: ["*"]
 
 jobs:
-  
-  test:
-    runs-on: ubuntu-latest
-    env:
-      DJANGO_SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
-      DEBUG: ${{ secrets.DEBUG }}
-      DJANGO_LOGLEVEL: ${{ secrets.DJANGO_LOGLEVEL }}
-      DJANGO_ALLOWED_HOSTS: ${{ secrets.DJANGO_ALLOWED_HOSTS }}
-      DATABASE_ENGINE: ${{ secrets.DATABASE_ENGINE }}
-      DATABASE_NAME: ${{ secrets.DATABASE_NAME }}
-      DATABASE_USERNAME: ${{ secrets.DATABASE_USERNAME }}
-      DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
-      DATABASE_HOST: ${{ secrets.DATABASE_HOST }}
-      DATABASE_PORT: ${{ secrets.DATABASE_PORT }}
-    steps:
-      - uses: actions/checkout@v4
+    test:
+        runs-on: ubuntu-latest
+        env:
+            DJANGO_SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
+            DEBUG: ${{ secrets.DEBUG }}
+            DJANGO_LOGLEVEL: ${{ secrets.DJANGO_LOGLEVEL }}
+            DJANGO_ALLOWED_HOSTS: ${{ secrets.DJANGO_ALLOWED_HOSTS }}
+            DATABASE_ENGINE: ${{ secrets.DATABASE_ENGINE }}
+            DATABASE_NAME: ${{ secrets.DATABASE_NAME }}
+            DATABASE_USERNAME: ${{ secrets.DATABASE_USERNAME }}
+            DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
+            DATABASE_HOST: ${{ secrets.DATABASE_HOST }}
+            DATABASE_PORT: ${{ secrets.DATABASE_PORT }}
+        steps:
+            - uses: actions/checkout@v4
 
-      # Configura o Docker Buildx
-      - name: Instalar Docker Compose
-        run: sudo apt-get update && sudo apt-get install -y docker-compose
+            # Configura o Docker Buildx
+            - name: Instalar Docker Compose
+              run: sudo apt-get update && sudo apt-get install -y docker-compose
 
-      # Rodar os containers Docker (web + db + redis)
-      - name: Run up
-        run: |
-          cd gamb-back
-          docker-compose up  -d
+            # Rodar os containers Docker (web + db + redis)
+            - name: Run up
+              run: |
+                  cd gamb-back
+                  docker-compose up  -d
 
-      # O parâmetro -d roda os containers em segundo plano
-      ## tem erro nos testes, veja isso depois adicione no pipeline
-      # # Rodar testes dentro do contêiner do Django
-      # - name: Run tests inside Docker container
-      #   run: |
-      #     cd gamb-back
-      #     docker exec -t gambdrf python manage.py test
-      #   # Gambdrf é o nome do seu contêiner Django, conforme o docker-compose.yml
+            # O parâmetro -d roda os containers em segundo plano
+            ## tem erro nos testes, veja isso depois adicione no pipeline
+            # # Rodar testes dentro do contêiner do Django
+            # - name: Run tests inside Docker container
+            #   run: |
+            #     cd gamb-back
+            #     docker exec -t gambdrf python manage.py test
+            #   # Gambdrf é o nome do seu contêiner Django, conforme o docker-compose.yml
 
-      # Desligar os containers após a execução dos testes
-      - name: Shut down Docker containers
-        run: |
-          cd gamb-back
-          docker-compose  down
-  build:
+            # Desligar os containers após a execução dos testes
+            - name: Shut down Docker containers
+              run: |
+                  cd gamb-back
+                  docker-compose  down
+    build:
+        runs-on: ubuntu-latest
 
-    runs-on: ubuntu-latest
-
-    steps:
-    - uses: actions/checkout@v4.2.2
-    - name: Set up Node.js
-      uses: actions/setup-node@v1
-      with:
-        node-version: 22.15.0
-    - name: Install dependencies
-      run: |
-        cd gamb-front
-        npm install
-    - name: Build
-      run: |
-        cd gamb-front
-        npm run build
-    - name: Test
-      run: | 
-        cd gamb-front
-        npm test
+        steps:
+            - uses: actions/checkout@v4.2.2
+            - name: Set up Node.js
+              uses: actions/setup-node@v1
+              with:
+                  node-version: 22.15.0
+            - name: Install dependencies
+              run: |
+                  cd gamb-front
+                  npm install
+            - name: Build
+              run: |
+                  cd gamb-front
+                  npm run build
+            - name: Test
+              run: |
+                  cd gamb-front
+                  npm test
