@@ -26,9 +26,9 @@ jobs:
 
             - name: Adicionar chave SSH
               run: |
-                  echo "${{ secrets.AWS_KEY_BACK }}" > gamb-key-back.pem
-                  chmod 400 gamb-key-back.pem
-
+                  echo "${{ env.AWS_KEY_BACK }}" > gamb-keys.pem
+                  chmod 400 gamb-keys.pem
+            
             - name: Adicionar servidor aos conhecidos
               run: |
                   mkdir -p ~/.ssh
@@ -36,8 +36,8 @@ jobs:
 
             - name: Conectar ao servidor remoto
               run: |
-                  ssh -i 'gamb-key-back.pem' ubuntu@52.22.187.150 
-                   pwd
+                ssh -i 'gamb-keys.pem' ubuntu@52.22.187.150 
+                  ls
                    cd gambiarra/gamb-back/
                    echo "DJANGO_SECRET_KEY=$DJANGO_SECRET_KEY" > .env
                    echo "DEBUG=$DEBUG" >> .env
