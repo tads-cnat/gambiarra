@@ -2,8 +2,9 @@ name: CD Pipeline
 
 on:
     push:
-        branches:
-            - main
+        branches: ["298-0---implementar-cd-de-deploy-do-projeto"]
+    pull_request:
+        branches: ["298-0---implementar-cd-de-deploy-do-projeto"]
 
 jobs:
     deploy:
