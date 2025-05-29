@@ -36,7 +36,7 @@ jobs:
 
             - name: Conectar ao servidor remoto
               run: |
-                  ssh -i 'gamb-key-back.pem' ubuntu@52.22.187.150 "echo 'Conectado com sucesso!'"
+                  ssh -i 'gamb-key-back.pem' ubuntu@52.22.187.150 
                    pwd
                    cd gambiarra/gamb-back/
                    echo "DJANGO_SECRET_KEY=$DJANGO_SECRET_KEY" > .env
