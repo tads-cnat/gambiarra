@@ -1,6 +1,10 @@
 name: Django CI
 
 on:
+    push:
+        branches: ["*"]
+    pull_request:
+        branches: ["*"]
 
 jobs:
     test:
@@ -30,15 +34,13 @@ jobs:
                   docker-compose up  -d
 
             # O parâmetro -d roda os containers em segundo plano
-            ## tem erro nos testes, veja isso depois adicione no pipeline
-            # # Rodar testes dentro do contêiner do Django
-            # - name: Run tests inside Docker container
-            #   run: |
-            #     cd gamb-back
-            #     docker exec -t gambdrf python manage.py test
-            #   # Gambdrf é o nome do seu contêiner Django, conforme o docker-compose.yml
+            # tem erro nos testes, veja isso depois adicione no pipeline
+            # Rodar testes dentro do contêiner do Django
+            - name: Run tests inside Docker container
+              run: |
+                  docker-compose exec -it gambdrf python manage.py test
+              # Gambdrf é o nome do seu contêiner Django, conforme o docker-compose.yml
 
-            # Desligar os containers após a execução dos testes
             - name: Shut down Docker containers
               run: |
                   cd gamb-back
