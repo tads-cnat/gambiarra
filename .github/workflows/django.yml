@@ -38,8 +38,7 @@ jobs:
             # Rodar testes dentro do contêiner do Django
             - name: Run tests inside Docker container
               run: |
-                  cd gamb-back
-                  docker exec -it gambdrf python manage.py test
+                  docker-compose exec -it gambdrf python manage.py test
               # Gambdrf é o nome do seu contêiner Django, conforme o docker-compose.yml
 
             - name: Shut down Docker containers
