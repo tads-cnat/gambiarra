@@ -1,51 +1,49 @@
 name: CD
 
 on:
-    push:
-        branches: ["298-0---implementar-cd-de-deploy-do-projeto"]
-    pull_request:
-        branches: ["298-0---implementar-cd-de-deploy-do-projeto"]
+  push:
+    branches: ["298-0---implementar-cd-de-deploy-do-projeto"]
+  pull_request:
+    branches: ["298-0---implementar-cd-de-deploy-do-projeto"]
 
 jobs:
-    deploy:
-        runs-on: ubuntu-latest
+  build-and-push-image:
+    runs-on: ubuntu-22.04
+    defaults:
+      run:
+        working-directory: gamb-back
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Get semantic version
+        id: version
+        uses: PaulHatch/semantic-version@v5.0.3
+        with:
+          change_path: "gamb-back"
+          major_pattern: "/^(feat!: | style!: | fix!: | test!:)$/"
+          minor_pattern: "feat:"
+
+      - name: Print version
         env:
-            DJANGO_SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
-            DEBUG: ${{ secrets.DEBUG }}
-            DJANGO_LOGLEVEL: ${{ secrets.DJANGO_LOGLEVEL }}
-            DJANGO_ALLOWED_HOSTS: ${{ secrets.DJANGO_ALLOWED_HOSTS }}
-            DATABASE_ENGINE: ${{ secrets.DATABASE_ENGINE }}
-            DATABASE_NAME: ${{ secrets.DATABASE_NAME }}
-            DATABASE_USERNAME: ${{ secrets.DATABASE_USERNAME }}
-            DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
-            DATABASE_HOST: ${{ secrets.DATABASE_HOST }}
-            DATABASE_PORT: ${{ secrets.DATABASE_PORT }}
+          STEPS_CONTEXT: ${{ toJson(steps.version.outputs) }}
+        run: echo "$STEPS_CONTEXT"
 
-        steps:
-            - uses: actions/checkout@v4
+      - name: Login to Dockerhub
+        uses: docker/login-action@v2.1.0
+        with:
+          username: ${{ secrets.USER_DH_BACK_LEO }}
+          password: ${{ secrets.PASSW_DH_BACK_LEO }}
 
-            - name: Adicionar chave SSH
-              run: |
-                  echo "${{ secrets.AWS_KEY_BACK }}" > gamb-key-back.pem
-                  chmod 400 gamb-key-back.pem
+      - name: Build and push Docker images
+        uses: docker/build-push-action@v4.0.0
+        with:
+          context: ./gamb-back/
+          push: true
+          tags: |
+            leveau/gamb_back_image:latest
+            leveau/gamb_back_image:${{ steps.version.outputs.version }}
 
-            - name: Adicionar servidor aos conhecidos
-              run: |
-                  mkdir -p ~/.ssh
-                  ssh-keyscan 52.22.187.150 >> ~/.ssh/known_hosts
-
-            - name: Conectar ao servidor remoto
-              run: |
-                  ssh -i 'gamb-key-back.pem' ubuntu@52.22.187.150 "echo 'Conectado com sucesso!'"
-                   pwd
-                   cd gambiarra/gamb-back/
-                   echo "DJANGO_SECRET_KEY=$DJANGO_SECRET_KEY" > .env
-                   echo "DEBUG=$DEBUG" >> .env
-                   echo "DJANGO_LOGLEVEL=$DJANGO_LOGLEVEL" >> .env
-                   echo "DJANGO_ALLOWED_HOSTS=$DJANGO_ALLOWED_HOSTS" >> .env
-                   echo "DATABASE_ENGINE=$DATABASE_ENGINE" >> .env
-                   echo "DATABASE_NAME=$DATABASE_NAME" >> .env
-                   echo "DATABASE_USERNAME=$DATABASE_USERNAME" >> .env
-                   echo "DATABASE_PASSWORD=$DATABASE_PASSWORD" >> .env
-                   echo "DATABASE_HOST=$DATABASE_HOST" >> .env
-                   echo "DATABASE_PORT=$DATABASE_PORT" >> .env
+ 
