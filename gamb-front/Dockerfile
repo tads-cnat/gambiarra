@@ -12,11 +12,9 @@ COPY . .
 
 RUN yarn build 
 
-# --- ESTÁGIO DE PRODUÇÃO (RUNNER) ---
-# Usa uma imagem Nginx leve para servir os arquivos estáticos.
+
 FROM nginx:alpine
 
-# Remove a configuração padrão do Nginx para evitar conflitos.
 RUN rm /etc/nginx/conf.d/default.conf
 
 COPY nginx.conf /etc/nginx/conf.d/default.conf
