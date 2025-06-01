@@ -5,13 +5,7 @@ import {
 	HouseSimple,
 	SignOut,
 } from "@phosphor-icons/react";
-import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { getUserActive, getUserActiveRole, logout } from "../../auth/service/AuthStore";
-import { ChamadoSubmit } from "../../interfaces/models/iChamado";
-import ChamadoService from "../../services/models/ChamadoService";
-import GambButton from "../GambButton/Button";
-import ModalChamadoSubmit from "./forms/abrirChamado/ModalChamadoSubmit";
 import {
 	ItemDropdown,
 	SidebarBody,
@@ -20,6 +14,12 @@ import {
 	User,
 	UserSpace,
 } from "./sidebarstyles";
+import GambButton from "../GambButton/Button";
+import { useState } from "react";
+import { ChamadoSubmit } from "../../interfaces/models/iChamado";
+import ModalChamadoSubmit from "./forms/abrirChamado/ModalChamadoSubmit";
+import ChamadoService from "../../services/models/ChamadoService";
+import { getUserActive, getUserActiveRole, logout } from "../../auth/service/AuthStore";
 
 // 1) Importe o hook para acessar dados do usuário
 
@@ -163,7 +163,7 @@ export function Sidebar() {
 					<SidebarContent>
 						<div>
 							<img
-								src="\images\logo-side.png"
+								src="\assets\logo-side.png"
 								alt="Logo Gambi"
 								className="gambi-img img-fluid"
 							/>
@@ -227,7 +227,7 @@ export function Sidebar() {
 						<UserSpace>
 							<User>
 								<img
-									src="\images\perfil.png"
+									src="\assets\perfil.png"
 									alt="Imagem de perfil"
 								/>
 								{getUserActive()?.username || "User"} -{" "}

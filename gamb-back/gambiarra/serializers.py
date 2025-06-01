@@ -41,12 +41,8 @@ class CreateChamadoSerializer(serializers.ModelSerializer):
             Acessorio.objects.create(item=item, **acessorio_data)
 
         chamado = Chamado.objects.create(item=item, cliente=cliente, **validated_data)
-        response = { "success": True
-                    , "message": "Chamado criado com sucesso!"
-                    , "chamado": chamado
-                    }
-        return response
 
+        return chamado
 
 
 class ListarChamadoSerializer(serializers.ModelSerializer):

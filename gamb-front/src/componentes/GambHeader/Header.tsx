@@ -16,7 +16,7 @@ export function Header() {
 		<HeaderContainer>
 			<HeaderContent>
 				<img
-					src="\images\marca-sm.png"
+					src="\assets\marca-sm.png"
 					alt=""
 				/>
 				<nav>
