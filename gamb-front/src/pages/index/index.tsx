@@ -6,15 +6,15 @@ import { Header } from "../../componentes/GambHeader/Header";
 // // import { useMap } from 'react-leaflet/hooks'
 // import { Marker } from 'react-leaflet/Marker'
 // import { Popup } from 'react-leaflet/Popup'
-import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 
-import CardIndex from "../../componentes/GambCardIndex/GambCardIndex";
 import {
 	CardContainer,
 	IndexContainer,
 	IndexContent,
 	MarcaGrafica,
 } from "./indexstyles";
+import CardIndex from "../../componentes/GambCardIndex/GambCardIndex";
 
 
 export default function Home() {
@@ -28,7 +28,7 @@ export default function Home() {
 				<IndexContainer>
 					<MarcaGrafica>
 						<img
-							src="\images\slogan.png"
+							src="\assets\slogan.png"
 							alt="manutenção para todos - ifrn cnat"
 						/>
 					</MarcaGrafica>
@@ -65,7 +65,7 @@ export default function Home() {
 						<div className="roboebotao">
 							<img
 								className="img-fluid"
-								src="\images\gambi-robozinho.png"
+								src="\assets\gambi-robozinho.png"
 								alt=""
 							/>
 							<GambButton

@@ -22,7 +22,7 @@ export default function CardIndex({
 		<CardIndexStyle className="col-md-6 col-12">
 			<Header>
 				<img
-					src="/images/logoCNAT.png"
+					src="/assets/logoCNAT.png"
 					alt="Logo do Campus"
 				/>
 				<h3>{nomeCampus}</h3>
