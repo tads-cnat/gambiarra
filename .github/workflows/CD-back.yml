@@ -55,14 +55,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Install sshpass
+      - name: Configure SSH
         run: |
-          sudo apt update
-          sudo apt install sshpass -y
+          mkdir -p ~/.ssh
+          echo "${{ secrets.EC2_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H 52.22.187.150 >> ~/.ssh/known_hosts
 
       - name: Deploy via SSH
         env:
-          EC2_PASS: ${{ secrets.EC2_KEY }}
           VERSION: ${{ needs.build-and-push-image.outputs.version }}
           DJANGO_SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
           DEBUG: ${{ secrets.DEBUG }}
@@ -75,24 +76,24 @@ jobs:
           DATABASE_HOST: ${{ secrets.DATABASE_HOST }}
           DATABASE_PORT: ${{ secrets.DATABASE_PORT }}
         run: |
-          sshpass -p "$EC2_PASS" ssh -o StrictHostKeyChecking=no ubuntu@52.22.187.150 << EOF
+          ssh ubuntu@52.22.187.150 << 'EOF'
             echo 'Conectado com sucesso!'
 
             docker pull leveau/gamb_back_image:latest
-            docker pull leveau/gamb_back_image:$VERSION
+            docker pull leveau/gamb_back_image:${VERSION}
 
             docker compose down
 
-            export DJANGO_SECRET_KEY="$DJANGO_SECRET_KEY"
-            export DEBUG="$DEBUG"
-            export DJANGO_LOGLEVEL="$DJANGO_LOGLEVEL"
-            export DJANGO_ALLOWED_HOSTS="$DJANGO_ALLOWED_HOSTS"
-            export DATABASE_ENGINE="$DATABASE_ENGINE"
-            export DATABASE_NAME="$DATABASE_NAME"
-            export DATABASE_USERNAME="$DATABASE_USERNAME"
-            export DATABASE_PASSWORD="$DATABASE_PASSWORD"
-            export DATABASE_HOST="$DATABASE_HOST"
-            export DATABASE_PORT="$DATABASE_PORT"
+            export DJANGO_SECRET_KEY="${DJANGO_SECRET_KEY}"
+            export DEBUG="${DEBUG}"
+            export DJANGO_LOGLEVEL="${DJANGO_LOGLEVEL}"
+            export DJANGO_ALLOWED_HOSTS="${DJANGO_ALLOWED_HOSTS}"
+            export DATABASE_ENGINE="${DATABASE_ENGINE}"
+            export DATABASE_NAME="${DATABASE_NAME}"
+            export DATABASE_USERNAME="${DATABASE_USERNAME}"
+            export DATABASE_PASSWORD="${DATABASE_PASSWORD}"
+            export DATABASE_HOST="${DATABASE_HOST}"
+            export DATABASE_PORT="${DATABASE_PORT}"
 
             docker compose up -d
 
