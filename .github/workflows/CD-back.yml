@@ -61,7 +61,6 @@ jobs:
           echo "${{ secrets.EC2_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H 52.22.187.150 >> ~/.ssh/known_hosts
-          echo -e "Host ec2\n  HostName 52.22.187.150\n  User ubuntu\n  IdentityFile ~/.ssh/id_rsa\n  StrictHostKeyChecking no" >> ~/.ssh/config
 
       - name: Deploy via SSH
         env:
@@ -77,7 +76,7 @@ jobs:
           DATABASE_HOST: ${{ secrets.DATABASE_HOST }}
           DATABASE_PORT: ${{ secrets.DATABASE_PORT }}
         run: |
-            ssh ec2 << 'EOF'
+          ssh ubuntu@52.22.187.150 << 'EOF'
             echo 'Conectado com sucesso!'
 
             docker pull leveau/gamb_back_image:latest
@@ -99,4 +98,4 @@ jobs:
             docker compose up -d
 
             docker image prune -f
-            EOF
+          EOF
