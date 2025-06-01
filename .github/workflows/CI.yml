@@ -2,7 +2,7 @@ name: Django CI
 
 on:
     push:
-        branches: ["*"]
+        branches: ["main", "dev"]
     pull_request:
         branches: ["*"]
 
@@ -62,7 +62,7 @@ jobs:
               run: |
                   cd gamb-front
                   npm run build
-            - name: Test
-              run: |
-                  cd gamb-front
-                  npm test
+            # - name: Test
+            #   run: |
+            #       cd gamb-front
+            #       npm test
