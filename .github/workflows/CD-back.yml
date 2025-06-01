@@ -12,6 +12,8 @@ jobs:
     defaults:
       run:
         working-directory: gamb-back
+    outputs:
+      version: ${{ steps.version.outputs.version }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -59,30 +61,40 @@ jobs:
           sudo apt install sshpass -y
 
       - name: Deploy via SSH
+        env:
+          EC2_PASS: ${{ secrets.EC2_KEY }}
+          VERSION: ${{ needs.build-and-push-image.outputs.version }}
+          DJANGO_SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
+          DEBUG: ${{ secrets.DEBUG }}
+          DJANGO_LOGLEVEL: ${{ secrets.DJANGO_LOGLEVEL }}
+          DJANGO_ALLOWED_HOSTS: ${{ secrets.DJANGO_ALLOWED_HOSTS }}
+          DATABASE_ENGINE: ${{ secrets.DATABASE_ENGINE }}
+          DATABASE_NAME: ${{ secrets.DATABASE_NAME }}
+          DATABASE_USERNAME: ${{ secrets.DATABASE_USERNAME }}
+          DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
+          DATABASE_HOST: ${{ secrets.DATABASE_HOST }}
+          DATABASE_PORT: ${{ secrets.DATABASE_PORT }}
         run: |
-          sshpass -p ${{ secrets.EC2_KEY }} ssh -o StrictHostKeyChecking=no ubuntu@52.22.187.150 << 'EOF'
+          sshpass -p "$EC2_PASS" ssh -o StrictHostKeyChecking=no ubuntu@52.22.187.150 << EOF
             echo 'Conectado com sucesso!'
-            docker pull leveau/gamb_back_image:latest
-            docker pull leveau/gamb_back_image:${{ needs.build-and-push-image.outputs.version }}
 
-            # Stop and remove old containers
+            docker pull leveau/gamb_back_image:latest
+            docker pull leveau/gamb_back_image:$VERSION
+
             docker compose down
 
-            # Start new containers with environment variables
-            
-            DJANGO_SECRET_KEY= ${{ secrets.DJANGO_SECRET_KEY }}
-            DEBUG= ${{ secrets.DEBUG }}
-            DJANGO_LOGLEVEL= ${{ secrets.DJANGO_LOGLEVEL }}
-            DJANGO_ALLOWED_HOSTS= ${{ secrets.DJANGO_ALLOWED_HOSTS }}
-            DATABASE_ENGINE= ${{ secrets.DATABASE_ENGINE }}
-            DATABASE_NAME= ${{ secrets.DATABASE_NAME }}
-            DATABASE_USERNAME= ${{ secrets.DATABASE_USERNAME }}
-            DATABASE_PASSWORD= ${{ secrets.DATABASE_PASSWORD }}
-            DATABASE_HOST= ${{ secrets.DATABASE_HOST }}
-            DATABASE_PORT= ${{ secrets.DATABASE_PORT }}
+            export DJANGO_SECRET_KEY="$DJANGO_SECRET_KEY"
+            export DEBUG="$DEBUG"
+            export DJANGO_LOGLEVEL="$DJANGO_LOGLEVEL"
+            export DJANGO_ALLOWED_HOSTS="$DJANGO_ALLOWED_HOSTS"
+            export DATABASE_ENGINE="$DATABASE_ENGINE"
+            export DATABASE_NAME="$DATABASE_NAME"
+            export DATABASE_USERNAME="$DATABASE_USERNAME"
+            export DATABASE_PASSWORD="$DATABASE_PASSWORD"
+            export DATABASE_HOST="$DATABASE_HOST"
+            export DATABASE_PORT="$DATABASE_PORT"
 
             docker compose up -d
 
-            # Cleanup
             docker image prune -f
           EOF
