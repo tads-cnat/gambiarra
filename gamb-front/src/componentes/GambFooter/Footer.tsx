@@ -29,7 +29,7 @@ export function Footer() {
         <FooterContainer>
             <FooterContent>
                 <div className="info">
-                    <h2><img src="/assets/gambi-footer.png" alt="Logo Gambiarra" /></h2>
+                    <h2><img src="/images/gambi-footer.png" alt="Logo Gambiarra" /></h2>
                     <div className="buttons">
                         <GambButton variant="verde" label="Conheça o projeto" />
                         <GambButton variant="branco" label="Conheça os criadores" />
