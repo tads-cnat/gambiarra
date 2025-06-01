@@ -43,8 +43,8 @@ jobs:
           context: ./gamb-front/
           push: true
           tags: |
-            ryaanpin/gamb_front:latest
-            ryaanpin/gamb_front:${{ steps.version.outputs.version }}
+            ryaanpin/gamb-front:latest
+            ryaanpin/gamb-front:${{ steps.version.outputs.version }}
 
     # deploy-app:
     #     runs-on: ubuntu-22.04
