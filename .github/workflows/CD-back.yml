@@ -1,82 +1,79 @@
 name: CD Back
 
 on:
-  push:
-    branches: ["298-0---implementar-cd-de-deploy-do-projeto"]
-    paths:
-      - "gamb-back/**"
-  pull_request:
-    branches: ["298-0---implementar-cd-de-deploy-do-projeto"]
-    paths:
-      - "gamb-back/**"
+    push:
+        branches: ["298-0---implementar-cd-de-deploy-do-projeto"]
+        paths:
+            - "gamb-back/**"
+    pull_request:
+        branches: ["298-0---implementar-cd-de-deploy-do-projeto"]
+        paths:
+            - "gamb-back/**"
 
 jobs:
-  build-and-push-image:
-    runs-on: ubuntu-22.04
-    defaults:
-      run:
-        working-directory: gamb-back
-    outputs:
-      version: ${{ steps.version.outputs.version }}
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
+    build-and-push-image:
+        runs-on: ubuntu-22.04
+        defaults:
+            run:
+                working-directory: gamb-back
+        outputs:
+            version: ${{ steps.version.outputs.version }}
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v3
+              with:
+                  fetch-depth: 0
 
-      - name: Get semantic version
-        id: version
-        uses: PaulHatch/semantic-version@v5.0.3
-        with:
-          change_path: "gamb-back"
-          major_pattern: "/^(feat!: | style!: | fix!: | test!:)$/"
-          minor_pattern: "feat:"
+            - name: Get semantic version
+              id: version
+              uses: PaulHatch/semantic-version@v5.0.3
+              with:
+                  change_path: "gamb-back"
+                  major_pattern: "/^(feat!: | style!: | fix!: | test!:)$/"
+                  minor_pattern: "feat:"
 
-      - name: Print version
-        env:
-          STEPS_CONTEXT: ${{ toJson(steps.version.outputs) }}
-        run: echo "$STEPS_CONTEXT"
+            - name: Print version
+              env:
+                  STEPS_CONTEXT: ${{ toJson(steps.version.outputs) }}
+              run: echo "$STEPS_CONTEXT"
 
-      - name: Login to Dockerhub
-        uses: docker/login-action@v2.1.0
-        with:
-          username: ${{ secrets.USER_DH_LIV }}
-          password: ${{ secrets.PASSW_DH_LIV }}
+            - name: Login to Dockerhub
+              uses: docker/login-action@v2.1.0
+              with:
+                  username: ${{ secrets.USER_DH_LIV }}
+                  password: ${{ secrets.PASSW_DH_LIV }}
 
-      - name: Build and push Docker images
-        uses: docker/build-push-action@v4.0.0
-        with:
-          context: ./gamb-back/
-          push: true
-          tags: |
-            liviaavs/gamb-back:latest
-            liviaavs/gamb-back:${{ steps.version.outputs.version }}
+            - name: Build and push Docker images
+              uses: docker/build-push-action@v4.0.0
+              with:
+                  context: ./gamb-back/
+                  push: true
+                  tags: |
+                      liviaavs/gamb-back:latest
+                      liviaavs/gamb-back:${{ steps.version.outputs.version }}
 
-  deploy-app:
-    runs-on: ubuntu-22.04
-    needs: [build-and-push-image]
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
+    deploy-app:
+        runs-on: ubuntu-22.04
+        needs: [build-and-push-image]
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v3
 
-      - name: Configure SSH
-        run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.EC2_KEY }}" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan -H 52.22.187.150 >> ~/.ssh/known_hosts
+            - name: Configure SSH
+              run: |
+                  mkdir -p ~/.ssh
+                  echo "${{ secrets.EC2_KEY }}" > ~/.ssh/id_rsa
+                  chmod 600 ~/.ssh/id_rsa
+                  ssh-keyscan -H 52.22.187.150 >> ~/.ssh/known_hosts
 
-      - name: Deploy via SSH
-        run: |
-          
-          ssh  ubuntu@52.22.187.150 << 'EOF'
-            echo 'Conectado com sucesso!'
-            
-             docker compose pull
-             docker compose down
-             docker compose up 
-            
-          EOF
+            - name: Deploy via SSH
+              run: |
 
-
-          
+                  ssh  ubuntu@52.22.187.150 << 'EOF'
+                    echo 'Conectado com sucesso!'
+                    
+                    sudo docker compose pull
+                    sudo docker compose down
+                    sudo docker compose up -d 
+                    
+                  EOF
