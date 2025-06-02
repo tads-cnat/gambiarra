@@ -13,7 +13,6 @@ on:
             - "gamb-front/**"
             - ".github/workflows/CD-front.yml"
             
-
 jobs:
     build-and-push-image:
         runs-on: ubuntu-22.04
@@ -52,6 +51,9 @@ jobs:
               env:
                   VITE_API_URL: ${{ secrets.VITE_API_URL }}
                   VITE_WS_HOST: ${{ secrets.VITE_WS_HOST }}
+              run : |
+                  echo "VITE_API_URL=${{ secrets.VITE_API_URL }}"
+                  echo "VITE_WS_HOST=${{ secrets.VITE_WS_HOST }}"
               with:
                   context: ./gamb-front/
                   push: true
