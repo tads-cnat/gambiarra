@@ -3,12 +3,12 @@ name: CD Front
 on:
   push:
     branches: ["298-0---implementar-cd-de-deploy-do-projeto"]
-    paths:
-      - "gamb-front/**"
+    # paths:
+    #   - "gamb-front/**"
   pull_request:
     branches: ["298-0---implementar-cd-de-deploy-do-projeto"]
-    paths:
-      - "gamb-front/**"
+    # paths:
+    #   - "gamb-front/**"
 
 jobs:
   build-and-push-image:
@@ -51,6 +51,7 @@ jobs:
           tags: |
             liviaavs/gamb-front:latest
             liviaavs/gamb-front:${{ steps.version.outputs.version }}
+
   deploy-app:
     runs-on: ubuntu-22.04
     needs: [build-and-push-image]
