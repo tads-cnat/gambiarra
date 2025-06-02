@@ -5,10 +5,13 @@ on:
         branches: ["298-0---implementar-cd-de-deploy-do-projeto"]
         paths:
             - "gamb-back/**"
+            - ".github/workflows/CD-back.yml"
+
     pull_request:
         branches: ["298-0---implementar-cd-de-deploy-do-projeto"]
         paths:
             - "gamb-back/**"
+            - ".github/workflows/CD-front.yml"
 
 jobs:
     build-and-push-image:

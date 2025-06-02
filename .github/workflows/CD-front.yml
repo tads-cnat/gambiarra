@@ -6,11 +6,13 @@ on:
         paths:
             - "gamb-front/**"
             - ".github/workflows/CD-front.yml"
+
     pull_request:
         branches: ["298-0---implementar-cd-de-deploy-do-projeto"]
         paths:
             - "gamb-front/**"
             - ".github/workflows/CD-front.yml"
+            
 
 jobs:
     build-and-push-image:
