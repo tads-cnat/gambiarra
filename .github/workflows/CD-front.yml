@@ -48,18 +48,16 @@ jobs:
 
             - name: Build and push Docker images
               uses: docker/build-push-action@v4.0.0
-              env:
-                  VITE_API_URL: ${{ secrets.VITE_API_URL }}
-                  VITE_WS_HOST: ${{ secrets.VITE_WS_HOST }}
-              run : |
-                  echo "VITE_API_URL=${{ secrets.VITE_API_URL }}"
-                  echo "VITE_WS_HOST=${{ secrets.VITE_WS_HOST }}"
+              
               with:
                   context: ./gamb-front/
                   push: true
                   tags: |
                       liviaavs/gamb-front:latest
                       liviaavs/gamb-front:${{ steps.version.outputs.version }}
+                  build-args: |
+                      VITE_API_URL=${{ secrets.VITE_API_URL }}
+                      VITE_WS_HOST=${{ secrets.VITE_WS_HOST }}
 
     deploy-app:
         runs-on: ubuntu-22.04
