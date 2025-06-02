@@ -76,6 +76,6 @@ jobs:
                     echo 'Conectado com sucesso!'
                     
                     sudo docker compose pull
-                    sudo docker compose up -d 
+      
                     
                   EOF
