@@ -82,8 +82,5 @@ jobs:
                     sudo su 
                     
                     docker compose pull
-                    docker compose down --rmi all
-                    docker compose up  -d
-                    docker run -p 80:80 -d liviaavs/gamb-front:latest
 
                   EOF
