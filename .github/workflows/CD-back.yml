@@ -3,12 +3,12 @@ name: CD Back
 on:
   push:
     branches: ["298-0---implementar-cd-de-deploy-do-projeto"]
-    # paths:
-    #   - "gamb-back/**"
+    paths:
+      - "gamb-back/**"
   pull_request:
     branches: ["298-0---implementar-cd-de-deploy-do-projeto"]
-    # paths:
-    #   - "gamb-back/**"
+    paths:
+      - "gamb-back/**"
 
 jobs:
   build-and-push-image:
