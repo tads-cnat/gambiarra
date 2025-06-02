@@ -10,13 +10,14 @@ on:
     paths:
       - "gamb-front/**"
 
-
 jobs:
   build-and-push-image:
     runs-on: ubuntu-22.04
     defaults:
       run:
-        working-directory: gamb-back
+        working-directory: gamb-front
+    outputs:
+      version: ${{ steps.version.outputs.version }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -39,8 +40,8 @@ jobs:
       - name: Login to Dockerhub
         uses: docker/login-action@v2.1.0
         with:
-          username: ${{ secrets.USER_DH_RYA }}
-          password: ${{ secrets.PASSW_DH_RYA }}
+          username: ${{ secrets.USER_DH_LIV }}
+          password: ${{ secrets.PASSW_DH_LIV }}
 
       - name: Build and push Docker images
         uses: docker/build-push-action@v4.0.0
@@ -48,26 +49,31 @@ jobs:
           context: ./gamb-front/
           push: true
           tags: |
-            ryaanpin/gamb-front:latest
-            ryaanpin/gamb-front:${{ steps.version.outputs.version }}
+            liviaavs/gamb-front:latest
+            liviaavs/gamb-front:${{ steps.version.outputs.version }}
+  deploy-app:
+    runs-on: ubuntu-22.04
+    needs: [build-and-push-image]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
 
-    # deploy-app:
-    #     runs-on: ubuntu-22.04
-    #     needs: [build-and-push-image]
+      - name: Configure SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.EC2_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H 52.22.187.150 >> ~/.ssh/known_hosts
 
-    #     steps:
-    #     - name: Checkout
-    #         uses: actions/checkout@v3
+      - name: Deploy via SSH
+        run: |
+          
+          ssh  ubuntu@52.22.187.150 << 'EOF'
+            echo 'Conectado com sucesso!'
+            
+            docker compose pull 
+            
+          EOF
 
-    #     - name: Install sshpass
-    #         run: |
-    #         sudo apt update
-    #         sudo apt install sshpass -y
 
-    #     - name: Deploy via SSH
-    #         run: |
-    #         sshpass -p ${{ secrets.AWS_PASS_BACK }} ssh -o StrictHostKeyChecking=no ubuntu@52.22.187.150 << 'EOF'
-    #             echo 'Conectado com sucesso!'
-    #             docker-compose pull
-    #             docker-compose up -d
-    #         EOF
+          

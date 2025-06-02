@@ -1,6 +1,6 @@
 services:
   web:
-    image: liviaavs/gamb-back:1.0.0
+    image: liviaavs/gamb-back:latest
     container_name: gambdrf
     command: >
       bash -c "
