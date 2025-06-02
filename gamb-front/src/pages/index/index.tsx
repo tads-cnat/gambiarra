@@ -16,14 +16,11 @@ import {
 	MarcaGrafica,
 } from "./indexstyles";
 
-
 export default function Home() {
-	
 	return (
 		<>
 			<Header />
 
-		
 			<main className="container m-auto">
 				<IndexContainer>
 					<MarcaGrafica>
@@ -43,11 +40,11 @@ export default function Home() {
 								executado por estudantes do Instituto Federal do
 								Rio Grande do Norte (<b>IFRN-CNAT</b>). Nosso
 								objetivo é <b>fornecer soluções</b> eficientes
-								para os{" "}
-								<b>problemas técnicos</b> dos seus dispositivos,
-								com a expertise e a paixão que só os estudantes
-								podem oferecer. Conte conosco para resolver suas
-								questões de forma <b>rápida e confiável!</b>
+								para os <b>problemas técnicos</b> dos seus
+								dispositivos, com a expertise e a paixão que só
+								os estudantes podem oferecer. Conte conosco para
+								resolver suas questões de forma{" "}
+								<b>rápida e confiável!</b>
 							</p>
 							<span>gostou da ideia?</span>
 							<div className="bottoes">
@@ -62,22 +59,16 @@ export default function Home() {
 							</div>
 						</div>
 
-						<div className="roboebotao">
-							<img
-								className="img-fluid"
-								src="\images\gambi-robozinho.png"
-								alt=""
-							/>
-							<GambButton
-								className="botaorobo"
-								label="Abrir Chamado"
-								variant="roxo"
-								size="large"
-							/>
-						</div>
+						<img
+							className="img-fluid"
+							src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fpt.wikipedia.org%2Fwiki%2FNicolas_Cage&psig=AOvVaw3kYC_Pc1vKJLsRc8DZztWG&ust=1748990890133000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCNCI6vbo040DFQAAAAAdAAAAABAE"
+							alt=""
+						/>
 					</IndexContent>
 
-					<h2 id="instituicoes">Quais campus estão envolvidos no projeto?</h2>
+					<h2 id="instituicoes">
+						Quais campus estão envolvidos no projeto?
+					</h2>
 
 					<CardContainer className="row">
 						<CardIndex
