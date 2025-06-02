@@ -2,9 +2,14 @@ name: CD Front
 
 on:
   push:
-    # branches: ["298-0---implementar-cd-de-deploy-do-projeto"]
+    branches: ["298-0---implementar-cd-de-deploy-do-projeto"]
+    paths:
+      - "gamb-front/**"
   pull_request:
-    # branches: ["298-0---implementar-cd-de-deploy-do-projeto"]
+    branches: ["298-0---implementar-cd-de-deploy-do-projeto"]
+    paths:
+      - "gamb-front/**"
+
 
 jobs:
   build-and-push-image:
