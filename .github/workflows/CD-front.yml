@@ -12,7 +12,7 @@ on:
         paths:
             - "gamb-front/**"
             - ".github/workflows/CD-front.yml"
-            
+
 jobs:
     build-and-push-image:
         runs-on: ubuntu-22.04
@@ -48,7 +48,7 @@ jobs:
 
             - name: Build and push Docker images
               uses: docker/build-push-action@v4.0.0
-              
+
               with:
                   context: ./gamb-front/
                   push: true
@@ -79,8 +79,10 @@ jobs:
                   ssh  ubuntu@44.210.61.21 << 'EOF'
                     echo 'Conectado com sucesso!'
                     
-                    sudo docker compose pull
-                    sudo docker compose down
-                    sudo docker compose up -d
+                    sudo su 
+                    
+                    docker compose pull
+                    docker compose down
+                    docker compose up  -d
 
                   EOF
