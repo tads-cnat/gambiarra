@@ -1,80 +1,83 @@
 name: CD Front
 
 on:
-  push:
-    branches: ["298-0---implementar-cd-de-deploy-do-projeto"]
-    paths:
-      - "gamb-front/**"
-  pull_request:
-    branches: ["298-0---implementar-cd-de-deploy-do-projeto"]
-    paths:
-      - "gamb-front/**"
+    push:
+        branches: ["298-0---implementar-cd-de-deploy-do-projeto"]
+        paths:
+            - "gamb-front/**"
+            - ".github/workflows/CD-front.yml"
+    pull_request:
+        branches: ["298-0---implementar-cd-de-deploy-do-projeto"]
+        paths:
+            - "gamb-front/**"
+            - ".github/workflows/CD-front.yml"
 
 jobs:
-  build-and-push-image:
-    runs-on: ubuntu-22.04
-    defaults:
-      run:
-        working-directory: gamb-front
-    outputs:
-      version: ${{ steps.version.outputs.version }}
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
+    build-and-push-image:
+        runs-on: ubuntu-22.04
+        defaults:
+            run:
+                working-directory: gamb-front
+        outputs:
+            version: ${{ steps.version.outputs.version }}
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v3
+              with:
+                  fetch-depth: 0
 
-      - name: Get semantic version
-        id: version
-        uses: PaulHatch/semantic-version@v5.0.3
-        with:
-          change_path: "gamb-front"
-          major_pattern: "/^(feat!: | style!: | fix!: | test!:)$/"
-          minor_pattern: "feat:"
+            - name: Get semantic version
+              id: version
+              uses: PaulHatch/semantic-version@v5.0.3
+              with:
+                  change_path: "gamb-front"
+                  major_pattern: "/^(feat!: | style!: | fix!: | test!:)$/"
+                  minor_pattern: "feat:"
 
-      - name: Print version
-        env:
-          STEPS_CONTEXT: ${{ toJson(steps.version.outputs) }}
-        run: echo "$STEPS_CONTEXT"
+            - name: Print version
+              env:
+                  STEPS_CONTEXT: ${{ toJson(steps.version.outputs) }}
+              run: echo "$STEPS_CONTEXT"
 
-      - name: Login to Dockerhub
-        uses: docker/login-action@v2.1.0
-        with:
-          username: ${{ secrets.USER_DH_LIV }}
-          password: ${{ secrets.PASSW_DH_LIV }}
+            - name: Login to Dockerhub
+              uses: docker/login-action@v2.1.0
+              with:
+                  username: ${{ secrets.USER_DH_LIV }}
+                  password: ${{ secrets.PASSW_DH_LIV }}
 
-      - name: Build and push Docker images
-        uses: docker/build-push-action@v4.0.0
-        with:
-          context: ./gamb-front/
-          push: true
-          tags: |
-            liviaavs/gamb-front:latest
-            liviaavs/gamb-front:${{ steps.version.outputs.version }}
+            - name: Build and push Docker images
+              uses: docker/build-push-action@v4.0.0
+              env:
+                  VITE_API_URL: ${{ secrets.VITE_API_URL }}
+                  VITE_WS_HOST: ${{ secrets.VITE_WS_HOST }}
+              with:
+                  context: ./gamb-front/
+                  push: true
+                  tags: |
+                      liviaavs/gamb-front:latest
+                      liviaavs/gamb-front:${{ steps.version.outputs.version }}
 
-  deploy-app:
-    runs-on: ubuntu-22.04
-    needs: [build-and-push-image]
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
+    deploy-app:
+        runs-on: ubuntu-22.04
+        needs: [build-and-push-image]
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v3
 
-      - name: Configure SSH
-        run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.EC2_KEY }}" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan -H 44.210.61.21 >> ~/.ssh/known_hosts
+            - name: Configure SSH
+              run: |
+                  mkdir -p ~/.ssh
+                  echo "${{ secrets.EC2_KEY }}" > ~/.ssh/id_rsa
+                  chmod 600 ~/.ssh/id_rsa
+                  ssh-keyscan -H 44.210.61.21 >> ~/.ssh/known_hosts
 
-      - name: Deploy via SSH
-        run: |
-          
-          ssh  ubuntu@44.210.61.21 << 'EOF'
-            echo 'Conectado com sucesso!'
-            
-            docker compose pull 
-            
-          EOF
+            - name: Deploy via SSH
+              run: |
 
-
-          
+                  ssh  ubuntu@44.210.61.21 << 'EOF'
+                    echo 'Conectado com sucesso!'
+                    
+                    docker compose pull 
+                    docker compose up -d --build gamb-front
+                    
+                  EOF
