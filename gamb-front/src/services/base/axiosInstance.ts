@@ -4,7 +4,10 @@ import {
 	setAuthToken,
 	getAuthRefreshToken,
 } from "../../auth/service/AuthStore";
-const baseURL = import.meta.env.VITE_API_URL;
+// const baseURL = import.meta.env.VITE_API_URL;
+const baseURL = "http://52.22.187.150:8000/api/v1";
+;
+
 
 // Criando a instância do Axios
 const axiosInstance = axios.create({
