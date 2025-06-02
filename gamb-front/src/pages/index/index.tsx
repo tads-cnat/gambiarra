@@ -59,11 +59,19 @@ export default function Home() {
 							</div>
 						</div>
 
-						<img
-							className="img-fluid"
-							src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fpt.wikipedia.org%2Fwiki%2FNicolas_Cage&psig=AOvVaw3kYC_Pc1vKJLsRc8DZztWG&ust=1748990890133000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCNCI6vbo040DFQAAAAAdAAAAABAE"
-							alt=""
-						/>
+						<div className="roboebotao">
+							<img
+								className="img-fluid"
+								src="\images\gambi-robozinho.png"
+								alt=""
+							/>
+							<GambButton
+								className="botaorobo"
+								label="Abrir Chamado"
+								variant="roxo"
+								size="large"
+							/>
+						</div>
 					</IndexContent>
 
 					<h2 id="instituicoes">
