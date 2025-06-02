@@ -76,7 +76,9 @@ jobs:
                     echo 'Conectado com sucesso!'
                     
                     sudo su
+                    docker compose down --rmi all
                     docker compose pull
+                    docker compose up -d 
 
                     
                   EOF
