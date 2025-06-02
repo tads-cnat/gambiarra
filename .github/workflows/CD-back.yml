@@ -77,7 +77,8 @@ jobs:
                     
                     sudo su
                     docker compose pull
-                    docker compose down
+                    docker compose down --rmi all
+
                     docker compose up  -d
                     
                   EOF
