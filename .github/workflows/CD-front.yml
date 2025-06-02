@@ -77,7 +77,8 @@ jobs:
                   ssh  ubuntu@44.210.61.21 << 'EOF'
                     echo 'Conectado com sucesso!'
                     
-                    docker compose pull 
-                    docker compose up -d --build gamb-front
+                    docker compose pull
+                    docker compose down
+                    docker compose up 
                     
                   EOF

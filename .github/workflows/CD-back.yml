@@ -72,7 +72,9 @@ jobs:
           ssh  ubuntu@52.22.187.150 << 'EOF'
             echo 'Conectado com sucesso!'
             
-            docker compose pull 
+             docker compose pull
+             docker compose down
+             docker compose up 
             
           EOF
 
