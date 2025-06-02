@@ -83,7 +83,27 @@ jobs:
           
           ssh  ubuntu@52.22.187.150 << 'EOF'
             echo 'Conectado com sucesso!'
-            pwd 
+            
+            sudo su
+
+            docker pull leveau/gamb_back_image:latest
+            docker pull leveau/gamb_back_image:${VERSION}
+
+            docker compose down
+
+            export DJANGO_SECRET_KEY="${DJANGO_SECRET_KEY}"
+            export DEBUG="${DEBUG}"
+            export DJANGO_LOGLEVEL="${DJANGO_LOGLEVEL}"
+            export DJANGO_ALLOWED_HOSTS="${DJANGO_ALLOWED_HOSTS}"
+            export DATABASE_ENGINE="${DATABASE_ENGINE}"
+            export DATABASE_NAME="${DATABASE_NAME}"
+            export DATABASE_USERNAME="${DATABASE_USERNAME}"
+            export DATABASE_PASSWORD="${DATABASE_PASSWORD}"
+            export DATABASE_HOST="${DATABASE_HOST}"
+            export DATABASE_PORT="${DATABASE_PORT}"
+
+            docker compose up -d
+            
           EOF
 
 
