@@ -1,6 +1,7 @@
 import Notificacao from "../GambNotificao/Notificacao";
 import { userRoles } from "../../auth/roles";
 import { defaultTheme } from "../../styles/themes/default";
+import { getUserActiveRole } from "../../auth/service/AuthStore";
 
 export type Action = {
 	name: string;
@@ -374,7 +375,7 @@ export const btnClientes: Record<number, Action[]> = {
 };
 // Função para checar a permissão (ajuste conforme sua lógica)
 const checkPermission = (roles: string[]) =>
-	roles.includes(localStorage.getItem("userActiveRole") ?? "");
+	roles.includes(getUserActiveRole() ?? "");
 
 // Função que mapeia as ações para componentes <Notificacao />
 export const getActionsByStatus = (
