@@ -12,6 +12,7 @@ export interface UserActive {
 	is_staff: boolean;
 	is_active: boolean;
 	grupo: UserRoles;
+	imagem: string | null;
 }
 
 // Papéis possíveis
