@@ -48,6 +48,5 @@ services:
 
  
 volumes:
-  app-sync:
-    external: true
+  app_data:
   postgres_data:
