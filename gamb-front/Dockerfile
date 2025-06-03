@@ -5,15 +5,15 @@ WORKDIR /app
 
 # Argumentos de build (serão passados via --build-arg)
 ARG VITE_API_URL
-ARG VITE_WS_HOST
+ARG VITE_HOST
 
 # Torna essas variáveis visíveis para o Vite (usadas em import.meta.env)
 ENV VITE_API_URL=$VITE_API_URL
-ENV VITE_WS_HOST=$VITE_WS_HOST
+ENV VITE_HOST=$VITE_HOST
 
 # Debug (opcional)
 RUN echo "🛠️ VITE_API_URL=$VITE_API_URL"
-RUN echo "🛠️ VITE_WS_HOST=$VITE_WS_HOST"
+RUN echo "🛠️ VITE_HOST=$VITE_HOST"
 
 # Instala dependências
 COPY package.json yarn.lock ./
