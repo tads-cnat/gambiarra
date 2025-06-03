@@ -1,4 +1,5 @@
 import { userRoles } from "../../auth/roles";
+import { getUserActiveRole } from "../../auth/service/AuthStore";
 import GambButton from "../GambButton/Button";
 
 export type Action = {
@@ -30,14 +31,14 @@ export const btnsPR: Record<number, Action[]> = {
 			icon: "clipboard",
 			label: "Atribuir Tarefa",
 		},
-		
+
 		{
 			name: "AlterarStatus",
 			typeBtn: "inline",
 			icon: "gear",
 			label: "Alterar Status",
 		},
-    {
+		{
 			name: "AtribuirBolsista",
 			typeBtn: "amarelo",
 			icon: "user",
@@ -57,14 +58,14 @@ export const btnsPR: Record<number, Action[]> = {
 			icon: "clipboard",
 			label: "Atribuir Tarefa",
 		},
-		
+
 		{
 			name: "AlterarStatus",
 			typeBtn: "inline",
 			icon: "gear",
 			label: "Alterar Status",
 		},
-    {
+		{
 			name: "AtribuirBolsista",
 			typeBtn: "amarelo",
 			icon: "user",
@@ -85,7 +86,6 @@ export const btnsPR: Record<number, Action[]> = {
 			icon: "clipboard",
 			label: "Atribuir Tarefa",
 		},
-		
 
 		{
 			name: "AlterarStatus",
@@ -93,7 +93,7 @@ export const btnsPR: Record<number, Action[]> = {
 			icon: "gear",
 			label: "Alterar Status",
 		},
-    {
+		{
 			name: "AtribuirBolsista",
 			typeBtn: "amarelo",
 			icon: "user",
@@ -113,7 +113,6 @@ export const btnsPR: Record<number, Action[]> = {
 			icon: "clipboard",
 			label: "Atribuir Tarefa",
 		},
-		
 
 		{
 			name: "AlterarStatus",
@@ -121,7 +120,7 @@ export const btnsPR: Record<number, Action[]> = {
 			icon: "gear",
 			label: "Alterar Status",
 		},
-    {
+		{
 			name: "AtribuirBolsista",
 			typeBtn: "amarelo",
 			icon: "user",
@@ -188,7 +187,7 @@ export const btnClientes: Record<number, Action[]> = {
 
 // Função para checar a permissão (ajuste conforme sua lógica)
 const checkPermission = (roles: string[]) =>
-	roles.includes(localStorage.getItem("userActiveRole") ?? "");
+	roles.includes(getUserActiveRole() ?? "");
 
 // Função que mapeia as ações para componentes <Notificacao />
 export const getActionsByStatus = (
@@ -196,11 +195,22 @@ export const getActionsByStatus = (
 	idChamado: number,
 	funct?: Record<string, (id: number) => void> // Parâmetro opcional para funções de ação
 ): JSX.Element[] => {
+	console.log(
+		`getActionsByStatus - status: ${status}, idChamado: ${idChamado}`
+	);
+	console.log(`getActionsByStatus - userRole: ${getUserActiveRole()}`);
+	console.log(
+		`checkPermission - userRole: ${getUserActiveRole()}, roles: ${[
+			userRoles.INTERNO.FUNCIONARIO.PR,
+		]}`
+	);
 	const actions: Action[] = checkPermission([
 		userRoles.INTERNO.FUNCIONARIO.GR,
 	])
 		? btnsGR[status] || []
-		: checkPermission([userRoles.INTERNO.FUNCIONARIO.PR])
+		: checkPermission([
+				userRoles.INTERNO.FUNCIONARIO.PR,
+		])
 		? btnsPR[status] || []
 		: btnClientes[status] || [];
 

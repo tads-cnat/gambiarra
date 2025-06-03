@@ -20,19 +20,8 @@ services:
     depends_on:
       - db
     
-    environment:
-      DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY}
-      DEBUG: ${DEBUG}
-      DJANGO_LOGLEVEL: ${DJANGO_LOGLEVEL}
-      DJANGO_ALLOWED_HOSTS: ${DJANGO_ALLOWED_HOSTS}
-      DATABASE_ENGINE: ${DATABASE_ENGINE}
-      DATABASE_NAME: ${DATABASE_NAME}
-      DATABASE_USERNAME: ${DATABASE_USERNAME}
-      DATABASE_PASSWORD: ${DATABASE_PASSWORD}
-      DATABASE_HOST: ${DATABASE_HOST}
-      DATABASE_PORT: ${DATABASE_PORT}
-
-    
+    env_file:
+      - ../../../.envs/backend/.env.local
 
   db:
     image: postgres:13-alpine
@@ -48,5 +37,6 @@ services:
 
  
 volumes:
-  app_data:
+  app-sync:
+    external: true
   postgres_data:

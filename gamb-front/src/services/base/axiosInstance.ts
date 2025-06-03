@@ -4,7 +4,8 @@ import {
 	setAuthToken,
 	getAuthRefreshToken,
 } from "../../auth/service/AuthStore";
-const baseURL = import.meta.env.VITE_API_URL;
+const baseURL = import.meta.env.VITE_API_URL || "http://localhost:8000/api/v1/";
+export const wsHOST = import.meta.env.VITE_WS_HOST || "52.22.187.150";
 
 // Criando a instância do Axios
 const axiosInstance = axios.create({

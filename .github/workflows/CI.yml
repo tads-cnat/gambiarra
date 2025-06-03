@@ -1,4 +1,4 @@
-name: Django CI
+name: CI
 
 on:
     push:
@@ -20,6 +20,7 @@ jobs:
             DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
             DATABASE_HOST: ${{ secrets.DATABASE_HOST }}
             DATABASE_PORT: ${{ secrets.DATABASE_PORT }}
+       
         steps:
             - uses: actions/checkout@v4
 
@@ -33,18 +34,15 @@ jobs:
                   cd gamb-back
                   docker-compose up  -d
 
-            # O parâmetro -d roda os containers em segundo plano
-            # tem erro nos testes, veja isso depois adicione no pipeline
-            # Rodar testes dentro do contêiner do Django
             - name: Run tests inside Docker container
               run: |
+                  cd gamb-back
                   docker-compose exec -it gambdrf python manage.py test
-              # Gambdrf é o nome do seu contêiner Django, conforme o docker-compose.yml
 
             - name: Shut down Docker containers
               run: |
                   cd gamb-back
-                  docker-compose  down
+                  docker compose down 
     build:
         runs-on: ubuntu-latest
 
