@@ -21,7 +21,7 @@ services:
       - db
     
     env_file:
-      - ../.envs/backend/.env.local
+      - ../../../.envs/backend/.env.local
 
   db:
     image: postgres:13-alpine
