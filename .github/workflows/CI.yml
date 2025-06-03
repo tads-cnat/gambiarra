@@ -20,11 +20,12 @@ jobs:
             DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
             DATABASE_HOST: ${{ secrets.DATABASE_HOST }}
             DATABASE_PORT: ${{ secrets.DATABASE_PORT }}
-        with:
-          change_path: "gamb-back"
+       
         steps:
             - uses: actions/checkout@v4
-
+              with:
+                change_path: "gamb-back"
+                
             # Configura o Docker Buildx
             - name: Instalar Docker Compose
               run: sudo apt-get update && sudo apt-get install -y docker-compose
@@ -42,14 +43,15 @@ jobs:
                   docker compose down 
     build:
         runs-on: ubuntu-latest
-        with:
-           change_path: "gamb-front"
+        
         steps:
             - uses: actions/checkout@v4.2.2
             - name: Set up Node.js
               uses: actions/setup-node@v1
               with:
                   node-version: 22.15.0
+                  change_path: "gamb-front"
+
             - name: Install dependencies
               run: |
                   npm install
