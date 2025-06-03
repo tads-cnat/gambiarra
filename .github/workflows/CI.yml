@@ -36,7 +36,8 @@ jobs:
 
             - name: Run tests inside Docker container
               run: |
-                  docker compose exec -it gambdrf python manage.py test
+              
+                  docker compose -f docker-compose.test.yml exec gambdrf python manage.py test
 
             - name: Shut down Docker containers
               run: |
