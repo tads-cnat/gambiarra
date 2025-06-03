@@ -12,32 +12,18 @@ import { defaultTheme } from "./styles/themes/default";
 import { Login } from "./pages/login/Login";
 import Detail from "./pages/dashboard/pages/detail/Detail";
 import "./styles/index.css";
-import authService from "./auth/service/authService";
 import {
 	isAuthenticatedStore,
 	setIsAuthenticatedStore,
 } from "./auth/service/AuthStore";
 
 export function App() {
-	// Função assíncrona para verificar autenticação
-	const checkAuth = async () => {
-		const user = await authService.profile();
-		if (user) {
-			if (!isAuthenticatedStore()) {
-				setIsAuthenticatedStore();
-			}
-		} else {
-			if (isAuthenticatedStore()) {
-				setIsAuthenticatedStore();
-			}
-		}
+	function checkAuth (): void{
+		setIsAuthenticatedStore();
 	};
 
-	// Verifica a autenticação assim que o componente é montado
 	useEffect(() => {
 		checkAuth();
-		console.log(isAuthenticatedStore());
-		
 	}, []);
 
 

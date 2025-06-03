@@ -51,7 +51,6 @@ export const useUser = create<UserStore>()(
 				const token = localStorage.getItem("refresh_token");
 				return token || null;
 			},
-
 			// Salva o token no localStorage
 			setAuthToken: (token: string) => {
 				localStorage.setItem("access_token", token);
@@ -110,14 +109,15 @@ export const getAuthRefreshToken = (): string | null => {
 	return useUser.getState().getAuthRefreshToken();
 };
 
-// Retorna se está autenticado
-export const isAuthenticatedStore = (): boolean => {
-	return useUser.getState().isAuthenticated;
-};
-
 // Define explicitamente que está autenticado (baseado no usuário ativo atual)
 export const setIsAuthenticatedStore = (): void => {
-	useUser.getState().setUserActive(useUser.getState().userActive);
+	useUser.getState().isAuthenticated = !!useUser.getState().userActive;
+};
+
+// Verifica se o usuário está autenticado
+export const isAuthenticatedStore = (): boolean => {
+	useUser.getState().isAuthenticated = !!useUser.getState().userActive;
+	return useUser.getState().isAuthenticated;
 };
 
 // Define o token de acesso
