@@ -31,15 +31,11 @@ jobs:
             - name: Run up
               run: |
                   cd gamb-back
-                  docker-compose up  -d
+                  docker-compose.local.yml up  -d
 
-            # O parâmetro -d roda os containers em segundo plano
-            # tem erro nos testes, veja isso depois adicione no pipeline
-            # Rodar testes dentro do contêiner do Django
             - name: Run tests inside Docker container
               run: |
                   docker-compose exec -it gambdrf python manage.py test
-              # Gambdrf é o nome do seu contêiner Django, conforme o docker-compose.yml
 
             - name: Shut down Docker containers
               run: |
