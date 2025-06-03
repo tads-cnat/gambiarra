@@ -4,6 +4,7 @@ services:
       context: .
       dockerfile: ./Dockerfile
     container_name: gambdrf
+    restart: "always"
     command: >
       bash -c "
       python manage.py makemigrations &&

@@ -2,13 +2,13 @@ name: CD Back
 
 on:
     push:
-        branches: ["298-0---implementar-cd-de-deploy-do-projeto"]
+        branches: ["main"]
         paths:
             - "gamb-back/**"
             - ".github/workflows/CD-back.yml"
 
     pull_request:
-        branches: ["298-0---implementar-cd-de-deploy-do-projeto"]
+        branches: ["main"]
         paths:
             - "gamb-back/**"
             - ".github/workflows/CD-front.yml"

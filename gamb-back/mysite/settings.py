@@ -202,7 +202,7 @@ CORS_ALLOW_ALL_ORIGINS = True
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
-    "http://44.210.61.21:80"
+    "http://44.210.61.21:8080"
 ]
 
 SWAGGER_SETTINGS = {

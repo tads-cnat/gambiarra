@@ -2,13 +2,13 @@ name: CD Front
 
 on:
     push:
-        branches: ["298-0---implementar-cd-de-deploy-do-projeto"]
+        branches: ["main"]
         paths:
             - "gamb-front/**"
             - ".github/workflows/CD-front.yml"
 
     pull_request:
-        branches: ["298-0---implementar-cd-de-deploy-do-projeto"]
+        branches: ["main"]
         paths:
             - "gamb-front/**"
             - ".github/workflows/CD-front.yml"
