@@ -27,7 +27,6 @@ jobs:
             - name: Instalar Docker Compose
               run: sudo apt-get update && sudo apt-get install -y docker-compose
 
-            # Rodar os containers Docker (web + db + redis)
             - name: Run up
               run: |
                   cd gamb-back
