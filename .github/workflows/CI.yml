@@ -40,7 +40,7 @@ jobs:
             - name: Shut down Docker containers
               run: |
                   cd gamb-back
-                  docker-compose  down
+                  docker compose down --rmi all
     build:
         runs-on: ubuntu-latest
 
