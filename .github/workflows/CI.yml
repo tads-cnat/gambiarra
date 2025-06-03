@@ -28,15 +28,14 @@ jobs:
             - name: Instalar Docker Compose
               run: sudo apt-get update && sudo apt-get install -y docker-compose
 
+            # Rodar os containers Docker (web + db + redis)
             - name: Run up
               run: |
-
                   cd gamb-back
                   docker compose -f docker-compose.test.yml up  -d
 
             - name: Run tests inside Docker container
               run: |
-                  cd gamb-back
                   docker compose exec -it gambdrf python manage.py test
 
             - name: Shut down Docker containers
@@ -45,13 +44,13 @@ jobs:
                   docker compose down 
     build:
         runs-on: ubuntu-latest
-        
+
         steps:
             - uses: actions/checkout@v4.2.2
             - name: Set up Node.js
               uses: actions/setup-node@v1
-             
-
+              with:
+                  node-version: 22.15.0
             - name: Install dependencies
               run: |
                   cd gamb-front
