@@ -4,7 +4,8 @@ import {
 	setAuthToken,
 	getAuthRefreshToken,
 } from "../../auth/service/AuthStore";
-const baseURL = import.meta.env.VITE_API_URL || "http://localhost:8000/api/v1/";
+const baseURL: string =
+	(import.meta.env.VITE_API_URL as string) || "http://localhost:8000/api/v1/";
 export const wsHOST = import.meta.env.VITE_HOST || "localhost";
 
 // Criando a instância do Axios
@@ -21,21 +22,25 @@ axiosInstance.interceptors.request.use(
 		return config;
 	},
 	async (error) => {
-		await Promise.reject(error);
+		const errorMessage = new Error("Erro ao fazer a requisição: " + error);
+		await Promise.reject(errorMessage);
 	}
 );
 
 // Interceptor para renovar o token
 axiosInstance.interceptors.response.use(
 	(response) => response,
-	async (error) => {
+	async (error: any) => {
 		const originalRequest = error.config;
 
 		// Ignora rotas de autenticação para evitar loop
 		const ignoredUrls = [`${baseURL}auth/token/`];
 
 		if (ignoredUrls.some((url) => originalRequest.url?.startsWith(url))) {
-			return Promise.reject(error);
+			const errorMessage = new Error(
+				"Erro ao fazer a requisição: " + error.data
+			);
+			return Promise.reject(errorMessage);
 		}
 
 		if (error.response.status === 401 && !originalRequest._retry) {

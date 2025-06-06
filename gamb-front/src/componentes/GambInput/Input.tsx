@@ -5,7 +5,7 @@ import UseMessage from "../GambMessage/Message";
 import { InputText } from "./inputsStyle"; // Importando o styled-component
 import { useState } from "react";
 
-export default function InputField(props: InputFieldProps): JSX.Element {
+export default function InputField(props: InputFieldProps): React.JSX.Element {
 	const {
 		name,
 		defaultValue,

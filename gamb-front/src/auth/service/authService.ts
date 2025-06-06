@@ -1,6 +1,5 @@
 import axiosInstance from "../../services/base/axiosInstance";
 import BaseService from "../../services/base/baseService";
-import { isAuthenticated } from "../Routes";
 import { LoginSubmit } from "./auth";
 import {
 	getAuthRefreshToken,
@@ -53,8 +52,6 @@ class AuthService extends BaseService {
 				sucesso: false,
 				mensagem: "Erro ao realizar login.",
 			};
-
-			// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		} catch (error: any) {
 			if (error.response?.status === 401) {
 				return {
@@ -109,7 +106,7 @@ class AuthService extends BaseService {
 		}
 	}
 
-	async profile(): Promise<UserActive | null | any> {
+	async profile(): Promise<UserActive | any> {
 		const authToken = getAuthToken();
 		if (!authToken) return null;
 

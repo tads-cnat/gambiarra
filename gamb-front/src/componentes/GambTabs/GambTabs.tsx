@@ -39,7 +39,7 @@ export default function GambTabs({
 
 	// Lógica de envio do formulário de chamado
 	async function onSubmit(data: ChamadoSubmit): Promise<void> {
-		ChamadoService.criarChamado(data)
+		await ChamadoService.criarChamado(data)
 			.then(() => {
 				alert("Chamado criado com sucesso");
 				window.location.reload();

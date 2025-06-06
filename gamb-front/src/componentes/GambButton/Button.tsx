@@ -2,7 +2,7 @@ import { GambButtonProps } from "../../interfaces/componentes/iGambButton";
 import Icon from "../GambIcon/Icon";
 import { ButtonGeneric } from "./buttonstyle";
 
-export default function GambButton(props: GambButtonProps): JSX.Element {
+export default function GambButton(props: GambButtonProps): React.JSX.Element {
 	const {
 		variant,
 		onClick,

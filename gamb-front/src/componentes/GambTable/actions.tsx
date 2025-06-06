@@ -3,12 +3,12 @@ import { userRoles } from "../../auth/roles";
 import { defaultTheme } from "../../styles/themes/default";
 import { getUserActiveRole } from "../../auth/service/AuthStore";
 
-export type Action = {
+export interface Action {
 	name: string;
-	colorIcon: string | "white";
+	colorIcon: string;
 	background: string;
 	icon: string;
-};
+}
 
 export const btnsPR: Record<number, Action[]> = {
 	1: [
@@ -382,7 +382,7 @@ export const getActionsByStatus = (
 	status: number,
 	idLinha: number,
 	funct?: Record<string, (id: number) => void> // Parâmetro opcional para funções de ação
-): JSX.Element[] => {
+): React.JSX.Element[] => {
 	const actions: Action[] = checkPermission([
 		userRoles.INTERNO.FUNCIONARIO.GR,
 	])
