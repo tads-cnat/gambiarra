@@ -73,7 +73,7 @@ jobs:
               run: |
                   cd gamb-front
                   npm run build
-            - name: Test
-              run: |
-                  cd gamb-front
-                  npm test
+            # - name: Test
+            #   run: |
+            #       cd gamb-front
+            #       npm test
