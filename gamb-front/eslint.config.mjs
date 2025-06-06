@@ -42,7 +42,7 @@ export default [
 			"@typescript-eslint/restrict-template-expressions": "off",
 			"@typescript-eslint/no-empty-object-type": "off",
 			"@typescript-eslint/no-redundant-type-constituents": "off",
-			"@typescript-eslint/no-deprecated": "warn",
+			"@typescript-eslint/no-deprecated": "error",
 		},
 	},
 
