@@ -21,6 +21,9 @@ jobs:
                   distribution: "temurin"
                   java-version: "17"
 
+            - name: Verificar Java
+              run: java -version
+
             - name: Instalar dependências do gamb-back (Python/Django)
               run: |
                   python -m venv venv
@@ -36,7 +39,7 @@ jobs:
               uses: dependency-check/Dependency-Check_Action@main
               with:
                   project: "Django REST API"
-                  scanPath: "gamb-back"
+                  path: "gamb-back"
                   format: "HTML"
                   out: "reports-gamb-back"
 
@@ -44,7 +47,7 @@ jobs:
               uses: dependency-check/Dependency-Check_Action@main
               with:
                   project: "React Frontend"
-                  scanPath: "gamb-front"
+                  path: "gamb-front"
                   format: "HTML"
                   out: "reports-gamb-front"
 
