@@ -17,4 +17,3 @@ export function Login() {
 	);
 }
 
-new Buffer("textp")

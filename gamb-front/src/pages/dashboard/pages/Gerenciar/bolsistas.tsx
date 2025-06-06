@@ -1,6 +1,4 @@
- 
-
-export default function GerenciarBolsista(): JSX.Element {
+export default function GerenciarBolsista(): React.JSX.Element {
 	return (
 		<div>
 			<h1>Gerenciar Usuários</h1>

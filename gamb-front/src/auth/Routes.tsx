@@ -30,9 +30,9 @@ export function ProtectedRoute({
 	element,
 	requiredRole,
 }: {
-	element: JSX.Element;
+	element: React.JSX.Element;
 	requiredRole?: string[];
-}): JSX.Element {
+}): React.JSX.Element {
 	const [isAuthenticatedState, setIsAuthenticatedState] = useState<
 		boolean | null
 	>(null);

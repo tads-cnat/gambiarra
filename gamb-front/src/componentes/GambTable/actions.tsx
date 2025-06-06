@@ -382,7 +382,7 @@ export const getActionsByStatus = (
 	status: number,
 	idLinha: number,
 	funct?: Record<string, (id: number) => void> // Parâmetro opcional para funções de ação
-): JSX.Element[] => {
+): React.JSX.Element[] => {
 	const actions: Action[] = checkPermission([
 		userRoles.INTERNO.FUNCIONARIO.GR,
 	])
