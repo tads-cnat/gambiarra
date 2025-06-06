@@ -1,13 +1,12 @@
 import {
 	GithubLogo,
-	HouseLine,
+	HouseLineIcon,
 	MapTrifold,
 	User,
 	UsersThree,
 } from "@phosphor-icons/react";
 import { HeaderContainer, HeaderContent } from "./headerstyle";
 import { useNavigate } from "react-router-dom";
- 
 
 export function Header() {
 	const navigate = useNavigate();
@@ -27,7 +26,7 @@ export function Header() {
 									navigate("/");
 								}}
 							>
-								<HouseLine /> Início
+								<HouseLineIcon /> Início
 							</button>
 						</li>
 						<li>
