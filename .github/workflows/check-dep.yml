@@ -15,14 +15,17 @@ jobs:
             - name: Checkout do código
               uses: actions/checkout@v3
 
-            - name: Instalar Java (necessário para OWASP DC)
+            - name: Instalar Java
               uses: actions/setup-java@v3
               with:
                   distribution: "temurin"
                   java-version: "17"
 
-            - name: Verificar Java
-              run: java -version
+            - name: Instalar OWASP Dependency-Check
+              run: |
+                  wget https://github.com/jeremylong/DependencyCheck/releases/download/v8.4.0/dependency-check-8.4.0-release.zip
+                  unzip dependency-check-8.4.0-release.zip -d dependency-check
+                  sudo ln -s $PWD/dependency-check/bin/dependency-check.sh /usr/local/bin/dependency-check
 
             - name: Instalar dependências do gamb-back (Python/Django)
               run: |
@@ -36,20 +39,12 @@ jobs:
                   npm install
 
             - name: Análise do Backend com OWASP Dependency-Check
-              uses: dependency-check/Dependency-Check_Action@main
-              with:
-                  project: "Django REST API"
-                  path: "gamb-back"
-                  format: "HTML"
-                  out: "reports-gamb-back"
+              run: |
+                  dependency-check --project "Django REST API" --scan gamb-back --format HTML --out reports-gamb-back
 
             - name: Análise do Frontend com OWASP Dependency-Check
-              uses: dependency-check/Dependency-Check_Action@main
-              with:
-                  project: "React Frontend"
-                  path: "gamb-front"
-                  format: "HTML"
-                  out: "reports-gamb-front"
+              run: |
+                  dependency-check --project "React Frontend" --scan gamb-front --format HTML --out reports-gamb-front
 
             - name: Upload dos relatórios
               uses: actions/upload-artifact@v4
