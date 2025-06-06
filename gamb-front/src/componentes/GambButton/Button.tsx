@@ -23,10 +23,10 @@ export default function GambButton(props: GambButtonProps): JSX.Element {
 				$variant={variant}
 				$size={size || "medium"}
 				id={id}
+				$disabled={disabled}
 				onClick={onClick}
 				type={type}
-				disabled={disabled}
-				className={`${className} size-${size}`} // Concatena className com o tamanho
+				className={`${className} size-${size} `} // Concatena className com o tamanho
 				style={style}
 				data-cypress={dataCypress}
 			>

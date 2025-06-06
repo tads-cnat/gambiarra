@@ -16,6 +16,7 @@ on:
 jobs:
     build-and-push-image:
         runs-on: ubuntu-22.04
+
         defaults:
             run:
                 working-directory: gamb-front
@@ -57,7 +58,7 @@ jobs:
                       liviaavs/gamb-front:${{ steps.version.outputs.version }}
                   build-args: |
                       VITE_API_URL=${{ secrets.VITE_API_URL }}
-                      VITE_WS_HOST=${{ secrets.VITE_WS_HOST }}
+                      VITE_HOST=${{ secrets.VITE_HOST }}
 
     deploy-app:
         runs-on: ubuntu-22.04

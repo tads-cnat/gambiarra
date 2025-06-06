@@ -94,6 +94,8 @@ instance/
 # Scrapy stuff:
 .scrapy
 
+/gamb-back/media/*
+
 # Sphinx documentation
 docs/_build/
 

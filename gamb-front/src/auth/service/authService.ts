@@ -1,9 +1,12 @@
 import axiosInstance from "../../services/base/axiosInstance";
 import BaseService from "../../services/base/baseService";
+import { isAuthenticated } from "../Routes";
 import { LoginSubmit } from "./auth";
 import {
 	getAuthRefreshToken,
 	getAuthToken,
+	isAuthenticatedStore,
+	setIsAuthenticatedStore,
 	setUserActive,
 	setUserActiveRole,
 	UserActive,
@@ -32,6 +35,8 @@ class AuthService extends BaseService {
 				if (userData) {
 					setUserActive(userData.data);
 					setUserActiveRole(userData.data.grupo);
+					setIsAuthenticatedStore();
+					console.log(isAuthenticatedStore());
 					return {
 						sucesso: true,
 						mensagem: "Login realizado com sucesso!",
