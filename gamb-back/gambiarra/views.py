@@ -66,12 +66,11 @@ class ChamadoViewSet(viewsets.ModelViewSet):
             return UpdateChamadoSerializer
         
         return ListarChamadoSerializer
-        
-        print("\n\n", acao, "\n\n")
-        raise Exception("Serializador não encontrado")
+       
+
     
     
-    
+
     def get(self, pk):
         try:
             chamado = Chamado.objects.get(pk=pk)
@@ -151,9 +150,9 @@ class ChamadoViewSet(viewsets.ModelViewSet):
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
         chamado = serializer.instance
-        chamado.save()
-        alteracao = Alteracao(autor = self.request.user, status=chamado.status, chamado=chamado)
-        alteracao.save()
+        #print("DEBUUUUUUG", chamado, type(chamado))
+        #chamado.save()
+        alteracao = Alteracao.objects.create(autor = self.request.user, status=chamado.status, chamado=chamado)
         return Response(
             data={
                 "success": True,

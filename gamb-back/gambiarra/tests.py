@@ -1,6 +1,6 @@
 import uuid
 from django.test import TestCase
-from .models import Chamado, Usuario, Item
+from .models import Chamado, Usuario, Item, Avaliacao, Mensagem
 from django.core.exceptions import ValidationError
 
 class ChamadoModelTest(TestCase):
@@ -66,6 +66,12 @@ class ChamadoModelTest(TestCase):
             cliente=self.cliente
         )
         self.assertIsNone(chamado_sem_acessorio.acessorio)
+    
+    def test_campo_modelo_max_length(self):
+        string = "a" * 31
+        item = Item(modelo=string, diagnostico="oi")
+        with self.assertRaisesMessage(ValidationError, "O modelo pode conter no máximo 30 caracteres"):
+            item.full_clean()
 
     def test_campo_titulo_max_length(self):
         """
@@ -159,4 +165,37 @@ class ChamadoModelTest(TestCase):
                 item=None, # Missing item
                 cliente=self.cliente
             )
+
+    def test_status_invalido(self):
+        item_teste = Item.objects.create(modelo='Item Status Inválido')
+        chamado = Chamado(
+            titulo="Chamado com status inválido",
+            descricao="Descrição",
+            professor=self.professor,
+            item=item_teste,
+            cliente=self.cliente,
+            status="999"  # inválido
+        )
+        with self.assertRaises(ValidationError):
+            chamado.full_clean()
+
+    def test_code_unico(self):
+        with self.assertRaises(Exception): 
+            Chamado.objects.create(
+                titulo="Chamado com code duplicado",
+                descricao="Descrição",
+                professor=self.professor,
+                item=Item.objects.create(modelo='Item Novo'),
+                cliente=self.cliente,
+                code=self.chamado.code  # forçando duplicação
+            )
+
+
+    def test_chamado_varios_bolsistas(self):
+        bolsista2 = Usuario.objects.create(username='bolsista2', email='bolsista2@example.com')
+        self.chamado.bolsistas.add(bolsista2)
+        self.assertEqual(self.chamado.bolsistas.count(), 2)
+        self.assertIn(bolsista2, self.chamado.bolsistas.all())
+
+
 
