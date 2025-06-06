@@ -10,8 +10,8 @@ export interface ChamadoFilter extends BaseFilter {
 	avaliacao?: string;
 	search?: string;	
 	tab?:   "todos" |
-	"aceitos" |
-	"aceitos" |
+	"aceitos" 
+	 |
 	"pendentes" |
 	"recusados" |
 	"fechados" |

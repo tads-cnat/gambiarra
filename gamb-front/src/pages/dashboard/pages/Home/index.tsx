@@ -1,7 +1,6 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useCallback, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { getUserActiveRole} from "../../../../auth/service/AuthStore";
+import { getUserActiveRole } from "../../../../auth/service/AuthStore";
 import GambButton from "../../../../componentes/GambButton/Button";
 import RenderCards from "../../../../componentes/GambCardChamados/CardChamado";
 import { GambFilterTable } from "../../../../componentes/GambFilterTable/FilterTable";
@@ -25,7 +24,7 @@ import axiosInstance from "../../../../services/base/axiosInstance";
 import { useNavigate, useLocation } from "react-router-dom";
 import GambTabs, { Tab } from "../../../../componentes/GambTabs/GambTabs";
 
-export default function DashboardHome(): JSX.Element {
+export default function DashboardHome(): React.JSX.Element {
 	const navigate = useNavigate();
 	const location = useLocation();
 
@@ -59,7 +58,7 @@ export default function DashboardHome(): JSX.Element {
 
 	async function handleChamados(data?: ChamadoFilter): Promise<void> {
 		data = { ...data, tab: activeTab as ChamadoFilter["tab"] };
-		// eslint-disable-next-line @typescript-eslint/no-unused-vars
+
 		const filtros = Object.fromEntries(
 			Object.entries(data).filter(([_, v]) => v)
 		);

@@ -2,12 +2,12 @@ import { userRoles } from "../../auth/roles";
 import { getUserActiveRole } from "../../auth/service/AuthStore";
 import GambButton from "../GambButton/Button";
 
-export type Action = {
+export interface Action {
 	name: string;
 	typeBtn: "verde" | "vermelho" | "cinza" | "roxo" | "amarelo" | "inline";
 	icon: string;
 	label: string;
-};
+}
 
 export const btnsPR: Record<number, Action[]> = {
 	1: [
@@ -194,7 +194,7 @@ export const getActionsByStatus = (
 	status: number,
 	idChamado: number,
 	funct?: Record<string, (id: number) => void> // Parâmetro opcional para funções de ação
-): JSX.Element[] => {
+): React.JSX.Element[] => {
 	console.log(
 		`getActionsByStatus - status: ${status}, idChamado: ${idChamado}`
 	);
@@ -208,9 +208,7 @@ export const getActionsByStatus = (
 		userRoles.INTERNO.FUNCIONARIO.GR,
 	])
 		? btnsGR[status] || []
-		: checkPermission([
-				userRoles.INTERNO.FUNCIONARIO.PR,
-		])
+		: checkPermission([userRoles.INTERNO.FUNCIONARIO.PR])
 		? btnsPR[status] || []
 		: btnClientes[status] || [];
 

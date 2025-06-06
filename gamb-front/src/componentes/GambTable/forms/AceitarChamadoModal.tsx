@@ -8,7 +8,7 @@ export default function AceitarChamadoModal(props: {
 }) {
     const { isModalOpen, closeModal, chamadoId } = props;
     async function handleAction(): Promise<void>{
-        ChamadoService.aceitarChamado(chamadoId ?? 0)
+        await ChamadoService.aceitarChamado(chamadoId ?? 0)
             .then(() => {
                alert("Chamado aceito com sucesso");
            })

@@ -12,6 +12,8 @@ export function Login() {
 				<LoginCard />
 			</IndexContainer>
 			<Footer />
+
 		</div>
 	);
 }
+

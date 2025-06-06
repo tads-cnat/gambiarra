@@ -17,8 +17,8 @@ interface ButtonProps {
 }
 
 export const ButtonGeneric = styled.button<ButtonProps>`
-	padding: ${({ $variant }) => ($variant == "circle" ? "8px" : "8px 20px")};
-	border-radius: ${({ $variant }) => ($variant == "circle" ? "50%" : "6px")};
+	padding: ${({ $variant }) => ($variant === "circle" ? "8px" : "8px 20px")};
+	border-radius: ${({ $variant }) => ($variant === "circle" ? "50%" : "6px")};
 	border: 0;
 	display: inline-flex;
 	align-items: center;
