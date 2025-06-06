@@ -50,7 +50,7 @@ export interface InputFieldProps {
 	/**
 	 * Controlador do formulário para campos com Controller.
 	 */
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	 
 	control?: Control<any>;
 
 	/**

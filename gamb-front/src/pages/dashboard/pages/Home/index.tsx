@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+ 
 import { useCallback, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { getUserActiveRole} from "../../../../auth/service/AuthStore";

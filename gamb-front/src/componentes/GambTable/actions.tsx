@@ -5,7 +5,7 @@ import { getUserActiveRole } from "../../auth/service/AuthStore";
 
 export interface Action {
 	name: string;
-	colorIcon: string | "white";
+	colorIcon: string;
 	background: string;
 	icon: string;
 }
