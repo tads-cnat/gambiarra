@@ -4,7 +4,8 @@ import {
 	setAuthToken,
 	getAuthRefreshToken,
 } from "../../auth/service/AuthStore";
-const baseURL: string = (import.meta.env.VITE_API_URL as string) || "http://localhost:8000/api/v1/";
+const baseURL: string =
+	(import.meta.env.VITE_API_URL as string) || "http://localhost:8000/api/v1/";
 export const wsHOST = import.meta.env.VITE_HOST || "localhost";
 
 // Criando a instância do Axios
@@ -29,8 +30,8 @@ axiosInstance.interceptors.request.use(
 // Interceptor para renovar o token
 axiosInstance.interceptors.response.use(
 	(response) => response,
-	async (error: AxiosResponse) => {
-		const originalRequest = error.config ;
+	async (error: any) => {
+		const originalRequest = error.config;
 
 		// Ignora rotas de autenticação para evitar loop
 		const ignoredUrls = [`${baseURL}auth/token/`];
