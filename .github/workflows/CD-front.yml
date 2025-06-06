@@ -1,17 +1,17 @@
 name: CD Front
 
-# on:
-#     push:
-#         branches: ["main"]
-#         paths:
-#             - "gamb-front/**"
-#             - ".github/workflows/CD-front.yml"
+on:
+    push:
+        branches: ["main"]
+        paths:
+            - "gamb-front/**"
+            - ".github/workflows/CD-front.yml"
 
-#     pull_request:
-#         branches: ["main"]
-#         paths:
-#             - "gamb-front/**"
-#             - ".github/workflows/CD-front.yml"
+    pull_request:
+        branches: ["main"]
+        paths:
+            - "gamb-front/**"
+            - ".github/workflows/CD-front.yml"
 
 jobs:
     build-and-push-image:

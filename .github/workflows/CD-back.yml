@@ -1,17 +1,17 @@
 name: CD Back
 
-# on:
-#     push:
-#         branches: ["main"]
-#         paths:
-#             - "gamb-back/**"
-#             - ".github/workflows/CD-back.yml"
+on:
+    push:
+        branches: ["main"]
+        paths:
+            - "gamb-back/**"
+            - ".github/workflows/CD-back.yml"
 
-#     pull_request:
-#         branches: ["main"]
-#         paths:
-#             - "gamb-back/**"
-#             - ".github/workflows/CD-front.yml"
+    pull_request:
+        branches: ["main"]
+        paths:
+            - "gamb-back/**"
+            - ".github/workflows/CD-front.yml"
 
 jobs:
     build-and-push-image:

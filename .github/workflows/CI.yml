@@ -1,18 +1,18 @@
 name: CI
 
-# on:
-#     push:
-#         branches: ["*"]
-#         paths:
-#             - "gamb-front/**"
-#             - "gamb-back/**"
-#             - ".github/workflows/CI.yml"
-#     pull_request:
-#         branches: ["*"]
-#         paths:
-#             - "gamb-front/**"
-#             - "gamb-back/**"
-#             - ".github/workflows/CI.yml"
+on:
+    push:
+        branches: ["main"]
+        paths:
+            - "gamb-front/**"
+            - "gamb-back/**"
+            - ".github/workflows/CI.yml"
+    pull_request:
+        branches: ["main"]
+        paths:
+            - "gamb-front/**"
+            - "gamb-back/**"
+            - ".github/workflows/CI.yml"
 
 jobs:
     test:
@@ -28,7 +28,7 @@ jobs:
             DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
             DATABASE_HOST: ${{ secrets.DATABASE_HOST }}
             DATABASE_PORT: ${{ secrets.DATABASE_PORT }}
-       
+
         steps:
             - uses: actions/checkout@v4
 
@@ -50,7 +50,7 @@ jobs:
             - name: Shut down Docker containers
               run: |
                   cd gamb-back
-                  docker compose down 
+                  docker compose down
     build:
         runs-on: ubuntu-latest
 
@@ -67,11 +67,10 @@ jobs:
 
             - name: Lint
               run: |
-                    cd gamb-front
-                    npm run lint 
+                  cd gamb-front
+                  npm run lint
 
             - name: Build
               run: |
                   cd gamb-front
                   npm run build
-
