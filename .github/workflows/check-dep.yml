@@ -1,0 +1,57 @@
+name: OWASP Dependency Check - Full Stack
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  dependency-check:
+    name: Análise de Dependências - Frontend e Backend
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v3
+
+      - name: Instalar Java (necessário para OWASP DC)
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Instalar dependências do gamb-back (Python/Django)
+        run: |
+          python -m venv venv
+          source venv/bin/activate
+          pip install -r gamb-back/requirements.txt
+
+      - name: Instalar dependências do gamb-front (React)
+        run: |
+          cd gamb-front
+          npm install
+
+      - name: Análise do Backend com OWASP Dependency-Check
+        uses: dependency-check/Dependency-Check_Action@main
+        with:
+          project: 'Django REST API'
+          scanPath: 'gamb-back'
+          format: 'HTML'
+          out: 'reports-gamb-back'
+
+      - name: Análise do Frontend com OWASP Dependency-Check
+        uses: dependency-check/Dependency-Check_Action@main
+        with:
+          project: 'React Frontend'
+          scanPath: 'gamb-front'
+          format: 'HTML'
+          out: 'reports-gamb-front'
+
+      - name: Upload dos relatórios
+        uses: actions/upload-artifact@v3
+        with:
+          name: dependency-check-reports
+          path: |
+            reports-gamb-back
+            reports-gamb-front
