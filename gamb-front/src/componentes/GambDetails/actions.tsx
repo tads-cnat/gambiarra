@@ -2,12 +2,12 @@ import { userRoles } from "../../auth/roles";
 import { getUserActiveRole } from "../../auth/service/AuthStore";
 import GambButton from "../GambButton/Button";
 
-export type Action = {
+export interface Action {
 	name: string;
 	typeBtn: "verde" | "vermelho" | "cinza" | "roxo" | "amarelo" | "inline";
 	icon: string;
 	label: string;
-};
+}
 
 export const btnsPR: Record<number, Action[]> = {
 	1: [

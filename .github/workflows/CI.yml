@@ -64,6 +64,11 @@ jobs:
               run: |
                   cd gamb-front
                   npm install
+            - name: Lint
+                run: |
+                    cd gamb-front
+                    npm run lint 
+
             - name: Build
               run: |
                   cd gamb-front

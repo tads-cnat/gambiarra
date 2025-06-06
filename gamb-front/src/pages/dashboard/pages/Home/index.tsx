@@ -59,7 +59,7 @@ export default function DashboardHome(): JSX.Element {
 
 	async function handleChamados(data?: ChamadoFilter): Promise<void> {
 		data = { ...data, tab: activeTab as ChamadoFilter["tab"] };
-		// eslint-disable-next-line @typescript-eslint/no-unused-vars
+		 
 		const filtros = Object.fromEntries(
 			Object.entries(data).filter(([_, v]) => v)
 		);

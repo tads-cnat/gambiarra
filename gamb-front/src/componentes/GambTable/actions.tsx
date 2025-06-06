@@ -3,12 +3,12 @@ import { userRoles } from "../../auth/roles";
 import { defaultTheme } from "../../styles/themes/default";
 import { getUserActiveRole } from "../../auth/service/AuthStore";
 
-export type Action = {
+export interface Action {
 	name: string;
 	colorIcon: string | "white";
 	background: string;
 	icon: string;
-};
+}
 
 export const btnsPR: Record<number, Action[]> = {
 	1: [

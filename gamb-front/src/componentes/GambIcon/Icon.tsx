@@ -61,7 +61,7 @@ import {
 import { GambIconProps } from "../../interfaces/componentes/iGambIcon";
 import { cloneElement } from "react";
  
-const iconComponents: { [key: string]: JSX.Element } = {
+const iconComponents: Record<string, JSX.Element> = {
 	house: <House />,
 	heart: <Heart />,
 	user: <User />,
