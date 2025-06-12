@@ -1,9 +1,8 @@
- 
 import { GambButtonProps } from "../../interfaces/componentes/iGambButton";
 import Icon from "../GambIcon/Icon";
 import { ButtonGeneric } from "./buttonstyle";
 
-export default function GambButton(props: GambButtonProps): JSX.Element {
+export default function GambButton(props: GambButtonProps): React.JSX.Element {
 	const {
 		variant,
 		onClick,
@@ -21,13 +20,13 @@ export default function GambButton(props: GambButtonProps): JSX.Element {
 	return (
 		<>
 			<ButtonGeneric
-				variant={variant}
-				size={size || "medium"}
+				$variant={variant}
+				$size={size || "medium"}
 				id={id}
+				$disabled={disabled}
 				onClick={onClick}
 				type={type}
-				disabled={disabled}
-				className={`${className} size-${size}`} // Concatena className com o tamanho
+				className={`${className} size-${size} `} // Concatena className com o tamanho
 				style={style}
 				data-cypress={dataCypress}
 			>

@@ -1,7 +1,9 @@
 import styled from "styled-components";
+import { defaultTheme } from "../../styles/themes/default";
+const theme = defaultTheme;
 
 interface ButtonProps {
-	variant:
+	$variant:
 		| "verde"
 		| "amarelo"
 		| "vermelho"
@@ -10,19 +12,20 @@ interface ButtonProps {
 		| "cinza"
 		| "inline"
 		| "circle";
-	size: "small" | "medium" | "large" | "mediumlg";
+	$size: "small" | "medium" | "large" | "mediumlg";
+	$disabled?: boolean;
 }
 
 export const ButtonGeneric = styled.button<ButtonProps>`
-	padding: ${({ variant }) => (variant == "circle" ? "8px" : "8px 20px")};
-	border-radius: ${({ variant }) => (variant == "circle" ? "50%" : "6px")};
-	cursor: pointer;
+	padding: ${({ $variant }) => ($variant === "circle" ? "8px" : "8px 20px")};
+	border-radius: ${({ $variant }) => ($variant === "circle" ? "50%" : "6px")};
 	border: 0;
 	display: inline-flex;
 	align-items: center;
 	flex-shrink: 0;
-	font-size: ${({ size, theme }) => {
-		switch (size) {
+	mouseout: pointer;
+	font-size: ${({ $size }) => {
+		switch ($size) {
 			case "small":
 				return `${theme.fontSize.font_scale_up_01}rem`;
 			case "medium":
@@ -39,70 +42,78 @@ export const ButtonGeneric = styled.button<ButtonProps>`
 	transition: 0.5s;
 
 	/* variação de cores */
-	background-color: ${({ variant, theme }) =>
-		variant === "verde"
+	background-color: ${({ $variant }) =>
+		$variant === "verde"
 			? theme.cores.green_sucess_primary
-			: variant === "amarelo"
+			: $variant === "amarelo"
 			? theme.cores.warning
-			: variant === "vermelho"
+			: $variant === "vermelho"
 			? theme.cores.danger
-			: variant === "cinza"
+			: $variant === "cinza"
 			? theme.cores.gray_light
-			: variant === "roxo"
+			: $variant === "roxo"
 			? theme.cores.purple_info_primary
-			: variant === "inline" || variant === "circle"
-			? theme.cores.transparent
+			: $variant === "inline" || $variant === "circle"
+			? "rgb(151,71,255,0)"
 			: theme.cores.white};
 
-	color: ${({ variant, theme }) =>
-		variant === "branco" ||
-		variant === "amarelo" ||
-		variant === "cinza" ||
-		variant === "inline" ||
-		variant === "circle"
+	color: ${({ $variant }) =>
+		$variant === "branco" ||
+		$variant === "amarelo" ||
+		$variant === "cinza" ||
+		$variant === "inline" ||
+		$variant === "circle"
 			? theme.cores.gray_text
 			: theme.cores.white};
 
 	border: 1px solid
-		${({ variant, theme }) =>
-			variant === "verde"
+		${({ $variant }) =>
+			$variant === "verde"
 				? theme.cores.green_sucess_primary
-				: variant === "amarelo"
+				: $variant === "amarelo"
 				? theme.cores.warning
-				: variant === "vermelho"
+				: $variant === "vermelho"
 				? theme.cores.danger
-				: variant === "cinza"
+				: $variant === "cinza"
 				? theme.cores.gray_light
-				: variant === "roxo"
+				: $variant === "roxo"
 				? theme.cores.purple_info_primary
-				: variant === "inline"
+				: $variant === "inline"
 				? theme.cores.gray_text
-				: variant === "circle"
+				: $variant === "circle"
 				? theme.cores.white
 				: theme.cores.black};
 
+	opacity: ${({ $disabled }) => ($disabled ? 0.6 : 1)};
+	cursor: ${({ $disabled }) => ($disabled ? "not-allowed" : "pointer")};
+	pointer-events: ${({ $disabled }) => ($disabled ? "none" : "auto")};
+
 	&:hover {
-		background-color: ${({ variant, theme }) =>
-			variant === "verde"
+		background-color: ${({ $variant, $disabled }) =>
+			$disabled
+				? undefined
+				: $variant === "verde"
 				? theme.cores.green_sucess_secondary
-				: variant === "amarelo"
+				: $variant === "amarelo"
 				? theme.cores.warning_second
-				: variant === "vermelho"
+				: $variant === "vermelho"
 				? theme.cores.danger_hover
-				: variant === "cinza"
+				: $variant === "cinza"
 				? theme.cores.gray_300
-				: variant === "roxo"
+				: $variant === "roxo"
 				? theme.cores.purple_info_secondary
-				: variant === "inline" || variant === "circle"
+				: $variant === "inline" || $variant === "circle"
 				? theme.cores.gray_300
 				: theme.cores.light_white};
 
-		color: ${({ variant, theme }) =>
-			variant === "branco" ||
-			variant === "amarelo" ||
-			variant === "cinza" ||
-			variant === "inline" ||
-			variant === "circle"
+		color: ${({ $variant, $disabled }) =>
+			$disabled
+				? undefined
+				: $variant === "branco" ||
+				  $variant === "amarelo" ||
+				  $variant === "cinza" ||
+				  $variant === "inline" ||
+				  $variant === "circle"
 				? theme.cores.gray_text
 				: theme.cores.white};
 	}

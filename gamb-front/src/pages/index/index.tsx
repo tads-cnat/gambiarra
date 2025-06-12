@@ -16,14 +16,11 @@ import {
 } from "./indexstyles";
 import CardIndex from "../../componentes/GambCardIndex/GambCardIndex";
 
-
 export default function Home() {
-	
 	return (
 		<>
 			<Header />
 
-		
 			<main className="container m-auto">
 				<IndexContainer>
 					<MarcaGrafica>
@@ -43,13 +40,13 @@ export default function Home() {
 								executado por estudantes do Instituto Federal do
 								Rio Grande do Norte (<b>IFRN-CNAT</b>). Nosso
 								objetivo é <b>fornecer soluções</b> eficientes
-								para os
-								<b>problemas técnicos</b> dos seus dispositivos,
-								com a expertise e a paixão que só os estudantes
-								podem oferecer. Conte conosco para resolver suas
-								questões de forma <b>rápida e confiável!</b>
+								para os <b>problemas técnicos</b> dos seus
+								dispositivos, com a expertise e a paixão que só
+								os estudantes podem oferecer. Conte conosco para
+								resolver suas questões de forma{" "}
+								<b>rápida e confiável!</b>
 							</p>
-							<span>gostou da idéia?</span>
+							<span>gostou da ideia?</span>
 							<div className="bottoes">
 								<GambButton
 									label="Saiba Mais"
@@ -77,7 +74,9 @@ export default function Home() {
 						</div>
 					</IndexContent>
 
-					<h2>Quais campus estão envolvidos no projeto?</h2>
+					<h2 id="instituicoes">
+						Quais campus estão envolvidos no projeto?
+					</h2>
 
 					<CardContainer className="row">
 						<CardIndex
@@ -113,7 +112,7 @@ export default function Home() {
 							maquinas={300}
 						/>
 					</CardContainer>
-					<h2>Mapa do Projeto 🌍</h2>
+					<h2 id="mapa">Mapa do Projeto 🌍</h2>
 					<MapContainer
 						center={[-5.861046793331842, -36.73219920508594]}
 						zoom={8}

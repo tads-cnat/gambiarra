@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+ 
 import { Pagination } from "../GambPaginação/Paginacao";
 import { GBodyTd } from "./GBodyTd";
 import { GHeadTh } from "./GHeadTh";

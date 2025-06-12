@@ -1,23 +1,16 @@
 services:
-  redis:
-    image: redis:latest
-    container_name: redis
-    restart: always
-    ports:
-      - "6379:6379"
-    volumes:
-      - redis_data:/data
   web:
     build:
       context: .
       dockerfile: ./Dockerfile
     container_name: gambdrf
+    restart: "always"
     command: >
       bash -c "
       python manage.py makemigrations &&
       python manage.py migrate &&
-      python manage.py populate_groups &&
-      python manage.py populate_user &&
+      python manage.py populate_grupos &&
+      python manage.py populate_usuarios_nos &&
       python manage.py populate_models &&
       python manage.py runserver 0.0.0.0:8000"
     volumes:
@@ -26,16 +19,9 @@ services:
       - "8000:8000"
     depends_on:
       - db
-      - redis
-    environment:
-      REDIS_HOST: redis
-      REDIS_PORT: 6379
-      POSTGRES_DB: postgres
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_HOST: db
-      POSTGRES_PORT: 5432
-      DJANGO_SETTINGS_MODULE: mysite.settings 
+    
+    env_file:
+      - ../.envs/backend/.env.local
 
   db:
     image: postgres:13-alpine
@@ -49,17 +35,8 @@ services:
     ports:
       - "5432:5432"
 
-  pgadmin:
-    image: dpage/pgadmin4
-    container_name: gambpgadmin
-    environment:
-      PGADMIN_DEFAULT_EMAIL: admin@admin.com
-      PGADMIN_DEFAULT_PASSWORD: admin
-    ports:
-      - "5050:80"
-    depends_on:
-      - db
-
+ 
 volumes:
+  app-sync:
+    external: true
   postgres_data:
-  redis_data:

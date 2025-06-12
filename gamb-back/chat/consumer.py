@@ -10,7 +10,7 @@ from django.core.serializers.json import DjangoJSONEncoder
 class ChatConsumer(AsyncWebsocketConsumer):
     
     async def connect(self):
-        print("Conectado")
+        #print("Conectado")
         # O chat_id agora é extraído do parâmetro da URL
         self.chat_id = self.scope['url_route']['kwargs']['chat_id']
 
@@ -34,7 +34,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
     async def receive(self, text_data):
         try:
-            print("Dados recebidos:", text_data)
+            #print("Dados recebidos:", text_data)
             data = json.loads(text_data)
             history = data.get("history", False)
             chamado_id = data.get("chamado")
@@ -73,7 +73,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
         except json.JSONDecodeError:
             await self.send(json.dumps({"error": "Formato JSON inválido"}))
         except Exception as e:
-            print(f"Erro geral: {str(e)}")
+            #print(f"Erro geral: {str(e)}")
             await self.send(json.dumps({"error": "Erro interno do servidor"}))
 
     async def chat_message(self, event):
@@ -99,8 +99,8 @@ class ChatConsumer(AsyncWebsocketConsumer):
                 chamado_id=chamado_id
             )
         except Exception as e:
-            print(f"Erro ao salvar mensagem: {str(e)}")
-            raise
+            #print(f"Erro ao salvar mensagem: {str(e)}")
+            raise e
 
     @sync_to_async
     def get_messages_by_chamado(self, chamado_id):

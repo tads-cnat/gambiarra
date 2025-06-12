@@ -1,9 +1,11 @@
-import React from "react"
-import { PaginationProps } from "../../interfaces/componentes/iGambPaginacao.ts"
 import { PageCol, PageLine } from "./PaginacaoStyles.ts"
 import GambButton from "../GambButton/Button.tsx"
 
-
+interface PaginationProps{
+    pageIndex: number,
+    totalCount: number,
+    perPage: number
+}
 export function Pagination(props: PaginationProps){
     const {pageIndex, totalCount, perPage} = props
 

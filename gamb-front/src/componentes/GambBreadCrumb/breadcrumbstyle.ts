@@ -1,4 +1,7 @@
 import styled from "styled-components";
+import { defaultTheme } from "../../styles/themes/default";
+const theme = defaultTheme
+
 
 export const BreadcrumbContainer = styled.nav`
     display: flex;
@@ -15,7 +18,7 @@ export const BreadcrumbItemWrapper = styled.div`
 
 export const BreadcrumbLink = styled.a`
   text-decoration: none;
-  color: ${({ theme }) => theme.cores.purple_info_secondary};
+  color: ${() => theme.cores.purple_info_secondary};
   font-weight: 400;
 
   &:hover {
@@ -26,12 +29,13 @@ export const BreadcrumbLink = styled.a`
 export const BreadcrumbSeparator = styled.span`
   margin: 0 -2px 0 6px;
   opacity: 0.5;
-  color: ${({ theme }) => theme.cores.gray};
+  color: ${() => theme.cores.gray_text
+  };
 `;
 
 export const BreadcrumbText = styled.span`
   font-weight: 400;
-  color: ${({ theme }) => theme.cores.blue_primary};
+  color: ${() => theme.cores.blue_info};
 `;
 
 export const BreadcrumbIcon = styled.div`
@@ -39,5 +43,5 @@ export const BreadcrumbIcon = styled.div`
   align-items: center;
   justify-content: center;
   font-size: 16px;
-  color: ${({ theme }) => theme.cores.green_primary}; // Cor do ícone
+  color: ${() => theme.cores.green_sucess_primary}; // Cor do ícone
 `;

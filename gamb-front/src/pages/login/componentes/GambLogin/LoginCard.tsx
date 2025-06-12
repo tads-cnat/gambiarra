@@ -7,7 +7,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { loginSchema } from "./schema";
 import authService from "../../../../auth/service/authService";
 import { useEffect, useState } from "react";
- 
+
 import UseMessage from "../../../../componentes/GambMessage/Message";
 import { useNavigate } from "react-router-dom";
 
@@ -36,9 +36,7 @@ export function LoginCard() {
 			}
 		});
 	}
-	useEffect(() => {
-		 (loginIsValid);
-	}, [loginIsValid]);
+	useEffect(() => {}, [loginIsValid]);
 
 	return (
 		<Card className="border-gambi">
@@ -58,7 +56,7 @@ export function LoginCard() {
 			<form onSubmit={handleSubmit(handleLogin)}>
 				<CardContent>
 					<h3>
-						Olá! bom te ver <span>denovo</span> 🤖
+						Olá! bom te ver <span>de novo</span> 🤖
 					</h3>
 					<InputField
 						label="Nome de usuário:"

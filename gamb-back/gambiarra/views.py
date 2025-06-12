@@ -15,6 +15,7 @@ from authentication.permissions import *
 from gambiarra.serializers import *
 from .models import *
 from authentication.models import *
+from django.db.models import Count
 
 TAB_STATUS_MAPPING = {
     "todos": [],
@@ -65,12 +66,11 @@ class ChamadoViewSet(viewsets.ModelViewSet):
             return UpdateChamadoSerializer
         
         return ListarChamadoSerializer
-        
-        print("\n\n", acao, "\n\n")
-        raise Exception("Serializador não encontrado")
+       
+
     
     
-    
+
     def get(self, pk):
         try:
             chamado = Chamado.objects.get(pk=pk)
@@ -84,13 +84,11 @@ class ChamadoViewSet(viewsets.ModelViewSet):
         user: Usuario = self.request.user
         grupo = user.grupo.name
 
-
-        print(grupo)
-
         if grupo == GrupoEnum.GERENTE:
             queryset = Chamado.objects.all()
         elif grupo == GrupoEnum.PROFESSOR:
-            queryset = Chamado.objects.filter(Q(professor=user) | Q(status="1"))
+            # Se o professor está assimilado, ou é aberto, ou fechado, ou arquivado
+            queryset = Chamado.objects.filter(Q(professor=user) | Q(status="1") | Q(status="6") | Q(status="9"))
         elif grupo == GrupoEnum.BOLSISTA:
             queryset = Chamado.objects.filter(bolsistas=user)
         else:
@@ -112,6 +110,36 @@ class ChamadoViewSet(viewsets.ModelViewSet):
 
         return queryset
 
+    @action(detail=False, methods=["get"], permission_classes=[IsAuthenticated])
+    def contagem_chamados(self, request):
+        user: Usuario = self.request.user
+        grupo = user.grupo.name
+
+        if grupo == GrupoEnum.GERENTE:
+            chamados = Chamado.objects.all()
+            contagem = {
+                "cadastrados": chamados.count(),
+                "pendentes": chamados.filter(status="1").count(),
+                "resolvidos": chamados.filter(status="5").count(),
+                "fechados": chamados.filter(status__in=["6", "7", "8"]).count(),
+            }
+
+        else:
+            if grupo == GrupoEnum.PROFESSOR:
+                chamados = Chamado.objects.filter(Q(professor=user) | Q(status="1"))
+            elif grupo == GrupoEnum.BOLSISTA:
+                chamados = Chamado.objects.filter(bolsistas=user)
+            else:  # Cliente
+                chamados = Chamado.objects.filter(cliente=user)
+
+            contagem = {
+                "atribuidas": chamados.count(),
+                "concluidas": chamados.filter(status__in=["5", "6", "7", "8"]).count(),
+                "pendentes": chamados.filter(status="1").count(),
+                "recusadas": chamados.filter(status="8").count() if grupo != GrupoEnum.BOLSISTA else 0,
+            }
+
+        return Response({"quantidades": contagem}, status=status.HTTP_200_OK)
    
     
     def create(self, request):
@@ -122,9 +150,9 @@ class ChamadoViewSet(viewsets.ModelViewSet):
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
         chamado = serializer.instance
-        chamado.save()
-        alteracao = Alteracao(autor = self.request.user, status=chamado.status, chamado=chamado)
-        alteracao.save()
+        #print("DEBUUUUUUG", chamado, type(chamado))
+        #chamado.save()
+        alteracao = Alteracao.objects.create(autor = self.request.user, status=chamado.status, chamado=chamado)
         return Response(
             data={
                 "success": True,

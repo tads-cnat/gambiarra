@@ -1,11 +1,13 @@
 import styled from "styled-components";
+import { defaultTheme } from "../../styles/themes/default";
+const theme = defaultTheme
 
 export const HeadTr = styled.tr`
   display: flex;
   height: 66.4px;
   align-items: flex-start;
   align-self: stretch;
-  background: ${(props) => props.theme.cores.white};
+  background: ${theme.cores.white};
 `;
 
 // Necessário olhar a largura mínima das células; se a tela diminuir, elas podem sair do container da dashboard.
@@ -50,8 +52,8 @@ export const BodyTr = styled.tr`
   height: 66.4px;
   align-items: flex-start;
   align-self: stretch;
-  background: ${(props) => props.theme.cores.white};
-  border-bottom: 1px solid ${(props) => props.theme.cores.gray_light};
+  background: ${theme.cores.white};
+  border-bottom: 1px solid ${theme.cores.gray_light};
   /* Removendo duplicação: background: #fff; */
 `;
 

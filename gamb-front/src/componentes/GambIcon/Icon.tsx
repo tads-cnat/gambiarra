@@ -60,8 +60,8 @@ import {
 } from "@phosphor-icons/react";
 import { GambIconProps } from "../../interfaces/componentes/iGambIcon";
 import { cloneElement } from "react";
- 
-const iconComponents: { [key: string]: JSX.Element } = {
+
+const iconComponents: Record<string, React.JSX.Element> = {
 	house: <House />,
 	heart: <Heart />,
 	user: <User />,
@@ -114,7 +114,7 @@ const iconComponents: { [key: string]: JSX.Element } = {
 	back: <SkipBackCircle />,
 	flower: <Flower />,
 
-	fillcircle: <Circle weight="fill"/>,
+	fillcircle: <Circle weight="fill" />,
 	text: <TextT />,
 	simcard: <SimCard />,
 	article: <Article />,
@@ -122,12 +122,12 @@ const iconComponents: { [key: string]: JSX.Element } = {
 	usersfour: <UsersFour />,
 	note_pencil: <NotePencil />,
 	onecheck: <Check />,
-	chatfill: <ChatsCircle/>,
-	clock: <ClockClockwise />, 
+	chatfill: <ChatsCircle />,
+	clock: <ClockClockwise />,
 	send: <ChatCircle />,
 };
 
-export default function Icon(props: GambIconProps): JSX.Element {
+export default function Icon(props: GambIconProps): React.JSX.Element {
 	const { icon, size, color, className } = props;
 
 	// Verifica se o ícone existe no mapeamento e retorna ele
