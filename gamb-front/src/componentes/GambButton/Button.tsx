@@ -47,6 +47,7 @@ export default function GambButton(props: GambButtonProps): React.JSX.Element {
 						}
 					/>
 				)}
+				{props.children}
 			</ButtonGeneric>
 		</>
 	);

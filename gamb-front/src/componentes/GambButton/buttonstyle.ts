@@ -20,10 +20,9 @@ export const ButtonGeneric = styled.button<ButtonProps>`
 	padding: ${({ $variant }) => ($variant === "circle" ? "8px" : "8px 20px")};
 	border-radius: ${({ $variant }) => ($variant === "circle" ? "50%" : "6px")};
 	border: 0;
-	display: inline-flex;
 	align-items: center;
 	flex-shrink: 0;
-	mouseout: pointer;
+	/* mouseout: pointer; */
 	font-size: ${({ $size }) => {
 		switch ($size) {
 			case "small":
@@ -120,7 +119,9 @@ export const ButtonGeneric = styled.button<ButtonProps>`
 
 	display: inline-flex; /* Alinha o conteúdo horizontalmente */
 	gap: 2px;
-	justify-content: space-between;
+	justify-content: center;
 	width: auto; /* Remove a largura fixa e ajusta ao tamanho do conteúdo */
 	white-space: nowrap; /* Impede que o texto seja quebrado em múltiplas linhas */
+	flex: 1;
+
 `;
