@@ -15,7 +15,7 @@ on:
             - ".github/workflows/CI.yml"
 
 jobs:
-    test:
+    back:
         runs-on: ubuntu-latest
         env:
             DJANGO_SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
@@ -51,7 +51,7 @@ jobs:
               run: |
                   cd gamb-back
                   docker compose down 
-    build:
+    front:
         runs-on: ubuntu-latest
 
         steps:
