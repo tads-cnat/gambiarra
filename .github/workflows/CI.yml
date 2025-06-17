@@ -47,6 +47,12 @@ jobs:
                   cd gamb-back
                   docker-compose exec -it gambdrf python manage.py test
 
+
+            - name: Install Python dependencies
+              run: |
+                python -m pip install --upgrade pip
+                pip install flake8 
+
             - name: Run Flake8
               run: |
                 cd gamb-back
