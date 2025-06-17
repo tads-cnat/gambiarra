@@ -49,6 +49,7 @@ jobs:
 
             - name: Run Flake8
               run: |
+                cd gamb-back
                 flake8 . --count --show-source --statistics
 
             - name: Shut down Docker containers
