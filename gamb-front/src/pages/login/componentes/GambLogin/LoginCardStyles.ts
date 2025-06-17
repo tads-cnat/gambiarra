@@ -47,13 +47,12 @@ export const OtherLoginButton = styled.div`
 // Aside que junta o login e a imagem
 export const ContainerLogin = styled.aside`
 
-margin-top: 3rem;
 	display: flex;
-	height: 700px;
-	width: 90%; /* não pega toda a tela, deixa so um espaço sobrando */
-	justify-content: space-around;
+	width: 80%; /* não pega toda a tela, deixa so um espaço sobrando */
 	align-items: center;
-	gap: 10px;
+	justify-content: center;
+	gap: 4rem;
+
 
 	border-radius: 30px;
 
@@ -68,8 +67,8 @@ margin-top: 3rem;
 // Literalmente a linha entre a imagem e o formulario
 export const Divider = styled.div`
   width: 1px;
-  height: 70%; // ajuste conforme necessário
-  background-color: #ccc; // cor da linha
+  height: 30rem;
+  background-color: #ccc; 
 `;
 
 export const DivButtons = styled.div`

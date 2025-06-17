@@ -47,7 +47,7 @@ export function LoginCard() {
 
 	return (
 		<ContainerLogin className="border-gambi">
-			<img src="/assets/ifrnphoto2.jpg" alt="" />
+			<img src="/assets/robofeio.png" alt="" />
 			<Divider />
 			<Card>
 				{/* Renderiza as mensagens com base no estado */}
@@ -119,7 +119,7 @@ export function LoginCard() {
 									size="large"
 									// onClick={() => authService.loginGoogle()}
 									>
-										<img src="/assets/google.png" alt="" />
+										<img src="/assets/google.png" alt="" style={{ height: '20px'}} />
 								</GambButton>
 
 							</DivButtons>

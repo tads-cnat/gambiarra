@@ -39,6 +39,7 @@ export const IndexContainer = styled.div`
 `;
 
 export const MarcaGrafica = styled.div`
+	align-items: center;
 	margin: 2rem 0;
 `;
 
