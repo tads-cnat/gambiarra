@@ -120,7 +120,8 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = "mysite.wsgi.application"
+# Channels configuration
+ASGI_APPLICATION = "mysite.asgi.application"
 
 
 # Database
@@ -230,6 +231,6 @@ CACHES = {
 # Configure os canais para usar camada in-memory
 CHANNEL_LAYERS = {
     "default": {
-        "BACKEND": "channels.layers.InMemoryChannelLayer",  # Camada em memória
+        "BACKEND": "channels.layers.InMemoryChannelLayer",  
     },
 }
