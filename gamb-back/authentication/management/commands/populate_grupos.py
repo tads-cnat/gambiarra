@@ -1,6 +1,7 @@
 from django.core.management.base import BaseCommand
 from django.contrib.auth.models import Group
 
+
 class GrupoEnum:
     GERENTE = "gerente"
     PROFESSOR = "professor"

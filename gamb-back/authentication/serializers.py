@@ -64,22 +64,23 @@ class ProfileUserSerializer(serializers.ModelSerializer):
         fields = [
             "id",
             "is_superuser",
-            "username", 
+            "username",
             "first_name",
             "last_name",
             "email",
             "is_staff",
             "is_active",
             "grupo",
-            "imagem"
+            "imagem",
         ]
-        
+
     def get_imagem(self, obj):
         def build_image_url(path):
-            request = self.context.get('request')
+            request = self.context.get("request")
             if request:
                 return request.build_absolute_uri(path)
             from urllib.parse import urljoin
+
             return urljoin(settings.MEDIA_URL, path)
 
         if obj.imagem:
@@ -87,14 +88,13 @@ class ProfileUserSerializer(serializers.ModelSerializer):
         return build_image_url("Padrao/perfil_padrao.png")
 
 
-
 class ListarUsuarioSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ["id", "username", "grupo"]
 
+
 class AlterarCargoSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ["id"]
- 
