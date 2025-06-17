@@ -5,20 +5,22 @@ from faker import Faker
 
 fake = Faker("pt_BR")
 
+
 class Command(BaseCommand):
     help = "popula o banco com vários usuários"
 
     def add_arguments(self, parser):
-        parser.add_argument("n_usu", type=int, help="Número de usuários a serem criados")
+        parser.add_argument(
+            "n_usu", type=int, help="Número de usuários a serem criados"
+        )
 
-        
     def handle(self, *args, **kwargs):
         try:
             grupo_aluno = Group.objects.get(pk=6)
             grupo_servidor = Group.objects.get(pk=4)
 
             # Criando clientes
-            for i in range(kwargs['n_usu']):
+            for i in range(kwargs["n_usu"]):
                 nome = fake.name()
                 usuario, created = Usuario.objects.update_or_create(
                     username=f"{nome}",
@@ -35,7 +37,7 @@ class Command(BaseCommand):
                     usuario.set_password("ZAP123!!")
                     usuario.save()
 
-            for i in range(kwargs['n_usu']):
+            for i in range(kwargs["n_usu"]):
                 nome = fake.name()
                 usuario, created = Usuario.objects.update_or_create(
                     username=f"{nome}",
@@ -52,7 +54,9 @@ class Command(BaseCommand):
                     usuario.set_password("ZAP123!!")
                     usuario.save()
 
-            self.stdout.write(self.style.SUCCESS("Usuários criados com nomes realistas usando Faker."))
+            self.stdout.write(
+                self.style.SUCCESS("Usuários criados com nomes realistas usando Faker.")
+            )
 
         except Group.DoesNotExist:
             self.stderr.write(self.style.ERROR("Os grupos não existem."))

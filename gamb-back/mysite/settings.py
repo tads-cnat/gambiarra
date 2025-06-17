@@ -37,7 +37,7 @@ ALLOWED_HOSTS = ["pdsweb.pythonanywhere.com", "localhost", "127.0.0.1", "0.0.0.0
 # Application definition
 
 INSTALLED_APPS = [
-    "daphne", 
+    "daphne",
     "channels",
     # chat
     "chat",
@@ -80,13 +80,13 @@ AUTH_USER_MODEL = "authentication.Usuario"
 
 # jwt token configurations
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=30),
-    'REFRESH_TOKEN_LIFETIME': timedelta(days=30),
-    'ROTATE_REFRESH_TOKENS': True,
-    'BLACKLIST_AFTER_ROTATION': True,
-    'UPDATE_LAST_LOGIN': True,
-    'ALGORITHM': 'HS256',
-    'SIGNING_KEY': 'gambiarra1590',
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=30),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=30),
+    "ROTATE_REFRESH_TOKENS": True,
+    "BLACKLIST_AFTER_ROTATION": True,
+    "UPDATE_LAST_LOGIN": True,
+    "ALGORITHM": "HS256",
+    "SIGNING_KEY": "gambiarra1590",
 }
 
 
@@ -128,20 +128,17 @@ WSGI_APPLICATION = "mysite.wsgi.application"
 
 
 DATABASES = {
-     'default': {
-         'ENGINE': 'django.db.backends.{}'.format(
-             os.getenv('DATABASE_ENGINE', 'sqlite3')
-         ),
-         'NAME': os.getenv('DATABASE_NAME', 'postgres'),
-         'USER': os.getenv('DATABASE_USERNAME', 'postgres'),
-         'PASSWORD': os.getenv('DATABASE_PASSWORD', 'postgres'),
-         'HOST': os.getenv('DATABASE_HOST', '127.0.0.1'),
-         'PORT': os.getenv('DATABASE_PORT', 5432),
-     }
- }
-
-
-
+    "default": {
+        "ENGINE": "django.db.backends.{}".format(
+            os.getenv("DATABASE_ENGINE", "sqlite3")
+        ),
+        "NAME": os.getenv("DATABASE_NAME", "postgres"),
+        "USER": os.getenv("DATABASE_USERNAME", "postgres"),
+        "PASSWORD": os.getenv("DATABASE_PASSWORD", "postgres"),
+        "HOST": os.getenv("DATABASE_HOST", "127.0.0.1"),
+        "PORT": os.getenv("DATABASE_PORT", 5432),
+    }
+}
 
 
 # Password validation
@@ -199,10 +196,7 @@ STATICFILES_DIRS = [
 CORS_ALLOW_ALL_ORIGINS = True
 
 
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:5173",
-    "http://44.210.61.21:8080"
-]
+CORS_ALLOWED_ORIGINS = ["http://localhost:5173", "http://44.210.61.21:8080"]
 
 SWAGGER_SETTINGS = {
     "SECURITY_DEFINITIONS": {
@@ -228,8 +222,8 @@ CACHES = {
 
 # Remova a configuração do Redis para cache (ou mantenha se quiser cache em memória)
 CACHES = {
-    'default': {
-        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',  # Cache em memória
+    "default": {
+        "BACKEND": "django.core.cache.backends.locmem.LocMemCache",  # Cache em memória
     }
 }
 

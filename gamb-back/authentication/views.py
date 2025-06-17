@@ -48,7 +48,6 @@ class ProfileUserView(RetrieveAPIView):
         )
 
 
-
 class UsuarioViewSet(viewsets.ModelViewSet):
     serializer_class = ListarUsuarioSerializer
     permission_classes = [IsAuthenticated]
@@ -56,32 +55,38 @@ class UsuarioViewSet(viewsets.ModelViewSet):
     filter_backends = (filters.DjangoFilterBackend,)
     filterset_class = UsuarioFilter
 
-    def get_serializer_class(self): #Função pra retornar o serializador apropriado pra cada função
+    def get_serializer_class(
+        self,
+    ):  # Função pra retornar o serializador apropriado pra cada função
         acao = self.action
         if acao == "alterar_cargo":
             return AlterarCargoSerializer
         return ListarUsuarioSerializer
-        
-
 
     def get(self, request):
-        grupo_id = request.GET.get('grupo_id', None)
+        grupo_id = request.GET.get("grupo_id", None)
 
         if not grupo_id:
-            return Response({"erro": "O campo 'grupo_id' é obrigatório."}, status=status.HTTP_400_BAD_REQUEST)
+            return Response(
+                {"erro": "O campo 'grupo_id' é obrigatório."},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
 
         try:
             grupo_id = int(grupo_id)
         except ValueError:
-            return Response({"erro": "O campo 'grupo_id' deve ser um número inteiro válido."}, status=status.HTTP_400_BAD_REQUEST)
+            return Response(
+                {"erro": "O campo 'grupo_id' deve ser um número inteiro válido."},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
 
         grupo = get_object_or_404(Group, id=grupo_id)
-        
+
         usuarios = Usuario.objects.filter(grupo__id=grupo_id)
         serializer = self.get_serializer(usuarios, many=True)
 
         return Response(serializer.data, status=status.HTTP_200_OK)
-    
+
     @action(detail=True, methods=["patch"], permission_classes=[OnlyGerente])
     def alterar_cargo(self, request, pk):
         usuario = get_object_or_404(Usuario, pk=pk)
@@ -100,7 +105,7 @@ class UsuarioViewSet(viewsets.ModelViewSet):
             retorno = status.HTTP_200_OK
             mensagem = "Usuário alterado com sucesso"
 
-
         serializer = ListarUsuarioSerializer(usuario)
-        return Response({"mensagem": mensagem, "usuario": serializer.data}, status=retorno)
-
+        return Response(
+            {"mensagem": mensagem, "usuario": serializer.data}, status=retorno
+        )
