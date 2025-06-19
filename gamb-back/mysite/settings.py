@@ -28,11 +28,19 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv("DJANGO_SECRET_KEY")
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv("DEGUB")
 
-ALLOWED_HOSTS = ["pdsweb.pythonanywhere.com", "localhost", "127.0.0.1", "0.0.0.0"]
+ALLOWED_HOSTS =  (
+    ["*"]
+    if os.getenv("MOD_DEV", "0") == "1"
+    else [
+        origin.strip()
+        for origin in os.getenv("DJANGO_ALLOWED_HOSTS", "").split(",")
+        if origin.strip()
+    ]
+)
 
+print("ALLOWED HOSTS: ", ALLOWED_HOSTS)
 
 # Application definition
 
@@ -194,11 +202,18 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static/"),
 ]
 
-CORS_ALLOW_ALL_ORIGINS = True
 
+CORS_ALLOWED_ORIGINS = (
+    ["http://localhost:8000"]
+    if os.getenv("MOD_DEV", "0") == "1"
+    else [
+        origin.strip()
+        for origin in os.getenv("DJANGO_CORS_ALLOWED_ORIGINS", "").split(",")
+        if origin.strip()
+    ]
+)
 
-CORS_ALLOWED_ORIGINS = ["http://localhost:5173", "http://44.210.61.21:8080"]
-
+print(CORS_ALLOWED_ORIGINS)
 SWAGGER_SETTINGS = {
     "SECURITY_DEFINITIONS": {
         "Bearer": {

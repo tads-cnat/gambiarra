@@ -72,12 +72,12 @@ jobs:
                   mkdir -p ~/.ssh
                   echo "${{ secrets.EC2_KEY }}" > ~/.ssh/id_rsa
                   chmod 600 ~/.ssh/id_rsa
-                  ssh-keyscan -H 44.210.61.21 >> ~/.ssh/known_hosts
+                  ssh-keyscan -H ${{ secrets.HOST_FRONT }} >> ~/.ssh/known_hosts
 
             - name: Deploy via SSH
               run: |
 
-                  ssh  ubuntu@44.210.61.21 << 'EOF'
+                  ssh  ubuntu@${{ secrets.HOST_FRONT }}<< 'EOF'
                     echo 'Conectado com sucesso!'
                     
                     sudo su 
