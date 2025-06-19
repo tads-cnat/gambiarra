@@ -33,7 +33,11 @@ MOD_DEV = os.getenv("MOD_DEV", "0") == "1"
 ALLOWED_HOSTS = (
     ["*"]
     if MOD_DEV
-    else os.getenv("DJANGO_ALLOWED_HOSTS", "localhost,127.0.0.1").split(",")
+    else [
+        origin.strip()
+        for origin in os.getenv("DJANGO_ALLOWED_HOSTS", "localhost,127.0.0.1").split(",")
+        if origin.strip()
+    ]
 )
 
 print("ALLOWED HOSTS:", ALLOWED_HOSTS)
@@ -184,8 +188,13 @@ CORS_ALLOWED_ALL_ORIGINS = os.getenv("DJANGO_CORS_ALLOW_ALL_ORIGINS", "0") == "1
 CORS_ALLOWED_ORIGINS = (
     ["http://localhost:8000"]
     if MOD_DEV
-    else os.getenv("DJANGO_CORS_ALLOWED_ORIGINS", "").split(",")
+    else [
+        origin.strip()
+        for origin in os.getenv("DJANGO_CORS_ALLOWED_ORIGINS", "").split(",")
+        if origin.strip()
+    ]
 )
+
 
 print("CORS_ALLOWED_ORIGINS:", CORS_ALLOWED_ORIGINS)
 
