@@ -30,7 +30,7 @@ SECRET_KEY = os.getenv("DJANGO_SECRET_KEY")
 
 DEBUG = os.getenv("DEGUB")
 
-ALLOWED_HOSTS =  (
+ALLOWED_HOSTS = (
     ["*"]
     if os.getenv("MOD_DEV", "0") == "1"
     else [
@@ -246,6 +246,6 @@ CACHES = {
 # Configure os canais para usar camada in-memory
 CHANNEL_LAYERS = {
     "default": {
-        "BACKEND": "channels.layers.InMemoryChannelLayer",  
+        "BACKEND": "channels.layers.InMemoryChannelLayer",
     },
 }
