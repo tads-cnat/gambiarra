@@ -29,7 +29,7 @@ export const HeaderContent = styled.div`
 		align-items: center;
 
 		button {
-			color: ${theme.cores.black};
+			/* color: ${theme.cores.black}; */
 			text-decoration: none;
 			font-weight: 500;
 
@@ -40,10 +40,10 @@ export const HeaderContent = styled.div`
 
 			transition: 0.5s;
 
-			&:hover {
-				color: ${theme.cores.purple_info_primary};
+			/* &:hover {
+				color: ${theme.cores.purple_info_primary}; */
 				/* border-bottom: 1px solid ${theme.cores.purple_info_primary}; */
-			}
+			/* } */
 		}
 	}
 `;

@@ -16,6 +16,7 @@ import {
 	isAuthenticatedStore,
 	setIsAuthenticatedStore,
 } from "./auth/service/AuthStore";
+import { Cadastro } from "./pages/cadastro/cadastro";
 
 export function App() {
 	function checkAuth (): void{
@@ -44,6 +45,17 @@ export function App() {
 								<Navigate to="/dashboard" />
 							) : (
 								<Login />
+							)
+						}
+					/>
+
+					<Route
+						path="/cadastro"
+						element={
+							isAuthenticatedStore() ? (
+								<Navigate to="/dashboard" />
+							) : (
+								<Cadastro />
 							)
 						}
 					/>

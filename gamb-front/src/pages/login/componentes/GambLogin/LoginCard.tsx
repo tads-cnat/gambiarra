@@ -100,7 +100,12 @@ export function LoginCard() {
 								/>
 						</CardButtonArea>
 						<OtherLoginButton>
-							<p>Não possui conta? <a href="#">Crie gratuitamente</a></p> 
+                            <p>Não possui uma conta? <a onClick={() => navigate("/cadastro")} 
+                                                       style={{ cursor: "pointer", color: "blue", textDecoration: "underline" }}
+	>
+                                                        Inscreva-se
+                                                    </a>
+                            </p> 
 							
 							<h3>Acesse sua conta</h3>
 							<DivButtons>
