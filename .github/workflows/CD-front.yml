@@ -2,7 +2,7 @@ name: CD Front
 
 on:
     push:
-        branches: ["main"]
+        branches: ["main", "321-0---analisar-falha-no-serviço-de-websocket-no-ec2-a-aws"]
         paths:
             - "gamb-front/**"
             - ".github/workflows/CD-front.yml"
