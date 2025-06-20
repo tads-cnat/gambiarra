@@ -25,7 +25,7 @@ export default function Home() {
 				<IndexContainer>
 					<MarcaGrafica>
 						<img
-							src="\assets\slogan.png"
+							src="\public\assets\slogan.png"
 							alt="manutenção para todos - ifrn cnat"
 						/>
 					</MarcaGrafica>
@@ -62,7 +62,7 @@ export default function Home() {
 						<div className="roboebotao">
 							<img
 								className="img-fluid"
-								src="\assets\gambi-robozinho.png"
+								src="\public\assets\gambi-robozinho.png"
 								alt=""
 							/>
 							<GambButton
