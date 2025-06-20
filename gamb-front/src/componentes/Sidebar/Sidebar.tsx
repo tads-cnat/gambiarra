@@ -167,7 +167,7 @@ export function Sidebar() {
 					<SidebarContent>
 						<div>
 							<img
-								src="\public\assets\logo-side.png"
+								src="logo-side.png"
 								alt="Logo Gambi"
 								className="gambi-img img-fluid"
 							/>
