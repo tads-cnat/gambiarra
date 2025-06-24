@@ -21,15 +21,12 @@ class RegisterUserView(CreateAPIView):
     permission_classes = [AllowAny]  # any can register an account
 
     def create(self, request):
-        try:
-            serializer = self.get_serializer(data=request.data)
-            serializer.is_valid(
-                raise_exception=True
-            )  # checks the validations inside the serializer
-            self.perform_create(serializer)  # calls the serializer's create method
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        except:
-            return Response("Erro ao realizar o cadastro", status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(
+            raise_exception=True
+        )  # checks the validations inside the serializer
+        self.perform_create(serializer)  # calls the serializer's create method
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
 class ProfileUserView(RetrieveAPIView):

@@ -21,7 +21,7 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
         write_only=True, required=True, validators=[validate_password]
     )
     password2 = serializers.CharField(write_only=True, required=True)
-    
+
     class Meta:
         model = User
         fields = (
@@ -29,7 +29,6 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
             "email",
             "password1",
             "password2",
-            "cpf"
         )  # fields to put in the register process
 
     def validate(self, attrs):  # checks and validate the password
@@ -47,7 +46,6 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
             username=validated_data["username"],
             email=validated_data["email"],
             grupo=cliente,
-            cpf=validated_data["cpf"]
         )
         user.set_password(
             validated_data["password1"]
