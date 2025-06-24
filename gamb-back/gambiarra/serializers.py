@@ -10,6 +10,7 @@ class UpdateBolsistaSerializer(serializers.ModelSerializer):
         model = Chamado
         fields = ["bolsistas"]
 
+
 class CreateAcessorioSerializer(serializers.ModelSerializer):
     class Meta:
         model = Acessorio
@@ -65,7 +66,6 @@ class ListarChamadoSerializer(serializers.ModelSerializer):
             "code",
         ]
 
-
     def get_cliente(self, obj):
         return {
             "username": obj.cliente.username,
@@ -90,12 +90,16 @@ class ListarChamadoSerializer(serializers.ModelSerializer):
         return None
 
     def get_status(self, obj):
-        ide = next((str(key) for key, value in STATUS_CHOICES if value == obj.get_status_display()), None)
+        ide = next(
+            (
+                str(key)
+                for key, value in STATUS_CHOICES
+                if value == obj.get_status_display()
+            ),
+            None,
+        )
 
-        return {
-            "id": ide,
-            "nome": obj.get_status_display()
-        }
+        return {"id": ide, "nome": obj.get_status_display()}
 
 
 class AceitarChamadoSerializer(serializers.ModelSerializer):
@@ -105,6 +109,7 @@ class AceitarChamadoSerializer(serializers.ModelSerializer):
             "id",
         ]
 
+
 class AlterarStatusSerializer(serializers.ModelSerializer):
     class Meta:
         model = Chamado
@@ -113,20 +118,23 @@ class AlterarStatusSerializer(serializers.ModelSerializer):
             "status",
         ]
 
+
 class AcessorioSerializer(serializers.ModelSerializer):
     class Meta:
         model = Acessorio
-        fields = ['id', 'nome']
+        fields = ["id", "nome"]
+
 
 class ItemSerializer(serializers.ModelSerializer):
     acessorios = AcessorioSerializer(many=True, read_only=True)
-    
+
     class Meta:
         model = Item
-        fields = ['id', 'modelo', 'diagnostico', 'acessorios']
+        fields = ["id", "modelo", "diagnostico", "acessorios"]
+
 
 class DetalharChamadoSerializer(serializers.ModelSerializer):
-    
+
     bolsistas = serializers.SerializerMethodField()
     professor = serializers.SerializerMethodField()
     cliente = serializers.SerializerMethodField()
@@ -137,7 +145,6 @@ class DetalharChamadoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Chamado
         fields = [
-                  
             "id",
             "titulo",
             "status",
@@ -145,12 +152,11 @@ class DetalharChamadoSerializer(serializers.ModelSerializer):
             "professor",
             "bolsistas",
             "avaliacao",
-
             "code",
             "descricao",
             "item",
         ]
-    
+
     def get_cliente(self, obj):
         return {
             "username": obj.cliente.username,
@@ -160,8 +166,7 @@ class DetalharChamadoSerializer(serializers.ModelSerializer):
     def get_bolsistas(self, obj):
         if obj.bolsistas.exists():
             return list(obj.bolsistas.values("id", "username"))
-        return [] 
-
+        return []
 
     def get_professor(self, obj):
         if obj.professor:
@@ -178,39 +183,45 @@ class DetalharChamadoSerializer(serializers.ModelSerializer):
         return None
 
     def get_status(self, obj):
-        ide = next((str(key) for key, value in STATUS_CHOICES if value == obj.get_status_display()), None)
-        return {
-            "id": ide,
-            "nome": obj.get_status_display()
-        }
-    
-     # Mantenha os métodos existentes e modifique apenas o get_item:
+        ide = next(
+            (
+                str(key)
+                for key, value in STATUS_CHOICES
+                if value == obj.get_status_display()
+            ),
+            None,
+        )
+        return {"id": ide, "nome": obj.get_status_display()}
+
+    # Mantenha os métodos existentes e modifique apenas o get_item:
     def get_item(self, obj):
         # Verifica se existe um item relacionado
         if not obj.item:
             return None
-            
+
         # Usa o serializer de Item para formatar a resposta
         return ItemSerializer(obj.item).data
+
 
 class MensagemSerializer(serializers.ModelSerializer):
     autor = serializers.PrimaryKeyRelatedField(read_only=True)
 
     class Meta:
         model = Mensagem
-        fields = ['id', 'data_envio', 'autor', 'texto', 'chamado']
-        read_only_fields = ['id', 'data_envio', 'autor', 'chamado']
+        fields = ["id", "data_envio", "autor", "texto", "chamado"]
+        read_only_fields = ["id", "data_envio", "autor", "chamado"]
+
 
 class AlteracaoSerializer(serializers.ModelSerializer):
     autor = serializers.PrimaryKeyRelatedField(read_only=True)
 
     class Meta:
         model = Alteracao
-        fields = ['status','data_alteracao','autor']
-        
+        fields = ["status", "data_alteracao", "autor"]
+
+
 class UpdateChamadoSerializer(serializers.ModelSerializer):
     avaliacao = serializers.SerializerMethodField()
-
 
     class Meta:
         model = Chamado
@@ -230,7 +241,8 @@ class UpdateChamadoSerializer(serializers.ModelSerializer):
 class MensagemSerializer(serializers.ModelSerializer):
     autor = serializers.PrimaryKeyRelatedField(read_only=True)
     chamado = serializers.PrimaryKeyRelatedField(read_only=True)
+
     class Meta:
         model = Mensagem
-        fields = ['id', 'data_envio', 'autor', 'texto', 'chamado']
+        fields = ["id", "data_envio", "autor", "texto", "chamado"]
         # read_only_fields = ['id', 'data_envio', 'autor', 'chamado']

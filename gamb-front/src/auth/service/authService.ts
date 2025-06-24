@@ -4,6 +4,8 @@ import { LoginSubmit } from "./auth";
 import {
 	getAuthRefreshToken,
 	getAuthToken,
+	isAuthenticatedStore,
+	setIsAuthenticatedStore,
 	setUserActive,
 	setUserActiveRole,
 	UserActive,
@@ -32,6 +34,8 @@ class AuthService extends BaseService {
 				if (userData) {
 					setUserActive(userData.data);
 					setUserActiveRole(userData.data.grupo);
+					setIsAuthenticatedStore();
+					console.log(isAuthenticatedStore());
 					return {
 						sucesso: true,
 						mensagem: "Login realizado com sucesso!",
@@ -48,8 +52,6 @@ class AuthService extends BaseService {
 				sucesso: false,
 				mensagem: "Erro ao realizar login.",
 			};
-
-			// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		} catch (error: any) {
 			if (error.response?.status === 401) {
 				return {
@@ -104,7 +106,7 @@ class AuthService extends BaseService {
 		}
 	}
 
-	async profile(): Promise<UserActive | null | any> {
+	async profile(): Promise<UserActive | any> {
 		const authToken = getAuthToken();
 		if (!authToken) return null;
 

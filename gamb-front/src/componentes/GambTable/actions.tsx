@@ -1,13 +1,14 @@
 import Notificacao from "../GambNotificao/Notificacao";
 import { userRoles } from "../../auth/roles";
 import { defaultTheme } from "../../styles/themes/default";
+import { getUserActiveRole } from "../../auth/service/AuthStore";
 
-export type Action = {
+export interface Action {
 	name: string;
-	colorIcon: string | "white";
+	colorIcon: string;
 	background: string;
 	icon: string;
-};
+}
 
 export const btnsPR: Record<number, Action[]> = {
 	1: [
@@ -374,14 +375,14 @@ export const btnClientes: Record<number, Action[]> = {
 };
 // Função para checar a permissão (ajuste conforme sua lógica)
 const checkPermission = (roles: string[]) =>
-	roles.includes(localStorage.getItem("userActiveRole") ?? "");
+	roles.includes(getUserActiveRole() ?? "");
 
 // Função que mapeia as ações para componentes <Notificacao />
 export const getActionsByStatus = (
 	status: number,
 	idLinha: number,
 	funct?: Record<string, (id: number) => void> // Parâmetro opcional para funções de ação
-): JSX.Element[] => {
+): React.JSX.Element[] => {
 	const actions: Action[] = checkPermission([
 		userRoles.INTERNO.FUNCIONARIO.GR,
 	])

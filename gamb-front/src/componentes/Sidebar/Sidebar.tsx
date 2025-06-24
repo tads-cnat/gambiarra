@@ -19,7 +19,11 @@ import { useState } from "react";
 import { ChamadoSubmit } from "../../interfaces/models/iChamado";
 import ModalChamadoSubmit from "./forms/abrirChamado/ModalChamadoSubmit";
 import ChamadoService from "../../services/models/ChamadoService";
-import { getUserActive, getUserActiveRole, logout } from "../../auth/service/AuthStore";
+import {
+	getUserActive,
+	getUserActiveRole,
+	logout,
+} from "../../auth/service/AuthStore";
 
 // 1) Importe o hook para acessar dados do usuário
 
@@ -37,7 +41,7 @@ export function Sidebar() {
 
 	// Lógica de envio do formulário de chamado
 	async function onSubmit(data: ChamadoSubmit): Promise<void> {
-		ChamadoService.criarChamado(data)
+		await ChamadoService.criarChamado(data)
 			.then(() => {
 				alert("Chamado criado com sucesso");
 				window.location.reload();
@@ -227,7 +231,10 @@ export function Sidebar() {
 						<UserSpace>
 							<User>
 								<img
-									src="\assets\perfil.png"
+									src={
+										`${getUserActive()?.imagem}` ||
+										"/assets/perfil.png"
+									}
 									alt="Imagem de perfil"
 								/>
 								{getUserActive()?.username || "User"} -{" "}

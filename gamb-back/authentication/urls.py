@@ -5,7 +5,7 @@ from rest_framework.routers import DefaultRouter
 from .views import *
 
 router = DefaultRouter()
-router.register(r'usuario', UsuarioViewSet, basename="Usuario")
+router.register(r"usuario", UsuarioViewSet, basename="Usuario")
 
 auth_urls = [
     path("login/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
@@ -15,6 +15,4 @@ auth_urls = [
     path('login-suap/', SuapLoginView.as_view(), name='login-suap'),
 ]
 
-usuario_url = [
-    
-] + router.urls
+usuario_url = [] + router.urls

@@ -12,19 +12,23 @@ from rest_framework import permissions
 schema_view = swagger_get_schema_view(
     openapi.Info(
         title="Gamb Documentation",
-        default_version='1.0.0',
-        description='Documentação para o Gamb',
+        default_version="1.0.0",
+        description="Documentação para o Gamb",
     ),
     public=True,
     permission_classes=(permissions.AllowAny,),
 )
 
 api_doc = [
-    path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
-    path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
+    path(
+        "swagger/",
+        schema_view.with_ui("swagger", cache_timeout=0),
+        name="schema-swagger-ui",
+    ),
+    path("redoc/", schema_view.with_ui("redoc", cache_timeout=0), name="schema-redoc"),
 ]
 
-#adicionar apps aqui
+# adicionar apps aqui
 api_path = [
     path("", include(gambiarra_urls)),
     path("auth/", include(auth_urls)),
@@ -33,9 +37,9 @@ api_path = [
 ]
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('api/v1/', include(api_path)),
-    path('api/doc/', include(api_doc)),
+    path("admin/", admin.site.urls),
+    path("api/v1/", include(api_path)),
+    path("api/doc/", include(api_doc)),
 ]
 
 if settings.DEBUG:

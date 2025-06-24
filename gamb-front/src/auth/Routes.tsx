@@ -4,7 +4,6 @@ import authService from "./service/authService";
 
 // Função para verificar se o usuário está autenticado
 export async function isAuthenticated(): Promise<boolean> {
-	 ("Verificando autenticação...");
 	try {
 		const result = await authService.profile();
 		return result; // Espera um booleano da API (true ou false)
@@ -31,9 +30,9 @@ export function ProtectedRoute({
 	element,
 	requiredRole,
 }: {
-	element: JSX.Element;
+	element: React.JSX.Element;
 	requiredRole?: string[];
-}): JSX.Element {
+}): React.JSX.Element {
 	const [isAuthenticatedState, setIsAuthenticatedState] = useState<
 		boolean | null
 	>(null);

@@ -13,13 +13,15 @@ import { useForm } from "react-hook-form";
 import { getUserActive } from "../../auth/service/AuthStore";
 import GambButton from "../GambButton/Button";
 import InputField from "../GambInput/Input";
+import { wsHOST } from "../../services/base/axiosInstance";
 
 export default function Chat({ chamado_id }: ChatProps) {
 	const chatBodyRef = useRef<HTMLDivElement>(null);
 
 	const { register, handleSubmit, reset } = useForm<{ texto: string }>();
+
 	const { messages, sendMessage, connected } = useWebSocket(
-		`ws://localhost:8000/ws/chat/${chamado_id}/`
+		`ws://${wsHOST}:8000/ws/chat/${chamado_id}/`
 	);
 
 	const css = `

@@ -6,7 +6,6 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import GambButton from "../../../GambButton/Button";
 import { MouseEvent } from "react";
 import { chamadoSchema } from "./schema";
- 
 
 export default function ModalChamadoSubmit(props: {
 	isModalOpen: boolean;
@@ -88,11 +87,12 @@ export default function ModalChamadoSubmit(props: {
 						icon="plus"
 						size="small"
 						onClick={addAcessorio}
+						disabled={fields.length >= 3} 
 					/>
 				</div>
 
 				<h3 className="text-xl font-regular  mt-3 mb-1">
-					| Acessórios (Opcional)
+					| Acessórios (Opcional) (Máx. 3)
 				</h3>
 
 				{/* Mapeando os campos de acessórios */}

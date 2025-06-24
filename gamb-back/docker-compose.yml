@@ -1,22 +1,15 @@
 services:
-  redis:
-    image: redis:latest
-    container_name: redis
-    restart: always
-    ports:
-      - "6379:6379"
-    volumes:
-      - redis_data:/data
   web:
     build:
       context: .
       dockerfile: ./Dockerfile
     container_name: gambdrf
+    restart: "always"
     command: >
       bash -c "
       python manage.py makemigrations &&
       python manage.py migrate &&
-      python manage.py populate_groups &&
+      python manage.py populate_grupos &&
       python manage.py populate_usuarios_nos &&
       python manage.py populate_models &&
       python manage.py runserver 0.0.0.0:8000"
@@ -26,7 +19,7 @@ services:
       - "8000:8000"
     depends_on:
       - db
-      - redis
+    
     environment:
       DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY}
       DEBUG: ${DEBUG}
@@ -38,6 +31,8 @@ services:
       DATABASE_PASSWORD: ${DATABASE_PASSWORD}
       DATABASE_HOST: ${DATABASE_HOST}
       DATABASE_PORT: ${DATABASE_PORT}
+
+    
 
   db:
     image: postgres:13-alpine
@@ -53,5 +48,5 @@ services:
 
  
 volumes:
+  app_data:
   postgres_data:
-  redis_data:

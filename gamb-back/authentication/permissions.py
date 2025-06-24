@@ -3,84 +3,53 @@ from rest_framework import permissions
 from rest_framework.request import Request
 from authentication.models import *
 
-class OnlyGerente(permissions.BasePermission):
+
+class BaseGrupoPermission(permissions.BasePermission):
+    grupo_permitido = None
     message = "Seu usuário não tem permissão."
 
     def has_permission(self, request: Request, view):
         user = request.user
-        if user.is_authenticated:
-            return user.grupo.name == GrupoEnum.GERENTE
-        return False
+        if not user.is_authenticated or not hasattr(user, "grupo"):
+            return False
 
-class OnlyProfessor(permissions.BasePermission):
-    message = "Seu usuário não tem permissão."
+        if isinstance(self.grupo_permitido, (list, tuple, set)):
+            return user.grupo.name in self.grupo_permitido
+        return user.grupo.name == self.grupo_permitido
 
-    def has_permission(self, request: Request, view):
-        user = request.user
-        if user.is_authenticated:
-            return user.grupo.name == GrupoEnum.PROFESSOR
-        return False
 
-class OnlyBolsista(permissions.BasePermission):
-    message = "Seu usuário não tem permissão."
+# Permissões específicas herdando da base
+class OnlyGerente(BaseGrupoPermission):
+    grupo_permitido = GrupoEnum.GERENTE
 
-    def has_permission(self, request: Request, view):
-        user = request.user
-        if user.is_authenticated:
-            return user.grupo.name == GrupoEnum.BOLSISTA
-        return False
 
-class OnlyServidor(permissions.BasePermission):
-    message = "Seu usuário não tem permissão."
+class OnlyProfessor(BaseGrupoPermission):
+    grupo_permitido = GrupoEnum.PROFESSOR
 
-    def has_permission(self, request: Request, view):
-        user = request.user
-        if user.is_authenticated:
-            return user.grupo.name == GrupoEnum.SERVIDOR
-        return False
 
-class OnlyCliente(permissions.BasePermission):
-    message = "Seu usuário não tem permissão."
+class OnlyBolsista(BaseGrupoPermission):
+    grupo_permitido = GrupoEnum.BOLSISTA
 
-    def has_permission(self, request: Request, view):
-        user = request.user
-        if user.is_authenticated:
-            return user.grupo.name == GrupoEnum.CLIENTE
-        return False
 
-class OnlyAluno(permissions.BasePermission):
-    message = "Seu usuário não tem permissão."
+class OnlyServidor(BaseGrupoPermission):
+    grupo_permitido = GrupoEnum.SERVIDOR
 
-    def has_permission(self, request: Request, view):
-        user = request.user
-        if user.is_authenticated:
-            return user.grupo.name == GrupoEnum.ALUNO
-        return False
 
-class OnlyInterno(permissions.BasePermission):
-    message = "Seu usuário não tem permissão."
+class OnlyCliente(BaseGrupoPermission):
+    grupo_permitido = GrupoEnum.CLIENTE
 
-    def has_permission(self, request: Request, view):
-        user = request.user
-        if user.is_authenticated:
-            return user.grupo.name in GrupoEnum.INTERNO
-        return False
 
-class OnlyExterno(permissions.BasePermission):
-    message = "Seu usuário não tem permissão."
+class OnlyAluno(BaseGrupoPermission):
+    grupo_permitido = GrupoEnum.ALUNO
 
-    def has_permission(self, request: Request, view):
-        user = request.user
-        if user.is_authenticated:
-            return user.grupo.name in GrupoEnum.EXTERNO
-        return False
 
-class OnlyStaff(permissions.BasePermission):
-    message = "Seu usuário não tem permissão."
+class OnlyInterno(BaseGrupoPermission):
+    grupo_permitido = GrupoEnum.INTERNO
 
-    def has_permission(self, request: Request, view):
-        user = request.user
-        if user.is_authenticated:
-            return user.grupo.name in GrupoEnum.STAFF
-        return False
 
+class OnlyExterno(BaseGrupoPermission):
+    grupo_permitido = GrupoEnum.EXTERNO
+
+
+class OnlyStaff(BaseGrupoPermission):
+    grupo_permitido = GrupoEnum.STAFF

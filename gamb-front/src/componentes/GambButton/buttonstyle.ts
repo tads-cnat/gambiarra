@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { defaultTheme } from "../../styles/themes/default";
-const theme = defaultTheme
+const theme = defaultTheme;
 
 interface ButtonProps {
 	$variant:
@@ -13,16 +13,17 @@ interface ButtonProps {
 		| "inline"
 		| "circle";
 	$size: "small" | "medium" | "large" | "mediumlg";
+	$disabled?: boolean;
 }
 
 export const ButtonGeneric = styled.button<ButtonProps>`
-	padding: ${({ $variant }) => ($variant == "circle" ? "8px" : "8px 20px")};
-	border-radius: ${({ $variant }) => ($variant == "circle" ? "50%" : "6px")};
-	cursor: pointer;
+	padding: ${({ $variant }) => ($variant === "circle" ? "8px" : "8px 20px")};
+	border-radius: ${({ $variant }) => ($variant === "circle" ? "50%" : "6px")};
 	border: 0;
 	display: inline-flex;
 	align-items: center;
 	flex-shrink: 0;
+	mouseout: pointer;
 	font-size: ${({ $size }) => {
 		switch ($size) {
 			case "small":
@@ -83,9 +84,15 @@ export const ButtonGeneric = styled.button<ButtonProps>`
 				? theme.cores.white
 				: theme.cores.black};
 
+	opacity: ${({ $disabled }) => ($disabled ? 0.6 : 1)};
+	cursor: ${({ $disabled }) => ($disabled ? "not-allowed" : "pointer")};
+	pointer-events: ${({ $disabled }) => ($disabled ? "none" : "auto")};
+
 	&:hover {
-		background-color: ${({ $variant }) =>
-			$variant === "verde"
+		background-color: ${({ $variant, $disabled }) =>
+			$disabled
+				? undefined
+				: $variant === "verde"
 				? theme.cores.green_sucess_secondary
 				: $variant === "amarelo"
 				? theme.cores.warning_second
@@ -99,12 +106,14 @@ export const ButtonGeneric = styled.button<ButtonProps>`
 				? theme.cores.gray_300
 				: theme.cores.light_white};
 
-		color: ${({ $variant }) =>
-			$variant === "branco" ||
-			$variant === "amarelo" ||
-			$variant === "cinza" ||
-			$variant === "inline" ||
-			$variant === "circle"
+		color: ${({ $variant, $disabled }) =>
+			$disabled
+				? undefined
+				: $variant === "branco" ||
+				  $variant === "amarelo" ||
+				  $variant === "cinza" ||
+				  $variant === "inline" ||
+				  $variant === "circle"
 				? theme.cores.gray_text
 				: theme.cores.white};
 	}

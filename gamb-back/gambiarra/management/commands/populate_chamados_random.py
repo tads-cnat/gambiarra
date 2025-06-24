@@ -2,6 +2,7 @@ from django.core.management.base import BaseCommand
 from authentication.models import Usuario
 from gambiarra.models import *
 import random
+
 PROBLEMAS_COMUNS = [
     "Computador não liga",
     "Tela azul ao iniciar",
@@ -163,16 +164,15 @@ ACESSORIOS_POSSIVEIS = [
 ]
 
 
-
 ALTERACOES_POSSIVEIS = [
-    [1],                   # Em análise
-    [1, 2],                # Aceito
-    [1, 2, 3],             # Em Diagnóstico
-    [1, 2, 3, 5, 4],       # Equipamento Em Conserto
-    [1, 2, 3, 5],          # Aguardando Peça
-    [1, 2, 3, 5, 4, 6],    # Fechado Sem Resolução
-    [1, 2, 3, 5, 4, 7],    # Resolvido
-    [1, 8],                # Recusado
+    [1],  # Em análise
+    [1, 2],  # Aceito
+    [1, 2, 3],  # Em Diagnóstico
+    [1, 2, 3, 5, 4],  # Equipamento Em Conserto
+    [1, 2, 3, 5],  # Aguardando Peça
+    [1, 2, 3, 5, 4, 6],  # Fechado Sem Resolução
+    [1, 2, 3, 5, 4, 7],  # Resolvido
+    [1, 8],  # Recusado
 ]
 
 
@@ -200,7 +200,9 @@ class Command(BaseCommand):
 
             if not (professores.exists() and bolsistas.exists() and clientes.exists()):
                 self.stderr.write(
-                    self.style.ERROR("Rode o script 'python manage.py populate_user' antes")
+                    self.style.ERROR(
+                        "Rode o script 'python manage.py populate_user' antes"
+                    )
                 )
                 return
 
@@ -210,7 +212,9 @@ class Command(BaseCommand):
                 cliente = random.choice(clientes)
                 sequencia_status = random.choice(ALTERACOES_POSSIVEIS)
                 problema = random.choice(PROBLEMAS_COMUNS)
-                descricao = random.choice(DESCRICOES_POSSIVEIS).format(cliente=cliente.username, problema=problema)
+                descricao = random.choice(DESCRICOES_POSSIVEIS).format(
+                    cliente=cliente.username, problema=problema
+                )
 
                 item = Item.objects.create(
                     modelo=random.choice(ITEMS_POSSIVEIS),
@@ -219,16 +223,18 @@ class Command(BaseCommand):
 
                 acessorios_nomes = []
                 if random.choice([True, False]):
-                    acessorios_nomes = random.sample(ACESSORIOS_POSSIVEIS, k=random.randint(1, 2))
+                    acessorios_nomes = random.sample(
+                        ACESSORIOS_POSSIVEIS, k=random.randint(1, 2)
+                    )
                     for acessorio_nome in acessorios_nomes:
                         Acessorio.objects.create(nome=acessorio_nome, item=item)
 
                 chamado = Chamado.objects.create(
                     titulo=problema,
-                    descricao = descricao,
+                    descricao=descricao,
                     status=sequencia_status[-1],
                     cliente=cliente,
-                    item=item
+                    item=item,
                 )
 
                 if sequencia_status[-1] != 1:  # Se o chamado passou de "Em análise"
@@ -239,7 +245,7 @@ class Command(BaseCommand):
                         Alteracao.objects.create(
                             autor=professor,  # Definindo um professor como autor da mudança
                             status=status,
-                            chamado=chamado
+                            chamado=chamado,
                         )
 
                 if sequencia_status[-1] == 7:  # Se foi resolvido
@@ -249,10 +255,12 @@ class Command(BaseCommand):
                         chamado=chamado,
                     )
 
-                if chamado.status != '1':  # Se saiu de "Em análise"
+                if chamado.status != "1":  # Se saiu de "Em análise"
                     chamado.bolsistas.add(bolsista)
-                
+
             self.stdout.write(self.style.SUCCESS(f"Criados chamados novos"))
 
         except Exception as e:
-            self.stderr.write(self.style.ERROR(f"Erro ao popular banco de dados: {str(e)}"))
+            self.stderr.write(
+                self.style.ERROR(f"Erro ao popular banco de dados: {str(e)}")
+            )
