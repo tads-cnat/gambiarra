@@ -70,10 +70,26 @@ class ChamadoViewSet(viewsets.ModelViewSet):
 
     
     
-
     def get(self, pk):
         try:
+        
             chamado = Chamado.objects.get(pk=pk)
+
+            # Verifica se o usuário tem permissão para ver o chamado
+            user: Usuario = self.request.user
+            grupo = user.grupo.name
+            if grupo == GrupoEnum.PROFESSOR and chamado.professor != user:
+                status_permitidos = (
+                    TAB_STATUS_MAPPING["pendentes"] +
+                    TAB_STATUS_MAPPING["fechados"] +
+                    TAB_STATUS_MAPPING["arquivados"]
+                )
+                if str(chamado.status) not in status_permitidos:
+                    return Response(
+                        {"erro": "Você não tem permissão para ver este chamado."},
+                        status=status.HTTP_403_FORBIDDEN
+                    )
+                
         except Chamado.DoesNotExist:
             return Response({"erro": "Chamado não encontrado."}, status=status.HTTP_404_NOT_FOUND)
 

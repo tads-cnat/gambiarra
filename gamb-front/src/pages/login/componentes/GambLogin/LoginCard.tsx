@@ -5,18 +5,21 @@ import { LoginSubmit } from "../../../../auth/service/auth";
 import authService from "../../../../auth/service/authService";
 import GambButton from "../../../../componentes/GambButton/Button";
 import InputField from "../../../../componentes/GambInput/Input";
-import { Card,
-	     CardButtonArea, 
-		 CardContent, 
-		 ContainerLogin, 
-		 DivButtons, 
-		 Divider, 
-		 OtherLoginButton 
-	   } from "./LoginCardStyles";
+import {
+	Card,
+	CardButtonArea,
+	CardContent,
+	ContainerLogin,
+	DivButtons,
+	Divider,
+	OtherLoginButton,
+} from "./LoginCardStyles";
 import { loginSchema } from "./schema";
 
 import { useNavigate } from "react-router-dom";
 import UseMessage from "../../../../componentes/GambMessage/Message";
+import { openSuapLoginPopup } from "../../../../services/base/suap-client";
+import { suapClient } from "../../../../services/base/suapConfigCliente";
 
 export function LoginCard() {
 	const {
@@ -47,11 +50,17 @@ export function LoginCard() {
 
 	return (
 		<ContainerLogin className="border-gambi">
-			<img src="/assets/robofeio.png" alt="" />
+			<img
+				src="/assets/robofeio.png"
+				alt=""
+			/>
 			<Divider />
 			<Card>
+				
 				{/* Renderiza as mensagens com base no estado */}
-				{loginIsValid === true && !errors.password && !errors.username ? (
+				{loginIsValid === true &&
+				!errors.password &&
+				!errors.username ? (
 					<UseMessage
 						type="success"
 						text="Login realizado com sucesso!"
@@ -77,7 +86,7 @@ export function LoginCard() {
 							error={errors.username?.message}
 							placeholder="Digite seu nome de usuário"
 							register={register("username")}
-							/>
+						/>
 						<InputField
 							label="Senha: "
 							type="password"
@@ -87,7 +96,7 @@ export function LoginCard() {
 							error={errors.password?.message}
 							placeholder="Digite sua senha"
 							register={register("password")}
-							/>
+						/>
 
 						<CardButtonArea>
 							<a href="#">Esqueci minha senha</a>
@@ -97,41 +106,55 @@ export function LoginCard() {
 								icon="seta_direita"
 								type="submit"
 								size="large"
-								/>
+							/>
 						</CardButtonArea>
 						<OtherLoginButton>
-                            <p>Não possui uma conta? <a onClick={() => navigate("/cadastro")} 
-                                                       style={{ cursor: "pointer", color: "blue", textDecoration: "underline" }}
-	>
-                                                        Inscreva-se
-                                                    </a>
-                            </p> 
-							
+							<p>
+								Não possui uma conta?{" "}
+								<a
+									onClick={() => navigate("/cadastro")}
+									style={{
+										cursor: "pointer",
+										color: "blue",
+										textDecoration: "underline",
+									}}
+								>
+									Inscreva-se
+								</a>
+							</p>
+
 							<h3>Acesse sua conta</h3>
 							<DivButtons>
 								<GambButton
-									variant="branco"
+									variant="inline"
 									icon="github"
 									type="button"
 									size="large"
-									// onClick={() => authService.loginGithub()}
+									onClick={() => {
+										openSuapLoginPopup();
+									}}
 								>
-									<img src="/assets/suap.svg" alt="" />
+									<img
+										src="/assets/suap.svg"
+										alt=""
+									/>
 								</GambButton>
 								<GambButton
-									variant="branco"
+									variant="inline"
 									type="button"
 									size="large"
 									// onClick={() => authService.loginGoogle()}
-									>
-										<img src="/assets/google.png" alt="" style={{ height: '20px'}} />
+								>
+									<img
+										src="/assets/google.png"
+										alt=""
+										style={{ height: "20px" }}
+									/>
 								</GambButton>
-
 							</DivButtons>
 						</OtherLoginButton>
 					</CardContent>
 				</form>
-
 			</Card>
 		</ContainerLogin>
 	);
