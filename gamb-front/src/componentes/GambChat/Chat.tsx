@@ -29,7 +29,7 @@ export default function Chat({ chamado_id }: ChatProps) {
       border: 1px solid #d1d1d1 !important;
     }
   `;
-
+	// armaria
 	useEffect(() => {
 		if (chatBodyRef.current) {
 			chatBodyRef.current.scrollTop = chatBodyRef.current.scrollHeight;
