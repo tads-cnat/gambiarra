@@ -59,9 +59,9 @@ export default [
 			sonarjs,
 		},
 		rules: {
-			"sonarjs/no-duplicate-string": "warn",
-			"sonarjs/no-identical-functions": "warn",
-			"sonarjs/no-small-switch": "warn",
+			"sonarjs/no-duplicate-string": "error",
+			"sonarjs/no-identical-functions": "error",
+			"sonarjs/no-small-switch": "error",
 		},
 	},
 ];
