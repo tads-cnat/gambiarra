@@ -71,5 +71,10 @@
 | 5.2 | Construção de Pipelines | Implementação de fluxos automatizados para integração e entrega contínua. |
 
 
+## 7. Cronograma de Marcos
+
+- A cor verde representa os pacotes que já foram entregues
+- A cor azul representa os pacotes que ainda serão entregues
+![cronogramademarcos](https://github.com/user-attachments/assets/9c5dcd23-d31c-4761-aadf-e6092b5b3918)
 
 
