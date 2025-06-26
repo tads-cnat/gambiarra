@@ -50,7 +50,7 @@ soupsieve==2.5
 sqlparse==0.5.1
 Twisted==24.11.0
 txaio==23.1.1
-typing_extensions==4.12.2
+typing_extensions==4.14.0
 tzdata==2024.1
 uritemplate==4.1.1
 zope.interface==7.2
