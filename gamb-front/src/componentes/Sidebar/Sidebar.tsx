@@ -66,96 +66,70 @@ export function Sidebar() {
 
 	// 3) Defina os itens de menu de acordo com o papel do usuário
 	function getSidebarItems() {
-		switch (getUserActiveRole()) {
-			case "gerente":
-				return [
-					{ to: "/dashboard", label: "Home", icon: <HouseSimple /> },
-					{
-						to: "#",
-						label: "Gerenciar Usuários",
-						icon: <FolderUser />,
-					},
-					{
-						to: "#",
-						label: "Gerenciar Bolsista",
-						icon: <FolderUser />,
-					},
-					{
-						to: "#",
-						label: "Gerenciar Tarefas",
-						icon: <FolderUser />,
-					},
-					{
-						to: "#",
-						label: "Gerar ordem de serviço",
-						icon: <FileText />,
-					},
-					{
-						to: "#",
-						label: "Gerar termo de responsabilidade",
-						icon: <AddressBook />,
-					},
-				];
-			case "professor":
-				return [
-					{ to: "/dashboard", label: "Home", icon: <HouseSimple /> },
-					{
-						to: "#",
-						label: "Gerenciar Bolsista",
-						icon: <FolderUser />,
-					},
-					{
-						to: "#",
-						label: "Gerenciar Tarefas",
-						icon: <FolderUser />,
-					},
-					{
-						to: "#",
-						label: "Gerar ordem de serviço",
-						icon: <FileText />,
-					},
-					{
-						to: "#",
-						label: "Estatísticas",
-						icon: <AddressBook />,
-					},
-				];
-			case "bolsista":
-				return [
-					{ to: "/dashboard", label: "Home", icon: <HouseSimple /> },
-					{
-						to: "#",
-						label: "Gerenciar Tarefas",
-						icon: <FolderUser />,
-					},
-					{
-						to: "#",
-						label: "Gerar ordem de serviço",
-						icon: <FileText />,
-					},
-					{
-						to: "#",
-						label: "Estatísticas",
-						icon: <AddressBook />,
-					},
-				];
-			case "cliente":
-			default:
-				// Outros papéis que não estejam mapeados explicitamente
-				return [
-					{ to: "/dashboard", label: "Home", icon: <HouseSimple /> },
-					{
-						to: "#",
-						label: "Gerar ordem de serviço",
-						icon: <FileText />,
-					},
-					{
-						to: "#",
-						label: "Estatísticas",
-						icon: <AddressBook />,
-					},
-				];
-		}
+		const commonItems = {
+			home: { to: "/dashboard", label: "Home", icon: <HouseSimple /> },
+			gerenciarBolsista: {
+				to: "#",
+				label: "Gerenciar Bolsista",
+				icon: <FolderUser />,
+			},
+			gerenciarTarefas: {
+				to: "#",
+				label: "Gerenciar Tarefas",
+				icon: <FolderUser />,
+			},
+			ordemServico: {
+				to: "#",
+				label: "Gerar ordem de serviço",
+				icon: <FileText />,
+			},
+			estatisticas: {
+				to: "#",
+				label: "Estatísticas",
+				icon: <AddressBook />,
+			},
+			usuarios: {
+				to: "#",
+				label: "Gerenciar Usuários",
+				icon: <FolderUser />,
+			},
+			termoResponsabilidade: {
+				to: "#",
+				label: "Gerar termo de responsabilidade",
+				icon: <AddressBook />,
+			},
+		};
+
+		const role = getUserActiveRole();
+
+		const roleMap: Record<string, Array<keyof typeof commonItems>> = {
+			gerente: [
+				"home",
+				"usuarios",
+				"gerenciarBolsista",
+				"gerenciarTarefas",
+				"ordemServico",
+				"termoResponsabilidade",
+			],
+			professor: [
+				"home",
+				"gerenciarBolsista",
+				"gerenciarTarefas",
+				"ordemServico",
+				"estatisticas",
+			],
+			bolsista: [
+				"home",
+				"gerenciarTarefas",
+				"ordemServico",
+				"estatisticas",
+			],
+			cliente: ["home", "ordemServico", "estatisticas"],
+		};
+
+		const selectedItems = roleMap[role] || roleMap["cliente"];
+
+		return selectedItems.map((key) => commonItems[key]);
 	}
 
 	const sidebarItems = getSidebarItems();

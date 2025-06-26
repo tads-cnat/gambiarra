@@ -188,7 +188,7 @@ CORS_ALLOWED_ALL_ORIGINS = os.getenv("DJANGO_CORS_ALLOW_ALL_ORIGINS", "0") == "1
 
 # CORS
 CORS_ALLOWED_ORIGINS = (
-    ["http://localhost:8000"]
+    ["http://localhost:5173"]
     if MOD_DEV
     else [
         origin.strip()
