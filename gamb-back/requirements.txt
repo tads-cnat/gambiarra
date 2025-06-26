@@ -37,7 +37,7 @@ pycodestyle==2.13.0
 pycparser==2.22
 pyflakes==3.3.2
 PyJWT==2.10.1
-pyOpenSSL==25.0.0
+pyOpenSSL==25.1.0
 python-dotenv==1.1.0
 pytz==2024.2
 PyYAML==6.0.2
