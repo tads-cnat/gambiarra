@@ -70,12 +70,12 @@ axiosInstance.interceptors.response.use(
 				setAuthToken(response.data.access);
 				setAuthToken(response.data.refresh);
 
-				// axiosInstance.defaults.headers[
-				// 	"Authorization"
-				// ] = `Bearer ${response.data.access}`;
-				// originalRequest.headers[
-				// 	"Authorization"
-				// ] = `Bearer ${response.data.access}`;
+				axiosInstance.defaults.headers[
+					"Authorization"
+				] = `Bearer ${response.data.access}`;
+				originalRequest.headers[
+					"Authorization"
+				] = `Bearer ${response.data.access}`;
 
 				return axiosInstance(originalRequest);
 			} catch (err) {

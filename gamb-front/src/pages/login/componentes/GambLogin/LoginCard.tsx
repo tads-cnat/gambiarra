@@ -19,7 +19,6 @@ import { loginSchema } from "./schema";
 import { useNavigate } from "react-router-dom";
 import UseMessage from "../../../../componentes/GambMessage/Message";
 import { openSuapLoginPopup } from "../../../../services/base/suap-client";
-import { suapClient } from "../../../../services/base/suapConfigCliente";
 
 export function LoginCard() {
 	const {
@@ -56,7 +55,6 @@ export function LoginCard() {
 			/>
 			<Divider />
 			<Card>
-				
 				{/* Renderiza as mensagens com base no estado */}
 				{loginIsValid === true &&
 				!errors.password &&
