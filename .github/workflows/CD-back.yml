@@ -2,7 +2,7 @@ name: CD Back
 
 on:
     push:
-        branches: ["main"]
+        branches: ["main", "321-0---analisar-falha-no-serviço-de-websocket-no-ec2-a-aws"]
         paths:
             - "gamb-back/**"
             - ".github/workflows/CD-back.yml"
@@ -67,12 +67,12 @@ jobs:
                   mkdir -p ~/.ssh
                   echo "${{ secrets.EC2_KEY }}" > ~/.ssh/id_rsa
                   chmod 600 ~/.ssh/id_rsa
-                  ssh-keyscan -H 52.22.187.150 >> ~/.ssh/known_hosts
+                  ssh-keyscan -H ${{ secrets.HOST_BACK }} >> ~/.ssh/known_hosts
 
             - name: Deploy via SSH
               run: |
 
-                  ssh  ubuntu@52.22.187.150 << 'EOF'
+                  ssh  ubuntu@${{ secrets.HOST_BACK }} << 'EOF'
                     echo 'Conectado com sucesso!'
                     
                     sudo su

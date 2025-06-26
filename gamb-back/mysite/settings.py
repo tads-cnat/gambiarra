@@ -17,25 +17,34 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv("DJANGO_SECRET_KEY")
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# Corrigido: variável estava como DEGUB
+DEBUG = os.getenv("DEBUG", "0") == "1"
 
-ALLOWED_HOSTS = ["pdsweb.pythonanywhere.com", "localhost", "127.0.0.1", "0.0.0.0"]
+# Ajuda a alternar entre modo dev e produção
+MOD_DEV = os.getenv("MOD_DEV", "0") == "1"
 
+# ALLOWED_HOSTS dinâmico, com fallback para segurança
+ALLOWED_HOSTS = (
+    ["*"]
+    if MOD_DEV
+    else [
+        origin.strip()
+        for origin in os.getenv("DJANGO_ALLOWED_HOSTS", "localhost,127.0.0.1").split(
+            ","
+        )
+        if origin.strip()
+    ]
+)
+
+print("ALLOWED HOSTS:", ALLOWED_HOSTS)
 
 # Application definition
-
 INSTALLED_APPS = [
     "daphne",
     "channels",
@@ -72,13 +81,10 @@ REST_FRAMEWORK = {
     "EXCEPTION_HANDLER": "authentication.utils.auth_exception_handler",
 }
 
-
+# ASGI
 ASGI_APPLICATION = "mysite.asgi.application"
 
-
-AUTH_USER_MODEL = "authentication.Usuario"
-
-# jwt token configurations
+# JWT token configurations
 SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=30),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=30),
@@ -89,6 +95,8 @@ SIMPLE_JWT = {
     "SIGNING_KEY": "gambiarra1590",
 }
 
+# Usuário customizado
+AUTH_USER_MODEL = "authentication.Usuario"
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -100,7 +108,6 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
-
 
 ROOT_URLCONF = "mysite.urls"
 
@@ -120,13 +127,8 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = "mysite.wsgi.application"
-
-
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
-
-
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.{}".format(
@@ -140,10 +142,8 @@ DATABASES = {
     }
 }
 
-
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
-
 AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
@@ -159,10 +159,8 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
-
 LANGUAGE_CODE = "pt-br"
 
 TIME_ZONE = "UTC"
@@ -171,33 +169,38 @@ USE_I18N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
-
-STATIC_URL = "static/"
-
-# Default primary key field type
-# https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
-
-DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
-
-# default static files settings for PythonAnywhere.
-# see https://help.pythonanywhere.com/pages/DjangoStaticFiles for more info
-MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
-MEDIA_URL = "/media/"
-STATIC_ROOT = "/home/pdsweb/mysite/static"
 STATIC_URL = "/static/"
+
+# Default static files settings for PythonAnywhere.
+# see https://help.pythonanywhere.com/pages/DjangoStaticFiles for more info
+STATIC_ROOT = "/home/pdsweb/mysite/static"
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static/"),
 ]
 
-CORS_ALLOW_ALL_ORIGINS = True
+MEDIA_URL = "/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
+
+CORS_ALLOWED_ALL_ORIGINS = os.getenv("DJANGO_CORS_ALLOW_ALL_ORIGINS", "0") == "1"
+
+# CORS
+CORS_ALLOWED_ORIGINS = (
+    ["http://localhost:8000"]
+    if MOD_DEV
+    else [
+        origin.strip()
+        for origin in os.getenv("DJANGO_CORS_ALLOWED_ORIGINS", "").split(",")
+        if origin.strip()
+    ]
+)
 
 
-CORS_ALLOWED_ORIGINS = ["http://localhost:5173", "http://44.210.61.21:8080"]
+print("CORS_ALLOWED_ORIGINS:", CORS_ALLOWED_ORIGINS)
 
+# Swagger settings
 SWAGGER_SETTINGS = {
     "SECURITY_DEFINITIONS": {
         "Bearer": {
@@ -209,27 +212,16 @@ SWAGGER_SETTINGS = {
     },
 }
 
-# Cache com Redis
+# Cache com LocMem (memória local, substituindo Redis)
 CACHES = {
     "default": {
-        "BACKEND": "django.core.cache.backends.redis.RedisCache",
-        "LOCATION": os.getenv("REDIS_URL", "redis://127.0.0.1:6379/1"),
+        "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
     }
 }
 
-
-# settings.py
-
-# Remova a configuração do Redis para cache (ou mantenha se quiser cache em memória)
-CACHES = {
-    "default": {
-        "BACKEND": "django.core.cache.backends.locmem.LocMemCache",  # Cache em memória
-    }
-}
-
-# Configure os canais para usar camada in-memory
+# Channels configuration
 CHANNEL_LAYERS = {
     "default": {
-        "BACKEND": "channels.layers.InMemoryChannelLayer",  # Camada em memória
+        "BACKEND": "channels.layers.InMemoryChannelLayer",
     },
 }
