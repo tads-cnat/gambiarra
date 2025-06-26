@@ -5,15 +5,24 @@ from faker import Faker
 
 fake = Faker("pt_BR")
 
+
 class Command(BaseCommand):
     help = "popula o banco com vários usuários"
 
     def add_arguments(self, parser):
-        parser.add_argument("n_adm", type=int, help="Número de administradores a serem criados")
-        parser.add_argument("n_pro", type=int, help="Número de professores a serem criados")
-        parser.add_argument("n_bol", type=int, help="Número de bolsistas a serem criados")
-        parser.add_argument("n_cli", type=int, help="Número de clientes a serem criados")
-        
+        parser.add_argument(
+            "n_adm", type=int, help="Número de administradores a serem criados"
+        )
+        parser.add_argument(
+            "n_pro", type=int, help="Número de professores a serem criados"
+        )
+        parser.add_argument(
+            "n_bol", type=int, help="Número de bolsistas a serem criados"
+        )
+        parser.add_argument(
+            "n_cli", type=int, help="Número de clientes a serem criados"
+        )
+
     def handle(self, *args, **kwargs):
         try:
             grupo_admin = Group.objects.get(pk=1)
@@ -22,7 +31,7 @@ class Command(BaseCommand):
             grupo_cliente = Group.objects.get(pk=5)
 
             # Criando administradores
-            for i in range(kwargs['n_adm']):
+            for i in range(kwargs["n_adm"]):
                 nome = fake.name()
                 usuario, created = Usuario.objects.update_or_create(
                     username=f"{nome}",
@@ -41,7 +50,7 @@ class Command(BaseCommand):
                     usuario.save()
 
             # Criando professores
-            for i in range(kwargs['n_pro']):
+            for i in range(kwargs["n_pro"]):
                 nome = fake.name()
                 usuario, created = Usuario.objects.update_or_create(
                     username=f"{nome}",
@@ -60,7 +69,7 @@ class Command(BaseCommand):
                     usuario.save()
 
             # Criando bolsistas
-            for i in range(kwargs['n_bol']):
+            for i in range(kwargs["n_bol"]):
                 nome = fake.name()
                 usuario, created = Usuario.objects.update_or_create(
                     username=f"{nome}",
@@ -79,7 +88,7 @@ class Command(BaseCommand):
                     usuario.save()
 
             # Criando clientes
-            for i in range(kwargs['n_cli']):
+            for i in range(kwargs["n_cli"]):
                 nome = fake.name()
                 usuario, created = Usuario.objects.update_or_create(
                     username=f"{nome}",
@@ -96,7 +105,9 @@ class Command(BaseCommand):
                     usuario.set_password("ZAP123!!")
                     usuario.save()
 
-            self.stdout.write(self.style.SUCCESS("Usuários criados com nomes realistas usando Faker."))
+            self.stdout.write(
+                self.style.SUCCESS("Usuários criados com nomes realistas usando Faker.")
+            )
 
         except Group.DoesNotExist:
             self.stderr.write(self.style.ERROR("Os grupos não existem."))

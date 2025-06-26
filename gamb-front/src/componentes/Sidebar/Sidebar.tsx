@@ -167,7 +167,7 @@ export function Sidebar() {
 					<SidebarContent>
 						<div>
 							<img
-								src="\assets\logo-side.png"
+								src="logo-side.png"
 								alt="Logo Gambi"
 								className="gambi-img img-fluid"
 							/>
@@ -233,7 +233,7 @@ export function Sidebar() {
 								<img
 									src={
 										`${getUserActive()?.imagem}` ||
-										"/assets/perfil.png"
+										"/public/assets/perfil.png"
 									}
 									alt="Imagem de perfil"
 								/>
