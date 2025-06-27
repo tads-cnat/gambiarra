@@ -31,10 +31,9 @@ services:
       DATABASE_PASSWORD: ${DATABASE_PASSWORD}
       DATABASE_HOST: ${DATABASE_HOST}
       DATABASE_PORT: ${DATABASE_PORT}
+      MOD_DEV: 1    
 
-    
-
-  db:
+  db:          
     image: postgres:13-alpine
     container_name: gambdevdb
     volumes:

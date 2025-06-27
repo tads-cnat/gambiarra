@@ -1,6 +1,15 @@
 import { UseFormRegisterReturn } from "react-hook-form";
 import { SelectText } from "./SelectStyles";
 
+const EM_ANALISE = "Em Análise";
+const ACEITO = "Aceito";
+const EM_DIAGNOSTICO = "Em Diagnóstico";
+const EQUIPAMENTO_EM_CONSERTO = "Equipamento Em Conserto";
+const AGUARDANDO_PECA = "Aguardando Peça";
+const FECHADO_SEM_RESOLUCAO = "Fechado Sem Resolução";
+const RESOLVIDO = "Resolvido";
+const RECUSADO = "Recusado";
+
 interface Option {
 	label: string;
 	value: string | number;
@@ -22,14 +31,14 @@ interface SelectFieldProps {
 
 // Opções completas
 export const statusChamado = [
-	{ label: "Em Análise", value: 1 },
-	{ label: "Aceito", value: 2 },
-	{ label: "Em Diagnóstico", value: 3 },
-	{ label: "Equipamento Em Conserto", value: 4 },
-	{ label: "Aguardando Peça", value: 5 },
-	{ label: "Fechado Sem Resolução", value: 6 },
-	{ label: "Resolvido", value: 7 },
-	{ label: "Recusado", value: 8 },
+	{ label: EM_ANALISE, value: 1 },
+	{ label: ACEITO, value: 2 },
+	{ label: EM_DIAGNOSTICO, value: 3 },
+	{ label: EQUIPAMENTO_EM_CONSERTO, value: 4 },
+	{ label: AGUARDANDO_PECA, value: 5 },
+	{ label: FECHADO_SEM_RESOLUCAO, value: 6 },
+	{ label: RESOLVIDO, value: 7 },
+	{ label: RECUSADO, value: 8 },
 ];
 
 const getFilteredOptions = (status?: string): Option[] => {
@@ -38,31 +47,31 @@ const getFilteredOptions = (status?: string): Option[] => {
 	switch (status) {
 		case "1": // Em Análise
 			return [
-				{ label: "Aceito", value: 2 },
-				{ label: "Recusado", value: 8 },
+				{ label: ACEITO, value: 2 },
+				{ label: RECUSADO, value: 8 },
 			];
 
 		case "2": // Aceito
-			return [{ label: "Em Diagnóstico", value: 3 }];
+			return [{ label: EM_DIAGNOSTICO, value: 3 }];
 
 		case "3": // Em Diagnostico
 			return [
-				{ label: "Equipamento Em Conserto", value: 4 },
-				{ label: "Aguardando Peça", value: 5 },
-				{ label: "Fechado Sem Resolução", value: 6 },
+				{ label: EQUIPAMENTO_EM_CONSERTO, value: 4 },
+				{ label: AGUARDANDO_PECA, value: 5 },
+				{ label: FECHADO_SEM_RESOLUCAO, value: 6 },
 			];
 
 		case "4": // Equipamento em conserto
 			return [
-				{ label: "Aguardando Peça", value: 5 },
-				{ label: "Fechado Sem Resolução", value: 6 },
-				{ label: "Resolvido", value: 7 },
+				{ label: AGUARDANDO_PECA, value: 5 },
+				{ label: FECHADO_SEM_RESOLUCAO, value: 6 },
+				{ label: RESOLVIDO, value: 7 },
 			];
 
 		case "5": // Aguardando peça
 			return [
-				{ label: "Equipamento Em Conserto", value: 4 },
-				{ label: "Fechado Sem Resolução", value: 6 },
+				{ label: EQUIPAMENTO_EM_CONSERTO, value: 4 },
+				{ label: FECHADO_SEM_RESOLUCAO, value: 6 },
 			];
 
 		case "6": // Fechado sem resolução
