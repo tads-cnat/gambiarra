@@ -1,18 +1,22 @@
+import { useEffect } from "react";
+import { suap } from "../../../services/base/suap-client";
+
 export default function Callback() {
 	// Este ficheiro deve estar no endpoint configurado como redirect_uri
-	const params = new URLSearchParams(window.location.search);
-	const code = params.get("code");
+	suap.init();
+	const token = suap.getToken();
 
-	if (code) {
-		localStorage.setItem("suap_oauth_code", code);
-		console.log("Código recebido:", code);
-		window.close(); // Fecha a popup
-	}
+	useEffect(() => {
+		console.log("Token recebido:", token);
+		suap.getResource("Testando", (data) => {
+			console.log("Dados recebidos do SUAP:", data);
+		});
+		window.close(); // Fecha a janela após obter o token
+	}, []);
 
 	return (
 		<>
-			<p>Code: {code}</p>
-			<p>Params: {params.toString()}</p>
+			<p>Params: Conectando com o suap...</p>
 		</>
 	); // Não renderiza nada, apenas fecha a janela
 }
