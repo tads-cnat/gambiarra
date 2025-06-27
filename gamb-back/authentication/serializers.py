@@ -29,6 +29,7 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
             "email",
             "password1",
             "password2",
+            "cpf"
         )  # fields to put in the register process
 
     def validate(self, attrs):  # checks and validate the password
@@ -46,6 +47,7 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
             username=validated_data["username"],
             email=validated_data["email"],
             grupo=cliente,
+            cpf=validated_data["cpf"]
         )
         user.set_password(
             validated_data["password1"]
