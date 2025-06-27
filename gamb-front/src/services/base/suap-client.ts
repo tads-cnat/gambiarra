@@ -1,4 +1,3 @@
-import { Route } from "react-router-dom";
 import { SuapClient } from "./client";
 
 const CLIENT_ID = "1ZhTRkW4vyAPp64qdfnqfhGWu5ZcpqWxRbiKpXki";
@@ -10,5 +9,4 @@ export const suap = new SuapClient(SUAP_URL, CLIENT_ID, REDIRECT_URI, SCOPE);
 
 export const openSuapLoginPopup = () => {
 	window.open(suap.getLoginURL(), "_blank", "width=800,height=600");
-	Route.push("/login/callback");
 };
