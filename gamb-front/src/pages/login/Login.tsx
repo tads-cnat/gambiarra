@@ -18,7 +18,7 @@ export function Login() {
 			<IndexContainer>
 				<MarcaGrafica>
 					<img
-						src="\assets\slogan.png"
+						src="slogan.png"
 						alt="manutenção para todos - ifrn cnat"
 					/>
 				</MarcaGrafica>

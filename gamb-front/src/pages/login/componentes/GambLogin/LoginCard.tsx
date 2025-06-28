@@ -50,7 +50,7 @@ export function LoginCard() {
 	return (
 		<ContainerLogin className="border-gambi">
 			<img
-				src="/assets/robofeio.png"
+				src="robofeio.png"
 				alt=""
 			/>
 			<Divider />
@@ -133,7 +133,7 @@ export function LoginCard() {
 									}}
 								>
 									<img
-										src="/assets/suap.svg"
+										src=" suap.svg"
 										alt=""
 									/>
 								</GambButton>
@@ -144,7 +144,7 @@ export function LoginCard() {
 									// onClick={() => authService.loginGoogle()}
 								>
 									<img
-										src="/assets/google.png"
+										src=" google.png"
 										alt=""
 										style={{ height: "20px" }}
 									/>

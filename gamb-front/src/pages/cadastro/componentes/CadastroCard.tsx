@@ -31,24 +31,23 @@ export function CadastroCard() {
 		null
 	); // Valor inicial como `null`
 	const navigate = useNavigate(); // Defina o hook navigate
-    const [message, setMessage] = useState<string>("");
-
+	const [message, setMessage] = useState<string>("");
 
 	async function handleCadastro(data: CadastroSubmit) {
 		setCadastroIsValid(null);
-        setMessage("");
+		setMessage("");
 
 		const res = await registerService.register(data);
 
 		if (res.sucesso) {
 			setCadastroIsValid(true);
-            setMessage(res.mensagem);
+			setMessage(res.mensagem);
 			setTimeout(() => {
 				navigate("/login");
 			}, 2000);
 		} else {
 			setCadastroIsValid(false);
-            setMessage(res.mensagem);
+			setMessage(res.mensagem);
 		}
 	}
 
@@ -57,7 +56,7 @@ export function CadastroCard() {
 	return (
 		<ContainerLogin className="border-gambi">
 			<img
-				src="/assets/robofeio.png"
+				src="robofeio.png"
 				alt=""
 			/>
 			<Divider />
@@ -175,7 +174,7 @@ export function CadastroCard() {
 									// onClick={() => authService.cadastroGithub()}
 								>
 									<img
-										src="/assets/suap.svg"
+										src="suap.svg"
 										alt=""
 									/>
 								</GambButton>
@@ -186,7 +185,7 @@ export function CadastroCard() {
 									// onClick={() => authService.cadastroGoogle()}
 								>
 									<img
-										src="/assets/google.png"
+										src="google.png"
 										alt=""
 										style={{ height: "20px" }}
 									/>

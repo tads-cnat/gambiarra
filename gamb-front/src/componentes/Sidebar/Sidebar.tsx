@@ -207,7 +207,7 @@ export function Sidebar() {
 								<img
 									src={
 										`${getUserActive()?.imagem}` ||
-										"/public/assets/perfil.png"
+										"perfil.png"
 									}
 									alt="Imagem de perfil"
 								/>
