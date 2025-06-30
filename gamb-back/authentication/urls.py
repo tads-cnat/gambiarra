@@ -12,7 +12,7 @@ auth_urls = [
     path("token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
     path("register/", RegisterUserView.as_view(), name="register"),  # register
     path("profile/", ProfileUserView.as_view(), name="profile"),
-    path('login-suap/', SuapLoginView.as_view(), name='login-suap'),
+    path("login-suap/", SuapLoginView.as_view(), name="login-suap"),
 ]
 
 usuario_url = [] + router.urls
