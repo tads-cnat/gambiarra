@@ -31,8 +31,7 @@ services:
       DATABASE_PASSWORD: ${DATABASE_PASSWORD}
       DATABASE_HOST: ${DATABASE_HOST}
       DATABASE_PORT: ${DATABASE_PORT}
-
-    
+      MOD_DEV: 1    
 
   db:
     image: postgres:13-alpine

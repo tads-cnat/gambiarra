@@ -27,10 +27,9 @@ export default function Chat({ chamado_id }: ChatProps) {
 	const css = `
     .input-chat > div > div {
       border: 1px solid #d1d1d1 !important;
-	  color: #d1d1d1 !important;
     }
   `;
-
+	// armaria
 	useEffect(() => {
 		if (chatBodyRef.current) {
 			chatBodyRef.current.scrollTop = chatBodyRef.current.scrollHeight;
@@ -119,7 +118,6 @@ export default function Chat({ chamado_id }: ChatProps) {
 							register={register("texto")}
 							icon="chat"
 							type="text"
-							classNameFather="w-full"
 						/>
 					</div>
 					<GambButton

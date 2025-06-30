@@ -1,6 +1,7 @@
 // eslint.config.mjs
 import eslint from "@eslint/js";
 import tseslint from "typescript-eslint";
+import sonarjs from "eslint-plugin-sonarjs";
 
 export default [
 	// Ignorar pastas comuns
@@ -42,7 +43,7 @@ export default [
 			"@typescript-eslint/restrict-template-expressions": "off",
 			"@typescript-eslint/no-empty-object-type": "off",
 			"@typescript-eslint/no-redundant-type-constituents": "off",
-			"@typescript-eslint/no-deprecated": "warn",
+			"@typescript-eslint/no-deprecated": "off",
 		},
 	},
 
@@ -50,5 +51,17 @@ export default [
 	{
 		files: [".ncurc.cjs", "eslint.config.mjs"],
 		rules: {},
+	},
+
+	// Regras sonarjs para detectar duplicações
+	{
+		plugins: {
+			sonarjs,
+		},
+		rules: {
+			"sonarjs/no-duplicate-string": "error",
+			"sonarjs/no-identical-functions": "error",
+			"sonarjs/no-small-switch": "error",
+		},
 	},
 ];
