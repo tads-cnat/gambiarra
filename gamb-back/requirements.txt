@@ -20,7 +20,7 @@ djangorestframework-simplejwt==5.3.1
 dotenv==0.9.9
 drf-yasg==1.21.8
 Faker==36.1.1
-flake8==7.2.0
+flake8==7.3.0
 hyperlink==21.0.0
 idna==3.10
 incremental==24.7.2
