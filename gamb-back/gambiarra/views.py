@@ -80,13 +80,19 @@ class ChamadoViewSet(viewsets.ModelViewSet):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     def get_queryset(self):
-        user: Usuario = self.request.user
+        
+
+        user = self.request.user
+
+        # Evita erro se o utilizador for anónimo
+        if not hasattr(user, 'grupo'):
+            return Chamado.objects.none()
+
         grupo = user.grupo.name
 
         if grupo == GrupoEnum.GERENTE:
             queryset = Chamado.objects.all()
         elif grupo == GrupoEnum.PROFESSOR:
-            # Se o professor está assimilado, ou é aberto, ou fechado, ou arquivado
             queryset = Chamado.objects.filter(
                 Q(professor=user) | Q(status="1") | Q(status="6") | Q(status="9")
             )
@@ -102,13 +108,14 @@ class ChamadoViewSet(viewsets.ModelViewSet):
             raise ValueError(f"Valor inválido para o parâmetro 'tab': {tab_param}")
 
         mapeamento = TAB_STATUS_MAPPING[tab_param]
-        if tab_param in TAB_STATUS_MAPPING and mapeamento:
+        if mapeamento:
             queryset = queryset.filter(status__in=mapeamento)
 
         if status_param:
             queryset = queryset.filter(status=status_param)
 
         return queryset
+
 
     @action(detail=False, methods=["get"], permission_classes=[IsAuthenticated])
     def contagem_chamados(self, request):
