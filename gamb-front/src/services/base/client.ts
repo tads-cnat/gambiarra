@@ -72,6 +72,7 @@ class Token {
 	public isValid(): boolean {
 		return Cookies.get("suapToken") !== null && this.value !== null;
 	}
+	
 
 	public revoke(): void {
 		this.value = null;
