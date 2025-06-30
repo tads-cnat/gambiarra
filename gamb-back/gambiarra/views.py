@@ -80,12 +80,11 @@ class ChamadoViewSet(viewsets.ModelViewSet):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     def get_queryset(self):
-        
 
         user = self.request.user
 
         # Evita erro se o utilizador for anónimo
-        if not hasattr(user, 'grupo'):
+        if not hasattr(user, "grupo"):
             return Chamado.objects.none()
 
         grupo = user.grupo.name
@@ -108,6 +107,7 @@ class ChamadoViewSet(viewsets.ModelViewSet):
             raise ValueError(f"Valor inválido para o parâmetro 'tab': {tab_param}")
 
         mapeamento = TAB_STATUS_MAPPING[tab_param]
+
         if mapeamento:
             queryset = queryset.filter(status__in=mapeamento)
 
@@ -115,7 +115,6 @@ class ChamadoViewSet(viewsets.ModelViewSet):
             queryset = queryset.filter(status=status_param)
 
         return queryset
-
 
     @action(detail=False, methods=["get"], permission_classes=[IsAuthenticated])
     def contagem_chamados(self, request):
