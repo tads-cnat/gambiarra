@@ -17,6 +17,9 @@ jobs:
             - uses: hoverkraft-tech/compose-action@v2.0.1
               with:
                 compose-file: "./gamb-back/docker-compose.yml"
+              up-flags:
+                - "--build"
+                - "-d"
               env:
                 DJANGO_SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
                 DEBUG: ${{ secrets.DEBUG }}
@@ -28,13 +31,6 @@ jobs:
                 DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
                 DATABASE_HOST: ${{ secrets.DATABASE_HOST }}
                 DATABASE_PORT: ${{ secrets.DATABASE_PORT }}
-
-
-            # Rodar os containers Docker (web + db + redis)
-            - name: Run up
-              run: |
-                  cd gamb-back
-                  docker compose up  -d
 
             - name: Run tests inside Docker container
               run: |
@@ -67,7 +63,7 @@ jobs:
                 cd gamb-back
                 TIMESTAMP=$(date +"%Y%m%d_%H%M%S")
                 docker compose exec -it gambdrf python manage.py graph_models gambiarra -o diagrams/gambiarra_$TIMESTAMP.png
-                docker compose ps 
+                docker ps 
             
             - name: Tests upload artifacts
               uses: actions/upload-artifact@v4.6.2
