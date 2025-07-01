@@ -10,26 +10,25 @@ on:
 jobs:
     back:
         runs-on: ubuntu-latest
-        env:
-            DJANGO_SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
-            DEBUG: ${{ secrets.DEBUG }}
-            DJANGO_LOGLEVEL: ${{ secrets.DJANGO_LOGLEVEL }}
-            DJANGO_ALLOWED_HOSTS: ${{ secrets.DJANGO_ALLOWED_HOSTS }}
-            DATABASE_ENGINE: ${{ secrets.DATABASE_ENGINE }}
-            DATABASE_NAME: ${{ secrets.DATABASE_NAME }}
-            DATABASE_USERNAME: ${{ secrets.DATABASE_USERNAME }}
-            DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
-            DATABASE_HOST: ${{ secrets.DATABASE_HOST }}
-            DATABASE_PORT: ${{ secrets.DATABASE_PORT }}
+          
        
         steps:
             - uses: actions/checkout@v4
-
-            # Configura o Docker Buildx
-            - name: Run docker compose
-              uses: hoverkraft-tech/compose-action@v2.0.1
+            - uses: hoverkraft-tech/compose-action@v2.0.1
               with:
                 compose-file: "./gamb-back/docker-compose.yml"
+              env:
+                DJANGO_SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
+                DEBUG: ${{ secrets.DEBUG }}
+                DJANGO_LOGLEVEL: ${{ secrets.DJANGO_LOGLEVEL }}
+                DJANGO_ALLOWED_HOSTS: ${{ secrets.DJANGO_ALLOWED_HOSTS }}
+                DATABASE_ENGINE: ${{ secrets.DATABASE_ENGINE }}
+                DATABASE_NAME: ${{ secrets.DATABASE_NAME }}
+                DATABASE_USERNAME: ${{ secrets.DATABASE_USERNAME }}
+                DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
+                DATABASE_HOST: ${{ secrets.DATABASE_HOST }}
+                DATABASE_PORT: ${{ secrets.DATABASE_PORT }}
+
 
             # Rodar os containers Docker (web + db + redis)
             - name: Run up
