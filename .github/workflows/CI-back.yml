@@ -28,13 +28,13 @@ jobs:
             - name: Start Docker containers
               run: |
                 cd gamb-back
-                docker-compose up -d
-                docker-compose ps 
+                docker compose up -d
 
             - name: Run tests inside Docker container
               run: |
                   cd gamb-back
-                  docker-compose exec -it gambdrf python manage.py test
+                  docker ps
+                  docker compose exec -it gambdrf python manage.py test
 
 
             - name: Install Python dependencies
@@ -61,7 +61,7 @@ jobs:
               run: |
                 cd gamb-back
                 TIMESTAMP=$(date +"%Y%m%d_%H%M%S")
-                docker-compose exec -it gambdrf python manage.py graph_models gambiarra -o diagrams/gambiarra_$TIMESTAMP.png
+                docker compose exec -it gambdrf python manage.py graph_models gambiarra -o diagrams/gambiarra_$TIMESTAMP.png
             
             - name: Tests upload artifacts
               uses: actions/upload-artifact@v4.6.2
@@ -73,6 +73,6 @@ jobs:
               if: always()
               run: |
                   cd gamb-back
-                  docker-compose down --remove-orphans 
+                  docker compose down --remove-orphans
 
       
