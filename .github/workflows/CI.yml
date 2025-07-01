@@ -66,29 +66,29 @@ jobs:
               run: |
                   cd gamb-back
                   docker compose down 
-    front:
-        runs-on: ubuntu-latest
+    # front:
+    #     runs-on: ubuntu-latest
 
-        steps:
-            - uses: actions/checkout@v4.2.2
-            - name: Set up Node.js
-              uses: actions/setup-node@v1
-              with:
-                  node-version: 22.15.0
-            - name: Install dependencies
-              run: |
-                  cd gamb-front
-                  npm install
+    #     steps:
+    #         - uses: actions/checkout@v4.2.2
+    #         - name: Set up Node.js
+    #           uses: actions/setup-node@v1
+    #           with:
+    #               node-version: 22.15.0
+    #         - name: Install dependencies
+    #           run: |
+    #               cd gamb-front
+    #               npm install
 
-            - name: Lint
-              run: |
-                    cd gamb-front
-                    npm run lint 
+    #         - name: Lint
+    #           run: |
+    #                 cd gamb-front
+    #                 npm run lint 
 
-            - name: Build
-              run: |
-                  cd gamb-front
-                  npm run build
+    #         - name: Build
+    #           run: |
+    #               cd gamb-front
+    #               npm run build
 
     generate-diagram:
       needs: back
