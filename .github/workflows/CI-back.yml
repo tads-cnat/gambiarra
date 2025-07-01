@@ -17,9 +17,9 @@ jobs:
             - uses: hoverkraft-tech/compose-action@v2.0.1
               with:
                 compose-file: "./gamb-back/docker-compose.yml"
-              up-flags:
-                - "--build"
-                - "-d"
+                up-flags:
+                  - "--build"
+                  - "-d"
               env:
                 DJANGO_SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
                 DEBUG: ${{ secrets.DEBUG }}
