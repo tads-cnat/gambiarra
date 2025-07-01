@@ -26,19 +26,21 @@ jobs:
             - uses: actions/checkout@v4
 
             # Configura o Docker Buildx
-            - name: Instalar Docker Compose
-              run: sudo apt-get update && sudo apt-get install -y docker-compose
+            - name: Run docker compose
+              uses: hoverkraft-tech/compose-action@v2.0.1
+              with:
+                compose-file: "./gamb-back/docker-compose.yml"
 
             # Rodar os containers Docker (web + db + redis)
             - name: Run up
               run: |
                   cd gamb-back
-                  docker-compose up  -d
+                  docker compose up  -d
 
             - name: Run tests inside Docker container
               run: |
                   cd gamb-back
-                  docker-compose exec -it gambdrf python manage.py test
+                  docker compose exec -it gambdrf python manage.py test
 
 
             - name: Install Python dependencies
@@ -65,8 +67,8 @@ jobs:
               run: |
                 cd gamb-back
                 TIMESTAMP=$(date +"%Y%m%d_%H%M%S")
-                docker-compose exec -it gambdrf python manage.py graph_models gambiarra -o diagrams/gambiarra_$TIMESTAMP.png
-                docker cp $(docker-compose ps -q gambdrf):/app/diagrams/gambiarra_$TIMESTAMP.png diagrams/gambiarra_$TIMESTAMP.png
+                docker compose exec -it gambdrf python manage.py graph_models gambiarra -o diagrams/gambiarra_$TIMESTAMP.png
+                docker compose ps 
             
             - name: Tests upload artifacts
               uses: actions/upload-artifact@v4.6.2
