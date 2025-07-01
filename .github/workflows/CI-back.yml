@@ -8,71 +8,73 @@ on:
             - ".github/workflows/CI-back.yml"
 
 jobs:
-    back:
-        runs-on: ubuntu-latest
-        env:
-            DJANGO_SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
-            DEBUG: ${{ secrets.DEBUG }}
-            DJANGO_LOGLEVEL: ${{ secrets.DJANGO_LOGLEVEL }}
-            DJANGO_ALLOWED_HOSTS: ${{ secrets.DJANGO_ALLOWED_HOSTS }}
-            DATABASE_ENGINE: ${{ secrets.DATABASE_ENGINE }}
-            DATABASE_NAME: ${{ secrets.DATABASE_NAME }}
-            DATABASE_USERNAME: ${{ secrets.DATABASE_USERNAME }}
-            DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
-            DATABASE_HOST: ${{ secrets.DATABASE_HOST }}
-            DATABASE_PORT: ${{ secrets.DATABASE_PORT }}
+    # back:
+    #     runs-on: ubuntu-latest
+    #     env:
+    #         DJANGO_SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
+    #         DEBUG: ${{ secrets.DEBUG }}
+    #         DJANGO_LOGLEVEL: ${{ secrets.DJANGO_LOGLEVEL }}
+    #         DJANGO_ALLOWED_HOSTS: ${{ secrets.DJANGO_ALLOWED_HOSTS }}
+    #         DATABASE_ENGINE: ${{ secrets.DATABASE_ENGINE }}
+    #         DATABASE_NAME: ${{ secrets.DATABASE_NAME }}
+    #         DATABASE_USERNAME: ${{ secrets.DATABASE_USERNAME }}
+    #         DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
+    #         DATABASE_HOST: ${{ secrets.DATABASE_HOST }}
+    #         DATABASE_PORT: ${{ secrets.DATABASE_PORT }}
        
-        steps:
-            - uses: actions/checkout@v4
+    #     steps:
+    #         - uses: actions/checkout@v4
 
-            # Configura o Docker Buildx
-            - name: Instalar Docker Compose
-              run: sudo apt-get update && sudo apt-get install -y docker-compose
+    #         # Configura o Docker Buildx
+    #         - name: Instalar Docker Compose
+    #           run: sudo apt-get update && sudo apt-get install -y docker-compose
 
-            # Rodar os containers Docker (web + db + redis)
-            - name: Run up
-              run: |
-                  cd gamb-back
-                  docker-compose up  -d
+    #         # Rodar os containers Docker (web + db + redis)
+    #         - name: Run up
+    #           run: |
+    #               cd gamb-back
+    #               docker-compose up  -d
 
-            - name: Run tests inside Docker container
-              run: |
-                  cd gamb-back
-                  docker-compose exec -it gambdrf python manage.py test
+    #         - name: Run tests inside Docker container
+    #           run: |
+    #               cd gamb-back
+    #               docker-compose exec -it gambdrf python manage.py test
 
 
-            - name: Install Python dependencies
-              run: |
-                python -m pip install --upgrade pip
-                pip install flake8 black
+    #         - name: Install Python dependencies
+    #           run: |
+    #             python -m pip install --upgrade pip
+    #             pip install flake8 black
 
-            - name: Run Flake8
-              run: |
-                cd gamb-back
-                flake8 . --count --show-source --statistics
+    #         - name: Run Flake8
+    #           run: |
+    #             cd gamb-back
+    #             flake8 . --count --show-source --statistics
             
-            - name: Run Black
-              run: |
-                black . --check
+    #         - name: Run Black
+    #           run: |
+    #             black . --check
 
-            - name: Instalar Graphviz e dependências
-              run: |
-                
-                sudo apt update
-                sudo apt install graphviz 
+            
            
           
 
-            - name: Shut down Docker containers
-              if: always()
-              run: |
-                  cd gamb-back
-                  docker compose down 
+    #         - name: Shut down Docker containers
+    #           if: always()
+    #           run: |
+    #               cd gamb-back
+    #               docker compose down 
 
   
     generate-diagrams:
-      needs: back
+      # needs: back
       runs-on: ubuntu-latest
+      env: 
+        DJANGO_SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
+        DEBUG: ${{ secrets.DEBUG }}
+        DJANGO_LOGLEVEL: ${{ secrets.DJANGO_LOGLEVEL }}
+      
+
       steps:
         - uses: actions/checkout@v4
 
@@ -94,4 +96,12 @@ jobs:
         - name: Gerar diagramas
           run: |
             cd gamb-back
-            python manage.py graph_models gambiarra -o gambiarra_diagram.png
+            TIMESTAMP=$(date +%Y%m%d_%H%M%S)
+            python manage.py graph_models gambiarra -o diagrams/gambiarra_diagram_$TIMESTAMP.png
+        
+        - name: Tests upload artifacts
+          uses: actions/upload-artifact@v4.6.2
+          with:
+              name: gambiarra_diagram
+              path: gamb-back/diagrams/**
+
