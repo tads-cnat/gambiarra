@@ -55,27 +55,24 @@ jobs:
               run: |
                 black . --check
 
+            - name: Instalar Graphviz e dependências
+              run: |
+                sudo apt update
+                pip install pydotplus
+                sudo apt install graphviz 
+                python manage.py graph_models gambiarra -o gambiarra_diagram.png
+                pip install django-extensions
+           
+            - name: Gerar diagrama com timestamp
+              run: |
+                cd gamb-back
+                mkdir -p diagrams
+                TIMESTAMP=$(date +"%Y%m%d_%H%M%S")
+                python manage.py graph_models gambiarra -o diagrams/gambiarra_$TIMESTAMP.png
+
             - name: Shut down Docker containers
               run: |
                   cd gamb-back
                   docker compose down 
 
-    generate-diagram:
-        needs: back 
-        runs-on: ubuntu-latest
-        
-        steps:
-          - uses: actions/checkout@v4
-          - name: Instalar Graphviz e dependências
-            run: |
-              sudo apt update
-              sudo apt install -y graphviz
-              python -m pip install --upgrade pip
-              pip install django django-extensions
-
-          - name: Gerar diagrama com timestamp
-            run: |
-              cd gamb-back
-              mkdir -p diagrams
-              TIMESTAMP=$(date +"%Y%m%d_%H%M%S")
-              python manage.py graph_models gambiarra -o diagrams/gambiarra_$TIMESTAMP.png
+      
