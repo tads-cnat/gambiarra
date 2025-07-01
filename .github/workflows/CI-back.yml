@@ -1,107 +1,104 @@
 name: CI-back
 
 on:
-    push:
-        branches: ["*"]
-        paths:
-            - "gamb-back/gambiarra/**"
-            - ".github/workflows/CI-back.yml"
+  push:
+    branches: ["*"]
+    paths:
+      - "gamb-back/gambiarra/**"
+      - ".github/workflows/CI-back.yml"
+
+  pull_request:
+    branches: ["*"]
+    paths:
+      - "gamb-back/gambiarra/**"
+      - ".github/workflows/CI-back.yml"
 
 jobs:
-    # back:
-    #     runs-on: ubuntu-latest
-    #     env:
-    #         DJANGO_SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
-    #         DEBUG: ${{ secrets.DEBUG }}
-    #         DJANGO_LOGLEVEL: ${{ secrets.DJANGO_LOGLEVEL }}
-    #         DJANGO_ALLOWED_HOSTS: ${{ secrets.DJANGO_ALLOWED_HOSTS }}
-    #         DATABASE_ENGINE: ${{ secrets.DATABASE_ENGINE }}
-    #         DATABASE_NAME: ${{ secrets.DATABASE_NAME }}
-    #         DATABASE_USERNAME: ${{ secrets.DATABASE_USERNAME }}
-    #         DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
-    #         DATABASE_HOST: ${{ secrets.DATABASE_HOST }}
-    #         DATABASE_PORT: ${{ secrets.DATABASE_PORT }}
-       
-    #     steps:
-    #         - uses: actions/checkout@v4
+  back:
+    runs-on: ubuntu-latest
+    env:
+      DJANGO_SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
+      DEBUG: ${{ secrets.DEBUG }}
+      DJANGO_LOGLEVEL: ${{ secrets.DJANGO_LOGLEVEL }}
+      DJANGO_ALLOWED_HOSTS: ${{ secrets.DJANGO_ALLOWED_HOSTS }}
+      DATABASE_ENGINE: ${{ secrets.DATABASE_ENGINE }}
+      DATABASE_NAME: ${{ secrets.DATABASE_NAME }}
+      DATABASE_USERNAME: ${{ secrets.DATABASE_USERNAME }}
+      DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
+      DATABASE_HOST: ${{ secrets.DATABASE_HOST }}
+      DATABASE_PORT: ${{ secrets.DATABASE_PORT }}
 
-    #         # Configura o Docker Buildx
-    #         - name: Instalar Docker Compose
-    #           run: sudo apt-get update && sudo apt-get install -y docker-compose
+    steps:
+      - uses: actions/checkout@v4
 
-    #         # Rodar os containers Docker (web + db + redis)
-    #         - name: Run up
-    #           run: |
-    #               cd gamb-back
-    #               docker-compose up  -d
+      - name: Instalar Docker Compose
+        run: sudo apt-get update && sudo apt-get install -y docker-compose
 
-    #         - name: Run tests inside Docker container
-    #           run: |
-    #               cd gamb-back
-    #               docker-compose exec -it gambdrf python manage.py test
+      - name: Subir containers Docker (web + db + redis)
+        run: |
+          cd gamb-back
+          docker-compose up -d
 
+      - name: Executar testes no container
+        run: |
+          cd gamb-back
+          docker-compose exec -it gambdrf python manage.py test
 
-    #         - name: Install Python dependencies
-    #           run: |
-    #             python -m pip install --upgrade pip
-    #             pip install flake8 black
+      - name: Instalar dependências Python para análise
+        run: |
+          python -m pip install --upgrade pip
+          pip install flake8 black
 
-    #         - name: Run Flake8
-    #           run: |
-    #             cd gamb-back
-    #             flake8 . --count --show-source --statistics
-            
-    #         - name: Run Black
-    #           run: |
-    #             black . --check
+      - name: Verificar código com Flake8
+        run: |
+          cd gamb-back
+          flake8 . --count --show-source --statistics
 
-            
-           
-          
+      - name: Verificar formatação com Black
+        run: |
+          black . --check
 
-    #         - name: Shut down Docker containers
-    #           if: always()
-    #           run: |
-    #               cd gamb-back
-    #               docker compose down 
+      - name: Derrubar containers Docker
+        if: always()
+        run: |
+          cd gamb-back
+          docker compose down
 
-  
-    generate-diagrams:
-      # needs: back
-      runs-on: ubuntu-latest
-      env: 
-        DJANGO_SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
-        DEBUG: ${{ secrets.DEBUG }}
-        DJANGO_LOGLEVEL: ${{ secrets.DJANGO_LOGLEVEL }}
-      
+  generate-diagrams:
+    needs: back
+    if: ${{ github.event_name == 'pull_request' && (github.base_ref == 'main' || github.base_ref == 'dev') }}
+    runs-on: ubuntu-latest
+    env: 
+      DJANGO_SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
+      DEBUG: ${{ secrets.DEBUG }}
+      DJANGO_LOGLEVEL: ${{ secrets.DJANGO_LOGLEVEL }}
 
-      steps:
-        - uses: actions/checkout@v4
+    steps:
+      - uses: actions/checkout@v4
 
-        - name: Setup Python
-          uses: actions/setup-python@v4
-          with:
-            python-version: '3.12'  # Ajuste conforme sua versão
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.12'
 
-        - name: Install Python dependencies
-          run: |
-            python -m pip install --upgrade pip
-            pip install -r gamb-back/requirements.txt
+      - name: Instalar dependências do Python
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r gamb-back/requirements.txt
 
-        - name: Instalar Graphviz e dependências
-          run: |
-            sudo apt update
-            sudo apt install -y graphviz
+      - name: Instalar Graphviz e dependências
+        run: |
+          sudo apt update
+          sudo apt install -y graphviz
 
-        - name: Gerar diagramas
-          run: |
-            cd gamb-back
-            TIMESTAMP=$(date +%Y%m%d_%H%M%S)
-            python manage.py graph_models gambiarra -o diagrams/gambiarra_diagram_$TIMESTAMP.png
-        
-        - name: Tests upload artifacts
-          uses: actions/upload-artifact@v4.6.2
-          with:
-              name: gambiarra_diagram
-              path: gamb-back/diagrams/**
+      - name: Gerar diagrama de modelos com timestamp
+        run: |
+          cd gamb-back
+          TIMESTAMP=$(date +%Y%m%d_%H%M%S)
+          python manage.py graph_models gambiarra -o diagrams/gambiarra_diagram_$TIMESTAMP.png
 
+      - name: Upload do diagrama como artefato
+        uses: actions/upload-artifact@v4.6.2
+        with:
+          name: gambiarra_diagram
+          path: gamb-back/diagrams/**

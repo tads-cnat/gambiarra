@@ -152,18 +152,3 @@ class Acessorio(models.Model):
 
     def __str__(self):
         return f"Acessório: {self.nome} ({self.item.modelo})"
-
-
-class Tarefa(models.Model):
-    titulo = models.CharField(max_length=50, default="")
-    descricao = models.TextField(max_length=255, default="")
-    responsavel = models.ForeignKey(
-        Usuario, on_delete=models.CASCADE, related_name="tarefas_responsavel", null=True
-    )
-    chamado = models.ForeignKey(Chamado, on_delete=models.CASCADE)
-
-    class Meta:
-        verbose_name_plural = "Tarefas"
-
-    def __str__(self):
-        return f"Tarefa: {self.titulo} - Responsável: {self.responsavel}"
