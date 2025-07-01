@@ -66,9 +66,14 @@ jobs:
             - name: Gerar diagrama com timestamp
               run: |
                 cd gamb-back
-                mkdir -p diagrams
                 TIMESTAMP=$(date +"%Y%m%d_%H%M%S")
-                python manage.py graph_models gambiarra -o gambiarra_$TIMESTAMP.png
+                python manage.py graph_models gambiarra -o diagrams/gambiarra_$TIMESTAMP.png
+            
+            - name: Tests upload artifacts
+              uses: actions/upload-artifact@v4.6.2
+              with:
+                  name: gambiarra_diagram
+                  path: gamb-back/diagrams/**
 
             - name: Shut down Docker containers
               run: |
