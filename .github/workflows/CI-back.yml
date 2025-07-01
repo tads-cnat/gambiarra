@@ -33,7 +33,7 @@ jobs:
             - name: Run tests inside Docker container
               run: |
                   cd gamb-back
-                  dockeer ps
+                  docker ps
                   docker compose exec -it gambdrf python manage.py test
 
 
