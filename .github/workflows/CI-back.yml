@@ -68,7 +68,7 @@ jobs:
                 cd gamb-back
                 mkdir -p diagrams
                 TIMESTAMP=$(date +"%Y%m%d_%H%M%S")
-                python manage.py graph_models gambiarra -o diagrams/gambiarra_$TIMESTAMP.png
+                python manage.py graph_models gambiarra -o gambiarra_$TIMESTAMP.png
 
             - name: Shut down Docker containers
               run: |
