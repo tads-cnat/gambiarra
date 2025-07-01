@@ -6,7 +6,6 @@ from authentication.models import Usuario
 import os
 
 
-
 # criar uma entidade para guardar esses status
 STATUS_CHOICES = [
     ("1", "Em Análise"),
