@@ -101,9 +101,9 @@ jobs:
 
       if: >
         github.event_name == 'push' && 
-        contains(join(github.event.head_commit.modified, '\n'), 'gamb-back/gambiarra/models') || 
-        contains(join(github.event.head_commit.added, '\n'), 'gamb-back/gambiarra/models') || 
-        contains(join(github.event.head_commit.removed, '\n'), 'gamb-back/gambiarra/models')
+        contains(join(github.event.head_commit.modified, '\n'), 'gamb-back/gambiarra/models.py') || 
+        contains(join(github.event.head_commit.added, '\n'), 'gamb-back/gambiarra/models.py') || 
+        contains(join(github.event.head_commit.removed, '\n'), 'gamb-back/gambiarra/models.py')
       steps:
         - uses: actions/checkout@v4
         - name: Instalar Graphviz e dependências
