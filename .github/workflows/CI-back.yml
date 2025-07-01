@@ -57,10 +57,10 @@ jobs:
 
             - name: Instalar Graphviz e dependências
               run: |
+                
                 sudo apt update
                 pip install pydotplus
                 sudo apt install graphviz 
-                python manage.py graph_models gambiarra -o gambiarra_diagram.png
                 pip install django-extensions
            
             - name: Gerar diagrama com timestamp
