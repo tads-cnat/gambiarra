@@ -90,3 +90,32 @@ jobs:
                   cd gamb-front
                   npm run build
 
+    generate-diagram:
+      needs: back
+      runs-on: ubuntu-latest
+
+      # Esta etapa só será executada se houver alterações nos modelos do Django
+      # ou se houver arquivos adicionados, modificados ou removidos no diretório gamb-back
+      # e se o evento for um push.
+      # Isso garante que o diagrama só seja gerado quando necessário.
+
+      if: >
+        github.event_name == 'push' && 
+        contains(join(github.event.head_commit.modified, '\n'), 'gamb-back/gambiarra/models') || 
+        contains(join(github.event.head_commit.added, '\n'), 'gamb-back/gambiarra/models') || 
+        contains(join(github.event.head_commit.removed, '\n'), 'gamb-back/gambiarra/models')
+      steps:
+        - uses: actions/checkout@v4
+        - name: Instalar Graphviz e dependências
+          run: |
+            sudo apt update
+            sudo apt install -y graphviz
+            python -m pip install --upgrade pip
+            pip install django django-extensions
+
+        - name: Gerar diagrama com timestamp
+          run: |
+            cd gamb-back
+            mkdir -p diagrams
+            TIMESTAMP=$(date +"%Y%m%d_%H%M%S")
+            python manage.py graph_models gambiarra -o diagrams/gambiarra_$TIMESTAMP.png
