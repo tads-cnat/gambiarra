@@ -153,6 +153,7 @@ class Acessorio(models.Model):
     def __str__(self):
         return f"Acessório: {self.nome} ({self.item.modelo})"
 
+
 class Tarefa(models.Model):
     titulo = models.CharField(max_length=50, default="")
     descricao = models.TextField(max_length=255, default="")
