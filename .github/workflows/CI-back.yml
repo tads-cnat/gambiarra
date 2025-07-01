@@ -33,8 +33,8 @@ jobs:
             - name: Run tests inside Docker container
               run: |
                   cd gamb-back
-                  docker ps
-                  docker compose exec -T gambdrf python manage.py test
+                  dockeer ps
+                  docker compose exec -it gambdrf python manage.py test
 
 
             - name: Install Python dependencies
@@ -61,7 +61,7 @@ jobs:
               run: |
                 cd gamb-back
                 TIMESTAMP=$(date +"%Y%m%d_%H%M%S")
-                docker compose exec -T gambdrf python manage.py graph_models gambiarra -o diagrams/gambiarra_$TIMESTAMP.png
+                docker compose exec -it gambdrf python manage.py graph_models gambiarra -o diagrams/gambiarra_$TIMESTAMP.png
             
             - name: Tests upload artifacts
               uses: actions/upload-artifact@v4.6.2
