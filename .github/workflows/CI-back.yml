@@ -25,20 +25,16 @@ jobs:
         steps:
             - uses: actions/checkout@v4
 
-            # Configura o Docker Buildx
-            - name: Instalar Docker Compose
-              run: sudo apt-get update && sudo apt-get install -y docker-compose
-
-            # Rodar os containers Docker (web + db + redis)
-            - name: Run up
+            - name: Start Docker containers
               run: |
-                  cd gamb-back
-                  docker-compose up  -d
+                cd gamb-back
+                docker compose up --build -d
 
             - name: Run tests inside Docker container
               run: |
                   cd gamb-back
-                  docker-compose exec -it gambdrf python manage.py test
+                  docker ps
+                  docker compose exec -it gambdrf python manage.py test
 
 
             - name: Install Python dependencies
@@ -63,12 +59,9 @@ jobs:
            
             - name: Gerar diagrama com timestamp
               run: |
-                  cd gamb-back
-                  TIMESTAMP=$(date +"%Y%m%d_%H%M%S")
-                  docker-compose exec -T gambdrf python manage.py graph_models gambiarra -o diagrams/gambiarra_$TIMESTAMP.png
-                  docker cp $(docker-compose ps -q gambdrf):/app/diagrams/gambiarra_$TIMESTAMP.png diagrams/gambiarra_$TIMESTAMP.png
-
-                
+                cd gamb-back
+                TIMESTAMP=$(date +"%Y%m%d_%H%M%S")
+                docker compose exec -it gambdrf python manage.py graph_models gambiarra -o diagrams/gambiarra_$TIMESTAMP.png
             
             - name: Tests upload artifacts
               uses: actions/upload-artifact@v4.6.2
@@ -77,8 +70,9 @@ jobs:
                 path: gamb-back/diagrams/**
 
             - name: Shut down Docker containers
+              if: always()
               run: |
                   cd gamb-back
-                  docker compose down 
+                  docker compose down --remove-orphans
 
       
