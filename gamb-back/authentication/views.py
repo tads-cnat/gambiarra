@@ -121,17 +121,22 @@ class UsuarioViewSet(viewsets.ModelViewSet):
 
 class SuapLoginView(APIView):
     def post(self, request):
-        username = request.data.get("username")
-        password = request.data.get("password")
-        suap_login_url = "https://suap.ifrn.edu.br/api/token/"
-        login_response = requests.post(
-            suap_login_url + "pair", data={"username": username, "password": password}
-        )
+        suap_login_url = "https://suap.ifrn.edu.br/api/rh/eu/"
+        token = request.data.get("token")
 
-        if login_response.status_code != 200:
-            return Response(
-                {"error": "Credenciais inválidas no SUAP"},
-                status=status.HTTP_401_UNAUTHORIZED,
-            )
+        if not token:
+            return Response({"erro":"Token não informado"}, status=status.HTTP_400_BAD_REQUEST)
 
-        print(login_response, login_response.text)
+        try:
+            suap = requests.get(suap_login_url, headers={"Authorization": f"Bearer {token}"})
+        
+        except requests.RequestException as e:
+            return Response({"erro":e})
+        
+        dados = suap.json 
+        cpf = dados.get("cpf")
+
+        if not cpf:
+            return Response({"erro":"Resposta do SUAP incompleta"})
+        
+
