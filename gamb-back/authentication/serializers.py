@@ -100,3 +100,9 @@ class AlterarCargoSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ["id"]
+
+class SuapLoginSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = "__all__"
+    #Ver quais dados necessários e alterar

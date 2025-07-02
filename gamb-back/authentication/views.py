@@ -135,8 +135,32 @@ class SuapLoginView(APIView):
         
         dados = suap.json 
         cpf = dados.get("cpf")
+        username = dados.get("nome_usual")
+        grupo = dados.get("tipo_usuario")
+        grupo = Group.objects.get(grupo)
+        imagem = dados.get("foto")
 
-        if not cpf:
+        if not cpf or username or grupo:
             return Response({"erro":"Resposta do SUAP incompleta"})
         
-
+        usuario_obj, created = Usuario.objects.update_or_create(
+                    username=username,
+                    cpf=cpf,
+                    iamgem=imagem,
+                    defaults={
+                        "email": "email@exemplo.com",
+                        "is_staff": grupo in GrupoEnum.INTERNO,
+                        "is_superuser": grupo in GrupoEnum.STAFF,
+                        "is_active": True,
+                        "grupo_id": grupo.id,
+                    },
+                )
+        
+        serializer = SuapLoginSerializer(usuario_obj)
+        status_ret = status.HTTP_201_CREATED if created else status.HTTP_202_ACCEPTED
+        return Response(
+            {"usuario": serializer.data, 
+             "mensagem": "Usuário criado com sucesso." if created 
+             else "Login realizado com sucesso."}, 
+             status=status_ret
+        )
