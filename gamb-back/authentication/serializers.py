@@ -105,8 +105,10 @@ class AlterarCargoSerializer(serializers.ModelSerializer):
 class SuapLoginRequestSerializer(serializers.Serializer):
     token = serializers.CharField(required=True)
 
+
 class SuapLoginResponseSerializer(serializers.Serializer):
     usuario = ProfileUserSerializer()
     access = serializers.CharField()
     refresh = serializers.CharField()
     mensagem = serializers.CharField()
+    

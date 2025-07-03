@@ -126,12 +126,11 @@ class UsuarioViewSet(viewsets.ModelViewSet):
 class SuapLoginView(APIView):
     permission_classes = [AllowAny]
 
-    @swagger_auto_schema(request_body=SuapLoginRequestSerializer, responses={200: SuapLoginResponseSerializer}) #mostra o formato da resposta no swagger
-
-    #Endpoint funcionando a partir do accesstoken do SUAP 
-    #Ver qual token é recebido, se é o access ou o Oauth2
-
+    @swagger_auto_schema(request_body=SuapLoginRequestSerializer, responses={200: SuapLoginResponseSerializer})  # mostra o formato da resposta no swagger
     def post(self, request):
+    # Endpoint funcionando a partir do accesstoken do SUAP
+    # Ver qual token é recebido, se é o access ou o Oauth2
+
         serializer = SuapLoginRequestSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         suap_token = serializer.validated_data["token"]
@@ -143,7 +142,6 @@ class SuapLoginView(APIView):
 
         suap_login_url = "https://suap.ifrn.edu.br/api/comum/meus-dados/"
 
-        
         try:
             response = requests.get(
                 suap_login_url,
@@ -181,24 +179,24 @@ class SuapLoginView(APIView):
                 status=status.HTTP_400_BAD_REQUEST,
             )
 
-        usuario_obj, created = Usuario.objects.get_or_create( #update_or_create usa um filtro e os valores default
+        usuario_obj, created = Usuario.objects.get_or_create(  # update_or_create usa um filtro e os valores default
             cpf=cpf_clean,
             defaults={
                 "username": email,
-                #"imagem": imagem, # -> a URL da imagem ser mt longa levanta o erro de value too long
+                # "imagem": imagem, # -> a URL da imagem ser mt longa levanta o erro de value too long
                 "email": email,
                 "first_name": nome.split()[0],
                 "last_name": nome.split()[-1],
-                "is_staff": False,  #Alterar com base no grupo
+                "is_staff": False,  # Alterar com base no grupo
                 "is_active": True,
-                "is_superuser": False, #Alterar com base no grupo
+                "is_superuser": False, # Alterar com base no grupo
                 "grupo": grupo_obj,
             },
         )
 
         usuario = ProfileUserSerializer(usuario_obj)
 
-        #Retorna o Refresh e Access Token
+        # Retorna o Refresh e Access Token
         refresh = RefreshToken.for_user(usuario_obj)
 
         status_ret = status.HTTP_201_CREATED if created else status.HTTP_202_ACCEPTED
@@ -215,4 +213,3 @@ class SuapLoginView(APIView):
             },
             status=status_ret,
         )
-
