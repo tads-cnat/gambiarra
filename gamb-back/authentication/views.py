@@ -1,21 +1,22 @@
 import requests
-from rest_framework import status, filters
-from rest_framework.generics import CreateAPIView, RetrieveAPIView
-from rest_framework.permissions import AllowAny, IsAuthenticated
-from rest_framework.decorators import action
-from rest_framework.response import Response
-from rest_framework.views import APIView
-from rest_framework import viewsets
-from .serializers import *
-from .permissions import *
-from .constants import *
-from drf_yasg.utils import swagger_auto_schema
-from drf_yasg import openapi
 from django.contrib.auth.models import Group
 from django.shortcuts import get_object_or_404
-from django_filters import rest_framework as filters
-from .models import Usuario
+from django_filters import rest_framework
+from django_filters.rest_framework import DjangoFilterBackend
+from drf_yasg import openapi
+from drf_yasg.utils import swagger_auto_schema
+from rest_framework import filters, status, viewsets
+from rest_framework.decorators import action
+from rest_framework.generics import CreateAPIView, RetrieveAPIView
+from rest_framework.permissions import AllowAny, IsAuthenticated
+from rest_framework.response import Response
+from rest_framework.views import APIView
+
+from .constants import *
 from .filters import UsuarioFilter
+from .models import Usuario
+from .permissions import *
+from .serializers import *
 
 
 class RegisterUserView(CreateAPIView):
@@ -60,7 +61,7 @@ class UsuarioViewSet(viewsets.ModelViewSet):
     serializer_class = ListarUsuarioSerializer
     permission_classes = [IsAuthenticated]
     queryset = Usuario.objects.all()
-    filter_backends = (filters.DjangoFilterBackend,)
+    filter_backends = [DjangoFilterBackend]
     filterset_class = UsuarioFilter
 
     def get_serializer_class(
@@ -120,20 +121,38 @@ class UsuarioViewSet(viewsets.ModelViewSet):
 
 
 class SuapLoginView(APIView):
+    permission_classes = [AllowAny]
+
+    @swagger_auto_schema(request_body=SuapLoginSerializer)
     def post(self, request):
+        serializer = SuapLoginSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        suap_token = serializer.validated_data["suap_token"]
+
+        if not suap_token:
+            return Response(
+                {"erro": "Token não informado"}, status=status.HTTP_400_BAD_REQUEST
+            )
+
         suap_login_url = "https://suap.ifrn.edu.br/api/rh/eu/"
-        token = request.data.get("token")
-
-        if not token:
-            return Response({"erro":"Token não informado"}, status=status.HTTP_400_BAD_REQUEST)
-
         try:
-            suap = requests.get(suap_login_url, headers={"Authorization": f"Bearer {token}"})
-        
+            response = requests.get(
+                suap_login_url,
+                headers={"Authorization": f"Bearer {suap_token}"},
+                timeout=20,
+            )
         except requests.RequestException as e:
-            return Response({"erro":e})
-        
-        dados = suap.json 
+            return Response({"erro": e})
+
+        if response.status_code != 200:
+            print("resposta ", response)
+            return Response(
+                {"erro": "Token inválido ou expirado"},
+                status=status.HTTP_401_UNAUTHORIZED,
+            )
+
+        print("resposta correta", response)
+        dados = response.json()
         cpf = dados.get("cpf")
         username = dados.get("nome_usual")
         grupo = dados.get("tipo_usuario")
@@ -141,26 +160,32 @@ class SuapLoginView(APIView):
         imagem = dados.get("foto")
 
         if not cpf or username or grupo:
-            return Response({"erro":"Resposta do SUAP incompleta"})
-        
+            return Response({"erro": "Resposta do SUAP incompleta"})
+
         usuario_obj, created = Usuario.objects.update_or_create(
-                    username=username,
-                    cpf=cpf,
-                    iamgem=imagem,
-                    defaults={
-                        "email": "email@exemplo.com",
-                        "is_staff": grupo in GrupoEnum.INTERNO,
-                        "is_superuser": grupo in GrupoEnum.STAFF,
-                        "is_active": True,
-                        "grupo_id": grupo.id,
-                    },
-                )
-        
-        serializer = SuapLoginSerializer(usuario_obj)
+            username=username,
+            cpf=cpf,
+            iamgem=imagem,
+            defaults={
+                "email": "email@exemplo.com",
+                "is_staff": grupo in GrupoEnum.INTERNO,
+                "is_superuser": grupo in GrupoEnum.STAFF,
+                "is_active": True,
+                "grupo_id": grupo.id,
+            },
+        )
+
+        usuario = ProfileUserSerializer(usuario_obj)
+
         status_ret = status.HTTP_201_CREATED if created else status.HTTP_202_ACCEPTED
         return Response(
-            {"usuario": serializer.data, 
-             "mensagem": "Usuário criado com sucesso." if created 
-             else "Login realizado com sucesso."}, 
-             status=status_ret
+            {
+                "usuario": usuario.data,
+                "mensagem": (
+                    "Usuário criado com sucesso."
+                    if created
+                    else "Login realizado com sucesso."
+                ),
+            },
+            status=status_ret,
         )
