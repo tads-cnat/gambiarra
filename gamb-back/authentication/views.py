@@ -146,13 +146,11 @@ class SuapLoginView(APIView):
             return Response({"erro": e})
 
         if response.status_code != 200:
-            print("resposta ", response)
             return Response(
                 {"erro": "Token inválido ou expirado"},
                 status=status.HTTP_401_UNAUTHORIZED,
             )
 
-        print("resposta correta", response.json())
         dados = response.json()
         cpf = dados.get("cpf")
         cpf_clean = re.sub(r'\D', '', cpf) 
