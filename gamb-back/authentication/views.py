@@ -128,8 +128,8 @@ class SuapLoginView(APIView):
 
     @swagger_auto_schema(request_body=SuapLoginRequestSerializer, responses={200: SuapLoginResponseSerializer})  # mostra o formato da resposta no swagger
     def post(self, request):
-    # Endpoint funcionando a partir do accesstoken do SUAP
-    # Ver qual token é recebido, se é o access ou o Oauth2
+        # Endpoint funcionando a partir do accesstoken do SUAP
+        # Ver qual token é recebido, se é o access ou o Oauth2
 
         serializer = SuapLoginRequestSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
@@ -189,7 +189,7 @@ class SuapLoginView(APIView):
                 "last_name": nome.split()[-1],
                 "is_staff": False,  # Alterar com base no grupo
                 "is_active": True,
-                "is_superuser": False, # Alterar com base no grupo
+                "is_superuser": False,  # Alterar com base no grupo
                 "grupo": grupo_obj,
             },
         )

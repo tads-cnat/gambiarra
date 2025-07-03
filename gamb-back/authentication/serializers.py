@@ -111,4 +111,3 @@ class SuapLoginResponseSerializer(serializers.Serializer):
     access = serializers.CharField()
     refresh = serializers.CharField()
     mensagem = serializers.CharField()
-    
