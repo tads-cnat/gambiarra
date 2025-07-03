@@ -12,6 +12,8 @@ from rest_framework.generics import CreateAPIView, RetrieveAPIView
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework_simplejwt.tokens import RefreshToken
+
 
 from .constants import *
 from .filters import UsuarioFilter
@@ -124,11 +126,11 @@ class UsuarioViewSet(viewsets.ModelViewSet):
 class SuapLoginView(APIView):
     permission_classes = [AllowAny]
 
-    @swagger_auto_schema(request_body=SuapLoginSerializer)
+    @swagger_auto_schema(request_body=SuapLoginRequestSerializer, responses={200: SuapLoginResponseSerializer}) #mostra o formato da resposta no swagger
     def post(self, request):
-        serializer = SuapLoginSerializer(data=request.data)
+        serializer = SuapLoginRequestSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        suap_token = serializer.validated_data["suap_token"]
+        suap_token = serializer.validated_data["token"]
 
         if not suap_token:
             return Response(
@@ -156,31 +158,51 @@ class SuapLoginView(APIView):
         cpf_clean = re.sub(r"\D", "", cpf)
         username = dados.get("nome_usual")
         grupo = dados.get("tipo_usuario")
-        grupo = Group.objects.get(name=grupo.lower())
         imagem = dados.get("foto")
         email = dados.get("email")
         first_name = dados.get("primeiro_nome")
         last_name = dados.get("ultimo_nome")
 
-        usuario_obj, created = Usuario.objects.update_or_create(
-            username=email,
+        try:
+            grupo_obj = Group.objects.get(name=grupo.lower())
+        except Group.DoesNotExist:
+            return Response(
+                {"erro": f"Grupo {grupo.lower()} não encontrado"},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        if not cpf_clean or not email:
+            return Response(
+                {"erro": "SUAP retornou dados incompletos"},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+        usuario_obj, created = Usuario.objects.get_or_create( #update_or_create usa um filtro e os valores default
             cpf=cpf_clean,
-            imagem=imagem,
-            email=email,
-            first_name=first_name,
-            last_name=last_name,
-            is_staff=False,
-            is_active=True,
-            is_superuser=False,
-            grupo=grupo,
+            defaults={
+                "username": email,
+                "imagem": imagem,
+                "email": email,
+                "first_name": first_name,
+                "last_name": last_name,
+                "is_staff": False,  #Alterar com base no grupo
+                "is_active": True,
+                "is_superuser": False, #Alterar com base no grupo
+                "grupo": grupo_obj,
+            },
         )
 
         usuario = ProfileUserSerializer(usuario_obj)
+
+        #Retorna o Refresh e Access Token
+        refresh = RefreshToken.for_user(usuario_obj)
 
         status_ret = status.HTTP_201_CREATED if created else status.HTTP_202_ACCEPTED
         return Response(
             {
                 "usuario": usuario.data,
+                "access": str(refresh.access_token),
+                "refresh": str(refresh),
                 "mensagem": (
                     "Usuário criado com sucesso."
                     if created
