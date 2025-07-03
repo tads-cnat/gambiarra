@@ -1,4 +1,5 @@
 import requests
+import re
 from django.contrib.auth.models import Group
 from django.shortcuts import get_object_or_404
 from django_filters import rest_framework
@@ -151,28 +152,29 @@ class SuapLoginView(APIView):
                 status=status.HTTP_401_UNAUTHORIZED,
             )
 
-        print("resposta correta", response)
+        print("resposta correta", response.json())
         dados = response.json()
         cpf = dados.get("cpf")
+        cpf_clean = re.sub(r'\D', '', cpf) 
         username = dados.get("nome_usual")
         grupo = dados.get("tipo_usuario")
-        grupo = Group.objects.get(grupo)
+        grupo = Group.objects.get(name=grupo.lower())
         imagem = dados.get("foto")
-
-        if not cpf or username or grupo:
-            return Response({"erro": "Resposta do SUAP incompleta"})
-
+        email = dados.get("email")
+        first_name = dados.get("primeiro_nome")
+        last_name = dados.get("ultimo_nome")
+        
         usuario_obj, created = Usuario.objects.update_or_create(
-            username=username,
-            cpf=cpf,
-            iamgem=imagem,
-            defaults={
-                "email": "email@exemplo.com",
-                "is_staff": grupo in GrupoEnum.INTERNO,
-                "is_superuser": grupo in GrupoEnum.STAFF,
-                "is_active": True,
-                "grupo_id": grupo.id,
-            },
+            username=email,
+            cpf=cpf_clean,
+            imagem=imagem,
+            email=email,
+            first_name=first_name,
+            last_name=last_name,
+            is_staff=False,
+            is_active=True,
+            is_superuser=False,
+            grupo=grupo
         )
 
         usuario = ProfileUserSerializer(usuario_obj)
