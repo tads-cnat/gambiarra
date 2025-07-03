@@ -153,7 +153,7 @@ class SuapLoginView(APIView):
 
         dados = response.json()
         cpf = dados.get("cpf")
-        cpf_clean = re.sub(r'\D', '', cpf) 
+        cpf_clean = re.sub(r"\D", "", cpf)
         username = dados.get("nome_usual")
         grupo = dados.get("tipo_usuario")
         grupo = Group.objects.get(name=grupo.lower())
@@ -161,7 +161,7 @@ class SuapLoginView(APIView):
         email = dados.get("email")
         first_name = dados.get("primeiro_nome")
         last_name = dados.get("ultimo_nome")
-        
+
         usuario_obj, created = Usuario.objects.update_or_create(
             username=email,
             cpf=cpf_clean,
@@ -172,7 +172,7 @@ class SuapLoginView(APIView):
             is_staff=False,
             is_active=True,
             is_superuser=False,
-            grupo=grupo
+            grupo=grupo,
         )
 
         usuario = ProfileUserSerializer(usuario_obj)
