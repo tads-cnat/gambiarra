@@ -2,6 +2,11 @@ import { userRoles } from "../../auth/roles";
 import { getUserActiveRole } from "../../auth/service/AuthStore";
 import GambButton from "../GambButton/Button";
 
+const ATRIBUIR_TAREFA_LABEL = "Atribuir Tarefa";
+const ALTERAR_STATUS_LABEL = "Alterar Status";
+const ATRIBUIR_BOLSISTA_LABEL = "Atribuir Bolsistas";
+const RESOLVER_CHAMADO_LABEL = "Resolver chamado";
+
 export interface Action {
 	name: string;
 	typeBtn: "verde" | "vermelho" | "cinza" | "roxo" | "amarelo" | "inline";
@@ -29,26 +34,26 @@ export const btnsPR: Record<number, Action[]> = {
 			name: "AtribuirTarefa",
 			typeBtn: "cinza",
 			icon: "clipboard",
-			label: "Atribuir Tarefa",
+			label: ATRIBUIR_TAREFA_LABEL,
 		},
 
 		{
 			name: "AlterarStatus",
 			typeBtn: "inline",
 			icon: "gear",
-			label: "Alterar Status",
+			label: ALTERAR_STATUS_LABEL,
 		},
 		{
 			name: "AtribuirBolsista",
 			typeBtn: "amarelo",
 			icon: "user",
-			label: "Atribuir Bolsistas",
+			label: ATRIBUIR_BOLSISTA_LABEL,
 		},
 		{
 			name: "ResolverChamado",
 			typeBtn: "roxo",
 			icon: "xcircle",
-			label: "Resolver chamado",
+			label: RESOLVER_CHAMADO_LABEL,
 		},
 	],
 	3: [
@@ -56,27 +61,27 @@ export const btnsPR: Record<number, Action[]> = {
 			name: "AtribuirTarefa",
 			typeBtn: "cinza",
 			icon: "clipboard",
-			label: "Atribuir Tarefa",
+			label: ATRIBUIR_TAREFA_LABEL,
 		},
 
 		{
 			name: "AlterarStatus",
 			typeBtn: "inline",
 			icon: "gear",
-			label: "Alterar Status",
+			label: ALTERAR_STATUS_LABEL,
 		},
 		{
 			name: "AtribuirBolsista",
 			typeBtn: "amarelo",
 			icon: "user",
-			label: "Atribuir Bolsistas",
+			label: ATRIBUIR_BOLSISTA_LABEL,
 		},
 
 		{
 			name: "ResolverChamado",
 			typeBtn: "roxo",
 			icon: "xcircle",
-			label: "Resolver chamado",
+			label: RESOLVER_CHAMADO_LABEL,
 		},
 	],
 	4: [
@@ -84,26 +89,26 @@ export const btnsPR: Record<number, Action[]> = {
 			name: "AtribuirTarefa",
 			typeBtn: "cinza",
 			icon: "clipboard",
-			label: "Atribuir Tarefa",
+			label: ATRIBUIR_TAREFA_LABEL,
 		},
 
 		{
 			name: "AlterarStatus",
 			typeBtn: "inline",
 			icon: "gear",
-			label: "Alterar Status",
+			label: ALTERAR_STATUS_LABEL,
 		},
 		{
 			name: "AtribuirBolsista",
 			typeBtn: "amarelo",
 			icon: "user",
-			label: "Atribuir Bolsistas",
+			label: ATRIBUIR_BOLSISTA_LABEL,
 		},
 		{
 			name: "ResolverChamado",
 			typeBtn: "roxo",
 			icon: "xcircle",
-			label: "Resolver chamado",
+			label: RESOLVER_CHAMADO_LABEL,
 		},
 	],
 	5: [
@@ -111,26 +116,26 @@ export const btnsPR: Record<number, Action[]> = {
 			name: "AtribuirTarefa",
 			typeBtn: "cinza",
 			icon: "clipboard",
-			label: "Atribuir Tarefa",
+			label: ATRIBUIR_TAREFA_LABEL,
 		},
 
 		{
 			name: "AlterarStatus",
 			typeBtn: "inline",
 			icon: "gear",
-			label: "Alterar Status",
+			label: ALTERAR_STATUS_LABEL,
 		},
 		{
 			name: "AtribuirBolsista",
 			typeBtn: "amarelo",
 			icon: "user",
-			label: "Atribuir Bolsistas",
+			label: ATRIBUIR_BOLSISTA_LABEL,
 		},
 		{
 			name: "ResolverChamado",
 			typeBtn: "roxo",
 			icon: "xcircle",
-			label: "Resolver chamado",
+			label: RESOLVER_CHAMADO_LABEL,
 		},
 	],
 	6: [
