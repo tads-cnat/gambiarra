@@ -127,6 +127,10 @@ class SuapLoginView(APIView):
     permission_classes = [AllowAny]
 
     @swagger_auto_schema(request_body=SuapLoginRequestSerializer, responses={200: SuapLoginResponseSerializer}) #mostra o formato da resposta no swagger
+
+    #Endpoint funcionando a partir do accesstoken do SUAP 
+    #Ver qual token é recebido, se é o access ou o Oauth2
+
     def post(self, request):
         serializer = SuapLoginRequestSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
@@ -137,7 +141,9 @@ class SuapLoginView(APIView):
                 {"erro": "Token não informado"}, status=status.HTTP_400_BAD_REQUEST
             )
 
-        suap_login_url = "https://suap.ifrn.edu.br/api/rh/eu/"
+        suap_login_url = "https://suap.ifrn.edu.br/api/comum/meus-dados/"
+
+        
         try:
             response = requests.get(
                 suap_login_url,
@@ -156,12 +162,10 @@ class SuapLoginView(APIView):
         dados = response.json()
         cpf = dados.get("cpf")
         cpf_clean = re.sub(r"\D", "", cpf)
-        username = dados.get("nome_usual")
-        grupo = dados.get("tipo_usuario")
-        imagem = dados.get("foto")
+        nome = dados.get("nome_usual")
+        grupo = dados.get("tipo_vinculo")
+        imagem = dados.get("url_foto_150x200")
         email = dados.get("email")
-        first_name = dados.get("primeiro_nome")
-        last_name = dados.get("ultimo_nome")
 
         try:
             grupo_obj = Group.objects.get(name=grupo.lower())
@@ -181,10 +185,10 @@ class SuapLoginView(APIView):
             cpf=cpf_clean,
             defaults={
                 "username": email,
-                "imagem": imagem,
+                #"imagem": imagem, # -> a URL da imagem ser mt longa levanta o erro de value too long
                 "email": email,
-                "first_name": first_name,
-                "last_name": last_name,
+                "first_name": nome.split()[0],
+                "last_name": nome.split()[-1],
                 "is_staff": False,  #Alterar com base no grupo
                 "is_active": True,
                 "is_superuser": False, #Alterar com base no grupo
@@ -211,3 +215,4 @@ class SuapLoginView(APIView):
             },
             status=status_ret,
         )
+
