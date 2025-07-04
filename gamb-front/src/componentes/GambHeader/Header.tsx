@@ -7,8 +7,11 @@ import {
 } from "@phosphor-icons/react";
 import { HeaderContainer, HeaderContent } from "./headerstyle";
 import { useNavigate } from "react-router-dom";
+<<<<<<< HEAD
 import GambButton from "../GambButton/Button";
  
+=======
+>>>>>>> eacccb30155a0fcc82af83a99f9721b0bc1e292c
 
 export function Header() {
 	const navigate = useNavigate();

@@ -65,6 +65,7 @@ INSTALLED_APPS = [
     # cors
     "corsheaders",
     # django
+    "django_extensions",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",

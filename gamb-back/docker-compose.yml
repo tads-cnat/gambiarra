@@ -32,6 +32,7 @@ services:
       DATABASE_HOST: ${DATABASE_HOST}
       DATABASE_PORT: ${DATABASE_PORT}
       MOD_DEV: 1    
+      MOD_DEV: 1    
 
   db:          
     image: postgres:13-alpine
