@@ -1,19 +1,25 @@
-from rest_framework import status, filters
-from rest_framework.generics import CreateAPIView, RetrieveAPIView
-from rest_framework.permissions import AllowAny, IsAuthenticated
-from rest_framework.decorators import action
-from rest_framework.response import Response
-from rest_framework import viewsets
-from .serializers import *
-from .permissions import *
-from .constants import *
-from drf_yasg.utils import swagger_auto_schema
-from drf_yasg import openapi
+import requests
+import re
 from django.contrib.auth.models import Group
 from django.shortcuts import get_object_or_404
-from django_filters import rest_framework as filters
-from .models import Usuario
+from django_filters import rest_framework
+from django_filters.rest_framework import DjangoFilterBackend
+from drf_yasg import openapi
+from drf_yasg.utils import swagger_auto_schema
+from rest_framework import filters, status, viewsets
+from rest_framework.decorators import action
+from rest_framework.generics import CreateAPIView, RetrieveAPIView
+from rest_framework.permissions import AllowAny, IsAuthenticated
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from rest_framework_simplejwt.tokens import RefreshToken
+
+
+from .constants import *
 from .filters import UsuarioFilter
+from .models import Usuario
+from .permissions import *
+from .serializers import *
 
 
 class RegisterUserView(CreateAPIView):
@@ -21,12 +27,18 @@ class RegisterUserView(CreateAPIView):
     permission_classes = [AllowAny]  # any can register an account
 
     def create(self, request):
-        serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(
-            raise_exception=True
-        )  # checks the validations inside the serializer
-        self.perform_create(serializer)  # calls the serializer's create method
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
+        try:
+            serializer = self.get_serializer(data=request.data)
+            serializer.is_valid(
+                raise_exception=True
+            )  # checks the validations inside the serializer
+            self.perform_create(serializer)  # calls the serializer's create method
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        except:
+            return Response(
+                "Erro ao realizar o cadastro",
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            )
 
 
 class ProfileUserView(RetrieveAPIView):
@@ -52,7 +64,7 @@ class UsuarioViewSet(viewsets.ModelViewSet):
     serializer_class = ListarUsuarioSerializer
     permission_classes = [IsAuthenticated]
     queryset = Usuario.objects.all()
-    filter_backends = (filters.DjangoFilterBackend,)
+    filter_backends = [DjangoFilterBackend]
     filterset_class = UsuarioFilter
 
     def get_serializer_class(
@@ -108,4 +120,101 @@ class UsuarioViewSet(viewsets.ModelViewSet):
         serializer = ListarUsuarioSerializer(usuario)
         return Response(
             {"mensagem": mensagem, "usuario": serializer.data}, status=retorno
+        )
+
+
+class SuapLoginView(APIView):
+    permission_classes = [AllowAny]
+
+    @swagger_auto_schema(
+        request_body=SuapLoginRequestSerializer,
+        responses={200: SuapLoginResponseSerializer},
+    )  # mostra o formato da resposta no swagger
+    def post(self, request):
+        # Endpoint funcionando a partir do accesstoken do SUAP
+        # Ver qual token é recebido, se é o access ou o Oauth2
+
+        serializer = SuapLoginRequestSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        suap_token = serializer.validated_data["token"]
+
+        if not suap_token:
+            return Response(
+                {"erro": "Token não informado"}, status=status.HTTP_400_BAD_REQUEST
+            )
+
+        suap_login_url = "https://suap.ifrn.edu.br/api/comum/meus-dados/"
+
+        try:
+            response = requests.get(
+                suap_login_url,
+                headers={"Authorization": f"Bearer {suap_token}"},
+                timeout=20,
+            )
+        except requests.RequestException as e:
+            return Response({"erro": e})
+
+        if response.status_code != 200:
+            return Response(
+                {"erro": "Token inválido ou expirado"},
+                status=status.HTTP_401_UNAUTHORIZED,
+            )
+
+        dados = response.json()
+        cpf = dados.get("cpf")
+        cpf_clean = re.sub(r"\D", "", cpf)
+        nome = dados.get("nome_usual")
+        grupo = dados.get("tipo_vinculo")
+        imagem = dados.get("url_foto_150x200")
+        email = dados.get("email")
+
+        try:
+            grupo_obj = Group.objects.get(name=grupo.lower())
+        except Group.DoesNotExist:
+            return Response(
+                {"erro": f"Grupo {grupo.lower()} não encontrado"},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+        if not cpf_clean or not email:
+            return Response(
+                {"erro": "SUAP retornou dados incompletos"},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+        usuario_obj, created = (
+            Usuario.objects.get_or_create(  # update_or_create usa um filtro e os valores default
+                cpf=cpf_clean,
+                defaults={
+                    "username": email,
+                    # "imagem": imagem, # -> a URL da imagem ser mt longa levanta o erro de value too long
+                    "email": email,
+                    "first_name": nome.split()[0],
+                    "last_name": nome.split()[-1],
+                    "is_staff": False,  # Alterar com base no grupo
+                    "is_active": True,
+                    "is_superuser": False,  # Alterar com base no grupo
+                    "grupo": grupo_obj,
+                },
+            )
+        )
+
+        usuario = ProfileUserSerializer(usuario_obj)
+
+        # Retorna o Refresh e Access Token
+        refresh = RefreshToken.for_user(usuario_obj)
+
+        status_ret = status.HTTP_201_CREATED if created else status.HTTP_202_ACCEPTED
+        return Response(
+            {
+                "usuario": usuario.data,
+                "access": str(refresh.access_token),
+                "refresh": str(refresh),
+                "mensagem": (
+                    "Usuário criado com sucesso."
+                    if created
+                    else "Login realizado com sucesso."
+                ),
+            },
+            status=status_ret,
         )

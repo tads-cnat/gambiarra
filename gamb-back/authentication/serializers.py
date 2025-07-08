@@ -27,28 +27,24 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
         fields = (
             "username",
             "email",
-            "password1",
-            "password2",
+            "password",
+            "cpf",
         )  # fields to put in the register process
 
-    def validate(self, attrs):  # checks and validate the password
-        if attrs["password1"] != attrs["password2"]:
-            raise serializers.ValidationError(
-                {"password": "Senhas precisam ser iguais."}
-            )
-        return attrs
+    
 
     def create(self, validated_data):  # creates and saves the user
-        validated_data.pop("password2")
+        validated_data.pop("password")
         cliente, created = Group.objects.get_or_create(name=GrupoEnum.CLIENTE)
 
         user = User(
             username=validated_data["username"],
             email=validated_data["email"],
             grupo=cliente,
+            cpf=validated_data["cpf"],
         )
         user.set_password(
-            validated_data["password1"]
+            validated_data["password"]
         )  # used this instead of create_user method to make sure the password is hashed
         user.save()
         # user.groups.add(cliente)    #VER COM O PESSOAL SE VAMOS QUERER ISSO AQUI MESMO(ACUMULAR GRUPOS)
@@ -98,3 +94,14 @@ class AlterarCargoSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ["id"]
+
+
+class SuapLoginRequestSerializer(serializers.Serializer):
+    token = serializers.CharField(required=True)
+
+
+class SuapLoginResponseSerializer(serializers.Serializer):
+    usuario = ProfileUserSerializer()
+    access = serializers.CharField()
+    refresh = serializers.CharField()
+    mensagem = serializers.CharField()

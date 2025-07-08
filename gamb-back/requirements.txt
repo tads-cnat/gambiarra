@@ -36,7 +36,7 @@ pathspec==0.12.1
 pillow==10.4.0
 platformdirs==4.3.8
 psycopg==3.2.3
-psycopg-binary==3.2.9
+psycopg-binary==3.2.3
 pyasn1==0.6.1
 pyasn1_modules==0.4.1
 pycodestyle==2.13.0
@@ -62,3 +62,4 @@ typing_extensions==4.14.0
 tzdata==2024.1
 uritemplate==4.1.1
 zope.interface==7.2
+requests
