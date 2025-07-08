@@ -65,6 +65,7 @@ INSTALLED_APPS = [
     # cors
     "corsheaders",
     # django
+    "django_extensions",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -184,11 +185,11 @@ STATICFILES_DIRS = [
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
 
-CORS_ALLOWED_ALL_ORIGINS = os.getenv("DJANGO_CORS_ALLOW_ALL_ORIGINS", "0") == "1"
+CORS_ALLOW_ALL_ORIGINS = os.getenv("DJANGO_CORS_ALLOW_ALL_ORIGINS", "0") == "1"
 
 # CORS
 CORS_ALLOWED_ORIGINS = (
-    ["http://localhost:5173"]
+    ["http://localhost:8000", "http://localhost:5173"]
     if MOD_DEV
     else [
         origin.strip()
