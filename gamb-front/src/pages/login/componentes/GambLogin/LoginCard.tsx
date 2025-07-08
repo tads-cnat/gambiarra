@@ -128,9 +128,9 @@ export function LoginCard() {
 									icon="github"
 									type="button"
 									size="large"
-									onClick={() => {
-										openSuapLoginPopup();
-									}}
+									onClick={
+										openSuapLoginPopup
+									}
 								>
 									<img
 										src=" suap.svg"

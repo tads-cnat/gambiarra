@@ -5,6 +5,8 @@ import {
 	getAuthRefreshToken,
 	getAuthToken,
 	isAuthenticatedStore,
+	setAuthRefreshToken,
+	setAuthToken,
 	setIsAuthenticatedStore,
 	setUserActive,
 	setUserActiveRole,
@@ -27,8 +29,8 @@ class AuthService extends BaseService {
 
 			if (response.status === 200) {
 				const { access, refresh } = response.data;
-				localStorage.setItem("access_token", access);
-				localStorage.setItem("refresh_token", refresh);
+				setAuthRefreshToken(refresh);
+				setAuthToken(access);
 				// Buscar perfil
 				const userData = await this.profile();
 				if (userData) {

@@ -27,14 +27,22 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
         fields = (
             "username",
             "email",
-            "password",
+            "password1",
+            "password2",
             "cpf",
         )  # fields to put in the register process
+
+    def validate(self, attrs):  # checks and validate the password
+        if attrs["password1"] != attrs["password2"]:
+            raise serializers.ValidationError(
+                {"password": "Senhas precisam ser iguais."}
+            )
+        return attrs
 
     
 
     def create(self, validated_data):  # creates and saves the user
-        validated_data.pop("password")
+        validated_data.pop("password2")
         cliente, created = Group.objects.get_or_create(name=GrupoEnum.CLIENTE)
 
         user = User(
@@ -44,7 +52,7 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
             cpf=validated_data["cpf"],
         )
         user.set_password(
-            validated_data["password"]
+            validated_data["password1"]
         )  # used this instead of create_user method to make sure the password is hashed
         user.save()
         # user.groups.add(cliente)    #VER COM O PESSOAL SE VAMOS QUERER ISSO AQUI MESMO(ACUMULAR GRUPOS)

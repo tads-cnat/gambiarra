@@ -1,5 +1,3 @@
-import { useCallback, useEffect } from "react";
-import { redirect, useNavigate } from "react-router-dom";
 import { SuapClient } from "./client";
 
 const CLIENT_ID = "1ZhTRkW4vyAPp64qdfnqfhGWu5ZcpqWxRbiKpXki";

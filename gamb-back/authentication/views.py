@@ -124,11 +124,14 @@ class UsuarioViewSet(viewsets.ModelViewSet):
 
 
 class SuapLoginView(APIView):
-    permission_classes = [AllowAny]
-
+    permission_classes = [AllowAny]  # Permite acesso a qualquer usuário, autenticado ou não
+    
     @swagger_auto_schema(
         request_body=SuapLoginRequestSerializer,
         responses={200: SuapLoginResponseSerializer},
+        permissions=[AllowAny],
+        operation_description="Realiza o login do usuário utilizando o token do SUAP.",
+        operation_summary="Login com SUAP",
     )  # mostra o formato da resposta no swagger
     def post(self, request):
         # Endpoint funcionando a partir do accesstoken do SUAP
@@ -143,7 +146,7 @@ class SuapLoginView(APIView):
                 {"erro": "Token não informado"}, status=status.HTTP_400_BAD_REQUEST
             )
 
-        suap_login_url = "https://suap.ifrn.edu.br/api/comum/meus-dados/"
+        suap_login_url = "https://suap.ifrn.edu.br/api/rh/eu"
 
         try:
             response = requests.get(
@@ -164,7 +167,7 @@ class SuapLoginView(APIView):
         cpf = dados.get("cpf")
         cpf_clean = re.sub(r"\D", "", cpf)
         nome = dados.get("nome_usual")
-        grupo = dados.get("tipo_vinculo")
+        grupo = dados.get("tipo_usuario")
         imagem = dados.get("url_foto_150x200")
         email = dados.get("email")
 

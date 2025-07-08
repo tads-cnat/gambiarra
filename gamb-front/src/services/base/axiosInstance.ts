@@ -15,7 +15,7 @@ const axiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use(
 	(config) => {
-		const ignoredUrls = [`/auth/token/`, `/auth/login/`];
+		const ignoredUrls = [`/auth/token/`, `/auth/login/`, `/auth/suap/`];
 
 		console.log("Interceptando requisição:", config.url);
 		if (ignoredUrls.some((url) => config.url?.endsWith(url))) {

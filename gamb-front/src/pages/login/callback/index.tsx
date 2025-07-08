@@ -1,16 +1,43 @@
+import { useEffect } from "react";
+import {
+	isAuthenticatedStore,
+	setAuthRefreshToken,
+	setAuthToken,
+	setIsAuthenticatedStore,
+	setUserActive,
+	setUserActiveRole,
+	UserActive,
+} from "../../../auth/service/AuthStore";
+import axiosInstance from "../../../services/base/axiosInstance";
 import { suap } from "../../../services/base/suap-client";
 
 export default function Callback() {
-	// Este ficheiro deve estar no endpoint configurado como redirect_uri
-	suap.init();
-	console.log(suap.getToken().getValue());
+	useEffect(() => {
+		suap.init();
+		console.log(suap.getToken().getValue());
 
-	if (suap.isAuthenticated()) {
-		suap.getResource("Testando", (data) => {
-			console.log("Dados recebidos do SUAP:", data);
-			localStorage.setItem("suap_oauth_data", JSON.stringify(data));
-		});
-	}
+		if (suap.isAuthenticated()) {
+			console.log("Usuário autenticado com sucesso!");
+			axiosInstance
+				.post("/auth/suap/", { token: suap.getToken().getValue() })
+				.then((response) => {
+					const { access, refresh, usuario } = response.data;
+					setAuthRefreshToken(refresh);
+					setAuthToken(access);
 
-	return null; // Não renderiza nada, apenas fecha a janela
+					const userData: UserActive = usuario;
+					if (userData) {
+						setUserActive(userData);
+						setUserActiveRole(userData.grupo);
+						setIsAuthenticatedStore();
+					}
+					localStorage.setItem("suap_oauth_code", suap.getToken().getValue()?.toString() || "");
+				})
+				.finally(() => {
+					window.close();
+				});
+		}
+	}, []);
+
+	return null;
 }
