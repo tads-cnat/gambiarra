@@ -1,5 +1,5 @@
-import { userRoles } from "../../auth/roles";
-import { getUserActiveRole } from "../../auth/service/AuthStore";
+
+import { isUserGerente, isUserProfessor } from "../../utils/checkRoleUser";
 import GambButton from "../GambButton/Button";
 
 const ATRIBUIR_TAREFA_LABEL = "Atribuir Tarefa";
@@ -190,32 +190,18 @@ export const btnClientes: Record<number, Action[]> = {
 	8: [],
 };
 
-// Função para checar a permissão (ajuste conforme sua lógica)
-const checkPermission = (roles: string[]) =>
-	roles.includes(getUserActiveRole() ?? "");
-
 // Função que mapeia as ações para componentes <Notificacao />
 export const getActionsByStatus = (
 	status: number,
 	idChamado: number,
 	funct?: Record<string, (id: number) => void> // Parâmetro opcional para funções de ação
 ): React.JSX.Element[] => {
-	console.log(
-		`getActionsByStatus - status: ${status}, idChamado: ${idChamado}`
-	);
-	console.log(`getActionsByStatus - userRole: ${getUserActiveRole()}`);
-	console.log(
-		`checkPermission - userRole: ${getUserActiveRole()}, roles: ${[
-			userRoles.INTERNO.FUNCIONARIO.PR,
-		]}`
-	);
-	const actions: Action[] = checkPermission([
-		userRoles.INTERNO.FUNCIONARIO.GR,
-	])
-		? btnsGR[status] || []
-		: checkPermission([userRoles.INTERNO.FUNCIONARIO.PR])
-		? btnsPR[status] || []
-		: btnClientes[status] || [];
+	
+	const actions: Action[] = isUserGerente()
+		? btnsGR[status]
+		: isUserProfessor()
+		? btnsPR[status]
+		: btnClientes[status];
 
 	return actions.map((action, index) => (
 		<GambButton

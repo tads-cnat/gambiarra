@@ -110,13 +110,7 @@ export default function ChamadoDetalhes({ chamado }: ChamadoDetalhesProps) {
               <div className="flex-grow min-w-[50px] h-[2px] bg-[#9CCFFF]"></div>
             </div>
             <div className="flex  flex-wrap gap-4 mt-4">
-              {/* <GambButton variant="verde" label="Aceitar" icon="checkcircle" />
-              <GambButton variant="vermelho" label="Recusar" icon="checkcircle" />
-              <GambButton variant="vermelho" label="Arquivar" icon="checkcircle" />
-              <GambButton variant="roxo" label="Fechar Chamado" icon="checkcircle" />
-              <GambButton variant="amarelo" label="Avaliar" icon="checkcircle" />
-              <GambButton variant="cinza" label="Atribuir tarefas" icon="checkcircle" />
-              <GambButton variant="branco" label="Alterar Status" icon="checkcircle" /> */}
+         
               {getActionsByStatus(Number(chamado.status.id), chamado.id, Actions).length > 0 ? getActionsByStatus(Number(chamado.status.id), chamado.id, Actions) : <p>Nenhuma ação disponivel</p>}
 
             </div>

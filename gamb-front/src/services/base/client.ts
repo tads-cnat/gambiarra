@@ -72,7 +72,6 @@ class Token {
 	public isValid(): boolean {
 		return Cookies.get("suapToken") !== null && this.value !== null;
 	}
-	
 
 	public revoke(): void {
 		this.value = null;
@@ -80,6 +79,7 @@ class Token {
 		this.finishTime = null;
 
 		Cookies.remove("suapToken");
+		Cookies.remove("sessionid");
 		Cookies.remove("suapTokenExpirationTime");
 		Cookies.remove("suapScope");
 	}
@@ -92,7 +92,7 @@ export class SuapClient {
 	private scope: string;
 	private resourceURL: string;
 	private authorizationURL: string;
-	private logoutURL: string;
+	// private logoutURL: string;
 	private responseType: string = "token";
 	private grantType: string = "implict";
 	private token!: Token;
@@ -111,9 +111,9 @@ export class SuapClient {
 		this.redirectURI = redirectURI;
 		this.scope = scope;
 
-		this.resourceURL = `${this.authHost}/api/eu/`;
+		this.resourceURL = `${this.authHost}/rh/eu/`;
 		this.authorizationURL = `${this.authHost}/o/authorize/`;
-		this.logoutURL = `${this.authHost}/o/revoke_token/`;
+		// this.logoutURL = `${this.authHost}/o/revoke_token/`;
 
 		this.dataJSON = {};
 	}
@@ -196,16 +196,20 @@ export class SuapClient {
 		window.location.href = this.getLoginURL();
 	}
 
-	public async logout(): Promise<void> {
+	public  logout():  void  {
 		try {
-			await axios.post(this.logoutURL, {
-				token: this.token.getValue(),
-				client_id: this.clientID,
-			});
+			// await axios.post(this.logoutURL, {
+			// 	token: this.token.getValue(),
+			// 	client_id: this.clientID,
+			// });
 			this.token.revoke();
-			window.location.href = this.redirectURI;
+			// console.log("Token revoked");
+
+			// window.location.href = this.redirectURI;
 		} catch (error) {
-			alert("Falha na comunicação com o SUAP");
+			alert(
+				"Falha na comunicação com o SUAPFalha na comunicação com o SUAPFalha na comunicação com o SUAPFalha na comunicação com o SUAPFalha na comunicação com o SUAPFalha na comunicação com o SUAPFalha na comunicação com o SUAPFalha na comunicação com o SUAPFalha na comunicação com o SUAPFalha na comunicação com o SUAPFalha na comunicação com o SUAPFalha na comunicação com o SUAPFalha na comunicação com o SUAPFalha na comunicação com o SUAPFalha na comunicação com o SUAPFalha na comunicação com o SUAPFalha na comunicação com o SUAPFalha na comunicação com o SUAPFalha na comunicação com o SUAPFalha na comunicação com o SUAPFalha na comunicação com o SUAPFalha na comunicação com o SUAPFalha na comunicação com o SUAPFalha na comunicação com o SUAPFalha na comunicação com o SUAPFalha na comunicação com o SUAPFalha na comunicação com o SUAPFalha na comunicação com o SUAPFalha na comunicação com o SUAPFalha na comunicação com o SUAP "
+			);
 			console.error(error);
 		}
 	}

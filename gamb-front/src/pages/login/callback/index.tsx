@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import {
-	isAuthenticatedStore,
 	setAuthRefreshToken,
 	setAuthToken,
 	setIsAuthenticatedStore,
@@ -10,14 +9,18 @@ import {
 } from "../../../auth/service/AuthStore";
 import axiosInstance from "../../../services/base/axiosInstance";
 import { suap } from "../../../services/base/suap-client";
+import { useNavigate } from "react-router-dom"; // CORRETO
 
 export default function Callback() {
+
+	const navigate = useNavigate();
+
 	useEffect(() => {
 		suap.init();
 		console.log(suap.getToken().getValue());
 
 		if (suap.isAuthenticated()) {
-			console.log("Usuário autenticado com sucesso!");
+			
 			axiosInstance
 				.post("/auth/suap/", { token: suap.getToken().getValue() })
 				.then((response) => {
@@ -31,13 +34,18 @@ export default function Callback() {
 						setUserActiveRole(userData.grupo);
 						setIsAuthenticatedStore();
 					}
+					console.log("Usuário autenticado:", userData);
 					localStorage.setItem("suap_oauth_code", suap.getToken().getValue()?.toString() || "");
+				}).catch((error) => {
+					console.error("Erro ao autenticar usuário:", error);
 				})
 				.finally(() => {
-					window.close();
+					navigate("/dashboard"); // CORRETO
 				});
+		} else {
+			console.log("Usuário não autenticado ou modal não aberto.");
 		}
-	}, []);
+	}, [navigate]); // boa prática: adicione navigate nas deps
 
 	return null;
 }

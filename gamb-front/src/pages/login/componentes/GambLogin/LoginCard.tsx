@@ -28,9 +28,9 @@ export function LoginCard() {
 	} = useForm<LoginSubmit>({
 		resolver: yupResolver(loginSchema),
 	});
-	const [loginIsValid, setLoginIsValid] = useState<boolean | null>(null); // Valor inicial como `null`
+	const [loginIsValid, setLoginIsValid] = useState<boolean | null>(null);
 	const navigate = useNavigate(); // Defina o hook navigate
-
+	const [ isExecute, setIsExecute ] = useState<boolean>(false);
 	async function handleLogin(data: LoginSubmit): Promise<void> {
 		await authService.loginAuth(data).then((response) => {
 			if (response.sucesso) {
@@ -128,9 +128,9 @@ export function LoginCard() {
 									icon="github"
 									type="button"
 									size="large"
-									onClick={
-										openSuapLoginPopup
-									}
+									onClick={() => {
+										openSuapLoginPopup();
+									}}
 								>
 									<img
 										src=" suap.svg"

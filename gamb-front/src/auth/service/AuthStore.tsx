@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
+import { suap } from "../../services/base/suap-client";
 
 // Interface para o usuário ativo
 export interface UserActive {
@@ -85,6 +86,9 @@ export const useUser = create<UserStore>()(
 					userActiveRole: "cliente",
 					isAuthenticated: false,
 				});
+				console.log("Usuário deslogado");
+				suap.logout(); 
+				suap.init(); // Re-inicializa o cliente SUAP
 			},
 		}),
 		{

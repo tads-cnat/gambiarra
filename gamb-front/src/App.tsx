@@ -50,7 +50,7 @@ export function App() {
 					/>
 					<Route
 						path="/login/callback"
-						element={ Callback() }
+						element={ <Callback /> }
 					/>
 
 					<Route
@@ -100,7 +100,7 @@ export function App() {
 								<ProtectedRoute
 									element={<GerenciarUsuarios />}
 									requiredRole={[
-										userRoles.INTERNO.FUNCIONARIO.GR,
+										userRoles.INTERNO.GERENTE,
 									]}
 								/>
 							}
