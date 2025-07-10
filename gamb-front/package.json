@@ -12,6 +12,7 @@
   "dependencies": {
     "@hookform/resolvers": "^5.1.1",
     "@phosphor-icons/react": "^2.1.10",
+    "antd": "^5.26.4",
     "autoprefixer": "^10.4.20",
     "axios": "^1.7.8",
     "headlessui": "^0.0.0",
