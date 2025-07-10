@@ -39,8 +39,6 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
             )
         return attrs
 
-    
-
     def create(self, validated_data):  # creates and saves the user
         validated_data.pop("password2")
         cliente, created = Group.objects.get_or_create(name=GrupoEnum.CLIENTE)
@@ -86,6 +84,7 @@ class ProfileUserSerializer(serializers.ModelSerializer):
             from urllib.parse import urljoin
 
             return urljoin(settings.MEDIA_URL, path)
+
         if obj.imagem:
             return build_image_url(obj.imagem.url)
 
