@@ -1,5 +1,4 @@
 import requests
-import re
 from django.contrib.auth.models import Group
 from django.shortcuts import get_object_or_404
 from django_filters import rest_framework
@@ -13,8 +12,8 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import RefreshToken
-
-
+import os
+import re
 from .constants import *
 from .filters import UsuarioFilter
 from .models import Usuario
@@ -124,19 +123,16 @@ class UsuarioViewSet(viewsets.ModelViewSet):
 
 
 class SuapLoginView(APIView):
-    permission_classes = [AllowAny]  # Permite acesso a qualquer usuário, autenticado ou não
-    
+    permission_classes = [AllowAny]
+
     @swagger_auto_schema(
         request_body=SuapLoginRequestSerializer,
         responses={200: SuapLoginResponseSerializer},
         permissions=[AllowAny],
         operation_description="Realiza o login do usuário utilizando o token do SUAP.",
         operation_summary="Login com SUAP",
-    )  # mostra o formato da resposta no swagger
+    )
     def post(self, request):
-        # Endpoint funcionando a partir do accesstoken do SUAP
-        # Ver qual token é recebido, se é o access ou o Oauth2
-
         serializer = SuapLoginRequestSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         suap_token = serializer.validated_data["token"]
@@ -155,7 +151,7 @@ class SuapLoginView(APIView):
                 timeout=20,
             )
         except requests.RequestException as e:
-            return Response({"erro": e})
+            return Response({"erro": str(e)})
 
         if response.status_code != 200:
             return Response(
@@ -168,9 +164,10 @@ class SuapLoginView(APIView):
         cpf_clean = re.sub(r"\D", "", cpf)
         nome = dados.get("nome_usual")
         grupo = dados.get("tipo_usuario")
-        imagem = dados.get("url_foto_150x200")
+        imagem_url = dados.get("foto")
         email = dados.get("email")
-
+        username = email.split("@")[0]
+        
         try:
             grupo_obj = Group.objects.get(name=grupo.lower())
         except Group.DoesNotExist:
@@ -184,29 +181,26 @@ class SuapLoginView(APIView):
                 {"erro": "SUAP retornou dados incompletos"},
                 status=status.HTTP_400_BAD_REQUEST,
             )
-
-        usuario_obj, created = (
-            Usuario.objects.get_or_create(  # update_or_create usa um filtro e os valores default
-                cpf=cpf_clean,
-                defaults={
-                    "username": email,
-                    # "imagem": imagem, # -> a URL da imagem ser mt longa levanta o erro de value too long
-                    "email": email,
-                    "first_name": nome.split()[0],
-                    "last_name": nome.split()[-1],
-                    "is_staff": False,  # Alterar com base no grupo
-                    "is_active": True,
-                    "is_superuser": False,  # Alterar com base no grupo
-                    "grupo": grupo_obj,
-                },
-            )
+              
+        
+        usuario_obj, created = Usuario.objects.get_or_create(
+            cpf=cpf_clean,
+            defaults={
+                "username": username,
+                "email": email,
+                "first_name": nome.split()[0],
+                "last_name": nome.split()[-1],
+                "is_staff": False,
+                "is_active": True,
+                "is_superuser": False,
+                "grupo": grupo_obj,
+            },
         )
-
+        
+        
+             
         usuario = ProfileUserSerializer(usuario_obj)
-
-        # Retorna o Refresh e Access Token
         refresh = RefreshToken.for_user(usuario_obj)
-
         status_ret = status.HTTP_201_CREATED if created else status.HTTP_202_ACCEPTED
         return Response(
             {

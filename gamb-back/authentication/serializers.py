@@ -86,10 +86,10 @@ class ProfileUserSerializer(serializers.ModelSerializer):
             from urllib.parse import urljoin
 
             return urljoin(settings.MEDIA_URL, path)
-
         if obj.imagem:
             return build_image_url(obj.imagem.url)
-        return build_image_url("Padrao/perfil_padrao.png")
+
+        return f"https://api.dicebear.com/7.x/initials/svg?seed={obj.username}"
 
 
 class ListarUsuarioSerializer(serializers.ModelSerializer):
