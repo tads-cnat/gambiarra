@@ -24,6 +24,7 @@ import {
 	getUserActiveRole,
 	logout,
 } from "../../auth/service/AuthStore";
+import { isUserExternal } from "../../utils/checkRoleUser";
 
 // 1) Importe o hook para acessar dados do usuário
 
@@ -125,6 +126,9 @@ export function Sidebar() {
 				"estatisticas",
 			],
 			cliente: ["home", "ordemServico", "estatisticas"],
+			aluno: ["home", "ordemServico", "estatisticas"],
+			servidor: ["home", "ordemServico", "estatisticas"],
+
 		};
 
 		const selectedItems = roleMap[role] || roleMap["cliente"];
@@ -152,8 +156,7 @@ export function Sidebar() {
 					Exibir "Abrir Chamado" apenas para bolsista OU cliente 
 				  */}
 
-								{(getUserActiveRole() === "bolsista" ||
-									getUserActiveRole() === "cliente") && (
+								{(isUserExternal()) && (
 									<GambButton
 										variant="roxo"
 										label="Abrir Chamado"
