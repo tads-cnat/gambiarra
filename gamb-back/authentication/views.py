@@ -166,7 +166,6 @@ class SuapLoginView(APIView):
         grupo = dados.get("tipo_usuario")
         email = dados.get("email")
         username = email.split("@")[0]
-        imagem = dados.get("foto")
 
         try:
             grupo_obj = Group.objects.get(name=grupo.lower())
@@ -190,7 +189,6 @@ class SuapLoginView(APIView):
                 "first_name": nome.split()[0],
                 "last_name": nome.split()[-1],
                 "is_staff": False,
-                "imagem": imagem,
                 "is_active": True,
                 "is_superuser": False,
                 "grupo": grupo_obj,
