@@ -167,7 +167,7 @@ class SuapLoginView(APIView):
         imagem_url = dados.get("foto")
         email = dados.get("email")
         username = email.split("@")[0]
-        
+
         try:
             grupo_obj = Group.objects.get(name=grupo.lower())
         except Group.DoesNotExist:
@@ -181,8 +181,7 @@ class SuapLoginView(APIView):
                 {"erro": "SUAP retornou dados incompletos"},
                 status=status.HTTP_400_BAD_REQUEST,
             )
-              
-        
+
         usuario_obj, created = Usuario.objects.get_or_create(
             cpf=cpf_clean,
             defaults={
@@ -196,9 +195,7 @@ class SuapLoginView(APIView):
                 "grupo": grupo_obj,
             },
         )
-        
-        
-             
+
         usuario = ProfileUserSerializer(usuario_obj)
         refresh = RefreshToken.for_user(usuario_obj)
         status_ret = status.HTTP_201_CREATED if created else status.HTTP_202_ACCEPTED
