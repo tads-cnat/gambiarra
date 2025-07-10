@@ -19,6 +19,9 @@ import { loginSchema } from "./schema";
 import { useNavigate } from "react-router-dom";
 import UseMessage from "../../../../componentes/GambMessage/Message";
 import { openSuapLoginPopup } from "../../../../services/base/suap-client";
+import robo from "../../../../assets/robofeio.png";
+import suap from "../../../../assets/suap.svg";
+import google from "../../../../assets/google.png";
 
 export function LoginCard() {
 	const {
@@ -30,7 +33,7 @@ export function LoginCard() {
 	});
 	const [loginIsValid, setLoginIsValid] = useState<boolean | null>(null);
 	const navigate = useNavigate(); // Defina o hook navigate
-
+	const [ message, setMessage ] = useState<string | null>(null);
 	async function handleLogin(data: LoginSubmit): Promise<void> {
 		await authService.loginAuth(data).then((response) => {
 			if (response.sucesso) {
@@ -42,6 +45,7 @@ export function LoginCard() {
 				});
 			} else {
 				setLoginIsValid(false);
+				setMessage(response.mensagem);
 			}
 		});
 	}
@@ -50,7 +54,7 @@ export function LoginCard() {
 	return (
 		<ContainerLogin className="border-gambi">
 			<img
-				src="robofeio.png"
+				src={robo}
 				alt=""
 			/>
 			<Divider />
@@ -66,7 +70,7 @@ export function LoginCard() {
 				) : loginIsValid === false ? (
 					<UseMessage
 						type="danger"
-						text="Usuário ou senha inválidos!"
+						text={message || "Erro ao realizar login. Verifique suas credenciais."}
 					/>
 				) : null}
 
@@ -133,7 +137,7 @@ export function LoginCard() {
 									}}
 								>
 									<img
-										src=" suap.svg"
+										src={suap}
 										alt=""
 									/>
 								</GambButton>
@@ -144,7 +148,7 @@ export function LoginCard() {
 									// onClick={() => authService.loginGoogle()}
 								>
 									<img
-										src=" google.png"
+										src={google}
 										alt=""
 										style={{ height: "20px" }}
 									/>

@@ -25,6 +25,7 @@ import {
 	logout,
 } from "../../auth/service/AuthStore";
 import { isUserExternal } from "../../utils/checkRoleUser";
+import logoGambi from "../../assets/logo-side.png";
 
 // 1) Importe o hook para acessar dados do usuário
 
@@ -145,7 +146,7 @@ export function Sidebar() {
 					<SidebarContent>
 						<div>
 							<img
-								src="logo-side.png"
+								src={logoGambi}
 								alt="Logo Gambi"
 								className="gambi-img img-fluid"
 							/>

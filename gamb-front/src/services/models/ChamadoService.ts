@@ -1,4 +1,5 @@
 import { ChamadoFilter } from "../../filters/ChamadoFilter";
+import { Chamado } from "../../interfaces/componentes/iGambDetails";
 import { ChamadoCardsResponse, ChamadoSubmit } from "../../interfaces/models/iChamado";
 import axiosInstance from "../base/axiosInstance";
 import BaseService from "../base/baseService";
@@ -35,10 +36,10 @@ class ChamadoService extends BaseService {
 		return response;
 	}
 
-	async getChamadoID(id: number): Promise<unknown>{
+	async getChamadoID(id: number): Promise<Chamado>{
 		const response = await axiosInstance.get(
 			`${this.serviceUrl}/${id}/`)
-			return response;
+			return response.data;
 	}
 
 	async getAcessorio(id: number): Promise<unknown>{

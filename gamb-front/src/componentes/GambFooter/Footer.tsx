@@ -2,6 +2,8 @@ import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import GambButton from "../GambButton/Button";
 import { FooterContainer, FooterContent } from "./footerstyle";
+import gambiFooter from "../../assets/gambi-footer.png"
+
 
 export function Footer() {
 	const location = useLocation();
@@ -35,7 +37,7 @@ export function Footer() {
 				<div className="info">
 					<h2>
 						<img
-							src=" gambi-footer.png"
+							src={gambiFooter}
 							alt="Logo Gambiarra"
 						/>
 					</h2>

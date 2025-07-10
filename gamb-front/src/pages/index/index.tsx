@@ -1,11 +1,6 @@
 import GambButton from "../../componentes/GambButton/Button";
 import { Footer } from "../../componentes/GambFooter/Footer";
 import { Header } from "../../componentes/GambHeader/Header";
-// import { MapContainer } from 'react-leaflet/MapContainer'
-// import { TileLayer } from 'react-leaflet/TileLayer'
-// // import { useMap } from 'react-leaflet/hooks'
-// import { Marker } from 'react-leaflet/Marker'
-// import { Popup } from 'react-leaflet/Popup'
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 
 import {
@@ -16,6 +11,9 @@ import {
 } from "./indexstyles";
 import CardIndex from "../../componentes/GambCardIndex/GambCardIndex";
 
+import slogan  from "../../assets/slogan.png";
+import gambizinho from "../../assets/gambi-robozinho.png"
+
 export default function Home() {
 	return (
 		<>
@@ -25,7 +23,7 @@ export default function Home() {
 				<IndexContainer>
 					<MarcaGrafica>
 						<img
-							src="slogan.png"
+							src={slogan}
 							alt="manutenção para todos - ifrn cnat"
 						/>
 					</MarcaGrafica>
@@ -62,7 +60,7 @@ export default function Home() {
 						<div className="roboebotao">
 							<img
 								className="img-fluid"
-								src="gambi-robozinho.png"
+								src={gambizinho}
 								alt=""
 							/>
 							<GambButton

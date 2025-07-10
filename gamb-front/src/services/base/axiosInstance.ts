@@ -4,6 +4,7 @@ import {
 	setAuthToken,
 	getAuthRefreshToken,
 } from "../../auth/service/AuthStore";
+import { redirect } from "react-router-dom";
 const baseURL: string =
 	(import.meta.env.VITE_API_URL as string) || "http://localhost:8000/api/v1/";
 export const wsHOST = import.meta.env.VITE_HOST || "localhost";
@@ -62,8 +63,7 @@ axiosInstance.interceptors.response.use(
 					}
 				);
 				if (!response.data.access) {
-					console.error("Erro ao renovar o token: ", response.data);
-					window.location.href = "/login";
+					redirect("/login");
 					return Promise.reject(error);
 				}
 
@@ -79,7 +79,7 @@ axiosInstance.interceptors.response.use(
 
 				return axiosInstance(originalRequest);
 			} catch (err) {
-				console.error("Erro ao renovar o token:", err);
+				redirect("/login");
 				return Promise.reject(err);
 			}
 		}

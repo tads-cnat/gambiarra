@@ -8,7 +8,7 @@ import {
 import { HeaderContainer, HeaderContent } from "./headerstyle";
 import { useNavigate } from "react-router-dom";
 import GambButton from "../GambButton/Button";
- 
+import marcasm from "../../assets/marca-sm.png";
 
 export function Header() {
 	const navigate = useNavigate();
@@ -17,7 +17,7 @@ export function Header() {
 		<HeaderContainer>
 			<HeaderContent>
 				<img
-					src="marca-sm.png"
+					src={marcasm}
 					alt=""
 				/>
 				<nav>
@@ -46,15 +46,7 @@ export function Header() {
 								<MapTrifold /> Unidades do projeto
 							</button>
 						</li>
-						<li>
-							<button
-								onClick={() => {
-									navigate("/login");
-								}}
-							>
-								<User /> Login
-							</button>
-						</li>
+						
 						<li>
 							<GambButton
 								onClick={() => {

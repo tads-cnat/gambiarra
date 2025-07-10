@@ -18,6 +18,7 @@ import {
 } from "./auth/service/AuthStore";
 import { Cadastro } from "./pages/cadastro/cadastro";
 import Callback from "./pages/login/callback";
+import ErrorPage from "./pages/errorPage";
 
 export function App() {
 	function checkAuth(): void {
@@ -73,6 +74,7 @@ export function App() {
 						}
 					>
 						{/* Página inicial da Dashboard */}
+						
 						<Route
 							index
 							element={
@@ -106,6 +108,10 @@ export function App() {
 							}
 						/>
 					</Route>
+					<Route
+						path="*"
+						element={<ErrorPage />}
+					/>
 				</Routes>
 			</BrowserRouter>
 		</ThemeProvider>

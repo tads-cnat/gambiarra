@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useEffect, useMemo, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { ChatCard } from "./detailstyles";
 import ChamadoDetalhes from "../../../../componentes/GambDetails/Details";
 import Chat from "../../../../componentes/GambChat/Chat";
@@ -8,27 +8,35 @@ import ChamadoService from "../../../../services/models/ChamadoService";
 import { Chamado } from "../../../../interfaces/componentes/iGambDetails";
 import { RequestTimeLine } from "../../../../componentes/GambTimeLine/TimeLineReceive";
 
+
 export default function Detail(): React.JSX.Element {
 	const { id } = useParams();
 	const [chamado, setChamado] = useState<Chamado | null>(null);
+	const navigate = useNavigate();
 
 	async function fetchChamado() {
 		if (id) {
 			await ChamadoService.getChamadoID(Number(id))
 				.then(async (response: any) => {
-					const chamado = response.data;
+					const chamado = response;
 					await ChamadoService.getAcessorio(Number(chamado.item.id))
 						.then((response: any) => {
-							const acessorio = response.data;
+							const acessorio = response;
 							chamado.acessorio = acessorio;
 						})
 						.catch((error) => {
 							console.error("Erro ao buscar acessorio:", error);
 						});
 					setChamado(chamado);
+					console.log("Chamado:", chamado);
 				})
 				.catch((error) => {
-					console.error("Erro ao buscar chamado:", error);
+					if (error.response?.status === 404) {
+						alert(
+							"Chamado não encontrado. Tente novamente ou verifique as informações."
+						);
+						navigate("/dashboard");
+					}
 				});
 		}
 	}
@@ -37,6 +45,7 @@ export default function Detail(): React.JSX.Element {
 		fetchChamado();
 	}, [id]);
 
+	
 	return (
 		<div className="flex flex-col gap-4">
 			{chamado ? (
