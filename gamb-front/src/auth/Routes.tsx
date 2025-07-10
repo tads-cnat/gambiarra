@@ -67,6 +67,16 @@ export function ProtectedRoute({
 		);
 	}
 
+	// 	if (!isAuthenticatedState) {
+	// 	// Redireciona para a página de cadastro se o usuário não estiver autenticado
+	// 	return (
+	// 		<Navigate
+	// 			to="/cadastro"
+	// 			replace
+	// 		/>
+	// 	);
+	// }
+
 	if (requiredRole && !hasPermissionState) {
 		// Redireciona para a página inicial se o usuário não tiver permissão
 		return (

@@ -8,5 +8,5 @@ class GrupoEnum:
     ALUNO = "aluno"
 
     INTERNO = (GERENTE, PROFESSOR, BOLSISTA)
-    EXTERNO = (SERVIDOR, CLIENTE, ALUNO) # externos são clientes de todos os tipos
+    EXTERNO = (SERVIDOR, CLIENTE, ALUNO)
     STAFF = (GERENTE, PROFESSOR)

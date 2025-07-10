@@ -7,6 +7,8 @@ import {
 } from "@phosphor-icons/react";
 import { HeaderContainer, HeaderContent } from "./headerstyle";
 import { useNavigate } from "react-router-dom";
+import GambButton from "../GambButton/Button";
+ 
 
 export function Header() {
 	const navigate = useNavigate();
@@ -53,6 +55,17 @@ export function Header() {
 								<User /> Login
 							</button>
 						</li>
+						<li>
+							<GambButton
+								onClick={() => {
+									navigate("/login");
+								}}
+								variant="verde"
+								label="Acesse já"
+								icon="seta_direita"
+							 />
+						</li>
+						
 					</ul>
 				</nav>
 			</HeaderContent>

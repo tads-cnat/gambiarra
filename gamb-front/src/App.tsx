@@ -16,16 +16,17 @@ import {
 	isAuthenticatedStore,
 	setIsAuthenticatedStore,
 } from "./auth/service/AuthStore";
+import { Cadastro } from "./pages/cadastro/cadastro";
+import Callback from "./pages/login/callback";
 
 export function App() {
-	function checkAuth (): void{
+	function checkAuth(): void {
 		setIsAuthenticatedStore();
-	};
+	}
 
 	useEffect(() => {
 		checkAuth();
 	}, []);
-
 
 	return (
 		<ThemeProvider theme={defaultTheme}>
@@ -44,6 +45,21 @@ export function App() {
 								<Navigate to="/dashboard" />
 							) : (
 								<Login />
+							)
+						}
+					/>
+					<Route
+						path="/login/callback"
+						element={ <Callback /> }
+					/>
+
+					<Route
+						path="/cadastro"
+						element={
+							isAuthenticatedStore() ? (
+								<Navigate to="/dashboard" />
+							) : (
+								<Cadastro />
 							)
 						}
 					/>
@@ -84,7 +100,7 @@ export function App() {
 								<ProtectedRoute
 									element={<GerenciarUsuarios />}
 									requiredRole={[
-										userRoles.INTERNO.FUNCIONARIO.GR,
+										userRoles.INTERNO.GERENTE,
 									]}
 								/>
 							}

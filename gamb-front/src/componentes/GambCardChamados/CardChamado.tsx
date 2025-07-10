@@ -9,6 +9,7 @@ import {
 import Icon from "../GambIcon/Icon";
 import { CardChamadoProps } from "../../interfaces/componentes/iGambCardChamado";
 import { getUserActiveRole } from "../../auth/service/AuthStore";
+import { isUserBolsista, isUserExternal, isUserGerente, isUserProfessor } from "../../utils/checkRoleUser";
 
 function CardChamado({ userType, cardKey, quantity }: CardChamadoProps) {
 	const messages = {
@@ -35,6 +36,20 @@ function CardChamado({ userType, cardKey, quantity }: CardChamadoProps) {
 			pendentes: "Pendentes",
 			recusadas: "Recusados",
 		},
+		aluno: {
+			atribuidas: "Cadastrados",
+			concluidas: "Resolvidos",
+			pendentes: "Pendentes",
+			recusadas: "Recusados",
+		},
+		servidor: {
+			atribuidas: "Cadastrados",
+			concluidas: "Resolvidos",
+			pendentes: "Pendentes",
+			recusadas: "Recusados",
+		},
+
+		
 	};
 
 	const icons = {
@@ -61,8 +76,20 @@ function CardChamado({ userType, cardKey, quantity }: CardChamadoProps) {
 			pendentes: "usercirclegear",
 			recusadas: "usercircleminus",
 		},
+		aluno: {
+			atribuidas: "usercircleplus",
+			concluidas: "usercirclecheck",
+			pendentes: "usercirclegear",
+			recusadas: "usercircleminus",
+		},
+		servidor: {
+			atribuidas: "usercircleplus",
+			concluidas: "usercirclecheck",
+			pendentes: "usercirclegear",
+			recusadas: "usercircleminus",
+		},
 	};
-
+	
 	// Corrigindo o erro usando type assertion para que o TS saiba que as chaves são do tipo string
 	const message =
 		(messages[userType] as Record<string, string>)[cardKey] ||
@@ -83,7 +110,7 @@ function CardChamado({ userType, cardKey, quantity }: CardChamadoProps) {
 				<TextContainer>
 					<CardChamadoText $cardKey={cardKey}>
 						{quantity}{" "}
-						{userType === "bolsista" ? "tarefas" : "chamados"}
+						{isUserBolsista() ? "tarefas" : "chamados"}
 					</CardChamadoText>
 					<CardChamadoText2 $cardKey={cardKey}>
 						{message}
@@ -96,10 +123,10 @@ function CardChamado({ userType, cardKey, quantity }: CardChamadoProps) {
 
 export default function RenderCards() {
 	// fazer a requisição para preencher informações
-
+	console.log()
 	return (
 		<>
-			{getUserActiveRole() === "gerente" ? (
+			{isUserGerente() ? (
 				<>
 					<CardChamado
 						userType={getUserActiveRole()}
@@ -122,7 +149,7 @@ export default function RenderCards() {
 						quantity={0}
 					/>
 				</>
-			) : getUserActiveRole() === "cliente" ? (
+			) : isUserExternal() ? (
 				<>
 					<CardChamado
 						userType={getUserActiveRole()}
@@ -145,7 +172,7 @@ export default function RenderCards() {
 						quantity={0}
 					/>
 				</>
-			) : getUserActiveRole() === "professor" ? (
+			) : isUserProfessor() ? (
 				<>
 					<CardChamado
 						userType={getUserActiveRole()}

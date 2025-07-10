@@ -15,6 +15,14 @@ const axiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use(
 	(config) => {
+		const ignoredUrls = [`/auth/token/`, `/auth/login/`, `/auth/suap/`];
+
+		console.log("Interceptando requisição:", config.url);
+		if (ignoredUrls.some((url) => config.url?.endsWith(url))) {
+			console.log("Requisição ignorada:", config.url);
+			return config;
+		}
+
 		const token = getAuthToken();
 		if (token !== undefined) {
 			config.headers.Authorization = `Bearer ${token}`;
@@ -34,9 +42,9 @@ axiosInstance.interceptors.response.use(
 		const originalRequest = error.config;
 
 		// Ignora rotas de autenticação para evitar loop
-		const ignoredUrls = [`${baseURL}auth/token/`];
+		const ignoredUrls = [`/auth/token/`, `/auth/login/`];
 
-		if (ignoredUrls.some((url) => originalRequest.url?.startsWith(url))) {
+		if (ignoredUrls.some((url) => originalRequest.url?.endsWith(url))) {
 			const errorMessage = new Error(
 				"Erro ao fazer a requisição: " + error.data
 			);

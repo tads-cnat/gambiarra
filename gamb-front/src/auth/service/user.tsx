@@ -15,7 +15,7 @@ export interface UserActive {
 }
 
 // Definindo o tipo para o papel do usuário
-export type userRoles = "bolsista" | "professor" | "cliente" | "gerente";
+export type userRoles = "bolsista" | "professor" | "cliente" | "gerente" | "aluno" | "servidor";
 
 // Definindo o formato do contexto
 interface UserContextProps {

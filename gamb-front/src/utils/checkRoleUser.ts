@@ -1,0 +1,52 @@
+import { userRoles } from "../auth/roles";
+import { getUserActiveRole } from "../auth/service/AuthStore";
+
+/**
+ * Verifica se o utilizador ativo tem um papel EXTERNO
+ * (cliente, aluno ou servidor externo)
+ */
+export const isUserExternal = () =>
+  Object.values(userRoles.EXTERNO).includes(getUserActiveRole());
+
+/**
+ * Verifica se o utilizador ativo tem um papel INTERNO
+ * (gerente, professor ou bolsista)
+ */
+export const isUserInternal = () =>
+  Object.values(userRoles.INTERNO).includes(getUserActiveRole());
+
+/**
+ * Verifica se o utilizador ativo é bolsista
+ */
+export const isUserBolsista = () =>
+  getUserActiveRole() === userRoles.INTERNO.BOLSISTA;
+
+/**
+ * Verifica se o utilizador ativo é professor
+ */
+export const isUserProfessor = () =>
+  getUserActiveRole() === userRoles.INTERNO.PROFESSOR;
+
+/**
+ * Verifica se o utilizador ativo é gerente
+ */
+export const isUserGerente = () =>
+  getUserActiveRole() === userRoles.INTERNO.GERENTE;
+
+/**
+ * Verifica se o utilizador ativo é servidor (EXTERNO)
+ */
+export const isUserServidor = () =>
+  getUserActiveRole() === userRoles.EXTERNO.SERVIDOR;
+
+/**
+ * Verifica se o utilizador ativo é cliente
+ */
+export const isUserCliente = () =>
+  getUserActiveRole() === userRoles.EXTERNO.CLIENTE;
+
+/**
+ * Verifica se o utilizador ativo é aluno
+ */
+export const isUserAluno = () =>
+  getUserActiveRole() === userRoles.EXTERNO.ALUNO;
