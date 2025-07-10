@@ -38,7 +38,7 @@ platformdirs==4.3.8
 psycopg==3.2.3
 psycopg-binary==3.2.3
 pyasn1==0.6.1
-pyasn1_modules==0.4.1
+pyasn1_modules==0.4.2
 pycodestyle==2.13.0
 pycparser==2.22
 pydotplus==2.0.2
