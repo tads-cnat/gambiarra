@@ -30,7 +30,7 @@ export function LoginCard() {
 	});
 	const [loginIsValid, setLoginIsValid] = useState<boolean | null>(null);
 	const navigate = useNavigate(); // Defina o hook navigate
-	const [ isExecute, setIsExecute ] = useState<boolean>(false);
+
 	async function handleLogin(data: LoginSubmit): Promise<void> {
 		await authService.loginAuth(data).then((response) => {
 			if (response.sucesso) {

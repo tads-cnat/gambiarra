@@ -1,6 +1,5 @@
 import Notificacao from "../GambNotificao/Notificacao";
 import { defaultTheme } from "../../styles/themes/default";
-import { getUserActiveRole } from "../../auth/service/AuthStore";
 import { isUserGerente, isUserProfessor } from "../../utils/checkRoleUser";
 
 export interface Action {
