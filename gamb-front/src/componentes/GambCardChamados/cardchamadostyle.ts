@@ -19,15 +19,15 @@ export const CardChamadoWrapper = styled.div<{ $cardKey: CardChamadoCardKey }>`
 	flex-shrink: 0;
 	border-radius: 0.375rem;
 	background-color: ${({ $cardKey }) =>
-		$cardKey === "concluidas"
+		$cardKey === "concluidos"
 			? theme.cores.green_sucess_primary
 			: $cardKey === "pendentes"
 			? theme.cores.warning_second
-			: $cardKey === "recusadas"
+			: $cardKey === "recusados"
 			? theme.cores.danger_hover
-			: $cardKey === "atribuidas"
+			: $cardKey === "atribuidos"
 			? theme.cores.purple_info_secondary
-			: $cardKey === "cadastrados"
+			: $cardKey === "cadastrados" || $cardKey === "solicitados"
 			? theme.cores.purple_info_primary
 			: $cardKey === "resolvidos"
 			? theme.cores.green_sucess_primary
@@ -35,7 +35,7 @@ export const CardChamadoWrapper = styled.div<{ $cardKey: CardChamadoCardKey }>`
 			? theme.cores.danger
 			: theme.cores.white};
 	color: ${({ $cardKey }) =>
-		["atribuidas", "concluidas", "recusadas"].includes($cardKey)
+		["atribuidas", "concluidos", "recusados"].includes($cardKey)
 			? theme.cores.white
 			: $cardKey === "pendentes"
 			? theme.cores.gray_text
@@ -47,7 +47,7 @@ export const CardChamadoIcon = styled.div<{ $cardKey: CardChamadoCardKey }>`
 	height: 4.5rem;
 	flex-shrink: 0;
 	color: ${({ $cardKey}) =>
-		["atribuidas", "concluidas", "recusadas"].includes($cardKey)
+		["atribuidas", "concluidos", "recusados"].includes($cardKey)
 			? theme.cores.white
 			: $cardKey === "pendentes"
 			? theme.cores.gray_text
@@ -71,7 +71,7 @@ export const CardChamadoText = styled.div<{ $cardKey: CardChamadoCardKey }>`
 	font-weight: 400;
 	line-height: 1.2;
 	color: ${({ $cardKey }) =>
-		["atribuidas", "concluidas", "recusadas"].includes($cardKey)
+		["atribuidas", "concluidos", "recusados"].includes($cardKey)
 			? theme.cores.white
 			: $cardKey === "pendentes"
 			? theme.cores.gray_text
@@ -86,7 +86,7 @@ export const CardChamadoText2 = styled.div<{ $cardKey: CardChamadoCardKey }>`
 	font-weight: 700;
 	line-height: 1.2;
 	color: ${({ $cardKey }) =>
-		["atribuidas", "concluidas", "recusadas"].includes($cardKey)
+		["atribuidas", "concluidos", "recusados"].includes($cardKey)
 			? theme.cores.white
 			: $cardKey === "pendentes"
 			? theme.cores.gray_text

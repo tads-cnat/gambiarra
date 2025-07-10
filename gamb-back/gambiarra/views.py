@@ -155,18 +155,31 @@ class ChamadoViewSet(viewsets.ModelViewSet):
             else:  # Cliente
                 chamados = Chamado.objects.filter(cliente=user)
 
-            contagem = {
-                "atribuidas": chamados.count(),
-                "concluidas": chamados.filter(status__in=["5", "6", "7", "8"]).count(),
-                "pendentes": chamados.filter(status="1").count(),
-                "recusadas": (
-                    chamados.filter(status="8").count()
-                    if grupo != GrupoEnum.BOLSISTA
-                    else 0
-                ),
-            }
+            if grupo in GrupoEnum.EXTERNO:
+                contagem = {
+                    "solicitados": chamados.count(),
+                    "concluidos": chamados.filter(
+                        status__in=["5", "6", "7", "8"]
+                    ).count(),
+                    "pendentes": chamados.filter(status="1").count(),
+                    "recusados": (chamados.filter(status="8").count()),
+                }
+            else:
 
-        return Response({"quantidades": contagem}, status=status.HTTP_200_OK)
+                contagem = {
+                    "atribuidos": chamados.count(),
+                    "concluidos": chamados.filter(
+                        status__in=["5", "6", "7", "8"]
+                    ).count(),
+                    "pendentes": chamados.filter(status="1").count(),
+                }
+                if grupo == GrupoEnum.PROFESSOR:
+                    contagem["recusados"] = chamados.filter(status="8").count()
+
+        return Response(
+            {f"{grupo in GrupoEnum.EXTERNO and 'clientes' or grupo}": contagem},
+            status=status.HTTP_200_OK,
+        )
 
     def create(self, request):
         # print("Authenticated user:", request.user.grupo.name)
@@ -249,9 +262,9 @@ class ChamadoViewSet(viewsets.ModelViewSet):
             return erro("Status atual inválido")
             # Nunca é pra chegar aqui, mas vai que...
 
-        # Mais verificação de erros:
-        # Se o status atual tem transições definidas (mais um que não é pra dar erro nunca)
-        # Se a transição desejada é permitida
+            # Mais verificação de erros:
+            # Se o status atual tem transições definidas (mais um que não é pra dar erro nunca)
+            # Se a transição desejada é permitida
 
         if status_atual_texto not in transicoes:
             return erro(

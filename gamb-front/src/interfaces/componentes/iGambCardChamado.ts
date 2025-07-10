@@ -2,12 +2,13 @@ import { UserRoles } from "../../auth/service/AuthStore";
 
 // Se o tipo de usuário já é definido em userRoles, podemos usá-lo diretamente
 export type CardChamadoCardKey =
-	| "atribuidas"
-	| "concluidas"
+	| "atribuidos"
+	| "concluidos"
 	| "pendentes"
-	| "recusadas"
+	| "recusados"
 	| "cadastrados"
 	| "resolvidos"
+	| "solicitados"
 	| "fechados";
 
 export interface CardChamadoProps {

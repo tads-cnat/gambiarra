@@ -37,10 +37,11 @@ export default function Callback() {
 					console.log("Usuário autenticado:", userData);
 					localStorage.setItem("suap_oauth_code", suap.getToken().getValue()?.toString() || "");
 				}).catch((error) => {
-					console.error("Erro ao autenticar usuário:", error);
+					navigate("/login");
+					alert("Erro ao autenticar usuário. Por favor, tente novamente. " + error.message);
 				})
 				.finally(() => {
-					navigate("/dashboard"); // CORRETO
+					navigate("/dashboard"); 
 				});
 		} else {
 			console.log("Usuário não autenticado ou modal não aberto.");

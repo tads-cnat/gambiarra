@@ -35,3 +35,30 @@ export interface Chamados {
 	};
 }
 
+export interface ChamadoCardsResponse {
+  gerente?: {
+    cadastrados: number;  // Total geral
+    pendentes: number;         // Ainda não resolvidos
+    resolvidos: number;        // Resolvidos
+    fechados: number;          // Encerrados
+  };
+  bolsista?: {
+    atribuidos: number;   // Chamados atribuídos ao bolsista
+    concluidos: number;        // Finalizados pelo bolsista
+    pendentes: number;         // Em andamento
+  };
+  professor?: {
+    atribuidos: number;   // Chamados atribuídos ao professor
+    concluidos: number;        // Finalizados
+    pendentes: number;         // Em andamento
+    recusados: number;         // Chamados recusados
+  };
+  clientes?: {
+    solicitados: number;  // Chamados abertos pelo cliente
+    concluidos: number;        // Finalizados
+    pendentes: number;         // Em aberto
+    recusados: number;         // Rejeitados
+  };
+}
+
+		

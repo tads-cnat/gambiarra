@@ -1,5 +1,5 @@
 import { ChamadoFilter } from "../../filters/ChamadoFilter";
-import { ChamadoSubmit } from "../../interfaces/models/iChamado";
+import { ChamadoCardsResponse, ChamadoSubmit } from "../../interfaces/models/iChamado";
 import axiosInstance from "../base/axiosInstance";
 import BaseService from "../base/baseService";
 
@@ -57,6 +57,12 @@ class ChamadoService extends BaseService {
 		const response = await axiosInstance.patch(
 			`${this.serviceUrl}/${id}/update_bolsistas/`, {bolsistas} )
 			return response;
+	}
+
+	async getChamadoCards(): Promise<ChamadoCardsResponse> {
+		const response = await axiosInstance.get(
+			`${this.serviceUrl}/contagem_chamados/`)
+		return response.data as ChamadoCardsResponse;
 	}
 }
 

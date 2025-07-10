@@ -10,6 +10,9 @@ import Icon from "../GambIcon/Icon";
 import { CardChamadoProps } from "../../interfaces/componentes/iGambCardChamado";
 import { getUserActiveRole } from "../../auth/service/AuthStore";
 import { isUserBolsista, isUserExternal, isUserGerente, isUserProfessor } from "../../utils/checkRoleUser";
+import { useMemo, useState } from "react";
+import ChamadoService from "../../services/models/ChamadoService";
+import { ChamadoCardsResponse } from "../../interfaces/models/iChamado";
 
 function CardChamado({ userType, cardKey, quantity }: CardChamadoProps) {
 	const messages = {
@@ -20,33 +23,33 @@ function CardChamado({ userType, cardKey, quantity }: CardChamadoProps) {
 			fechados: "Sem solução",
 		},
 		bolsista: {
-			atribuidas: "Atribuídas",
-			concluidas: "Concluídas",
+			atribuidos: "Atribuídos",
+			concluidos: "Concluídos",
 			pendentes: "Pendentes",
 		},
 		professor: {
-			atribuidas: "Recebidos",
-			concluidas: "Concluídos",
+			atribuidos: "Recebidos",
+			concluidos: "Concluídos",
 			pendentes: "Pendentes",
-			recusadas: "Recusados",
+			recusados: "Recusados",
 		},
 		cliente: {
-			atribuidas: "Cadastrados",
-			concluidas: "Resolvidos",
+			solicitados: "Solicitados",
+			concluidos: "Resolvidos",
 			pendentes: "Pendentes",
-			recusadas: "Recusados",
+			recusados: "Recusados",
 		},
 		aluno: {
-			atribuidas: "Cadastrados",
-			concluidas: "Resolvidos",
+			solicitados: "Solicitados",
+			concluidos: "Resolvidos",
 			pendentes: "Pendentes",
-			recusadas: "Recusados",
+			recusados: "Recusados",
 		},
 		servidor: {
-			atribuidas: "Cadastrados",
-			concluidas: "Resolvidos",
+			solicitados: "Solicitados",
+			concluidos: "Resolvidos",
 			pendentes: "Pendentes",
-			recusadas: "Recusados",
+			recusados: "Recusados",
 		},
 
 		
@@ -60,37 +63,36 @@ function CardChamado({ userType, cardKey, quantity }: CardChamadoProps) {
 			fechados: "usercircleminus",
 		},
 		bolsista: {
-			atribuidas: "usercircleplus",
-			concluidas: "usercirclecheck",
+			atribuidos: "usercircleplus",
+			concluidos: "usercirclecheck",
 			pendentes: "usercirclegear",
 		},
 		professor: {
-			atribuidas: "usercircleplus",
-			concluidas: "usercirclecheck",
+			atribuidos: "usercircleplus",
+			concluidos: "usercirclecheck",
 			pendentes: "usercirclegear",
-			recusadas: "usercircleminus",
+			recusados: "usercircleminus",
 		},
 		cliente: {
-			atribuidas: "usercircleplus",
-			concluidas: "usercirclecheck",
+			solicitados: "usercircleplus",
+			concluidos: "usercirclecheck",
 			pendentes: "usercirclegear",
-			recusadas: "usercircleminus",
+			recusados: "usercircleminus",
 		},
 		aluno: {
-			atribuidas: "usercircleplus",
-			concluidas: "usercirclecheck",
+			solicitados: "usercircleplus",
+			concluidos: "usercirclecheck",
 			pendentes: "usercirclegear",
-			recusadas: "usercircleminus",
+			recusados: "usercircleminus",
 		},
 		servidor: {
-			atribuidas: "usercircleplus",
-			concluidas: "usercirclecheck",
+			solicitados: "usercircleplus",
+			concluidos: "usercirclecheck",
 			pendentes: "usercirclegear",
-			recusadas: "usercircleminus",
+			recusados: "usercircleminus",
 		},
 	};
 	
-	// Corrigindo o erro usando type assertion para que o TS saiba que as chaves são do tipo string
 	const message =
 		(messages[userType] as Record<string, string>)[cardKey] ||
 		"Status desconhecido.";
@@ -122,66 +124,89 @@ function CardChamado({ userType, cardKey, quantity }: CardChamadoProps) {
 }
 
 export default function RenderCards() {
-	// fazer a requisição para preencher informações
-	console.log()
+	const [ cardsChamados, setChamados ] = useState<ChamadoCardsResponse>({});
+
+	async function handleChamadoCartoes(): Promise<void> {
+		await ChamadoService.getChamadoCards()
+			.then((response) => {
+				setChamados(response);
+				console.log("Chamados:", response);
+			})
+				
+	
+	}
+
+	useMemo(() => {
+		if (!getUserActiveRole()) {
+			return <p>Carregando...</p>;
+		}else {
+			handleChamadoCartoes();
+		}
+
+	}, []);
 	return (
 		<>
+
+			{  }
 			{isUserGerente() ? (
 				<>
 					<CardChamado
 						userType={getUserActiveRole()}
 						cardKey="cadastrados"
-						quantity={0}
+						quantity={cardsChamados.gerente?.cadastrados || 0}
 					/>
 					<CardChamado
 						userType={getUserActiveRole()}
 						cardKey="pendentes"
-						quantity={0}
+						quantity={cardsChamados.gerente?.pendentes || 0}
 					/>
 					<CardChamado
 						userType={getUserActiveRole()}
 						cardKey="resolvidos"
-						quantity={0}
+						quantity={cardsChamados.gerente?.resolvidos || 0}
 					/>
 					<CardChamado
 						userType={getUserActiveRole()}
 						cardKey="fechados"
-						quantity={0}
+						quantity={cardsChamados.gerente?.fechados || 0}
 					/>
+				
 				</>
 			) : isUserExternal() ? (
 				<>
+				
 					<CardChamado
 						userType={getUserActiveRole()}
-						cardKey="atribuidas"
-						quantity={0}
+						cardKey="solicitados"
+						quantity={cardsChamados?.clientes?.solicitados || 0}
 					/>
 					<CardChamado
 						userType={getUserActiveRole()}
-						cardKey="concluidas"
-						quantity={0}
+						cardKey="concluidos"
+						quantity={cardsChamados?.clientes?.concluidos || 0}
 					/>
 					<CardChamado
 						userType={getUserActiveRole()}
 						cardKey="pendentes"
-						quantity={0}
+						quantity={cardsChamados?.clientes?.pendentes || 0}
 					/>
+					
 					<CardChamado
 						userType={getUserActiveRole()}
-						cardKey="recusadas"
-						quantity={0}
+						cardKey="recusados"
+						quantity={cardsChamados?.clientes?.recusados || 0}
 					/>
 				</>
 			) : isUserProfessor() ? (
 				<>
 					<CardChamado
 						userType={getUserActiveRole()}
-						cardKey="atribuidas"
+						cardKey="atribuidos"
 						quantity={0}
 					/>
 					<CardChamado
 						userType={getUserActiveRole()}
-						cardKey="concluidas"
+						cardKey="concluidos"
 						quantity={0}
 					/>
 					<CardChamado
@@ -191,7 +216,7 @@ export default function RenderCards() {
 					/>
 					<CardChamado
 						userType={getUserActiveRole()}
-						cardKey="recusadas"
+						cardKey="recusados"
 						quantity={0}
 					/>
 				</>
@@ -199,18 +224,18 @@ export default function RenderCards() {
 				<>
 					<CardChamado
 						userType={getUserActiveRole()}
-						cardKey="atribuidas"
-						quantity={0}
+						cardKey="atribuidos"
+						quantity={cardsChamados?.bolsista?.atribuidos || 0}
 					/>
 					<CardChamado
 						userType={getUserActiveRole()}
-						cardKey="concluidas"
-						quantity={0}
+						cardKey="concluidos"
+						quantity={cardsChamados?.bolsista?.concluidos || 0}
 					/>
 					<CardChamado
 						userType={getUserActiveRole()}
 						cardKey="pendentes"
-						quantity={0}
+						quantity={cardsChamados?.bolsista?.pendentes || 0}
 					/>
 				</>
 			)}
