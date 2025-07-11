@@ -46,10 +46,7 @@ axiosInstance.interceptors.response.use(
 		const ignoredUrls = [`/auth/token/`, `/auth/login/`];
 
 		if (ignoredUrls.some((url) => originalRequest.url?.endsWith(url))) {
-			const errorMessage = new Error(
-				"Erro ao fazer a requisição: " + error.data
-			);
-			return Promise.reject(errorMessage);
+			return Promise.reject(error);
 		}
 
 		if (error.response.status === 401 && !originalRequest._retry) {

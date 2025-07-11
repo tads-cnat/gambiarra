@@ -36,6 +36,7 @@ export function LoginCard() {
 	const [ message, setMessage ] = useState<string | null>(null);
 	async function handleLogin(data: LoginSubmit): Promise<void> {
 		await authService.loginAuth(data).then((response) => {
+			setMessage(response.mensagem);
 			if (response.sucesso) {
 				setLoginIsValid(true);
 				authService.profile().then(() => {
@@ -45,7 +46,7 @@ export function LoginCard() {
 				});
 			} else {
 				setLoginIsValid(false);
-				setMessage(response.mensagem);
+				
 			}
 		});
 	}

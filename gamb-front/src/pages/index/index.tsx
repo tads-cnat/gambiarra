@@ -11,8 +11,8 @@ import {
 } from "./indexstyles";
 import CardIndex from "../../componentes/GambCardIndex/GambCardIndex";
 
-import slogan  from "../../assets/slogan.png";
-import gambizinho from "../../assets/gambi-robozinho.png"
+import slogan from "../../assets/slogan.png";
+import gambizinho from "../../assets/tomada.svg";
 
 export default function Home() {
 	return (
@@ -57,18 +57,17 @@ export default function Home() {
 							</div>
 						</div>
 
-						<div className="roboebotao">
-							<img
-								className="img-fluid"
-								src={gambizinho}
-								alt=""
-							/>
-							<GambButton
-								className="botaorobo"
-								label="Abrir Chamado"
-								variant="roxo"
-								size="large"
-							/>
+						<div className="roboebotao flex flex-center " >
+							<div style={{ width: "70%" }} >
+								<img
+									className="img-fluid"
+									src={gambizinho}
+									alt=""
+									width={"100%"}
+								/>
+							</div>
+
+						
 						</div>
 					</IndexContent>
 

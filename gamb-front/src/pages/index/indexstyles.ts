@@ -33,8 +33,8 @@ export const IndexContainer = styled.div`
 	.roboebotao {
 		display: flex;
 		flex-direction: column;
-		justify-content: space-between;
-		align-items: end;
+		justify-content: center;
+		align-items: center;
 	}
 `;
 
@@ -48,7 +48,7 @@ export const IndexContent = styled.div`
 	padding: 50px;
 	width: 75%;
 	background: ${theme.cores.white};
-	justify-content: space-between;
+	justify-content: space-around;
 	align-items: center;
 
 	border-radius: 30px;

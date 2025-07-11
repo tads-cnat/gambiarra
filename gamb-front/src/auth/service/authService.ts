@@ -37,7 +37,7 @@ class AuthService extends BaseService {
 					setUserActive(userData.data);
 					setUserActiveRole(userData.data.grupo);
 					setIsAuthenticatedStore();
-					console.log(isAuthenticatedStore());
+					
 					return {
 						sucesso: true,
 						mensagem: "Login realizado com sucesso!",
@@ -58,19 +58,19 @@ class AuthService extends BaseService {
 			if (error.response?.status === 401) {
 				return {
 					sucesso: false,
-					mensagem: "Invalid username or password.",
+					mensagem: "Usuário ou senha inválidos.",
 				};
 			}
 			if (error.response?.status === 403) {
 				return {
 					sucesso: false,
-					mensagem: "User is not active.",
+					mensagem: "Usuário não está ativo.",
 				};
 			}
 			if (error.response?.status === 404) {
 				return {
 					sucesso: false,
-					mensagem: "User not found.",
+					mensagem: "Usuário não encontrado.",
 				};
 			}
 			if (error.response?.status === 500) {

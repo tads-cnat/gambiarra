@@ -8,14 +8,14 @@ import {
 import { HeaderContainer, HeaderContent } from "./headerstyle";
 import { useNavigate } from "react-router-dom";
 import GambButton from "../GambButton/Button";
-import marcasm from "../../assets/marca-sm.png";
+import marcasm from "../../assets/marca-sm.png"
 
 export function Header() {
 	const navigate = useNavigate();
 
 	return (
-		<HeaderContainer>
-			<HeaderContent>
+		<HeaderContainer className="border-gambi elevacao-def ">
+			<HeaderContent >
 				<img
 					src={marcasm}
 					alt=""
