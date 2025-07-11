@@ -208,7 +208,7 @@ export class SuapClient {
 			// window.location.href = this.redirectURI;
 		} catch (error) {
 			alert(
-				"Falha na comunicação com o SUAPFalha na comunicação com o SUAPFalha na comunicação com o SUAPFalha na comunicação com o SUAPFalha na comunicação com o SUAPFalha na comunicação com o SUAPFalha na comunicação com o SUAPFalha na comunicação com o SUAPFalha na comunicação com o SUAPFalha na comunicação com o SUAPFalha na comunicação com o SUAPFalha na comunicação com o SUAPFalha na comunicação com o SUAPFalha na comunicação com o SUAPFalha na comunicação com o SUAPFalha na comunicação com o SUAPFalha na comunicação com o SUAPFalha na comunicação com o SUAPFalha na comunicação com o SUAPFalha na comunicação com o SUAPFalha na comunicação com o SUAPFalha na comunicação com o SUAPFalha na comunicação com o SUAPFalha na comunicação com o SUAPFalha na comunicação com o SUAPFalha na comunicação com o SUAPFalha na comunicação com o SUAPFalha na comunicação com o SUAPFalha na comunicação com o SUAPFalha na comunicação com o SUAP "
+				"Falha na comunicação com o SUAP"
 			);
 			console.error(error);
 		}

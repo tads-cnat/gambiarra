@@ -14,20 +14,13 @@ import Detail from "./pages/dashboard/pages/detail/Detail";
 import "./styles/index.css";
 import {
 	isAuthenticatedStore,
-	setIsAuthenticatedStore,
 } from "./auth/service/AuthStore";
 import { Cadastro } from "./pages/cadastro/cadastro";
 import Callback from "./pages/login/callback";
 import ErrorPage from "./pages/errorPage";
 
 export function App() {
-	function checkAuth(): void {
-		setIsAuthenticatedStore();
-	}
-
-	useEffect(() => {
-		checkAuth();
-	}, []);
+	
 
 	return (
 		<ThemeProvider theme={defaultTheme}>

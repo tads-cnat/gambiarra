@@ -77,7 +77,7 @@ export const useUser = create<UserStore>()(
 				});
 			},
 
-			// Limpa todos os dados e faz logout
+			
 			logout: () => {
 				localStorage.removeItem("access_token");
 				localStorage.removeItem("refresh_token");
@@ -88,7 +88,7 @@ export const useUser = create<UserStore>()(
 				});
 				console.log("Usuário deslogado");
 				suap.logout(); 
-				suap.init(); // Re-inicializa o cliente SUAP
+				suap.init(); 
 			},
 		}),
 		{
