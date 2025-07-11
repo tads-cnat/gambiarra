@@ -1,9 +1,9 @@
 import {
-	AddressBook,
-	FileText,
-	FolderUser,
-	HouseSimple,
-	SignOut,
+	AddressBookIcon,
+	FileTextIcon,
+	FolderUserIcon,
+	HouseSimpleIcon,
+	SignOutIcon,
 } from "@phosphor-icons/react";
 import { Link, useNavigate } from "react-router-dom";
 import {
@@ -69,36 +69,36 @@ export function Sidebar() {
 	// 3) Defina os itens de menu de acordo com o papel do usuário
 	function getSidebarItems() {
 		const commonItems = {
-			home: { to: "/dashboard", label: "Home", icon: <HouseSimple /> },
+			home: { to: "/dashboard", label: "Home", icon: <HouseSimpleIcon /> },
 			gerenciarBolsista: {
 				to: "#",
 				label: "Gerenciar Bolsista",
-				icon: <FolderUser />,
+				icon: <FolderUserIcon />,
 			},
 			gerenciarTarefas: {
 				to: "#",
 				label: "Gerenciar Tarefas",
-				icon: <FolderUser />,
+				icon: <FolderUserIcon />,
 			},
 			ordemServico: {
 				to: "#",
 				label: "Gerar ordem de serviço",
-				icon: <FileText />,
+				icon: <FileTextIcon />,
 			},
 			estatisticas: {
 				to: "#",
 				label: "Estatísticas",
-				icon: <AddressBook />,
+				icon: <AddressBookIcon />,
 			},
 			usuarios: {
 				to: "#",
 				label: "Gerenciar Usuários",
-				icon: <FolderUser />,
+				icon: <FolderUserIcon />,
 			},
 			termoResponsabilidade: {
 				to: "#",
 				label: "Gerar termo de responsabilidade",
-				icon: <AddressBook />,
+				icon: <AddressBookIcon />,
 			},
 		};
 
@@ -226,7 +226,7 @@ export function Sidebar() {
 												href="/login"
 												onClick={handleLogout}
 											>
-												<SignOut /> Logout
+												<SignOutIcon /> Logout
 											</a>
 										</li>
 									</ItemDropdown>
