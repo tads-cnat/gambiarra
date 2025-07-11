@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { redirect, useNavigate, useParams } from "react-router-dom";
 import { ChatCard } from "./detailstyles";
 import ChamadoDetalhes from "../../../../componentes/GambDetails/Details";
 import Chat from "../../../../componentes/GambChat/Chat";
@@ -32,10 +32,7 @@ export default function Detail(): React.JSX.Element {
 				})
 				.catch((error) => {
 					if (error.response?.status === 404) {
-						alert(
-							"Chamado não encontrado. Tente novamente ou verifique as informações."
-						);
-						navigate("/dashboard");
+						navigate("/404");
 					}
 				});
 		}
