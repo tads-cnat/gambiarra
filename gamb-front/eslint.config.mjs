@@ -44,7 +44,7 @@ export default [
 			"@typescript-eslint/restrict-template-expressions": "off",
 			"@typescript-eslint/no-empty-object-type": "off",
 			"@typescript-eslint/no-redundant-type-constituents": "off",
-			"@typescript-eslint/no-deprecated": "warn",
+			"@typescript-eslint/no-deprecated": "error",
 		},
 	},
 
@@ -65,16 +65,16 @@ export default [
 			"sonarjs/no-duplicate-string": "error", // Strings duplicadas no código
 			"sonarjs/no-identical-functions": "error", // Funções duplicadas
 			"sonarjs/no-small-switch": "error", // Evita switches triviais
-			"sonarjs/cognitive-complexity": ["warn", 15], // Limita complexidade de funções
+			"sonarjs/cognitive-complexity": ["error", 15], // Limita complexidade de funções
 			"sonarjs/no-all-duplicated-branches": "error", // Branches duplicadas em if/switch
-			"sonarjs/no-collapsible-if": "warn", // Ifs que podem ser combinados
+			"sonarjs/no-collapsible-if": "error", // Ifs que podem ser combinados
 			"sonarjs/no-collection-size-mischeck": "error", // Verificações incorretas de tamanho
 			"sonarjs/no-duplicated-branches": "error", // Branches duplicadas em geral
-			"sonarjs/no-gratuitous-expressions": "warn", // Expressões booleanas desnecessárias
-			"sonarjs/no-inverted-boolean-check": "warn", // Verificações invertidas confusas
-			"sonarjs/no-nested-switch": "warn", // Switch dentro de switch
-			"sonarjs/no-redundant-boolean": "warn", // Boolean redundante (ex: `!true`)
-			"sonarjs/no-use-of-empty-return-value": "warn", // Return vazio onde não faz sentido
+			"sonarjs/no-gratuitous-expressions": "error", // Expressões booleanas desnecessárias
+			"sonarjs/no-inverted-boolean-check": "error", // Verificações invertidas confusas
+			"sonarjs/no-nested-switch": "error", // Switch dentro de switch
+			"sonarjs/no-redundant-boolean": "error", // Boolean redundante (ex: `!true`)
+			"sonarjs/no-use-of-empty-return-value": "error", // Return vazio onde não faz sentido
  			// 🚩 IMPORT RULES
       		"import/no-extraneous-dependencies": "error", // Importações que não estão no package.json
 		},
