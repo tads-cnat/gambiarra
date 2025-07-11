@@ -170,10 +170,7 @@ class SuapLoginView(APIView):
         try:
             grupo_obj = Group.objects.get(name=grupo.lower())
         except Group.DoesNotExist:
-            return Response(
-                {"erro": f"Grupo {grupo.lower()} não encontrado"},
-                status=status.HTTP_400_BAD_REQUEST,
-            )
+            grupo_obj = Group.objects.get(name="cliente")
 
         if not cpf_clean or not email:
             return Response(
@@ -181,6 +178,7 @@ class SuapLoginView(APIView):
                 status=status.HTTP_400_BAD_REQUEST,
             )
 
+       
         usuario_obj, created = Usuario.objects.get_or_create(
             cpf=cpf_clean,
             defaults={
