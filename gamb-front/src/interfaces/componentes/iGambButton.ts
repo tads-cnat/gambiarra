@@ -42,4 +42,6 @@ export interface GambButtonProps {
 	// Define o ícone a ser exibido no botão.
 	icon?: string;
 	id?: string;
+
+	'data-testid'?: string
 }

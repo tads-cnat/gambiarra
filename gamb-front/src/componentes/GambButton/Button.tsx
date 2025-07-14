@@ -15,6 +15,7 @@ export default function GambButton(props: GambButtonProps): React.JSX.Element {
 		icon,
 		size,
 		id,
+		['data-testid']: dataTestId,
 	} = props;
 	// regras de negócio relacionadas ao componente devem ser implementadas aqui
 	return (
@@ -29,6 +30,7 @@ export default function GambButton(props: GambButtonProps): React.JSX.Element {
 				className={`${className} size-${size} `} // Concatena className com o tamanho
 				style={style}
 				data-cypress={dataCypress}
+				data-testid={dataTestId}
 			>
 				{label}
 				{icon && (

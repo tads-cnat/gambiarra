@@ -47,10 +47,12 @@ export default function Home() {
 							<span>gostou da ideia?</span>
 							<div className="bottoes">
 								<GambButton
+									data-testid="saiba-mais-index"
 									label="Saiba Mais"
 									variant="verde"
 								/>
 								<GambButton
+									data-testid="fale-conosco-index"
 									label="Fale Conosco"
 									variant="verde"
 								/>
