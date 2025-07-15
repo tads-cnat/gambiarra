@@ -27,5 +27,11 @@ test.describe("Index", () => {
         await expect(page.getByText(/Campus Pau dos Ferros - IFRN/i)).toBeVisible();
     });
 
+    test('deve redirecionar para a tela de login', async ({ page }) => {
+        await page.goto("http://localhost:5173/") // navega para o index
+        await page.getByText(/Acesse já/i).click(); // clica no botão que tem o texto "Acesse já"
+        await expect(page).toHaveURL("http://localhost:5173/login") //verifica se foi redirecionado para o login
+    });
+
 
 })  
