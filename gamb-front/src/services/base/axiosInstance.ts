@@ -3,6 +3,7 @@ import {
 	getAuthToken,
 	setAuthToken,
 	getAuthRefreshToken,
+	logout,
 } from "../../auth/service/AuthStore";
 import { redirect } from "react-router-dom";
 const baseURL: string =
@@ -60,6 +61,7 @@ axiosInstance.interceptors.response.use(
 					}
 				);
 				if (!response.data.access) {
+					logout();
 					redirect("/login");
 					return Promise.reject(error);
 				}
@@ -76,6 +78,7 @@ axiosInstance.interceptors.response.use(
 
 				return axiosInstance(originalRequest);
 			} catch (err) {
+				logout();
 				redirect("/login");
 				return Promise.reject(err);
 			}

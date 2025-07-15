@@ -15,6 +15,7 @@
     "antd": "^5.26.4",
     "autoprefixer": "^10.4.20",
     "axios": "^1.7.8",
+    "eslint-plugin-import": "^2.32.0",
     "headlessui": "^0.0.0",
     "heroicons": "^2.2.0",
     "i": "^0.3.7",
