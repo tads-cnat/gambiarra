@@ -70,4 +70,7 @@ export interface InputFieldProps {
 	icon?: string;
 
 	classNameFather?: string;
+
+	'data-testid'?: string
+
 }

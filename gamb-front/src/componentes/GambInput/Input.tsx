@@ -19,6 +19,7 @@ export default function InputField(props: InputFieldProps): React.JSX.Element {
 		icon,
 		formIsValid,
 		classNameFather,
+		['data-testid']: dataTestId,
 	} = props;
 
 	// Estado para alternar o tipo de entrada (exclusivo para campos de senha)
@@ -60,6 +61,7 @@ export default function InputField(props: InputFieldProps): React.JSX.Element {
 							type={typeInputPassword}
 							placeholder={placeholder}
 							data-cypress={`${name}-input`}
+							data-testid={dataTestId}
 							{...register}
 							defaultValue={defaultValue}
 							value={props.value}
@@ -91,6 +93,7 @@ export default function InputField(props: InputFieldProps): React.JSX.Element {
 						type={type}
 						placeholder={placeholder}
 						data-cypress={`${name}-input`}
+						data-testid={dataTestId}
 						{...register}
 						defaultValue={defaultValue}
 						value={props.value}

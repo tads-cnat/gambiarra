@@ -33,5 +33,21 @@ test.describe("Index", () => {
         await expect(page).toHaveURL("http://localhost:5173/login") //verifica se foi redirecionado para o login
     });
 
+    test('deve realizar login', async ({ page }) => {
+        await page.goto("http://localhost:5173/login"); //navega para tela de login
+        await page.getByTestId('user-field').fill('lipe');
+        await page.getByTestId('password-field').fill('ZAP123!!');
+        await page.getByText(/Entrar/i).click();
+        await expect(page).toHaveURL("http://localhost:5173/dashboard")
+
+    })
+
+    test('deve realizar login', async ({ page }) => {
+        await page.goto("http://localhost:5173/login"); //navega para tela de login
+        await page.getByTestId('user-field').fill('lipe');
+        await page.getByTestId('password-field').fill('ZAP123!!');
+        await page.getByText(/Entrar/i).click();
+        await expect(page).toHaveURL("http://localhost:5173/dashboard")
+    })  
 
 })  

@@ -89,6 +89,7 @@ export function LoginCard() {
 							error={errors.username?.message}
 							placeholder="Digite seu nome de usuário"
 							register={register("username")}
+							data-testid="user-field"
 						/>
 						<InputField
 							label="Senha: "
@@ -99,6 +100,7 @@ export function LoginCard() {
 							error={errors.password?.message}
 							placeholder="Digite sua senha"
 							register={register("password")}
+							data-testid="password-field"
 						/>
 
 						<CardButtonArea>
