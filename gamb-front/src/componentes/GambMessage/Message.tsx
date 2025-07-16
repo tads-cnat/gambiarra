@@ -23,37 +23,37 @@ export default function UseMessage(props: MessageProps): React.JSX.Element {
 	} else {
 		return (
 			<MessageContainer>
-				<MessageWrapper type={type}>
-					<MessageIcon type={type}>
+				<MessageWrapper $type={type}>
+					<MessageIcon $type={type}>
 						{type === "success" && (
 							<Icon
 								icon="checkcircle"
-								size={26}
+								size={24}
 							/>
 						)}
 						{type === "info" && (
 							<Icon
 								icon="info"
-								size={26}
+								size={24}
 							/>
 						)}
 						{type === "warning" && (
 							<Icon
 								icon="warning"
-								size={26}
+								size={24}
 							/>
 						)}
 						{type === "danger" && (
 							<Icon
 								icon="danger"
-								size={26}
+								size={24}
 							/>
 						)}
 					</MessageIcon>
-					<MessageText>{text}</MessageText>
+					<MessageText $type={type}>{text}</MessageText>
 					{viewClose && (
 						<CloseButton
-							type={type}
+							$type={type}
 							onClick={onClose}
 						>
 							<Icon

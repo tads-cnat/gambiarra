@@ -8,369 +8,82 @@ export interface Action {
 	background: string;
 	icon: string;
 }
+const { cores } = defaultTheme;
+
+const ACTIONS = {
+	detalhar: {
+		name: "detalhar",
+		colorIcon: cores.purple_info_primary,
+		background: cores.purple_info_secondary,
+		icon: "eyeopen",
+	},
+
+	resolver: {
+		name: "resolver",
+		colorIcon: cores.green_sucess_primary,
+		background: cores.green_sucess_secondary,
+		icon: "checkcircle",
+	},
+	arquivar: {
+		name: "arquivar",
+		colorIcon: cores.danger,
+		background: cores.danger_secondary,
+		icon: "archive",
+	},
+	aceitar: {
+		name: "aceitar",
+		colorIcon: cores.green_sucess_primary,
+		background: cores.green_sucess_secondary,
+		icon: "checkcircle",
+	},
+	recusar: {
+		name: "recusar",
+		colorIcon: cores.danger,
+		background: cores.danger_secondary,
+		icon: "xcircle",
+	},
+	avaliar: {
+		name: "avaliar",
+		colorIcon: cores.gray_text,
+		background: cores.warning,
+		icon: "star",
+	},
+};
 
 export const btnsPR: Record<number, Action[]> = {
-	1: [
-		{
-			name: "aceitar",
-			colorIcon: "white",
-			background: defaultTheme.cores.green_sucess_primary,
-			icon: "checkcircle",
-		},
-		{
-			name: "recusar",
-			colorIcon: "white",
-			background: defaultTheme.cores.danger,
-			icon: "xcircle",
-		},
-		{
-			name: "detalhar",
-			colorIcon: "white",
-			background: defaultTheme.cores.purple_info_primary,
-			icon: "eyeopen",
-		},
-	],
-	2: [
-		{
-			name: "detalhar",
-			colorIcon: "white",
-			background: defaultTheme.cores.purple_info_primary,
-			icon: "eyeopen",
-		},
-		{
-			name: "chat",
-			colorIcon: "white",
-			background: defaultTheme.cores.blue_info,
-			icon: "chat",
-		},
-		{
-			name: "resolver",
-			colorIcon: "white",
-			background: defaultTheme.cores.green_sucess_primary,
-			icon: "checkcircle",
-		},
-	],
-	3: [
-		{
-			name: "detalhar",
-			colorIcon: "white",
-			background: defaultTheme.cores.purple_info_primary,
-			icon: "eyeopen",
-		},
-		{
-			name: "chat",
-			colorIcon: "white",
-			background: defaultTheme.cores.blue_info,
-			icon: "chat",
-		},
-		{
-			name: "resolver",
-			colorIcon: "white",
-			background: defaultTheme.cores.green_sucess_primary,
-			icon: "checkcircle",
-		},
-	],
-	4: [
-		{
-			name: "detalhar",
-			colorIcon: "white",
-			background: defaultTheme.cores.purple_info_primary,
-			icon: "eyeopen",
-		},
-		{
-			name: "chat",
-			colorIcon: "white",
-			background: defaultTheme.cores.blue_info,
-			icon: "chat",
-		},
-		{
-			name: "resolver",
-			colorIcon: "white",
-			background: defaultTheme.cores.green_sucess_primary,
-			icon: "checkcircle",
-		},
-	],
-	5: [
-		{
-			name: "detalhar",
-			colorIcon: "white",
-			background: defaultTheme.cores.purple_info_primary,
-			icon: "eyeopen",
-		},
-		{
-			name: "chat",
-			colorIcon: "white",
-			background: defaultTheme.cores.blue_info,
-			icon: "chat",
-		},
-		{
-			name: "resolver",
-			colorIcon: "white",
-			background: defaultTheme.cores.green_sucess_primary,
-			icon: "checkcircle",
-		},
-	],
-	6: [
-		{
-			name: "detalhar",
-			colorIcon: "white",
-			background: defaultTheme.cores.purple_info_primary,
-			icon: "eyeopen",
-		},
-		{
-			name: "chat",
-			colorIcon: "white",
-			background: defaultTheme.cores.blue_info,
-			icon: "chat",
-		},
-		{
-			name: "arquivar",
-			colorIcon: "white",
-			background: defaultTheme.cores.danger,
-			icon: "archive",
-		},
-	],
-	7: [
-		{
-			name: "detalhar",
-			colorIcon: "white",
-			background: defaultTheme.cores.purple_info_primary,
-			icon: "eyeopen",
-		},
-		{
-			name: "chat",
-			colorIcon: "white",
-			background: defaultTheme.cores.blue_info,
-			icon: "chat",
-		},
-		{
-			name: "arquivar",
-			colorIcon: "white",
-			background: defaultTheme.cores.danger,
-			icon: "archive",
-		},
-	],
-	8: [
-		{
-			name: "detalhar",
-			colorIcon: "white",
-			background: defaultTheme.cores.purple_info_primary,
-			icon: "eyeopen",
-		},
-		{
-			name: "arquivar",
-			colorIcon: "white",
-			background: defaultTheme.cores.danger,
-			icon: "archive",
-		},
-	],
-	9: [
-		{
-			name: "detalhar",
-			colorIcon: "white",
-			background: defaultTheme.cores.purple_info_primary,
-			icon: "eyeopen",
-		},
-	],
+	1: [ACTIONS.aceitar, ACTIONS.recusar, ACTIONS.detalhar],
+	2: [ACTIONS.detalhar, ACTIONS.resolver],
+	3: [ACTIONS.detalhar,  ACTIONS.resolver],
+	4: [ACTIONS.detalhar,  ACTIONS.resolver],
+	5: [ACTIONS.detalhar,  ACTIONS.resolver],
+	6: [ACTIONS.detalhar,  ACTIONS.arquivar],
+	7: [ACTIONS.detalhar,  ACTIONS.arquivar],
+	8: [ACTIONS.detalhar, ACTIONS.arquivar],
+	9: [ACTIONS.detalhar],
 };
 
 export const btnsGR: Record<number, Action[]> = {
-	1: [
-		{
-			name: "detalhar",
-			colorIcon: "white",
-			background: defaultTheme.cores.purple_info_primary,
-			icon: "eyeopen",
-		},
-	],
-	2: [
-		{
-			name: "detalhar",
-			colorIcon: "white",
-			background: defaultTheme.cores.purple_info_primary,
-			icon: "eyeopen",
-		},
-	],
-	3: [
-		{
-			name: "detalhar",
-			colorIcon: "white",
-			background: defaultTheme.cores.purple_info_primary,
-			icon: "eyeopen",
-		},
-	],
-	4: [
-		{
-			name: "detalhar",
-			colorIcon: "white",
-			background: defaultTheme.cores.purple_info_primary,
-			icon: "eyeopen",
-		},
-	],
-	5: [
-		{
-			name: "detalhar",
-			colorIcon: "white",
-			background: defaultTheme.cores.purple_info_primary,
-			icon: "eyeopen",
-		},
-	],
-	6: [
-		{
-			name: "detalhar",
-			colorIcon: "white",
-			background: defaultTheme.cores.purple_info_primary,
-			icon: "eyeopen",
-		},
-	],
-	7: [
-		{
-			name: "detalhar",
-			colorIcon: "white",
-			background: defaultTheme.cores.purple_info_primary,
-			icon: "eyeopen",
-		},
-	],
-	8: [
-		{
-			name: "detalhar",
-			colorIcon: "white",
-			background: defaultTheme.cores.purple_info_primary,
-			icon: "eyeopen",
-		},
-	],
-	9: [
-		{
-			name: "detalhar",
-			colorIcon: "white",
-			background: defaultTheme.cores.purple_info_primary,
-			icon: "eyeopen",
-		},
-	],
+	1: [ACTIONS.detalhar],
+	2: [ACTIONS.detalhar],
+	3: [ACTIONS.detalhar],
+	4: [ACTIONS.detalhar],
+	5: [ACTIONS.detalhar],
+	6: [ACTIONS.detalhar],
+	7: [ACTIONS.detalhar],
+	8: [ACTIONS.detalhar],
+	9: [ACTIONS.detalhar],
 };
 
 export const btnClientes: Record<number, Action[]> = {
-	1: [
-		{
-			name: "detalhar",
-			colorIcon: "white",
-			background: defaultTheme.cores.purple_info_primary,
-			icon: "eyeopen",
-		},
-	],
-	2: [
-		{
-			name: "detalhar",
-			colorIcon: "white",
-			background: defaultTheme.cores.purple_info_primary,
-			icon: "eyeopen",
-		},
-		{
-			name: "chat",
-			colorIcon: "white",
-			background: defaultTheme.cores.blue_info,
-			icon: "chat",
-		},
-	],
-	3: [
-		{
-			name: "detalhar",
-			colorIcon: "white",
-			background: defaultTheme.cores.purple_info_primary,
-			icon: "eyeopen",
-		},
-		{
-			name: "chat",
-			colorIcon: "white",
-			background: defaultTheme.cores.blue_info,
-			icon: "chat",
-		},
-	],
-	4: [
-		{
-			name: "detalhar",
-			colorIcon: "white",
-			background: defaultTheme.cores.purple_info_primary,
-			icon: "eyeopen",
-		},
-		{
-			name: "chat",
-			colorIcon: "white",
-			background: defaultTheme.cores.blue_info,
-			icon: "chat",
-		},
-	],
-	5: [
-		{
-			name: "detalhar",
-			colorIcon: "white",
-			background: defaultTheme.cores.purple_info_primary,
-			icon: "eyeopen",
-		},
-		{
-			name: "chat",
-			colorIcon: "white",
-			background: defaultTheme.cores.blue_info,
-			icon: "chat",
-		},
-	],
-	6: [
-		{
-			name: "detalhar",
-			colorIcon: "white",
-			background: defaultTheme.cores.purple_info_primary,
-			icon: "eyeopen",
-		},
-		{
-			name: "chat",
-			colorIcon: "white",
-			background: defaultTheme.cores.blue_info,
-			icon: "chat",
-		},
-		{
-			name: "avaliar",
-			colorIcon: defaultTheme.cores.gray_text,
-			background: defaultTheme.cores.warning,
-			icon: "star",
-		},
-	],
-	7: [
-		{
-			name: "detalhar",
-			colorIcon: "white",
-			background: defaultTheme.cores.purple_info_primary,
-			icon: "eyeopen",
-		},
-		{
-			name: "chat",
-			colorIcon: "white",
-			background: defaultTheme.cores.blue_info,
-			icon: "chat",
-		},
-		{
-			name: "avaliar",
-			colorIcon: defaultTheme.cores.gray_text,
-			background: defaultTheme.cores.warning,
-			icon: "star",
-		},
-	],
-	8: [
-		{
-			name: "detalhar",
-			colorIcon: "white",
-			background: defaultTheme.cores.purple_info_primary,
-			icon: "eyeopen",
-		},
-	],
-
-	9: [
-		{
-			name: "detalhar",
-			colorIcon: "white",
-			background: defaultTheme.cores.purple_info_primary,
-			icon: "eyeopen",
-		},
-	],
+	1: [ACTIONS.detalhar],
+	2: [ACTIONS.detalhar],
+	3: [ACTIONS.detalhar],
+	4: [ACTIONS.detalhar],
+	5: [ACTIONS.detalhar],
+	6: [ACTIONS.detalhar, ACTIONS.avaliar],
+	7: [ACTIONS.detalhar, ACTIONS.avaliar],
+	8: [ACTIONS.detalhar],
+	9: [ACTIONS.detalhar],
 };
 
 // Função que mapeia as ações para componentes <Notificacao />
@@ -380,7 +93,7 @@ export const getActionsByStatus = (
 	funct?: Record<string, (id: number) => void> // Parâmetro opcional para funções de ação
 ): React.JSX.Element[] => {
 	const actions: Action[] = isUserGerente()
-		? btnsGR[status] 
+		? btnsGR[status]
 		: isUserProfessor()
 		? btnsPR[status]
 		: btnClientes[status];

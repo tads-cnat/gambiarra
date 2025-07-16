@@ -15,6 +15,7 @@ export default function Notificacao({
 			size={size}
 			$backgroundColor={$backgroundColor}
 			onClick={onClick}
+			$borderColor={$iconColor} // Usando a cor do ícone como borda opcional
 		>
 			<IconContainer $iconColor={$iconColor}>
 				<Icon

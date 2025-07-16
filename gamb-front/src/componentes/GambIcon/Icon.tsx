@@ -57,6 +57,7 @@ import {
 	WarningIcon,
 	XCircleIcon,
 	XIcon,
+	SidebarIcon,
 } from "@phosphor-icons/react";
 import { GambIconProps } from "../../interfaces/componentes/iGambIcon";
 import { cloneElement } from "react";
@@ -113,7 +114,7 @@ const iconComponents: Record<string, React.JSX.Element> = {
 	search: <ListMagnifyingGlassIcon />,
 	back: <SkipBackCircleIcon />,
 	flower: <FlowerIcon />,
-
+	sb: <SidebarIcon />,
 	fillcircle: <CircleIcon weight="fill" />,
 	text: <TextTIcon />,
 	simcard: <SimCardIcon />,

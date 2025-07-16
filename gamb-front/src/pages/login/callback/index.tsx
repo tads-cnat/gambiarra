@@ -30,7 +30,7 @@ export default function Callback() {
 					if (userData) {
 						setUserActive(userData);
 						setUserActiveRole(userData.grupo);
-						setIsAuthenticatedStore(true);
+						setIsAuthenticatedStore();
 					}
 
 					navigate("/dashboard");

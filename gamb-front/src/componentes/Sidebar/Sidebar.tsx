@@ -173,15 +173,15 @@ export function Sidebar() {
 									icon={"back"}
 									size="large"
 									onClick={() => navigate(-1)}
-									style={{ width: "100%" }}
+									style={{ width: "100%", justifyContent: "space-between" }}
 								/>
 								<GambButton
 									variant="inline"
-									label={"Tela de Início"}
-									icon={"flower"}
+									label={"Encolher"}
+									icon={"sb"} // não sei pq quando eu coloco o nome desse icone como "sidebar" ele explode a memoria ram do PC
 									size="large"
-									onClick={() => navigate("/")}
-									style={{ width: "100%" }}
+									onClick={() => {}}
+									style={{ width: "100%", justifyContent: "space-between" }}
 								/>
 							</div>
 

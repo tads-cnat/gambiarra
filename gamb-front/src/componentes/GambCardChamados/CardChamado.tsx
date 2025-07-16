@@ -17,9 +17,9 @@ import { ChamadoCardsResponse } from "../../interfaces/models/iChamado";
 function CardChamado({ userType, cardKey, quantity }: CardChamadoProps) {
 	const messages = {
 		gerente: {
-			cadastrados: "Chamados Cadastrados",
-			pendentes: "Chamados Pendentes",
-			resolvidos: "Chamados Resolvidos",
+			cadastrados: "Cadastrados",
+			pendentes: "Pendentes",
+			resolvidos: "Resolvidos",
 			fechados: "Sem solução",
 		},
 		bolsista: {
@@ -112,7 +112,7 @@ function CardChamado({ userType, cardKey, quantity }: CardChamadoProps) {
 				<TextContainer>
 					<CardChamadoText $cardKey={cardKey}>
 						{quantity}{" "}
-						{isUserBolsista() ? "tarefas" : "chamados"}
+						{isUserBolsista() ? "Tarefas" : "Chamados"}
 					</CardChamadoText>
 					<CardChamadoText2 $cardKey={cardKey}>
 						{message}
