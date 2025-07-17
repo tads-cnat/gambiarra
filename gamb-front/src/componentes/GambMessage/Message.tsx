@@ -14,7 +14,7 @@ export default function UseMessage(props: MessageProps): React.JSX.Element {
 	const [show, setShow] = useState(true);
 
 	// Função para fechar a mensagem
-	function onClose() {
+	function onClose(): void {
 		setShow(false); // Muda o estado para false, fechando a mensagem
 	}
 	// Renderiza a mensagem apenas se `show` for true

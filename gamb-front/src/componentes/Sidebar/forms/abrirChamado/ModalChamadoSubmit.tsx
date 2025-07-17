@@ -11,7 +11,7 @@ export default function ModalChamadoSubmit(props: {
 	isModalOpen: boolean;
 	closeModal: () => void;
 	onSubmit: (data: ChamadoSubmit) => void;
-}) {
+}): React.JSX.Element {
 	const { isModalOpen, closeModal, onSubmit } = props;
 
 	// Hook para o formulário e campo de array dinâmico
@@ -31,7 +31,7 @@ export default function ModalChamadoSubmit(props: {
 	});
 
 	// Função para adicionar um novo acessório
-	const addAcessorio = (e: MouseEvent<HTMLButtonElement>) => {
+	const addAcessorio = (e: MouseEvent<HTMLButtonElement>): void => {
 		e.preventDefault(); // Previne o envio do formulário caso algum comportamento de submit aconteça
 		append({ nome: "" }); // Adiciona um novo item vazio no array de acessórios
 	};

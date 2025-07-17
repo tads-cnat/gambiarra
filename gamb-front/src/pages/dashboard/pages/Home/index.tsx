@@ -232,7 +232,7 @@ export default function DashboardHome(): React.JSX.Element {
 				isChamados={true}
 				TableActions={{
 					detalhar: (id: number) => {
-						navigate(`/dashboard/detail/${id}`);
+						void navigate(`/dashboard/detail/${id}`);
 					},
 					chat: (id: number) => console.log("chat", id),
 					arquivar: (id: number) => console.log("arquivar", id),

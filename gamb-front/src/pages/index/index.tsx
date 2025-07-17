@@ -14,7 +14,7 @@ import CardIndex from "../../componentes/GambCardIndex/GambCardIndex";
 import slogan from "../../assets/slogan.png";
 import gambizinho from "../../assets/tomada.svg";
 
-export default function Home() {
+export default function Home(): React.JSX.Element {
 	return (
 		<>
 			<Header />

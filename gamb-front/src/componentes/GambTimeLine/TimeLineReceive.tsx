@@ -7,7 +7,7 @@ export function RequestTimeLine(props: { id: number }): React.JSX.Element {
 	const { id } = props;
 	const [timeLine, setTimeLine] = useState<StatusType[]>([]);
 
-	async function handleTimeLine(id: number) {
+	async function handleTimeLine(id: number): Promise<void> {
 		await axiosInstance
 			.get(`/chamado/${id}/alteracoes/`)
 			.then((response) => {
@@ -55,7 +55,7 @@ export function RequestTimeLine(props: { id: number }): React.JSX.Element {
 	}
 
 	useEffect(() => {
-		handleTimeLine(id);
+		void handleTimeLine(id);
 	}, [id]);
 
 	return <>{timeLine.length > 0 && <Timeline status={timeLine} />}</>;

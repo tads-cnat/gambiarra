@@ -162,6 +162,9 @@ export const btnsPR: Record<number, Action[]> = {
 			label: "Arquivar",
 		},
 	],
+	9: [
+		
+	],
 };
 
 export const btnsGR: Record<number, Action[]> = {
@@ -173,6 +176,8 @@ export const btnsGR: Record<number, Action[]> = {
 	6: [],
 	7: [],
 	8: [],
+	9: [
+	],
 };
 
 export const btnClientes: Record<number, Action[]> = {
@@ -188,6 +193,7 @@ export const btnClientes: Record<number, Action[]> = {
 		{ name: "Avaliar", typeBtn: "amarelo", icon: "star", label: "Avaliar" },
 	],
 	8: [],
+	9: [],
 };
 
 // Função que mapeia as ações para componentes <Notificacao />
@@ -196,7 +202,6 @@ export const getActionsByStatus = (
 	idChamado: number,
 	funct?: Record<string, (id: number) => void> // Parâmetro opcional para funções de ação
 ): React.JSX.Element[] => {
-	
 	const actions: Action[] = isUserGerente()
 		? btnsGR[status]
 		: isUserProfessor()

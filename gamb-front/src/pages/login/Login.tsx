@@ -3,7 +3,7 @@ import { Header } from "../../componentes/GambHeader/Header";
 import { Footer } from "../../componentes/GambFooter/Footer";
 import { IndexContainer, MarcaGrafica } from "../index/indexstyles";
 import slogan  from "../../assets/slogan.png"
-export function Login() {
+export function Login(): React.JSX.Element {
 
 	return (
 		<div>

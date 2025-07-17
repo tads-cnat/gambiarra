@@ -24,9 +24,9 @@ export const defaultTheme = {
 
     background: "#F8F8F8",
 
-    blue_info: "#61B3FF",
-    blue_info_hover: "#4290DA", 
-    blue_info_light: "#C9E5FF",
+    blue_info: "#61B3FF",         // azul principal
+    blue_info_hover: "#4290DA",   // hover
+    blue_info_light: "#ddefff",
 
     // Cinzas do mais claro ao mais escuro
     gray_100: "#E1E1E6",

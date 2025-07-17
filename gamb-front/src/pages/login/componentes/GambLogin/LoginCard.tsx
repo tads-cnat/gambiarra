@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { LoginSubmit } from "../../../../auth/service/auth";
 import authService from "../../../../auth/service/authService";
@@ -23,7 +24,7 @@ import robo from "../../../../assets/robofeio.png";
 import suap from "../../../../assets/suap.svg";
 import google from "../../../../assets/google.png";
 
-export function LoginCard() {
+export function LoginCard(): React.JSX.Element {
 	const {
 		register,
 		handleSubmit,
@@ -39,9 +40,9 @@ export function LoginCard() {
 			setMessage(response.mensagem);
 			if (response.sucesso) {
 				setLoginIsValid(true);
-				authService.profile().then(() => {
+				void authService.profile().then(() => {
 					setTimeout(() => {
-						navigate("/dashboard");
+						void navigate("/dashboard");
 					}, 2000);
 				});
 			} else {
@@ -115,7 +116,7 @@ export function LoginCard() {
 							<p>
 								Não possui uma conta?{" "}
 								<a
-									onClick={() => navigate("/cadastro")}
+									onClick={() => void navigate("/cadastro")}
 									style={{
 										cursor: "pointer",
 										color: "blue",

@@ -1,11 +1,11 @@
 import ChamadoService from "../../../services/models/ChamadoService";
 import GambButton from "../../GambButton/Button";
-import { ModalCard, ModalFooter, ModalHeader, ModalOverlay } from "../../GambModal/modalstyles";
+import { ModalCard, ModalFooter, ModalHeader, ModalOverlay} from "../../GambModal/modalstyles";
 export default function AceitarChamadoModal(props: {
     chamadoId: number | null;
 	isModalOpen: boolean;
 	closeModal: () => void;
-}) {
+}): React.JSX.Element{
     const { isModalOpen, closeModal, chamadoId } = props;
     async function handleAction(): Promise<void>{
         await ChamadoService.aceitarChamado(chamadoId ?? 0)
@@ -25,8 +25,8 @@ export default function AceitarChamadoModal(props: {
         return (
             <>
                 <ModalOverlay
-				onClick={closeModal}
-			    >
+                onClick={closeModal}
+                >
                     <ModalCard onClick={(e) => e.stopPropagation()} className="elevacao-def">
                         <ModalHeader>
                                 <h4>Confirmar Ação - Aceitar Chamado</h4>
@@ -55,4 +55,5 @@ export default function AceitarChamadoModal(props: {
             </>
         );
     }
+    return <></>;
 }

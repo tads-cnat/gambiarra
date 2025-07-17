@@ -4,7 +4,7 @@ import { Header } from "../../componentes/GambHeader/Header";
 import { Footer } from "../../componentes/GambFooter/Footer";
 import { IndexContainer, MarcaGrafica } from "../index/indexstyles";
 
-export function Cadastro() {
+export function Cadastro(): React.JSX.Element {
     return (
         <div>
             <Header />

@@ -42,28 +42,28 @@ export const useUser = create<UserStore>()(
 			isAuthenticated: false,
 
 			// Retorna o token do localStorage
-			getAuthToken: () => {
+			getAuthToken: (): string | null => {
 				const token = localStorage.getItem("access_token");
 				return token || null;
 			},
 
 			// Retorna o refresh token do localStorage
-			getAuthRefreshToken: () => {
+			getAuthRefreshToken: (): string | null => {
 				const token = localStorage.getItem("refresh_token");
 				return token || null;
 			},
 			// Salva o token no localStorage
-			setAuthToken: (token: string) => {
+			setAuthToken: (token: string): void => {
 				localStorage.setItem("access_token", token);
 			},
 
 			// Salva o refresh token no localStorage
-			setAuthRefreshToken: (token: string) => {
+			setAuthRefreshToken: (token: string): void => {
 				localStorage.setItem("refresh_token", token);
 			},
 
 			// Define o usuário ativo e marca como autenticado
-			setUserActive: (user: UserActive | null) => {
+			setUserActive: (user: UserActive | null): void => {
 				set({
 					userActive: user,
 					isAuthenticated: !!user,
@@ -71,14 +71,14 @@ export const useUser = create<UserStore>()(
 			},
 
 			// Define o papel ativo
-			setUserActiveRole: (role: UserRoles) => {
+			setUserActiveRole: (role: UserRoles): void => {
 				set({
 					userActiveRole: role,
 				});
 			},
 
-			
-			logout: () => {
+
+			logout: (): void => {
 				localStorage.removeItem("access_token");
 				localStorage.removeItem("refresh_token");
 				set({

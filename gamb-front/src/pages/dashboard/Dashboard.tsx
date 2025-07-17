@@ -11,7 +11,7 @@ import {
 export const Dashboard: React.FC = () => {
 	useEffect(() => {
 		// Função para capturar mudanças no localStorage
-		const handleStorageChange = (e: StorageEvent) => {
+		const handleStorageChange = (e: StorageEvent): void => {
 			if (e.key === "userToken" || e.key === "role") {
 				console.log("Mudança no localStorage detectada");
 			}
@@ -21,7 +21,7 @@ export const Dashboard: React.FC = () => {
 		window.addEventListener("storage", handleStorageChange);
 
 		// Limpa o ouvinte ao desmontar o componente
-		return () => {
+		return (): void => {
 			window.removeEventListener("storage", handleStorageChange);
 		};
 	}, []);

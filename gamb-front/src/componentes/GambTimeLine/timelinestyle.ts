@@ -27,7 +27,7 @@ export const StepDot = styled.div<{ color: string }>`
   width: 24px;
   height: 24px;
   border-radius: 50%;
-  background-color: ${(props) => props.color};
+  background-color: ${(props): string => props.color};
 `;
 
 export const StepLine = styled.div<{ 
@@ -36,7 +36,7 @@ export const StepLine = styled.div<{
 }>`
   width: 200px;
   height: 1px;
-  background-color: ${(props) => props.color};
+  background-color: ${(props): string => props.color};
   margin: 0 8px;
   position: relative;
 `;
@@ -46,7 +46,7 @@ export const StepLineEnd = styled.div<{
 }>`
   width: 200px;
   height: 1px;
-  background-color: ${(props) => props.color};
+  background-color: ${(props): string => props.color};
   margin: 0 8px;
   position: relative;
 

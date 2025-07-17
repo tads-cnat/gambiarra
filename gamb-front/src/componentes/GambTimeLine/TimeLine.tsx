@@ -10,7 +10,7 @@ import {
 } from "./timelinestyle";
 import { ChatTimelineProps } from "../../interfaces/componentes/iGambTimeLine";
 
-export default function Timeline(props: ChatTimelineProps) {
+export default function Timeline(props: ChatTimelineProps): React.JSX.Element {
   const { status } = props;
 
   const lastStatus = status[status.length - 1];

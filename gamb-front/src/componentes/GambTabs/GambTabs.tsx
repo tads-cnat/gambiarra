@@ -22,16 +22,16 @@ export default function GambTabs({
 	tabs,
 	activeTab,
 	onTabChange,
-}: GambTabsProps) {
+}: GambTabsProps): React.JSX.Element {
 	const navigate = useNavigate();
 	const location = useLocation();
 	const [ModalOpen, setModalOpen] = useState(false);
 
-	const handleTabChange = (tabId: string) => {
+	const handleTabChange = (tabId: string): void => {
 		onTabChange(tabId);
 		const params = new URLSearchParams(location.search);
 		params.set("tab", tabId);
-		navigate(`?${params.toString()}`);
+		void navigate(`?${params.toString()}`);
 	};
 
 	// Fecha o modal de abrir chamado
@@ -82,7 +82,7 @@ export default function GambTabs({
 			<ModalChamadoSubmit
 				isModalOpen={ModalOpen}
 				closeModal={closeModal}
-				onSubmit={onSubmit}
+				onSubmit={() => void onSubmit}
 			/>
 		</>
 	);

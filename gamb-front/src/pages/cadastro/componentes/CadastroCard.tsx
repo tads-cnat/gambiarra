@@ -19,7 +19,7 @@ import { cadastroSchema } from "./schema";
 import { useNavigate } from "react-router-dom";
 import UseMessage from "../../../componentes/GambMessage/Message";
 
-export function CadastroCard() {
+export function CadastroCard(): React.JSX.Element {
 	const {
 		register,
 		handleSubmit,
@@ -33,7 +33,7 @@ export function CadastroCard() {
 	const navigate = useNavigate(); // Defina o hook navigate
 	const [message, setMessage] = useState<string>("");
 
-	async function handleCadastro(data: CadastroSubmit) {
+	async function handleCadastro(data: CadastroSubmit): Promise<void> {
 		setCadastroIsValid(null);
 		setMessage("");
 
@@ -43,7 +43,7 @@ export function CadastroCard() {
 			setCadastroIsValid(true);
 			setMessage(res.mensagem);
 			setTimeout(() => {
-				navigate("/login");
+				void navigate("/login");
 			}, 2000);
 		} else {
 			setCadastroIsValid(false);
@@ -76,7 +76,7 @@ export function CadastroCard() {
 					/>
 				) : null}
 
-				<form onSubmit={handleSubmit(handleCadastro)}>
+				<form onSubmit={() => void handleSubmit(handleCadastro)}>
 					<CardContent>
 						<h3>
 							Só precisamos de algumas{" "}
@@ -153,7 +153,7 @@ export function CadastroCard() {
 							<p>
 								Já uma possui conta?{" "}
 								<a
-									onClick={() => navigate("/login")}
+									onClick={() => void navigate("/login")}
 									style={{
 										cursor: "pointer",
 										color: "blue",

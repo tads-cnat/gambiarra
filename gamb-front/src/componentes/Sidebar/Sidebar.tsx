@@ -29,7 +29,7 @@ import logoGambi from "../../assets/logo-side.png";
 
 // 1) Importe o hook para acessar dados do usuário
 
-export function Sidebar() {
+export function Sidebar(): React.JSX.Element {
 	// Estados internos do componente
 	const [ModalOpen, setModalOpen] = useState(false);
 	const [isDropdownOpen, setDropdownOpen] = useState(false);
@@ -39,7 +39,7 @@ export function Sidebar() {
 	const navigate = useNavigate();
 
 	// Fecha o modal de abrir chamado
-	const closeModal = () => setModalOpen(false);
+	const closeModal = (): void => setModalOpen(false);
 
 	// Lógica de envio do formulário de chamado
 	async function onSubmit(data: ChamadoSubmit): Promise<void> {
@@ -60,14 +60,18 @@ export function Sidebar() {
 	// Lógica de logout
 	function handleLogout(): void {
 		logout();
-		navigate("/login");
+		void navigate("/login");
 	}
 
 	// Abre/fecha o dropdown do usuário
-	const toggleDropdown = () => setDropdownOpen(!isDropdownOpen);
+	const toggleDropdown = (): void => setDropdownOpen(!isDropdownOpen);
 
 	// 3) Defina os itens de menu de acordo com o papel do usuário
-	function getSidebarItems() {
+	function getSidebarItems(): Array<{
+		to: string;
+		label: string;
+		icon: React.JSX.Element;
+	}> {
 		const commonItems = {
 			home: { to: "/dashboard", label: "Home", icon: <HouseSimpleIcon /> },
 			gerenciarBolsista: {
@@ -172,7 +176,7 @@ export function Sidebar() {
 									label={"Voltar"}
 									icon={"back"}
 									size="large"
-									onClick={() => navigate(-1)}
+									onClick={() => void navigate(-1)}
 									style={{ width: "100%", justifyContent: "space-between" }}
 								/>
 								<GambButton
@@ -250,7 +254,7 @@ export function Sidebar() {
 			<ModalChamadoSubmit
 				isModalOpen={ModalOpen}
 				closeModal={closeModal}
-				onSubmit={onSubmit}
+				onSubmit={(data) => { void onSubmit(data); }}
 			/>
 		</>
 	);

@@ -19,7 +19,7 @@ export default function ErrorPage(): React.JSX.Element {
 					variant={"roxo"}
 					onClick={() => {
 						if (window.location.pathname === "/404") {
-              							navigate("/dashboard");
+              							void navigate("/dashboard");
 
 						} else {
               							window.history.back();

@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import Home from "./pages/index";
 import { ProtectedRoute } from "./auth/Routes";
@@ -19,9 +18,7 @@ import { Cadastro } from "./pages/cadastro/cadastro";
 import Callback from "./pages/login/callback";
 import ErrorPage from "./pages/errorPage";
 
-export function App() {
-	
-
+export function App(): React.JSX.Element {
 	return (
 		<ThemeProvider theme={defaultTheme}>
 			<GlobalStyle />
