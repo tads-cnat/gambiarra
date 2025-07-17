@@ -55,31 +55,49 @@ const getStatusColors = ({$status } : StatusProps) => {
         border: theme.cores.gray_700,
         text: theme.cores.gray_700,
       };
+     case 7:
+      return{
+        bg: theme.cores.green_sucess_secondary,
+        border: theme.cores.green_sucess_hover,
+        text: theme.cores.green_sucess_hover,
+      };
+
+    case 8:
+      return{
+        bg: theme.cores.danger_secondary,
+        border: theme.cores.danger,
+        text: theme.cores.danger,
+    };
+    case 9:
+      return{
+        bg: theme.cores.danger_secondary,
+        border: theme.cores.danger_hover,
+        text: theme.cores.danger_hover,
+      };
     default:
       return{
-        bg: theme.cores.white,
-        border: theme.cores.white,
-        text: theme.cores.danger,
+        bg: theme.cores.gray_400,
+        border: theme.cores.gray_100,
+        text: theme.cores.gray_600,
       };
   }
 };
 
-const actionColors: Record<number, string> = {
-  1: "#9E9E9E",
-  2: "#12A400",
-  3: "#ce962f",
-  4: "#7C74DA",
-  5: "#a3d3ff",
-  6: "#3b3b3b",
-  7: "#117005",
-};
+
 
 export const StatusBadge = styled.span<StatusProps>`
   padding: 5px;
   border-radius: 50%;
   color: #fff;
-  background: ${({ $status }): string => actionColors[$status] || "#DC3545"};
-`;
+ ${({ $status }): string => {
+    const { bg, border, text } = getStatusColors({$status});
+    return `
+      background-color: ${bg};
+      border: 1px solid ${border};
+      color: ${text};
+    `;
+  }}`
+  ;
 
 export const ChamadosBadge = styled.span<StatusProps>`
   font-size: 12px;

@@ -20,22 +20,27 @@ from .models import Usuario
 from .permissions import *
 from .serializers import *
 
+from rest_framework.exceptions import ValidationError
+from rest_framework.response import Response
+from rest_framework import status
 
 class RegisterUserView(CreateAPIView):
     serializer_class = UserRegistrationSerializer
-    permission_classes = [AllowAny]  # any can register an account
+    permission_classes = [AllowAny]
 
     def create(self, request):
         try:
             serializer = self.get_serializer(data=request.data)
-            serializer.is_valid(
-                raise_exception=True
-            )  # checks the validations inside the serializer
-            self.perform_create(serializer)  # calls the serializer's create method
+            serializer.is_valid(raise_exception=True)
+            self.perform_create(serializer)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
-        except:
+        except ValidationError as e:
+            print("Validation error:", e)
+            return Response(e.detail, status=status.HTTP_400_BAD_REQUEST)
+        except Exception as e:
+            print("Unexpected error during registration:", e)
             return Response(
-                "Erro ao realizar o cadastro",
+                "Erro inesperado ao realizar o cadastro",
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR,
             )
 

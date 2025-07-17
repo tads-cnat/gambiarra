@@ -44,8 +44,8 @@ const ACTIONS = {
 	},
 	avaliar: {
 		name: "avaliar",
-		colorIcon: cores.gray_text,
-		background: cores.warning,
+		colorIcon: cores.warning,
+		background: cores.warning_secondary,
 		icon: "star",
 	},
 };

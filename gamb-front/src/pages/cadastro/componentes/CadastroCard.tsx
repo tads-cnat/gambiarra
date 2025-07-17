@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -14,6 +15,11 @@ import {
 	Divider,
 	OtherLoginButton,
 } from "../../login/componentes/GambLogin/LoginCardStyles";
+
+import robo from "../../../assets/robofeio.png";
+import google from "../../../assets/google.png";
+import suapLogo from "../../../assets/suap.svg";
+
 import { cadastroSchema } from "./schema";
 
 import { useNavigate } from "react-router-dom";
@@ -56,14 +62,14 @@ export function CadastroCard(): React.JSX.Element {
 	return (
 		<ContainerLogin className="border-gambi">
 			<img
-				src="robofeio.png"
+				src={robo}
 				alt=""
 			/>
 			<Divider />
 			<Card>
 				{/* Renderiza as mensagens com base no estado */}
 				{cadastroIsValid === true &&
-				!errors.password &&
+				!errors.password1 &&
 				!errors.username ? (
 					<UseMessage
 						type="success"
@@ -76,7 +82,7 @@ export function CadastroCard(): React.JSX.Element {
 					/>
 				) : null}
 
-				<form onSubmit={() => void handleSubmit(handleCadastro)}>
+				<form onSubmit={handleSubmit(handleCadastro)}>
 					<CardContent>
 						<h3>
 							Só precisamos de algumas{" "}
@@ -118,12 +124,13 @@ export function CadastroCard(): React.JSX.Element {
 							type="password"
 							icon="lock"
 							formIsValid={cadastroIsValid}
-							name="password"
-							error={errors.password?.message}
+							name="password1"
+							error={errors.password1?.message}
 							placeholder="Deve ter no minimo 8 caracteres"
-							register={register("password")}
+							register={register("password1")}
 						/>
 
+						
 						<InputField
 							label="Confirmar Senha *"
 							type="password"
@@ -174,7 +181,7 @@ export function CadastroCard(): React.JSX.Element {
 									// onClick={() => authService.cadastroGithub()}
 								>
 									<img
-										src="suap.svg"
+										src={suapLogo}
 										alt=""
 									/>
 								</GambButton>
@@ -185,7 +192,7 @@ export function CadastroCard(): React.JSX.Element {
 									// onClick={() => authService.cadastroGoogle()}
 								>
 									<img
-										src="google.png"
+										src={google}
 										alt=""
 										style={{ height: "20px" }}
 									/>

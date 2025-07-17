@@ -1,15 +1,8 @@
 // src/auth/service/registerService.ts
 import axiosInstance from "../../services/base/axiosInstance";
 import BaseService from "../../services/base/baseService";
+import { CadastroSubmit } from "./register";
 
-// Payload de cadastro
-export interface CadastroSubmit {
-  cpf: string;
-  email: string;
-  username: string;
-  password: string;
-  password2: string;
-}
 
 // Interface de resposta
 export interface Mensagem {
