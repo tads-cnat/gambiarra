@@ -73,14 +73,12 @@ class ChamadoViewSet(viewsets.ModelViewSet):
             chamado = Chamado.objects.get(pk=pk)
         except Chamado.DoesNotExist:
             return Response(
-                {"erro": "Chamado não encontrado."}, 
-                status=status.HTTP_404_NOT_FOUND
+                {"erro": "Chamado não encontrado."}, status=status.HTTP_404_NOT_FOUND
             )
 
         user: Usuario = self.request.user
         grupo = user.grupo.name
 
-       
         if grupo == GrupoEnum.PROFESSOR and chamado.professor != user:
             status_permitidos = (
                 TAB_STATUS_MAPPING["pendentes"]
@@ -96,7 +94,6 @@ class ChamadoViewSet(viewsets.ModelViewSet):
         serializer = DetalharChamadoSerializer(chamado)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
-    
     def get_queryset(self):
 
         user = self.request.user

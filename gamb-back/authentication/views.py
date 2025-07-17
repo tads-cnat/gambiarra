@@ -24,6 +24,7 @@ from rest_framework.exceptions import ValidationError
 from rest_framework.response import Response
 from rest_framework import status
 
+
 class RegisterUserView(CreateAPIView):
     serializer_class = UserRegistrationSerializer
     permission_classes = [AllowAny]
@@ -171,6 +172,7 @@ class SuapLoginView(APIView):
         grupo = dados.get("tipo_usuario")
         email = dados.get("email")
         username = email.split("@")[0]
+        foto = dados.get("foto")
 
         try:
             grupo_obj = Group.objects.get(name=grupo.lower())
@@ -183,7 +185,6 @@ class SuapLoginView(APIView):
                 status=status.HTTP_400_BAD_REQUEST,
             )
 
-       
         usuario_obj, created = Usuario.objects.get_or_create(
             cpf=cpf_clean,
             defaults={
