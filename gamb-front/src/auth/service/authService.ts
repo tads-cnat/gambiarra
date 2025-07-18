@@ -4,7 +4,6 @@ import { LoginSubmit } from "./auth";
 import {
 	getAuthRefreshToken,
 	getAuthToken,
-	isAuthenticatedStore,
 	setAuthRefreshToken,
 	setAuthToken,
 	setIsAuthenticatedStore,
