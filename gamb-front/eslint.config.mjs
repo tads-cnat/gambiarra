@@ -78,8 +78,7 @@ export default [
 			"sonarjs/no-use-of-empty-return-value": "error", // Return vazio onde não faz sentido
 			// 🚩 IMPORT RULES
 			"import/no-extraneous-dependencies": "error", // Importações que não estão no package.json
-		},
-		rules: {
+
 			// 🚫 Evita usar child_process (exec, spawn) sem sanitização — previne Command Injection
 			"security/detect-child-process": "error",
 
@@ -107,7 +106,7 @@ export default [
 			// 🚫 Evita require(userInput) — previne carregar módulos arbitrários
 			"security/detect-non-literal-require": "error",
 
-			// ⚠️ Avisa comparação insegura de tokens — para evitar Timing Attacks
+			// ⚠️ Avisa comparação insegura de tokens — para evitar Timing Attacks 
 			"security/detect-possible-timing-attacks": "error",
 		},
 	},
