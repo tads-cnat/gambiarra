@@ -3,6 +3,7 @@ import eslint from "@eslint/js";
 import tseslint from "typescript-eslint";
 import sonarjs from "eslint-plugin-sonarjs";
 import eslintPluginImport from "eslint-plugin-import";
+import eslintPluginSecurity from "eslint-plugin-security";
 
 export default [
 	// Ignorar pastas comuns
@@ -37,6 +38,7 @@ export default [
 			"@typescript-eslint/no-unsafe-call": "off",
 			"@typescript-eslint/no-unsafe-assignment": "off",
 			"@typescript-eslint/no-unsafe-argument": "off",
+			"@typescript-eslint/no-misused-promises": "off",
 			"@typescript-eslint/no-floating-promises": "off",
 			"@typescript-eslint/await-thenable": "off",
 			"@typescript-eslint/restrict-template-expressions": "off",
@@ -56,7 +58,8 @@ export default [
 	{
 		plugins: {
 			sonarjs,
-			  import: eslintPluginImport
+			import: eslintPluginImport,
+			security: eslintPluginSecurity,
 		},
 		rules: {
 			"sonarjs/no-implicit-dependencies": "error",
@@ -75,6 +78,15 @@ export default [
 			"sonarjs/no-use-of-empty-return-value": "error", // Return vazio onde não faz sentido
  			// 🚩 IMPORT RULES
       		"import/no-extraneous-dependencies": "error", // Importações que não estão no package.json
+		},
+		rules: {
+			"security/detect-object-injection": "error",
+			"security/detect-child-process": "error",
+			"security/detect-non-literal-fs-filename": "error",
+			"security/detect-non-literal-regexp": "error",
+			"security/detect-eval-with-expression": "error",
+			"security/detect-pseudoRandomBytes": "error",
+			"security/detect-new-buffer": "error",
 		},
 	},
 ];
