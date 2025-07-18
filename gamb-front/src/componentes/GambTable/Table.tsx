@@ -1,14 +1,9 @@
 import { Pagination } from "../GambPaginação/Paginacao";
-import { GBodyTd } from "./GBodyTd";
 import { GHeadTh } from "./GHeadTh";
 import {
-	BodyTr,
-	ChamadosBadge,
 	HeadTr,
-	StatusBadge,
 	Table,
 } from "./tableStyles";
-import { getActionsByStatus } from "./actions";
 import TableBody from "./tableBody";
 
 export function GambTable({
