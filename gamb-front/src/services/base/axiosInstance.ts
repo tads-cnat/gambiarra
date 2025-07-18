@@ -26,9 +26,13 @@ axiosInstance.interceptors.request.use(
 		}
 
 		const token = getAuthToken();
-		if (token !== undefined) {
+
+		const isTokenDefined = typeof token === "string" && token.length > 0;
+
+		if (isTokenDefined) {
 			config.headers.Authorization = `Bearer ${token}`;
 		}
+		
 		return config;
 	},
 	async (error) => {
