@@ -8,7 +8,7 @@ import eslintPluginSecurity from "eslint-plugin-security";
 export default [
 	// Ignorar pastas comuns
 	{
-		ignores: ["**/dist/**", "**/node_modules/**", "bin/**", "coverage/**"],
+		ignores: ["**/dist/**", "**/node_modules/**", "bin/**", "coverage/**" , "build/**", "public/**", "scripts/**", "test/**", "tests/**", "cypress/**", "e2e/**", "cypress.config.js", "cypress.config.ts", "cypress.config.mjs", "cypress.env.json", "cypress.env.js", "cypress.env.ts"],
 	},
 
 	// Configurações base

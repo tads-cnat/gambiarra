@@ -1,0 +1,16 @@
+{
+    "success": true,
+    "data": {
+        "id": 16,
+        "is_superuser": false,
+        "username": "lipe",
+        "first_name": "",
+        "last_name": "",
+        "email": "email@exemplo.com",
+        "is_staff": false,
+        "is_active": true,
+        "grupo": "cliente",
+        "imagem": "http://localhost:8000/media/fotos_perfil/lipe_Hp93dmo.png"
+    },
+    "message": null
+}
