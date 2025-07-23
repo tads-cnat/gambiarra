@@ -5,7 +5,7 @@ import { defineConfig } from "cypress";
 export default defineConfig({
 	e2e: {
 		// URL base da aplicação que será testada
-		baseUrl: "http://localhost:5173",
+		baseUrl: "http://localhost:4173",
 
 		// Largura da tela do browser durante os testes
 		viewportWidth: 1280,
