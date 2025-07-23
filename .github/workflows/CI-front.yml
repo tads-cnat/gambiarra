@@ -38,6 +38,9 @@ jobs:
            
 
             - name: Build
+              env:
+                VITE_API_URL: "http://localhost:8000/api/v1/"
+                VITE_HOST: "localhost"
               run: |
                   cd gamb-front
                   npm run build
@@ -45,6 +48,6 @@ jobs:
             - name: Run Cypress tests
               run: |
                     cd gamb-front
-                    npm start &
+                    npm run start &
                     sleep 10 # Aguarda o servidor iniciar
                     npm run cypress:run --browser chrome --headless
