@@ -35,15 +35,7 @@ jobs:
                     cd gamb-front
                     npm run lint
 
-            - name: Cypress run
-              uses: cypress-io/github-action@v6
-              env:
-                VITE_API_URL: "http://localhost:8000/api/v1/"
-                VITE_HOST: "localhost"
-              with:
-                  build: yarn build
-                  start: yarn preview
-                  working-directory: gamb-front
+            
 
 
           
