@@ -17,11 +17,11 @@ export default defineConfig({
 		testIsolation: false,
 
 		// Número de tentativas ao correr testes em modo interativo (cypress open)
-		retries: { openMode: 2 },
+		// retries: { openMode: 2 },
 	},
 
 	env: {
 		// Variável de ambiente para definir o URL base da API
-		API_BASE_URL: "http://localhost:8000/api/v2",
+		API_BASE_URL: "http://localhost:8000/api/v1",
 	},
 });

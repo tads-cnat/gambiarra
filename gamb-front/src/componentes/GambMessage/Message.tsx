@@ -10,7 +10,7 @@ import {
 import { useState } from "react";
 
 export default function UseMessage(props: MessageProps): React.JSX.Element {
-	const { type, text, viewClose } = props;
+	const { type, text, viewClose, datacypress } = props;
 	const [show, setShow] = useState(true);
 
 	// Função para fechar a mensagem
@@ -22,7 +22,7 @@ export default function UseMessage(props: MessageProps): React.JSX.Element {
 		return <></>; // Se a mensagem não deve ser exibida, retorna vazio
 	} else {
 		return (
-			<MessageContainer>
+			<MessageContainer data-cypress={datacypress}>
 				<MessageWrapper $type={type}>
 					<MessageIcon $type={type}>
 						{type === "success" && (

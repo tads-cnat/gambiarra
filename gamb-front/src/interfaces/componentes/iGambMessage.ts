@@ -8,4 +8,6 @@ export interface MessageProps {
 	text: string;
 
 	viewClose?: boolean;
+
+	datacypress?: string;
 }
