@@ -50,4 +50,4 @@ jobs:
                     cd gamb-front
                     npm run dev &
                     sleep 10 # Aguarda o servidor iniciar
-                    npm run cypress:run --browser chrome --headless
+                    npm run cypress run --browser chrome --headless
