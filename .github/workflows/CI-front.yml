@@ -35,16 +35,16 @@ jobs:
                     cd gamb-front
                     npm run lint
 
-            - name: Cypress run
-              uses: cypress-io/github-action@v6
-              with:
-                  build: npm run build
-                  start: npm start
-                  path: gamb-front
+           
 
             - name: Build
               run: |
                   cd gamb-front
                   npm run build
 
-    
+            - name: Run Cypress tests
+              run: |
+                    cd gamb-front
+                    npm start &
+                    sleep 10 # Aguarda o servidor iniciar
+                    npm run cypress:run --browser chrome --headless
