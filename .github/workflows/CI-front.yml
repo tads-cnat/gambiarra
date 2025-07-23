@@ -24,14 +24,15 @@ jobs:
               uses: actions/setup-node@v1
               with:
                   node-version: 22.15.0
-                  path: gamb-front
-
+                  
             - name: Install dependencies
               run: |
+                  cd gamb-front
                   npm install
 
             - name: Lint
               run: |
+                    cd gamb-front
                     npm run lint
 
             - name: Cypress run
@@ -42,6 +43,7 @@ jobs:
 
             - name: Build
               run: |
+                  cd gamb-front
                   npm run build
 
     
