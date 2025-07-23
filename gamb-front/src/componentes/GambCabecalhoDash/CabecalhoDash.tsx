@@ -9,9 +9,7 @@ export default function CabecalhoDash() {
 	return (
 		<CabecalhoDashContainer>
 			<CabecalhoDashWrapper>
-				<Breadcrumb
-					crumbs={[{ label: "Dashboard", href: "/dashboard" }]}
-				/>
+				<Breadcrumb />
 				<div className="flex gap-2">
 					<Notificacao
 						icon={"chat"}
