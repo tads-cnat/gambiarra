@@ -33,6 +33,8 @@ export function Sidebar(): React.JSX.Element {
 	// Estados internos do componente
 	const [ModalOpen, setModalOpen] = useState(false);
 	const [isDropdownOpen, setDropdownOpen] = useState(false);
+	const [isCollapsed, setIsCollapsed] = useState(false);
+
 
 	// 2) Obtenha dados do usuário e seu papel
 
@@ -146,13 +148,13 @@ export function Sidebar(): React.JSX.Element {
 	return (
 		<>
 			<SidebarBody>
-				<SidebarContainer>
+				 <SidebarContainer collapsed={isCollapsed}>
 					<SidebarContent>
 						<div>
 							<img
 								src={logoGambi}
 								alt="Logo Gambi"
-								className="gambi-img img-fluid"
+								className={`gambi-img ${isCollapsed ? "collapsed" : ""}`}
 							/>
 
 							{/* BOTÃO (Abrir Chamado) */}
@@ -164,28 +166,28 @@ export function Sidebar(): React.JSX.Element {
 								{(isUserExternal()) && (
 									<GambButton
 										variant="roxo"
-										label="Abrir Chamado"
+										label={isCollapsed ? "" : "Abrir Chamado"}
 										icon="plus_circle"
 										onClick={() => setModalOpen(true)}
 										size="large"
-										style={{ width: "100%" }}
+										style={{ width: "100%"}}
 									/>
 								)}
 								<GambButton
 									variant="inline"
-									label={"Voltar"}
+									label={isCollapsed ? "" : "Voltar"}
 									icon={"back"}
 									size="large"
 									onClick={() => void navigate(-1)}
-									style={{ width: "100%", justifyContent: "space-between" }}
+									style={{ width: "100%", justifyContent: "space-between"}}
 								/>
 								<GambButton
 									variant="inline"
-									label={"Encolher"}
+									label={isCollapsed ? "" : "Encolher"}
 									icon={"sb"} // não sei pq quando eu coloco o nome desse icone como "sidebar" ele explode a memoria ram do PC
 									size="large"
-									onClick={() => {}}
-									style={{ width: "100%", justifyContent: "space-between" }}
+									onClick={() => setIsCollapsed(!isCollapsed)}
+									style={{ width: "100%", justifyContent: isCollapsed ? "center" : "space-between"}}
 								/>
 							</div>
 
@@ -195,33 +197,31 @@ export function Sidebar(): React.JSX.Element {
 									<li key={`${item.to}-${index}`}>
 										<Link
 											to={item.to}
-											className={`${
-												item.to ===
-												window.location.pathname
-													? "text-green-600 font-regular border-l-2 border-green-600"
-													: ""
-											}`}
+											className={`
+											flex items-center gap-2 p-2
+											${item.to === window.location.pathname ? "text-green-600 font-regular border-l-2 border-green-600" : ""}
+											`}
 										>
-											{item.icon} {item.label}
+											{item.icon}
+											{!isCollapsed && <span>{item.label}</span>}
 										</Link>
 									</li>
 								))}
 							</ul>
+
 						</div>
 
 						{/* INFORMAÇÕES DO USUÁRIO E DROPDOWN */}
 						<UserSpace>
-							<User>
-								<img
-									src={
-										`${getUserActive()?.imagem}` ||
-										"perfil.png"
-									}
-									alt="Imagem de perfil"
-								/>
-								{getUserActive()?.username || "User"} -{" "}
-								{getUserActiveRole()}
-							</User>
+							{!isCollapsed && (
+								<User>
+									<img
+										src={getUserActive()?.imagem || "perfil.png"}
+										alt="Imagem de perfil"
+									/>
+									{getUserActive()?.username || "Usuário"} - {getUserActiveRole()}
+								</User>
+							)}
 							<div className="flex flex-col-reverse relative">
 								{isDropdownOpen && (
 									<ItemDropdown className="absolute bottom-full mb-2 left-0 w-full elevacao-def">

@@ -2,13 +2,15 @@ import styled from "styled-components";
 import { defaultTheme } from "../../styles/themes/default";
 const theme = defaultTheme
 
-export const SidebarContainer = styled.aside`
+export const SidebarContainer = styled.aside<{ collapsed?: boolean }>`
 	background-color: ${theme.cores.white};
-	width: 100%;
+	width: ${(props) => (props.collapsed ? "80px" : "100%")};
 	border-radius: 30px;
 	box-shadow: 5px 5px 10px 5px rgba(54, 54, 54, 0.1);
 	height: 100%;
+	transition: width 0.3s ease;
 `;
+
 
 export const SidebarBody = styled.div`
 	height: 100vh;
@@ -77,7 +79,15 @@ export const SidebarContent = styled.div`
 		padding: 1rem;
 		border-bottom: 1px solid ${theme.cores.gray_300};
 		width: 100%;
+		transition: all 0.3s ease;
+
+		&.collapsed {
+			width: 100%;
+			padding: 0.5rem;
+			margin: 0 auto;
+		}
 	}
+
 
 	.buttons-conj {
 		margin-top: 1.5rem;
