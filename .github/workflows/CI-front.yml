@@ -17,26 +17,31 @@ jobs:
              
     front:
         runs-on: ubuntu-latest
-
+        
         steps:
             - uses: actions/checkout@v4.2.2
             - name: Set up Node.js
               uses: actions/setup-node@v1
               with:
                   node-version: 22.15.0
+                  path: gamb-front
+
             - name: Install dependencies
               run: |
-                  cd gamb-front
                   npm install
 
             - name: Lint
               run: |
-                    cd gamb-front
-                    npm run lint 
+                    npm run lint
+
+            - name: Cypress run
+              uses: cypress-io/github-action@v6
+              with:
+                  build: npm run build
+                  start: npm start
 
             - name: Build
               run: |
-                  cd gamb-front
                   npm run build
 
     
