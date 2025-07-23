@@ -46,13 +46,4 @@ jobs:
                   working-directory: gamb-front
 
 
-
-            - name: Build
-              env:
-                VITE_API_URL: "http://localhost:8000/api/v1/"
-                VITE_HOST: "localhost"
-              run: |
-                  cd gamb-front
-                  npm run build
-
           

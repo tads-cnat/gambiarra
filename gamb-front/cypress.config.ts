@@ -1,11 +1,15 @@
 // Importa a função defineConfig do Cypress
 import { defineConfig } from "cypress";
+import { loadEnv } from "vite";
+
+const env = loadEnv(process.cwd(), "");
 
 // Exporta a configuração principal do Cypress
 export default defineConfig({
 	e2e: {
 		// URL base da aplicação que será testada
-		baseUrl: "http://localhost:4173",
+		baseUrl: env.VITE_PORT
+			? `http://localhost:${env.VITE_PORT}` :  `http://localhost:5173`,
 
 		// Largura da tela do browser durante os testes
 		viewportWidth: 1280,
