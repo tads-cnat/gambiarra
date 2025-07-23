@@ -8,7 +8,8 @@ const env = loadEnv(process.cwd(), "");
 export default defineConfig({
 	e2e: {
 		// URL base da aplicação que será testada
-		baseUrl: env.VITE_PORT
+		// se estou previzualizando o build a porta é a 4173 caso contrário é a 5173
+		baseUrl: env.VITE_PORT 
 			? `http://localhost:${env.VITE_PORT}` :  `http://localhost:5173`,
 
 		// Largura da tela do browser durante os testes
