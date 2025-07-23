@@ -30,12 +30,12 @@ suap.click()
 sleep(5)
 
 suaplogin = driver.find_element(By.XPATH, "/html/body/div[1]/main/div[2]/div[2]/form/div[1]/div/input[1]")
-suaplogin.send_keys("20231014040008")
+suaplogin.send_keys("*")
 sleep(5)
 
 
 senhasuap = driver.find_element(By.XPATH, "/html/body/div[1]/main/div[2]/div[2]/form/div[2]/div/div/input")
-senhasuap.send_keys("@Guga2011")
+senhasuap.send_keys("*")
 sleep(5)
 
 submitsuap = driver.find_element(By.XPATH, "/html/body/div[1]/main/div[2]/div[2]/form/div[5]/input")
