@@ -79,13 +79,7 @@ export const SidebarContent = styled.div`
 		padding: 1rem;
 		border-bottom: 1px solid ${theme.cores.gray_300};
 		width: 100%;
-		transition: all 0.3s ease;
-
-		&.collapsed {
-			width: 100%;
-			padding: 0.5rem;
-			margin: 0 auto;
-		}
+		transition: all 0.5s ease;
 	}
 
 
@@ -96,5 +90,12 @@ export const SidebarContent = styled.div`
 		gap: 0.5rem;
 		padding-bottom: 2rem;
 	}
+
+
+	div > .collapsed-img {
+		padding: 1rem;
+		border-bottom: 1px solid ${theme.cores.gray_300};
+		width: 100%;
+		transition: all 0.5s ease;
 
 `;

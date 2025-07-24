@@ -26,6 +26,7 @@ import {
 } from "../../auth/service/AuthStore";
 import { isUserExternal } from "../../utils/checkRoleUser";
 import logoGambi from "../../assets/logo-side.png";
+import tomada from "../../assets/marca-grafica-tomada.png";
 
 // 1) Importe o hook para acessar dados do usuário
 
@@ -76,6 +77,25 @@ export function Sidebar(): React.JSX.Element {
 	}> {
 		const commonItems = {
 			home: { to: "/dashboard", label: "Home", icon: <HouseSimpleIcon /> },
+			
+			abrirChamado: {
+				to: "#",
+				label: "Abrir Chamado",
+				icon: <FolderUserIcon />,
+			},
+
+			voltarPagina: {
+				to: "#",
+				label: "Voltar Pagina",
+				icon: <FolderUserIcon />,
+			},
+
+			abrirSidebar: {
+				to: "#",
+				label: "Abrir Sidebar",
+				icon: <FolderUserIcon />,
+			},
+
 			gerenciarBolsista: {
 				to: "#",
 				label: "Gerenciar Bolsista",
@@ -151,11 +171,19 @@ export function Sidebar(): React.JSX.Element {
 				 <SidebarContainer collapsed={isCollapsed}>
 					<SidebarContent>
 						<div>
-							<img
-								src={logoGambi}
-								alt="Logo Gambi"
-								className={`gambi-img ${isCollapsed ? "collapsed" : ""}`}
-							/>
+							{isCollapsed ? (
+								<img
+									src={tomada}
+									alt="Tomada"
+									className={`collapsed-img`}
+								/>
+							) : (
+								<img
+									src={logoGambi}
+									alt="Logo Gambi"
+									className={`gambi-img`}
+								/>
+							)}
 
 							{/* BOTÃO (Abrir Chamado) */}
 							<div className="buttons-conj flex justify-center">
@@ -213,15 +241,18 @@ export function Sidebar(): React.JSX.Element {
 
 						{/* INFORMAÇÕES DO USUÁRIO E DROPDOWN */}
 						<UserSpace>
-							{!isCollapsed && (
+							
 								<User>
 									<img
 										src={getUserActive()?.imagem || "perfil.png"}
 										alt="Imagem de perfil"
 									/>
-									{getUserActive()?.username || "Usuário"} - {getUserActiveRole()}
+									{!isCollapsed && (
+										<>
+											{getUserActive()?.username || "Usuário"} - {getUserActiveRole()}
+										</>
+									)}
 								</User>
-							)}
 							<div className="flex flex-col-reverse relative">
 								{isDropdownOpen && (
 									<ItemDropdown className="absolute bottom-full mb-2 left-0 w-full elevacao-def">
@@ -235,6 +266,7 @@ export function Sidebar(): React.JSX.Element {
 										</li>
 									</ItemDropdown>
 								)}
+								{!isCollapsed &&(
 								<GambButton
 									id="multiLevelDropdownButton"
 									type="button"
@@ -244,6 +276,8 @@ export function Sidebar(): React.JSX.Element {
 									size="large"
 									onClick={toggleDropdown}
 								/>
+								)}
+									
 							</div>
 						</UserSpace>
 					</SidebarContent>
