@@ -91,7 +91,7 @@ class Command(BaseCommand):
                 chamado = Chamado.objects.create(
                     titulo=f"chamado {i[1]}",
                     descricao=f"{i[1]}",
-                    professor=professores[escolha],
+                    professor=professores[escolha] if i[0] != "1" else None,
                     cliente=random.choice(clientes),
                     status=i[0],  # JEITO CERTO DE GUARDAR O STATUS
                     item=item,
