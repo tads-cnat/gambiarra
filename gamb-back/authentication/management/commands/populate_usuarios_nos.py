@@ -11,18 +11,6 @@ class Command(BaseCommand):
     help = "Populate the User table with new users (Gerentes and Professores), including profile pictures"
 
     def handle(self, *args, **kwargs):
-        pasta = os.path.join(
-            settings.BASE_DIR, "authentication", "management", "commands", "img"
-        )
-
-        def add_foto(usuario, nome):
-            imagem_nome = f"{nome}.png".lower()
-            imagem_caminho = os.path.join(pasta, imagem_nome)
-
-            if os.path.exists(imagem_caminho):
-                with open(imagem_caminho, "rb") as img_file:
-                    usuario.imagem.save(imagem_nome, File(img_file), save=True)
-
         try:
             grupo_admin = Group.objects.get(pk=1)
             grupo_professor = Group.objects.get(pk=2)
@@ -53,6 +41,7 @@ class Command(BaseCommand):
                 # Servidores
                 # Clientes
                 {"username": "lipe", "grupo": grupo_cliente},
+                {"username": "cliente1", "grupo": grupo_cliente},
                 # Alunos
             ]
 
@@ -77,10 +66,13 @@ class Command(BaseCommand):
                     },
                 )
 
-                if created:
-                    usuario_obj.set_password("ZAP123!!")
-                    add_foto(usuario_obj, usuario["username"])
+                if created:     # ------> APENAS para a avaliação empírica. Após, retirar o cliente1
+                    if usuario["username"] == "cliente1":
+                        usuario_obj.set_password("senha123")
+                    else:
+                        usuario_obj.set_password("ZAP123!!")
                     usuario_obj.save()
+
 
             self.stderr.write(self.style.SUCCESS("Os usuários foram criados!"))
 
