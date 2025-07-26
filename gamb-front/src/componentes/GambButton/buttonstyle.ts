@@ -65,9 +65,9 @@ const getButtonColors = ($variant: ButtonProps["$variant"]) => {
     case "inline":
       return {
         bg: "rgba(151,71,255,0)",
-        border: theme.cores.gray_text,
+        border: theme.cores.gray_500,
         hover: theme.cores.gray_300,
-        text: theme.cores.gray_text,
+        text: theme.cores.gray_500,
       };
     case "circle":
       return {
