@@ -8,15 +8,17 @@
     "build": "tsc -b && vite build",
     "lint": "eslint src --ext .ts,.tsx,.js,.jsx --fix ",
     "preview": "vite preview"
-  },
+    },
   "dependencies": {
     "@hookform/resolvers": "^5.1.1",
     "@phosphor-icons/react": "^2.1.10",
     "antd": "^5.26.4",
     "autoprefixer": "^10.4.20",
     "axios": "^1.7.8",
+    "cypress": "^14.5.2",
     "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-security": "^3.0.1",
+    "form-data": "^4.0.4",
     "headlessui": "^0.0.0",
     "heroicons": "^2.2.0",
     "i": "^0.3.7",
@@ -37,6 +39,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.28.0",
+    "@mocks-server/main": "^4.1.0",
     "@types/jest": "^29.5.14",
     "@types/js-cookie": "^3.0.6",
     "@types/leaflet": "^1.9.16",
