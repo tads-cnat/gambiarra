@@ -23,6 +23,8 @@ import EncerrarChamadoModal from "../../../../componentes/GambTable/forms/Encerr
 import axiosInstance from "../../../../services/base/axiosInstance";
 import { useNavigate, useLocation } from "react-router-dom";
 import GambTabs, { Tab } from "../../../../componentes/GambTabs/GambTabs";
+import { Collapse } from "antd";
+import type { CollapseProps } from "antd";
 
 export default function DashboardHome(): React.JSX.Element {
 	const navigate = useNavigate();
@@ -118,6 +120,115 @@ export default function DashboardHome(): React.JSX.Element {
 		{ id: "fechados", label: "Fechados" },
 		{ id: "arquivados", label: "Arquivados" },
 	];
+	const text = `
+  A dog is a type of domesticated animal.
+  Known for its loyalty and faithfulness,
+  it can be found as a welcome guest in many households across the world.
+`;
+
+	const items: CollapseProps["items"] = [
+		{
+			key: "1",
+			label: (
+				<GambTitle
+					label="Filtre por pessoas"
+					color="azul"
+				/>
+			),
+			children: (
+				<FilterContent>
+					<FilterInputs>
+						<SelectField
+							label="Bolsista"
+							placeholder="selecione um bolsista"
+							register={register("bolsistas_id")}
+							options={optionsBolsista}
+							defaultValue=""
+						/>
+						{(getUserActiveRole() === "gerente" ||
+							getUserActiveRole() === "professor") && (
+							<SelectField
+								label="Cliente"
+								placeholder="selecione um cliente"
+								register={register("cliente_id")}
+								options={optionsCliente}
+								defaultValue=""
+							/>
+						)}
+						{(getUserActiveRole() === "gerente" ||
+							getUserActiveRole() === "cliente") && (
+							<SelectField
+								label="Professor"
+								placeholder="selecione um professor"
+								register={register("professor_id")}
+								options={optionsProfessor}
+								defaultValue=""
+							/>
+						)}
+					</FilterInputs>
+				</FilterContent>
+			),
+		},
+		{
+			key: "2",
+			label: (
+				<GambTitle
+					label="Filtre pelos dados do chamado"
+					color="roxo"
+				/>
+			),
+			children: (
+				<FilterContent>
+					<FilterInputs>
+						<InputField
+							label="Descrição"
+							placeholder="busque pela descrição"
+							register={register("descricao")}
+						/>
+						<InputField
+							label="Titulo"
+							placeholder="busque pelo titulo"
+							register={register("titulo")}
+						/>
+						<SelectField
+							label="Status"
+							placeholder="selecione um status"
+							register={register("status")}
+							options={statusChamado}
+							defaultValue={""}
+						/>
+						<InputField
+							label="Avaliação"
+							placeholder="busque pela avaliação"
+							register={register("avaliacao")}
+						/>
+						<InputField
+							label="Busca por texto"
+							placeholder="busque por campos de texto"
+							register={register("search")}
+							icon="search"
+							classNameFather="w-full"
+						/>
+					</FilterInputs>
+					<div className="flex gap-4">
+						<GambButton
+							variant="cinza"
+							label="Filtrar"
+							size="large"
+						/>
+						<GambButton
+							variant="inline"
+							label=" Limpar fitros"
+							size="large"
+							onClick={() => {
+								reset();
+							}}
+						/>
+					</div>
+				</FilterContent>
+			),
+		},
+	];
 
 	return (
 		<div>
@@ -125,106 +236,19 @@ export default function DashboardHome(): React.JSX.Element {
 			<div className="flex flex-wrap gap-2">
 				<RenderCards />
 			</div>
-
-			<form onSubmit={handleSubmit(handleChamados)}>
-				<GambFilterTable className="elevacao-def mb-6">
-					<FilterContent>
-						<GambTitle
-							label="Filtre por pessoas"
-							color="azul"
-						/>
-						<FilterInputs>
-							<SelectField
-								label="Bolsista"
-								placeholder="selecione um bolsista"
-								register={register("bolsistas_id")}
-								options={optionsBolsista}
-								defaultValue={""}
-							/>
-							{(getUserActiveRole() === "gerente" ||
-								getUserActiveRole() === "professor") && (
-								<SelectField
-									label="Cliente"
-									placeholder="selecione um cliente"
-									register={register("cliente_id")}
-									options={optionsCliente}
-									defaultValue={""}
-								/>
-							)}
-							{(getUserActiveRole() === "gerente" ||
-								getUserActiveRole() === "cliente") && (
-								<SelectField
-									label="Professor"
-									placeholder="selecione um professor"
-									register={register("professor_id")}
-									options={optionsProfessor}
-									defaultValue={""}
-								/>
-							)}
-						</FilterInputs>
-					</FilterContent>
-					<FilterContent className="mt-4">
-						<GambTitle
-							label="Filtre pelos dados do chamado"
-							color="roxo"
-						/>
-						<FilterInputs>
-							<InputField
-								label="Descrição"
-								placeholder="busque pela descrição"
-								register={register("descricao")}
-							/>
-							<InputField
-								label="Titulo"
-								placeholder="busque pelo titulo"
-								register={register("titulo")}
-							/>
-							<SelectField
-								label="Status"
-								placeholder="selecione um status"
-								register={register("status")}
-								options={statusChamado}
-								defaultValue={""}
-							/>
-							<InputField
-								label="Avaliação"
-								placeholder="busque pela avaliação"
-								register={register("avaliacao")}
-							/>
-							<InputField
-								label="Busca por texto"
-								placeholder="busque por campos de texto"
-								register={register("search")}
-								icon="search"
-								classNameFather="w-full"
-							/>
-						</FilterInputs>
-
-						<div className="flex gap-4">
-							<GambButton
-								variant="cinza"
-								label="Filtrar"
-								size="large"
-							/>
-							<GambButton
-								variant="inline"
-								label=" Limpar fitros"
-								size="large"
-								onClick={() => {
-									reset();
-								}}
-							/>
-						</div>
-					</FilterContent>
-				</GambFilterTable>
-			</form>
-
+			<GambFilterTable className="mb-6 mx-0">
+				<form onSubmit={handleSubmit(handleChamados)}>
+					<Collapse
+						items={items}
+						defaultActiveKey={["1"]}
+					/>
+				</form>
+			</GambFilterTable>
 			<GambTabs
 				tabs={tabs}
 				activeTab={activeTab}
 				onTabChange={handleTabChange}
 			/>
-
 			<GambTable
 				data={chamados}
 				action={true}
