@@ -1,7 +1,10 @@
 import styled from "styled-components";
 
+import { defaultTheme } from "../../styles/themes/default";
+const theme = defaultTheme;
+
 export const ChatContainer = styled.div`
-  border: 1px solid #564CCF;
+  border: 2px solid ${theme.cores.purple_info_primary};
   border-radius: 2px;
   width: 100%;
   height: 350px; 
@@ -12,12 +15,13 @@ export const ChatContainer = styled.div`
 `;
 
 export const ChatHeader = styled.div`
-  background-color: #564CCF;
-  color: #fff;
+  background-color: ${theme.cores.purple_info_secondary};
+  color: ${theme.cores.purple_info_primary};
   padding: 12px 16px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  border-bottom: 2px solid ${theme.cores.purple_info_primary};
 
   .header-left {
     display: flex;

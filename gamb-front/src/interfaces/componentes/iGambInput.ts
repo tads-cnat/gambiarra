@@ -8,7 +8,7 @@ export interface InputFieldProps {
 	/**
 	 * Nome do campo no formulário, usado para identificação no React Hook Form.
 	 */
-	name?: string;
+	name: string;
 
 	/**
 	 * Rótulo a ser exibido junto ao campo de input (opcional).
@@ -58,10 +58,6 @@ export interface InputFieldProps {
 	 */
 	textAux?: string;
 
-	/**
-	 * Função do React Hook Form para registrar o campo.
-	 */
-	register: UseFormRegisterReturn;
 
 	formIsValid?: boolean | null;
 

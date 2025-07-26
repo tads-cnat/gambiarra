@@ -18,7 +18,7 @@ import { wsHOST } from "../../services/base/axiosInstance";
 export default function Chat({ chamado_id }: ChatProps) {
 	const chatBodyRef = useRef<HTMLDivElement>(null);
 
-	const { register, handleSubmit, reset } = useForm<{ texto: string }>();
+	const { handleSubmit, reset, control} = useForm<{ texto: string }>();
 
 	const { messages, sendMessage, connected } = useWebSocket(
 		`ws://${wsHOST}:8000/ws/chat/${chamado_id}/`
@@ -114,10 +114,11 @@ export default function Chat({ chamado_id }: ChatProps) {
 				<form className="w-full flex items-center gap-2">
 					<div className="input-chat w-full">
 						<InputField
+							name="texto"
 							placeholder="Digite sua mensagem..."
-							register={register("texto")}
 							icon="chat"
 							type="text"
+							control={control}
 						/>
 					</div>
 					<GambButton
