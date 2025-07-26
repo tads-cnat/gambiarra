@@ -7,9 +7,8 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint src --ext .ts,.tsx,.js,.jsx --fix ",
-    "preview": "vite preview",
-    "mocks": "mocks-server"
-  },
+    "preview": "vite preview"
+    },
   "dependencies": {
     "@hookform/resolvers": "^5.1.1",
     "@phosphor-icons/react": "^2.1.10",
@@ -35,8 +34,7 @@
     "react-use-websocket": "^4.13.0",
     "socket.io-client": "^4.8.1",
     "styled-components": "^6.1.19",
-    "yup": "^1.4.0",
-    "zustand": "^5.0.4"
+    "yup": "^1.4.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.28.0",
