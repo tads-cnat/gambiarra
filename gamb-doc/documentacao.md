@@ -15,4 +15,5 @@ Clique em cada um dos links abaixo para acessar o artefato específico.
 11. [Diagrama de Componentes](Componentes/componentes.md)
 12. [Casos de testes](testes/Casos-de-testes.md)
 13. [Planejamento do Escopo](escopo/escopo.md)
+14. [Gerenciamento de Riscos](gerenciamento%20de%20riscos/analise_de_risco.md)
 
