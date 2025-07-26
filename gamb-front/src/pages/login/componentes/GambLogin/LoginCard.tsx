@@ -67,11 +67,13 @@ export function LoginCard(): React.JSX.Element {
 				!errors.username ? (
 					<UseMessage
 						type="success"
+						datacypress="success-messageLogin"
 						text="Login realizado com sucesso!"
 					/>
 				) : loginIsValid === false ? (
 					<UseMessage
 						type="danger"
+						datacypress="error-messageLogin"
 						text={message || "Erro ao realizar login. Verifique suas credenciais."}
 					/>
 				) : null}

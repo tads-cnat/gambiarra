@@ -1,0 +1,1836 @@
+[
+    {
+        "id": 2,
+        "titulo": "chamado Aceito",
+        "status": {
+            "id": "2",
+            "nome": "Aceito"
+        },
+        "cliente": {
+            "username": "lipe",
+            "id": 16
+        },
+        "professor": {
+            "id": 6,
+            "username": "jorgiano"
+        },
+        "bolsistas": [
+            {
+                "id": 14,
+                "username": "lua"
+            }
+        ],
+        "avaliacao": null,
+        "code": "e693b1e4-ddaa-4ea7-a483-774f12087e1e"
+    },
+    {
+        "id": 3,
+        "titulo": "chamado Em Diagnóstico",
+        "status": {
+            "id": "3",
+            "nome": "Em Diagnóstico"
+        },
+        "cliente": {
+            "username": "lipe",
+            "id": 16
+        },
+        "professor": {
+            "id": 6,
+            "username": "jorgiano"
+        },
+        "bolsistas": [
+            {
+                "id": 14,
+                "username": "lua"
+            }
+        ],
+        "avaliacao": null,
+        "code": "8e70edd0-6981-4701-b00e-e43ff38225c7"
+    },
+    {
+        "id": 4,
+        "titulo": "chamado Equipamento Em Conserto",
+        "status": {
+            "id": "4",
+            "nome": "Equipamento Em Conserto"
+        },
+        "cliente": {
+            "username": "lipe",
+            "id": 16
+        },
+        "professor": {
+            "id": 6,
+            "username": "jorgiano"
+        },
+        "bolsistas": [
+            {
+                "id": 14,
+                "username": "lua"
+            }
+        ],
+        "avaliacao": null,
+        "code": "e8443453-e152-4595-9f56-08453c3cfd79"
+    },
+    {
+        "id": 5,
+        "titulo": "chamado Aguardando Peça",
+        "status": {
+            "id": "5",
+            "nome": "Aguardando Peça"
+        },
+        "cliente": {
+            "username": "lipe",
+            "id": 16
+        },
+        "professor": {
+            "id": 6,
+            "username": "jorgiano"
+        },
+        "bolsistas": [
+            {
+                "id": 14,
+                "username": "lua"
+            }
+        ],
+        "avaliacao": {
+            "nota": 2,
+            "texto": "Avaliação"
+        },
+        "code": "55f138ee-7aec-4900-b510-f0cc7ced8e39"
+    },
+    {
+        "id": 6,
+        "titulo": "chamado Fechado Sem Resolução",
+        "status": {
+            "id": "6",
+            "nome": "Fechado Sem Resolução"
+        },
+        "cliente": {
+            "username": "lipe",
+            "id": 16
+        },
+        "professor": {
+            "id": 6,
+            "username": "jorgiano"
+        },
+        "bolsistas": [
+            {
+                "id": 14,
+                "username": "lua"
+            }
+        ],
+        "avaliacao": {
+            "nota": 4,
+            "texto": "Avaliação"
+        },
+        "code": "d2ec6070-9e25-4344-b06b-1b98a196e617"
+    },
+    {
+        "id": 7,
+        "titulo": "chamado Resolvido",
+        "status": {
+            "id": "7",
+            "nome": "Resolvido"
+        },
+        "cliente": {
+            "username": "lipe",
+            "id": 16
+        },
+        "professor": {
+            "id": 6,
+            "username": "jorgiano"
+        },
+        "bolsistas": [
+            {
+                "id": 14,
+                "username": "lua"
+            }
+        ],
+        "avaliacao": {
+            "nota": 2,
+            "texto": "Avaliação"
+        },
+        "code": "5ea84c6e-b2b5-4d50-b0da-1287af42797c"
+    },
+    {
+        "id": 8,
+        "titulo": "chamado Recusado",
+        "status": {
+            "id": "8",
+            "nome": "Recusado"
+        },
+        "cliente": {
+            "username": "lipe",
+            "id": 16
+        },
+        "professor": {
+            "id": 6,
+            "username": "jorgiano"
+        },
+        "bolsistas": [
+            {
+                "id": 14,
+                "username": "lua"
+            }
+        ],
+        "avaliacao": null,
+        "code": "84a6bfa2-7cbd-46cb-9ef4-249878771db4"
+    },
+    {
+        "id": 9,
+        "titulo": "chamado Arquivado",
+        "status": {
+            "id": "9",
+            "nome": "Arquivado"
+        },
+        "cliente": {
+            "username": "lipe",
+            "id": 16
+        },
+        "professor": {
+            "id": 6,
+            "username": "jorgiano"
+        },
+        "bolsistas": [
+            {
+                "id": 14,
+                "username": "lua"
+            }
+        ],
+        "avaliacao": {
+            "nota": 4,
+            "texto": "Avaliação"
+        },
+        "code": "ad8e0464-b71b-401b-92c8-d66bb9931564"
+    },
+    {
+        "id": 35,
+        "titulo": "chamado Aceito",
+        "status": {
+            "id": "2",
+            "nome": "Aceito"
+        },
+        "cliente": {
+            "username": "lipe",
+            "id": 16
+        },
+        "professor": {
+            "id": 6,
+            "username": "jorgiano"
+        },
+        "bolsistas": [
+            {
+                "id": 14,
+                "username": "lua"
+            }
+        ],
+        "avaliacao": {
+            "nota": 4,
+            "texto": "Avaliação"
+        },
+        "code": "d7759cc3-a49f-4486-9ba4-25e191c3c882"
+    },
+    {
+        "id": 36,
+        "titulo": "chamado Em Diagnóstico",
+        "status": {
+            "id": "3",
+            "nome": "Em Diagnóstico"
+        },
+        "cliente": {
+            "username": "silva.livia1",
+            "id": 17
+        },
+        "professor": {
+            "id": 6,
+            "username": "jorgiano"
+        },
+        "bolsistas": [
+            {
+                "id": 14,
+                "username": "lua"
+            }
+        ],
+        "avaliacao": null,
+        "code": "2b1f4f11-7d78-46b7-8a6c-3d89d8d9a756"
+    },
+    {
+        "id": 37,
+        "titulo": "chamado Equipamento Em Conserto",
+        "status": {
+            "id": "4",
+            "nome": "Equipamento Em Conserto"
+        },
+        "cliente": {
+            "username": "lipe",
+            "id": 16
+        },
+        "professor": {
+            "id": 6,
+            "username": "jorgiano"
+        },
+        "bolsistas": [
+            {
+                "id": 14,
+                "username": "lua"
+            }
+        ],
+        "avaliacao": null,
+        "code": "887e9a86-e195-4439-92c5-541856296da7"
+    },
+    {
+        "id": 38,
+        "titulo": "chamado Aguardando Peça",
+        "status": {
+            "id": "5",
+            "nome": "Aguardando Peça"
+        },
+        "cliente": {
+            "username": "lipe",
+            "id": 16
+        },
+        "professor": {
+            "id": 6,
+            "username": "jorgiano"
+        },
+        "bolsistas": [
+            {
+                "id": 14,
+                "username": "lua"
+            }
+        ],
+        "avaliacao": {
+            "nota": 1,
+            "texto": "Avaliação"
+        },
+        "code": "53ba08c2-2575-4ab4-a81f-c963ebec2835"
+    },
+    {
+        "id": 39,
+        "titulo": "chamado Fechado Sem Resolução",
+        "status": {
+            "id": "6",
+            "nome": "Fechado Sem Resolução"
+        },
+        "cliente": {
+            "username": "silva.livia1",
+            "id": 17
+        },
+        "professor": {
+            "id": 6,
+            "username": "jorgiano"
+        },
+        "bolsistas": [
+            {
+                "id": 14,
+                "username": "lua"
+            }
+        ],
+        "avaliacao": {
+            "nota": 5,
+            "texto": "Avaliação"
+        },
+        "code": "09247a27-7fcd-4dda-92b3-6afc0da8092d"
+    },
+    {
+        "id": 40,
+        "titulo": "chamado Resolvido",
+        "status": {
+            "id": "7",
+            "nome": "Resolvido"
+        },
+        "cliente": {
+            "username": "lipe",
+            "id": 16
+        },
+        "professor": {
+            "id": 6,
+            "username": "jorgiano"
+        },
+        "bolsistas": [
+            {
+                "id": 14,
+                "username": "lua"
+            }
+        ],
+        "avaliacao": null,
+        "code": "2796c308-d944-42d6-8f19-8cb31bdb70a1"
+    },
+    {
+        "id": 41,
+        "titulo": "chamado Recusado",
+        "status": {
+            "id": "8",
+            "nome": "Recusado"
+        },
+        "cliente": {
+            "username": "silva.livia1",
+            "id": 17
+        },
+        "professor": {
+            "id": 6,
+            "username": "jorgiano"
+        },
+        "bolsistas": [
+            {
+                "id": 14,
+                "username": "lua"
+            }
+        ],
+        "avaliacao": null,
+        "code": "9a4da702-c2b3-4448-b18c-b49317115bbd"
+    },
+    {
+        "id": 42,
+        "titulo": "chamado Arquivado",
+        "status": {
+            "id": "9",
+            "nome": "Arquivado"
+        },
+        "cliente": {
+            "username": "silva.livia1",
+            "id": 17
+        },
+        "professor": {
+            "id": 6,
+            "username": "jorgiano"
+        },
+        "bolsistas": [
+            {
+                "id": 14,
+                "username": "lua"
+            }
+        ],
+        "avaliacao": null,
+        "code": "5fd2229d-36ab-429d-bd93-4b9920002fac"
+    },
+    {
+        "id": 44,
+        "titulo": "chamado Aceito",
+        "status": {
+            "id": "2",
+            "nome": "Aceito"
+        },
+        "cliente": {
+            "username": "lipe",
+            "id": 16
+        },
+        "professor": {
+            "id": 6,
+            "username": "jorgiano"
+        },
+        "bolsistas": [
+            {
+                "id": 14,
+                "username": "lua"
+            }
+        ],
+        "avaliacao": {
+            "nota": 2,
+            "texto": "Avaliação"
+        },
+        "code": "99d1b56e-cc49-4748-bd8e-a4b801bb8b41"
+    },
+    {
+        "id": 45,
+        "titulo": "chamado Em Diagnóstico",
+        "status": {
+            "id": "3",
+            "nome": "Em Diagnóstico"
+        },
+        "cliente": {
+            "username": "lipe",
+            "id": 16
+        },
+        "professor": {
+            "id": 6,
+            "username": "jorgiano"
+        },
+        "bolsistas": [
+            {
+                "id": 14,
+                "username": "lua"
+            }
+        ],
+        "avaliacao": {
+            "nota": 4,
+            "texto": "Avaliação"
+        },
+        "code": "18a069c9-568e-4379-8d30-7e6c843ccd8f"
+    },
+    {
+        "id": 46,
+        "titulo": "chamado Equipamento Em Conserto",
+        "status": {
+            "id": "4",
+            "nome": "Equipamento Em Conserto"
+        },
+        "cliente": {
+            "username": "lipe",
+            "id": 16
+        },
+        "professor": {
+            "id": 6,
+            "username": "jorgiano"
+        },
+        "bolsistas": [
+            {
+                "id": 14,
+                "username": "lua"
+            }
+        ],
+        "avaliacao": null,
+        "code": "d029a7c9-70a3-4aaa-990c-591761a16cfe"
+    },
+    {
+        "id": 47,
+        "titulo": "chamado Aguardando Peça",
+        "status": {
+            "id": "5",
+            "nome": "Aguardando Peça"
+        },
+        "cliente": {
+            "username": "lipe",
+            "id": 16
+        },
+        "professor": {
+            "id": 6,
+            "username": "jorgiano"
+        },
+        "bolsistas": [
+            {
+                "id": 14,
+                "username": "lua"
+            }
+        ],
+        "avaliacao": {
+            "nota": 5,
+            "texto": "Avaliação"
+        },
+        "code": "46a87d5c-38b4-4782-ba29-cc3673d9f8d0"
+    },
+    {
+        "id": 48,
+        "titulo": "chamado Fechado Sem Resolução",
+        "status": {
+            "id": "6",
+            "nome": "Fechado Sem Resolução"
+        },
+        "cliente": {
+            "username": "lipe",
+            "id": 16
+        },
+        "professor": {
+            "id": 6,
+            "username": "jorgiano"
+        },
+        "bolsistas": [
+            {
+                "id": 14,
+                "username": "lua"
+            }
+        ],
+        "avaliacao": null,
+        "code": "c0c2fe4c-c678-4048-92fd-3b11f2c52bb3"
+    },
+    {
+        "id": 49,
+        "titulo": "chamado Resolvido",
+        "status": {
+            "id": "7",
+            "nome": "Resolvido"
+        },
+        "cliente": {
+            "username": "silva.livia1",
+            "id": 17
+        },
+        "professor": {
+            "id": 6,
+            "username": "jorgiano"
+        },
+        "bolsistas": [
+            {
+                "id": 14,
+                "username": "lua"
+            }
+        ],
+        "avaliacao": {
+            "nota": 2,
+            "texto": "Avaliação"
+        },
+        "code": "d9fe1e02-9c0e-4a77-830a-c65a3bbf4064"
+    },
+    {
+        "id": 50,
+        "titulo": "chamado Recusado",
+        "status": {
+            "id": "8",
+            "nome": "Recusado"
+        },
+        "cliente": {
+            "username": "silva.livia1",
+            "id": 17
+        },
+        "professor": {
+            "id": 6,
+            "username": "jorgiano"
+        },
+        "bolsistas": [
+            {
+                "id": 14,
+                "username": "lua"
+            }
+        ],
+        "avaliacao": {
+            "nota": 2,
+            "texto": "Avaliação"
+        },
+        "code": "430175e9-66f4-4101-9ff8-854b09a63df4"
+    },
+    {
+        "id": 51,
+        "titulo": "chamado Arquivado",
+        "status": {
+            "id": "9",
+            "nome": "Arquivado"
+        },
+        "cliente": {
+            "username": "lipe",
+            "id": 16
+        },
+        "professor": {
+            "id": 6,
+            "username": "jorgiano"
+        },
+        "bolsistas": [
+            {
+                "id": 14,
+                "username": "lua"
+            }
+        ],
+        "avaliacao": null,
+        "code": "96f1dff0-d101-438f-89da-4ffae442ef9e"
+    },
+    {
+        "id": 53,
+        "titulo": "chamado Aceito",
+        "status": {
+            "id": "2",
+            "nome": "Aceito"
+        },
+        "cliente": {
+            "username": "lipe",
+            "id": 16
+        },
+        "professor": {
+            "id": 6,
+            "username": "jorgiano"
+        },
+        "bolsistas": [
+            {
+                "id": 14,
+                "username": "lua"
+            }
+        ],
+        "avaliacao": {
+            "nota": 1,
+            "texto": "Avaliação"
+        },
+        "code": "fa795275-e98b-46d3-9981-c8daedf6ac37"
+    },
+    {
+        "id": 54,
+        "titulo": "chamado Em Diagnóstico",
+        "status": {
+            "id": "3",
+            "nome": "Em Diagnóstico"
+        },
+        "cliente": {
+            "username": "silva.livia1",
+            "id": 17
+        },
+        "professor": {
+            "id": 6,
+            "username": "jorgiano"
+        },
+        "bolsistas": [
+            {
+                "id": 14,
+                "username": "lua"
+            }
+        ],
+        "avaliacao": null,
+        "code": "dd992073-b2cc-4c9e-98c2-1871d07a8f96"
+    },
+    {
+        "id": 55,
+        "titulo": "chamado Equipamento Em Conserto",
+        "status": {
+            "id": "4",
+            "nome": "Equipamento Em Conserto"
+        },
+        "cliente": {
+            "username": "lipe",
+            "id": 16
+        },
+        "professor": {
+            "id": 6,
+            "username": "jorgiano"
+        },
+        "bolsistas": [
+            {
+                "id": 14,
+                "username": "lua"
+            }
+        ],
+        "avaliacao": null,
+        "code": "35d823d7-f7a7-4491-99e9-bf4557b6311f"
+    },
+    {
+        "id": 56,
+        "titulo": "chamado Aguardando Peça",
+        "status": {
+            "id": "5",
+            "nome": "Aguardando Peça"
+        },
+        "cliente": {
+            "username": "lipe",
+            "id": 16
+        },
+        "professor": {
+            "id": 6,
+            "username": "jorgiano"
+        },
+        "bolsistas": [
+            {
+                "id": 14,
+                "username": "lua"
+            }
+        ],
+        "avaliacao": {
+            "nota": 2,
+            "texto": "Avaliação"
+        },
+        "code": "f258c019-2e07-4f04-835e-5ad954a4c667"
+    },
+    {
+        "id": 57,
+        "titulo": "chamado Fechado Sem Resolução",
+        "status": {
+            "id": "6",
+            "nome": "Fechado Sem Resolução"
+        },
+        "cliente": {
+            "username": "lipe",
+            "id": 16
+        },
+        "professor": {
+            "id": 6,
+            "username": "jorgiano"
+        },
+        "bolsistas": [
+            {
+                "id": 14,
+                "username": "lua"
+            }
+        ],
+        "avaliacao": null,
+        "code": "ad50921c-3a23-4858-8d47-32aebf2f2cf4"
+    },
+    {
+        "id": 58,
+        "titulo": "chamado Resolvido",
+        "status": {
+            "id": "7",
+            "nome": "Resolvido"
+        },
+        "cliente": {
+            "username": "silva.livia1",
+            "id": 17
+        },
+        "professor": {
+            "id": 6,
+            "username": "jorgiano"
+        },
+        "bolsistas": [
+            {
+                "id": 14,
+                "username": "lua"
+            }
+        ],
+        "avaliacao": {
+            "nota": 2,
+            "texto": "Avaliação"
+        },
+        "code": "b10b9369-74a7-441b-9b2a-76bd1dff0ee4"
+    },
+    {
+        "id": 59,
+        "titulo": "chamado Recusado",
+        "status": {
+            "id": "8",
+            "nome": "Recusado"
+        },
+        "cliente": {
+            "username": "silva.livia1",
+            "id": 17
+        },
+        "professor": {
+            "id": 6,
+            "username": "jorgiano"
+        },
+        "bolsistas": [
+            {
+                "id": 14,
+                "username": "lua"
+            }
+        ],
+        "avaliacao": {
+            "nota": 2,
+            "texto": "Avaliação"
+        },
+        "code": "c1c72eaa-144e-4e5c-9b30-6c2aa0a038ff"
+    },
+    {
+        "id": 60,
+        "titulo": "chamado Arquivado",
+        "status": {
+            "id": "9",
+            "nome": "Arquivado"
+        },
+        "cliente": {
+            "username": "silva.livia1",
+            "id": 17
+        },
+        "professor": {
+            "id": 6,
+            "username": "jorgiano"
+        },
+        "bolsistas": [
+            {
+                "id": 14,
+                "username": "lua"
+            }
+        ],
+        "avaliacao": null,
+        "code": "7ff76a8b-b41e-45ba-93ef-50d938cb6357"
+    },
+    {
+        "id": 43,
+        "titulo": "chamado Em Análise",
+        "status": {
+            "id": "1",
+            "nome": "Em Análise"
+        },
+        "cliente": {
+            "username": "silva.livia1",
+            "id": 17
+        },
+        "professor": null,
+        "bolsistas": [],
+        "avaliacao": {
+            "nota": 1,
+            "texto": "Avaliação"
+        },
+        "code": "2a6ca1a4-4cf4-4a07-80af-135aefee2c41"
+    },
+    {
+        "id": 1,
+        "titulo": "chamado Em Análise",
+        "status": {
+            "id": "1",
+            "nome": "Em Análise"
+        },
+        "cliente": {
+            "username": "lipe",
+            "id": 16
+        },
+        "professor": null,
+        "bolsistas": [],
+        "avaliacao": {
+            "nota": 1,
+            "texto": "Avaliação"
+        },
+        "code": "2aa092d4-25f0-4345-a8a8-020bc349413c"
+    },
+    {
+        "id": 61,
+        "titulo": "chamado Em Análise",
+        "status": {
+            "id": "1",
+            "nome": "Em Análise"
+        },
+        "cliente": {
+            "username": "lipe",
+            "id": 16
+        },
+        "professor": {
+            "id": 7,
+            "username": "lucena"
+        },
+        "bolsistas": [],
+        "avaliacao": {
+            "nota": 5,
+            "texto": "Avaliação"
+        },
+        "code": "439e7906-5c2a-4437-908e-4365be759682"
+    },
+    {
+        "id": 62,
+        "titulo": "chamado Aceito",
+        "status": {
+            "id": "2",
+            "nome": "Aceito"
+        },
+        "cliente": {
+            "username": "lipe",
+            "id": 16
+        },
+        "professor": {
+            "id": 6,
+            "username": "jorgiano"
+        },
+        "bolsistas": [
+            {
+                "id": 14,
+                "username": "lua"
+            }
+        ],
+        "avaliacao": null,
+        "code": "f3e0760b-e7d9-47f0-99ef-a99f72296216"
+    },
+    {
+        "id": 63,
+        "titulo": "chamado Em Diagnóstico",
+        "status": {
+            "id": "3",
+            "nome": "Em Diagnóstico"
+        },
+        "cliente": {
+            "username": "silva.livia1",
+            "id": 17
+        },
+        "professor": {
+            "id": 6,
+            "username": "jorgiano"
+        },
+        "bolsistas": [
+            {
+                "id": 14,
+                "username": "lua"
+            }
+        ],
+        "avaliacao": null,
+        "code": "fb57d344-aa74-47e5-b20f-734e2db5dfaa"
+    },
+    {
+        "id": 64,
+        "titulo": "chamado Equipamento Em Conserto",
+        "status": {
+            "id": "4",
+            "nome": "Equipamento Em Conserto"
+        },
+        "cliente": {
+            "username": "silva.livia1",
+            "id": 17
+        },
+        "professor": {
+            "id": 6,
+            "username": "jorgiano"
+        },
+        "bolsistas": [
+            {
+                "id": 14,
+                "username": "lua"
+            }
+        ],
+        "avaliacao": {
+            "nota": 1,
+            "texto": "Avaliação"
+        },
+        "code": "fc92e9e3-265d-4043-819f-6318808bb72f"
+    },
+    {
+        "id": 65,
+        "titulo": "chamado Aguardando Peça",
+        "status": {
+            "id": "5",
+            "nome": "Aguardando Peça"
+        },
+        "cliente": {
+            "username": "lipe",
+            "id": 16
+        },
+        "professor": {
+            "id": 6,
+            "username": "jorgiano"
+        },
+        "bolsistas": [
+            {
+                "id": 14,
+                "username": "lua"
+            }
+        ],
+        "avaliacao": null,
+        "code": "2e08eab5-18b9-452b-a81c-137220b2e5d9"
+    },
+    {
+        "id": 66,
+        "titulo": "chamado Fechado Sem Resolução",
+        "status": {
+            "id": "6",
+            "nome": "Fechado Sem Resolução"
+        },
+        "cliente": {
+            "username": "silva.livia1",
+            "id": 17
+        },
+        "professor": {
+            "id": 6,
+            "username": "jorgiano"
+        },
+        "bolsistas": [
+            {
+                "id": 14,
+                "username": "lua"
+            }
+        ],
+        "avaliacao": null,
+        "code": "cced40e4-b4dc-4cf6-8278-33c174177592"
+    },
+    {
+        "id": 67,
+        "titulo": "chamado Resolvido",
+        "status": {
+            "id": "7",
+            "nome": "Resolvido"
+        },
+        "cliente": {
+            "username": "lipe",
+            "id": 16
+        },
+        "professor": {
+            "id": 6,
+            "username": "jorgiano"
+        },
+        "bolsistas": [
+            {
+                "id": 14,
+                "username": "lua"
+            }
+        ],
+        "avaliacao": {
+            "nota": 1,
+            "texto": "Avaliação"
+        },
+        "code": "68c90c64-c908-48f6-9c91-3b382f38d045"
+    },
+    {
+        "id": 68,
+        "titulo": "chamado Recusado",
+        "status": {
+            "id": "8",
+            "nome": "Recusado"
+        },
+        "cliente": {
+            "username": "silva.livia1",
+            "id": 17
+        },
+        "professor": {
+            "id": 6,
+            "username": "jorgiano"
+        },
+        "bolsistas": [
+            {
+                "id": 14,
+                "username": "lua"
+            }
+        ],
+        "avaliacao": null,
+        "code": "4d06f5eb-89e4-4dcb-a585-1aa86451547c"
+    },
+    {
+        "id": 69,
+        "titulo": "chamado Arquivado",
+        "status": {
+            "id": "9",
+            "nome": "Arquivado"
+        },
+        "cliente": {
+            "username": "silva.livia1",
+            "id": 17
+        },
+        "professor": {
+            "id": 6,
+            "username": "jorgiano"
+        },
+        "bolsistas": [
+            {
+                "id": 14,
+                "username": "lua"
+            }
+        ],
+        "avaliacao": {
+            "nota": 2,
+            "texto": "Avaliação"
+        },
+        "code": "f4731d73-e01f-4d45-9c5f-b9e45c1435cb"
+    },
+    {
+        "id": 52,
+        "titulo": "chamado Em Análise",
+        "status": {
+            "id": "8",
+            "nome": "Recusado"
+        },
+        "cliente": {
+            "username": "silva.livia1",
+            "id": 17
+        },
+        "professor": null,
+        "bolsistas": [],
+        "avaliacao": {
+            "nota": 2,
+            "texto": "Avaliação"
+        },
+        "code": "40d40c57-1e2d-4c55-9aa1-dfa8f7595ed6"
+    },
+    {
+        "id": 75,
+        "titulo": "chamado Equipamento Em Conserto",
+        "status": {
+            "id": "4",
+            "nome": "Equipamento Em Conserto"
+        },
+        "cliente": {
+            "username": "lipe",
+            "id": 16
+        },
+        "professor": {
+            "id": 6,
+            "username": "jorgiano"
+        },
+        "bolsistas": [
+            {
+                "id": 14,
+                "username": "lua"
+            }
+        ],
+        "avaliacao": {
+            "nota": 5,
+            "texto": "Avaliação"
+        },
+        "code": "63cf610c-2612-46a9-8477-535dc6a1ad73"
+    },
+    {
+        "id": 34,
+        "titulo": "chamado Em Análise",
+        "status": {
+            "id": "3",
+            "nome": "Em Diagnóstico"
+        },
+        "cliente": {
+            "username": "lipe",
+            "id": 16
+        },
+        "professor": {
+            "id": 7,
+            "username": "lucena"
+        },
+        "bolsistas": [
+            {
+                "id": 13,
+                "username": "lili"
+            },
+            {
+                "id": 14,
+                "username": "lua"
+            }
+        ],
+        "avaliacao": null,
+        "code": "21206395-a2ff-4832-a6d9-2a668bfb97cc"
+    },
+    {
+        "id": 70,
+        "titulo": "DDD",
+        "status": {
+            "id": "1",
+            "nome": "Em Análise"
+        },
+        "cliente": {
+            "username": "silva.livia1",
+            "id": 17
+        },
+        "professor": null,
+        "bolsistas": [],
+        "avaliacao": null,
+        "code": "de99545a-9109-4972-ade9-3af36234b2c3"
+    },
+    {
+        "id": 71,
+        "titulo": "sss",
+        "status": {
+            "id": "1",
+            "nome": "Em Análise"
+        },
+        "cliente": {
+            "username": "lipe",
+            "id": 16
+        },
+        "professor": null,
+        "bolsistas": [],
+        "avaliacao": null,
+        "code": "679a3b75-1f75-4c31-bf37-7d178130dd68"
+    },
+    {
+        "id": 72,
+        "titulo": "chamado Em Análise",
+        "status": {
+            "id": "1",
+            "nome": "Em Análise"
+        },
+        "cliente": {
+            "username": "lipe",
+            "id": 16
+        },
+        "professor": {
+            "id": 7,
+            "username": "lucena"
+        },
+        "bolsistas": [],
+        "avaliacao": {
+            "nota": 5,
+            "texto": "Avaliação"
+        },
+        "code": "e86dbcb9-9497-4c2d-a787-e5a554875c77"
+    },
+    {
+        "id": 73,
+        "titulo": "chamado Aceito",
+        "status": {
+            "id": "2",
+            "nome": "Aceito"
+        },
+        "cliente": {
+            "username": "lipe",
+            "id": 16
+        },
+        "professor": {
+            "id": 6,
+            "username": "jorgiano"
+        },
+        "bolsistas": [
+            {
+                "id": 14,
+                "username": "lua"
+            }
+        ],
+        "avaliacao": {
+            "nota": 3,
+            "texto": "Avaliação"
+        },
+        "code": "9b00801f-e0da-42aa-8727-f14960f27b55"
+    },
+    {
+        "id": 74,
+        "titulo": "chamado Em Diagnóstico",
+        "status": {
+            "id": "3",
+            "nome": "Em Diagnóstico"
+        },
+        "cliente": {
+            "username": "silva.livia1",
+            "id": 17
+        },
+        "professor": {
+            "id": 6,
+            "username": "jorgiano"
+        },
+        "bolsistas": [
+            {
+                "id": 14,
+                "username": "lua"
+            }
+        ],
+        "avaliacao": null,
+        "code": "5ed87c93-9d93-4264-853a-b40f4a4b9bd0"
+    },
+    {
+        "id": 76,
+        "titulo": "chamado Aguardando Peça",
+        "status": {
+            "id": "5",
+            "nome": "Aguardando Peça"
+        },
+        "cliente": {
+            "username": "lipe",
+            "id": 16
+        },
+        "professor": {
+            "id": 6,
+            "username": "jorgiano"
+        },
+        "bolsistas": [
+            {
+                "id": 14,
+                "username": "lua"
+            }
+        ],
+        "avaliacao": null,
+        "code": "db24368c-33a5-473f-99b9-1c0c8c7a34c3"
+    },
+    {
+        "id": 77,
+        "titulo": "chamado Fechado Sem Resolução",
+        "status": {
+            "id": "6",
+            "nome": "Fechado Sem Resolução"
+        },
+        "cliente": {
+            "username": "silva.livia1",
+            "id": 17
+        },
+        "professor": {
+            "id": 6,
+            "username": "jorgiano"
+        },
+        "bolsistas": [
+            {
+                "id": 14,
+                "username": "lua"
+            }
+        ],
+        "avaliacao": null,
+        "code": "40e867ab-58fe-4d42-9f32-d0349967fc90"
+    },
+    {
+        "id": 78,
+        "titulo": "chamado Resolvido",
+        "status": {
+            "id": "7",
+            "nome": "Resolvido"
+        },
+        "cliente": {
+            "username": "lipe",
+            "id": 16
+        },
+        "professor": {
+            "id": 6,
+            "username": "jorgiano"
+        },
+        "bolsistas": [
+            {
+                "id": 14,
+                "username": "lua"
+            }
+        ],
+        "avaliacao": null,
+        "code": "f7c76d1e-cc31-4bc3-9f0a-794df0560e8c"
+    },
+    {
+        "id": 79,
+        "titulo": "chamado Recusado",
+        "status": {
+            "id": "8",
+            "nome": "Recusado"
+        },
+        "cliente": {
+            "username": "silva.livia1",
+            "id": 17
+        },
+        "professor": {
+            "id": 6,
+            "username": "jorgiano"
+        },
+        "bolsistas": [
+            {
+                "id": 14,
+                "username": "lua"
+            }
+        ],
+        "avaliacao": null,
+        "code": "a37b1a1b-1f45-4bb4-80cd-207b9ed306b8"
+    },
+    {
+        "id": 80,
+        "titulo": "chamado Arquivado",
+        "status": {
+            "id": "9",
+            "nome": "Arquivado"
+        },
+        "cliente": {
+            "username": "silva.livia1",
+            "id": 17
+        },
+        "professor": {
+            "id": 6,
+            "username": "jorgiano"
+        },
+        "bolsistas": [
+            {
+                "id": 14,
+                "username": "lua"
+            }
+        ],
+        "avaliacao": null,
+        "code": "53fe8fd0-c944-4c05-b9e5-829108e0f2b9"
+    },
+    {
+        "id": 81,
+        "titulo": "chamado Em Análise",
+        "status": {
+            "id": "1",
+            "nome": "Em Análise"
+        },
+        "cliente": {
+            "username": "silva.livia1",
+            "id": 17
+        },
+        "professor": {
+            "id": 7,
+            "username": "lucena"
+        },
+        "bolsistas": [],
+        "avaliacao": {
+            "nota": 1,
+            "texto": "Avaliação"
+        },
+        "code": "d12ebc76-7d6f-47c4-a1d3-f318b8c0d064"
+    },
+    {
+        "id": 82,
+        "titulo": "chamado Aceito",
+        "status": {
+            "id": "2",
+            "nome": "Aceito"
+        },
+        "cliente": {
+            "username": "88888888888",
+            "id": 34
+        },
+        "professor": {
+            "id": 6,
+            "username": "jorgiano"
+        },
+        "bolsistas": [
+            {
+                "id": 14,
+                "username": "lua"
+            }
+        ],
+        "avaliacao": {
+            "nota": 4,
+            "texto": "Avaliação"
+        },
+        "code": "0f233a31-9f34-4750-bbb3-f573c38339ac"
+    },
+    {
+        "id": 83,
+        "titulo": "chamado Em Diagnóstico",
+        "status": {
+            "id": "3",
+            "nome": "Em Diagnóstico"
+        },
+        "cliente": {
+            "username": "silva.livia1",
+            "id": 17
+        },
+        "professor": {
+            "id": 6,
+            "username": "jorgiano"
+        },
+        "bolsistas": [
+            {
+                "id": 14,
+                "username": "lua"
+            }
+        ],
+        "avaliacao": {
+            "nota": 4,
+            "texto": "Avaliação"
+        },
+        "code": "c95d235a-9c3d-40ef-a457-c91857f6ae25"
+    },
+    {
+        "id": 84,
+        "titulo": "chamado Equipamento Em Conserto",
+        "status": {
+            "id": "4",
+            "nome": "Equipamento Em Conserto"
+        },
+        "cliente": {
+            "username": "lipe",
+            "id": 16
+        },
+        "professor": {
+            "id": 6,
+            "username": "jorgiano"
+        },
+        "bolsistas": [
+            {
+                "id": 14,
+                "username": "lua"
+            }
+        ],
+        "avaliacao": {
+            "nota": 2,
+            "texto": "Avaliação"
+        },
+        "code": "88ab2485-247d-4dac-8ab0-d1e5a9d97457"
+    },
+    {
+        "id": 85,
+        "titulo": "chamado Aguardando Peça",
+        "status": {
+            "id": "5",
+            "nome": "Aguardando Peça"
+        },
+        "cliente": {
+            "username": "silva.livia1",
+            "id": 17
+        },
+        "professor": {
+            "id": 6,
+            "username": "jorgiano"
+        },
+        "bolsistas": [
+            {
+                "id": 14,
+                "username": "lua"
+            }
+        ],
+        "avaliacao": {
+            "nota": 4,
+            "texto": "Avaliação"
+        },
+        "code": "061bfd65-5fcf-4fe2-af2b-c9c5d97d9fd8"
+    },
+    {
+        "id": 86,
+        "titulo": "chamado Fechado Sem Resolução",
+        "status": {
+            "id": "6",
+            "nome": "Fechado Sem Resolução"
+        },
+        "cliente": {
+            "username": "silva.livia1",
+            "id": 17
+        },
+        "professor": {
+            "id": 6,
+            "username": "jorgiano"
+        },
+        "bolsistas": [
+            {
+                "id": 14,
+                "username": "lua"
+            }
+        ],
+        "avaliacao": {
+            "nota": 4,
+            "texto": "Avaliação"
+        },
+        "code": "753fbbd3-5e26-4880-b208-69b2b54f692d"
+    },
+    {
+        "id": 87,
+        "titulo": "chamado Resolvido",
+        "status": {
+            "id": "7",
+            "nome": "Resolvido"
+        },
+        "cliente": {
+            "username": "silva.livia1",
+            "id": 17
+        },
+        "professor": {
+            "id": 6,
+            "username": "jorgiano"
+        },
+        "bolsistas": [
+            {
+                "id": 14,
+                "username": "lua"
+            }
+        ],
+        "avaliacao": null,
+        "code": "eeae5051-1480-4c83-9883-8d031adcf915"
+    },
+    {
+        "id": 88,
+        "titulo": "chamado Recusado",
+        "status": {
+            "id": "8",
+            "nome": "Recusado"
+        },
+        "cliente": {
+            "username": "lipe",
+            "id": 16
+        },
+        "professor": {
+            "id": 6,
+            "username": "jorgiano"
+        },
+        "bolsistas": [
+            {
+                "id": 14,
+                "username": "lua"
+            }
+        ],
+        "avaliacao": {
+            "nota": 1,
+            "texto": "Avaliação"
+        },
+        "code": "685facb3-076e-4f9c-a31f-797db3e047a8"
+    },
+    {
+        "id": 89,
+        "titulo": "chamado Arquivado",
+        "status": {
+            "id": "9",
+            "nome": "Arquivado"
+        },
+        "cliente": {
+            "username": "88888888888",
+            "id": 34
+        },
+        "professor": {
+            "id": 6,
+            "username": "jorgiano"
+        },
+        "bolsistas": [
+            {
+                "id": 14,
+                "username": "lua"
+            }
+        ],
+        "avaliacao": {
+            "nota": 3,
+            "texto": "Avaliação"
+        },
+        "code": "4f920fe2-b849-4ca4-9cbd-b1228d363885"
+    },
+    {
+        "id": 114,
+        "titulo": "chamado Em Análise",
+        "status": {
+            "id": "1",
+            "nome": "Em Análise"
+        },
+        "cliente": {
+            "username": "silva.livia1",
+            "id": 17
+        },
+        "professor": {
+            "id": 11,
+            "username": "demostenes"
+        },
+        "bolsistas": [],
+        "avaliacao": null,
+        "code": "511dca34-7f7d-4dc6-8b5c-81c98fe3764a"
+    },
+    {
+        "id": 115,
+        "titulo": "chamado Aceito",
+        "status": {
+            "id": "2",
+            "nome": "Aceito"
+        },
+        "cliente": {
+            "username": "88888888888",
+            "id": 34
+        },
+        "professor": {
+            "id": 10,
+            "username": "felipao"
+        },
+        "bolsistas": [
+            {
+                "id": 14,
+                "username": "lua"
+            }
+        ],
+        "avaliacao": null,
+        "code": "904b975a-e4db-402f-ad9a-e0ffb623162c"
+    },
+    {
+        "id": 116,
+        "titulo": "chamado Em Diagnóstico",
+        "status": {
+            "id": "3",
+            "nome": "Em Diagnóstico"
+        },
+        "cliente": {
+            "username": "88888888888",
+            "id": 34
+        },
+        "professor": {
+            "id": 10,
+            "username": "felipao"
+        },
+        "bolsistas": [
+            {
+                "id": 14,
+                "username": "lua"
+            }
+        ],
+        "avaliacao": {
+            "nota": 2,
+            "texto": "Avaliação"
+        },
+        "code": "a2854e55-9539-4bd5-895f-ac7d291659a7"
+    },
+    {
+        "id": 117,
+        "titulo": "chamado Equipamento Em Conserto",
+        "status": {
+            "id": "4",
+            "nome": "Equipamento Em Conserto"
+        },
+        "cliente": {
+            "username": "88888888888",
+            "id": 34
+        },
+        "professor": {
+            "id": 10,
+            "username": "felipao"
+        },
+        "bolsistas": [
+            {
+                "id": 14,
+                "username": "lua"
+            }
+        ],
+        "avaliacao": null,
+        "code": "acf7ed41-b0f7-4348-99ee-1a411689ec43"
+    },
+    {
+        "id": 118,
+        "titulo": "chamado Aguardando Peça",
+        "status": {
+            "id": "5",
+            "nome": "Aguardando Peça"
+        },
+        "cliente": {
+            "username": "lipe",
+            "id": 16
+        },
+        "professor": {
+            "id": 10,
+            "username": "felipao"
+        },
+        "bolsistas": [
+            {
+                "id": 14,
+                "username": "lua"
+            }
+        ],
+        "avaliacao": null,
+        "code": "bc80d66c-160d-4e7e-b7d8-12ff820e6777"
+    },
+    {
+        "id": 119,
+        "titulo": "chamado Fechado Sem Resolução",
+        "status": {
+            "id": "6",
+            "nome": "Fechado Sem Resolução"
+        },
+        "cliente": {
+            "username": "silva.livia1",
+            "id": 17
+        },
+        "professor": {
+            "id": 10,
+            "username": "felipao"
+        },
+        "bolsistas": [
+            {
+                "id": 14,
+                "username": "lua"
+            }
+        ],
+        "avaliacao": {
+            "nota": 5,
+            "texto": "Avaliação"
+        },
+        "code": "8b5a32c2-e6f0-44de-87e7-460db938f9ea"
+    },
+    {
+        "id": 120,
+        "titulo": "chamado Resolvido",
+        "status": {
+            "id": "7",
+            "nome": "Resolvido"
+        },
+        "cliente": {
+            "username": "88888888888",
+            "id": 34
+        },
+        "professor": {
+            "id": 10,
+            "username": "felipao"
+        },
+        "bolsistas": [
+            {
+                "id": 14,
+                "username": "lua"
+            }
+        ],
+        "avaliacao": {
+            "nota": 4,
+            "texto": "Avaliação"
+        },
+        "code": "bfb2fda5-3ed1-43e0-af1f-b27b8fdf2af6"
+    },
+    {
+        "id": 121,
+        "titulo": "chamado Recusado",
+        "status": {
+            "id": "8",
+            "nome": "Recusado"
+        },
+        "cliente": {
+            "username": "88888888888",
+            "id": 34
+        },
+        "professor": {
+            "id": 10,
+            "username": "felipao"
+        },
+        "bolsistas": [
+            {
+                "id": 14,
+                "username": "lua"
+            }
+        ],
+        "avaliacao": null,
+        "code": "814e226f-b3dc-4fce-91ef-d9067091ead5"
+    },
+    {
+        "id": 122,
+        "titulo": "chamado Arquivado",
+        "status": {
+            "id": "9",
+            "nome": "Arquivado"
+        },
+        "cliente": {
+            "username": "88888888888",
+            "id": 34
+        },
+        "professor": {
+            "id": 10,
+            "username": "felipao"
+        },
+        "bolsistas": [
+            {
+                "id": 14,
+                "username": "lua"
+            }
+        ],
+        "avaliacao": {
+            "nota": 4,
+            "texto": "Avaliação"
+        },
+        "code": "601eec2e-9ae6-4e2f-99de-10eed4d94206"
+    }
+]
