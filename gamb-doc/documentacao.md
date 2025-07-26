@@ -17,3 +17,4 @@ Clique em cada um dos links abaixo para acessar o artefato específico.
 13. [Planejamento do Escopo](escopo/escopo.md)
 14. [Gerenciamento de Riscos](gerenciamento%20de%20riscos/analise_de_risco.md)
 15. [Orçamento do Projeto](orçamento/orcamento.md)
+16. [Cronograma do Projeto](cronograma%20do%20projeto/CronogramProjeto.md)
