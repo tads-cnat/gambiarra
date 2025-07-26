@@ -27,7 +27,7 @@ import google from "../../../../assets/google.png";
 export function LoginCard(): React.JSX.Element {
 	const {
 		register,
-		handleSubmit,
+		handleSubmit, control,
 		formState: { errors },
 	} = useForm<LoginSubmit>({
 		resolver: yupResolver(loginSchema),
@@ -84,24 +84,24 @@ export function LoginCard(): React.JSX.Element {
 							Olá! bom te ver <span>de novo</span> 🤖
 						</h3>
 						<InputField
+							name="username"
 							label="Nome de usuário:"
 							type="text"
 							icon="user"
-							name="username"
+							control={control}
 							formIsValid={loginIsValid}
 							error={errors.username?.message}
 							placeholder="Digite seu nome de usuário"
-							register={register("username")}
 						/>
 						<InputField
+							name="password"
+							control={control}
 							label="Senha: "
 							type="password"
 							icon="lock"
 							formIsValid={loginIsValid}
-							name="password"
 							error={errors.password?.message}
 							placeholder="Digite sua senha"
-							register={register("password")}
 						/>
 
 						<CardButtonArea>

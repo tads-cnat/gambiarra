@@ -2,6 +2,7 @@ import {
 	AddressBookIcon,
 	FileTextIcon,
 	FolderUserIcon,
+	HouseLineIcon,
 	HouseSimpleIcon,
 	SignOutIcon,
 } from "@phosphor-icons/react";
@@ -36,7 +37,6 @@ export function Sidebar(): React.JSX.Element {
 	const [isDropdownOpen, setDropdownOpen] = useState(false);
 	const [isCollapsed, setIsCollapsed] = useState(false);
 
-
 	// 2) Obtenha dados do usuário e seu papel
 
 	const navigate = useNavigate();
@@ -68,63 +68,91 @@ export function Sidebar(): React.JSX.Element {
 
 	// Abre/fecha o dropdown do usuário
 	const toggleDropdown = (): void => setDropdownOpen(!isDropdownOpen);
+	const stylesDefault = {
+		defaultIconSize: 24,
+		justifyBetween: "space-between",
+	};
 
 	// 3) Defina os itens de menu de acordo com o papel do usuário
 	function getSidebarItems(): Array<{
 		to: string;
 		label: string;
-		icon: React.JSX.Element;
+		icon: (size?: string | number) => React.JSX.Element;
 	}> {
 		const commonItems = {
-			home: { to: "/dashboard", label: "Home", icon: <HouseSimpleIcon /> },
-			
+			home: {
+				to: "/dashboard",
+				label: "Home",
+				icon: (size?: string | number) => (
+					<HouseLineIcon size={size ?? stylesDefault.defaultIconSize} />
+				),
+			},
+
 			abrirChamado: {
 				to: "#",
 				label: "Abrir Chamado",
-				icon: <FolderUserIcon />,
+				icon: (size?: string | number) => (
+					<FolderUserIcon size={size ?? stylesDefault.defaultIconSize} />
+				),
 			},
 
 			voltarPagina: {
 				to: "#",
 				label: "Voltar Pagina",
-				icon: <FolderUserIcon />,
+				icon: (size?: string | number) => (
+					<FolderUserIcon size={size ?? stylesDefault.defaultIconSize} />
+				),
 			},
 
 			abrirSidebar: {
 				to: "#",
 				label: "Abrir Sidebar",
-				icon: <FolderUserIcon />,
+				icon: (size?: string | number) => (
+					<FolderUserIcon size={size ?? stylesDefault.defaultIconSize} />
+				),
 			},
 
 			gerenciarBolsista: {
 				to: "#",
 				label: "Gerenciar Bolsista",
-				icon: <FolderUserIcon />,
+				icon: (size?: string | number) => (
+					<FolderUserIcon size={size ?? stylesDefault.defaultIconSize} />
+				),
 			},
 			gerenciarTarefas: {
 				to: "#",
 				label: "Gerenciar Tarefas",
-				icon: <FolderUserIcon />,
+				icon: (size?: string | number) => (
+					<FolderUserIcon size={size ?? stylesDefault.defaultIconSize} />
+				),
 			},
 			ordemServico: {
 				to: "#",
 				label: "Gerar ordem de serviço",
-				icon: <FileTextIcon />,
+				icon: (size?: string | number) => (
+					<FileTextIcon size={size ?? stylesDefault.defaultIconSize} />
+				),
 			},
 			estatisticas: {
 				to: "#",
 				label: "Estatísticas",
-				icon: <AddressBookIcon />,
+				icon: (size?: string | number) => (
+					<AddressBookIcon size={size ?? stylesDefault.defaultIconSize} />
+				),
 			},
 			usuarios: {
 				to: "#",
 				label: "Gerenciar Usuários",
-				icon: <FolderUserIcon />,
+				icon: (size?: string | number) => (
+					<FolderUserIcon size={size ?? stylesDefault.defaultIconSize} />
+				),
 			},
 			termoResponsabilidade: {
 				to: "#",
 				label: "Gerar termo de responsabilidade",
-				icon: <AddressBookIcon />,
+				icon: (size?: string | number) => (
+					<AddressBookIcon size={size ?? stylesDefault.defaultIconSize} />
+				),
 			},
 		};
 
@@ -155,7 +183,6 @@ export function Sidebar(): React.JSX.Element {
 			cliente: ["home", "ordemServico", "estatisticas"],
 			aluno: ["home", "ordemServico", "estatisticas"],
 			servidor: ["home", "ordemServico", "estatisticas"],
-
 		};
 
 		const selectedItems = roleMap[role] || roleMap["cliente"];
@@ -168,8 +195,8 @@ export function Sidebar(): React.JSX.Element {
 	return (
 		<>
 			<SidebarBody>
-				 <SidebarContainer collapsed={isCollapsed}>
-					<SidebarContent>
+				<SidebarContainer collapsed={isCollapsed}>
+					<SidebarContent collapsed={isCollapsed}>
 						<div>
 							{isCollapsed ? (
 								<img
@@ -191,14 +218,19 @@ export function Sidebar(): React.JSX.Element {
 					Exibir "Abrir Chamado" apenas para bolsista OU cliente 
 				  */}
 
-								{(isUserExternal()) && (
+								{isUserExternal() && (
 									<GambButton
 										variant="roxo"
-										label={isCollapsed ? "" : "Abrir Chamado"}
+										label={
+											isCollapsed ? "" : "Abrir Chamado"
+										}
 										icon="plus_circle"
 										onClick={() => setModalOpen(true)}
 										size="large"
-										style={{ width: "100%"}}
+											style={{
+										width: "100%",
+										justifyContent: stylesDefault.justifyBetween,
+									}}
 									/>
 								)}
 								<GambButton
@@ -207,7 +239,10 @@ export function Sidebar(): React.JSX.Element {
 									icon={"back"}
 									size="large"
 									onClick={() => void navigate(-1)}
-									style={{ width: "100%", justifyContent: "space-between"}}
+									style={{
+										width: "100%",
+										justifyContent: stylesDefault.justifyBetween,
+									}}
 								/>
 								<GambButton
 									variant="inline"
@@ -215,7 +250,12 @@ export function Sidebar(): React.JSX.Element {
 									icon={"sb"} // não sei pq quando eu coloco o nome desse icone como "sidebar" ele explode a memoria ram do PC
 									size="large"
 									onClick={() => setIsCollapsed(!isCollapsed)}
-									style={{ width: "100%", justifyContent: isCollapsed ? "center" : "space-between"}}
+									style={{
+										width: "100%",
+										justifyContent: isCollapsed
+											? "center"
+											: stylesDefault.justifyBetween,
+									}}
 								/>
 							</div>
 
@@ -225,34 +265,62 @@ export function Sidebar(): React.JSX.Element {
 									<li key={`${item.to}-${index}`}>
 										<Link
 											to={item.to}
-											className={`
-											flex items-center gap-2 p-2
-											${item.to === window.location.pathname ? "text-green-600 font-regular border-l-2 border-green-600" : ""}
-											`}
+											className={` flex  gap-2 p-2 px-4 w-full h-full ${
+												isCollapsed
+													? " items-center justify-center  text-center"
+													: ""
+											} ${
+												item.to ===
+												window.location.pathname
+													? "text-green-600 font-regular border-l-2 border-green-600"
+													: ""
+											}`}
 										>
-											{item.icon}
-											{!isCollapsed && <span>{item.label}</span>}
+											{isCollapsed ? (
+												<span>{item.icon()}</span>
+											) : (
+												<>
+													<span>{item.icon(16)}</span>
+													<span>{item.label}</span>
+												</>
+											)}
 										</Link>
 									</li>
 								))}
 							</ul>
-
 						</div>
 
 						{/* INFORMAÇÕES DO USUÁRIO E DROPDOWN */}
 						<UserSpace>
-							
-								<User>
-									<img
-										src={getUserActive()?.imagem || "perfil.png"}
-										alt="Imagem de perfil"
-									/>
-									{!isCollapsed && (
-										<>
-											{getUserActive()?.username || "Usuário"} - {getUserActiveRole()}
-										</>
-									)}
-								</User>
+							<User>
+								{isCollapsed ? (
+									// Imagem VIRA botão
+									<button onClick={toggleDropdown}>
+										<img
+											src={
+												getUserActive()?.imagem ||
+												"perfil.png"
+											}
+											alt="Imagem de perfil"
+											className="w-10 h-10 rounded-full"
+										/>
+									</button>
+								) : (
+									<>
+										<img
+											src={
+												getUserActive()?.imagem ||
+												"perfil.png"
+											}
+											alt="Imagem de perfil"
+											className="w-10 h-10 rounded-full"
+										/>
+										{getUserActive()?.username || "Usuário"}{" "}
+										- {getUserActiveRole()}
+									</>
+								)}
+							</User>
+
 							<div className="flex flex-col-reverse relative">
 								{isDropdownOpen && (
 									<ItemDropdown className="absolute bottom-full mb-2 left-0 w-full elevacao-def">
@@ -266,18 +334,18 @@ export function Sidebar(): React.JSX.Element {
 										</li>
 									</ItemDropdown>
 								)}
-								{!isCollapsed &&(
-								<GambButton
-									id="multiLevelDropdownButton"
-									type="button"
-									variant="circle"
-									label=""
-									icon="list"
-									size="large"
-									onClick={toggleDropdown}
-								/>
+
+								{!isCollapsed && (
+									<GambButton
+										id="multiLevelDropdownButton"
+										type="button"
+										variant="circle"
+										label=""
+										icon="list"
+										size="large"
+										onClick={toggleDropdown}
+									/>
 								)}
-									
 							</div>
 						</UserSpace>
 					</SidebarContent>
@@ -288,7 +356,9 @@ export function Sidebar(): React.JSX.Element {
 			<ModalChamadoSubmit
 				isModalOpen={ModalOpen}
 				closeModal={closeModal}
-				onSubmit={(data) => { void onSubmit(data); }}
+				onSubmit={(data) => {
+					void onSubmit(data);
+				}}
 			/>
 		</>
 	);
