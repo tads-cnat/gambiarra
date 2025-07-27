@@ -58,7 +58,7 @@ jobs:
                       liviaavs/gamb-front:${{ steps.version.outputs.version }}
                   build-args: |
                       VITE_API_URL=${{ secrets.VITE_API_URL }}
-                      VITE_HOST=${{ secrets.VITE_HOST }}
+                      VITE_WS_URL=${{ secrets.VITE_WS_URL }}
 
     deploy-app:
         runs-on: ubuntu-22.04
