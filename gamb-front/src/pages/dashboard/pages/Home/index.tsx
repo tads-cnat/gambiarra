@@ -46,7 +46,6 @@ export default function DashboardHome(): React.JSX.Element {
   const [optionsBolsista, setOptionsBolsista] = useState([]);
 
   const {
-    register,
     control,
     handleSubmit,
     reset,

@@ -15,7 +15,7 @@ export default function AlterarStatusModal(props: {
   stats?: string; // Status atual como string
 }) {
 
-  const { register, formState: { errors }, handleSubmit } = useForm<FormValues>();
+  const { formState: { errors }, handleSubmit, control } = useForm<FormValues>();
   const { isModalOpen, closeModal, chamadoId, stats } = props;
 
   async function onSubmit(values: FormValues): Promise<void> {
@@ -48,8 +48,9 @@ export default function AlterarStatusModal(props: {
             <form style={{ marginTop: "8px"}} onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4 p-2 mt-0 justify-center items-center">
               <SelectField
                 label="Status"
+                name="status"
                 placeholder="Selecione um status"
-                register={register("status", { required: true })}
+                control={control}
                 defaultValue=""
                 styles={{ width: "100%" }}
                 status={stats} // Passando a string do status atual

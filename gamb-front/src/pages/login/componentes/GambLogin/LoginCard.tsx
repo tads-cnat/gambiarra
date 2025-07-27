@@ -26,7 +26,6 @@ import google from "../../../../assets/google.png";
 
 export function LoginCard(): React.JSX.Element {
 	const {
-		register,
 		handleSubmit, control,
 		formState: { errors },
 	} = useForm<LoginSubmit>({

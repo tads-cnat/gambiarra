@@ -27,8 +27,8 @@ import UseMessage from "../../../componentes/GambMessage/Message";
 
 export function CadastroCard(): React.JSX.Element {
 	const {
-		register,
 		handleSubmit,
+		control,
 		formState: { errors, isSubmitting },
 	} = useForm<CadastroSubmit>({
 		resolver: yupResolver(cadastroSchema),
@@ -96,7 +96,7 @@ export function CadastroCard(): React.JSX.Element {
 							formIsValid={cadastroIsValid}
 							error={errors.cpf?.message}
 							placeholder="000.000.000-00"
-							register={register("cpf")}
+							control={control}
 						/>
 						<InputField
 							label="Email *"
@@ -106,7 +106,7 @@ export function CadastroCard(): React.JSX.Element {
 							formIsValid={cadastroIsValid}
 							error={errors.email?.message}
 							placeholder="exemplo@email.com"
-							register={register("email")}
+							control={control}
 						/>
 
 						<InputField
@@ -117,7 +117,7 @@ export function CadastroCard(): React.JSX.Element {
 							formIsValid={cadastroIsValid}
 							error={errors.username?.message}
 							placeholder="Usuario123"
-							register={register("username")}
+							control={control}
 						/>
 						<InputField
 							label="Senha *"
@@ -127,7 +127,7 @@ export function CadastroCard(): React.JSX.Element {
 							name="password1"
 							error={errors.password1?.message}
 							placeholder="Deve ter no minimo 8 caracteres"
-							register={register("password1")}
+							control={control}
 						/>
 
 						
@@ -138,8 +138,8 @@ export function CadastroCard(): React.JSX.Element {
 							formIsValid={cadastroIsValid}
 							name="password2"
 							error={errors.password2?.message}
+							control={control}
 							placeholder="Deve ter no minimo 8 caracteres"
-							register={register("password2")}
 						/>
 
 						<CardButtonArea>

@@ -1,5 +1,4 @@
 import {
-	UseFormRegisterReturn,
 	Control,
 	RegisterOptions,
 } from "react-hook-form";
@@ -58,12 +57,23 @@ export interface InputFieldProps {
 	 */
 	textAux?: string;
 
-
+	/**
+	 * Indica se o formulário é válido, usado para estilização condicional.
+	 */
 	formIsValid?: boolean | null;
 
+	/**
+	 * Ícone a ser exibido no campo, se necessário.
+	 */
 	value?: string;
 
+	/**
+	 * Ícone a ser exibido no campo, se necessário.
+	 */
 	icon?: string;
 
+	/**
+	 * Classe CSS do elemento pai, útil para estilização externa.
+	 */
 	classNameFather?: string;
 }

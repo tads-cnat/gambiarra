@@ -1,9 +1,7 @@
 import React from "react";
-import { UseFormRegisterReturn, Controller, Control } from "react-hook-form";
+import {Controller, Control } from "react-hook-form";
 import { Select } from "antd";
-import { SelectText } from "./SelectStyles";
 
-const { Option } = Select;
 
 const EM_ANALISE = "Em Análise";
 const ACEITO = "Aceito";
