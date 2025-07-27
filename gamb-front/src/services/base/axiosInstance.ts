@@ -7,7 +7,7 @@ import {
 } from "../../auth/service/AuthStore";
 import { redirect } from "react-router-dom";
 const baseURL: string =
-	(import.meta.env.VITE_API_URL as string) || "http://localhost:8000/api/v1/";
+	(import.meta.env.VITE_API_URL as string) || "https://localhost/api/v1/";
 export const wsHOST = import.meta.env.VITE_WS_URL || "wss://localhost/ws/chat/";
 
 // Criando a instância do Axios
