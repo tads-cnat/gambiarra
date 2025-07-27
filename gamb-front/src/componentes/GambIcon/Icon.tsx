@@ -58,6 +58,13 @@ import {
 	XCircleIcon,
 	XIcon,
 	SidebarIcon,
+	ChartBarIcon,	
+	StethoscopeIcon,
+	HammerIcon,
+	HourglassMediumIcon,
+	SmileySadIcon,
+	SmileyIcon,
+
 } from "@phosphor-icons/react";
 import { GambIconProps } from "../../interfaces/componentes/iGambIcon";
 import { cloneElement } from "react";
@@ -126,6 +133,12 @@ const iconComponents: Record<string, React.JSX.Element> = {
 	chatfill: <ChatsCircleIcon />,
 	clock: <ClockClockwiseIcon />,
 	send: <ChatCircleIcon />,
+	barchart: <ChartBarIcon />,
+	diagnostico: <StethoscopeIcon />,
+	conserto: <HammerIcon />,
+	waiting: <HourglassMediumIcon />,
+	sad: <SmileySadIcon />,
+	happy: <SmileyIcon />
 };
 
 export default function Icon(props: GambIconProps): React.JSX.Element {

@@ -24,18 +24,22 @@ export const StepWrapper = styled.div`
 `;
 
 export const StepDot = styled.div<{ color: string }>`
-  width: 24px;
-  height: 24px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
-  background-color: ${(props): string => props.color};
+  background-color: ${(props) => props.color};
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
+
 
 export const StepLine = styled.div<{ 
   color: string;
   $isRejected?: boolean;
 }>`
   width: 200px;
-  height: 1px;
+  height: 3px;
   background-color: ${(props): string => props.color};
   margin: 0 8px;
   position: relative;
@@ -63,9 +67,9 @@ export const StepLineEnd = styled.div<{
 
 export const StepLabel = styled.span`
   position: absolute;
-  top: 1.75rem;
+  top: 2.75rem;
   left: 0;
-  width: 80px;
+  width: 100px;
   text-align: center;
   font-size: 0.8rem;
   transform: translateX(-28%);

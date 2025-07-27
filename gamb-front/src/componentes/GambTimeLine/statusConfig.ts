@@ -1,42 +1,42 @@
 export const statusConfig = {
     "1": {
       label: "Em Análise",
-      color: "#FFD700",  // Amarelo ouro
-      lineColor: "#FFD700"
+      color: "#DEE2E6",  // Amarelo ouro
+      lineColor: "#FFD700",
     },
     "2": {
       label: "Aceito",
-      color: "#32CD32",  // Verde lima
-      lineColor: "#32CD32"
+      color: "#DEE2E6",  // Verde lima
+      lineColor: "#32CD32",
     },
     "3": {
       label: "Em Diagnóstico",
-      color: "#1E90FF",  // Azul dodger
-      lineColor: "#1E90FF"
+      color: "#DEE2E6",  // Azul dodger
+      lineColor: "#1E90FF",
     },
     "4": {
       label: "Equipamento Em Conserto",
-      color: "#8A2BE2",  // Azul violeta
-      lineColor: "#8A2BE2"
+      color: "#DEE2E6",  // Azul violeta
+      lineColor: "#8A2BE2",
     },
     "5": {
       label: "Aguardando Peça",
-      color: "#FFA500",  // Laranja
-      lineColor: "#FFA500"
+      color: "#DEE2E6",  // Laranja
+      lineColor: "#FFA500",
     },
     "6": {
       label: "Fechado Sem Resolução",
-      color: "#A9A9A9",  // Cinza escuro
-      lineColor: "#A9A9A9"
+      color: "#DEE2E6",  // Cinza escuro
+      lineColor: "#A9A9A9",
     },
     "7": {
       label: "Resolvido",
-      color: "#008000",  // Verde escuro
-      lineColor: "#008000"
+      color: "#DEE2E6",  // Verde escuro
+      lineColor: "#008000",
     },
     "8": {
       label: "Recusado",
-      color: "#FF0000",  // Vermelho
-      lineColor: "#FF0000"
+      color: "#DEE2E6",  // Vermelho
+      lineColor: "#FF0000",
     }
   };
