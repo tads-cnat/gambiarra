@@ -2,7 +2,7 @@ name: CD Front
 
 on:
     push:
-        branches: ["main", "321-0---analisar-falha-no-serviço-de-websocket-no-ec2-a-aws"]
+        branches: ["main", "384-0---implantar-servidor-de-proxy-reverso-caddy"]
         paths:
             - "gamb-front/**"
             - ".github/workflows/CD-front.yml"
