@@ -2,7 +2,7 @@ name: CD Back
 
 on:
     push:
-        branches: ["main", "321-0---analisar-falha-no-serviço-de-websocket-no-ec2-a-aws"]
+        branches: ["main", "384-0---implantar-servidor-de-proxy-reverso-caddy"]
         paths:
             - "gamb-back/**"
             - ".github/workflows/CD-back.yml"
@@ -11,7 +11,7 @@ on:
         branches: ["main"]
         paths:
             - "gamb-back/**"
-            - ".github/workflows/CD-front.yml"
+            - ".github/workflows/CD-back.yml"
 
 jobs:
     build-and-push-image:
