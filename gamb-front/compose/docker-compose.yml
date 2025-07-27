@@ -1,14 +1,7 @@
-version: "3.8"
-
 services:
-    gamb-front:
-        image: liviaavs/gamb-front:latest
-        container_name: gambfront
-        restart: always
-        ports:
-            - "80:80"
-        env_file:
-            - .env
-
-volumes:
-    gamb_front_data:
+  gamb-front:
+    image: liviaavs/gamb-front:latest
+    container_name: gambfront
+    restart: always
+    ports:
+      - "80:80"
