@@ -38,8 +38,6 @@ jobs:
             - name: Cypress run
               uses: cypress-io/github-action@v6
               env:
-                VITE_API_URL: "http://localhost:8000/api/v1/"
-                VITE_HOST: "localhost"
                 VITE_PORT: "4173"
               with:
                   build: yarn build
