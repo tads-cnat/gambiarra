@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 export const FilterTableContainer = styled.div`
 	display: flex;
-	padding: 20px 10px;
 	flex-direction: column;
 	width: 100%;
 `;

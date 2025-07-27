@@ -6,11 +6,13 @@ import {
 	BreadcrumbText,
 	BreadcrumbIcon,
 } from "./breadcrumbstyle";
-import { BreadcrumbProps } from "../../interfaces/componentes/IGambBreadcrumb";
 import Icon from "../GambIcon/Icon";
+import useBreadcrumbs from "../../hooks/useBreadcrumbs";
 
-export default function Breadcrumb({ crumbs }: BreadcrumbProps) {
-	const allCrumbs = [{ label: "", href: "/" }, ...crumbs];
+export default function Breadcrumb() {
+	const dynamicCrumbs = useBreadcrumbs();
+	const activeCrumbs = dynamicCrumbs;
+	const allCrumbs = [{ label: "", href: "/" }, ...activeCrumbs];
 
 	return (
 		<BreadcrumbContainer>
