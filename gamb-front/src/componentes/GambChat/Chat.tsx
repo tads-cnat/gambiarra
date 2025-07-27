@@ -21,7 +21,7 @@ export default function Chat({ chamado_id }: ChatProps) {
 	const { handleSubmit, reset, control} = useForm<{ texto: string }>();
 
 	const { messages, sendMessage, connected } = useWebSocket(
-		`ws://${wsHOST}:8000/ws/chat/${chamado_id}/`
+		`/ws/chat/${chamado_id}/`
 	);
 
 	const css = `

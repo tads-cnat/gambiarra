@@ -34,9 +34,26 @@ services:
       POSTGRES_PASSWORD: postgres
     ports:
       - "5432:5432"
+  caddy:
+      image: caddy:latest
+      container_name: gambcaddy
+      restart: unless-stopped
+      ports:
+        - "80:80"
+        - "443:443"
+        - "443:443/udp"
+      volumes:
+        - ./conf:/etc/caddy
+        - ./site:/srv
+        - caddy_data:/data
+        - caddy_config:/config
+      depends_on:
+        - web
 
  
 volumes:
   app-sync:
     external: true
   postgres_data:
+  caddy_data:
+  caddy_config:
