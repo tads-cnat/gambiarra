@@ -8,7 +8,7 @@ from authentication.models import Usuario
 
 
 class Command(BaseCommand):
-    help = "Populate the User table with new users (Gerentes and Professores), including profile pictures"
+    help = "Populate the User table with new users."
 
     def handle(self, *args, **kwargs):
         try:
@@ -33,7 +33,7 @@ class Command(BaseCommand):
                 {"username": "marilia", "grupo": grupo_professor},
                 {"username": "felipao", "grupo": grupo_professor},
                 {"username": "demostenes", "grupo": grupo_professor},
-                {"username": "gracom", "grupo": grupo_professor},
+                {"username": "gracon", "grupo": grupo_professor},
                 # Bolsistas
                 {"username": "lili", "grupo": grupo_bolsista},
                 {"username": "lua", "grupo": grupo_bolsista},
@@ -66,13 +66,12 @@ class Command(BaseCommand):
                     },
                 )
 
-                if created:     # ------> APENAS para a avaliação empírica. Após, retirar o cliente1
+                if created:
                     if usuario["username"] == "cliente1":
                         usuario_obj.set_password("senha123")
                     else:
                         usuario_obj.set_password("ZAP123!!")
                     usuario_obj.save()
-
 
             self.stderr.write(self.style.SUCCESS("Os usuários foram criados!"))
 
