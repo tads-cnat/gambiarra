@@ -9,6 +9,7 @@ import {
   StepLineEnd,
 } from "./timelinestyle";
 import { ChatTimelineProps } from "../../interfaces/componentes/iGambTimeLine";
+import Icon from "../../componentes/GambIcon/Icon";
 
 export default function Timeline(props: ChatTimelineProps): React.JSX.Element {
   const { status } = props;
@@ -21,10 +22,13 @@ export default function Timeline(props: ChatTimelineProps): React.JSX.Element {
         {status.map((alt, index) => {
           const isFinal = index === status.length - 1;
           const dotColor = alt.color;
-          const lineColor = alt.color;
- return (
-            <StepWrapper key={index}>
-              <StepDot color={dotColor} />
+          const lineColor = alt.lineColor;
+          const iconName = alt.iconName;
+    return(
+            <StepWrapper key={index} title={alt.tooltip}>
+              <StepDot color={dotColor}>
+              <Icon icon={iconName} size={22} color={lineColor} />
+            </StepDot>
               {isFinal ? (
                 <StepLineEnd color={lineColor} />
               ) : (
@@ -43,10 +47,12 @@ export default function Timeline(props: ChatTimelineProps): React.JSX.Element {
       <MiddleStatusContainer>
         {middleStatuses.map((alt, index) => {
           return (
-            <StepWrapper key={index}>
+            <StepWrapper key={index} title={alt.tooltip}>
               <div className="inline-flex items-center justify-center ml-1">
-                <StepDot color={alt.color} />
-                <StepLine color={alt.color} />
+                 <StepDot color={alt.color}>
+              <Icon icon={alt.iconName} size={22} color={alt.lineColor} />
+            </StepDot>
+                <StepLine color={alt.lineColor} />
                 <StepLabel className="ml-1 mt-9">{alt.label}</StepLabel>
               </div>
             </StepWrapper>
@@ -55,10 +61,11 @@ export default function Timeline(props: ChatTimelineProps): React.JSX.Element {
       </MiddleStatusContainer>
   
       <FirstOrLastStatusContainer>
-        <StepWrapper>
-          <StepDot color={lastStatus.color} />
-          <StepLineEnd
-            color={lastStatus.color}          />
+        <StepWrapper title={lastStatus.tooltip}>
+           <StepDot color={lastStatus.color}>
+              <Icon icon={lastStatus.iconName} size={22} color={lastStatus.lineColor} />
+            </StepDot>
+          <StepLineEnd color={lastStatus.lineColor} />
           <StepLabel>{lastStatus.label}</StepLabel>
         </StepWrapper>
       </FirstOrLastStatusContainer>
