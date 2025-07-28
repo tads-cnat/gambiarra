@@ -3,9 +3,6 @@ from authentication.models import Usuario
 from gambiarra.models import *
 import random
 
-#Retirar pós avaliação
-from .populate_chamados_random import PROBLEMAS_COMUNS, DIAGNOSTICOS_POSSIVEIS, ITEMS_POSSIVEIS, AVALIACOES_POSSIVEIS, DESCRICOES_POSSIVEIS, ACESSORIOS_POSSIVEIS
-
 # Criação de alterações
 ALTERACOES_POSSIVEIS = [
     [
@@ -25,7 +22,6 @@ class Command(BaseCommand):
     help = "Popula o banco de dados com os modelos de chamado, itens, acessórios, avaliações, mensagens, e alterações de status"
 
     def handle(self, *args, **kwargs):
-        escolha = 1
         bypass = (
             os.getenv("MOD_DEV", "0") == "1"
         )  # para popular o banco se já houver objetos
@@ -86,40 +82,25 @@ class Command(BaseCommand):
 
             # ===============================================================================#
 
-            # Criação de chamados para usuário Cliente1 APENAS PARA AVALIAÇÃO EMPÍRICA
             # criação de chamados, um para cada status
             for i in STATUS_CHOICES:
-                for j in range(3):
-                    cliente = clientes.filter(username="cliente1")
-                    bolsista = random.choice(bolsistas)
-                    professor = random.choice(professores)
-                    cliente = random.choice(clientes)
-                    sequencia_status = random.choice(ALTERACOES_POSSIVEIS)
-                    problema = random.choice(PROBLEMAS_COMUNS)
-                    descricao = random.choice(DESCRICOES_POSSIVEIS).format(
-                        cliente=cliente.username, problema=problema
-                    )
-                    ALTERACOES_POSSIVEIS.remove(sequencia_status)
-                    PROBLEMAS_COMUNS.remove(problema)
-                    DESCRICOES_POSSIVEIS.remove(descricao)
+                item = random.choice(itens)
+                itens.remove(item)
 
-                    item = random.choice(itens)
-                    itens.remove(item)
-
-                    chamado = Chamado.objects.create(
-                        titulo=problema,
-                        descricao=descricao,
-                        status=sequencia_status[-1],
-                        cliente=cliente,
-                        item=item,
-                    )
-
-
-                    if chamado.status != "1":
-                        chamado.professor = professor
-                        chamado.bolsistas.add(bolsista)
-                        chamado.save()
-                    chamados.append(chamado)
+                chamado = Chamado.objects.create(
+                    titulo=f"chamado {i[1]}",
+                    descricao=f"{i[1]}",
+                    cliente=clientes.get(username="cliente1"),
+                    status=i[0],  # JEITO CERTO DE GUARDAR O STATUS
+                    item=item,
+                )
+                if chamado.status != "1":
+                    chamado.professor = random.choice(professores)
+                    for i in range(3):
+                        if random.choice([True, False]):
+                            chamado.bolsistas.add(random.choice(bolsistas))
+                    chamado.save()
+                chamados.append(chamado)
 
                 # print("\n\n\n")
             self.stdout.write(self.style.SUCCESS("Chamados criados."))
@@ -139,8 +120,11 @@ class Command(BaseCommand):
                 for i in range(random.randint(1, 5)):
                     if chamado.professor:
                         mensagem = Mensagem.objects.create(
-                            autor=random.choice([chamado.professor, chamado.cliente]),
-                            texto=f"Mensagem de teste-{i}",
+                            autor=random.choice(
+                                [chamado.professor, chamado.cliente]
+                                + list(chamado.bolsistas.all())
+                            ),
+                            texto=f"Mensagem {i}",
                             chamado=chamado,
                         )
                         mensagens.append(mensagem)
