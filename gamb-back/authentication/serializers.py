@@ -77,17 +77,6 @@ class ProfileUserSerializer(serializers.ModelSerializer):
         ]
 
     def get_imagem(self, obj):
-        def build_image_url(path):
-            request = self.context.get("request")
-            if request:
-                return request.build_absolute_uri(path)
-            from urllib.parse import urljoin
-
-            return urljoin(settings.MEDIA_URL, path)
-
-        if obj.imagem:
-            return build_image_url(obj.imagem.url)
-
         return f"https://api.dicebear.com/7.x/initials/svg?seed={obj.username}"
 
 
