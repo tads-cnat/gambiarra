@@ -6,6 +6,8 @@ import ModalChamadoSubmit from "../Sidebar/forms/abrirChamado/ModalChamadoSubmit
 import { ChamadoSubmit } from "../../interfaces/models/iChamado";
 import ChamadoService from "../../services/models/ChamadoService";
 import { getUserActiveRole } from "../../auth/service/AuthStore";
+import { notification } from 'antd';
+
 
 export interface Tab {
 	id: string;
@@ -26,6 +28,7 @@ export default function GambTabs({
 	const navigate = useNavigate();
 	const location = useLocation();
 	const [ModalOpen, setModalOpen] = useState(false);
+	const [api, contextHolder] = notification.useNotification();
 
 	const handleTabChange = (tabId: string): void => {
 		onTabChange(tabId);
@@ -41,11 +44,22 @@ export default function GambTabs({
 	async function onSubmit(data: ChamadoSubmit): Promise<void> {
 		await ChamadoService.criarChamado(data)
 			.then(() => {
-				alert("Chamado criado com sucesso");
+				api.success({
+					message: "Chamado criado com sucesso",
+					placement: 'top',
+				});
+				setTimeout(() => {
 				window.location.reload();
+			}, 2000);
 			})
 			.catch(() => {
-				alert("Erro ao criar chamado:");
+				api.error({
+				message: "Erro ao criar chamado",
+				placement: 'top',
+			});
+				setTimeout(() => {
+				window.location.reload();
+			}, 2000);
 			})
 			.finally(() => {
 				closeModal();
@@ -54,6 +68,7 @@ export default function GambTabs({
 	}
 	return (
 		<>
+		{contextHolder}
 			<TabsContainer>
 				<div className="w-full p-0 align-end flex gap-4">
 					{tabs.map((tab) => (
