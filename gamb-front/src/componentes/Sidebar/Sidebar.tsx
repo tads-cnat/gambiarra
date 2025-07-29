@@ -27,6 +27,8 @@ import {
 import { isUserExternal } from "../../utils/checkRoleUser";
 import logoGambi from "../../assets/logo-side.png";
 import tomada from "../../assets/marca-grafica-tomada.png";
+import { notification } from 'antd';
+
 
 // 1) Importe o hook para acessar dados do usuário
 
@@ -35,6 +37,7 @@ export function Sidebar(): React.JSX.Element {
 	const [ModalOpen, setModalOpen] = useState(false);
 	const [isDropdownOpen, setDropdownOpen] = useState(false);
 	const [isCollapsed, setIsCollapsed] = useState(false);
+	const [api, contextHolder] = notification.useNotification();
 
 	// 2) Obtenha dados do usuário e seu papel
 
@@ -47,11 +50,22 @@ export function Sidebar(): React.JSX.Element {
 	async function onSubmit(data: ChamadoSubmit): Promise<void> {
 		await ChamadoService.criarChamado(data)
 			.then(() => {
-				alert("Chamado criado com sucesso");
+				api.success({
+					message: "Chamado criado com sucesso",
+					placement: 'top',
+				});
+				setTimeout(() => {
 				window.location.reload();
+			}, 2000);
 			})
 			.catch(() => {
-				alert("Erro ao criar chamado:");
+				api.error({
+				message: "Erro ao criar chamado",
+				placement: 'top',
+			});
+				setTimeout(() => {
+				window.location.reload();
+			}, 2000);
 			})
 			.finally(() => {
 				closeModal();
@@ -193,6 +207,7 @@ export function Sidebar(): React.JSX.Element {
 
 	return (
 		<>
+		{contextHolder}
 			<SidebarBody>
 				<SidebarContainer collapsed={isCollapsed}>
 					<SidebarContent collapsed={isCollapsed}>
