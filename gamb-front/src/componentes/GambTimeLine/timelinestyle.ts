@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { defaultTheme } from "../../styles/themes/default";
 
 export const TimelineContainer = styled.div`
   display: flex;
