@@ -1,6 +1,6 @@
 import { SuapClient } from "./client";
 
-const CLIENT_ID = import.meta.env.VITE_CLIENT_ID_SUAP
+const CLIENT_ID = import.meta.env.VITE_CLIENT_ID_SUAP || "1ZhTRkW4vyAPp64qdfnqfhGWu5ZcpqWxRbiKpXki"
 const REDIRECT_URI =  import.meta.env.VITE_SUAP_REDIRECT_URI
 const SUAP_URL = "https://suap.ifrn.edu.br";
 const SCOPE = "identificacao email documentos_pessoais";
