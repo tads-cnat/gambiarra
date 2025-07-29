@@ -2,7 +2,7 @@ name: CD Back
 
 on:
     push:
-        branches: ["main", "384-0---implantar-servidor-de-proxy-reverso-caddy"]
+        branches: ["main"]
         paths:
             - "gamb-back/**"
             - ".github/workflows/CD-back.yml"
