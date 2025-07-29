@@ -59,7 +59,7 @@ jobs:
                   build-args: |
                       VITE_API_URL=${{ secrets.VITE_API_URL_PROD }}
                       VITE_WS_URL=${{ secrets.VITE_WS_URL_PROD }}
-                      VITE_CLIENT_ID=${{ secrets.VITE_CLIENT_ID_SUAP }}
+                      VITE_CLIENT_ID_SUAP=${{ secrets.VITE_CLIENT_ID_SUAP }}
                       VITE_REDIRECT_URI=${{ secrets.VITE_REDIRECT_URI_PROD }}
 
     deploy-app:
