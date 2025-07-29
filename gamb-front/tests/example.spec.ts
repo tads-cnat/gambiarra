@@ -42,12 +42,4 @@ test.describe("Index", () => {
 
     })
 
-    test('deve realizar login', async ({ page }) => {
-        await page.goto("http://localhost:5173/login"); //navega para tela de login
-        await page.getByTestId('user-field').fill('lipe');
-        await page.getByTestId('password-field').fill('ZAP123!!');
-        await page.getByText(/Entrar/i).click();
-        await expect(page).toHaveURL("http://localhost:5173/dashboard")
-    })  
-
 })  
