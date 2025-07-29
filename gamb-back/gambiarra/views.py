@@ -225,7 +225,7 @@ class ChamadoViewSet(viewsets.ModelViewSet):
                 "Equipamento Em Conserto",
             ],
             "Aguardando Peça": ["Equipamento Em Conserto", "Fechado Sem Resolução"],
-            "Equipamento Em Conserto": ["Resolvido", "Fechado Sem Resolução"],
+            "Equipamento Em Conserto": ["Resolvido", "Fechado Sem Resolução", "Aguardando Peça"],
             "Resolvido": ["Fechado", "Arquivado"],
             "Fechado Sem Resolução": ["Fechado", "Arquivado"],
             "Recusado": ["Fechado", "Arquivado"],

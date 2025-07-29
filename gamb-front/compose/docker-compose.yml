@@ -4,4 +4,24 @@ services:
     container_name: gambfront
     restart: always
     ports:
-      - "80:80"
+      - "3000:3000"
+
+  caddy:
+      image: caddy:latest
+      container_name: gambcaddy
+      restart: unless-stopped
+      ports:
+        - "80:80"
+        - "443:443"
+        - "443:443/udp"
+      volumes:
+        - ./conf:/etc/caddy
+        - ./site:/srv
+        - caddy_data:/data
+        - caddy_config:/config
+      depends_on:
+        - gamb-front
+
+volumes:
+  caddy_data:
+  caddy_config:  

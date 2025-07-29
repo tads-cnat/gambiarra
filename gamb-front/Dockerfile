@@ -5,15 +5,17 @@ WORKDIR /app
 
 # Argumentos de build (serão passados via --build-arg)
 ARG VITE_API_URL
-ARG VITE_HOST
+ARG VITE_WS_URL
 
 # Torna essas variáveis visíveis para o Vite (usadas em import.meta.env)
-ENV VITE_API_URL=$VITE_API_URL
-ENV VITE_HOST=$VITE_HOST
+ENV VITE_API_URL $VITE_API_URL
+ENV VITE_WS_URL $VITE_WS_URL
+ENV VITE_CLIENT_ID_SUAP $VITE_CLIENT_ID_SUAP
+ENV VITE_REDIRECT_URI $VITE_REDIRECT_URI
 
 # Debug (opcional)
 RUN echo "🛠️ VITE_API_URL=$VITE_API_URL"
-RUN echo "🛠️ VITE_HOST=$VITE_HOST"
+RUN echo "🛠️ VITE_WS_URL=$VITE_WS_URL"
 
 # Instala dependências
 COPY package.json yarn.lock ./
@@ -38,6 +40,6 @@ COPY nginx.conf /etc/nginx/conf.d/default.conf
 # Copia os arquivos estáticos do frontend compilado
 COPY --from=build /app/dist /usr/share/nginx/html
 
-EXPOSE 80
+EXPOSE 3000
 
 CMD ["nginx", "-g", "daemon off;"]

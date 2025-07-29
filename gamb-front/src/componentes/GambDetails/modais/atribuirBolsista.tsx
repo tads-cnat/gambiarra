@@ -1,5 +1,4 @@
 import { useForm } from "react-hook-form";
-import ChamadoService from "../../../services/models/ChamadoService";
 import GambButton from "../../GambButton/Button";
 import {
 	ModalCard,
@@ -9,23 +8,21 @@ import {
 } from "../../GambModal/modalstyles";
 import axiosInstance from "../../../services/base/axiosInstance";
 import { useEffect, useState } from "react";
-// import MultSelect from "../../GambMultSelect/MultSelect";
-
-interface FormValues {
-	bolsistas: number[]; // Tipagem para o campo de select
-}
+import { notification } from 'antd';
+import { AtribuirBolsistaFormValues } from "../Details";
 
 export default function AtribuirBolsistaModal(props: {
 	chamadoId: number | null;
 	isModalOpen: boolean;
 	closeModal: () => void;
+	onSubmit: (values: AtribuirBolsistaFormValues) => void;
 }) {
 	const {
 		register,
 		formState: { errors },
 		handleSubmit,
-	} = useForm<FormValues>();
-	const { isModalOpen, closeModal, chamadoId } = props;
+	} = useForm<AtribuirBolsistaFormValues>();
+	const { isModalOpen, closeModal, onSubmit } = props;
 	const [options, setOptions] = useState<{ label: string; value: number }[]>(
 		[]
 	);
@@ -42,23 +39,11 @@ export default function AtribuirBolsistaModal(props: {
 			}));
 			setOptions(option);
 		} catch (error) {
-			console.error("Erro ao buscar usuários:", error);
-		}
-	}
-
-	async function onSubmit(values: FormValues): Promise<void> {
-		if (!chamadoId) return; // Verifica se chamadoId é válido
-		await ChamadoService.atribuirBolsista(chamadoId, values.bolsistas) // Altera os bolsistas
-			.then(() => {
-				alert("Bolsista alterado com sucesso");
-			})
-			.catch(() => {
-				console.error("Erro ao alterar bolsistas do chamado");
-			})
-			.finally(() => {
-				window.location.reload();
-				closeModal();
+			notification.error({
+				message: "Erro ao buscar usuários",
+				placement: 'top',
 			});
+		}
 	}
 
 	useEffect(() => {

@@ -21,7 +21,7 @@ export default function Chat({ chamado_id }: ChatProps) {
 	const { handleSubmit, reset, control} = useForm<{ texto: string }>();
 
 	const { messages, sendMessage, connected } = useWebSocket(
-		`${wsHOST}/ws/chat/${chamado_id}/`
+		`${wsHOST}/${chamado_id}/`
 	);
 
 	const css = `
@@ -82,7 +82,8 @@ export default function Chat({ chamado_id }: ChatProps) {
 					messages.length > 0 ? (
 						messages.map((message) => (
 							<ChatMessage
-								side={
+								key={message.id}
+								$side={
 									message.autor.id === getUserActive()?.id
 										? "right"
 										: "left"

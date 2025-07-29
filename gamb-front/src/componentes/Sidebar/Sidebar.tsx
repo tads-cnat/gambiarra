@@ -209,8 +209,8 @@ export function Sidebar(): React.JSX.Element {
 		<>
 		{contextHolder}
 			<SidebarBody>
-				<SidebarContainer collapsed={isCollapsed}>
-					<SidebarContent collapsed={isCollapsed}>
+				<SidebarContainer $collapsed={isCollapsed}>
+					<SidebarContent $collapsed={isCollapsed}>
 						<div>
 							{isCollapsed ? (
 								<img

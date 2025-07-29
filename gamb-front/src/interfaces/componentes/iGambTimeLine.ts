@@ -5,6 +5,7 @@ export interface StatusType {
     icon?: string;
     iconName: string;
     tooltip?: string;   
+    bgColor?: string;
   }
 
 export interface ChatTimelineProps {

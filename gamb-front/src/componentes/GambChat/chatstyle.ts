@@ -62,18 +62,18 @@ export const ChatBody = styled.div`
 `;
 
 interface ChatMessageProps {
-  side: "left" | "right";
+  $side: "left" | "right";
 }
 
 export const ChatMessage = styled.div<ChatMessageProps>`
   display: flex;
-  justify-content: ${({ side }) =>
-    side === "right" ? "flex-end" : "flex-start"};
+  justify-content: ${({ $side }) =>
+    $side === "right" ? "flex-end" : "flex-start"};
   margin-bottom: 16px;
 
   .bubble {
-    background-color: ${({ side }) =>
-      side === "right" ? "#f1f1f1" : "#e0e0ff"};
+    background-color: ${({ $side }) =>
+      $side === "right" ? "#f1f1f1" : "#e0e0ff"};
     color: #333;
     border-radius: 16px;
     padding: 8px 12px;
