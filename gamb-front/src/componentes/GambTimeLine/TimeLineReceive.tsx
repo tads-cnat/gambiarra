@@ -22,7 +22,6 @@ export function RequestTimeLine(props: { id: number }): React.JSX.Element {
 					let iconName = "";
 					const date = new Date(alt.data_alteracao);
   					const tooltip = formatDate(date, "dd/MM/yyyy HH:mm");
-					console.log("ALT", alt);
 					if (alt.status === "1") {
 						color = statusConfig["1"].color;
 						lineColor = statusConfig["1"].lineColor;
@@ -63,6 +62,11 @@ export function RequestTimeLine(props: { id: number }): React.JSX.Element {
 						lineColor = statusConfig["8"].lineColor;
 						label = "Recusado";
 						iconName = "xcircle";
+					} else if (alt.status === "9") {
+						color = statusConfig["9"].color;
+						lineColor = statusConfig["9"].lineColor;
+						label = "Arquivado";
+						iconName = "archive";
 					}
 
 					return {

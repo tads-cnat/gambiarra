@@ -77,7 +77,6 @@ export default function Timeline(props: ChatTimelineProps): React.JSX.Element {
           title={lastStatus.tooltip}
           placement="top"
           color={lastStatus.lineColor}
-          style={{ backgroundColor: lastStatus.bgColor, color: "#fff" }}
         >
           <StepWrapper>
             <StepDot color={lastStatus.color} borderColor={lastStatus.lineColor} bgColor={lastStatus.bgColor}>

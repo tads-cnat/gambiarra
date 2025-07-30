@@ -53,7 +53,7 @@ export const statusConfig = {
     color: theme.cores.danger,
   },
   "9": {
-    label: "Cancelado",
+    label: "Arquivado",
     bgColor: theme.cores.danger_secondary,
     lineColor: theme.cores.danger_hover,
     color: theme.cores.danger_hover,
