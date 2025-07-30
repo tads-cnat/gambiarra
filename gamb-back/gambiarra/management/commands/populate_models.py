@@ -23,7 +23,9 @@ class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
         escolha = 1
-        bypass = True  # para popular o banco se já houver objetos
+        bypass = (
+            os.getenv("MOD_DEV", "0") == "1"
+        )  # para popular o banco se já houver objetos
         try:
             if (
                 Item.objects.all()
