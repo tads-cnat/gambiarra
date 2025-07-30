@@ -108,7 +108,11 @@ class ChamadoViewSet(viewsets.ModelViewSet):
             queryset = Chamado.objects.all()
         elif grupo == GrupoEnum.PROFESSOR:
             queryset = Chamado.objects.filter(
-                Q(professor=user) | Q(status="1") | Q(status="6") | Q(status="9") | Q(status="8")
+                Q(professor=user)
+                | Q(status="1")
+                | Q(status="6")
+                | Q(status="9")
+                | Q(status="8")
             )
         elif grupo == GrupoEnum.BOLSISTA:
             queryset = Chamado.objects.filter(bolsistas=user)
