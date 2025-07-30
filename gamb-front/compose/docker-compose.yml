@@ -1,14 +1,27 @@
-version: "3.8"
-
 services:
-    gamb-front:
-        image: liviaavs/gamb-front:latest
-        container_name: gambfront
-        restart: always
-        ports:
-            - "80:80"
-        env_file:
-            - .env
+  gamb-front:
+    image: liviaavs/gamb-front:latest
+    container_name: gambfront
+    restart: always
+    ports:
+      - "3000:3000"
+
+  caddy:
+      image: caddy:latest
+      container_name: gambcaddy
+      restart: unless-stopped
+      ports:
+        - "80:80"
+        - "443:443"
+        - "443:443/udp"
+      volumes:
+        - ./conf:/etc/caddy
+        - ./site:/srv
+        - caddy_data:/data
+        - caddy_config:/config
+      depends_on:
+        - gamb-front
 
 volumes:
-    gamb_front_data:
+  caddy_data:
+  caddy_config:  

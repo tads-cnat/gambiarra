@@ -2,9 +2,9 @@ import styled from "styled-components";
 import { defaultTheme } from "../../styles/themes/default";
 const theme = defaultTheme;
 
-export const SidebarContainer = styled.aside<{ collapsed?: boolean }>`
+export const SidebarContainer = styled.aside<{ $collapsed?: boolean }>`
   background-color: ${theme.cores.white};
-  width: ${(props) => (props.collapsed ? "80px" : "300px")}; 
+  width: ${(props) => (props.$collapsed ? "80px" : "300px")}; 
   border-radius: 16px;
   box-shadow: 5px 5px 10px 5px rgba(54, 54, 54, 0.1);
   transition: width 0.5s ease-out, padding 0.5s ease-out;
@@ -55,11 +55,11 @@ export const ItemDropdown = styled.ul`
   }
 `;
 
-export const SidebarContent = styled.div<{ collapsed?: boolean }>`
+export const SidebarContent = styled.div<{ $collapsed?: boolean }>`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  align-items: ${(props) => (props.collapsed ? "center" : "flex-start")};
+  align-items: ${(props) => (props.$collapsed ? "center" : "flex-start")};
   gap: 1.25rem;
   height: 100%;
   padding: 0 20px;

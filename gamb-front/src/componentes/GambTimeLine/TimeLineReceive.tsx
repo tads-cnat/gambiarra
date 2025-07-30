@@ -3,8 +3,8 @@ import { useEffect, useState } from "react";
 import Timeline from "./TimeLine";
 import type { StatusType } from "../../interfaces/componentes/iGambTimeLine";
 import { statusConfig } from "./statusConfig";
-import { format } from "date-fns";
-import { ptBR } from "date-fns/locale";
+import { formatDate } from "../../utils/FormatDate";
+
 
 
 export function RequestTimeLine(props: { id: number }): React.JSX.Element {
@@ -21,7 +21,7 @@ export function RequestTimeLine(props: { id: number }): React.JSX.Element {
 					let label = "";
 					let iconName = "";
 					const date = new Date(alt.data_alteracao);
-  					const tooltip = format(date, "dd/MM/yyyy HH:mm", { locale: ptBR });
+  					const tooltip = formatDate(date, "dd/MM/yyyy HH:mm");
 					console.log("ALT", alt);
 					if (alt.status === "1") {
 						color = statusConfig["1"].color;

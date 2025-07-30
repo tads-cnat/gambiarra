@@ -202,22 +202,22 @@ export default function RenderCards() {
 					<CardChamado
 						userType={getUserActiveRole()}
 						cardKey="atribuidos"
-						quantity={0}
+						quantity={cardsChamados?.professor?.atribuidos || 0}
 					/>
 					<CardChamado
 						userType={getUserActiveRole()}
 						cardKey="concluidos"
-						quantity={0}
+						quantity={cardsChamados?.professor?.concluidos || 0}
 					/>
 					<CardChamado
 						userType={getUserActiveRole()}
 						cardKey="pendentes"
-						quantity={0}
+						quantity={cardsChamados?.professor?.pendentes || 0}
 					/>
 					<CardChamado
 						userType={getUserActiveRole()}
 						cardKey="recusados"
-						quantity={0}
+						quantity={cardsChamados?.professor?.recusados || 0}
 					/>
 				</>
 			) : (

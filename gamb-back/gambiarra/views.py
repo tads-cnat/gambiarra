@@ -73,14 +73,12 @@ class ChamadoViewSet(viewsets.ModelViewSet):
             chamado = Chamado.objects.get(pk=pk)
         except Chamado.DoesNotExist:
             return Response(
-                {"erro": "Chamado não encontrado."}, 
-                status=status.HTTP_404_NOT_FOUND
+                {"erro": "Chamado não encontrado."}, status=status.HTTP_404_NOT_FOUND
             )
 
         user: Usuario = self.request.user
         grupo = user.grupo.name
 
-       
         if grupo == GrupoEnum.PROFESSOR and chamado.professor != user:
             status_permitidos = (
                 TAB_STATUS_MAPPING["pendentes"]
@@ -96,7 +94,6 @@ class ChamadoViewSet(viewsets.ModelViewSet):
         serializer = DetalharChamadoSerializer(chamado)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
-    
     def get_queryset(self):
 
         user = self.request.user
@@ -111,7 +108,11 @@ class ChamadoViewSet(viewsets.ModelViewSet):
             queryset = Chamado.objects.all()
         elif grupo == GrupoEnum.PROFESSOR:
             queryset = Chamado.objects.filter(
-                Q(professor=user) | Q(status="1") | Q(status="6") | Q(status="9")
+                Q(professor=user)
+                | Q(status="1")
+                | Q(status="6")
+                | Q(status="9")
+                | Q(status="8")
             )
         elif grupo == GrupoEnum.BOLSISTA:
             queryset = Chamado.objects.filter(bolsistas=user)
@@ -225,7 +226,11 @@ class ChamadoViewSet(viewsets.ModelViewSet):
                 "Equipamento Em Conserto",
             ],
             "Aguardando Peça": ["Equipamento Em Conserto", "Fechado Sem Resolução"],
-            "Equipamento Em Conserto": ["Resolvido", "Fechado Sem Resolução"],
+            "Equipamento Em Conserto": [
+                "Resolvido",
+                "Fechado Sem Resolução",
+                "Aguardando Peça",
+            ],
             "Resolvido": ["Fechado", "Arquivado"],
             "Fechado Sem Resolução": ["Fechado", "Arquivado"],
             "Recusado": ["Fechado", "Arquivado"],
@@ -280,7 +285,8 @@ class ChamadoViewSet(viewsets.ModelViewSet):
         # Linkando o professor ao chamado, se ele aceitá-lo
         if status_novo_texto == "Aceito":
             chamado.professor = request.user
-
+        if status_novo_texto == "Recusado":
+            chamado.professor = request.user
         chamado.status = status_novo
         chamado.save()
 

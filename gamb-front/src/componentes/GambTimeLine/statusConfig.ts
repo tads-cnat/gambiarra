@@ -1,42 +1,67 @@
+import { defaultTheme } from "../../styles/themes/default";
+
+const theme = defaultTheme;
+
+
 export const statusConfig = {
-    "1": {
-      label: "Em Análise",
-      color: "#DEE2E6",  // Amarelo ouro
-      lineColor: "#FFD700",
-    },
-    "2": {
-      label: "Aceito",
-      color: "#DEE2E6",  // Verde lima
-      lineColor: "#32CD32",
-    },
-    "3": {
-      label: "Em Diagnóstico",
-      color: "#DEE2E6",  // Azul dodger
-      lineColor: "#1E90FF",
-    },
-    "4": {
-      label: "Equipamento Em Conserto",
-      color: "#DEE2E6",  // Azul violeta
-      lineColor: "#8A2BE2",
-    },
-    "5": {
-      label: "Aguardando Peça",
-      color: "#DEE2E6",  // Laranja
-      lineColor: "#FFA500",
-    },
-    "6": {
-      label: "Fechado Sem Resolução",
-      color: "#DEE2E6",  // Cinza escuro
-      lineColor: "#A9A9A9",
-    },
-    "7": {
-      label: "Resolvido",
-      color: "#DEE2E6",  // Verde escuro
-      lineColor: "#008000",
-    },
-    "8": {
-      label: "Recusado",
-      color: "#DEE2E6",  // Vermelho
-      lineColor: "#FF0000",
-    }
-  };
+  "1": {
+    label: "Em Análise",
+    bgColor: theme.cores.gray_300,
+    lineColor: theme.cores.gray_400,
+    color: theme.cores.gray_400,
+  },
+  "2": {
+    label: "Aceito",
+    bgColor: theme.cores.green_sucess_secondary,
+    lineColor: theme.cores.green_sucess_primary,
+    color: theme.cores.green_sucess_primary,
+  },
+  "3": {
+    label: "Em Diagnóstico",
+    bgColor: theme.cores.warning_secondary,
+    lineColor: "#ce962f",
+    color: "#ce962f",
+  },
+  "4": {
+    label: "Equipamento Em Conserto",
+    bgColor: theme.cores.purple_info_secondary,
+    lineColor: theme.cores.purple_info_primary,
+    color: theme.cores.purple_info_primary,
+  },
+  "5": {
+    label: "Aguardando Peça",
+    bgColor: theme.cores.blue_info_light,
+    lineColor: theme.cores.blue_info,
+    color: theme.cores.blue_info_hover,
+  },
+  "6": {
+    label: "Fechado Sem Resolução",
+    bgColor: theme.cores.gray_100,
+    lineColor: theme.cores.gray_700,
+    color: theme.cores.gray_700,
+  },
+  "7": {
+    label: "Resolvido",
+    bgColor: theme.cores.green_sucess_secondary,
+    lineColor: theme.cores.green_sucess_hover,
+    color: theme.cores.green_sucess_hover,
+  },
+  "8": {
+    label: "Recusado",
+    bgColor: theme.cores.danger_secondary,
+    lineColor: theme.cores.danger,
+    color: theme.cores.danger,
+  },
+  "9": {
+    label: "Cancelado",
+    bgColor: theme.cores.danger_secondary,
+    lineColor: theme.cores.danger_hover,
+    color: theme.cores.danger_hover,
+  },
+  default: {
+    label: "Desconhecido",
+    bgColor: theme.cores.gray_400,
+    lineColor: theme.cores.gray_100,
+    color: theme.cores.gray_600,
+  },
+};

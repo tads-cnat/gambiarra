@@ -23,13 +23,14 @@ export const StepWrapper = styled.div`
   position: relative;
 `;
 
-export const StepDot = styled.div<{ color: string }>`
+export const StepDot = styled.div<{ color: string, borderColor?: string, bgColor?: string }>`
   width: 44px;
   height: 44px;
   border-radius: 50%;
-  background-color: ${(props) => props.color};
+  background-color: ${(props) => props.bgColor};
   display: flex;
   align-items: center;
+  border: 1px solid ${(props) => props.borderColor};
   justify-content: center;
 `;
 

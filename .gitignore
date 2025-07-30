@@ -13,7 +13,7 @@ migrations/
 
 .vscode
 
-gamb-back/media/**
+gamb-back/media/fotos_perfil/**
 
 ### Pythonanywhere ###
 .bashrc
@@ -98,7 +98,6 @@ instance/
 # Scrapy stuff:
 .scrapy
 
-/gamb-back/media/*
 
 # Sphinx documentation
 docs/_build/
