@@ -58,7 +58,7 @@ export default function Chat({ chamado_id }: ChatProps) {
 	}
 
 	return (
-		<ChatContainer>
+		<ChatContainer style={{ borderRadius: "8px" }}>
 			<style dangerouslySetInnerHTML={{ __html: css }} />
 
 			<ChatHeader>

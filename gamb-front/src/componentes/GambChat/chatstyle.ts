@@ -4,8 +4,7 @@ import { defaultTheme } from "../../styles/themes/default";
 const theme = defaultTheme;
 
 export const ChatContainer = styled.div`
-  border: 2px solid ${theme.cores.purple_info_primary};
-  border-radius: 2px;
+  border: 1px solid ${theme.cores.purple_info_primary};
   width: 100%;
   height: 350px; 
   margin: 0 auto;
@@ -21,8 +20,8 @@ export const ChatHeader = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 2px solid ${theme.cores.purple_info_primary};
-
+  border-bottom: 1px solid ${theme.cores.purple_info_primary};
+  border-radius: 8px 8px 0 0;
   .header-left {
     display: flex;
     align-items: center;
@@ -35,7 +34,7 @@ export const ChatHeader = styled.div`
     }
 
     .username {
-      font-weight: bold;
+      font-weight: medium;
       font-size: 1rem;
     }
   }
@@ -101,6 +100,7 @@ export const ChatFooter = styled.div`
   padding: 12px 16px;
   background-color: #fafafa;
   gap: 8px;
+  border-radius: 0 0 8px 8px;
 `;
 
 

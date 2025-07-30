@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { set, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { getUserActiveRole } from "../../../../auth/service/AuthStore";
 import GambButton from "../../../../componentes/GambButton/Button";
 import RenderCards from "../../../../componentes/GambCardChamados/CardChamado";
@@ -19,7 +19,6 @@ import { ChamadoFilter } from "../../../../filters/ChamadoFilter";
 import { Chamados } from "../../../../interfaces/models/iChamado";
 import ChamadoService from "../../../../services/models/ChamadoService";
 import AceitarChamadoModal from "../../../../componentes/GambTable/forms/AceitarChamadoModal";
-import EncerrarChamadoModal from "../../../../componentes/GambTable/forms/ArquivarChamadoModal";
 import axiosInstance from "../../../../services/base/axiosInstance";
 import { useNavigate, useLocation } from "react-router-dom";
 import GambTabs, { Tab } from "../../../../componentes/GambTabs/GambTabs";

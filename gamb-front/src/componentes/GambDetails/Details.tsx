@@ -11,11 +11,12 @@ import { ChamadoDetalhesProps } from "../../interfaces/componentes/iGambDetails"
 import Icon from "../GambIcon/Icon";
 import { getActionsByStatus } from "./actions";
 import AceitarChamadoModal from "../../componentes/GambTable/forms/AceitarChamadoModal";
-import EncerrarChamadoModal from "../GambTable/forms/RecusarChamadoModal";
 import AlterarStatusModal from "./modais/alterarStatus";
 import AtribuirBolsistaModal from "./modais/atribuirBolsista";
 import ChamadoService from "../../services/models/ChamadoService";
 import { notification } from "antd";
+import RecusarChamadoModal from "../GambTable/forms/RecusarChamadoModal";
+import ArquivarChamadoModal from "../GambTable/forms/ArquivarChamadoModal";
 
 export interface AlterarStatusFormValues {
   status: number;
@@ -27,16 +28,19 @@ export interface AtribuirBolsistaFormValues {
 
 export default function ChamadoDetalhes({ chamado }: ChamadoDetalhesProps) {
   const [aceitarModalOpen, setAceitarModalOpen] = useState(false);
-  const [encerrarModalOpen, setEncerrarModalOpen] = useState(false);
+  const [recusarModalOpen, setRecusarModalOpen] = useState(false);
   const [chamadoId, setChamadoId] = useState(0);
   const [openModalAtribuirBolsista, setOpenModalAtribuirBolsista] =
     useState(false);
   const [openModalAlterarStatus, setOpenModalAlterarStatus] = useState(false);
+  const [arquivarModalOpen, setArquivarModalOpen] = useState(false);
+
 
   const [api, contextHolder] = notification.useNotification();
 
   const closeAceitarModal = () => setAceitarModalOpen(false);
-  const closeEncerrarModal = () => setEncerrarModalOpen(false);
+  const closeRecusarModal = () => setRecusarModalOpen(false);
+  const closeArquivarModal = () => setArquivarModalOpen(false);
 
   async function handleAlterarStatus(values: AlterarStatusFormValues): Promise<void> {
     if (!chamadoId) return;
@@ -87,13 +91,88 @@ export default function ChamadoDetalhes({ chamado }: ChamadoDetalhesProps) {
         }, 1500);
       });
   }
+  async function handleActionAceitarChamado(): Promise<void> {
+      await ChamadoService.aceitarChamado(chamadoId ?? 0)
+        .then(() => {
+          api.success({
+            message: "Chamado aceito com sucesso",
+            placement: "top",
+          });
+          setTimeout(() => {
+            setAceitarModalOpen(false);
+            window.location.reload();
+          }, 2000);
+        })
+        .catch(() => {
+          api.error({
+            message: "Erro ao aceitar chamado",
+            placement: "top",
+          });
+          setTimeout(() => {
+            setAceitarModalOpen(false);
+            window.location.reload();
+          }, 2000);
+        })
+    }
+    async function handleActionRecusarChamado(): Promise<void> {
+      await ChamadoService.recusarChamado(chamadoId ?? 0)
+        .then(() => {
+          api.success({
+            message: "Chamado recusado com sucesso",
+            placement: "top",
+          });
+          setTimeout(() => {
+                    setRecusarModalOpen(false);
+  
+          window.location.reload();
+        }, 2000);
+        })
+        .catch(() => {
+          api.error({
+            message: "Erro ao recusar chamado",
+            description: "Por favor, tente novamente mais tarde.",
+            placement: "top",
+          });
+          setTimeout(() => {
+            setRecusarModalOpen(false);
+            window.location.reload();
+          }, 2000);
+        })
+        
+    }
+    async function handleActionArquivarChamado(): Promise<void> {
+      await ChamadoService.arquivarChamado(chamadoId ?? 0)
+        .then(() => {
+          api.success({
+            message: "Chamado arquivado com sucesso",
+            placement: "top",
+          });
+          setTimeout(() => {
+            setArquivarModalOpen(false);
+            window.location.reload();
+          }, 2000);
+        })
+        .catch(() => {
+          api.error({
+            message: "Erro ao recusar chamado",
+            description: "Por favor, tente novamente mais tarde.",
+            placement: "top",
+          });
+          setTimeout(() => {
+            setArquivarModalOpen(false);
+            window.location.reload();
+          }, 2000);
+        })
+        
+    }
 
   const Actions = {
     Avaliar: (id: number) => {
       console.log("avaliar", id);
     },
     arquivar: (id: number) => {
-      console.log("arquivar", id);
+      setChamadoId(id);
+      setArquivarModalOpen(true);
     },
     resolver: (id: number) => {
       console.log(id);
@@ -104,7 +183,7 @@ export default function ChamadoDetalhes({ chamado }: ChamadoDetalhesProps) {
     },
     recusar: (id: number) => {
       setChamadoId(id);
-      setEncerrarModalOpen(true);
+      setRecusarModalOpen(true);
     },
     AtribuirBolsista: (id: number) => {
       setChamadoId(id);
@@ -229,16 +308,21 @@ export default function ChamadoDetalhes({ chamado }: ChamadoDetalhesProps) {
             </div>
           </CardContentPeople>
         </Card>
-
+        
+        <ArquivarChamadoModal
+          isModalOpen={arquivarModalOpen}
+          closeModal={closeArquivarModal}
+          onSubmit={handleActionArquivarChamado}
+        />
         <AceitarChamadoModal
           isModalOpen={aceitarModalOpen}
           closeModal={closeAceitarModal}
-          chamadoId={chamadoId}
+          onSubmit={handleActionAceitarChamado}
         />
-        <EncerrarChamadoModal
-          isModalOpen={encerrarModalOpen}
-          closeModal={closeEncerrarModal}
-          chamadoId={chamadoId}
+        <RecusarChamadoModal
+          isModalOpen={recusarModalOpen}
+          closeModal={closeRecusarModal}
+          onSubmit={handleActionRecusarChamado}
         />
         <AlterarStatusModal
           isModalOpen={openModalAlterarStatus}
@@ -250,7 +334,6 @@ export default function ChamadoDetalhes({ chamado }: ChamadoDetalhesProps) {
         <AtribuirBolsistaModal
           isModalOpen={openModalAtribuirBolsista}
           closeModal={() => setOpenModalAtribuirBolsista(false)}
-          chamadoId={chamadoId}
           onSubmit={handleAtribuirBolsista}
         />
       </Container>

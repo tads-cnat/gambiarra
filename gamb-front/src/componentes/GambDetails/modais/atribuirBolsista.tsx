@@ -12,7 +12,6 @@ import { notification } from 'antd';
 import { AtribuirBolsistaFormValues } from "../Details";
 
 export default function AtribuirBolsistaModal(props: {
-	chamadoId: number | null;
 	isModalOpen: boolean;
 	closeModal: () => void;
 	onSubmit: (values: AtribuirBolsistaFormValues) => void;
@@ -97,14 +96,7 @@ export default function AtribuirBolsistaModal(props: {
 									</div>
 								))}
 							</div>
-							{/* <SelectField
-                label="Bolsistas"
-                placeholder="Selecione um ou mais bolsistas"
-                options={options}
-                register={register("bolsistas", { required: true })}
-                defaultValue={""}
-                styles={{ width: "100%" }}
-              /> */}
+							
 							{errors.bolsistas && (
 								<p style={{ color: "red" }}>
 									Este campo é obrigatório
