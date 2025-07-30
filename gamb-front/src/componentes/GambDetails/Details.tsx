@@ -11,7 +11,7 @@ import { ChamadoDetalhesProps } from "../../interfaces/componentes/iGambDetails"
 import Icon from "../GambIcon/Icon";
 import { getActionsByStatus } from "./actions";
 import AceitarChamadoModal from "../../componentes/GambTable/forms/AceitarChamadoModal";
-import EncerrarChamadoModal from "../../componentes/GambTable/forms/EncerrarChamadoModal";
+import EncerrarChamadoModal from "../GambTable/forms/RecusarChamadoModal";
 import AlterarStatusModal from "./modais/alterarStatus";
 import AtribuirBolsistaModal from "./modais/atribuirBolsista";
 import ChamadoService from "../../services/models/ChamadoService";

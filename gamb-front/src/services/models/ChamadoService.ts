@@ -30,9 +30,14 @@ class ChamadoService extends BaseService {
 		return response;
 	}
 	
-	async encerrarChamado(id: number): Promise<unknown> {
+	async arquivarChamado(id: number): Promise<unknown> {
 		const response = await axiosInstance.patch(
-		`${this.serviceUrl}/${id}/alterar_status/`, {status: 8} )
+		`${this.serviceUrl}/${id}/alterar_status/`, {status: 9} )
+		return response;
+	}
+	async recusarChamado(id: number): Promise<unknown> {
+		const response = await axiosInstance.patch(
+			`${this.serviceUrl}/${id}/alterar_status/`, {status: 8} )
 		return response;
 	}
 
