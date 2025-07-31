@@ -117,7 +117,7 @@ export function LoginCard(): React.JSX.Element {
 							<p>
 								Não possui uma conta?{" "}
 								<a
-									onClick={() => void navigate("/cadastro")}
+									href="/cadastro"
 									style={{
 										cursor: "pointer",
 										color: "blue",
