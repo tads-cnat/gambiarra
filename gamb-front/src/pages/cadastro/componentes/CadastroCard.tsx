@@ -160,7 +160,7 @@ export function CadastroCard(): React.JSX.Element {
 							<p>
 								Já uma possui conta?{" "}
 								<a
-									onClick={() => void navigate("/login")}
+									href="/login"
 									style={{
 										cursor: "pointer",
 										color: "blue",
