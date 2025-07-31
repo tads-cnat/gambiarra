@@ -1,5 +1,4 @@
 import {
-	UseFormRegisterReturn,
 	Control,
 	RegisterOptions,
 } from "react-hook-form";
@@ -8,7 +7,7 @@ export interface InputFieldProps {
 	/**
 	 * Nome do campo no formulário, usado para identificação no React Hook Form.
 	 */
-	name?: string;
+	name: string;
 
 	/**
 	 * Rótulo a ser exibido junto ao campo de input (opcional).
@@ -59,15 +58,22 @@ export interface InputFieldProps {
 	textAux?: string;
 
 	/**
-	 * Função do React Hook Form para registrar o campo.
+	 * Indica se o formulário é válido, usado para estilização condicional.
 	 */
-	register: UseFormRegisterReturn;
-
 	formIsValid?: boolean | null;
 
+	/**
+	 * Ícone a ser exibido no campo, se necessário.
+	 */
 	value?: string;
 
+	/**
+	 * Ícone a ser exibido no campo, se necessário.
+	 */
 	icon?: string;
 
+	/**
+	 * Classe CSS do elemento pai, útil para estilização externa.
+	 */
 	classNameFather?: string;
 }

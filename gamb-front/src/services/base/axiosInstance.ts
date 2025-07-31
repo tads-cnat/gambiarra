@@ -3,10 +3,12 @@ import {
 	getAuthToken,
 	setAuthToken,
 	getAuthRefreshToken,
+	logout,
 } from "../../auth/service/AuthStore";
+import { redirect } from "react-router-dom";
 const baseURL: string =
-	(import.meta.env.VITE_API_URL as string) || "http://localhost:8000/api/v1/";
-export const wsHOST = import.meta.env.VITE_HOST || "localhost";
+	(import.meta.env.VITE_API_URL as string) || "https://localhost/api/v1/";
+export const wsHOST = import.meta.env.VITE_WS_URL || "wss://localhost/ws/chat/";
 
 // Criando a instância do Axios
 const axiosInstance = axios.create({
@@ -15,10 +17,22 @@ const axiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use(
 	(config) => {
+		const ignoredUrls = [`/auth/token/`, `/auth/login/`, `/auth/suap/`, "auth/register/"];
+
+		console.log("Interceptando requisição:", config.url);
+		if (ignoredUrls.some((url) => config.url?.endsWith(url))) {
+			console.log("Requisição ignorada:", config.url);
+			return config;
+		}
+
 		const token = getAuthToken();
-		if (token !== undefined) {
+
+		const isTokenDefined = typeof token === "string" && token.length > 0;
+
+		if (isTokenDefined) {
 			config.headers.Authorization = `Bearer ${token}`;
 		}
+		
 		return config;
 	},
 	async (error) => {
@@ -34,13 +48,10 @@ axiosInstance.interceptors.response.use(
 		const originalRequest = error.config;
 
 		// Ignora rotas de autenticação para evitar loop
-		const ignoredUrls = [`${baseURL}auth/token/`];
+		const ignoredUrls = [`/auth/token/`, `/auth/login/`];
 
-		if (ignoredUrls.some((url) => originalRequest.url?.startsWith(url))) {
-			const errorMessage = new Error(
-				"Erro ao fazer a requisição: " + error.data
-			);
-			return Promise.reject(errorMessage);
+		if (ignoredUrls.some((url) => originalRequest.url?.endsWith(url))) {
+			return Promise.reject(error);
 		}
 
 		if (error.response.status === 401 && !originalRequest._retry) {
@@ -54,8 +65,8 @@ axiosInstance.interceptors.response.use(
 					}
 				);
 				if (!response.data.access) {
-					console.error("Erro ao renovar o token: ", response.data);
-					window.location.href = "/login";
+					logout();
+					redirect("/login");
 					return Promise.reject(error);
 				}
 
@@ -71,7 +82,8 @@ axiosInstance.interceptors.response.use(
 
 				return axiosInstance(originalRequest);
 			} catch (err) {
-				console.error("Erro ao renovar o token:", err);
+				logout();
+				redirect("/login");
 				return Promise.reject(err);
 			}
 		}

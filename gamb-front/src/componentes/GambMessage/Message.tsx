@@ -10,11 +10,11 @@ import {
 import { useState } from "react";
 
 export default function UseMessage(props: MessageProps): React.JSX.Element {
-	const { type, text, viewClose } = props;
+	const { type, text, viewClose, datacypress } = props;
 	const [show, setShow] = useState(true);
 
 	// Função para fechar a mensagem
-	function onClose() {
+	function onClose(): void {
 		setShow(false); // Muda o estado para false, fechando a mensagem
 	}
 	// Renderiza a mensagem apenas se `show` for true
@@ -22,38 +22,38 @@ export default function UseMessage(props: MessageProps): React.JSX.Element {
 		return <></>; // Se a mensagem não deve ser exibida, retorna vazio
 	} else {
 		return (
-			<MessageContainer>
-				<MessageWrapper type={type}>
-					<MessageIcon type={type}>
+			<MessageContainer data-cypress={datacypress}>
+				<MessageWrapper $type={type}>
+					<MessageIcon $type={type}>
 						{type === "success" && (
 							<Icon
 								icon="checkcircle"
-								size={26}
+								size={24}
 							/>
 						)}
 						{type === "info" && (
 							<Icon
 								icon="info"
-								size={26}
+								size={24}
 							/>
 						)}
 						{type === "warning" && (
 							<Icon
 								icon="warning"
-								size={26}
+								size={24}
 							/>
 						)}
 						{type === "danger" && (
 							<Icon
 								icon="danger"
-								size={26}
+								size={24}
 							/>
 						)}
 					</MessageIcon>
-					<MessageText>{text}</MessageText>
+					<MessageText $type={type}>{text}</MessageText>
 					{viewClose && (
 						<CloseButton
-							type={type}
+							$type={type}
 							onClick={onClose}
 						>
 							<Icon

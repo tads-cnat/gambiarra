@@ -3,19 +3,21 @@ import { defaultTheme } from "../../styles/themes/default";
 const theme = defaultTheme
 
 export const CircleContainer = styled.button<{
-	size: number;
-	$backgroundColor: string;
+  size: number;
+  $backgroundColor: string;
+  $borderColor?: string;
 }>`
-	width: ${({ size }) => size}px;
-	height: ${({ size }) => size}px;
-	background-color: ${({ $backgroundColor }) => $backgroundColor};
-	border-radius: 50%;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	border-color: ${theme.cores.gray_text};
-	border-width: 1px;
-	position: relative;
+  width: ${({ size }) => size}px;
+  height: ${({ size }) => size}px;
+  background-color: ${({ $backgroundColor }) => $backgroundColor};
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid ${({ $borderColor }) => $borderColor || theme.cores.gray_text};
+
+  position: relative;
 `;
 
 export const IconContainer = styled.div<{ $iconColor?: string }>`

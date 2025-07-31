@@ -1,6 +1,11 @@
-import { userRoles } from "../../auth/roles";
-import { getUserActiveRole } from "../../auth/service/AuthStore";
+
+import { isUserGerente, isUserProfessor } from "../../utils/checkRoleUser";
 import GambButton from "../GambButton/Button";
+
+const ATRIBUIR_TAREFA_LABEL = "Atribuir Tarefa";
+const ALTERAR_STATUS_LABEL = "Alterar Status";
+const ATRIBUIR_BOLSISTA_LABEL = "Atribuir Bolsistas";
+const RESOLVER_CHAMADO_LABEL = "Resolver chamado";
 
 export interface Action {
 	name: string;
@@ -29,26 +34,26 @@ export const btnsPR: Record<number, Action[]> = {
 			name: "AtribuirTarefa",
 			typeBtn: "cinza",
 			icon: "clipboard",
-			label: "Atribuir Tarefa",
+			label: ATRIBUIR_TAREFA_LABEL,
 		},
 
 		{
 			name: "AlterarStatus",
 			typeBtn: "inline",
 			icon: "gear",
-			label: "Alterar Status",
+			label: ALTERAR_STATUS_LABEL,
 		},
 		{
 			name: "AtribuirBolsista",
 			typeBtn: "amarelo",
 			icon: "user",
-			label: "Atribuir Bolsistas",
+			label: ATRIBUIR_BOLSISTA_LABEL,
 		},
 		{
 			name: "ResolverChamado",
 			typeBtn: "roxo",
 			icon: "xcircle",
-			label: "Resolver chamado",
+			label: RESOLVER_CHAMADO_LABEL,
 		},
 	],
 	3: [
@@ -56,27 +61,27 @@ export const btnsPR: Record<number, Action[]> = {
 			name: "AtribuirTarefa",
 			typeBtn: "cinza",
 			icon: "clipboard",
-			label: "Atribuir Tarefa",
+			label: ATRIBUIR_TAREFA_LABEL,
 		},
 
 		{
 			name: "AlterarStatus",
 			typeBtn: "inline",
 			icon: "gear",
-			label: "Alterar Status",
+			label: ALTERAR_STATUS_LABEL,
 		},
 		{
 			name: "AtribuirBolsista",
 			typeBtn: "amarelo",
 			icon: "user",
-			label: "Atribuir Bolsistas",
+			label: ATRIBUIR_BOLSISTA_LABEL,
 		},
 
 		{
 			name: "ResolverChamado",
 			typeBtn: "roxo",
 			icon: "xcircle",
-			label: "Resolver chamado",
+			label: RESOLVER_CHAMADO_LABEL,
 		},
 	],
 	4: [
@@ -84,26 +89,26 @@ export const btnsPR: Record<number, Action[]> = {
 			name: "AtribuirTarefa",
 			typeBtn: "cinza",
 			icon: "clipboard",
-			label: "Atribuir Tarefa",
+			label: ATRIBUIR_TAREFA_LABEL,
 		},
 
 		{
 			name: "AlterarStatus",
 			typeBtn: "inline",
 			icon: "gear",
-			label: "Alterar Status",
+			label: ALTERAR_STATUS_LABEL,
 		},
 		{
 			name: "AtribuirBolsista",
 			typeBtn: "amarelo",
 			icon: "user",
-			label: "Atribuir Bolsistas",
+			label: ATRIBUIR_BOLSISTA_LABEL,
 		},
 		{
 			name: "ResolverChamado",
 			typeBtn: "roxo",
 			icon: "xcircle",
-			label: "Resolver chamado",
+			label: RESOLVER_CHAMADO_LABEL,
 		},
 	],
 	5: [
@@ -111,26 +116,26 @@ export const btnsPR: Record<number, Action[]> = {
 			name: "AtribuirTarefa",
 			typeBtn: "cinza",
 			icon: "clipboard",
-			label: "Atribuir Tarefa",
+			label: ATRIBUIR_TAREFA_LABEL,
 		},
 
 		{
 			name: "AlterarStatus",
 			typeBtn: "inline",
 			icon: "gear",
-			label: "Alterar Status",
+			label: ALTERAR_STATUS_LABEL,
 		},
 		{
 			name: "AtribuirBolsista",
 			typeBtn: "amarelo",
 			icon: "user",
-			label: "Atribuir Bolsistas",
+			label: ATRIBUIR_BOLSISTA_LABEL,
 		},
 		{
 			name: "ResolverChamado",
 			typeBtn: "roxo",
 			icon: "xcircle",
-			label: "Resolver chamado",
+			label: RESOLVER_CHAMADO_LABEL,
 		},
 	],
 	6: [
@@ -157,6 +162,9 @@ export const btnsPR: Record<number, Action[]> = {
 			label: "Arquivar",
 		},
 	],
+	9: [
+		
+	],
 };
 
 export const btnsGR: Record<number, Action[]> = {
@@ -168,6 +176,8 @@ export const btnsGR: Record<number, Action[]> = {
 	6: [],
 	7: [],
 	8: [],
+	9: [
+	],
 };
 
 export const btnClientes: Record<number, Action[]> = {
@@ -183,11 +193,8 @@ export const btnClientes: Record<number, Action[]> = {
 		{ name: "Avaliar", typeBtn: "amarelo", icon: "star", label: "Avaliar" },
 	],
 	8: [],
+	9: [],
 };
-
-// Função para checar a permissão (ajuste conforme sua lógica)
-const checkPermission = (roles: string[]) =>
-	roles.includes(getUserActiveRole() ?? "");
 
 // Função que mapeia as ações para componentes <Notificacao />
 export const getActionsByStatus = (
@@ -195,22 +202,11 @@ export const getActionsByStatus = (
 	idChamado: number,
 	funct?: Record<string, (id: number) => void> // Parâmetro opcional para funções de ação
 ): React.JSX.Element[] => {
-	console.log(
-		`getActionsByStatus - status: ${status}, idChamado: ${idChamado}`
-	);
-	console.log(`getActionsByStatus - userRole: ${getUserActiveRole()}`);
-	console.log(
-		`checkPermission - userRole: ${getUserActiveRole()}, roles: ${[
-			userRoles.INTERNO.FUNCIONARIO.PR,
-		]}`
-	);
-	const actions: Action[] = checkPermission([
-		userRoles.INTERNO.FUNCIONARIO.GR,
-	])
-		? btnsGR[status] || []
-		: checkPermission([userRoles.INTERNO.FUNCIONARIO.PR])
-		? btnsPR[status] || []
-		: btnClientes[status] || [];
+	const actions: Action[] = isUserGerente()
+		? btnsGR[status]
+		: isUserProfessor()
+		? btnsPR[status]
+		: btnClientes[status];
 
 	return actions.map((action, index) => (
 		<GambButton

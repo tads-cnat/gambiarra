@@ -18,7 +18,7 @@ export const BreadcrumbItemWrapper = styled.div`
 
 export const BreadcrumbLink = styled.a`
   text-decoration: none;
-  color: ${() => theme.cores.purple_info_secondary};
+  color: ${() => theme.cores.green_sucess_primary};
   font-weight: 400;
 
   &:hover {

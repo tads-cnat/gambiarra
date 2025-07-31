@@ -76,19 +76,43 @@ class ChamadoViewSet(viewsets.ModelViewSet):
                 {"erro": "Chamado não encontrado."}, status=status.HTTP_404_NOT_FOUND
             )
 
+        user: Usuario = self.request.user
+        grupo = user.grupo.name
+
+        if grupo == GrupoEnum.PROFESSOR and chamado.professor != user:
+            status_permitidos = (
+                TAB_STATUS_MAPPING["pendentes"]
+                + TAB_STATUS_MAPPING["fechados"]
+                + TAB_STATUS_MAPPING["arquivados"]
+            )
+            if str(chamado.status) not in status_permitidos:
+                return Response(
+                    {"erro": "Você não tem permissão para ver este chamado."},
+                    status=status.HTTP_403_FORBIDDEN,
+                )
+
         serializer = DetalharChamadoSerializer(chamado)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     def get_queryset(self):
-        user: Usuario = self.request.user
+
+        user = self.request.user
+
+        # Evita erro se o utilizador for anónimo
+        if not hasattr(user, "grupo"):
+            return Chamado.objects.none()
+
         grupo = user.grupo.name
 
         if grupo == GrupoEnum.GERENTE:
             queryset = Chamado.objects.all()
         elif grupo == GrupoEnum.PROFESSOR:
-            # Se o professor está assimilado, ou é aberto, ou fechado, ou arquivado
             queryset = Chamado.objects.filter(
-                Q(professor=user) | Q(status="1") | Q(status="6") | Q(status="9")
+                Q(professor=user)
+                | Q(status="1")
+                | Q(status="6")
+                | Q(status="9")
+                | Q(status="8")
             )
         elif grupo == GrupoEnum.BOLSISTA:
             queryset = Chamado.objects.filter(bolsistas=user)
@@ -102,7 +126,8 @@ class ChamadoViewSet(viewsets.ModelViewSet):
             raise ValueError(f"Valor inválido para o parâmetro 'tab': {tab_param}")
 
         mapeamento = TAB_STATUS_MAPPING[tab_param]
-        if tab_param in TAB_STATUS_MAPPING and mapeamento:
+
+        if mapeamento:
             queryset = queryset.filter(status__in=mapeamento)
 
         if status_param:
@@ -132,18 +157,31 @@ class ChamadoViewSet(viewsets.ModelViewSet):
             else:  # Cliente
                 chamados = Chamado.objects.filter(cliente=user)
 
-            contagem = {
-                "atribuidas": chamados.count(),
-                "concluidas": chamados.filter(status__in=["5", "6", "7", "8"]).count(),
-                "pendentes": chamados.filter(status="1").count(),
-                "recusadas": (
-                    chamados.filter(status="8").count()
-                    if grupo != GrupoEnum.BOLSISTA
-                    else 0
-                ),
-            }
+            if grupo in GrupoEnum.EXTERNO:
+                contagem = {
+                    "solicitados": chamados.count(),
+                    "concluidos": chamados.filter(
+                        status__in=["5", "6", "7", "8"]
+                    ).count(),
+                    "pendentes": chamados.filter(status="1").count(),
+                    "recusados": (chamados.filter(status="8").count()),
+                }
+            else:
 
-        return Response({"quantidades": contagem}, status=status.HTTP_200_OK)
+                contagem = {
+                    "atribuidos": chamados.count(),
+                    "concluidos": chamados.filter(
+                        status__in=["5", "6", "7", "8"]
+                    ).count(),
+                    "pendentes": chamados.filter(status="1").count(),
+                }
+                if grupo == GrupoEnum.PROFESSOR:
+                    contagem["recusados"] = chamados.filter(status="8").count()
+
+        return Response(
+            {f"{grupo in GrupoEnum.EXTERNO and 'clientes' or grupo}": contagem},
+            status=status.HTTP_200_OK,
+        )
 
     def create(self, request):
         # print("Authenticated user:", request.user.grupo.name)
@@ -188,7 +226,11 @@ class ChamadoViewSet(viewsets.ModelViewSet):
                 "Equipamento Em Conserto",
             ],
             "Aguardando Peça": ["Equipamento Em Conserto", "Fechado Sem Resolução"],
-            "Equipamento Em Conserto": ["Resolvido", "Fechado Sem Resolução"],
+            "Equipamento Em Conserto": [
+                "Resolvido",
+                "Fechado Sem Resolução",
+                "Aguardando Peça",
+            ],
             "Resolvido": ["Fechado", "Arquivado"],
             "Fechado Sem Resolução": ["Fechado", "Arquivado"],
             "Recusado": ["Fechado", "Arquivado"],
@@ -226,9 +268,9 @@ class ChamadoViewSet(viewsets.ModelViewSet):
             return erro("Status atual inválido")
             # Nunca é pra chegar aqui, mas vai que...
 
-        # Mais verificação de erros:
-        # Se o status atual tem transições definidas (mais um que não é pra dar erro nunca)
-        # Se a transição desejada é permitida
+            # Mais verificação de erros:
+            # Se o status atual tem transições definidas (mais um que não é pra dar erro nunca)
+            # Se a transição desejada é permitida
 
         if status_atual_texto not in transicoes:
             return erro(
@@ -243,7 +285,8 @@ class ChamadoViewSet(viewsets.ModelViewSet):
         # Linkando o professor ao chamado, se ele aceitá-lo
         if status_novo_texto == "Aceito":
             chamado.professor = request.user
-
+        if status_novo_texto == "Recusado":
+            chamado.professor = request.user
         chamado.status = status_novo
         chamado.save()
 

@@ -1,32 +1,18 @@
-import ChamadoService from "../../../services/models/ChamadoService";
 import GambButton from "../../GambButton/Button";
-import { ModalCard, ModalFooter, ModalHeader, ModalOverlay } from "../../GambModal/modalstyles";
+import { ModalCard, ModalFooter, ModalHeader, ModalOverlay} from "../../GambModal/modalstyles";
 export default function AceitarChamadoModal(props: {
-    chamadoId: number | null;
 	isModalOpen: boolean;
 	closeModal: () => void;
-}) {
-    const { isModalOpen, closeModal, chamadoId } = props;
-    async function handleAction(): Promise<void>{
-        await ChamadoService.aceitarChamado(chamadoId ?? 0)
-            .then(() => {
-               alert("Chamado aceito com sucesso");
-           })
-            .catch(() => {
-               alert("Erro ao aceitar chamado");
-            })
-            .finally(() => {
-                window.location.reload();
-            });
-            
-        closeModal();
-    }
+    onSubmit: () => void;
+}): React.JSX.Element{
+    const { isModalOpen, closeModal,onSubmit } = props;
+
     if(isModalOpen){
         return (
             <>
                 <ModalOverlay
-				onClick={closeModal}
-			    >
+                onClick={closeModal}
+                >
                     <ModalCard onClick={(e) => e.stopPropagation()} className="elevacao-def">
                         <ModalHeader>
                                 <h4>Confirmar Ação - Aceitar Chamado</h4>
@@ -39,7 +25,7 @@ export default function AceitarChamadoModal(props: {
                                 type="button"
                                 variant="verde"
                                 size="large"
-                                onClick={handleAction}
+                                onClick={onSubmit}
                                 />
                             <GambButton
                                 label="Cancelar"
@@ -55,4 +41,5 @@ export default function AceitarChamadoModal(props: {
             </>
         );
     }
+    return <></>;
 }

@@ -1,8 +1,10 @@
 import styled from "styled-components";
 
+import { defaultTheme } from "../../styles/themes/default";
+const theme = defaultTheme;
+
 export const ChatContainer = styled.div`
-  border: 1px solid #564CCF;
-  border-radius: 2px;
+  border: 1px solid ${theme.cores.purple_info_primary};
   width: 100%;
   height: 350px; 
   margin: 0 auto;
@@ -12,13 +14,14 @@ export const ChatContainer = styled.div`
 `;
 
 export const ChatHeader = styled.div`
-  background-color: #564CCF;
-  color: #fff;
+  background-color: ${theme.cores.purple_info_secondary};
+  color: ${theme.cores.purple_info_primary};
   padding: 12px 16px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-
+  border-bottom: 1px solid ${theme.cores.purple_info_primary};
+  border-radius: 8px 8px 0 0;
   .header-left {
     display: flex;
     align-items: center;
@@ -31,7 +34,7 @@ export const ChatHeader = styled.div`
     }
 
     .username {
-      font-weight: bold;
+      font-weight: medium;
       font-size: 1rem;
     }
   }
@@ -58,18 +61,18 @@ export const ChatBody = styled.div`
 `;
 
 interface ChatMessageProps {
-  side: "left" | "right";
+  $side: "left" | "right";
 }
 
 export const ChatMessage = styled.div<ChatMessageProps>`
   display: flex;
-  justify-content: ${({ side }) =>
-    side === "right" ? "flex-end" : "flex-start"};
+  justify-content: ${({ $side }) =>
+    $side === "right" ? "flex-end" : "flex-start"};
   margin-bottom: 16px;
 
   .bubble {
-    background-color: ${({ side }) =>
-      side === "right" ? "#f1f1f1" : "#e0e0ff"};
+    background-color: ${({ $side }) =>
+      $side === "right" ? "#f1f1f1" : "#e0e0ff"};
     color: #333;
     border-radius: 16px;
     padding: 8px 12px;
@@ -97,6 +100,7 @@ export const ChatFooter = styled.div`
   padding: 12px 16px;
   background-color: #fafafa;
   gap: 8px;
+  border-radius: 0 0 8px 8px;
 `;
 
 

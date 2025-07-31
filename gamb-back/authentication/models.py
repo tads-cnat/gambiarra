@@ -12,3 +12,4 @@ class Usuario(AbstractUser):
         null=True,
     )
     imagem = models.ImageField(upload_to="fotos_perfil/", blank=True, null=True)
+    cpf = models.CharField(max_length=14, blank=True, null=True)

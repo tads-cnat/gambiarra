@@ -1,4 +1,3 @@
- 
 import GambButton from "../GambButton/Button";
 import {
 	CardIndexStyle,
@@ -9,6 +8,7 @@ import {
 } from "./StyleCardIndex";
 import Icon from "../GambIcon/Icon";
 import { CardIndexProps } from "../../interfaces/componentes/iGambCardIndex";
+import logoCampus from "../../assets/logoCNAT.png"
 
 export default function CardIndex({
 	nomeCampus,
@@ -22,7 +22,7 @@ export default function CardIndex({
 		<CardIndexStyle className="col-md-6 col-12">
 			<Header>
 				<img
-					src="logoCNAT.png"
+					src={logoCampus}
 					alt="Logo do Campus"
 				/>
 				<h3>{nomeCampus}</h3>

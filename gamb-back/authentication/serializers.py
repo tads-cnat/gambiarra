@@ -29,6 +29,7 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
             "email",
             "password1",
             "password2",
+            "cpf",
         )  # fields to put in the register process
 
     def validate(self, attrs):  # checks and validate the password
@@ -46,6 +47,7 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
             username=validated_data["username"],
             email=validated_data["email"],
             grupo=cliente,
+            cpf=validated_data["cpf"],
         )
         user.set_password(
             validated_data["password1"]
@@ -85,7 +87,8 @@ class ProfileUserSerializer(serializers.ModelSerializer):
 
         if obj.imagem:
             return build_image_url(obj.imagem.url)
-        return build_image_url("Padrao/perfil_padrao.png")
+
+        return f"https://api.dicebear.com/7.x/initials/svg?seed={obj.username}"
 
 
 class ListarUsuarioSerializer(serializers.ModelSerializer):
@@ -98,3 +101,14 @@ class AlterarCargoSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ["id"]
+
+
+class SuapLoginRequestSerializer(serializers.Serializer):
+    token = serializers.CharField(required=True)
+
+
+class SuapLoginResponseSerializer(serializers.Serializer):
+    usuario = ProfileUserSerializer()
+    access = serializers.CharField()
+    refresh = serializers.CharField()
+    mensagem = serializers.CharField()

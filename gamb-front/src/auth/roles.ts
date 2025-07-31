@@ -1,33 +1,35 @@
 export interface iuserRoles {
 	INTERNO: {
-		FUNCIONARIO: {
-			GR: string;
-			PR: string;
-			BO: string;
-		};
-		CLIENTE: {
-			AL: string;
-			SE: string;
-		};
-	};
+		GERENTE: string;
+		PROFESSOR: string;
+		BOLSISTA: string;
+
+	}
 	EXTERNO: {
 		CLIENTE: string;
+		ALUNO: string;
+		SERVIDOR: string;
 	};
 }
 
+
+const GERENTE = "gerente";
+const PROFESSOR = "professor";
+const BOLSISTA = "bolsista";
+const SERVIDOR = "servidor";
+const CLIENTE = "cliente";
+const ALUNO = "aluno";
+
 export const userRoles: iuserRoles = {
 	INTERNO: {
-		FUNCIONARIO: {
-			GR: "gerente",
-			PR: "professor",
-			BO: "bolsista",
-		},
-		CLIENTE: {
-			AL: "aluno",
-			SE: "servidor",
-		},
+		
+			GERENTE: GERENTE,
+			PROFESSOR: PROFESSOR,
+			BOLSISTA: BOLSISTA,
 	},
 	EXTERNO: {
-		CLIENTE: "cliente",
+			CLIENTE: CLIENTE,
+			ALUNO: ALUNO,
+			SERVIDOR: SERVIDOR,
 	},
 };

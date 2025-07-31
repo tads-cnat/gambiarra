@@ -1,0 +1,31 @@
+[ {
+        "id": 11,
+        "username": "demostenes",
+        "grupo": 2
+    },
+    {
+        "id": 12,
+        "username": "gracom",
+        "grupo": 2
+    },
+    {
+        "id": 6,
+        "username": "jorgiano",
+        "grupo": 2
+    },
+    {
+        "id": 7,
+        "username": "lucena",
+        "grupo": 2
+    },
+    {
+        "id": 8,
+        "username": "braulio",
+        "grupo": 2
+    },
+    {
+        "id": 9,
+        "username": "marilia",
+        "grupo": 2
+    }
+]

@@ -1,9 +1,10 @@
- 
 import { Pagination } from "../GambPaginação/Paginacao";
-import { GBodyTd } from "./GBodyTd";
 import { GHeadTh } from "./GHeadTh";
-import { BodyTr, HeadTr, StatusBadge, Table } from "./tableStyles";
-import { getActionsByStatus } from "./actions";
+import {
+	HeadTr,
+	Table,
+} from "./tableStyles";
+import TableBody from "./tableBody";
 
 export function GambTable({
 	data,
@@ -27,57 +28,26 @@ export function GambTable({
 		(header) => !hiddenFields.includes(header)
 	);
 
+	
 	return (
 		<>
 			<div style={{ width: "100%", overflowX: "auto" }}>
 				<Table style={{ minWidth: "100%" }}>
 					<thead>
 						<HeadTr>
-							{action && <GHeadTh>Ações</GHeadTh>}
+							{action && <GHeadTh header="acoes">Ações</GHeadTh>}
 							{headers.map((header) => (
-								<GHeadTh key={header}>{header}</GHeadTh>
+								<GHeadTh key={header} header={header}>{header}</GHeadTh>
 							))}
 						</HeadTr>
 					</thead>
-					<tbody>
-						{data.map((row, index) => (
-							<BodyTr key={index}>
-								{action && (
-									<GBodyTd>
-										{getActionsByStatus(row.status?.id, row.id, TableActions)}
-									</GBodyTd>
-								)}
-
-								{headers.map((header) => (
-									<GBodyTd key={header}>
-										{header === "avaliacao" && row.avaliacao ? (
-											<div className="flex flex-col justify-center">
-												<span className="font-bold mb-1">
-													{String(row.avaliacao.texto)}
-												</span>
-												<span className="star-rating">
-													{"⭐".repeat(row.avaliacao.nota) +
-														"☆".repeat(5 - row.avaliacao.nota)}
-												</span>
-											</div>
-										) : isChamados && header === "status" ? (
-											<StatusBadge $status={row.status?.id}>
-												{String(row.status?.nome)}
-											</StatusBadge>
-										) : header === "bolsistas" ? (
-											row.bolsistas?.map((b: { id: number, username: string}) => b.username).join(", ") || "-"
-										) : header === "professor" ? (
-											row.professor?.username || "-"
-										) : header === "cliente" ? (
-											row.cliente?.username || "-"
-										) : (
-											String(row[header] ?? "-")
-										)}
-									</GBodyTd>
-								))}
-							</BodyTr>
-						))}
-					</tbody>
+					<TableBody
+						action={action}
+						isChamados={isChamados}
+						TableActions={TableActions}
+						data={data}
+						headers={headers}
+					/>
 				</Table>
 			</div>
 			<Pagination

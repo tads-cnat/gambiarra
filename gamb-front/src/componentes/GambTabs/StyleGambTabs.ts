@@ -12,8 +12,8 @@ export const TabButton = styled.button<{ $isActive: boolean }>`
 	font-weight: 500;
 	border: none;
 	background: none;
-	color: ${(props) => (props.$isActive ? "#10B981" : "#6B7280")};
-	border-bottom: ${(props) =>
+	color: ${(props): string => (props.$isActive ? "#10B981" : "#6B7280")};
+	border-bottom: ${(props): string =>
 		props.$isActive ? "2px solid #10B981" : "none"};
 	cursor: pointer;
 	transition: color 0.2s, border-bottom 0.2s;

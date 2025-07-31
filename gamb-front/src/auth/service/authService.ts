@@ -4,7 +4,8 @@ import { LoginSubmit } from "./auth";
 import {
 	getAuthRefreshToken,
 	getAuthToken,
-	isAuthenticatedStore,
+	setAuthRefreshToken,
+	setAuthToken,
 	setIsAuthenticatedStore,
 	setUserActive,
 	setUserActiveRole,
@@ -27,15 +28,15 @@ class AuthService extends BaseService {
 
 			if (response.status === 200) {
 				const { access, refresh } = response.data;
-				localStorage.setItem("access_token", access);
-				localStorage.setItem("refresh_token", refresh);
+				setAuthRefreshToken(refresh);
+				setAuthToken(access);
 				// Buscar perfil
 				const userData = await this.profile();
 				if (userData) {
 					setUserActive(userData.data);
 					setUserActiveRole(userData.data.grupo);
 					setIsAuthenticatedStore();
-					console.log(isAuthenticatedStore());
+					
 					return {
 						sucesso: true,
 						mensagem: "Login realizado com sucesso!",
@@ -56,19 +57,19 @@ class AuthService extends BaseService {
 			if (error.response?.status === 401) {
 				return {
 					sucesso: false,
-					mensagem: "Invalid username or password.",
+					mensagem: "Usuário ou senha inválidos.",
 				};
 			}
 			if (error.response?.status === 403) {
 				return {
 					sucesso: false,
-					mensagem: "User is not active.",
+					mensagem: "Usuário não está ativo.",
 				};
 			}
 			if (error.response?.status === 404) {
 				return {
 					sucesso: false,
-					mensagem: "User not found.",
+					mensagem: "Usuário não encontrado.",
 				};
 			}
 			if (error.response?.status === 500) {

@@ -1,5 +1,6 @@
 import { ChamadoFilter } from "../../filters/ChamadoFilter";
-import { ChamadoSubmit } from "../../interfaces/models/iChamado";
+import { Acessorio, Chamado } from "../../interfaces/componentes/iGambDetails";
+import { ChamadoCardsResponse, ChamadoSubmit } from "../../interfaces/models/iChamado";
 import axiosInstance from "../base/axiosInstance";
 import BaseService from "../base/baseService";
 
@@ -29,22 +30,27 @@ class ChamadoService extends BaseService {
 		return response;
 	}
 	
-	async encerrarChamado(id: number): Promise<unknown> {
+	async arquivarChamado(id: number): Promise<unknown> {
 		const response = await axiosInstance.patch(
-		`${this.serviceUrl}/${id}/alterar_status/`, {status: 8} )
+		`${this.serviceUrl}/${id}/alterar_status/`, {status: 9} )
+		return response;
+	}
+	async recusarChamado(id: number): Promise<unknown> {
+		const response = await axiosInstance.patch(
+			`${this.serviceUrl}/${id}/alterar_status/`, {status: 8} )
 		return response;
 	}
 
-	async getChamadoID(id: number): Promise<unknown>{
+	async getChamadoID(id: number): Promise<Chamado>{
 		const response = await axiosInstance.get(
 			`${this.serviceUrl}/${id}/`)
-			return response;
+			return response.data as Chamado;
 	}
 
-	async getAcessorio(id: number): Promise<unknown>{
+	async getAcessorios(id: number): Promise<Acessorio[]>{
 		const response = await axiosInstance.get(
 			`${this.serviceUrl}/${id}/get_acessorios_item/`)
-			return response;
+			return response.data as Acessorio[];
 	}
 
 	async alterarStatus(id: number, status: string): Promise<unknown>{
@@ -57,6 +63,12 @@ class ChamadoService extends BaseService {
 		const response = await axiosInstance.patch(
 			`${this.serviceUrl}/${id}/update_bolsistas/`, {bolsistas} )
 			return response;
+	}
+
+	async getChamadoCards(): Promise<ChamadoCardsResponse> {
+		const response = await axiosInstance.get(
+			`${this.serviceUrl}/contagem_chamados/`)
+		return response.data as ChamadoCardsResponse;
 	}
 }
 

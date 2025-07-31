@@ -11,12 +11,11 @@ export default function ModalChamadoSubmit(props: {
 	isModalOpen: boolean;
 	closeModal: () => void;
 	onSubmit: (data: ChamadoSubmit) => void;
-}) {
+}): React.JSX.Element {
 	const { isModalOpen, closeModal, onSubmit } = props;
 
 	// Hook para o formulário e campo de array dinâmico
 	const {
-		register,
 		handleSubmit,
 		control,
 		formState: { errors },
@@ -31,7 +30,7 @@ export default function ModalChamadoSubmit(props: {
 	});
 
 	// Função para adicionar um novo acessório
-	const addAcessorio = (e: MouseEvent<HTMLButtonElement>) => {
+	const addAcessorio = (e: MouseEvent<HTMLButtonElement>): void => {
 		e.preventDefault(); // Previne o envio do formulário caso algum comportamento de submit aconteça
 		append({ nome: "" }); // Adiciona um novo item vazio no array de acessórios
 	};
@@ -54,7 +53,7 @@ export default function ModalChamadoSubmit(props: {
 					placeholder="Informe um título para o chamado"
 					name="titulo"
 					error={errors.titulo?.message}
-					register={register("titulo")}
+					control={control}
 				/>
 
 				<InputField
@@ -63,7 +62,7 @@ export default function ModalChamadoSubmit(props: {
 					placeholder="Informe uma descrição para o chamado"
 					name="descricao"
 					error={errors.descricao?.message}
-					register={register("descricao")}
+					control={control}
 				/>
 				<h3 className="text-xl font-normal mt-3 mb-1">
 					| Item <span className="text-red-500">*</span>
@@ -76,7 +75,7 @@ export default function ModalChamadoSubmit(props: {
 					name="item.modelo"
 					error={errors.item?.modelo?.message}
 					textAux="Informe o modelo do item com defeito"
-					register={register("item.modelo")}
+					control={control}
 				/>
 				{/* Botão para adicionar um acessório */}
 				<div className="flex w-full justify-end">
@@ -110,9 +109,7 @@ export default function ModalChamadoSubmit(props: {
 										?.message
 								}
 								icon="lego"
-								register={register(
-									`item.acessorios.${index}.nome`
-								)}
+								control={control}
 								textAux="Informe um acessório que pode acompanhar o item defeituoso na sua entrega. EX: Item = Notebook / Acessório 01 =  carregador / Acessório 02 = mouse"
 							/>
 

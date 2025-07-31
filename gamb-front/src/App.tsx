@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import Home from "./pages/index";
 import { ProtectedRoute } from "./auth/Routes";
@@ -14,19 +13,12 @@ import Detail from "./pages/dashboard/pages/detail/Detail";
 import "./styles/index.css";
 import {
 	isAuthenticatedStore,
-	setIsAuthenticatedStore,
 } from "./auth/service/AuthStore";
+import { Cadastro } from "./pages/cadastro/cadastro";
+import Callback from "./pages/login/callback";
+import ErrorPage from "./pages/errorPage";
 
-export function App() {
-	function checkAuth (): void{
-		setIsAuthenticatedStore();
-	};
-
-	useEffect(() => {
-		checkAuth();
-	}, []);
-
-
+export function App(): React.JSX.Element {
 	return (
 		<ThemeProvider theme={defaultTheme}>
 			<GlobalStyle />
@@ -48,6 +40,21 @@ export function App() {
 						}
 					/>
 					<Route
+						path="/login/callback"
+						element={ <Callback /> }
+					/>
+
+					<Route
+						path="/cadastro"
+						element={
+							isAuthenticatedStore() ? (
+								<Navigate to="/dashboard" />
+							) : (
+								<Cadastro />
+							)
+						}
+					/>
+					<Route
 						path="/dashboard"
 						element={
 							<ProtectedRoute
@@ -57,6 +64,7 @@ export function App() {
 						}
 					>
 						{/* Página inicial da Dashboard */}
+						
 						<Route
 							index
 							element={
@@ -84,12 +92,16 @@ export function App() {
 								<ProtectedRoute
 									element={<GerenciarUsuarios />}
 									requiredRole={[
-										userRoles.INTERNO.FUNCIONARIO.GR,
+										userRoles.INTERNO.GERENTE,
 									]}
 								/>
 							}
 						/>
 					</Route>
+					<Route
+						path="*"
+						element={<ErrorPage />}
+					/>
 				</Routes>
 			</BrowserRouter>
 		</ThemeProvider>
